@@ -1,0 +1,11 @@
+version: '3'
+
+tasks:
+
+  serve:
+    cmds:
+      - hugo server --enableGitInfo --buildDrafts --buildExpired --buildFuture -p 1313
+
+  build:
+    cmds:
+      - hugo --minify

@@ -1,0 +1,47 @@
+# Hugo config
+title = "Hextra Theme"
+
+baseURL = "https://example.org"
+
+disableKinds = ["taxonomy", "term"]
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min      = "0.115.1"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "hugo_stats.json"
+    target = "assets/watching/hugo_stats.json"
+
+[build]
+  writeStats = true
+  [[build.cachebusters]]
+    source = "assets/watching/hugo_stats\\.json"
+    target = "styles\\.css"
+  [[build.cachebusters]]
+    source = "(postcss|tailwind)\\.config\\.js"
+    target = "css"
+  [[build.cachebusters]]
+    source = "assets/.*\\.(js|ts|jsx|tsx)"
+    target = "js"
+  [[build.cachebusters]]
+    source = "assets/.*\\.(.*)$"
+    target = "$1"
+
+
+[menu]
+  [[menu.main]]
+    name = 'Documentation'
+    pageRef = '/docs'
+    weight = 10
+  [[menu.main]]
+    name = 'Showcase'
+    pageRef = '/showcase'
+    weight = 20
+  [[menu.main]]
+    name = 'About'
+    pageRef = '/about'
+    weight = 30
