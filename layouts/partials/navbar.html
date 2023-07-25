@@ -1,0 +1,26 @@
+<div class="sticky top-0 z-20 w-full bg-transparent print:hidden">
+  <div class="pointer-events-none absolute z-[-1] h-full w-full bg-white shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:shadow-[0_0_0_1px_#000] dark:bg-dark dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:shadow-[0_0_0_1px_#fff]"></div>
+
+  <nav class="mx-auto flex items-center justify-end gap-2 h-16 px-6 max-w-[90rem]">
+    <a class="flex items-center hover:opacity-75 ltr:mr-auto rtl:ml-auto" href="{{ .Site.BaseURL }}">
+      {{ partial "utils/icon.html" (dict "context" . "name" "hugo" "attributes" "height=20") }}
+      <span class="mx-2 font-extrabold hidden md:inline select-none" title="{{ .Site.Title }}">
+        {{ .Site.Title }}
+      </span>
+    </a>
+
+    {{ $currentPage := . }}
+    {{ range .Site.Menus.main }}
+      {{ if .Params.icon }}
+        <a class="p-2 text-current" target="_blank" rel="noreferer" href="{{ .URL }}">
+          {{ partial "utils/icon.html" (dict "context" $currentPage "name" .Params.icon "attributes" "height=24") }}
+          <span class="sr-only">{{ .Name }}</span>
+        </a>
+      {{ else }}
+        <a class="text-sm contrast-more:text-gray-700 contrast-more:dark:text-gray-100 relative -ml-2 hidden whitespace-nowrap p-2 md:inline-block text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="{{ .URL }}">
+          <span class="text-center">{{ .Name }}</span>
+        </a>
+      {{ end }}
+    {{ end }}
+  </nav>
+</div>

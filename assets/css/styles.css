@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+html {
+  @apply text-base antialiased;
+  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+
+:root {
+  --primary-hue: 212deg;
+}
+
+.dark {
+  --primary-hue: 204deg;
+}
