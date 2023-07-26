@@ -1,0 +1,85 @@
+.content {
+  h1 {
+    @apply mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100;
+  }
+  h2 {
+    @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-10 border-b pb-1 text-3xl border-neutral-200/70 contrast-more:border-neutral-400 dark:border-primary-100/10 contrast-more:dark:border-neutral-400;
+  }
+  h3 {
+    @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-8 text-2xl;
+  }
+  h4 {
+    @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-8 text-xl;
+  }
+  h5 {
+    @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-8 text-lg;
+  }
+  h6 {
+    @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-8 text-base;
+  }
+  p {
+    @apply mt-6 leading-7 first:mt-0;
+  }
+  a {
+    @apply text-primary-600 underline decoration-from-font [text-underline-position:from-font];
+  }
+  blockquote {
+    @apply mt-6 border-gray-300 italic text-gray-700 dark:border-gray-700 dark:text-gray-400 first:mt-0 ltr:border-l-2 ltr:pl-6 rtl:border-r-2 rtl:pr-6;
+  }
+  pre {
+    @apply bg-primary-700/5 mb-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-4;
+  }
+  code {
+    @apply border-black border-opacity-[0.04] bg-opacity-[0.03] bg-black break-words rounded-md border py-0.5 px-[.25em] text-[.9em] dark:border-white/10 dark:bg-white/10;
+  }
+  table {
+    @apply block overflow-x-auto mt-6 p-0 first:mt-0;
+
+    tr {
+      @apply m-0 border-t border-gray-300 p-0 dark:border-gray-600 even:bg-gray-100 even:dark:bg-gray-600/20;
+    }
+    th {
+      @apply m-0 border border-gray-300 px-4 py-2 font-semibold dark:border-gray-600;
+    }
+    td {
+      @apply m-0 border border-gray-300 px-4 py-2 dark:border-gray-600;
+    }
+  }
+  ol {
+    @apply mt-6 list-decimal first:mt-0 ltr:ml-6 rtl:mr-6;
+    li {
+      @apply my-2;
+    }
+  }
+  ul {
+    @apply mt-6 list-disc first:mt-0 ltr:ml-6 rtl:mr-6;
+    li {
+      @apply my-2;
+    }
+  }
+
+}
+
+.subheading-anchor {
+  @apply opacity-0 transition-opacity ltr:ml-1 rtl:mr-1;
+
+  span:target + &,
+  :hover > &,
+  &:focus {
+    @apply opacity-100;
+  }
+
+  span + &,
+  :hover > & {
+    @apply !no-underline;
+  }
+
+  &:after {
+    @apply content-['#'] px-1;
+    @apply text-gray-300 dark:text-neutral-700;
+    span:target + & {
+      @apply text-gray-400;
+      @apply dark:text-neutral-500;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div class="mt-1.5 flex items-center gap-1 overflow-hidden text-sm text-gray-500 dark:text-gray-400 contrast-more:text-current">
+  {{ range .Ancestors.Reverse }}
+    {{ if not .IsHome }}
+      <div class="whitespace-nowrap transition-colors min-w-[24px] overflow-hidden text-ellipsis">
+        <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      </div>
+      {{ partial "utils/icon.html" (dict "context" . "name" "breadcrumb-delimiter" "attributes" "class=\"w-3.5 shrink-0\"") }}
+    {{ end }}
+  {{ end }}
+  <div class="whitespace-nowrap transition-colors font-medium text-gray-700 contrast-more:font-bold contrast-more:text-current dark:text-gray-100 contrast-more:dark:text-current">
+    {{ .LinkTitle }}
+  </div>
+</div>

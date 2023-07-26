@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "typography.css";
+
 
 html {
   @apply text-base antialiased;

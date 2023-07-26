@@ -1,0 +1,14 @@
+<footer class="bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900 print:bg-transparent">
+  <hr class="dark:border-neutral-800" />
+  <div class="mx-auto flex max-w-[90rem] justify-center py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-600 dark:text-gray-400 md:justify-start">
+    <div class="flex w-full flex-col items-center sm:items-start">
+      <div>
+        <a class="flex items-center gap-1 text-current" target="_blank" rel="noopener noreferrer" title="Hugo homepage" href="https://gohugo.io/">
+          <span>Powered by</span>
+          {{ partial "utils/icon.html" (dict "context" . "name" "hugo-full" "attributes" "height=20") }}
+        </a>
+      </div>
+      <p class="mt-6 text-xs">© 2023 Hextra Project.</p>
+    </div>
+  </div>
+</footer>
