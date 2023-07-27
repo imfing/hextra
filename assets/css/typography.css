@@ -23,6 +23,9 @@
   a {
     @apply text-primary-600 underline decoration-from-font [text-underline-position:from-font];
   }
+  .not-prose a {
+    @apply text-current no-underline;
+  }
   blockquote {
     @apply mt-6 border-gray-300 italic text-gray-700 dark:border-gray-700 dark:text-gray-400 first:mt-0 ltr:border-l-2 ltr:pl-6 rtl:border-r-2 rtl:pr-6;
   }
