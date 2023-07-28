@@ -1,3 +1,4 @@
 ---
-title: Documentation
+linkTitle: "Documentation"
+title: Welcome to Hextra
 ---
