@@ -1,0 +1,17 @@
+{{ $href := .Get "link" }}
+{{ $title := .Get "title" }}
+{{ $icon := .Get "icon" }}
+{{ $context := . }}
+
+
+<a
+  class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 hover:border-gray-300 bg-transparent shadow-sm dark:border-neutral-800 hover:bg-slate-50 hover:shadow-md dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
+  href="{{ $href }}"
+>
+  <span class="flex font-semibold items-start gap-2 p-4 text-gray-700 hover:text-gray-900 dark:text-neutral-200 dark:hover:text-neutral-50">
+    {{ with $icon }}
+      {{ partial "utils/icon.html" (dict "context" $context "name" $icon) }}
+    {{ end }}
+    {{ $title }}
+  </span>
+</a>

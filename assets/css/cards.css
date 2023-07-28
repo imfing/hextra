@@ -1,0 +1,29 @@
+.hextra-cards {
+  grid-template-columns: repeat(auto-fill, minmax(max(250px, calc((100% - 1rem * 2) / var(--rows))), 1fr));
+}
+
+.hextra-card img {
+  user-select: none;
+}
+
+.hextra-card:hover svg {
+  color: currentColor;
+}
+
+.hextra-card svg {
+  width: 1.5rem;
+  color: #00000033;
+  transition: color 0.3s ease;
+}
+
+.hextra-card p {
+  margin-top: 0.5rem;
+}
+
+.dark .hextra-card svg {
+  color: #ffffff66;
+}
+
+.dark .hextra-card:hover svg {
+  color: currentColor;
+}

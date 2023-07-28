@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @import "typography.css";
-
+@import "cards.css";
 
 html {
   @apply text-base antialiased;
