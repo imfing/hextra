@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "typography.css";
+@import "highlight.css";
 @import "components/cards.css";
 @import "components/steps.css";
 

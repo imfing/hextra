@@ -29,13 +29,13 @@
   blockquote {
     @apply mt-6 border-gray-300 italic text-gray-700 dark:border-gray-700 dark:text-gray-400 first:mt-0 ltr:border-l-2 ltr:pl-6 rtl:border-r-2 rtl:pr-6;
   }
-  pre {
+  pre:not(.code-block pre) {
     @apply bg-primary-700/5 mb-4 overflow-x-auto rounded-xl font-medium subpixel-antialiased dark:bg-primary-300/10 text-[.9em] contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40 py-4;
   }
-  code {
+  code:not(.code-block code) {
     @apply border-black border-opacity-[0.04] bg-opacity-[0.03] bg-black break-words rounded-md border py-0.5 px-[.25em] text-[.9em] dark:border-white/10 dark:bg-white/10;
   }
-  table {
+  table:not(.code-block table) {
     @apply block overflow-x-auto mt-6 p-0 first:mt-0;
 
     tr {

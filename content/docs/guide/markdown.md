@@ -1,5 +1,6 @@
 ---
 title: Markdown
+math: true
 ---
 
 This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.
@@ -55,47 +56,61 @@ Tables aren't part of the core Markdown spec, but Hugo supports them out-of-the-
 
 ## Code Blocks
 
-#### Code block with backticks
+### Code block with triple backticks
 
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Example HTML5 Document</title>
-</head>
-<body>
-  <p>Test</p>
-</body>
-</html>
+```
+def say_hello():
+    print("Hello!")
 ```
 
-#### Code block indented with four spaces
 
-    <!doctype html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <title>Example HTML5 Document</title>
-    </head>
-    <body>
-      <p>Test</p>
-    </body>
-    </html>
+```python
+def say_hello():
+    print("Hello!")
+```
 
-#### Code block with Hugo's internal highlight shortcode
-{{< highlight html >}}
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Example HTML5 Document</title>
-</head>
-<body>
-  <p>Test</p>
-</body>
-</html>
-{{< /highlight >}}
+### Code block with filename
+
+```python {filename="hello.py"}
+def say_hello():
+    print("Hello!")
+```
+
+### Code block highlight with line numbers
+
+```python {linenos=table,hl_lines=[1, 2],linenostart=1}
+def say_hello():
+    print("Hello!")
+
+def main():
+    say_hello()
+```
+
+```python {linenos=table,hl_lines=[1, 2],linenostart=1,filename="hello.py"}
+def say_hello():
+    print("Hello!")
+
+def main():
+    say_hello()
+```
+
+## Diagrams
+
+[Mermaid](https://github.com/mermaid-js/mermaid#readme) is a JavaScript based diagramming and charting tool that takes Markdown-inspired text definitions and creates diagrams dynamically in the browser.
+
+```mermaid
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail!
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!
+```
 
 ## List Types
 
@@ -121,6 +136,27 @@ Tables aren't part of the core Markdown spec, but Hugo supports them out-of-the-
   * Milk
   * Cheese
 
+## Math
+
+[KaTeX](https://github.com/KaTeX/KaTeX) is a fast math typesetting library for the web. It uses javascript for client-side rendering.
+
+### Inline
+
+```
+This $\int\limits_1^\infty \frac{1}{k}\,dk$ is inline.
+```
+
+This $\int\limits_1^\infty \frac{1}{k}\,dk$ is inline.
+
+### Separate Paragraph
+
+```
+$$f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} \,d\xi$$
+```
+
+$$f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} \,d\xi$$
+
+
 ## Other Elements — abbr, sub, sup, kbd, mark
 
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
@@ -129,6 +165,6 @@ H<sub>2</sub>O
 
 X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 
-Press <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd></kbd> to end the session.
+Press <kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd> to end the session.
 
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.

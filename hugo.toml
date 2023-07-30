@@ -46,6 +46,9 @@ defaultContentLanguage = 'en'
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.highlight]
+    noClasses = false
+
 
 [menu]
   [[menu.main]]

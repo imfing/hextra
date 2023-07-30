@@ -1,0 +1,47 @@
+/* Code syntax highlight */
+@import "chroma/light.css";
+@import "chroma/dark.css";
+
+.code-block {
+  @apply text-[.9em] leading-5;
+
+  pre {
+    @apply text-[.9em] bg-primary-700/5 overflow-x-auto font-medium subpixel-antialiased dark:bg-primary-300/10 contrast-more:border contrast-more:border-primary-900/20 contrast-more:contrast-150 contrast-more:dark:border-primary-100/40;
+  }
+
+  .filename {
+    @apply absolute top-0 z-[1] w-full truncate rounded-t-xl bg-primary-700/5 py-2 px-4 text-xs text-gray-700 dark:bg-primary-300/10 dark:text-gray-200;
+  }
+}
+
+.code-block pre:not(.lntable pre) {
+  @apply px-4 mb-4 py-4 rounded-xl;
+}
+
+.code-block div:nth-of-type(2) pre {
+  @apply pt-12 pb-4;
+}
+
+.chroma {
+  .lntable {
+    @apply m-0 block w-auto overflow-auto rounded-xl;
+
+    pre {
+      @apply pt-4 pb-4;
+    }
+  }
+  .lnt,
+  .ln {
+    @apply pl-4 pr-4 min-w-[2.6rem] text-neutral-600 dark:text-neutral-300;
+  }
+  .lntd {
+    @apply p-0 align-top;
+  }
+  .lntd:last-of-type {
+    @apply w-full;
+  }
+  /* LineHighlight */
+  .hl {
+    @apply block w-full bg-primary-800/10;
+  }
+}
