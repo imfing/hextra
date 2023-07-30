@@ -60,7 +60,9 @@
       @apply my-2;
     }
   }
-
+  kbd {
+    @apply border-black border-opacity-[0.04] bg-opacity-[0.03] bg-black break-words rounded-md border py-0.5 px-[.25em] text-[.9em] dark:border-white/10 dark:bg-white/10;
+  }
 }
 
 .subheading-anchor {
@@ -84,5 +86,34 @@
       @apply text-gray-400;
       @apply dark:text-neutral-500;
     }
+  }
+}
+
+article.typesetting-article {
+  font-size: 17px;
+  font-feature-settings:
+    'rlig' 1,
+    'calt' 1;
+  h1 {
+    @apply mt-6 mb-4 text-center;
+    font-size: 2.5rem;
+  }
+  h2 {
+    @apply border-none;
+  }
+  a {
+    @apply no-underline hover:underline;
+  }
+  p {
+    @apply leading-8;
+  }
+  code {
+    @apply border-none dark:bg-neutral-700;
+  }
+  pre code {
+    @apply dark:bg-transparent;
+  }
+  .subheading-anchor + a {
+    @apply no-underline hover:no-underline after:hidden;
   }
 }

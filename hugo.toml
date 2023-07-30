@@ -7,14 +7,14 @@ disableKinds = ["taxonomy", "term"]
 
 defaultContentLanguage = 'en'
 [languages]
-  [languages.ja]
-    languageName = '日本語'
-    weight = 1
-    title = 'Hextra テーマ'
   [languages.en]
     languageName = 'English'
-    weight = 2
+    weight = 1
     title = 'Hextra Theme'
+  [languages.ja]
+    languageName = '日本語'
+    weight = 2
+    title = 'Hextra テーマ'
 
 [module]
   [module.hugoVersion]

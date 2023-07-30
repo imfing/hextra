@@ -7,5 +7,6 @@ Hextra provides a variety of built-in components based on [Hugo Shortcodes](http
 
 {{< cards >}}
   {{< card link="callouts" title="Callouts" icon="warning" >}}
-  {{< card link="cards" title="Cards" >}}
+  {{< card link="cards" title="Cards" icon="cards" >}}
+  {{< card link="steps" title="Steps" icon="one" >}}
 {{< /cards >}}
