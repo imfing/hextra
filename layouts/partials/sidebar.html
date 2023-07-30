@@ -48,4 +48,19 @@
       {{ end }}
     </ul>
   </div>
+  <!-- theme switch button -->
+  <div class="sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
+    <div class="grow flex flex-col">
+      <button title="Change theme" class="h-7 rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors dark:text-gray-400 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100/5 dark:hover:text-gray-50" id="theme-toggle" type="button" aria-label="Toggle Dark Mode">
+        <div id="theme-toggle-light-icon" class="hidden flex items-center gap-2 capitalize">
+          {{- partial "utils/icon.html" (dict "context" . "name" "sun" "attributes" "height=12") -}}
+          <span>Light</span>
+        </div>
+        <div id="theme-toggle-dark-icon" class="hidden flex items-center gap-2 capitalize">
+          {{- partial "utils/icon.html" (dict "context" . "name" "moon" "attributes" "height=12") -}}
+          <span>Dark</span>
+        </div>
+      </button>
+    </div>
+  </div>
 </aside>
