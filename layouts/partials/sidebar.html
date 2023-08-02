@@ -1,26 +1,28 @@
 <aside class="flex flex-col print:hidden md:top-16 md:shrink-0 md:w-64 md:sticky md:self-start max-md:[transform:translate3d(0,-100%,0)]">
-  <div class="overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-4rem)]">
+  <div class="overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-4rem-3.75rem)]">
     <ul class="flex flex-col gap-1 max-md:hidden">
-      {{ $s := .FirstSection }}
-      {{ $topLevelItems := union $s.RegularPages $s.Sections }}
-      {{ $currentUrl := .RelPermalink }}
+      {{- $s := .FirstSection -}}
+      {{- $topLevelItems := union $s.RegularPages $s.Sections -}}
+      {{- $currentUrl := .RelPermalink -}}
 
-      {{ range $topLevelItems.ByWeight }}
-        {{ $isCurrent := eq $currentUrl .RelPermalink }}
+      {{- range $topLevelItems.ByWeight -}}
+        {{- $isCurrent := eq $currentUrl .RelPermalink -}}
+        {{- $title := .LinkTitle | default .File.BaseFileName -}}
         <li class="open">
-          {{ if $isCurrent }}
+          {{- if $isCurrent -}}
             <a
               class="flex cursor-pointer items-center justify-between gap-2 rounded bg-primary-100 px-2 py-1.5 text-sm font-semibold text-primary-800 transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word] contrast-more:border contrast-more:border-primary-500 dark:bg-primary-400/10 dark:text-primary-600 contrast-more:dark:border-primary-500"
               href="{{ .RelPermalink }}"
-              >{{ .LinkTitle }}</a
             >
+              {{- $title -}}
+            </a>
           {{ else }}
             <a
               class="flex cursor-pointer items-center justify-between gap-2 rounded px-2 py-1.5 text-sm text-gray-500 transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word] hover:bg-gray-100 hover:text-gray-900 contrast-more:border contrast-more:border-transparent contrast-more:text-gray-900 contrast-more:hover:border-gray-900 dark:text-neutral-400 dark:hover:bg-primary-100/5 dark:hover:text-gray-50 contrast-more:dark:text-gray-50 contrast-more:dark:hover:border-gray-50"
               href="{{ .RelPermalink }}"
-              >{{ .LinkTitle }}
+              >{{- $title -}}
             </a>
-          {{ end }}
+          {{- end -}}
         </li>
         {{ $secondLevelItems := union .RegularPages .Sections }}
         {{ with $secondLevelItems }}
@@ -38,7 +40,7 @@
                     {{ end }}"
                     href="{{ .RelPermalink }}"
                   >
-                    {{ .LinkTitle }}
+                    {{ .LinkTitle | default .File.BaseFileName }}
                   </a>
                 </li>
               {{ end }}

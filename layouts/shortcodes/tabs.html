@@ -1,0 +1,26 @@
+{{- $items := split (.Get "items") "," -}}
+{{- $defaultIndex := int ((.Get "defaultIndex") | default "0") -}}
+
+{{- if not $items -}}
+  {{ errorf "no items provided" }}
+{{- end -}}
+
+
+<div class="mt-4 flex w-max min-w-full border-b border-gray-200 pb-px dark:border-neutral-800">
+  {{- range $i, $item := $items -}}
+    <button
+      class="tabs-toggle data-[state=selected]:border-primary-500 data-[state=selected]:text-primary-600 mr-2 rounded-t p-2 font-medium leading-5 transition-colors -mb-0.5 select-none border-b-2 border-transparent text-gray-600 hover:border-gray-200 hover:text-black dark:text-gray-200 dark:hover:border-neutral-800 dark:hover:text-white"
+      role="tab"
+      type="button"
+      aria-controls="tabs-panel-{{ $i }}"
+      {{ if eq $i $defaultIndex }}aria-selected="true"{{ end }}
+      {{ if eq $i $defaultIndex }}tabindex="0"{{ end }}
+      {{ if eq $i $defaultIndex }}data-state="selected"{{ end }}
+    >
+      {{- $item -}}
+    </button>
+  {{- end -}}
+</div>
+<div>
+  {{ .Inner }}
+</div>

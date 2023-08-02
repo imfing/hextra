@@ -1,0 +1,11 @@
+{{- $defaultIndex := int ((.Parent.Get "defaultIndex") | default "0") -}}
+
+<div
+  class="tabs-panel rounded pt-6 hidden data-[state=selected]:block"
+  id="tabs-panel-{{ .Ordinal }}"
+  role="tabpanel"
+  {{ if eq .Ordinal $defaultIndex }}tabindex="0"{{ end }}
+  {{ if eq .Ordinal $defaultIndex }}data-state="selected"{{ end }}
+>
+  {{ .InnerDeindent | markdownify }}
+</div>
