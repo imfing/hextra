@@ -3,4 +3,4 @@ title: Introduction
 weight: 1
 ---
 
-Introduction to the project.
+Hextra is a modern, responsive Hugo theme built with [Tailwind CSS](https://tailwindcss.com/).

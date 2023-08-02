@@ -55,11 +55,11 @@
     <div class="grow flex flex-col">
       <button title="Change theme" class="h-7 rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors dark:text-gray-400 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100/5 dark:hover:text-gray-50" id="theme-toggle" type="button" aria-label="Toggle Dark Mode">
         <div id="theme-toggle-light-icon" class="hidden flex items-center gap-2 capitalize">
-          {{- partial "utils/icon.html" (dict "context" . "name" "sun" "attributes" "height=12") -}}
+          {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12") -}}
           <span>Light</span>
         </div>
         <div id="theme-toggle-dark-icon" class="hidden flex items-center gap-2 capitalize">
-          {{- partial "utils/icon.html" (dict "context" . "name" "moon" "attributes" "height=12") -}}
+          {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12") -}}
           <span>Dark</span>
         </div>
       </button>

@@ -10,7 +10,7 @@
 >
   <span class="flex font-semibold items-start gap-2 p-4 text-gray-700 hover:text-gray-900 dark:text-neutral-200 dark:hover:text-neutral-50">
     {{ with $icon }}
-      {{ partial "utils/icon.html" (dict "context" $context "name" $icon) }}
+      {{ partial "utils/icon.html" (dict "name" $icon) }}
     {{ end }}
     {{ $title }}
   </span>

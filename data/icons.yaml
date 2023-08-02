@@ -2,7 +2,7 @@
 #
 # Example usage in templates using the icon.html partial:
 #
-# {{ partial "utils/icon.html" (dict "context" . "name" "github" "attributes" "height=24") }}
+# {{ partial "utils/icon.html" (dict "name" "github" "attributes" "height=24") }}
 
 github: >
   <svg fill="currentColor" viewBox="3 3 18 18">

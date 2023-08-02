@@ -1,4 +1,4 @@
-{{- $icon := index .context.Site.Data.icons .name -}}
+{{- $icon := index site.Data.icons .name -}}
 
 {{- if not $icon -}}
   {{ errorf "icon %q not found" .name }}

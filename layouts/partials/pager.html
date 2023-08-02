@@ -6,14 +6,14 @@
   <div class="mb-8 flex items-center border-t pt-8 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400 print:hidden">
     {{- if $prev -}}
       <a href="{{ $prev.RelPermalink }}" class="flex max-w-[50%] items-center gap-1 py-4 text-base font-medium text-gray-600 transition-colors [word-break:break-word] hover:text-primary-600 dark:text-gray-300 md:text-lg ltr:pr-4 rtl:pl-4">
-        {{- partial "utils/icon.html" (dict "context" . "name" "chevron-right" "attributes" "class=\"inline h-5 shrink-0 ltr:rotate-180\"") -}}
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"inline h-5 shrink-0 ltr:rotate-180\"") -}}
         {{- $prev.Title -}}
       </a>
     {{- end -}}
     {{- if $next -}}
       <a href="{{ $next.RelPermalink }}" class="flex max-w-[50%] items-center gap-1 py-4 text-base font-medium text-gray-600 transition-colors [word-break:break-word] hover:text-primary-600 dark:text-gray-300 md:text-lg ltr:ml-auto ltr:pl-4 ltr:text-right rtl:mr-auto rtl:pr-4 rtl:text-left">
         {{- $next.LinkTitle -}}
-        {{- partial "utils/icon.html" (dict "context" . "name" "chevron-right" "attributes" "class=\"inline h-5 shrink-0\"") -}}
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"inline h-5 shrink-0\"") -}}
       </a>
     {{- end -}}
   </div>

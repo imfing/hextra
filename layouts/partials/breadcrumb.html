@@ -4,7 +4,7 @@
       <div class="whitespace-nowrap transition-colors min-w-[24px] overflow-hidden text-ellipsis">
         <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
       </div>
-      {{ partial "utils/icon.html" (dict "context" . "name" "chevron-right" "attributes" "class=\"w-3.5 shrink-0\"") }}
+      {{ partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"w-3.5 shrink-0\"") }}
     {{ end }}
   {{ end }}
   <div class="whitespace-nowrap transition-colors font-medium text-gray-700 contrast-more:font-bold contrast-more:text-current dark:text-gray-100 contrast-more:dark:text-current">
