@@ -18,6 +18,11 @@
   <script src="{{ $tabsJS.RelPermalink }}"></script>
 {{ end }}
 
+{{- $searchJSFile := printf "%s.search.js" .Language.Lang }}
+{{- $searchJS := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $searchJSFile . | resources.Minify | resources.Fingerprint -}}
+<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.min.js"></script>
+<script defer src="{{ $searchJS.RelPermalink }}"></script>
+
 {{ if .Page.Params.math }}
   <!-- TODO: embed katex in the theme -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous" />

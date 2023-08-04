@@ -1,0 +1,19 @@
+{{- $pages := where .Site.Pages "Kind" "in" (slice "page" "section") -}}
+{{- $pages = where $pages "Params.excludeSearch" "!=" true -}}
+{{- $pages = where $pages "Content" "!=" "" -}}
+
+[
+  {{ range $index, $page := $pages }}
+  {{ $pageTitle := $page.LinkTitle | default $page.File.BaseFileName }}
+  {{ $pageContent := $page.Plain }}
+  {{ $pageSection := $page.Parent.LinkTitle }}
+
+  {{ if gt $index 0}},{{end}} {
+      "id": {{ $index }},
+      "href": "{{ $page.Permalink }}",
+      "title": {{ $pageTitle | jsonify }},
+      "section": {{ $pageSection | jsonify }},
+      "content": {{ $page.Plain | jsonify }}
+  }
+  {{- end -}}
+]

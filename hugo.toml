@@ -64,6 +64,10 @@ defaultContentLanguage = 'en'
     pageRef = '/about'
     weight = 30
   [[menu.main]]
+    name = 'Search'
+    weight = 35
+    params = { placeholder = 'Search documentation...' }
+  [[menu.main]]
     name = 'GitHub'
     url = 'https://github.com'
     weight = 40
