@@ -18,9 +18,13 @@
   <script src="{{ $tabsJS.RelPermalink }}"></script>
 {{ end }}
 
-{{- $searchJSFile := printf "%s.search.js" .Language.Lang }}
-{{- $searchJS := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $searchJSFile . | resources.Minify | resources.Fingerprint -}}
-<script src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.min.js"></script>
+<!-- TODO: use feature flag for search and embed flexsearch -->
+{{ $searchJSFile := printf "%s.search.js" .Language.Lang }}
+{{ $searchJS := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $searchJSFile . }}
+{{ if hugo.IsProduction }}
+  {{ $searchJS = $searchJS | minify | fingerprint }}
+{{ end }}
+<script defer src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.min.js"></script>
 <script defer src="{{ $searchJS.RelPermalink }}"></script>
 
 {{ if .Page.Params.math }}

@@ -1,0 +1,45 @@
+{{/* Split page raw content into fragments */}}
+{{ $page := . }}
+
+{{ $headingKeys := slice }}
+{{ $headingTitles := slice }}
+
+{{ range $h1 := $page.Fragments.Headings }}
+  {{ if eq $h1.Title "" }}
+    {{ $headingKeys = $headingKeys | append $h1.Title }}
+  {{ else }}
+    {{ $headingKeys = $headingKeys | append (printf "%s#%s" $h1.ID $h1.Title) }}
+  {{ end }}
+  {{ $headingTitles = $headingTitles | append (printf "# %s" $h1.Title) }}
+
+  {{ range $h2 := $h1.Headings }}
+    {{ $headingKeys = $headingKeys | append (printf "%s#%s" $h2.ID $h2.Title) }}
+    {{ $headingTitles = $headingTitles | append (printf "## %s" $h2.Title) }}
+  {{ end }}
+{{ end }}
+
+{{ $content := $page.RawContent }}
+{{ $len := len $headingKeys }}
+{{ $data := dict }}
+
+{{ if eq $len 0 }}
+  {{ $data = $data | merge (dict "" $page.Plain) }}
+{{ else }}
+  {{ range seq $len }}
+    {{ $i := sub $len . }}
+    {{ $headingKey := index $headingKeys $i }}
+    {{ $headingTitle := index $headingTitles $i }}
+
+    {{ if eq $i 0 }}
+      {{ $data = $data | merge (dict $headingKey ($content | markdownify | plainify)) }}
+    {{ else }}
+      {{ $parts := split $content (printf "\n%s\n" $headingTitle) }}
+      {{ $lastPart := index $parts (sub (len $parts) 1) }}
+
+      {{ $data = $data | merge (dict $headingKey ($lastPart | markdownify | plainify)) }}
+      {{ $content = strings.TrimSuffix $lastPart $content }}
+      {{ $content = strings.TrimSuffix (printf "\n%s\n" $headingTitle) $content }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $data }}

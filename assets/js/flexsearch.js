@@ -1,86 +1,306 @@
+// Search functionality using FlexSearch.
+
+// Render the search data as JSON.
 // {{ $searchDataFile := printf "%s.search-data.json" .Language.Lang }}
-// {{ $searchData := resources.Get "json/search-data.json" | resources.ExecuteAsTemplate $searchDataFile . | resources.Minify | resources.Fingerprint }}
+// {{ $searchData := resources.Get "json/search-data.json" | resources.ExecuteAsTemplate $searchDataFile . }}
+// {{ if hugo.IsProduction }}
+//   {{ $searchData := $searchData | minify | fingerprint }}
+// {{ end }}
 
 (function () {
   const searchDataURL = '{{ $searchData.Permalink }}';
-  console.log('searchDataURL', searchDataURL);
 
-  const indexConfig = {
-    tokenize: "full",
-    cache: 100,
-    document: {
-      id: 'id',
-      store: ['title', 'href', 'section'],
-      index: ["title", "content"]
-    },
-    context: {
-      resolution: 9,
-      depth: 2,
-      bidirectional: true
+  const inputElement = document.getElementById('search-input');
+  const resultsElement = document.getElementById('search-results');
+
+  inputElement.addEventListener('focus', init);
+  inputElement.addEventListener('keyup', search);
+  inputElement.addEventListener('keydown', handleKeyDown);
+
+  const INPUTS = ['input', 'select', 'button', 'textarea']
+
+  // Focus the search input when pressing ctrl+k/cmd+k or /.
+  document.addEventListener('keydown', function (e) {
+    const activeElement = document.activeElement;
+    const tagName = activeElement && activeElement.tagName;
+    if (
+      inputElement === activeElement ||
+      !tagName ||
+      INPUTS.includes(tagName) ||
+      (activeElement && activeElement.isContentEditable))
+      return;
+
+    if (
+      e.key === '/' ||
+      (e.key === 'k' &&
+        (e.metaKey /* for Mac */ || /* for non-Mac */ e.ctrlKey))
+    ) {
+      e.preventDefault();
+      inputElement.focus();
+    } else if (e.key === 'Escape' && inputElement.value) {
+      inputElement.blur();
+    }
+  });
+
+  // Get the currently active result and its index.
+  function getActiveResult() {
+    const result = resultsElement.querySelector('.active');
+    if (result) {
+      const index = parseInt(result.getAttribute('data-index'));
+      return { result, index };
+    }
+    return { result: undefined, index: -1 };
+  }
+
+  // Set the active result by index.
+  function setActiveResult(index) {
+    const { result: activeResult } = getActiveResult();
+    activeResult && activeResult.classList.remove('active');
+    const result = resultsElement.querySelector(`[data-index="${index}"]`);
+    if (result) {
+      result.classList.add('active');
+      result.focus();
     }
   }
-  window.flexSearchIndex = new FlexSearch.Document(indexConfig);
 
-  const input = document.getElementById('search-input');
-  const results = document.getElementById('search-results');
+  // Get the number of search results from the DOM.
+  function getResultsLength() {
+    return resultsElement.querySelectorAll('li').length;
+  }
 
-  input.addEventListener('focus', init);
-  input.addEventListener('keyup', search);
+  // Finish the search by hiding the results and clearing the input.
+  function finishSearch() {
+    hideSearchResults();
+    inputElement.value = '';
+    inputElement.blur();
+  }
 
+  function hideSearchResults() {
+    resultsElement.classList.add('hidden');
+  }
 
-  /**
-   * Initializes the search functionality by adding the necessary event listeners and fetching the search data.
-   */
+  // Handle keyboard events.
+  function handleKeyDown(e) {
+    const resultsLength = getResultsLength();
+    const { result: activeResult, index: activeIndex } = getActiveResult();
+
+    switch (e.key) {
+      case 'ArrowUp':
+        e.preventDefault();
+        if (activeIndex > 0) setActiveResult(activeIndex - 1);
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        if (activeIndex + 1 < resultsLength) setActiveResult(activeIndex + 1);
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (activeResult) {
+          activeResult.click();
+        }
+        finishSearch();
+      case 'Escape':
+        e.preventDefault();
+        hideSearchResults();
+        inputElement.blur();
+        break;
+    }
+  }
+
+  // Initializes the search.
   function init() {
-    input.removeEventListener('focus', init); // init once
+    inputElement.removeEventListener('focus', init);
+    preloadIndex().then(search);
+  }
 
-    fetch(searchDataURL).then(resp => resp.json()).then(pages => {
-      pages.forEach(page => {
-        window.flexSearchIndex.add(page);
+  // Preload the search index.
+  async function preloadIndex() {
+    window.pageIndex = new FlexSearch.Document({
+      tokenize: 'forward',
+      cache: 100,
+      document: {
+        id: 'id',
+        store: ['title'],
+        index: "content"
+      }
+    });
+
+    window.sectionIndex = new FlexSearch.Document({
+      tokenize: 'forward',
+      cache: 100,
+      document: {
+        id: 'id',
+        store: ['title', 'content', 'url', 'display'],
+        index: "content",
+        tag: 'pageId'
+      }
+    });
+
+    const resp = await fetch(searchDataURL);
+    const data = await resp.json();
+    let pageId = 0;
+    for (const route in data) {
+      let pageContent = '';
+      ++pageId;
+
+      for (const heading in data[route].data) {
+        const [hash, text] = heading.split('#');
+        const url = route.trimEnd('/') + (hash ? '#' + hash : '');
+        const title = text || data[route].title;
+
+        const content = data[route].data[heading] || '';
+        const paragraphs = content.split('\n').filter(Boolean);
+
+        sectionIndex.add({
+          id: url,
+          url,
+          title,
+          pageId: `page_${pageId}`,
+          content: title,
+          ...(paragraphs[0] && { display: paragraphs[0] })
+        });
+
+        for (let i = 0; i < paragraphs.length; i++) {
+          sectionIndex.add({
+            id: `${url}_${i}`,
+            url,
+            title,
+            pageId: `page_${pageId}`,
+            content: paragraphs[i]
+          });
+        }
+
+        pageContent += ` ${title} ${content}`;
+      }
+
+      window.pageIndex.add({
+        id: pageId,
+        title: data[route].title,
+        content: pageContent
       });
-    }).then(search);
+
+    }
   }
 
   function search() {
-    console.log('search', input.value);
-    while (results.firstChild) {
-      results.removeChild(results.firstChild);
-    }
-
-    if (!input.value) {
+    const query = inputElement.value;
+    if (!inputElement.value) {
+      hideSearchResults();
       return;
     }
 
-    const searchHits = window.flexSearchIndex.search(input.value, { limit: 5, enrich: true });
-    showResults(searchHits);
+    while (resultsElement.firstChild) {
+      resultsElement.removeChild(resultsElement.firstChild);
+    }
+    resultsElement.classList.remove('hidden');
+
+    const pageResults = window.pageIndex.search(query, 5, { enrich: true, suggest: true })[0]?.result || [];
+
+    const results = [];
+    const pageTitleMatches = {};
+
+    for (let i = 0; i < pageResults.length; i++) {
+      const result = pageResults[i];
+      pageTitleMatches[i] = 0;
+
+      // Show the top 5 results for each page
+      const sectionResults = window.sectionIndex.search(query, 5, { enrich: true, suggest: true, tag: `page_${result.id}` })[0]?.result || [];
+      let isFirstItemOfPage = true
+      const occurred = {}
+
+      for (let j = 0; j < sectionResults.length; j++) {
+        const { doc } = sectionResults[j]
+        const isMatchingTitle = doc.display !== undefined
+        if (isMatchingTitle) {
+          pageTitleMatches[i]++
+        }
+        const { url, title } = doc
+        const content = doc.display || doc.content
+
+        if (occurred[url + '@' + content]) continue
+        occurred[url + '@' + content] = true
+        results.push({
+          _page_rk: i,
+          _section_rk: j,
+          route: url,
+          prefix: isFirstItemOfPage ? result.doc.title : undefined,
+          children: { title, content }
+        })
+        isFirstItemOfPage = false
+      }
+    }
+    const sortedResults = results
+      .sort((a, b) => {
+        // Sort by number of matches in the title.
+        if (a._page_rk === b._page_rk) {
+          return a._section_rk - b._section_rk
+        }
+        if (pageTitleMatches[a._page_rk] !== pageTitleMatches[b._page_rk]) {
+          return pageTitleMatches[b._page_rk] - pageTitleMatches[a._page_rk]
+        }
+        return a._page_rk - b._page_rk
+      })
+      .map(res => ({
+        id: `${res._page_rk}_${res._section_rk}`,
+        route: res.route,
+        prefix: res.prefix,
+        children: res.children
+      }));
+    displayResults(sortedResults, query);
   }
 
-  function showResults(hits) {
-    console.log('showResults', hits);
-    const flatResults = new Map(); // keyed by href to dedupe hits
-    for (const result of hits.flatMap(r => r.result)) {
-      if (flatResults.has(result.doc.href)) continue;
-      flatResults.set(result.doc.href, result.doc);
+
+
+  function displayResults(results, query) {
+    if (!results.length) {
+      resultsElement.innerHTML = `<span class="no-result">No results found.</span>`;
+      return;
     }
-    console.log('flatResults', flatResults);
-    const create = (str) => {
+
+    function highlightMatches(text, query) {
+      const escapedQuery = query.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+      const regex = new RegExp(escapedQuery, 'gi');
+      return text.replace(regex, (match) => `<span class="match">${match}</span>`);
+    }
+
+    // Create a DOM element from the HTML string.
+    function createElement(str) {
       const div = document.createElement('div');
       div.innerHTML = str.trim();
       return div.firstChild;
     }
+
+    function handleMouseMove(e) {
+      const target = e.target.closest('a');
+      if (target) {
+        const active = resultsElement.querySelector('a.active');
+        if (active) {
+          active.classList.remove('active');
+        }
+        target.classList.add('active');
+      }
+    }
+
     const fragment = document.createDocumentFragment();
-
-    console.log(fragment)
-
-    for (const result of flatResults.values()) {
-      const li = create(`
-      <li class="mx-2.5 break-words rounded-md contrast-more:border text-gray-800 contrast-more:border-transparent dark:text-gray-300">
-        <a class="block scroll-m-12 px-2.5 py-2" data-index="0" href="${result.href}">
-          <div class="text-base font-semibold leading-5">${result.title}</div>
-        </a>
-      </li>`);
+    for (let i = 0; i < results.length; i++) {
+      const result = results[i];
+      if (result.prefix) {
+        fragment.appendChild(createElement(`
+          <div class="prefix">${result.prefix}</div>`));
+      }
+      let li = createElement(`
+        <li>
+          <a data-index="${i}" href="${result.route}" class=${i === 0 ? "active" : ""}>
+            <div class="title">`+ highlightMatches(result.children.title, query) + `</div>` +
+        (result.children.content ?
+          `<div class="excerpt">` + highlightMatches(result.children.content, query) + `</div>` : '') + `
+          </a>
+        </li>`);
+      li.addEventListener('mousemove', handleMouseMove);
+      li.addEventListener('keydown', handleKeyDown);
+      li.querySelector('a').addEventListener('click', finishSearch);
       fragment.appendChild(li);
     }
-    results.appendChild(fragment);
+    resultsElement.appendChild(fragment);
   }
 })();
