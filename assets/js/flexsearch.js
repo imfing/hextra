@@ -10,17 +10,33 @@
 (function () {
   const searchDataURL = '{{ $searchData.Permalink }}';
 
-  const inputElement = document.getElementById('search-input');
-  const resultsElement = document.getElementById('search-results');
+  const inputElements = document.querySelectorAll('.search-input');
+  for (const el of inputElements) {
+    el.addEventListener('focus', init);
+    el.addEventListener('keyup', search);
+    el.addEventListener('keydown', handleKeyDown);
+  }
 
-  inputElement.addEventListener('focus', init);
-  inputElement.addEventListener('keyup', search);
-  inputElement.addEventListener('keydown', handleKeyDown);
+  // Get the search wrapper, input, and results elements.
+  function getActiveSearchElement() {
+    const inputs = Array.from(document.querySelectorAll('.search-wrapper')).filter(el => el.clientHeight > 0);
+    if (inputs.length === 1) {
+      return {
+        wrapper: inputs[0],
+        inputElement: inputs[0].querySelector('.search-input'),
+        resultsElement: inputs[0].querySelector('.search-results')
+      };
+    }
+    return undefined;
+  }
 
   const INPUTS = ['input', 'select', 'button', 'textarea']
 
   // Focus the search input when pressing ctrl+k/cmd+k or /.
   document.addEventListener('keydown', function (e) {
+    const { inputElement } = getActiveSearchElement();
+    if (!inputElement) return;
+
     const activeElement = document.activeElement;
     const tagName = activeElement && activeElement.tagName;
     if (
@@ -42,18 +58,36 @@
     }
   });
 
+  // Dismiss the search results when clicking outside the search box.
+  document.addEventListener('mousedown', function (e) {
+    const { inputElement, resultsElement } = getActiveSearchElement();
+    if (!inputElement || !resultsElement) return;
+    if (
+      e.target !== inputElement &&
+      e.target !== resultsElement &&
+      !resultsElement.contains(e.target)
+    ) {
+      hideSearchResults();
+    }
+  });
+
   // Get the currently active result and its index.
   function getActiveResult() {
+    const { resultsElement } = getActiveSearchElement();
+    if (!resultsElement) return { result: undefined, index: -1 };
+
     const result = resultsElement.querySelector('.active');
-    if (result) {
-      const index = parseInt(result.getAttribute('data-index'));
-      return { result, index };
-    }
-    return { result: undefined, index: -1 };
+    if (!result) return { result: undefined, index: -1 };
+
+    const index = parseInt(result.getAttribute('data-index'));
+    return { result, index };
   }
 
   // Set the active result by index.
   function setActiveResult(index) {
+    const { resultsElement } = getActiveSearchElement();
+    if (!resultsElement) return;
+
     const { result: activeResult } = getActiveResult();
     activeResult && activeResult.classList.remove('active');
     const result = resultsElement.querySelector(`[data-index="${index}"]`);
@@ -65,22 +99,31 @@
 
   // Get the number of search results from the DOM.
   function getResultsLength() {
+    const { resultsElement } = getActiveSearchElement();
+    if (!resultsElement) return 0;
     return resultsElement.querySelectorAll('li').length;
   }
 
   // Finish the search by hiding the results and clearing the input.
   function finishSearch() {
+    const { inputElement } = getActiveSearchElement();
+    if (!inputElement) return;
     hideSearchResults();
     inputElement.value = '';
     inputElement.blur();
   }
 
   function hideSearchResults() {
+    const { resultsElement } = getActiveSearchElement();
+    if (!resultsElement) return;
     resultsElement.classList.add('hidden');
   }
 
   // Handle keyboard events.
   function handleKeyDown(e) {
+    const { inputElement } = getActiveSearchElement();
+    if (!inputElement) return;
+
     const resultsLength = getResultsLength();
     const { result: activeResult, index: activeIndex } = getActiveResult();
 
@@ -108,9 +151,11 @@
   }
 
   // Initializes the search.
-  function init() {
-    inputElement.removeEventListener('focus', init);
-    preloadIndex().then(search);
+  function init(e) {
+    e.target.removeEventListener('focus', init);
+    if (!(window.pageIndex && window.sectionIndex)) {
+      preloadIndex();
+    }
   }
 
   // Preload the search index.
@@ -182,13 +227,14 @@
     }
   }
 
-  function search() {
-    const query = inputElement.value;
-    if (!inputElement.value) {
+  function search(e) {
+    const query = e.target.value;
+    if (!e.target.value) {
       hideSearchResults();
       return;
     }
 
+    const { resultsElement } = getActiveSearchElement();
     while (resultsElement.firstChild) {
       resultsElement.removeChild(resultsElement.firstChild);
     }
@@ -249,9 +295,10 @@
     displayResults(sortedResults, query);
   }
 
-
-
   function displayResults(results, query) {
+    const { resultsElement } = getActiveSearchElement();
+    if (!resultsElement) return;
+
     if (!results.length) {
       resultsElement.innerHTML = `<span class="no-result">No results found.</span>`;
       return;

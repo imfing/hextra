@@ -4,6 +4,9 @@
 {{ $codeCopyJS := resources.Get "js/code-copy.js" }}
 <script src="{{ $codeCopyJS.RelPermalink }}"></script>
 
+{{ $menuJS := resources.Get "js/menu.js" }}
+<script src="{{ $menuJS.RelPermalink }}"></script>
+
 {{ if .Page.Store.Get "hasMermaid" }}
   <script type="module">
     // TODO: embed mermaid.min.js in the theme
@@ -17,6 +20,7 @@
   {{ $tabsJS := resources.Get "js/tabs.js" }}
   <script src="{{ $tabsJS.RelPermalink }}"></script>
 {{ end }}
+
 
 <!-- TODO: use feature flag for search and embed flexsearch -->
 {{ $searchJSFile := printf "%s.search.js" .Language.Lang }}

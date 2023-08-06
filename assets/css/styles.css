@@ -8,6 +8,7 @@
 @import "components/steps.css";
 @import "components/search.css";
 @import "components/sidebar.css";
+@import "components/navbar.css";
 
 html {
   @apply text-base antialiased;
@@ -22,6 +23,7 @@ body {
 :root {
   --primary-hue: 212deg;
   --navbar-height: 4rem;
+  --menu-height: 3.75rem;
 }
 
 .dark {
