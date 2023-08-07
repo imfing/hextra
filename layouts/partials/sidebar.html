@@ -1,3 +1,11 @@
+{{ $context := .context }}
+{{ $disableSidebar := .disableSidebar | default false }}
+
+{{ $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection }}
+{{ $navPages := union $navRoot.RegularPages $navRoot.Sections }}
+{{ $pageURL := $context.RelPermalink }}
+
+
 <aside class="sidebar-container flex flex-col print:hidden md:top-16 md:shrink-0 md:w-64 md:sticky md:self-start max-md:[transform:translate3d(0,-100%,0)]">
   <!-- Search bar on small screen -->
   <div class="px-4 pt-4 md:hidden">
@@ -5,46 +13,50 @@
   </div>
   <div class="overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
     <ul class="flex flex-col gap-1 md:hidden">
-      <!-- Navbar -->
-      {{- range .Site.Menus.main -}}
-        {{- if and .URL (ne .Params.type "search") -}}
+      <!-- Nav -->
+      {{- range site.Menus.main -}}
+        {{- if and .URL (and (ne .Params.type "search") (not .Params.icon)) -}}
           <li>{{ template "sidebar-item-link" dict "active" false "title" .Name "link" .URL }}</li>
         {{- end -}}
       {{- end -}}
-      <div class="mt-4 border-t py-4 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400" />
-
-      {{- $s := .FirstSection -}}
-      {{- $topLevelItems := union $s.RegularPages $s.Sections -}}
-      {{- $pageURL := .RelPermalink -}}
-
-      {{- range $topLevelItems.ByWeight -}}
-        {{ template "sidebar-item" (dict "item" . "pageURL" $pageURL) }}
-        {{ template "sidebar-tree" (dict "context" . "level" 1 "pageURL" $pageURL "toc" true) }}
-      {{ end }}
+      {{ template "sidebar-separator" }}
+      {{ template "sidebar-main" (dict "pages" $navPages "pageURL" $pageURL "toc" true) }}
 
 
       <!-- Sidebar footer -->
-      <div class="mt-4 border-t py-4 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400" />
-      {{ template "sidebar-footer" }}
+      {{ with site.Params.sidebar.footer -}}
+        {{ template "sidebar-separator" }}
+        {{ template "sidebar-footer" }}
+      {{ end }}
     </ul>
 
     <!-- Sidebar on large screen -->
-    <ul class="flex flex-col gap-1 max-md:hidden">
-      {{- $s := .FirstSection -}}
-      {{- $topLevelItems := union $s.RegularPages $s.Sections -}}
-      {{- $pageURL := .RelPermalink -}}
-
-      {{- range $topLevelItems.ByWeight -}}
-        <!-- First level items and nested tree under  -->
-        {{ template "sidebar-item" (dict "item" . "pageURL" $pageURL) }}
-        {{ template "sidebar-tree" (dict "context" . "level" 1 "pageURL" $pageURL) }}
-      {{ end }}
-      <!-- Sidebar footer -->
-      {{ template "sidebar-footer" }}
-    </ul>
+    {{ if $disableSidebar -}}
+      <div class="max-xl:hidden h-0 w-64 shrink-0"></div>
+      {{ .context.Scratch.Set "enableFooterSwitches" true }}
+    {{ else }}
+      <ul class="flex flex-col gap-1 max-md:hidden">
+        {{ template "sidebar-main" (dict "pages" $navPages "pageURL" $pageURL) }}
+        {{ template "sidebar-footer" }}
+      </ul>
+    {{ end }}
   </div>
-  {{ template "theme-switch" }}
+  {{/* Hide theme switch when sidebar is disabled */}}
+  {{ template "theme-switch" (dict "class" (cond $disableSidebar "md:hidden" "")) }}
 </aside>
+
+{{- define "sidebar-main" -}}
+  {{ $pages := .pages }}
+  {{ $toc := .toc | default false }}
+  {{ $pageURL := .pageURL }}
+
+  {{- with $pages -}}
+    {{- range .ByWeight -}}
+      {{ template "sidebar-item" (dict "item" . "pageURL" $pageURL "toc" $toc) }}
+      {{ template "sidebar-tree" (dict "context" . "level" 1 "pageURL" $pageURL "toc" $toc) }}
+    {{- end -}}
+  {{ end }}
+{{- end -}}
 
 {{- define "sidebar-footer" -}}
   {{- range site.Menus.sidebar -}}
@@ -113,10 +125,14 @@
   {{- $active := eq .pageURL .item.RelPermalink -}}
   {{- $title := .item.LinkTitle | default .item.File.BaseFileName -}}
   {{- $link := .item.RelPermalink -}}
+  {{- $toc := .toc | default false -}}
 
 
   <li class="open">
     {{ template "sidebar-item-link" dict "active" $active "title" $title "link" $link }}
+    {{ if and $toc $active }}
+      {{ template "sidebar-toc" dict "page" .item }}
+    {{ end }}
   </li>
 {{- end -}}
 
@@ -136,20 +152,15 @@
   </a>
 {{- end -}}
 
+{{- define "sidebar-separator" -}}
+  <div class="mt-4 border-t py-4 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400" />
+{{- end -}}
+
 {{- define "theme-switch" -}}
-  <!-- theme switch button -->
-  <div class="sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
+  {{- $class := .class -}}
+  <div class="{{ $class }} sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
     <div class="grow flex flex-col">
-      <button title="Change theme" class="h-7 rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors dark:text-gray-400 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100/5 dark:hover:text-gray-50" id="theme-toggle" type="button" aria-label="Toggle Dark Mode">
-        <div id="theme-toggle-light-icon" class="hidden flex items-center gap-2 capitalize">
-          {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12") -}}
-          <span>Light</span>
-        </div>
-        <div id="theme-toggle-dark-icon" class="hidden flex items-center gap-2 capitalize">
-          {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12") -}}
-          <span>Dark</span>
-        </div>
-      </button>
+      {{ partial "theme-toggle" }}
     </div>
   </div>
 {{- end -}}

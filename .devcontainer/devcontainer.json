@@ -1,0 +1,23 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/go:1",
+  "features": {
+    "ghcr.io/devcontainers/features/hugo:1": {
+      "extended": true,
+      "version": "0.116.1"
+    },
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mhutchie.git-graph",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "tamasfe.even-better-toml",
+        "budparr.language-hugo-vscode"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install",
+  "forwardPorts": [1313]
+}

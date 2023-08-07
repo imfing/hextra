@@ -1,4 +1,8 @@
+{{- $enableFooterSwitches := .Scratch.Get "enableFooterSwitches" | default false -}}
+
+
 <footer class="bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900 print:bg-transparent">
+  {{- if $enableFooterSwitches }}{{ template "footer-switches" }}{{ end -}}
   <hr class="dark:border-neutral-800" />
   <div class="mx-auto flex max-w-[90rem] justify-center py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-600 dark:text-gray-400 md:justify-start">
     <div class="flex w-full flex-col items-center sm:items-start">
@@ -12,3 +16,9 @@
     </div>
   </div>
 </footer>
+
+{{- define "footer-switches" -}}
+  <div class="mx-auto flex max-w-[90rem] gap-2 py-2 px-4">
+    {{ partial "theme-toggle.html" }}
+  </div>
+{{- end -}}

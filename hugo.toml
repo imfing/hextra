@@ -56,8 +56,8 @@ defaultContentLanguage = 'en'
     pageRef = '/docs'
     weight = 10
   [[menu.main]]
-    name = 'Showcase'
-    pageRef = '/showcase'
+    name = 'Blog'
+    pageRef = '/blog'
     weight = 20
   [[menu.main]]
     name = 'About'
@@ -81,3 +81,8 @@ defaultContentLanguage = 'en'
     name = 'Hugo Docs ↗'
     url = 'https://gohugo.io/documentation/'
     weight = 20
+
+[params]
+  dateFormat = 'January 2, 2006'
+
+  displayUpdatedDate = true

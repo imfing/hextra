@@ -1,0 +1,8 @@
+<button title="Change theme" data-theme="light" class="theme-toggle group h-7 rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors dark:text-gray-400 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100/5 dark:hover:text-gray-50" type="button" aria-label="Toggle Dark Mode">
+  <div class="flex items-center gap-2 capitalize">
+    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12 class=\"group-data-[theme=light]:hidden\"") -}}
+    <span class="group-data-[theme=light]:hidden">Light</span>
+    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12 class=\"group-data-[theme=dark]:hidden\"") -}}
+    <span class="group-data-[theme=dark]:hidden">Dark</span>
+  </div>
+</button>
