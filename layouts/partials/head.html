@@ -1,18 +1,18 @@
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {{ partialCached "favicons.html" . }}
   <title>
-    {{ .Title }}
+    {{- if .IsHome -}}
+      {{ .Site.Title -}}
+    {{ else -}}
+      {{ with .Title }}{{ . }} – {{ end -}}
+      {{ .Site.Title -}}
+    {{ end -}}
   </title>
-  <meta name="description" content="{{ .Description }}" />
-  {{ $options := dict "inlineImports" true }}
-  {{ $styles := resources.Get "css/styles.css" }}
-  {{ $styles = $styles | resources.PostCSS $options }}
-  {{ if hugo.IsProduction }}
-    {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
-  {{ end }}
-  <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
-
+  <meta name="description" content="{{ partial "utils/page-description.html" . }}" />
+  {{ partial "opengraph.html" . }}
+  {{ partial "head-css.html" . }}
   <script>
     /* Initialize light/dark mode */
     if (localStorage.getItem("color-theme") === "dark" || (!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
@@ -21,4 +21,6 @@
       document.documentElement.classList.remove("dark");
     }
   </script>
+
+  {{ partial "custom/head-end.html" . }}
 </head>
