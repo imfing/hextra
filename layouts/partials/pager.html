@@ -1,7 +1,9 @@
 {{/* Article navigation on the footer of the article */}}
 
-{{- $prev := .NextInSection -}}
-{{- $next := .PrevInSection -}}
+{{ $reversePagination := .Scratch.Get "reversePagination" | default false }}
+
+{{- $prev := cond $reversePagination .PrevInSection .NextInSection -}}
+{{- $next := cond $reversePagination .NextInSection .PrevInSection -}}
 {{- if or $prev $next -}}
   <div class="mb-8 flex items-center border-t pt-8 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400 print:hidden">
     {{- if $prev -}}

@@ -9,7 +9,7 @@
           <h1>{{ .Title }}</h1>
           {{ .Content }}
         </div>
-        <div class="mt-16"></div>
+        {{ partial "components/last-updated.html" . }}
         {{ partial "pager.html" . }}
       </main>
     </article>

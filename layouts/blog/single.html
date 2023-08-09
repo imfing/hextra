@@ -9,15 +9,15 @@
         {{ with $date := .Date }}
           <div class="mt-4 mb-16 text-gray-500 text-sm">
             {{ partial "utils/format-date" $date }}
-            {{- if $.Params.authors }} by {{ end -}}
-            {{- with $.Params.authors }}
+            {{- if $.Params.authors }}&nbsp;by&nbsp;{{ end -}}
+            {{- with $.Params.authors -}}
               {{- range $i, $author := . -}}
                 {{- if $i }},{{ end -}}
-                {{- if $author.link }}
+                {{- if $author.link -}}
                   <a href="{{ $author.link }}" target="_blank" class="mx-1 text-current underline [text-underline-position:from-font] decoration-from-font">{{ $author.name }}</a>
-                {{ else }}
+                {{- else -}}
                   <span>{{ $author.name }}</span>
-                {{ end -}}
+                {{- end -}}
               {{- end -}}
             {{- end -}}
           </div>
@@ -25,7 +25,8 @@
         <div class="content">
           {{ .Content }}
         </div>
-        <div class="mt-16"></div>
+        {{ partial "components/last-updated.html" . }}
+        {{ .Scratch.Set "reversePagination" true }}
         {{ partial "pager.html" . }}
       </main>
     </article>
