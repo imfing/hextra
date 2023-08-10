@@ -24,6 +24,9 @@ defaultContentLanguage = 'en'
     source = "assets"
     target = "assets"
   [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
     source = "hugo_stats.json"
     target = "assets/watching/hugo_stats.json"
 
