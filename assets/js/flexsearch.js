@@ -8,7 +8,7 @@
 // {{ end }}
 
 (function () {
-  const searchDataURL = '{{ $searchData.Permalink }}';
+  const searchDataURL = '{{ $searchData.RelPermalink }}';
 
   const inputElements = document.querySelectorAll('.search-input');
   for (const el of inputElements) {

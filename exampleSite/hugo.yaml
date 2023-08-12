@@ -79,6 +79,9 @@ params:
   search:
     disabled: false
 
+  math:
+    disabled: false
+
   editURL:
     disabled: false
     base: "https://github.com/imfing/hextra/edit/dev/exampleSite/content"

@@ -1,42 +1,52 @@
-{{ $themeJS := resources.Get "js/theme.js" }}
-<script src="{{ $themeJS.RelPermalink }}"></script>
+{{ $jsTheme := resources.Get "js/theme.js" }}
+{{ $jsMenu := resources.Get "js/menu.js" }}
+{{ $jsCodeCopy := resources.Get "js/code-copy.js" }}
+{{ $jsTabs := resources.Get "js/code-copy.js" }}
 
-{{ $codeCopyJS := resources.Get "js/code-copy.js" }}
-<script src="{{ $codeCopyJS.RelPermalink }}"></script>
+{{ $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs | resources.Concat "js/main.js" }}
+{{ if hugo.IsProduction }}
+  {{ $scripts = $scripts | minify | fingerprint }}
+{{ end }}
+<script defer src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
 
-{{ $menuJS := resources.Get "js/menu.js" }}
-<script src="{{ $menuJS.RelPermalink }}"></script>
+{{/* FlexSearch */}}
+{{- if not site.Params.search.disabled -}}
+  {{ $jsSearchScript := printf "%s.search.js" .Language.Lang }}
+  {{ $jsSearch := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $jsSearchScript . }}
+  {{ if hugo.IsProduction }}
+    {{ $jsSearch = $jsSearch | minify | fingerprint }}
+  {{ end }}
+  {{ $flexSearchJS := resources.Get "vendor/flexsearch/flexsearch.bundle.min.js" | fingerprint }}
+  <script defer src="{{ $flexSearchJS.RelPermalink }}" integrity="{{ $flexSearchJS.Data.Integrity }}"></script>
+  <script defer src="{{ $jsSearch.RelPermalink }}" integrity="{{ $jsSearch.Data.Integrity }}"></script>
+{{- end -}}
 
-{{ if .Page.Store.Get "hasMermaid" }}
-  <script type="module">
-    // TODO: embed mermaid.min.js in the theme
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs";
-    const theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
-    mermaid.initialize({ startOnLoad: true, theme: theme });
+{{/* Mermaid */}}
+{{ if .Page.Store.Get "hasMermaid" -}}
+  {{ $mermaidJS := resources.Get "vendor/mermaid/mermaid.min.js" | fingerprint }}
+  <script defer src="{{ $mermaidJS.RelPermalink }}" integrity="{{ $mermaidJS.Data.Integrity }}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
+      mermaid.initialize({ startOnLoad: true, theme: theme });
+    });
   </script>
 {{ end }}
 
-{{ if .HasShortcode "tabs" }}
-  {{ $tabsJS := resources.Get "js/tabs.js" }}
-  <script src="{{ $tabsJS.RelPermalink }}"></script>
-{{ end }}
-
-
-<!-- TODO: use feature flag for search and embed flexsearch -->
-{{ $searchJSFile := printf "%s.search.js" .Language.Lang }}
-{{ $searchJS := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $searchJSFile . }}
-{{ if hugo.IsProduction }}
-  {{ $searchJS = $searchJS | minify | fingerprint }}
-{{ end }}
-<script defer src="https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.min.js"></script>
-<script defer src="{{ $searchJS.RelPermalink }}"></script>
-
-{{ if .Page.Params.math }}
-  <!-- TODO: embed katex in the theme -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous" />
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+{{/* KaTex */}}
+{{ if and (not site.Params.math.disabled) .Page.Params.math }}
+  {{ $katexCSS := resources.Get "vendor/katex/katex.min.css" | fingerprint }}
+  {{ $katexJS := resources.Get "vendor/katex/katex.min.js" | fingerprint }}
+  {{ $katexAutoRenderJS := resources.Get "vendor/katex/auto-render.min.js" | fingerprint }}
+  <link type="text/css" rel="stylesheet" href="{{ $katexCSS.RelPermalink }}" integrity="{{ $katexCSS.Data.Integrity }}" />
+  <script defer src="{{ $katexJS.RelPermalink }}" integrity="{{ $katexJS.Data.Integrity }}"></script>
+  <script defer src="{{ $katexAutoRenderJS.RelPermalink }}" integrity="{{ $katexAutoRenderJS.Data.Integrity }}"></script>
+  {{ $katexFonts := resources.Match "vendor/katex/fonts/*" }}
+  {{ range $katexFonts }}
+    {{ .Publish }}
+  {{ end }}
   <script>
+    // TODO: make render options configurable
     document.addEventListener("DOMContentLoaded", function () {
       renderMathInElement(document.body, {
         delimiters: [

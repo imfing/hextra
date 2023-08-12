@@ -1,3 +1,5 @@
+// Hamburger menu for mobile navigation
+
 const menu = document.querySelector('.hamburger-menu');
 
 menu.addEventListener('click', (e) => {
