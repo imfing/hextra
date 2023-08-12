@@ -1,6 +1,7 @@
 {{/* Table of Contents */}}
 {{/* TODO: toc bottom part should be able to hide */}}
 {{- $toc := .Params.toc | default true -}}
+{{- with site.Params.toc.disabled -}}{{ $toc = not . }}{{- end -}}
 
 
 <nav class="order-last hidden w-64 shrink-0 xl:block print:hidden px-4" aria-label="table of contents">
@@ -22,9 +23,13 @@
         {{ $borderClass = "" }}
       {{ end }}
 
-
+      {{/* TOC bottom part */}}
       <div class="{{ $borderClass }} sticky bottom-0 flex flex-col items-start gap-2 pb-8 dark:border-neutral-800 contrast-more:border-t contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:border-neutral-400">
-        <a class="text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 contrast-more:text-gray-800 contrast-more:dark:text-gray-50" href="{{ .Params.editURL }}">Edit this page on GitHub →</a>
+        {{- if not site.Params.editURL.disabled -}}
+          {{- $editURL := urls.JoinPath site.Params.editURL.base .File.Path -}}
+          {{- with .Params.editURL -}}{{ $editURL = .Params.editURL }}{{- end -}}
+          <a class="text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 contrast-more:text-gray-800 contrast-more:dark:text-gray-50" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ i18n "article.edit_this_page" }}</a>
+        {{- end -}}
       </div>
     </div>
   {{ end }}

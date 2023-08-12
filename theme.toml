@@ -3,19 +3,14 @@
 
 name = "Hextra"
 license = "MIT"
-licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE"
-description = ""
-homepage = "http://example.com/"
-tags = []
-features = []
-min_version = "0.115.3"
+licenselink = "https://github.com/imfing/hextra/blob/main/LICENSE"
+description = "Modern, versatile theme for building beautiful websites with Hugo"
+homepage = "https://github.com/imfing/hextra/"
+demosite = ""
+tags = ["Modern", "Elegant", "Blog", "Documentation"]
+features = ["Responsive", "Dark Mode", "Search", "Syntax Highlighting", "Multilingual"]
+min_version = "0.111.0"
 
 [author]
-  name = ""
-  homepage = ""
-
-# If porting an existing theme
-[original]
-  name = ""
-  homepage = ""
-  repo = ""
+  name = "Xin"
+  homepage = "https://imfing.com"

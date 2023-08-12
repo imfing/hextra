@@ -1,6 +1,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {{ if hugo.IsProduction -}}
+    <meta name="robots" content="index, follow" />
+  {{ else -}}
+    <meta name="robots" content="noindex, nofollow" />
+  {{ end -}}
   {{ partialCached "favicons.html" . }}
   <title>
     {{- if .IsHome -}}
@@ -12,6 +17,7 @@
   </title>
   <meta name="description" content="{{ partial "utils/page-description.html" . }}" />
   {{ partial "opengraph.html" . }}
+  {{ template "_internal/schema.html" . -}}
   {{ partial "head-css.html" . }}
   <script>
     /* Initialize light/dark mode */

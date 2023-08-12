@@ -79,7 +79,7 @@
     const result = resultsElement.querySelector('.active');
     if (!result) return { result: undefined, index: -1 };
 
-    const index = parseInt(result.getAttribute('data-index'));
+    const index = parseInt(result.dataset.index, 10);
     return { result, index };
   }
 
@@ -101,7 +101,7 @@
   function getResultsLength() {
     const { resultsElement } = getActiveSearchElement();
     if (!resultsElement) return 0;
-    return resultsElement.querySelectorAll('li').length;
+    return resultsElement.dataset.count;
   }
 
   // Finish the search by hiding the results and clearing the input.
@@ -304,6 +304,7 @@
       return;
     }
 
+    // Highlight the query in the result text.
     function highlightMatches(text, query) {
       const escapedQuery = query.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
       const regex = new RegExp(escapedQuery, 'gi');
@@ -349,5 +350,6 @@
       fragment.appendChild(li);
     }
     resultsElement.appendChild(fragment);
+    resultsElement.dataset.count = results.length;
   }
 })();

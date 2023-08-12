@@ -72,3 +72,13 @@ menu:
 params:
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
+
+  toc:
+    disabled: false
+
+  search:
+    disabled: false
+
+  editURL:
+    disabled: false
+    base: "https://github.com/imfing/hextra/edit/dev/exampleSite/content"
