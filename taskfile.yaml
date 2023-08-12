@@ -1,11 +1,19 @@
-version: '3'
+version: "3"
 
 tasks:
-
-  serve:
+  dev:
     cmds:
-      - hugo server --enableGitInfo --buildDrafts --buildExpired --buildFuture -p 1313
+      - hugo server --debug --enableGitInfo --source=exampleSite --themesDir=../.. --environment=theme --disableFastRender --buildDrafts --port 1313
 
   build:
+    deps: [css]
     cmds:
-      - hugo --minify
+      - hugo --minify --source=exampleSite --themesDir=../..
+
+  css:
+    cmds:
+      - npx postcss --config postcss.config.js --env production assets/css/styles.css -o assets/css/compiled/main.css
+
+  clean:
+    cmds:
+      - rm -rf public resources

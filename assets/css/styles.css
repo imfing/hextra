@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import "typography.css";
 @import "highlight.css";
 @import "components/cards.css";
@@ -9,6 +5,10 @@
 @import "components/search.css";
 @import "components/sidebar.css";
 @import "components/navbar.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
   @apply text-base antialiased;

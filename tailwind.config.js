@@ -9,8 +9,13 @@ const makePrimaryColor =
       return `hsl(var(--primary-hue) 100% ${l}% / ${opacityValue})`
     }
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./hugo_stats.json'],
+  content: [
+    "./layouts/**/*.html",
+    "./content/**/*.{html,md}",
+    './hugo_stats.json'
+  ],
   theme: {
     screens: {
       sm: '640px',

@@ -1,0 +1,74 @@
+# Configuration
+baseURL: "https://example.com/"
+title: "Hextra"
+
+enableRobotsTXT: true
+enableGitInfo: true
+# hasCJKLanguage: true
+
+outputs:
+  home: [HTML]
+  page: [HTML]
+  section: [HTML, RSS]
+
+defaultContentLanguage: en
+languages:
+  en:
+    languageName: English
+    weight: 1
+    title: Hextra
+  ja:
+    languageName: 日本語
+    weight: 2
+    title: "Hextra テーマ"
+
+module:
+  hugoVersion:
+    extended: true
+    min: "0.111.0"
+
+  workspace: hugo.work
+  imports:
+    path: github.com/imfing/hextra
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+menu:
+  main:
+    - name: Documentation
+      pageRef: /docs
+      weight: 1
+    - name: Blog
+      pageRef: /blog
+      weight: 2
+    - name: About
+      pageRef: /about
+      weight: 3
+    - name: Search
+      weight: 4
+      params:
+        type: search
+        placeholder: Search Hextra docs...
+    - name: GitHub
+      weight: 5
+      url: "https://github.com/imfing/hextra"
+      params:
+        icon: github
+
+  sidebar:
+    - name: More
+      params:
+        type: separator
+      weight: 1
+    - name: "Hugo Docs ↗"
+      url: "https://gohugo.io/documentation/"
+      weight: 2
+
+params:
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"

@@ -1,9 +1,9 @@
-{{ $options := dict "inlineImports" true }}
-{{ $styles := resources.Get "css/styles.css" }}
-{{ $styles = $styles | resources.PostCSS $options }}
-{{ if not hugo.IsProduction }}
+{{ if and (not hugo.IsProduction) (eq hugo.Environment "theme")}}
+  {{ $styles := resources.Get "css/styles.css" }}
+  {{ $styles = $styles | resources.PostCSS (dict "inlineImports" true) }}
   <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
 {{ else }}
+  {{ $styles := resources.Get "css/compiled/main.css" }}
   {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
   <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
   <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.integrity }}" />
