@@ -43,7 +43,11 @@
     {{ end }}
   </div>
   {{/* Hide theme switch when sidebar is disabled */}}
-  {{ template "theme-switch" (dict "class" (cond $disableSidebar "md:hidden" "")) }}
+  {{ $switchesClass := cond $disableSidebar "md:hidden" "" }}
+  <div class="{{ $switchesClass }} sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex justify-end items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
+    {{ partial "language-switch" (dict "context" $context "grow" true) }}
+    {{ partial "theme-toggle" (dict "hideLabel" true) }}
+  </div>
 </aside>
 
 {{- define "sidebar-main" -}}
@@ -155,13 +159,4 @@
 
 {{- define "sidebar-separator" -}}
   <div class="mt-4 border-t py-4 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400" />
-{{- end -}}
-
-{{- define "theme-switch" -}}
-  {{- $class := .class -}}
-  <div class="{{ $class }} sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
-    <div class="grow flex flex-col">
-      {{ partial "theme-toggle" }}
-    </div>
-  </div>
 {{- end -}}

@@ -1,10 +1,16 @@
 document.querySelectorAll('.code-copy-btn').forEach(function (button) {
   button.addEventListener('click', function (e) {
-    const targetId = e.target.getAttribute('data-clipboard-target');
+    e.preventDefault();
+    const targetId = button.getAttribute('data-clipboard-target');
     const target = document.querySelector(targetId);
-    const codeElements = target.querySelectorAll('code');
-    // Select the last code element in case line numbers are present
-    const codeElement = codeElements[codeElements.length - 1];
+    let codeElement;
+    if (target.tagName === 'CODE') {
+      codeElement = target;
+    } else {
+      // Select the last code element in case line numbers are present
+      const codeElements = target.querySelectorAll('code');
+      codeElement = codeElements[codeElements.length - 1];
+    }
     if (codeElement) {
       // Replace double newlines with single newlines in the innerText
       // as each line inside <span> has trailing newline '\n'

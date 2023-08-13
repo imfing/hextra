@@ -1,6 +1,6 @@
-{{ $class := .Attributes.class | default "" }}
-{{ $filename := .Attributes.filename | default "" }}
-{{ $lang := .Attributes.lang | default .Type }}
+{{- $class := .Attributes.class | default "" -}}
+{{- $filename := .Attributes.filename | default "" -}}
+{{- $lang := .Attributes.lang | default .Type -}}
 
 
 <div class="code-block relative mt-6 first:mt-0 group/code">
@@ -12,7 +12,7 @@
       {{- highlight .Inner $lang .Options -}}
     </div>
   {{- else -}}
-    <pre><code id="code-block-{{ .Ordinal }}">{{- .Inner -}}</code></pre>
+    <pre><code id="code-block-{{ .Ordinal }}">{{ .Inner }}</code></pre>
   {{- end -}}
   <div class="opacity-0 transition group-hover/code:opacity-100 flex gap-1 absolute m-[11px] right-0 {{ if $filename }}top-8{{ else }}top-0{{ end }}">
     <button class="code-copy-btn group/copybtn transition-all active:opacity-50 bg-primary-700/5 border border-black/5 text-gray-600 hover:text-gray-900 rounded-md p-1.5 dark:bg-primary-300/10 dark:border-white/10 dark:text-gray-400 dark:hover:text-gray-50" title="Copy code" data-clipboard-target="#code-block-{{ .Ordinal }}">

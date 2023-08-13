@@ -1,9 +1,10 @@
 {{ $jsTheme := resources.Get "js/theme.js" }}
 {{ $jsMenu := resources.Get "js/menu.js" }}
 {{ $jsCodeCopy := resources.Get "js/code-copy.js" }}
-{{ $jsTabs := resources.Get "js/code-copy.js" }}
+{{ $jsTabs := resources.Get "js/tabs.js" }}
+{{ $jsLang := resources.Get "js/lang.js" }}
 
-{{ $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs | resources.Concat "js/main.js" }}
+{{ $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs $jsLang | resources.Concat "js/main.js" }}
 {{ if hugo.IsProduction }}
   {{ $scripts = $scripts | minify | fingerprint }}
 {{ end }}

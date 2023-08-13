@@ -1,0 +1,25 @@
+{{/* Get relative link of a page for given language */}}
+{{/* If not found, return the homepage of the language page */}}
+
+{{ $page := .context }}
+{{ $lang := .lang }}
+
+{{ $link := false }}
+
+{{ range $page.AllTranslations }}
+  {{ if eq .Language.Lang $lang }}
+    {{ $link = .RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{ if not $link }}
+  {{ range where $page.Sites ".Language.Lang" $lang }}
+    {{ $link = .Home.RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{ if not $link }}
+  {{ $link = site.Home.RelPermalink }}
+{{ end }}
+
+{{ return $link }}
