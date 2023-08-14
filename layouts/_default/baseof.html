@@ -4,7 +4,7 @@
   <body dir="ltr">
     {{- partial "navbar.html" . -}}
     {{- block "main" . }}{{ end -}}
-    {{- partial "footer.html" . -}}
+    {{- if not .Site.Params.footer.disabled }}{{ partial "footer.html" . }}{{ end }}
   </body>
   {{ partial "scripts.html" . }}
 </html>

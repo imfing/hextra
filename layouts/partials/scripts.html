@@ -1,30 +1,30 @@
-{{ $jsTheme := resources.Get "js/theme.js" }}
-{{ $jsMenu := resources.Get "js/menu.js" }}
-{{ $jsCodeCopy := resources.Get "js/code-copy.js" }}
-{{ $jsTabs := resources.Get "js/tabs.js" }}
-{{ $jsLang := resources.Get "js/lang.js" }}
+{{- $jsTheme := resources.Get "js/theme.js" -}}
+{{- $jsMenu := resources.Get "js/menu.js" -}}
+{{- $jsCodeCopy := resources.Get "js/code-copy.js" -}}
+{{- $jsTabs := resources.Get "js/tabs.js" -}}
+{{- $jsLang := resources.Get "js/lang.js" -}}
 
-{{ $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs $jsLang | resources.Concat "js/main.js" }}
-{{ if hugo.IsProduction }}
-  {{ $scripts = $scripts | minify | fingerprint }}
-{{ end }}
+{{- $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs $jsLang | resources.Concat "js/main.js" -}}
+{{- if hugo.IsProduction -}}
+  {{- $scripts = $scripts | minify | fingerprint -}}
+{{- end -}}
 <script defer src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
 
 {{/* FlexSearch */}}
 {{- if not site.Params.search.disabled -}}
-  {{ $jsSearchScript := printf "%s.search.js" .Language.Lang }}
-  {{ $jsSearch := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $jsSearchScript . }}
-  {{ if hugo.IsProduction }}
-    {{ $jsSearch = $jsSearch | minify | fingerprint }}
-  {{ end }}
-  {{ $flexSearchJS := resources.Get "vendor/flexsearch/flexsearch.bundle.min.js" | fingerprint }}
+  {{- $jsSearchScript := printf "%s.search.js" .Language.Lang -}}
+  {{- $jsSearch := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $jsSearchScript . -}}
+  {{- if hugo.IsProduction -}}
+    {{- $jsSearch = $jsSearch | minify | fingerprint -}}
+  {{- end -}}
+  {{- $flexSearchJS := resources.Get "vendor/flexsearch/flexsearch.bundle.min.js" | fingerprint -}}
   <script defer src="{{ $flexSearchJS.RelPermalink }}" integrity="{{ $flexSearchJS.Data.Integrity }}"></script>
   <script defer src="{{ $jsSearch.RelPermalink }}" integrity="{{ $jsSearch.Data.Integrity }}"></script>
 {{- end -}}
 
 {{/* Mermaid */}}
-{{ if .Page.Store.Get "hasMermaid" -}}
-  {{ $mermaidJS := resources.Get "vendor/mermaid/mermaid.min.js" | fingerprint }}
+{{- if .Page.Store.Get "hasMermaid" -}}
+  {{- $mermaidJS := resources.Get "vendor/mermaid/mermaid.min.js" | fingerprint -}}
   <script defer src="{{ $mermaidJS.RelPermalink }}" integrity="{{ $mermaidJS.Data.Integrity }}"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -32,20 +32,20 @@
       mermaid.initialize({ startOnLoad: true, theme: theme });
     });
   </script>
-{{ end }}
+{{- end -}}
 
 {{/* KaTex */}}
-{{ if and (not site.Params.math.disabled) .Page.Params.math }}
-  {{ $katexCSS := resources.Get "vendor/katex/katex.min.css" | fingerprint }}
-  {{ $katexJS := resources.Get "vendor/katex/katex.min.js" | fingerprint }}
-  {{ $katexAutoRenderJS := resources.Get "vendor/katex/auto-render.min.js" | fingerprint }}
+{{- if and (not site.Params.math.disabled) .Page.Params.math -}}
+  {{- $katexCSS := resources.Get "vendor/katex/katex.min.css" | fingerprint -}}
+  {{- $katexJS := resources.Get "vendor/katex/katex.min.js" | fingerprint -}}
+  {{- $katexAutoRenderJS := resources.Get "vendor/katex/auto-render.min.js" | fingerprint -}}
   <link type="text/css" rel="stylesheet" href="{{ $katexCSS.RelPermalink }}" integrity="{{ $katexCSS.Data.Integrity }}" />
   <script defer src="{{ $katexJS.RelPermalink }}" integrity="{{ $katexJS.Data.Integrity }}"></script>
   <script defer src="{{ $katexAutoRenderJS.RelPermalink }}" integrity="{{ $katexAutoRenderJS.Data.Integrity }}"></script>
   {{ $katexFonts := resources.Match "vendor/katex/fonts/*" }}
-  {{ range $katexFonts }}
+  {{- range $katexFonts -}}
     {{ .Publish }}
-  {{ end }}
+  {{- end -}}
   <script>
     // TODO: make render options configurable
     document.addEventListener("DOMContentLoaded", function () {
