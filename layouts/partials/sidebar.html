@@ -51,11 +51,7 @@
 </aside>
 
 {{- define "sidebar-main" -}}
-  {{ $context := .context }}
-  {{ $toc := .toc | default false }}
-  {{ $pageURL := .pageURL }}
-
-  {{ template "sidebar-tree" (dict "context" $context "level" 0 "pageURL" $pageURL "toc" $toc) }}
+  {{ template "sidebar-tree" (dict "context" .context "level" 0 "pageURL" .pageURL "toc" (.toc | default false)) }}
 {{- end -}}
 
 {{- define "sidebar-tree" -}}
@@ -78,7 +74,7 @@
           {{- if and $toc $active -}}
             {{- template "sidebar-toc" dict "page" . -}}
           {{- end -}}
-          {{- template "sidebar-tree" dict "context" . "pageURL" $pageURL "level" (add $level 1) -}}
+          {{- template "sidebar-tree" dict "context" . "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
         </li>
       {{- end -}}
     {{- else -}}
@@ -92,7 +88,7 @@
               {{- if and $toc $active -}}
                 {{ template "sidebar-toc" dict "page" . }}
               {{- end }}
-              {{ template "sidebar-tree" dict "context" . "pageURL" $pageURL "level" (add $level 1) }}
+              {{ template "sidebar-tree" dict "context" . "pageURL" $pageURL "level" (add $level 1) "toc" $toc }}
             </li>
           {{- end -}}
         </ul>
@@ -105,9 +101,9 @@
   {{ $page := .page }}
   {{ with $page.Fragments.Headings }}
     <ul class='flex flex-col gap-1 relative before:absolute before:inset-y-1 before:w-px before:bg-gray-200 before:content-[""] dark:before:bg-neutral-800 ltr:pl-3 ltr:before:left-0 rtl:pr-3 rtl:before:right-0 ltr:ml-3 rtl:mr-3'>
-      {{ range . }}
-        {{ with .Headings }}
-          {{ range . }}
+      {{- range . }}
+        {{- with .Headings }}
+          {{- range . -}}
             <li>
               <a
                 href="#{{ anchorize .ID }}"
@@ -116,9 +112,9 @@
                 {{- .Title -}}
               </a>
             </li>
-          {{ end }}
-        {{ end }}
-      {{ end }}
+          {{ end -}}
+        {{ end -}}
+      {{ end -}}
     </ul>
   {{ end }}
 {{- end -}}
