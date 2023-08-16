@@ -1,5 +1,0 @@
----
-title: Advanced
----
-
-Advanced topics.

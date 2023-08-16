@@ -3,7 +3,7 @@ version: "3"
 tasks:
   dev:
     cmds:
-      - hugo server --debug --enableGitInfo --source=exampleSite --themesDir=../.. --environment=theme --disableFastRender --buildDrafts --port 1313
+      - hugo server --logLevel debug --enableGitInfo --source=exampleSite --themesDir=../.. --environment=theme --disableFastRender --buildDrafts --port 1313
 
   build:
     deps: [css]
@@ -17,3 +17,11 @@ tasks:
   clean:
     cmds:
       - rm -rf public resources
+
+  vendor:
+    cmds:
+      - wget https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js -O assets/vendor/katex/katex.min.js
+      - wget https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js -O assets/vendor/katex/auto-render.min.js
+      - wget https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css -O assets/vendor/katex/katex.min.css
+      - wget https://cdn.jsdelivr.net/npm/mermaid@10.3.1/dist/mermaid.min.js -O assets/vendor/mermaid/mermaid.min.js
+      - wget https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.min.js -O assets/vendor/flexsearch/flexsearch.bundle.min.js

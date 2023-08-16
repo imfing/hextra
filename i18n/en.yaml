@@ -1,3 +1,6 @@
 article:
   on_this_page: "On this page"
   edit_this_page: "Edit this page on GitHub →"
+
+footer:
+  copyright: "© 2023 Hextra Project."
