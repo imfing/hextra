@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "dev:theme": "hugo server --environment=theme --source=exampleSite --themesDir=../.. --disableFastRender -D --port 1313",
+    "dev": "hugo server --source=exampleSite --themesDir=../.. --disableFastRender -D --port 1313",
+    "build:css": "npx postcss --config postcss.config.js --env production assets/css/styles.css -o assets/css/compiled/main.css",
+    "build": "hugo --gc --minify --themesDir=../.. --source=exampleSite"
+  },
   "devDependencies": {
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "autoprefixer": "^10.4.14",
