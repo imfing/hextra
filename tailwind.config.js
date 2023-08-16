@@ -12,9 +12,7 @@ const makePrimaryColor =
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./layouts/**/*.html",
-    "./content/**/*.{html,md}",
-    './hugo_stats.json'
+    './**/hugo_stats.json',
   ],
   theme: {
     screens: {

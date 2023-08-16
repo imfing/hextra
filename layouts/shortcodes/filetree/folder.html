@@ -1,0 +1,17 @@
+{{- $name := .Get "name" -}}
+{{- $state := .Get "state" | default "open" }}
+
+<li class="group flex list-none flex-col">
+  <button class="hextra-filetree-folder inline-flex cursor-pointer items-center py-1 hover:opacity-60">
+    <span data-state="{{ $state }}" class="data-[state=open]:hidden">
+      {{- partial "utils/icon" (dict "name" "folder" "attributes" "width=1em") -}}
+    </span>
+    <span data-state="{{ $state }}" class="data-[state=closed]:hidden">
+      {{- partial "utils/icon" (dict "name" "folder-open" "attributes" "width=1em") -}}
+    </span>
+    <span class="ml-1">{{ $name }}</span>
+  </button>
+  <ul data-state="{{ $state }}" class="pl-5 data-[state=closed]:hidden">
+    {{- .Inner -}}
+  </ul>
+</li>
