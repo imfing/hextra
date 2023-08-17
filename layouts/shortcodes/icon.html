@@ -1,0 +1,12 @@
+{{- $icon := index site.Data.icons (.Get 0) -}}
+{{- $attributes := "height=1em"}}
+
+{{- if not $icon -}}
+  {{ errorf "icon %q not found" (.Get 0) }}
+{{- end -}}
+
+{{- $icon = replaceRE "<svg" (printf "<svg %s" $attributes) $icon -}}
+
+<span class="inline-block align-text-bottom icon">
+  {{- $icon | safeHTML -}}
+</span>

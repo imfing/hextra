@@ -38,6 +38,8 @@ markup:
   highlight:
     noClasses: false
 
+enableInlineShortcodes: true
+
 menu:
   main:
     - name: Documentation
