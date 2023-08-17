@@ -24,7 +24,8 @@
 {{- end -}}
 
 {{/* Mermaid */}}
-{{- if .Page.Store.Get "hasMermaid" -}}
+{{/* FIXME: need to investigate .Page.Store hasMermaid is set for homepage */}}
+{{- if and (.Page.Store.Get "hasMermaid") (not .Page.IsHome) -}}
   {{- $mermaidJS := resources.Get "vendor/mermaid/mermaid.min.js" | fingerprint -}}
   <script defer src="{{ $mermaidJS.RelPermalink }}" integrity="{{ $mermaidJS.Data.Integrity }}"></script>
   <script>

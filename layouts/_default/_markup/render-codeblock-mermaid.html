@@ -1,4 +1,5 @@
 <pre class="mermaid mt-6">
-  {{- .Inner | safeHTML }}
+  {{- .Inner | safeHTML -}}
 </pre>
-{{ .Page.Store.Set "hasMermaid" true }}
+{{- .Page.Store.Set "hasMermaid" true -}}
+{{ warnf .Page.RelPermalink }}
