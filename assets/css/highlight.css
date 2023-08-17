@@ -30,8 +30,9 @@
       @apply pt-4 pb-4;
     }
   }
-  .lnt,
-  .ln {
+  .ln,
+  .lnt:not(.hl > .lnt),
+  .hl {
     @apply pl-4 pr-4 min-w-[2.6rem] text-neutral-600 dark:text-neutral-300;
   }
   .lntd {
