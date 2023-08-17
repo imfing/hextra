@@ -65,9 +65,12 @@ menu:
       params:
         type: separator
       weight: 1
+    - name: "About"
+      pageRef: "/about"
+      weight: 2
     - name: "Hugo Docs ↗"
       url: "https://gohugo.io/documentation/"
-      weight: 2
+      weight: 3
 
 params:
   footer:

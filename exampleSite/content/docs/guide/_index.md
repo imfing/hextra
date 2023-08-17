@@ -15,8 +15,5 @@ Guide to using Hextra to build your site.
   {{< card link="shortcodes" title="Shortcodes" icon="template" >}}
   {{< card link="search" title="Search" icon="document-search" >}}
   {{< card link="multi-language" title="Multi-language" icon="translate" >}}
-  {{< card link="seo" title="SEO" icon="chart-pie" >}}
-  {{< card link="customization" title="Customization" icon="pencil" >}}
   {{< card link="deployment" title="Deployment" icon="server" >}}
-  {{< card link="faq" title="FAQ" icon="question-mark-circle" >}}
 {{< /cards >}}

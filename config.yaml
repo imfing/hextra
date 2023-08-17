@@ -1,6 +1,7 @@
 build:
   buildStats:
     enable: true
+    disableIDs: true
   cacheBusters:
   - source: assets/watching/hugo_stats\.json
     target: styles\.css
@@ -27,5 +28,3 @@ module:
     target: i18n
   - source: archetypes
     target: archetypes
-  - source: hugo_stats.json
-    target: assets/watching/hugo_stats.json
