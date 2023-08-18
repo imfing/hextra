@@ -1,3 +1,4 @@
+{{- $name := .Get "name" | default (.Get 0) -}}
 {{- $icon := index site.Data.icons (.Get 0) -}}
 {{- $attributes := "height=1em"}}
 
