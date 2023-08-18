@@ -40,10 +40,12 @@
 {{- if and (not site.Params.math.disabled) .Page.Params.math -}}
   {{- $katexCSS := resources.Get "vendor/katex/katex.min.css" | fingerprint -}}
   {{- $katexJS := resources.Get "vendor/katex/katex.min.js" | fingerprint -}}
+  {{- $mhchemJS := resources.Get "vendor/katex/mhchem.min.js" | fingerprint -}}
   {{- $katexAutoRenderJS := resources.Get "vendor/katex/auto-render.min.js" | fingerprint -}}
   <link type="text/css" rel="stylesheet" href="{{ $katexCSS.RelPermalink }}" integrity="{{ $katexCSS.Data.Integrity }}" />
   <script defer src="{{ $katexJS.RelPermalink }}" integrity="{{ $katexJS.Data.Integrity }}"></script>
   <script defer src="{{ $katexAutoRenderJS.RelPermalink }}" integrity="{{ $katexAutoRenderJS.Data.Integrity }}"></script>
+  <script defer src="{{ $mhchemJS.RelPermalink }}" integrity="{{ $mhchemJS.Data.Integrity }}"></script>
   {{ $katexFonts := resources.Match "vendor/katex/fonts/*" }}
   {{- range $katexFonts -}}
     {{ .Publish }}
