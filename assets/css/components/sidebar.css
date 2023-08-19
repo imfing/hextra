@@ -7,3 +7,15 @@
     backface-visibility: hidden;
   }
 }
+
+.sidebar-container {
+  li > div {
+    @apply h-0;
+  }
+  li.open > div {
+    @apply h-auto;
+  }
+  li.open > a > span > svg > path {
+    @apply rotate-90;
+  }
+}
