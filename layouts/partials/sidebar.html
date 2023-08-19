@@ -44,9 +44,15 @@
   </div>
   {{/* Hide theme switch when sidebar is disabled */}}
   {{ $switchesClass := cond $disableSidebar "md:hidden" "" }}
-  <div class="{{ $switchesClass }} sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex justify-end items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
-    {{ partial "language-switch" (dict "context" $context "grow" true) }}
-    {{ partial "theme-toggle" (dict "hideLabel" true) }}
+  <div class="{{ $switchesClass }} {{ with site.IsMultiLingual }}justify-end{{ end }} sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
+    {{- with site.IsMultiLingual }}
+      {{ partial "language-switch" (dict "context" $context "grow" true) }}
+      {{ partial "theme-toggle" (dict "hideLabel" true) }}
+    {{ else }}
+      <div class="flex grow flex-col">
+        {{ partial "theme-toggle" }}
+      </div>
+    {{ end -}}
   </div>
 </aside>
 

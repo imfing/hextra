@@ -5,8 +5,12 @@ weight: 1
 
 ## Start as New Project
 
-Before we start, make sure we have [Hugo](https://gohugo.io/) installed. We also need to have Git and Go installed if we want to use Hugo modules.
+### Prerequisites
+
+Before we start, make sure we have [Hugo](https://gohugo.io/) installed.
 Please refer to Hugo's [official installation guide](https://gohugo.io/installation/) for more details.
+
+[Hugo modules](https://gohugo.io/hugo-modules/) are the recommended way to manage Hugo themes. To use Hugo modules, we need to install [Git](https://git-scm.com/) and [Go](https://go.dev/).
 
 {{% steps %}}
 
@@ -16,9 +20,7 @@ Please refer to Hugo's [official installation guide](https://gohugo.io/installat
 $ hugo new site my-site --format=yaml
 ```
 
-### Configure Hextra theme
-
-[Hugo modules](https://gohugo.io/hugo-modules/) are the recommended way to manage Hugo themes.
+### Configure Hextra theme via module
 
 ```shell
 # initialize hugo module
@@ -29,7 +31,7 @@ $ hugo mod init github.com/username/my-site
 $ hugo mod get github.com/imfing/hextra
 ```
 
-Edit `config.yaml` to enable Hextra theme:
+Edit `hugo.yaml` to enable Hextra theme:
 
 ```yaml
 module:
@@ -37,12 +39,32 @@ module:
     - path: github.com/imfing/hextra
 ```
 
-### Run Hugo server
+### Create your first content pages
+
+Let's create a new content page for the home page and the documentation page:
 
 ```shell
-$ hugo server -D
+$ hugo new content/_index.md
+$ hugo new content/docs/_index.md
+```
+
+### Preview the site locally
+
+```shell
+$ hugo server
 ```
 
 Voila! You can see your new site at `http://localhost:1313/`.
 
 {{% /steps %}}
+
+
+## Next
+
+Explore the following sections to start adding more contents:
+
+{{< cards >}}
+  {{< card link="organize-files" title="Organize Files" icon="document-duplicate" >}}
+  {{< card link="configuration" title="Configuration" icon="adjustments" >}}
+  {{< card link="markdown" title="Markdown" icon="markdown" >}}
+{{< /cards >}}

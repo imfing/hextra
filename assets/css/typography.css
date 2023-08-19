@@ -60,7 +60,7 @@
       @apply my-2;
     }
   }
-  .not-prose ul, ol {
+  .not-prose ul, .not-prose ol {
     @apply m-0 list-none;
     li {
       @apply m-0;
@@ -68,6 +68,17 @@
   }
   kbd {
     @apply border-black border-opacity-[0.04] bg-opacity-[0.03] bg-black break-words rounded-md border py-0.5 px-[.25em] text-[.9em] dark:border-white/10 dark:bg-white/10;
+  }
+  pre:not(.code-block pre).mermaid {
+    @apply bg-transparent rounded-none dark:bg-transparent;
+  }
+  img {
+    @apply mx-auto my-4 rounded-md;
+  }
+  figure {
+    figcaption {
+      @apply text-sm text-gray-500 dark:text-gray-400 mt-2 block text-center;
+    }
   }
 }
 

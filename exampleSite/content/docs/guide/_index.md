@@ -13,7 +13,4 @@ Guide to using Hextra to build your site.
   {{< card link="latex" title="LaTeX" icon="variable" >}}
   {{< card link="diagrams" title="Diagrams" icon="chart-square-bar" >}}
   {{< card link="shortcodes" title="Shortcodes" icon="template" >}}
-  {{< card link="search" title="Search" icon="document-search" >}}
-  {{< card link="multi-language" title="Multi-language" icon="translate" >}}
-  {{< card link="deployment" title="Deployment" icon="server" >}}
 {{< /cards >}}

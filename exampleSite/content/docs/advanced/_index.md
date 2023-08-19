@@ -4,6 +4,7 @@ title: Advanced Topics
 ---
 
 {{< cards >}}
-  {{< card link="seo" title="SEO" icon="chart-pie" >}}
+  {{< card link="multi-language" title="Multi-language" icon="translate" >}}
+  {{< card link="deployment" title="Deployment" icon="server" >}}
   {{< card link="customization" title="Customization" icon="pencil" >}}
 {{< /cards >}}
