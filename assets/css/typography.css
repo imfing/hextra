@@ -75,6 +75,9 @@
   img {
     @apply mx-auto my-4 rounded-md;
   }
+  .not-prose img {
+    @apply m-0 rounded-none;
+  }
   figure {
     figcaption {
       @apply text-sm text-gray-500 dark:text-gray-400 mt-2 block text-center;
