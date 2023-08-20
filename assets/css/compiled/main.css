@@ -2122,6 +2122,10 @@ video {
   margin-left: 1rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .mr-1 {
   margin-right: 0.25rem;
 }
@@ -3410,6 +3414,14 @@ body {
     --tw-border-opacity: 1;
     border-color: rgb(17 24 39 / var(--tw-border-opacity));
   }
+}
+
+:is(html[class~="dark"] .dark\:block) {
+  display: block;
+}
+
+:is(html[class~="dark"] .dark\:hidden) {
+  display: none;
 }
 
 :is(html[class~="dark"] .dark\:border-blue-200\/30) {
