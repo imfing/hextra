@@ -18,7 +18,8 @@
   <meta name="description" content="{{ partial "utils/page-description.html" . }}" />
   {{ partial "opengraph.html" . }}
   {{ template "_internal/schema.html" . -}}
-  {{ partial "head-css.html" . }}
+  {{ template "_internal/twitter_cards.html" . -}}
+  {{ partialCached "head-css.html" . }}
   <script>
     /* Initialize light/dark mode */
     if (localStorage.getItem("color-theme") === "dark" || (!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
