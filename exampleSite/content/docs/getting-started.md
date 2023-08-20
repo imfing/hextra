@@ -1,6 +1,7 @@
 ---
 title: Getting Started
 weight: 1
+next: /docs/guide
 ---
 
 ## Start as New Project

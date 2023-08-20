@@ -1,6 +1,7 @@
 ---
 title: Guide
 weight: 2
+next: /docs/guide/organize-files
 sidebar:
   open: true
 ---

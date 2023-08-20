@@ -1,15 +1,28 @@
 {{/* Article navigation on the footer of the article */}}
 
-{{ $reversePagination := .Scratch.Get "reversePagination" | default false }}
+{{- $reversePagination := .Scratch.Get "reversePagination" | default false -}}
 
 {{- $prev := cond $reversePagination .PrevInSection .NextInSection -}}
 {{- $next := cond $reversePagination .NextInSection .PrevInSection -}}
+
+{{- with .Params.prev -}}
+  {{- with $.Site.GetPage . -}}
+    {{- if $reversePagination }}{{ $next = . }}{{ else }}{{ $prev = . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Params.next -}}
+  {{- with $.Site.GetPage . -}}
+    {{- if $reversePagination }}{{ $prev = . }}{{ else }}{{ $next = . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
 {{- if or $prev $next -}}
   <div class="mb-8 flex items-center border-t pt-8 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400 print:hidden">
     {{- if $prev -}}
       <a href="{{ $prev.RelPermalink }}" class="flex max-w-[50%] items-center gap-1 py-4 text-base font-medium text-gray-600 transition-colors [word-break:break-word] hover:text-primary-600 dark:text-gray-300 md:text-lg ltr:pr-4 rtl:pl-4">
         {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"inline h-5 shrink-0 ltr:rotate-180\"") -}}
-        {{- $prev.Title -}}
+        {{- $prev.LinkTitle -}}
       </a>
     {{- end -}}
     {{- if $next -}}
