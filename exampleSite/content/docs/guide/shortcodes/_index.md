@@ -3,13 +3,16 @@ title: Shortcodes
 weight: 9
 ---
 
-Hextra provides a variety of built-in components based on [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/).
+[Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/) are simple snippets inside your content files calling built-in or custom templates.
+
+Hextra provides a collection of beautiful shortcodes to enhance your content.
 
 
 {{< cards >}}
   {{< card link="callouts" title="Callouts" icon="warning" >}}
-  {{< card link="cards" title="Cards" >}}
-  {{< card link="filetree" title="FileTree" >}}
+  {{< card link="cards" title="Cards" icon="card" >}}
+  {{< card link="filetree" title="FileTree" icon="folder-tree" >}}
+  {{< card link="icon" title="Icon" icon="badge-check" >}}
   {{< card link="steps" title="Steps" icon="one" >}}
   {{< card link="tabs" title="Tabs" icon="collection" >}}
 {{< /cards >}}

@@ -2126,10 +2126,6 @@ video {
   margin-left: 1rem;
 }
 
-.ml-auto {
-  margin-left: auto;
-}
-
 .mr-1 {
   margin-right: 0.25rem;
 }
@@ -3810,9 +3806,6 @@ body {
   }
   .md\:inline-block {
     display: inline-block;
-  }
-  .md\:inline {
-    display: inline;
   }
   .md\:hidden {
     display: none;

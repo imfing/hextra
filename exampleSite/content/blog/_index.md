@@ -1,3 +1,3 @@
 ---
-title: "Hextra Blog"
+title: "Blog"
 ---

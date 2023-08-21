@@ -7,7 +7,6 @@ linkTitle: Cards
 
 {{< cards >}}
   {{< card link="/" title="Callout" icon="warning" >}}
-  {{< card link="/" title="GitHub" icon="github" >}}
   {{< card link="/" title="No Icon" >}}
 {{< /cards >}}
 
@@ -21,7 +20,6 @@ linkTitle: Cards
 ```
 {{</* cards */>}}
   {{</* card link="/" title="Callout" icon="warning" */>}}
-  {{</* card link="/" title="GitHub" icon="github" */>}}
   {{</* card link="/" title="No Icon" */>}}
 {{</* /cards */>}}
 ```

@@ -5,6 +5,8 @@ weight: 1
 
 Hextra supports creating site with multiple languages using Hugo's [multilingual mode](https://gohugo.io/content-management/multilingual/).
 
+<!--more-->
+
 ## Enable Multi-language
 
 To make our site multi-language, we need to tell Hugo the supported languages. We need to add to the site configuration file:
@@ -62,6 +64,16 @@ and translate them in the corresponding i18n file:
 documentation: Documentation
 blog: Blog
 ```
+
+## Translate Strings
+
+To translate strings on the other places, we need to add the translation to the corresponding i18n file:
+
+```yaml {filename="i18n/fr.yaml"}
+readMore: Lire la suite
+```
+
+A list of strings used in the theme can be found in the `i18n/en.yaml` file.
 
 ## Read More
 

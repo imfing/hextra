@@ -4,6 +4,7 @@
     <article class="w-full break-words flex min-h-[calc(100vh-4rem)] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main class="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
         <h1 class="text-4xl tracking-tighter text-center font-extrabold md:text-5xl mt-8 pb-6">{{ .Title }}</h1>
+        <div class="content">{{ .Content }}</div>
         {{ range .Pages.ByDate }}
           <div class="mb-10">
             <h3><a style="color: inherit; text-decoration: none;" class="block font-semibold mt-8 text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>

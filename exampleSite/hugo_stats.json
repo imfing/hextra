@@ -2,7 +2,6 @@
   "htmlElements": {
     "tags": [
       "a",
-      "abbr",
       "article",
       "aside",
       "blockquote",
@@ -33,7 +32,6 @@
       "li",
       "link",
       "main",
-      "mark",
       "meta",
       "nav",
       "ol",
@@ -502,7 +500,6 @@
       "transition-colors",
       "transition-opacity",
       "transition-transform",
-      "typesetting-article",
       "underline",
       "underline-offset-2",
       "w-3.5",
