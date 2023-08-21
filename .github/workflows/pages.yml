@@ -53,7 +53,7 @@ jobs:
           hugo \
             --minify \
             --themesDir=../.. --source=exampleSite \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --baseURL "https://imfing.github.io/hextra/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
