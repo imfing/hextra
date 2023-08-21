@@ -320,6 +320,10 @@
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
+  .content .footnotes {
+  margin-top: 3rem;
+  font-size: .875rem;
+}
 
 .subheading-anchor {
   opacity: 0;

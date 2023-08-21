@@ -6,7 +6,7 @@ sidebar:
   open: true
 ---
 
-Guide to using Hextra to build your site.
+Explore the following sections to learn to compose content using Hextra:
 
 {{< cards >}}
   {{< card link="organize-files" title="Organize Files" icon="document-duplicate" >}}
