@@ -9,8 +9,8 @@ Welcome to the Hextra documentation!
 
 **Hextra** is a modern, responsive and powerful [Hugo](https://gohugo.io/) theme built with [Tailwind CSS](https://tailwindcss.com/). It is inspired by Next.js theme [Nextra](https://github.com/shuding/nextra).
 
-It is designed for building websites for documentation, blogs, books and landing pages.
-It is easy to use out of the box, and batteries are included to make your site fast and beautiful.
+It is designed for building beautiful websites for documentation, blogs, books and landing pages.
+It is easy to use out of the box, and batteries are included to make your site versatile and powerful.
 
 ## Features
 
@@ -19,14 +19,14 @@ It is easy to use out of the box, and batteries are included to make your site f
 - **Lightweight and Fast** - Hextra is solely dependent on Hugo, one of the world's fastest static site generator that comes with just a single binary file.
 - **Full-text Search** - Hextra offers built-in offline full-text search powered by [FlexSearch](https://github.com/nextapps-de/flexsearch).
 - **Battery included** - Hextra supports Markdown, syntax highlighting, LaTeX, diagrams, and comes with Shortcodes components as building blocks for your Markdown content.
-- **Muliti-language** - Hextra supports multi-language sites out of the box.
+- **Multi-language Support** - Multi-language sites made easy with Hugo's multilingual mode.
 - **SEO Friendly** - Out of the box support for SEO tags, Open Graph, and Twitter Cards.
 - **Customizable** - You can easily customize the theme to make the site look the way you want.
 
 ## Next
 
-Explore the following sections to get started:
+Explore the following section to get started:
 
 {{< cards >}}
-{{< card link="/" title="Getting Started" icon="play" >}}
+  {{< card link="getting-started" title="Getting Started" icon="play" >}}
 {{< /cards >}}

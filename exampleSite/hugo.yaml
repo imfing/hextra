@@ -42,20 +42,22 @@ enableInlineShortcodes: true
 
 menu:
   main:
-    - name: Documentation
+    - identifier: documentation
+      name: Documentation
       pageRef: /docs
       weight: 1
-    - name: Blog
+    - identifier: blog
+      name: Blog
       pageRef: /blog
       weight: 2
-    - name: About
+    - identifier: about
+      name: About
       pageRef: /about
       weight: 3
     - name: Search
       weight: 4
       params:
         type: search
-        placeholder: Search Hextra docs...
     - name: GitHub
       weight: 5
       url: "https://github.com/imfing/hextra"

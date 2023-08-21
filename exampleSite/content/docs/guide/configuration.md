@@ -29,7 +29,6 @@ menu:
       weight: 4
       params:
         type: search
-        placeholder: Search Hextra docs...
     - name: GitHub
       weight: 5
       url: "https://github.com/imfing/hextra"
@@ -54,7 +53,6 @@ There are different types of menu items:
     - name: Search
       params:
         type: search
-        placeholder: Search Hextra docs...
     ```
 4. Icon
     ```yaml

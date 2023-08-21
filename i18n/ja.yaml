@@ -1,2 +1,8 @@
+documentation: "ドキュメンテーション"
+blog: "ブログ"
+about: "このサイトについて"
+
+search_placeholder: "検索ドキュメント..."
+
 article:
   on_this_page: "このページでは"

@@ -13,7 +13,7 @@
       <img class="block dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoWidth }}" width="{{ $logoHeight }}" />
       <img class="hidden dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoWidth }}" width="{{ $logoHeight }}" />
       {{- if .Site.Params.navbar.displayTitle -}}
-        <span class="mx-2 font-extrabold hidden md:inline select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
+        <span class="mx-2 font-extrabold inline select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
       {{- end -}}
     </a>
 
@@ -25,26 +25,26 @@
         {{- $external := strings.HasPrefix .URL "http" -}}
         {{/* Display icon menu item */}}
         {{- if .Params.icon -}}
-          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="noreferer"{{ end }} href="{{ .URL | safeURL }}">
+          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="noreferer"{{ end }} href="{{ .URL | relLangURL }}">
             {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
-            <span class="sr-only">{{ .Name }}</span>
+            <span class="sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- else -}}
           {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
           {{- $activeClass := cond $active "font-medium" "text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" -}}
           <a
-            href="{{ .URL | safeURL }}"
+            href="{{ .URL | relLangURL }}"
             {{ if $external }}target="_blank" rel="noreferer"{{ end }}
             class="text-sm contrast-more:text-gray-700 contrast-more:dark:text-gray-100 relative -ml-2 hidden whitespace-nowrap p-2 md:inline-block {{ $activeClass }}"
           >
-            <span class="text-center">{{ .Name }}</span>
+            <span class="text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- end -}}
       {{- end -}}
     {{- end -}}
 
 
-    <button type="button" aria-label="Menu" class="hamburger-menu ml-auto -mr-2 rounded p-2 active:bg-gray-400/20 md:hidden">
+    <button type="button" aria-label="Menu" class="hamburger-menu -mr-2 rounded p-2 active:bg-gray-400/20 md:hidden">
       {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" "height=24") -}}
     </button>
   </nav>
