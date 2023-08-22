@@ -2,13 +2,13 @@
 title: Icon
 ---
 
-To use this shortcode inline, make sure you have enabled the inline shortcode in the config:
+To use this shortcode inline, inline shortcode needs to be enabled in the config:
 
 ```yaml {filename="hugo.yaml"}
 enableInlineShortcodes: true
 ```
 
-The list of available icons can be found in `data/icon.yaml`.
+The list of available icons can be found in `data/icons.yaml`.
 
 ## Example
 

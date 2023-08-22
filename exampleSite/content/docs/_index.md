@@ -7,17 +7,24 @@ title: Introduction
 
 ## What is Hextra?
 
-**Hextra** is a modern, fast and batteries-included [Hugo][hugo] theme built with [Tailwind CSS][tailwind-css].
+Hextra is a modern, fast and batteries-included [Hugo][hugo] theme built with [Tailwind CSS][tailwind-css].
 Designed for building beautiful websites for documentation, blogs and websites, it provides out-of-the-box features and flexibility to meet various requirements.
 
 ## Features
 
 - **Beautiful Design** - Inspired by Nextra, it uses Tailwind CSS to provide a modern design that makes your site look outstanding.
 - **Responsive Layout and Dark Mode** - It looks great on all devices, from mobile, tablet to desktop. Dark mode is also supported to accomodate various lighting conditions.
-- **Fast and Lightweight** - Powered by Hugo, a lightning-fast static-site generator within a single binary file, Hextra keeps its footprint minimal. No Javascript or Node are needed to use it.
+- **Fast and Lightweight** - Powered by Hugo, a lightning-fast static-site generator within a single binary file, Hextra keeps its footprint minimal. No Javascript or Node.js are needed to use it.
 - **Full-text Search** - Built-in offline full-text search powered by [FlexSearch][flex-search]. No configuration is required.
-- **Battery included** - Hextra supports Markdown, syntax highlighting, LaTeX, diagrams, and comes with [Shortcodes](guide/shortcodes) components as building blocks for your Markdown content.
+- **Battery-included** - Markdown, syntax highlighting, LaTeX math formulae, diagrams and [Shortcodes](guide/shortcodes) elements to enhance your content. Table of contents, breadcumbs, pagination, sidebar navigation and more are all automatically generated.
 - **Multi-language and SEO Ready** - Multi-language sites made easy with Hugo's multilingual mode. Out of the box support for SEO tags, Open Graph, and Twitter Cards.
+
+## Questions or Feedback?
+
+{{< callout emoji="❓" >}}
+  Hextra is still in active development.
+  Have a question or feedback? Feel free to [open an issue](https://github.com/imfing/hextra/issues)!
+{{< /callout >}}
 
 ## Next
 
