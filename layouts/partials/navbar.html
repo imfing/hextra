@@ -10,11 +10,13 @@
 
   <nav class="mx-auto flex items-center justify-end gap-2 h-16 px-6 max-w-[90rem]">
     <a class="flex items-center hover:opacity-75 ltr:mr-auto rtl:ml-auto" href="{{ $logoLink }}">
-      <img class="block dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoWidth }}" width="{{ $logoHeight }}" />
-      <img class="hidden dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoWidth }}" width="{{ $logoHeight }}" />
-      {{- if .Site.Params.navbar.displayTitle -}}
+      {{- if (.Site.Params.navbar.displayLogo | default true) }}
+        <img class="block dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoWidth }}" width="{{ $logoHeight }}" />
+        <img class="hidden dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoWidth }}" width="{{ $logoHeight }}" />
+      {{- end }}
+      {{- if (.Site.Params.navbar.displayTitle | default true) }}
         <span class="mx-2 font-extrabold inline select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
-      {{- end -}}
+      {{- end }}
     </a>
 
     {{- $currentPage := . -}}
@@ -25,7 +27,7 @@
         {{- $external := strings.HasPrefix .URL "http" -}}
         {{/* Display icon menu item */}}
         {{- if .Params.icon -}}
-          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="noreferer"{{ end }} href="{{ .URL | relLangURL }}">
+          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="noreferer"{{ end }} href="{{ .URL | relLangURL }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
             {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
             <span class="sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
@@ -33,6 +35,7 @@
           {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
           {{- $activeClass := cond $active "font-medium" "text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" -}}
           <a
+            title="{{ or (T .Identifier) .Name | safeHTML }}"
             href="{{ .URL | relLangURL }}"
             {{ if $external }}target="_blank" rel="noreferer"{{ end }}
             class="text-sm contrast-more:text-gray-700 contrast-more:dark:text-gray-100 relative -ml-2 hidden whitespace-nowrap p-2 md:inline-block {{ $activeClass }}"

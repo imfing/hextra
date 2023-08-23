@@ -4,6 +4,7 @@ title: "Hextra"
 
 enableRobotsTXT: true
 enableGitInfo: true
+# enableEmoji: false
 # hasCJKLanguage: true
 
 outputs:
@@ -88,22 +89,15 @@ params:
       # height: 20
 
   footer:
-    disabled: false
     displayCopyright: true
     displayPoweredBy: true
 
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
 
-  toc:
-    disabled: false
-
   search:
-    disabled: false
-
-  math:
-    disabled: false
+    enable: true
 
   editURL:
-    disabled: false
+    enable: true
     base: "https://github.com/imfing/hextra/edit/main/exampleSite/content"

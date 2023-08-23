@@ -15,20 +15,8 @@
   <div class="overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
     <ul class="flex flex-col gap-1 md:hidden">
       <!-- Nav -->
-      {{- range site.Menus.main }}
-        {{- if and .URL (and (ne .Params.type "search") (not .Params.icon)) -}}
-          <li>{{ template "sidebar-item-link" dict "active" false "title" .Name "link" .URL }}</li>
-        {{- end -}}
-      {{- end -}}
-      {{ template "sidebar-separator" -}}
-      {{ template "sidebar-main" (dict "context" $navRoot "pageURL" $pageURL "page" $context "toc" true) -}}
-
-
-      <!-- Sidebar footer -->
-      {{ with site.Params.sidebar.footer -}}
-        {{ template "sidebar-separator" }}
-        {{ template "sidebar-footer" }}
-      {{ end }}
+      {{ template "sidebar-main" (dict "context" site.Home "pageURL" $pageURL "page" $context "toc" true) -}}
+      {{ template "sidebar-footer" }}
     </ul>
 
     <!-- Sidebar on large screen -->

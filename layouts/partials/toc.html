@@ -1,7 +1,6 @@
 {{/* Table of Contents */}}
 {{/* TODO: toc bottom part should be able to hide */}}
 {{- $toc := .Params.toc | default true -}}
-{{- with site.Params.toc.disabled -}}{{ $toc = not . }}{{- end -}}
 
 
 <nav class="hextra-toc order-last hidden w-64 shrink-0 xl:block print:hidden px-4" aria-label="table of contents">
@@ -23,7 +22,7 @@
 
       {{/* TOC bottom part */}}
       <div class="{{ $borderClass }} sticky bottom-0 flex flex-col items-start gap-2 pb-8 dark:border-neutral-800 contrast-more:border-t contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:border-neutral-400">
-        {{- if not site.Params.editURL.disabled -}}
+        {{- if site.Params.editURL.enable -}}
           {{- $editURL := site.Params.editURL.base | default "" -}}
           {{- with .File -}}{{ $editURL = urls.JoinPath $editURL .Path }}{{- end -}}
           {{- with .Params.editURL -}}{{ $editURL = .Params.editURL }}{{- end -}}

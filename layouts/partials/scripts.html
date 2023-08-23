@@ -13,7 +13,7 @@
 <script defer src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
 
 {{/* FlexSearch */}}
-{{- if not site.Params.search.disabled -}}
+{{- if (site.Params.search.enable | default true) -}}
   {{- $jsSearchScript := printf "%s.search.js" .Language.Lang -}}
   {{- $jsSearch := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $jsSearchScript . -}}
   {{- if hugo.IsProduction -}}
@@ -38,7 +38,7 @@
 {{- end -}}
 
 {{/* KaTex */}}
-{{- if and (not site.Params.math.disabled) .Page.Params.math -}}
+{{- if .Page.Params.math -}}
   {{- $katexCSS := resources.Get "lib/katex/katex.min.css" | fingerprint -}}
   {{- $katexJS := resources.Get "lib/katex/katex.min.js" | fingerprint -}}
   {{- $mhchemJS := resources.Get "lib/katex/mhchem.min.js" | fingerprint -}}
