@@ -1,6 +1,9 @@
 {{- $context := .context -}}
+
 {{- $disableSidebar := .disableSidebar | default false -}}
-{{- $sidebarClass := cond $disableSidebar "md:hidden xl:block" "md:sticky" -}}
+{{- $displayPlaceholder := .displayPlaceholder | default false -}}
+
+{{- $sidebarClass := cond $disableSidebar (cond $displayPlaceholder "md:hidden xl:block" "md:hidden") "md:sticky" -}}
 
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
 {{- $navPages := union $navRoot.RegularPages $navRoot.Sections -}}
@@ -20,8 +23,8 @@
     </ul>
 
     <!-- Sidebar on large screen -->
-    {{- if $disableSidebar }}
-      <div class="max-xl:hidden h-0 w-64 shrink-0"></div>
+    {{- if $disableSidebar -}}
+      {{- if $displayPlaceholder }}<div class="max-xl:hidden h-0 w-64 shrink-0"></div>{{ end -}}
       {{ .context.Scratch.Set "enableFooterSwitches" true }}
     {{- else -}}
       <ul class="flex flex-col gap-1 max-md:hidden">
