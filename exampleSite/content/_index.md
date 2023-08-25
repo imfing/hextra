@@ -1,4 +1,4 @@
 ---
 title: Hextra Theme
-toc: false
+layout: hextra-home
 ---
