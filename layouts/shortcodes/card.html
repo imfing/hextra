@@ -1,4 +1,4 @@
-{{- $href := .Get "link" -}}
+{{- $link := .Get "link" -}}
 {{- $title := .Get "title" -}}
 {{- $icon := .Get "icon" -}}
 {{- $subtitle := .Get "subtitle" }}
@@ -10,9 +10,15 @@
   {{ $linkClass = "hover:border-gray-300 bg-gray-100 shadow dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-50 hover:shadow-lg dark:hover:border-neutral-500 dark:hover:bg-neutral-700" }}
 {{- end -}}
 
+{{- $external := strings.HasPrefix $link "http" -}}
+
 <a
   class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
-  href="{{ $href }}"
+  href="{{ $link }}"
+  {{- if $external -}}
+    target="_blank"
+    rel="noreferrer"
+  {{- end -}}
 >
   {{- with $image -}}
     <img alt="{{ $title }}" loading="lazy" decoding="async" style="color: transparent;" src="{{ $image }}" />

@@ -66,7 +66,7 @@ Voila! You can see your new site at `http://localhost:1313/`.
 Explore the following sections to start adding more contents:
 
 {{< cards >}}
-  {{< card link="organize-files" title="Organize Files" icon="document-duplicate" >}}
-  {{< card link="configuration" title="Configuration" icon="adjustments" >}}
-  {{< card link="markdown" title="Markdown" icon="markdown" >}}
+  {{< card link="../guide/organize-files" title="Organize Files" icon="document-duplicate" >}}
+  {{< card link="../guide/configuration" title="Configuration" icon="adjustments" >}}
+  {{< card link="../guide/markdown" title="Markdown" icon="markdown" >}}
 {{< /cards >}}
