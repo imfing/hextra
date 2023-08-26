@@ -7,6 +7,6 @@ module.exports = {
 		require('postcss-import'),
 		require('@tailwindcss/nesting'),
 		tailwind,
-		...(process.env.HUGO_ENVIRONMENT === 'production' ? [autoprefixer] : [])
+		autoprefixer
 	],
 };
