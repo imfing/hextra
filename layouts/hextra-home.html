@@ -1,21 +1,37 @@
 {{ define "main" }}
   <div class="mx-auto flex max-w-screen-xl">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
-    <div class="w-full break-words flex min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-start pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <section class="flex max-w-[90rem] flex-col items-start gap-2 px-6 sm:px-4 pt-8 md:pt-12 pb-8">
-        <a class="inline-flex items-center rounded-full gap-2 px-3 py-1 text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-neutral-900 dark:border-neutral-800 " href="https://github.com/imfing/hextra">
+    <div class="w-full break-words flex flex-col min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-start pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <section class="flex max-w-[90rem] flex-col items-start gap-2 px-6 sm:px-4 pt-8 md:pt-12">
+        <a
+          href="https://github.com/imfing/hextra"
+          target="_blank"
+          rel="noreferrer"
+          class="inline-flex items-center rounded-full gap-2 px-3 py-1 text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-neutral-800 dark:border-neutral-800 border hover:border-gray-400 dark:hover:text-gray-50 dark:hover:border-gray-600"
+        >
           <div class="w-2 h-2 rounded-full bg-primary-400"></div>
           <span>Free, open source</span>
           {{- partial "utils/icon" (dict "name" "arrow-circle-right" "attributes" "height=14") -}}
         </a>
-        <h1 class="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1] mt-6">
-          Build modern website
-          <br class="sm:block hidden" />
-          with Hugo and Markdown
+        <h1
+          class="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1] mt-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400"
+        >
+          Build modern websites <br class="sm:block hidden" />
+          with Markdown and Hugo
         </h1>
-        <p class="mt-4 text-xl text-gray-600 sm:text-xl">
-          Beautiful, batteries-included theme for Hugo.
+        <p class="mt-4 text-xl text-gray-600 dark:text-gray-400 sm:text-xl">
+          Fast, batteries-included Hugo theme <br class="sm:block hidden" />
+          for building beautiful static websites.
         </p>
+        <div class="mt-8">
+          {{- $docsURL := "docs" | relURL -}}
+          <a
+            href="{{ $docsURL }}"
+            class="font-medium cursor-pointer px-6 py-3 text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 rounded-full text-center mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          >
+            Get Started
+          </a>
+        </div>
       </section>
     </div>
   </div>

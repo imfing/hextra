@@ -1192,7 +1192,9 @@ article details > summary::before {
 }
 
 .hextra-card img {
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .hextra-card:hover svg {
@@ -1302,7 +1304,9 @@ article details > summary::before {
 
 .search-wrapper .no-result {
   display: block;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   padding: 2rem;
   text-align: center;
   font-size: .875rem;
@@ -1315,7 +1319,9 @@ article details > summary::before {
   margin-right: 0.625rem;
   margin-bottom: 0.5rem;
   margin-top: 1.5rem;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   border-bottom-width: 1px;
   border-color: rgb(0 0 0 / 0.1);
   padding-left: 0.625rem;
@@ -1515,7 +1521,8 @@ html {
   line-height: 1.5; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   -moz-tab-size: 4; /* 3 */
-  tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
   font-feature-settings: normal; /* 5 */
   font-variation-settings: normal; /* 6 */
@@ -1548,7 +1555,8 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
 abbr:where([title]) {
-  text-decoration: underline dotted;
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
 }
 
 /*
@@ -1807,6 +1815,11 @@ textarea {
 1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
 
 input::placeholder,
 textarea::placeholder {
@@ -2286,6 +2299,7 @@ video {
 }
 
 .w-max {
+  width: -moz-max-content;
   width: max-content;
 }
 
@@ -2350,7 +2364,9 @@ video {
 }
 
 .select-none {
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .scroll-my-6 {
@@ -2368,7 +2384,9 @@ video {
 }
 
 .appearance-none {
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
 
 .flex-col {
@@ -2562,6 +2580,11 @@ video {
   background-color: hsl(var(--primary-hue) 100% 66% / var(--tw-bg-opacity));
 }
 
+.bg-primary-600 {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--primary-hue) 100% 45% / var(--tw-bg-opacity));
+}
+
 .bg-primary-700\/5 {
   background-color: hsl(var(--primary-hue) 100% 39% / 0.05);
 }
@@ -2583,6 +2606,25 @@ video {
 .bg-yellow-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 252 232 / var(--tw-bg-opacity));
+}
+
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-gray-900 {
+  --tw-gradient-from: #111827 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(17 24 39 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-gray-600 {
+  --tw-gradient-to: #4b5563 var(--tw-gradient-to-position);
+}
+
+.bg-clip-text {
+  -webkit-background-clip: text;
+          background-clip: text;
 }
 
 .p-0 {
@@ -2662,6 +2704,11 @@ video {
 .py-2\.5 {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .py-4 {
@@ -2873,6 +2920,15 @@ video {
   color: rgb(15 23 42 / var(--tw-text-opacity));
 }
 
+.text-transparent {
+  color: transparent;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .text-yellow-900 {
   --tw-text-opacity: 1;
   color: rgb(113 63 18 / var(--tw-text-opacity));
@@ -2964,7 +3020,9 @@ video {
 }
 
 .transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -3014,7 +3072,8 @@ video {
 }
 
 .\[hyphens\:auto\] {
-  hyphens: auto;
+  -webkit-hyphens: auto;
+          hyphens: auto;
 }
 
 .\[text-underline-position\:from-font\] {
@@ -3054,6 +3113,11 @@ body {
 
 .dark {
   --primary-hue: 204deg;
+}
+
+.placeholder\:text-gray-500::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .placeholder\:text-gray-500::placeholder {
@@ -3112,6 +3176,11 @@ body {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.hover\:border-gray-400:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -3124,6 +3193,11 @@ body {
 .hover\:bg-primary-50:hover {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--primary-hue) 100% 97% / var(--tw-bg-opacity));
+}
+
+.hover\:bg-primary-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--primary-hue) 100% 39% / var(--tw-bg-opacity));
 }
 
 .hover\:bg-slate-50:hover {
@@ -3179,6 +3253,22 @@ body {
 .focus\:bg-white:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus\:ring-4:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-primary-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: hsl(var(--primary-hue) 100% 77% / var(--tw-ring-opacity));
 }
 
 .active\:bg-gray-400\/20:active {
@@ -3537,12 +3627,27 @@ body {
   background-color: hsl(var(--primary-hue) 100% 66% / 0.1);
 }
 
+:is(html[class~="dark"] .dark\:bg-primary-600) {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--primary-hue) 100% 45% / var(--tw-bg-opacity));
+}
+
 :is(html[class~="dark"] .dark\:bg-red-900\/30) {
   background-color: rgb(127 29 29 / 0.3);
 }
 
 :is(html[class~="dark"] .dark\:bg-yellow-700\/30) {
   background-color: rgb(161 98 7 / 0.3);
+}
+
+:is(html[class~="dark"] .dark\:from-gray-100) {
+  --tw-gradient-from: #f3f4f6 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(243 244 246 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+:is(html[class~="dark"] .dark\:to-gray-400) {
+  --tw-gradient-to: #9ca3af var(--tw-gradient-to-position);
 }
 
 :is(html[class~="dark"] .dark\:text-blue-200) {
@@ -3632,6 +3737,11 @@ body {
   --tw-ring-color: rgb(255 255 255 / 0.2);
 }
 
+:is(html[class~="dark"] .dark\:placeholder\:text-gray-400)::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
 :is(html[class~="dark"] .dark\:placeholder\:text-gray-400)::placeholder {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
@@ -3641,6 +3751,11 @@ body {
   content: var(--tw-content);
   --tw-bg-opacity: 1;
   background-color: rgb(38 38 38 / var(--tw-bg-opacity));
+}
+
+:is(html[class~="dark"] .dark\:hover\:border-gray-600:hover) {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
 
 :is(html[class~="dark"] .dark\:hover\:border-neutral-500:hover) {
@@ -3674,6 +3789,11 @@ body {
 
 :is(html[class~="dark"] .dark\:hover\:bg-primary-100\/5:hover) {
   background-color: hsl(var(--primary-hue) 100% 94% / 0.05);
+}
+
+:is(html[class~="dark"] .dark\:hover\:bg-primary-700:hover) {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--primary-hue) 100% 39% / var(--tw-bg-opacity));
 }
 
 :is(html[class~="dark"] .hover\:dark\:bg-primary-500\/10):hover {
@@ -3724,6 +3844,11 @@ body {
 :is(html[class~="dark"] .dark\:focus\:bg-dark:focus) {
   --tw-bg-opacity: 1;
   background-color: rgb(17 17 17 / var(--tw-bg-opacity));
+}
+
+:is(html[class~="dark"] .dark\:focus\:ring-primary-800:focus) {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: hsl(var(--primary-hue) 100% 32% / var(--tw-ring-opacity));
 }
 
 @media (prefers-contrast: more) {
