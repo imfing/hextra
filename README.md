@@ -7,10 +7,8 @@ Demo → [imfing.github.io/hextra](https://imfing.github.io/hextra/)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/5097752/263550533-c18343ca-3848-4230-b5c0-ee989d7916da.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/5097752/263550528-663599f9-17a1-4686-b5c4-3da233b5034d.png">
   <img alt="Hextra" src="https://user-images.githubusercontent.com/5097752/263550528-663599f9-17a1-4686-b5c4-3da233b5034d.png">
 </picture>
-
 
 ## Features
 
