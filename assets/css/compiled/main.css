@@ -3831,11 +3831,6 @@ body {
   border-color: rgb(115 115 115 / var(--tw-border-opacity));
 }
 
-:is(html[class~="dark"] .dark\:hover\:border-neutral-600:hover) {
-  --tw-border-opacity: 1;
-  border-color: rgb(82 82 82 / var(--tw-border-opacity));
-}
-
 :is(html[class~="dark"] .dark\:hover\:border-neutral-700:hover) {
   --tw-border-opacity: 1;
   border-color: rgb(64 64 64 / var(--tw-border-opacity));
