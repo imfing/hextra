@@ -112,7 +112,7 @@
       <p class="text-gray-500 text-sm leading-6">{{ $subtitle | markdownify }}</p>
     </div>
     {{- with $image -}}
-      <img src="{{ . }}" class="absolute max-w-none {{ $imageClass }}" />
+      <img src="{{ . }}" class="absolute max-w-none {{ $imageClass }}" alt="{{ $title }}" />
     {{- end -}}
   </div>
 {{- end -}}
