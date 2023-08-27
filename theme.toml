@@ -4,11 +4,11 @@
 name = "Hextra"
 license = "MIT"
 licenselink = "https://github.com/imfing/hextra/blob/main/LICENSE"
-description = "Modern, versatile theme for building beautiful websites with Hugo"
+description = "Modern, responsive, batteries-included Hugo theme for creating beautiful static websites."
 homepage = "https://github.com/imfing/hextra/"
-demosite = ""
-tags = ["Modern", "Elegant", "Blog", "Documentation"]
-features = ["Responsive", "Dark Mode", "Search", "Syntax Highlighting", "Multilingual"]
+demosite = "https://imfing.github.io/hextra/"
+tags = ["Modern", "Elegant", "Blog", "Documentation", "Responsive", "Clean", "Light", "Dark", "Minimal"]
+features = ["Responsive", "Dark Mode", "Search", "Syntax Highlighting", "Multilingual", "Social", "Blog", "RSS", "Customization"]
 min_version = "0.111.0"
 
 [author]
