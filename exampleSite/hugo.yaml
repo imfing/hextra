@@ -66,18 +66,23 @@ menu:
         icon: github
 
   sidebar:
-    - name: More
+    - identifier: more
+      name: More
       params:
         type: separator
       weight: 1
-    - name: "About"
+    - identifier: about
+      name: "About"
       pageRef: "/about"
       weight: 2
-    - name: "Hugo Docs ↗"
+    - identifier: hugoDocs
+      name: "Hugo Docs ↗"
       url: "https://gohugo.io/documentation/"
       weight: 3
 
 params:
+  description: Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.
+
   navbar:
     displayTitle: true
     displayLogo: true

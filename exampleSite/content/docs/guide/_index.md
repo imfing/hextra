@@ -8,6 +8,8 @@ sidebar:
 
 Explore the following sections to learn to compose content using Hextra:
 
+<!--more-->
+
 {{< cards >}}
   {{< card link="organize-files" title="Organize Files" icon="document-duplicate" >}}
   {{< card link="configuration" title="Configuration" icon="adjustments" >}}

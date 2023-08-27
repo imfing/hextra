@@ -6,6 +6,8 @@ math: true
 
 $\KaTeX$ is used for rendering LaTeX math expressions. It can be enabled per page by setting `math` to `true` in the page front matter.
 
+<!--more-->
+
 ```yaml {filename="Markdown"}
 ---
 title: "My Page with LaTeX"

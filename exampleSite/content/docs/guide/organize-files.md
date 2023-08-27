@@ -8,6 +8,8 @@ weight: 1
 By default, Hugo searches for Markdown files in the `content` directory, and the structure of the directory determines the final output structure of your website.
 Take the example site as an example:
 
+<!--more-->
+
 {{< filetree/container >}}
   {{< filetree/folder name="content" >}}
     {{< filetree/file name="_index.md" >}}

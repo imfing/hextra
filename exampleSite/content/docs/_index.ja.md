@@ -5,6 +5,8 @@ title: Hextraへようこそ
 
 👋 こんにちは！Hextraドキュメンテーションへようこそ！
 
+<!--more-->
+
 ## Hextraとは？
 
 Hextraは、[Hugo][hugo]テーマの一つで、[Tailwind CSS][tailwind-css]を使用して作られた、現代的で高速なバッテリー内蔵のテーマです。

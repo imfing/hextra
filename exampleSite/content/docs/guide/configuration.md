@@ -7,6 +7,8 @@ Hugo reads its configuration from `hugo.yaml` in the root of your Hugo site.
 The config file is where you can configure all aspects of your site.
 You can find the config file for this site in `exampleSite/hugo.yaml` as a good starting point.
 
+<!--more-->
+
 ## Navigation
 
 ### Menu

@@ -6,6 +6,8 @@ weight: 3
 Hugo uses [Chroma](https://github.com/alecthomas/chroma), a general purpose syntax highlighter in pure Go, for syntax highlighting.
 It is recommended to use backticks for code blocks in Markdown content. For example:
 
+<!--more-->
+
 ````markdown {filename="Markdown"}
 ```python
 def say_hello():
