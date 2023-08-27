@@ -2020,6 +2020,14 @@ video {
   bottom: 0px;
 }
 
+.left-\[24px\] {
+  left: 24px;
+}
+
+.left-\[36px\] {
+  left: 36px;
+}
+
 .right-0 {
   right: 0px;
 }
@@ -2034,6 +2042,10 @@ video {
 
 .top-8 {
   top: 2rem;
+}
+
+.top-\[40\%\] {
+  top: 40%;
 }
 
 .top-full {
@@ -2222,6 +2234,10 @@ video {
   display: none;
 }
 
+.aspect-auto {
+  aspect-ratio: auto;
+}
+
 .h-0 {
   height: 0px;
 }
@@ -2294,6 +2310,14 @@ video {
   width: 16rem;
 }
 
+.w-\[110\%\] {
+  width: 110%;
+}
+
+.w-\[180\%\] {
+  width: 180%;
+}
+
 .w-full {
   width: 100%;
 }
@@ -2337,6 +2361,10 @@ video {
 
 .max-w-\[min\(calc\(100vw-2rem\)\2c calc\(100\%\+20rem\)\)\] {
   max-width: min(calc(100vw - 2rem),calc(100% + 20rem));
+}
+
+.max-w-none {
+  max-width: none;
 }
 
 .max-w-screen-xl {
@@ -2387,6 +2415,10 @@ video {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -2471,6 +2503,10 @@ video {
 
 .rounded {
   border-radius: 0.25rem;
+}
+
+.rounded-3xl {
+  border-radius: 1.5rem;
 }
 
 .rounded-full {
@@ -2608,8 +2644,18 @@ video {
   background-color: rgb(254 252 232 / var(--tw-bg-opacity));
 }
 
+.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-gray-800 {
+  --tw-gradient-from: #1f2937 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(31 41 55 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .from-gray-900 {
@@ -2649,6 +2695,10 @@ video {
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-1 {
@@ -2842,6 +2892,10 @@ video {
 
 .leading-5 {
   line-height: 1.25rem;
+}
+
+.leading-6 {
+  line-height: 1.5rem;
 }
 
 .leading-7 {
@@ -3125,9 +3179,19 @@ body {
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
+.before\:pointer-events-none::before {
+  content: var(--tw-content);
+  pointer-events: none;
+}
+
 .before\:absolute::before {
   content: var(--tw-content);
   position: absolute;
+}
+
+.before\:inset-0::before {
+  content: var(--tw-content);
+  inset: 0px;
 }
 
 .before\:inset-y-1::before {
@@ -3715,6 +3779,10 @@ body {
   color: rgb(254 240 138 / var(--tw-text-opacity));
 }
 
+:is(html[class~="dark"] .dark\:opacity-80) {
+  opacity: 0.8;
+}
+
 :is(html[class~="dark"] .dark\:shadow-\[0_-12px_16px_\#111\]) {
   --tw-shadow: 0 -12px 16px #111;
   --tw-shadow-colored: 0 -12px 16px var(--tw-shadow-color);
@@ -3761,6 +3829,11 @@ body {
 :is(html[class~="dark"] .dark\:hover\:border-neutral-500:hover) {
   --tw-border-opacity: 1;
   border-color: rgb(115 115 115 / var(--tw-border-opacity));
+}
+
+:is(html[class~="dark"] .dark\:hover\:border-neutral-600:hover) {
+  --tw-border-opacity: 1;
+  border-color: rgb(82 82 82 / var(--tw-border-opacity));
 }
 
 :is(html[class~="dark"] .dark\:hover\:border-neutral-700:hover) {
@@ -3917,9 +3990,18 @@ body {
   }
 }
 
+@media not all and (min-width: 1024px) {
+  .max-lg\:min-h-\[340px\] {
+    min-height: 340px;
+  }
+}
+
 @media not all and (min-width: 768px) {
   .max-md\:hidden {
     display: none;
+  }
+  .max-md\:min-h-\[340px\] {
+    min-height: 340px;
   }
   .max-md\:\[transform\:translate3d\(0\2c -100\%\2c 0\)\] {
     transform: translate3d(0,-100%,0);
@@ -3932,6 +4014,12 @@ body {
   }
   .sm\:flex {
     display: flex;
+  }
+  .sm\:w-\[110\%\] {
+    width: 110%;
+  }
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .sm\:items-start {
     align-items: flex-start;
@@ -3957,6 +4045,9 @@ body {
   }
   .md\:hidden {
     display: none;
+  }
+  .md\:aspect-\[1\.1\/1\] {
+    aspect-ratio: 1.1/1;
   }
   .md\:h-\[calc\(100vh-var\(--navbar-height\)-var\(--menu-height\)\)\] {
     height: calc(100vh - var(--navbar-height) - var(--menu-height));
@@ -4001,6 +4092,9 @@ body {
 }
 
 @media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   .lg\:leading-\[1\.1\] {
     line-height: 1.1;
   }
