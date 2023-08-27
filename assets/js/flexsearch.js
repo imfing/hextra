@@ -6,6 +6,7 @@
 // {{ if hugo.IsProduction }}
 //   {{ $searchData := $searchData | minify | fingerprint }}
 // {{ end }}
+// {{ $noResultsFound := (T "noResultsFound") | default "No results found." }}
 
 (function () {
   const searchDataURL = '{{ $searchData.RelPermalink }}';
@@ -300,7 +301,7 @@
     if (!resultsElement) return;
 
     if (!results.length) {
-      resultsElement.innerHTML = `<span class="no-result">No results found.</span>`;
+      resultsElement.innerHTML = `<span class="no-result">{{ $noResultsFound | safeHTML }}</span>`;
       return;
     }
 

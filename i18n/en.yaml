@@ -1,6 +1,5 @@
-article:
-  on_this_page: "On this page"
-  edit_this_page: "Edit this page on GitHub →"
+onThisPage: "On this page"
+editThisPage: "Edit this page on GitHub →"
+lastUpdated: "Last updated on"
 
-footer:
-  copyright: "© 2023 Hextra Project."
+copyright: "© 2023 Hextra Project."

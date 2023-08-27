@@ -1,5 +1,7 @@
 {{- $enableFooterSwitches := .Scratch.Get "enableFooterSwitches" | default false -}}
 
+{{- $copyright := (T "copyright") | default "© 2023 Hextra." -}}
+
 
 <footer class="hextra-footer bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900 print:bg-transparent">
   {{- if $enableFooterSwitches }}
@@ -9,17 +11,20 @@
     </div>
   {{ end -}}
   <hr class="dark:border-neutral-800" />
-  <div class="mx-auto flex max-w-screen-xl justify-center py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-600 dark:text-gray-400 md:justify-start">
+  <div
+    class="mx-auto flex max-w-screen-xl justify-center py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-600 dark:text-gray-400 md:justify-start"
+  >
     <div class="flex w-full flex-col items-center sm:items-start">
       {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="font-semibold">{{ template "theme-credit" . }}</div>{{ end }}
-      {{- if .Site.Params.footer.displayCopyright }}<p class="mt-6 text-xs">{{ i18n "footer.copyright" }}</p>{{ end }}
+      {{- if .Site.Params.footer.displayCopyright }}<p class="mt-6 text-xs">{{ $copyright }}</p>{{ end }}
     </div>
   </div>
 </footer>
 
 {{- define "theme-credit" -}}
   <a class="flex text-sm items-center gap-1 text-current" target="_blank" rel="noopener noreferrer" title="Hextra GitHub Homepage" href="https://github.com/imfing/hextra">
-    <span>Powered by Hextra
+    <span
+      >Powered by Hextra
       {{- partial "utils/icon.html" (dict "name" "hextra" "attributes" "height=1em class=\"inline-block ml-1 align-text-bottom\"") -}}
     </span>
   </a>

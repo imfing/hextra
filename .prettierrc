@@ -1,7 +1,7 @@
 {
   "goTemplateBracketSpacing": true,
   "htmlWhitespaceSensitivity": "css",
-  "printWidth": 100,
+  "printWidth": 200,
   "singleQuote": false,
   "tabWidth": 2,
   "trailingComma": "es5",

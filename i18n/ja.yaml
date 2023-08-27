@@ -1,8 +1,16 @@
+# Navbar
 documentation: "ドキュメンテーション"
 blog: "ブログ"
 about: "このサイトについて"
 
-search_placeholder: "検索ドキュメント..."
+more: "もっと"
+hugoDocs: "Hugoドキュメント ↗"
 
-article:
-  on_this_page: "このページでは"
+searchPlaceholder: "検索ドキュメント..."
+noResultsFound: "検索結果が見つかりませんでした"
+
+onThisPage: "このページでは"
+editThisPage: "このページをGitHubで編集する →"
+lastUpdated: "最終更新日"
+
+copyright: "© 2023 Hextra Project."

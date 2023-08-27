@@ -1,13 +1,14 @@
 {{/* Table of Contents */}}
 {{/* TODO: toc bottom part should be able to hide */}}
 {{- $toc := .Params.toc | default true -}}
-
+{{- $onThisPage := (T "onThisPage") | default "On this page"}}
+{{- $editThisPage := (T "editThisPage") | default "Edit this page"}}
 
 <nav class="hextra-toc order-last hidden w-64 shrink-0 xl:block print:hidden px-4" aria-label="table of contents">
   {{- if $toc }}
     <div class="sticky top-16 overflow-y-auto pr-4 pt-6 text-sm [hyphens:auto] max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:-mr-4 rtl:-ml-4">
       {{- with .Fragments.Headings -}}
-        <p class="mb-4 font-semibold tracking-tight">{{ i18n "article.on_this_page" }}</p>
+        <p class="mb-4 font-semibold tracking-tight">{{ $onThisPage }}</p>
         {{- range . -}}
           <ul>
             {{- with .Headings -}}{{ template "toc-subheading" (dict "headings" . "level" 0) }}{{- end -}}
@@ -26,7 +27,7 @@
           {{- $editURL := site.Params.editURL.base | default "" -}}
           {{- with .File -}}{{ $editURL = urls.JoinPath $editURL .Path }}{{- end -}}
           {{- with .Params.editURL -}}{{ $editURL = .Params.editURL }}{{- end -}}
-          <a class="text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 contrast-more:text-gray-800 contrast-more:dark:text-gray-50" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ i18n "article.edit_this_page" }}</a>
+          <a class="text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 contrast-more:text-gray-800 contrast-more:dark:text-gray-50" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
         {{- end -}}
       </div>
     </div>
