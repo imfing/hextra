@@ -1,7 +1,16 @@
-<p align="center">
+<div align="center">
   <h1 align="center">Hextra</h1>
   <p align="center">Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.</p>
-</p>
+
+Demo → [imfing.github.io/hextra](https://imfing.github.io/hextra/)
+</div>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/5097752/263550533-c18343ca-3848-4230-b5c0-ee989d7916da.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/5097752/263550528-663599f9-17a1-4686-b5c4-3da233b5034d.png">
+  <img alt="Hextra" src="https://user-images.githubusercontent.com/5097752/263550528-663599f9-17a1-4686-b5c4-3da233b5034d.png">
+</picture>
+
 
 ## Features
 
