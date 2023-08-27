@@ -12,12 +12,12 @@ Designed for building beautiful websites for documentation, blogs and websites, 
 
 ## Features
 
-- **Beautiful Design** - Inspired by Nextra, it uses Tailwind CSS to provide a modern design that makes your site look outstanding.
+- **Beautiful Design** - Inspired by Nextra, Hextra utilizes Tailwind CSS to offer a modern design that makes your site look outstanding.
 - **Responsive Layout and Dark Mode** - It looks great on all devices, from mobile, tablet to desktop. Dark mode is also supported to accomodate various lighting conditions.
-- **Fast and Lightweight** - Powered by Hugo, a lightning-fast static-site generator within a single binary file, Hextra keeps its footprint minimal. No Javascript or Node.js are needed to use it.
-- **Full-text Search** - Built-in offline full-text search powered by [FlexSearch][flex-search]. No configuration is required.
-- **Battery-included** - Markdown, syntax highlighting, LaTeX math formulae, diagrams and [Shortcodes](guide/shortcodes) elements to enhance your content. Table of contents, breadcumbs, pagination, sidebar navigation and more are all automatically generated.
-- **Multi-language and SEO Ready** - Multi-language sites made easy with Hugo's multilingual mode. Out of the box support for SEO tags, Open Graph, and Twitter Cards.
+- **Fast and Lightweight** - Powered by Hugo, a lightning-fast static-site generator housed in a single binary file, Hextra keeps its footprint minimal. No Javascript or Node.js are needed to use it.
+- **Full-text Search** - Built-in offline full-text search powered by FlexSearch, no additional configuration required.
+- **Battery-included** - Markdown, syntax highlighting, LaTeX math formulae, diagrams and Shortcodes elements to enhance your content. Table of contents, breadcumbs, pagination, sidebar navigation and more are all automatically generated.
+- **Multi-language and SEO Ready** - Multi-language sites made easy with Hugo's multilingual mode. Out-of-the-box support is included for SEO tags, Open Graph, and Twitter Cards.
 
 ## Questions or Feedback?
 
