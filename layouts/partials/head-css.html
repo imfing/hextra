@@ -1,14 +1,25 @@
-{{ if and (not hugo.IsProduction) (eq hugo.Environment "theme")}}
-  {{ $styles := resources.Get "css/styles.css" }}
-  {{ $styles = $styles | resources.PostCSS (dict "inlineImports" true) }}
+{{- if and (not hugo.IsProduction) (eq hugo.Environment "theme") }}
+  {{- $styles := resources.Get "css/styles.css" }}
+  {{- $styles = $styles | resources.PostCSS (dict "inlineImports" true) }}
   <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
-{{ else }}
-  {{ $styles := resources.Get "css/compiled/main.css" }}
-  {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
-  <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
-  <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
-{{ end }}
+{{- else }}
+  {{- $styles := resources.Get "css/compiled/main.css" -}}
 
-{{ $custom := resources.Get "css/custom.css" }}
-{{ $custom = $custom | minify | fingerprint }}
-<link href="{{ $custom.RelPermalink }}" rel="stylesheet" integrity="{{ $custom.Data.Integrity }}" />
+  {{- if hugo.IsProduction }}
+    {{- $styles = $styles | minify | fingerprint }}
+    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
+  {{- else }}
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
+  {{- end }}
+{{- end }}
+
+
+<!-- Custom CSS -->
+{{- $custom := resources.Get "css/custom.css" }}
+{{- if hugo.IsProduction -}}
+  {{- $custom = $custom | minify | fingerprint }}
+  <link href="{{ $custom.RelPermalink }}" rel="stylesheet" integrity="{{ $custom.Data.Integrity }}" />
+{{- else }}
+  <link href="{{ $custom.RelPermalink }}" rel="stylesheet" />
+{{- end }}
