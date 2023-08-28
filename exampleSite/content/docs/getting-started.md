@@ -7,7 +7,7 @@ prev: /docs
 
 ## Quick Start from Template
 
-{{< icon "github" >}} [imfing/hextra-starter-template](https://github.com/imfing/hextra-starter-template)
+{{< icon "github" >}}&nbsp;[imfing/hextra-starter-template](https://github.com/imfing/hextra-starter-template)
 
 You will be able to quickly get started by using the above template repository.
 
