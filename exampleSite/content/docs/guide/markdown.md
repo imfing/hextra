@@ -46,7 +46,7 @@ Tables aren't part of the core Markdown spec, but Hugo supports them out-of-the-
 ### Code Blocks
 
 {{< cards >}}
-    {{< card link="/docs/guide/syntax-highlighting" title="Syntax Highlighting" icon="sparkles" >}}
+  {{< card link="../../guide/syntax-highlighting" title="Syntax Highlighting" icon="sparkles" >}}
 {{< /cards >}}
 
 ### Lists

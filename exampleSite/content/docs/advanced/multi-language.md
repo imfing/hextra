@@ -1,6 +1,7 @@
 ---
 title: "Multi-language"
 weight: 1
+prev: /docs/advanced
 ---
 
 Hextra supports creating site with multiple languages using Hugo's [multilingual mode](https://gohugo.io/content-management/multilingual/).

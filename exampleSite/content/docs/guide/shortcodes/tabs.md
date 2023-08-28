@@ -1,5 +1,6 @@
 ---
 title: Tabs
+next: /docs/advanced/
 ---
 
 ## Example

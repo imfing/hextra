@@ -1,9 +1,14 @@
 ---
 title: Callout Component
 linkTitle: Callout
+aliases:
+- callouts
+prev: /docs/guide/shortcodes
 ---
 
 A built-in component to show important information to the reader.
+
+<!--more-->
 
 ## Example
 

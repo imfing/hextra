@@ -1,6 +1,7 @@
 ---
 title: Organize Files
 weight: 1
+prev: /docs/guide
 ---
 
 ## Directory Structure

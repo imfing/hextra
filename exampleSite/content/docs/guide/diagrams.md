@@ -1,6 +1,7 @@
 ---
 title: Diagrams
 weight: 6
+next: /docs/guide/shortcodes
 ---
 
 Currently, Hextra supports [Mermaid](#mermaid) for diagrams.
