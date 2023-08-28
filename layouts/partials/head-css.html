@@ -6,9 +6,9 @@
   {{ $styles := resources.Get "css/compiled/main.css" }}
   {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
   <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
-  <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.integrity }}" />
+  <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
 {{ end }}
 
 {{ $custom := resources.Get "css/custom.css" }}
 {{ $custom = $custom | minify | fingerprint }}
-<link href="{{ $custom.RelPermalink }}" rel="stylesheet" integrity="{{ $custom.Data.integrity }}" />
+<link href="{{ $custom.RelPermalink }}" rel="stylesheet" integrity="{{ $custom.Data.Integrity }}" />
