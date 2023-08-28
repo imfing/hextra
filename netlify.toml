@@ -1,0 +1,10 @@
+[build]
+publish = "exampleSite/public"
+command = "cd exampleSite && hugo --gc --minify --themesDir ../.. -b ${DEPLOY_PRIME_URL}"
+
+# Always trigger a rebuild, even if the files haven't changed.
+# See https://docs.netlify.com/configure-builds/file-based-configuration/#ignore-builds
+ignore = "false"
+
+[build.environment]
+HUGO_VERSION = "0.117.0"
