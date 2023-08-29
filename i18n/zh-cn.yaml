@@ -1,0 +1,15 @@
+documentation: "文档"
+blog: "博客"
+about: "关于"
+
+more: "更多"
+hugoDocs: "Hugo 文档 ↗"
+
+searchPlaceholder: "搜索文档..."
+noResultsFound: "无结果"
+
+onThisPage: "此页上"
+editThisPage: "在 GitHub 上编辑此页 →"
+lastUpdated: "最后更新于"
+
+copyright: "© 2023 Hextra Project."
