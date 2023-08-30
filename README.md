@@ -2,6 +2,8 @@
   <h1 align="center">Hextra</h1>
   <p align="center">Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.</p>
 
+[中文(中国)](https://github.com/imfing/hextra/blob/main/README.zh-cn.md) | [English](https://github.com/imfing/hextra/blob/main/README.md)
+
 Demo → [imfing.github.io/hextra](https://imfing.github.io/hextra/)
 </div>
 
