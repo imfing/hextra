@@ -5,7 +5,7 @@ title: "Hextra"
 enableRobotsTXT: true
 enableGitInfo: true
 # enableEmoji: false
-# hasCJKLanguage: true
+hasCJKLanguage: true
 
 outputs:
   home: [HTML]

@@ -3,7 +3,7 @@ title: Markdown
 weight: 2
 ---
 
-Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容, 创建列表等. 本页将向你展示一些最常见的 Markdown 语法示例.
+Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容，创建列表等。本页将向你展示一些最常见的 Markdown 语法示例。
 
 <!--more-->
 
@@ -21,7 +21,7 @@ Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容, 
 
 ### 引用
 
-带角标的块引用: 
+带角标的块引用：
 
 > Don't communicate by sharing memory, share memory by communicating.<br>
 > — <cite>Rob Pike[^1]</cite>
@@ -30,7 +30,7 @@ Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容, 
 
 ### 表格
 
-表格并非核心 Markdown 规范, 但 Hugo 支持开箱即用的表格: 
+表格并非核心 Markdown 规范，但 Hugo 支持开箱即用的表格：
 
    Name | Age
 --------|------
@@ -73,19 +73,18 @@ Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容, 
   * Milk
   * Cheese
 
-### 图像
+### 图片
 
 ![](https://source.unsplash.com/featured/800x600?landscape)
 
-With caption:
+带有标题：
 
 ![](https://source.unsplash.com/featured/800x600?landscape "Unsplash Landscape")
 
 ## 配置
 
-Hugo 使用 [Goldmark](https://github.com/yuin/goldmark) 解析 Markdown.
-Markdown 渲染可以在 `hugo.yaml` 中的 `markup.goldmark` 中配置.
-以下是Hextra的默认配置: 
+Hugo 使用 [Goldmark](https://github.com/yuin/goldmark) 解析 Markdown。
+Markdown 渲染可以在 `hugo.yaml` 中的 `markup.goldmark` 中配置。以下是Hextra的默认配置：
 
 ```yaml {filename="hugo.yaml"}
 markup:
@@ -96,7 +95,7 @@ markup:
     noClasses: false
 ```
 
-如需了解更多选项, 转至 [Configure Markup](https://gohugo.io/getting-started/configuration-markup/).
+如需了解更多选项，转至 [Configure Markup](https://gohugo.io/getting-started/configuration-markup/)。
 
 ## 参考资料
 
