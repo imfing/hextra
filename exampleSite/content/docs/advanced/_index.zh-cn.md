@@ -10,6 +10,6 @@ next: /docs/advanced/multi-language
 <!--more-->
 
 {{< cards >}}
-  {{< card link="multi-language.zh-cn" title="多语言" icon="translate" >}}
-  {{< card link="customization.zh-cn" title="定制化" icon="pencil" >}}
+  {{< card link="multi-language" title="多语言" icon="translate" >}}
+  {{< card link="customization" title="定制化" icon="pencil" >}}
 {{< /cards >}}

@@ -77,7 +77,7 @@ $ hugo server
 你可以探索以下部分来添加更多内容:
 
 {{< cards >}}
-  {{< card link="../guide/organize-files.zh-cn" title="目录结构" icon="document-duplicate" >}}
-  {{< card link="../guide/configuration.zh-cn" title="配置文件指南" icon="adjustments" >}}
+  {{< card link="../guide/organize-files" title="目录结构" icon="document-duplicate" >}}
+  {{< card link="../guide/configuration" title="配置文件指南" icon="adjustments" >}}
   {{< card link="../guide/markdown" title="Markdown" icon="markdown" >}}
 {{< /cards >}}

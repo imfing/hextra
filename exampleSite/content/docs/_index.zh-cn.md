@@ -31,7 +31,7 @@ Hextra 是一个现代化, 快速和开箱即用的 [Hugo][hugo] 主题, 使用 
 直接进入以下部分开始：
 
 {{< cards >}}
-  {{< card link="getting-started.zh-cn" title="快速开始" icon="document-text" subtitle="学习如何使用 Hextra 创建网站" >}}
+  {{< card link="getting-started" title="快速开始" icon="document-text" subtitle="学习如何使用 Hextra 创建网站" >}}
 {{< /cards >}}
 
 [hugo]: https://gohugo.io/
