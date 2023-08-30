@@ -18,5 +18,5 @@ sidebar:
   {{< card link="syntax-highlighting" title="代码高亮" icon="sparkles" >}}
   {{< card link="latex" title="LaTeX 公式" icon="variable" >}}
   {{< card link="diagrams" title="图表" icon="chart-square-bar" >}}
-  {{< card link="shortcodes" title="Shortcodes" icon="template" >}}
+  {{< card link="shortcodes" title="短代码" icon="template" >}}
 {{< /cards >}}
