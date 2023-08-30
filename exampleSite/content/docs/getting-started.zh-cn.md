@@ -65,7 +65,7 @@ $ hugo new content/docs/_index.md
 ### 在本地预览站点
 
 ```shell
-$ hugo server
+$ hugo server --buildDrafts --disableFastRender
 ```
 
 瞧! 你现在可以在 `http://localhost:1313/` 看到你的新站点.

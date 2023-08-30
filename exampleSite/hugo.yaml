@@ -18,14 +18,14 @@ languages:
     languageName: English
     weight: 1
     title: Hextra
-  zh-cn:
-    languageName: 中文(中国)
-    weight: 2
-    title: Hextra
   ja:
     languageName: 日本語
     weight: 3
     title: "Hextra テーマ"
+  zh-cn:
+    languageName: 中文(中国)
+    weight: 3
+    title: Hextra
 
 module:
   hugoVersion:
