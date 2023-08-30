@@ -65,7 +65,7 @@ $ hugo new content/docs/_index.md
 ### Preview the site locally
 
 ```shell
-$ hugo server
+$ hugo server --buildDrafts --disableFastRender
 ```
 
 Voila! You can see your new site at `http://localhost:1313/`.
