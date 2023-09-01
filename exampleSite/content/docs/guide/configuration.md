@@ -124,3 +124,13 @@ params:
   editURL: "https://example.com/edit/this/page"
 ---
 ```
+
+## Footer
+
+### Copyright
+
+To edit the copyright text, create file `en.yaml` in the `i18n/` directory with content:
+
+```yaml {filename="i18n/en.yaml"}
+copyright: "© 2023 YOUR TEXT HERE"
+```
