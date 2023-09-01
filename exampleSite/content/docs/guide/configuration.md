@@ -129,8 +129,11 @@ params:
 
 ### Copyright
 
-To edit the copyright text, create file `en.yaml` in the `i18n/` directory with content:
+To modify the copyright text displayed in your website's footer, you'll need to create a file named `i18n/en.yaml`.
+In this file, specify your new copyright text as shown below:
 
 ```yaml {filename="i18n/en.yaml"}
 copyright: "© 2023 YOUR TEXT HERE"
 ```
+
+For your reference, an example [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) file can be found in the GitHub repository. Additionally, you could use Markdown format in the copyright text.
