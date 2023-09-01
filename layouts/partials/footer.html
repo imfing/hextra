@@ -16,7 +16,7 @@
   >
     <div class="flex w-full flex-col items-center sm:items-start">
       {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="font-semibold">{{ template "theme-credit" . }}</div>{{ end }}
-      {{- if .Site.Params.footer.displayCopyright }}<p class="mt-6 text-xs">{{ $copyright }}</p>{{ end }}
+      {{- if .Site.Params.footer.displayCopyright }}<p class="mt-6 text-xs">{{ $copyright | markdownify }}</p>{{ end }}
     </div>
   </div>
 </footer>
