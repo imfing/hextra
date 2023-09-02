@@ -73,6 +73,21 @@ Voila! You can see your new site at `http://localhost:1313/`.
 {{% /steps %}}
 
 
+## Update Theme
+
+{{% details title="How to update theme?" %}}
+
+To update the theme to the [latest released version](https://github.com/imfing/hextra/releases), run the following command:
+
+```shell
+$ hugo mod get -u
+```
+
+See [Hugo Modules](https://gohugo.io/hugo-modules/use-modules/#update-all-modules) for more details.
+
+{{% /details %}}
+
+
 ## Next
 
 Explore the following sections to start adding more contents:
