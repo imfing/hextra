@@ -4090,9 +4090,6 @@ body {
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .lg\:leading-\[1\.1\] {
-    line-height: 1.1;
-  }
 }
 
 @media (min-width: 1280px) {
