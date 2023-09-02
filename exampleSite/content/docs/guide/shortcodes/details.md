@@ -16,9 +16,9 @@ Markdown is **supported**.
 
 {{% /details %}}
 
-{{% details title="Details Closed" closed="true" %}}
+{{% details title="Click me to reveal" closed="true" %}}
 
-This will be closed by default.
+This will be hidden by default.
 
 {{% /details %}}
 
@@ -35,9 +35,9 @@ Markdown is **supported**.
 ````
 
 ````
-{{%/* details title="Details Closed" closed="true" */%}}
+{{%/* details title="Click me to reveal" closed="true" */%}}
 
-This will be closed by default.
+This will be hidden by default.
 
 {{%/* /details */%}}
 ````
