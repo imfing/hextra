@@ -163,3 +163,5 @@ params:
 To customize the favicon for your site, simply place your `favicon.ico` file (and favicons for other platforms) under the `static` folder.
 
 You can use [https://favicon.io/favicon-converter/](https://favicon.io/favicon-converter/) to easily generate your favicons for different platforms from a `.png` or `.svg` file.
+
+If your favicons are not loading, create an empty file named `favicons.html` and place it at `/layouts/partials/favicons.html`. This is a makeshift fix.
