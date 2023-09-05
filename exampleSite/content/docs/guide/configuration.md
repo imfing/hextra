@@ -137,3 +137,25 @@ copyright: "© 2023 YOUR TEXT HERE"
 ```
 
 For your reference, an example [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) file can be found in the GitHub repository. Additionally, you could use Markdown format in the copyright text.
+
+## Add where appropriate:
+
+### Logo
+
+To modify the default logo, you'll need to place your logo .svg file under `/static/images` and name it as `logo.svg`.
+
+### Favicon
+
+To customize the favicon for your site, place your `favicon.ico` file (and favicon for other platform files) under `/static` and then add the following lines to your `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  assets:
+    favicon: "static/favicon.ico"
+    favicon16x16:  "static/favicon-16x16.png"
+    favicon32x32:  "static/favicon-32x32.png"
+    apple_touch_icon:  "static/apple-touch-icon.png"
+    safari_pinned_tab:  "static/safari-pinned-tab.svg"
+```
+
+You can use [https://favicon.io/favicon-converter/](https://favicon.io/favicon-converter/) to generate your favicons for different platforms from a `.png` or `.svg` file.
