@@ -29,6 +29,7 @@ Put Markdown h3 header within `steps` shortcode.
 
 ```
 {{%/* steps */%}}
+
 ### Step 1
 
 This is the first step.
@@ -36,5 +37,6 @@ This is the first step.
 ### Step 2
 
 This is the second step.
+
 {{%/* /steps */%}}
 ```
