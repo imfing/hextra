@@ -142,20 +142,24 @@ For your reference, an example [`i18n/en.yaml`](https://github.com/imfing/hextra
 
 ### Logo
 
-To modify the default logo, you'll need to place your logo .svg file under `/static/images` and name it as `logo.svg`.
-
-### Favicon
-
-To customize the favicon for your site, place your `favicon.ico` file (and favicon for other platform files) under `/static` and then add the following lines to your `hugo.yaml`:
+To modify the default logo, simply edit `hugo.yaml` and add the path to your logo svg file. Optionally, you can change the link that users are redirected to when clicking on your logo, as well as set the width & height of the logo in pixels.
 
 ```yaml {filename="hugo.yaml"}
 params:
-  assets:
-    favicon: "static/favicon.ico"
-    favicon16x16:  "static/favicon-16x16.png"
-    favicon32x32:  "static/favicon-32x32.png"
-    apple_touch_icon:  "static/apple-touch-icon.png"
-    safari_pinned_tab:  "static/safari-pinned-tab.svg"
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/logo.svg
+      dark: images/logo-dark.svg
+      link: /
+      width: 40
+      height: 20
 ```
 
-You can use [https://favicon.io/favicon-converter/](https://favicon.io/favicon-converter/) to generate your favicons for different platforms from a `.png` or `.svg` file.
+
+### Favicon
+
+To customize the favicon for your site, simply place your `favicon.ico` file (and favicons for other platforms) under the `static` folder.
+
+You can use [https://favicon.io/favicon-converter/](https://favicon.io/favicon-converter/) to easily generate your favicons for different platforms from a `.png` or `.svg` file.
