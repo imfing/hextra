@@ -12,22 +12,23 @@
 
 {{- $external := strings.HasPrefix $link "http" -}}
 
+
 <a
   class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
   href="{{ $link }}"
-  {{- if $external -}}
-    target="_blank"
-    rel="noreferrer"
+  {{- if $external }}
+    target="_blank" rel="noreferrer"
   {{- end -}}
 >
   {{- with $image -}}
-    <img alt="{{ $title }}" loading="lazy" decoding="async" style="color: transparent;" src="{{ $image }}" />
+    <img alt="{{ $title }}" loading="lazy" decoding="async" style="color: transparent;" src="{{ $image | safeURL }}" />
   {{- end -}}
 
-  {{ $padding := "p-4"}}
+  {{- $padding := "p-4" -}}
   {{- with $subtitle -}}
-    {{ $padding = "pt-4 px-4"}}
+    {{- $padding = "pt-4 px-4" -}}
   {{- end -}}
+
 
   <span class="flex font-semibold items-start gap-2 {{ $padding }} text-gray-700 hover:text-gray-900 dark:text-neutral-200 dark:hover:text-neutral-50">
     {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{ end -}}
