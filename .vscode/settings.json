@@ -1,4 +1,5 @@
 {
   "editor.tabSize": 2,
-  "css.customData": [".vscode/tailwind.json"]
+  "css.customData": [".vscode/tailwind.json"],
+  "markdown.extension.toc.levels": "2..6"
 }

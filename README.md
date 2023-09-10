@@ -31,13 +31,16 @@ Using the [Hextra Starter Template](https://github.com/imfing/hextra-starter-tem
 
 The template repository also includes a [GitHub Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow) for deploying your website to GitHub Pages.
 
+<img alt="Hextra Starter Template" src="https://user-images.githubusercontent.com/5097752/263551418-c403b9a9-a76c-47a6-8466-513d772ef0b7.jpg" width=600/>
+
 ### Usage
 
 Refer to the [documentation](https://imfing.github.io/hextra/docs) for more information.
 
 ## Contributing
 
-This project is actively under development. Contributions are welcome!
+Contributions are welcome!
+Check out the [contributing guide](.github/CONTRIBUTING.md) to get started.
 
 ## License
 
