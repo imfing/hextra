@@ -55,7 +55,7 @@ jobs:
           hugo \
             --minify \
             --themesDir=../.. --source=exampleSite \
-            --baseURL "https://imfing.github.io/hextra/"
+            --baseURL "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
