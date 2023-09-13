@@ -10,11 +10,25 @@ This page describes the available options and how to customize the theme further
 
 ## Custom CSS
 
-To add custom CSS, we need to create a file `assets/css/custom.css` in our site. Hextra will automatically load this file. For example, customize the font family of the content:
+To add custom CSS, we need to create a file `assets/css/custom.css` in our site. Hextra will automatically load this file.
+
+### Font Family
+
+The font family of the content can be customized using:
 
 ```css {filename="assets/css/custom.css"}
 .content {
   font-family: "Times New Roman", Times, serif;
+}
+```
+
+### Inline Code Element
+
+The color of text mixed with `other text` can customized with:
+
+```css {filename="assets/css/custom.css"}
+.content code:not(.code-block code) {
+  color: #c97c2e;
 }
 ```
 
