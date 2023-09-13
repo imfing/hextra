@@ -11,11 +11,11 @@
 {{- end -}}
 
 {{- $external := strings.HasPrefix $link "http" -}}
-
+{{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
 
 <a
   class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
-  href="{{ $link | relURL }}"
+  href="{{ $href }}"
   {{- if $external }}
     target="_blank" rel="noreferrer"
   {{- end -}}
