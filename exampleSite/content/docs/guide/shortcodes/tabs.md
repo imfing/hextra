@@ -100,16 +100,18 @@ Markdown syntax including code block is also supported:
 {{< tab >}}
 ```python {filename="hello.py"}
 def main():
-    print("hello")
+    print("Hello")
 ```
 {{< /tab >}}
 
 {{< tab >}}
 ```go {filename="hello.go"}
+package main
+
 import "fmt"
 
 func main() {
-    fmt.printf("Hello")
+    fmt.Println("Hello")
 }
 ```
 {{< /tab >}}
