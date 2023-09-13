@@ -91,29 +91,3 @@ Markdown syntax including code block is also supported:
   {{< /tab >}}
 
 {{< /tabs >}}
-
-
-### Use Code Blocks
-
-{{< tabs items="Python,Go" >}}
-
-{{< tab >}}
-```python {filename="hello.py"}
-def main():
-    print("Hello")
-```
-{{< /tab >}}
-
-{{< tab >}}
-```go {filename="hello.go"}
-package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello")
-}
-```
-{{< /tab >}}
-
-{{< /tabs >}}
