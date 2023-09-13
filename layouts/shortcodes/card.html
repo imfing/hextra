@@ -15,7 +15,7 @@
 
 <a
   class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
-  href="{{ $link }}"
+  href="{{ $link | relURL }}"
   {{- if $external }}
     target="_blank" rel="noreferrer"
   {{- end -}}
