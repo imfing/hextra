@@ -22,7 +22,7 @@ The font family of the content can be customized using:
 }
 ```
 
-### Code in Plain Text
+### Inline Code Element
 
 The color of text mixed with `other text` can customized with:
 
