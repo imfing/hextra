@@ -91,3 +91,27 @@ Markdown syntax including code block is also supported:
   {{< /tab >}}
 
 {{< /tabs >}}
+
+
+### Use Code Blocks
+
+{{< tabs items="Python,Go" >}}
+
+{{< tab >}}
+```python {filename="hello.py"}
+def main():
+    print("hello")
+```
+{{< /tab >}}
+
+{{< tab >}}
+```go {filename="hello.go"}
+import "fmt"
+
+func main() {
+    fmt.printf("Hello")
+}
+```
+{{< /tab >}}
+
+{{< /tabs >}}
