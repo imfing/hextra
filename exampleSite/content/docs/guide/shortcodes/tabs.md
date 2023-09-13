@@ -50,3 +50,44 @@ The `YAML` tab will be selected by default.
 {{< tab >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
 
 {{< /tabs >}}
+
+
+### Use Markdown
+
+Markdown syntax including code block is also supported:
+
+````
+{{</* tabs items="JSON,YAML,TOML" */>}}
+
+  {{</* tab */>}}
+  ```json
+  { "hello": "world" }
+  ```
+  {{</* /tab */>}}
+
+  ... add other tabs similarly
+
+{{</* /tabs */>}}
+````
+
+{{< tabs items="JSON,YAML,TOML" >}}
+
+  {{< tab >}}
+  ```json
+  { "hello": "world" }
+  ```
+  {{< /tab >}}
+
+  {{< tab >}}
+  ```yaml
+  hello: world
+  ```
+  {{< /tab >}}
+
+  {{< tab >}}
+  ```toml
+  hello = "world"
+  ```
+  {{< /tab >}}
+
+{{< /tabs >}}
