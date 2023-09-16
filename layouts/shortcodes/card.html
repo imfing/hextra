@@ -5,6 +5,13 @@
 {{- $image := .Get "image" }}
 {{- $context := . -}}
 
+{{/*- Adding asset support for images here, so that Hugo can do its image processing magic. -*/}}
+{{- if not (urls.Parse $image).Scheme -}}
+  {{- with resources.Get $image -}}
+    {{- $image = (.Resize "800x webp q80").RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
 {{ $linkClass := "hover:border-gray-300 bg-transparent shadow-sm dark:border-neutral-800 hover:bg-slate-50 hover:shadow-md dark:hover:border-neutral-700 dark:hover:bg-neutral-900" }}
 {{- with $image -}}
   {{ $linkClass = "hover:border-gray-300 bg-gray-100 shadow dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-50 hover:shadow-lg dark:hover:border-neutral-500 dark:hover:bg-neutral-700" }}
