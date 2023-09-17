@@ -1,14 +1,27 @@
 {{- $link := .Get "link" -}}
 {{- $title := .Get "title" -}}
 {{- $icon := .Get "icon" -}}
-{{- $subtitle := .Get "subtitle" }}
-{{- $image := .Get "image" }}
+{{- $subtitle := .Get "subtitle" -}}
+{{- $image := .Get "image" -}}
+{{- $method := .Get "method" | default "Resize" | humanize -}}
+{{- $options := .Get "options" | default "800x webp q80" -}}
 {{- $context := . -}}
 
+
 {{/*- Adding asset support for images here, so that Hugo can do its image processing magic. -*/}}
+{{/* Unfortunately we cannot pass .Resize/.Fit/.Fill as variables, so we're left with chaining IFs */}}
+
 {{- if not (urls.Parse $image).Scheme -}}
   {{- with resources.Get $image -}}
-    {{- $image = (.Resize "800x webp q80").RelPermalink -}}
+    {{- if eq $method "Resize" -}}
+      {{- $image = (.Resize $options).RelPermalink -}}
+    {{- else if eq $method "Fit" -}}
+      {{- $image = (.Fit $options).RelPermalink -}}
+    {{- else if eq $method "Fill" -}}
+      {{- $image = (.Fill $options).RelPermalink -}}
+    {{- else if eq $method "Crop" -}}
+      {{- $image = (.Crop $options).RelPermalink -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
@@ -38,10 +51,10 @@
 
 
   <span class="flex font-semibold items-start gap-2 {{ $padding }} text-gray-700 hover:text-gray-900 dark:text-neutral-200 dark:hover:text-neutral-50">
-    {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{ end -}}
+    {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{- end -}}
     {{- $title -}}
   </span>
   {{- with $subtitle -}}
-    <div class="line-clamp-3 text-sm font-normal text-gray-500 dark:text-gray-400 px-4 mb-4 mt-2">{{ $subtitle }}</div>
+    <div class="line-clamp-3 text-sm font-normal text-gray-500 dark:text-gray-400 px-4 mb-4 mt-2">{{- $subtitle | markdownify -}}</div>
   {{- end -}}
 </a>
