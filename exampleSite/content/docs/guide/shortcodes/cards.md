@@ -12,10 +12,9 @@ linkTitle: Cards
 
 {{< cards >}}
   {{< card link="/" title="Image Card" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplash Landscape" >}}
-  {{< card link="/" title="Local Image" image="/images/space.jpg" subtitle="This is a local image on the server, processed by Hugo." method="Resize" options="600x q80 webp" >}}
-  {{< card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="This is a local image on the server, *not* processed by Hugo." >}}
+  {{< card link="/" title="Local Image" image="/images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" >}}
+  {{< card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." >}}
 {{< /cards >}}
-
 
 ## Usage
 
@@ -29,24 +28,31 @@ linkTitle: Cards
 ```
 {{</* cards */>}}
   {{</* card link="/" title="Image Card" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplash Landscape" */>}}
-  {{</* card link="/" title="Local Image" image="/images/astronaut.jpg" subtitle="This is a local image on the server, processed by Hugo." method="Resize" options="600x q80 webp" */>}}
-  {{</* card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="This is a local image on the server, *not* processed by Hugo." */>}}
+  {{</* card link="/" title="Local Image" image="/images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" */>}}
+  {{</* card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." */>}}
 {{</* /cards */>}}
 ```
 
 ## Card Parameters
 
-| Parameter  | Description                                              |
-|----------- |--------------------------------------------------------- |
-| `link`     | URL for the page the card links to.                      |
-| `title`    | Large title heading for the card.                        |
-| `subtitle` | Small subtitle heading for the card (supports Markdown). |
-| `image`    | Source for card image.                                   |
-| `icon`     | Name of the icon for the card.                           |
-| `method`   | Image processing method for Hugo.                        |
-| `options`  | Image processing options for Hugo.                       |
+| Parameter  | Description                           |
+|----------- |---------------------------------------|
+| `link`     | URL (internal or external).           |
+| `title`    | Title heading for the card.           |
+| `subtitle` | Subtitle heading (supports Markdown). |
+| `icon`     | Name of the icon.                     |
 
-Image cards support images in three ways: 
+## Image Card
+
+Additionally, the card supports adding image and processing through these parameters:
+
+| Parameter  | Description                                 |
+|----------- |---------------------------------------------|
+| `image`    | Specifies the image URL for the card.       |
+| `method`   | Sets Hugo's image processing method.        |
+| `options`  | Configures Hugo's image processing options. |
+
+Card supports three kinds of images: 
 
 1. Remote image: the full URL in the `image` parameter.
 2. Static image: use the relative path in Hugo's `static/` directory.
