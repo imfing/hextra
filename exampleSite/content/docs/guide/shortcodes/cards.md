@@ -12,7 +12,7 @@ linkTitle: Cards
 
 {{< cards >}}
   {{< card link="/" title="Image Card" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplash Landscape" >}}
-  {{< card link="/" title="Local Image" image="/images/astronaut.jpg" subtitle="This is a local image on the server, processed by Hugo." method="resize" options="800x q80 webp" >}}
+  {{< card link="/" title="Local Image" image="/images/astronaut.jpg" subtitle="This is a local image on the server, processed by Hugo." method="crop" options="1200x900 middle q80 webp" >}}
   {{< card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="This is a local image on the server, *not* processed by Hugo." >}}
 {{< /cards >}}
 
@@ -29,7 +29,7 @@ linkTitle: Cards
 ```
 {{</* cards */>}}
   {{</* card link="/" title="Image Card" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplash Landscape" */>}}
-  {{</* card link="/" title="Local Image" image="/images/astronaut.jpg" subtitle="This is a local image on the server, processed by Hugo." method="resize" options="800x q80 webp" */>}}
+  {{</* card link="/" title="Local Image" image="/images/astronaut.jpg" subtitle="This is a local image on the server, processed by Hugo." method="crop" options="1200x900 middle q80 webp */>}}
   {{</* card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="This is a local image on the server, *not* processed by Hugo." */>}}
 {{</* /cards */>}}
 ```
