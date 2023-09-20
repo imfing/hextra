@@ -30,7 +30,7 @@ languages:
 module:
   hugoVersion:
     extended: true
-    min: "0.111.0"
+    min: "0.112.0"
 
   workspace: hugo.work
   imports:
@@ -96,6 +96,10 @@ params:
       # link: /
       # width: 40
       # height: 20
+
+  page:
+    # full, wide (90rem), normal (1280px)
+    width: wide
 
   footer:
     displayCopyright: true
