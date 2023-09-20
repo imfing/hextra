@@ -8,7 +8,7 @@
 <div class="nav-container sticky top-0 z-20 w-full bg-transparent print:hidden">
   <div class="nav-container-blur pointer-events-none absolute z-[-1] h-full w-full bg-white dark:bg-dark shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:shadow-[0_0_0_1px_#000] dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:shadow-[0_0_0_1px_#fff]"></div>
 
-  <nav class="mx-auto flex items-center justify-end gap-2 h-16 px-6 max-w-[90rem]">
+  <nav class='mx-auto flex items-center justify-end gap-2 h-16 px-6 {{ partial "utils/page-width" . }}'>
     <a class="flex items-center hover:opacity-75 ltr:mr-auto rtl:ml-auto" href="{{ $logoLink }}">
       {{- if (.Site.Params.navbar.displayLogo | default true) }}
         <img class="block dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
