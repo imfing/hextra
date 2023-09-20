@@ -180,3 +180,17 @@ Include both `favicon.ico` and `favicon.svg` files in your project to ensure you
 
 While `favicon.ico` is generally for older browsers, `favicon.svg` is supported by modern ones. The optional `favicon-dark.svg` can be included for a tailored experience in dark mode.
 Feel free to use tools like [favicon.io](https://favicon.io/) or [favycon](https://github.com/ruisaraiva19/favycon) to generate these icons.
+
+
+### Page Width
+
+The width of the page can be customized by the `params.page.width` parameter in the config file:
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    # full (100%), wide (90rem), normal (1280px)
+    width: wide
+```
+
+There are three available options: `full`, `wide`, and `normal`. By default, the page width is set to `normal`.
