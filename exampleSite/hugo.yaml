@@ -98,12 +98,13 @@ params:
       # height: 20
 
   page:
-    # full, wide (90rem), normal (1280px)
-    width: wide
+    # full (100%), wide (90rem), normal (1280px)
+    width: normal
 
   footer:
     displayCopyright: true
     displayPoweredBy: true
+    # width: normal
 
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"

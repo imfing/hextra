@@ -4,7 +4,7 @@
 {{- $pageWidth := "" -}}
 
 {{/* Get page width setting from page front matter or site params */}}
-{{ with .Params.page.width -}}
+{{ with .Params.width -}}
   {{ $pageWidth = . -}}
 {{ else -}}
   {{ with .Site.Params.page.width -}}
