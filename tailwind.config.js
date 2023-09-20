@@ -14,6 +14,11 @@ module.exports = {
   content: [
     './**/hugo_stats.json',
   ],
+  safelist: [
+    'max-w-screen-xl',
+    'max-w-[90rem]',
+    'max-w-full'
+  ],
   theme: {
     screens: {
       sm: '640px',
