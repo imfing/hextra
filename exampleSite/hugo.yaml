@@ -30,7 +30,7 @@ languages:
 module:
   hugoVersion:
     extended: true
-    min: "0.111.0"
+    min: "0.112.0"
 
   workspace: hugo.work
   imports:
@@ -93,13 +93,19 @@ params:
     logo:
       path: images/logo.svg
       dark: images/logo-dark.svg
-      # link: /
       # width: 40
       # height: 20
+      # link: /
+    width: wide
+
+  page:
+    # full (100%), wide (90rem), normal (1280px)
+    width: normal
 
   footer:
     displayCopyright: true
     displayPoweredBy: true
+    width: normal
 
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"

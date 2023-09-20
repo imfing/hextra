@@ -779,6 +779,9 @@ video {
 .max-w-\[min\(calc\(100vw-2rem\)\2c calc\(100\%\+20rem\)\)\] {
   max-width: min(calc(100vw - 2rem),calc(100% + 20rem));
 }
+.max-w-full {
+  max-width: 100%;
+}
 .max-w-none {
   max-width: none;
 }
