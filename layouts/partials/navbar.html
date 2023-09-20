@@ -5,7 +5,7 @@
 {{- $logoDarkPath := .Site.Params.navbar.logo.dark | default $logoPath -}}
 
 {{- $navWidth := "max-w-[90rem]" -}}
-{{- with .Site.Params.footer.width -}}
+{{- with .Site.Params.navbar.width -}}
   {{ if eq . "normal" -}}
     {{ $navWidth = "max-w-screen-xl" -}}
   {{ else if eq . "full" -}}

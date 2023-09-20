@@ -93,9 +93,10 @@ params:
     logo:
       path: images/logo.svg
       dark: images/logo-dark.svg
-      # link: /
       # width: 40
       # height: 20
+      # link: /
+    width: wide
 
   page:
     # full (100%), wide (90rem), normal (1280px)
@@ -104,7 +105,7 @@ params:
   footer:
     displayCopyright: true
     displayPoweredBy: true
-    # width: normal
+    width: normal
 
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
