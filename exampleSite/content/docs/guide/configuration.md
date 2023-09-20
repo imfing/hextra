@@ -197,3 +197,12 @@ There are three available options: `full`, `wide`, and `normal`.
 By default, the page width is set to `normal`.
 
 Similarly, the width of the navbar and footer can be customized by the `params.navbar.width` and `params.footer.width` parameters.
+
+
+### Google Analytics
+
+To enable Google Analytics, set the `googleAnalytics` parameter in the config file:
+
+```yaml {filename="hugo.yaml"}
+googleAnalytics: G-XXXXXXXXXX
+```
