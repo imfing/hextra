@@ -1,11 +1,11 @@
-{{ with .Description | plainify -}}
+{{ with .Description | plainify | htmlUnescape -}}
   {{ . -}}
 {{ else -}}
   {{ if .IsHome -}}
-    {{ with .Site.Params.description | plainify -}}
+    {{ with .Site.Params.description | plainify | htmlUnescape -}}
       {{ . -}}
     {{ end -}}
   {{ else -}}
-    {{ .Summary | plainify | chomp -}}
+    {{ .Summary | plainify | htmlUnescape | chomp -}}
   {{ end -}}
 {{ end -}}
