@@ -7,6 +7,8 @@ enableGitInfo: true
 # enableEmoji: false
 hasCJKLanguage: true
 
+# googleAnalytics: G-XXXXXXXXXX
+
 outputs:
   home: [HTML]
   page: [HTML]
