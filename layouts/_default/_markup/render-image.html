@@ -3,14 +3,15 @@
 {{- $dest := .Destination -}}
 
 {{- $isRemote := not (urls.Parse $dest).Scheme -}}
-{{- $startsWithSlash := hasPrefix $dest "/" -}}
 {{- $isPage := and (eq .Page.Kind "page") (not .Page.BundleType) -}}
+{{- $startsWithSlash := hasPrefix $dest "/" -}}
+{{- $startsWithRelative := hasPrefix $dest "../" -}}
 
 {{- if and $dest $isRemote -}}
   {{- if $startsWithSlash -}}
     {{/* Images under static directory */}}
     {{- $dest = (relURL $dest) -}}
-  {{- else if $isPage -}}
+  {{- else if and $isPage (not $startsWithRelative) -}}
     {{/* Images that are sibling to the individual page file */}}
     {{ $dest = (printf "../%s" $dest) }}
   {{- end -}}
