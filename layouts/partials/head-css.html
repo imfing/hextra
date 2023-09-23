@@ -7,7 +7,7 @@
 
   {{- if hugo.IsProduction }}
     {{- $styles = $styles | minify | fingerprint }}
-    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
+    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
   {{- else }}
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
