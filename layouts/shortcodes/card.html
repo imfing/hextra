@@ -13,7 +13,7 @@
 
 {{- if not (urls.Parse $image).Scheme -}}
   {{- with resources.Get $image -}}
-    {{- if eq $method "Resize" -}}
+    {{- if eq $method "Resize" -}}      
       {{- $image = (.Resize $options).RelPermalink -}}
     {{- else if eq $method "Fit" -}}
       {{- $image = (.Fit $options).RelPermalink -}}
@@ -21,7 +21,11 @@
       {{- $image = (.Fill $options).RelPermalink -}}
     {{- else if eq $method "Crop" -}}
       {{- $image = (.Crop $options).RelPermalink -}}
+    {{- else -}}
+      {{- errorf "Invalid image processing command: Must be one of Crop, Fit, Fill or Resize." -}}
     {{- end -}}
+  {{- else -}}
+    {{- $image = ($image | relURL) -}}
   {{- end -}}
 {{- end -}}
 
