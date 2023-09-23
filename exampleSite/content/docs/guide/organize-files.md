@@ -63,3 +63,61 @@ weight: 2
 ## Configure Content Directory
 
 If we need to use a different directory for our content, we can do so by setting the [`contentDir`](https://gohugo.io/getting-started/configuration/#contentdir) parameter in our site configuration file.
+
+## Add Images
+
+To add images, the easiest way is to put the image files in the same directory as the Markdown file.
+For example, add an image file `image.png` alongside the `my-page.md` file:
+
+{{< filetree/container >}}
+  {{< filetree/folder name="content" >}}
+    {{< filetree/folder name="docs" >}}
+        {{< filetree/file name="my-page.md" >}}
+        {{< filetree/file name="image.png" >}}
+    {{< /filetree/folder >}}
+  {{< /filetree/folder >}}
+{{< /filetree/container >}}
+
+Then, we can use the following Markdown syntax to add the image to the content:
+
+```markdown
+![Image Alt Text](image.png)
+```
+
+We can also utilize the [page bundles][page-bundles] feature of Hugo to organize the image files together with the Markdown file. To achieve that, turn the `my-page.md` file into a directory `my-page` and put the content into a file named `index.md`:
+
+{{< filetree/container >}}
+  {{< filetree/folder name="content" >}}
+    {{< filetree/folder name="docs" >}}
+        {{< filetree/folder name="my-page" >}}
+            {{< filetree/file name="index.md" >}}
+            {{< filetree/file name="image.png" >}}
+        {{< /filetree/folder >}}
+    {{< /filetree/folder >}}
+  {{< /filetree/folder >}}
+{{< /filetree/container >}}
+
+```markdown
+![Image Alt Text](image.png)
+```
+
+Alternatively, we can also put the image files in the `static` directory, which will make the images available for all pages:
+
+{{< filetree/container >}}
+  {{< filetree/folder name="static" >}}
+    {{< filetree/folder name="images" >}}
+        {{< filetree/file name="image.png" >}}
+    {{< /filetree/folder >}}
+  {{< /filetree/folder >}}
+  {{< filetree/folder name="content" >}}
+    {{< filetree/folder name="docs" >}}
+        {{< filetree/file name="my-page.md" >}}
+    {{< /filetree/folder >}}
+  {{< /filetree/folder >}}
+{{< /filetree/container >}}
+
+```markdown
+![Image Alt Text](/images/image.png)
+```
+
+[page-bundles]: https://gohugo.io/content-management/page-bundles/#leaf-bundles
