@@ -7,13 +7,13 @@
 {{- $options := .Get "options" | default "800x webp q80" -}}
 {{- $context := . -}}
 
-
-{{/*- Adding asset support for images here, so that Hugo can do its image processing magic. -*/}}
+{{/* Adding asset support for images here, so that Hugo can do its image processing magic. */}}
 {{/* Unfortunately we cannot pass .Resize/.Fit/.Fill as variables, so we're left with chaining IFs */}}
 
-{{- if not (urls.Parse $image).Scheme -}}
+{{- if and $image (not (urls.Parse $image).Scheme) -}}
+  {{/* Process images in assets */}}
   {{- with resources.Get $image -}}
-    {{- if eq $method "Resize" -}}      
+    {{- if eq $method "Resize" -}}
       {{- $image = (.Resize $options).RelPermalink -}}
     {{- else if eq $method "Fit" -}}
       {{- $image = (.Fit $options).RelPermalink -}}
@@ -25,6 +25,7 @@
       {{- errorf "Invalid image processing command: Must be one of Crop, Fit, Fill or Resize." -}}
     {{- end -}}
   {{- else -}}
+    {{/* Otherwise, use relative link of the image */}}
     {{- $image = ($image | relURL) -}}
   {{- end -}}
 {{- end -}}
@@ -36,6 +37,7 @@
 
 {{- $external := strings.HasPrefix $link "http" -}}
 {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
+
 
 <a
   class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
