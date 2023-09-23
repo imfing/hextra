@@ -81,7 +81,7 @@ For example, add an image file `image.png` alongside the `my-page.md` file:
 Then, we can use the following Markdown syntax to add the image to the content:
 
 ```markdown
-![Image Alt Text](image.png)
+![](image.png)
 ```
 
 We can also utilize the [page bundles][page-bundles] feature of Hugo to organize the image files together with the Markdown file. To achieve that, turn the `my-page.md` file into a directory `my-page` and put the content into a file named `index.md`:
@@ -98,7 +98,7 @@ We can also utilize the [page bundles][page-bundles] feature of Hugo to organize
 {{< /filetree/container >}}
 
 ```markdown
-![Image Alt Text](image.png)
+![](image.png)
 ```
 
 Alternatively, we can also put the image files in the `static` directory, which will make the images available for all pages:
@@ -117,7 +117,7 @@ Alternatively, we can also put the image files in the `static` directory, which 
 {{< /filetree/container >}}
 
 ```markdown
-![Image Alt Text](/images/image.png)
+![](/images/image.png)
 ```
 
 [page-bundles]: https://gohugo.io/content-management/page-bundles/#leaf-bundles
