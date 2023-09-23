@@ -80,11 +80,11 @@ For example, add an image file `image.png` alongside the `my-page.md` file:
 
 Then, we can use the following Markdown syntax to add the image to the content:
 
-```markdown
+```markdown {filename="content/docs/my-page.md"}
 ![](image.png)
 ```
 
-We can also utilize the [page bundles][page-bundles] feature of Hugo to organize the image files together with the Markdown file. To achieve that, turn the `my-page.md` file into a directory `my-page` and put the content into a file named `index.md`:
+We can also utilize the [page bundles][page-bundles] feature of Hugo to organize the image files together with the Markdown file. To achieve that, turn the `my-page.md` file into a directory `my-page` and put the content into a file named `index.md`, and put the image files inside the `my-page` directory:
 
 {{< filetree/container >}}
   {{< filetree/folder name="content" >}}
@@ -97,7 +97,7 @@ We can also utilize the [page bundles][page-bundles] feature of Hugo to organize
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-```markdown
+```markdown {filename="content/docs/my-page/index.md"}
 ![](image.png)
 ```
 
@@ -116,7 +116,9 @@ Alternatively, we can also put the image files in the `static` directory, which 
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-```markdown
+Note that the image path begins with a slash `/` and is relative to the static directory:
+
+```markdown {filename="content/docs/my-page.md"}
 ![](/images/image.png)
 ```
 
