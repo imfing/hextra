@@ -1,8 +1,26 @@
-{{- if .Title -}}
+{{- $alt := .PlainText | safeHTML -}}
+{{- $lazyLoading := .Page.Site.Params.enableImagelazyLoading | default true -}}
+{{- $dest := .Destination -}}
+
+{{- $isRemote := not (urls.Parse $dest).Scheme -}}
+{{- $startsWithSlash := hasPrefix $dest "/" -}}
+{{- $isPage := and (eq .Page.Kind "page") (not .Page.BundleType) -}}
+
+{{- if and $dest $isRemote -}}
+  {{- if $startsWithSlash -}}
+    {{/* Images under static directory */}}
+    {{- $dest = (relURL $dest) -}}
+  {{- else if $isPage -}}
+    {{/* Images that are sibling to the individual page file */}}
+    {{ $dest = (printf "../%s" $dest) }}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Title -}}
   <figure>
-    <img src="{{ .Destination | safeURL }}" title="{{ .Title }}" alt="{{ .PlainText | safeHTML }}" loading="lazy" />
-    <figcaption>{{ .Title }}</figcaption>
+    <img src="{{ $dest | safeURL }}" title="{{ . }}" alt="{{ $alt }}" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+    <figcaption>{{ . }}</figcaption>
   </figure>
 {{- else -}}
-  <img src="{{ .Destination | safeURL }}" alt="{{ .PlainText | safeHTML }}" loading="lazy" />
+  <img src="{{ $dest | safeURL }}" alt="{{ $alt }}" {{ if $lazyLoading }}loading="lazy"{{ end }} />
 {{- end -}}
