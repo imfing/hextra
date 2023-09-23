@@ -19,5 +19,8 @@
 
 [module]
   [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
     source = "hugo_stats.json"
     target = "assets/watching/hugo_stats.json"

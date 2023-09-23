@@ -1,27 +1,37 @@
+{{- $context := . -}}
 {{- $link := .Get "link" -}}
 {{- $title := .Get "title" -}}
 {{- $icon := .Get "icon" -}}
 {{- $subtitle := .Get "subtitle" -}}
 {{- $image := .Get "image" -}}
+{{- $width := 0 -}}
+{{- $height := 0 -}}
+
+{{/* Image processing options */}}
 {{- $method := .Get "method" | default "Resize" | humanize -}}
 {{- $options := .Get "options" | default "800x webp q80" -}}
-{{- $context := . -}}
 
-
-{{/*- Adding asset support for images here, so that Hugo can do its image processing magic. -*/}}
-{{/* Unfortunately we cannot pass .Resize/.Fit/.Fill as variables, so we're left with chaining IFs */}}
-
-{{- if not (urls.Parse $image).Scheme -}}
+{{- if and $image (not (urls.Parse $image).Scheme) -}}
+  {{/* Process images in assets */}}
   {{- with resources.Get $image -}}
+    {{- $processed := "" -}}
     {{- if eq $method "Resize" -}}
-      {{- $image = (.Resize $options).RelPermalink -}}
+      {{- $processed = (.Resize $options) -}}
     {{- else if eq $method "Fit" -}}
-      {{- $image = (.Fit $options).RelPermalink -}}
+      {{- $processed = (.Fit $options) -}}
     {{- else if eq $method "Fill" -}}
-      {{- $image = (.Fill $options).RelPermalink -}}
+      {{- $processed = (.Fill $options) -}}
     {{- else if eq $method "Crop" -}}
-      {{- $image = (.Crop $options).RelPermalink -}}
+      {{- $processed = (.Crop $options) -}}
+    {{- else -}}
+      {{- errorf "Invalid image processing command: Must be one of Crop, Fit, Fill or Resize." -}}
     {{- end -}}
+    {{- $width = $processed.Width -}}
+    {{- $height = $processed.Height -}}
+    {{- $image = $processed.RelPermalink -}}
+  {{- else -}}
+    {{/* Otherwise, use relative link of the image */}}
+    {{- $image = ($image | relURL) -}}
   {{- end -}}
 {{- end -}}
 
@@ -33,6 +43,7 @@
 {{- $external := strings.HasPrefix $link "http" -}}
 {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
 
+
 <a
   class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
   href="{{ $href }}"
@@ -41,7 +52,15 @@
   {{- end -}}
 >
   {{- with $image -}}
-    <img alt="{{ $title }}" loading="lazy" decoding="async" style="color: transparent;" src="{{ $image | safeURL }}" />
+    <img
+      alt="{{ $title }}"
+      loading="lazy"
+      decoding="async"
+      style="color: transparent;"
+      src="{{ $image | safeURL }}"
+      {{ with $width }}width="{{ . }}"{{ end }}
+      {{ with $height }}height="{{ . }}"{{ end }}
+    />
   {{- end -}}
 
   {{- $padding := "p-4" -}}

@@ -12,8 +12,8 @@ linkTitle: Cards
 
 {{< cards >}}
   {{< card link="/" title="Image Card" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplash Landscape" >}}
-  {{< card link="/" title="Local Image" image="/images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" >}}
   {{< card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." >}}
+  {{< card link="/" title="Local Image" image="images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" >}}
 {{< /cards >}}
 
 ## Usage
@@ -28,8 +28,8 @@ linkTitle: Cards
 ```
 {{</* cards */>}}
   {{</* card link="/" title="Image Card" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplash Landscape" */>}}
-  {{</* card link="/" title="Local Image" image="/images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" */>}}
   {{</* card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." */>}}
+  {{</* card link="/" title="Local Image" image="images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" */>}}
 {{</* /cards */>}}
 ```
 
@@ -52,7 +52,7 @@ Additionally, the card supports adding image and processing through these parame
 | `method`   | Sets Hugo's image processing method.        |
 | `options`  | Configures Hugo's image processing options. |
 
-Card supports three kinds of images: 
+Card supports three kinds of images:
 
 1. Remote image: the full URL in the `image` parameter.
 2. Static image: use the relative path in Hugo's `static/` directory.
