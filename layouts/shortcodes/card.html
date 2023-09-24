@@ -6,6 +6,7 @@
 {{- $image := .Get "image" -}}
 {{- $width := 0 -}}
 {{- $height := 0 -}}
+{{- $imageStyle := .Get "imageStyle" -}}
 
 {{/* Image processing options */}}
 {{- $method := .Get "method" | default "Resize" | humanize -}}
@@ -58,10 +59,10 @@
       alt="{{ $title }}"
       loading="lazy"
       decoding="async"
-      style="color: transparent;"
       src="{{ $image | safeURL }}"
       {{ with $width }}width="{{ . }}"{{ end }}
       {{ with $height }}height="{{ . }}"{{ end }}
+      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
     />
   {{- end -}}
 
