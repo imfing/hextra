@@ -1,7 +1,7 @@
 {{ define "main" }}
   <div class='mx-auto flex {{ partial "utils/page-width" . }}'>
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
-    <div class="w-full break-words flex flex-col min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-start pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+    <div class="w-full break-words min-h-[calc(100vh-var(--navbar-height))] min-w-0 pt-4 pb-8 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-left),1.5rem)]">
       <section class="flex max-w-[90rem] flex-col items-start gap-2 px-6 sm:px-4 pt-8 md:pt-12">
         <a
           href="https://github.com/imfing/hextra"
@@ -90,6 +90,9 @@
           }}
         </div>
       </section>
+      <div>
+        {{ .Content }}
+      </div>
     </div>
   </div>
 {{ end }}
