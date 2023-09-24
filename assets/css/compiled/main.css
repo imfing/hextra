@@ -1122,6 +1122,9 @@ video {
 .pr-\[calc\(env\(safe-area-inset-right\)-1\.5rem\)\] {
   padding-right: calc(env(safe-area-inset-right) - 1.5rem);
 }
+.pr-\[max\(env\(safe-area-inset-left\)\2c 1\.5rem\)\] {
+  padding-right: max(env(safe-area-inset-left),1.5rem);
+}
 .pr-\[max\(env\(safe-area-inset-right\)\2c 1\.5rem\)\] {
   padding-right: max(env(safe-area-inset-right),1.5rem);
 }
