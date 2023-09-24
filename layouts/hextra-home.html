@@ -2,66 +2,9 @@
   <div class='mx-auto flex {{ partial "utils/page-width" . }}'>
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
     <div class="w-full break-words min-h-[calc(100vh-var(--navbar-height))] min-w-0 pt-4 pb-8 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-left),1.5rem)]">
-      <section class="flex max-w-[90rem] flex-col items-start gap-2 px-6 sm:px-4 pt-8 md:pt-12">
-        <a
-          href="https://github.com/imfing/hextra"
-          target="_blank"
-          rel="noreferrer"
-          class="inline-flex items-center rounded-full gap-2 px-3 py-1 text-xs text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-neutral-800 dark:border-neutral-800 border hover:border-gray-400 dark:hover:text-gray-50 dark:hover:border-gray-600"
-        >
-          <div class="w-2 h-2 rounded-full bg-primary-400"></div>
-          <span>Free, open source</span>
-          {{- partial "utils/icon" (dict "name" "arrow-circle-right" "attributes" "height=14") -}}
-        </a>
-        <h1
-          class="text-4xl font-bold leading-tight tracking-tighter md:text-5xl mt-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400"
-        >
-          Build modern websites&nbsp;<br class="sm:block hidden" />
-          with Markdown and Hugo
-        </h1>
-        <p class="mt-4 text-xl text-gray-600 dark:text-gray-400 sm:text-xl">
-          Fast, batteries-included Hugo theme <br class="sm:block hidden" />
-          for creating beautiful static websites.
-        </p>
-        <div class="mt-8">
-          {{- $docsURL := "docs" | relURL -}}
-          <a
-            href="{{ $docsURL }}"
-            class="font-medium cursor-pointer px-6 py-3 text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 rounded-full text-center mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-          >
-            Get Started
-          </a>
-        </div>
-      </section>
-      <section class="flex max-w-[90rem] flex-col items-start gap-2 px-6 sm:px-4 pt-8 pb-8">
-        <h2 class="mt-12 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-gray-800 to-gray-600 dark:from-gray-100 dark:to-gray-400">What's in Hextra?</h2>
-      </section>
       <div class="flex flex-col items-start">
         {{ .Content }}
       </div>
     </div>
   </div>
 {{ end }}
-
-{{- define "hextra-feature-card" -}}
-  {{- $title := .title -}}
-  {{- $subtitle := .subtitle -}}
-  {{- $class := .class -}}
-  {{- $image := .image -}}
-  {{- $imageClass := .imageClass -}}
-  {{- $style := .style -}}
-
-
-  <div
-    {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
-    class="{{ $class }} relative overflow-hidden rounded-3xl border border-gray-200 hover:border-gray-300 dark:border-neutral-800 dark:hover:border-neutral-700 before:pointer-events-none before:absolute before:inset-0 before:bg-glass-gradient"
-  >
-    <div class="relative w-full p-6">
-      <h3 class="text-2xl font-medium leading-6 mb-2">{{ $title }}</h3>
-      <p class="text-gray-500 text-sm leading-6">{{ $subtitle | markdownify }}</p>
-    </div>
-    {{- with $image -}}
-      <img src="{{ . }}" class="absolute max-w-none {{ $imageClass }}" alt="{{ $title }}" />
-    {{- end -}}
-  </div>
-{{- end -}}
