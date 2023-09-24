@@ -31,7 +31,9 @@
     {{- $image = $processed.RelPermalink -}}
   {{- else -}}
     {{/* Otherwise, use relative link of the image */}}
-    {{- $image = ($image | relURL) -}}
+    {{- if hasPrefix $image "/" -}}
+      {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

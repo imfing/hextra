@@ -10,7 +10,7 @@
 {{- if and $dest $isRemote -}}
   {{- if $startsWithSlash -}}
     {{/* Images under static directory */}}
-    {{- $dest = (relURL $dest) -}}
+    {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
   {{- else if and $isPage (not $startsWithRelative) -}}
     {{/* Images that are sibling to the individual page file */}}
     {{ $dest = (printf "../%s" $dest) }}
