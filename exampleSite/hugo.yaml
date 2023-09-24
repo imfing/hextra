@@ -53,20 +53,24 @@ menu:
       name: Documentation
       pageRef: /docs
       weight: 1
+    - identifier: showcase
+      name: Showcase
+      pageRef: /showcase
+      weight: 2
     - identifier: blog
       name: Blog
       pageRef: /blog
-      weight: 2
+      weight: 3
     - identifier: about
       name: About
       pageRef: /about
-      weight: 3
-    - name: Search
       weight: 4
+    - name: Search
+      weight: 5
       params:
         type: search
     - name: GitHub
-      weight: 5
+      weight: 6
       url: "https://github.com/imfing/hextra"
       params:
         icon: github

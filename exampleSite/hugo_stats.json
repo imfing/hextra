@@ -441,6 +441,7 @@
       "pointer-events-none",
       "pr-4",
       "pr-[calc(env(safe-area-inset-right)-1.5rem)]",
+      "pr-[max(env(safe-area-inset-left),1.5rem)]",
       "pr-[max(env(safe-area-inset-right),1.5rem)]",
       "print:bg-transparent",
       "print:hidden",
