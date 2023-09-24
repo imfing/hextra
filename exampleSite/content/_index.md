@@ -3,7 +3,17 @@ title: Hextra Theme
 layout: hextra-home
 ---
 
-{{< hextra/button text="Get Started" link="docs" >}}
+{{< hextra/hero-headline >}}
+  Build modern websites&nbsp;<br class="sm:block hidden" />with Markdown and Hugo
+{{< /hextra/hero-headline >}}
+
+{{< hextra/hero-subtitle >}}
+  Fast, batteries-included Hugo theme&nbsp;<br class="sm:block hidden" />for creating beautiful static websites.
+{{< /hextra/hero-subtitle >}}
+
+<div class="mt-8">
+{{< hextra/hero-button text="Get Started" link="docs" >}}
+</div>
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
