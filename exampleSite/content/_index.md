@@ -3,6 +3,8 @@ title: Hextra Theme
 layout: hextra-home
 ---
 
+{{< hextra/button text="Get Started" link="docs" >}}
+
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     title="Fast and Full-featured"

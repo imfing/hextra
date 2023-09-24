@@ -1,0 +1,14 @@
+{{- $link := .Get "link" -}}
+{{- $text := .Get "text" -}}
+
+{{- $external := hasPrefix $link "http" -}}
+{{- $href := cond (hasPrefix $link "/") ($link | relURL) $link -}}
+
+
+<a
+  href="{{ $href }}"
+  class="font-medium cursor-pointer px-6 py-3 text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300 rounded-full text-center mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+  {{ if $external }}target="_blank" rel="noreferrer"{{ end -}}
+>
+  {{- $text -}}
+</a>
