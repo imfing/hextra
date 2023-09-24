@@ -6,7 +6,7 @@
         <br class="mt-1.5 text-sm" />
         <h1 class="text-center mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{{ .Title }}</h1>
         <div class="content">{{ .Content }}</div>
-        {{ range .Pages.ByDate }}
+        {{ range .Pages.ByDate.Reverse }}
           <div class="mb-10">
             <h3><a style="color: inherit; text-decoration: none;" class="block font-semibold mt-8 text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             <p class="opacity-80 mt-6 leading-7">
