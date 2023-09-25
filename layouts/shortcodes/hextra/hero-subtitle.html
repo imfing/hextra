@@ -1,3 +1,9 @@
-<p class="mt-4 text-xl text-gray-600 dark:text-gray-400 sm:text-xl">
+{{- $style := .Get "style" -}}
+
+
+<p
+  class="text-xl text-gray-600 dark:text-gray-400 sm:text-xl"
+  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
+>
   {{ .Inner | markdownify }}
 </p>

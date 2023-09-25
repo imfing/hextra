@@ -9,17 +9,23 @@ layout: hextra-home
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 
+<div class="mt-6 mb-6">
 {{< hextra/hero-headline >}}
   Build modern websites&nbsp;<br class="sm:block hidden" />with Markdown and Hugo
 {{< /hextra/hero-headline >}}
+</div>
 
+<div class="mb-12">
 {{< hextra/hero-subtitle >}}
-  Fast, batteries-included Hugo theme&nbsp;<br class="sm:block hidden" />for creating beautiful static websites.
+  Fast, batteries-included Hugo theme&nbsp;<br class="sm:block hidden" />for creating beautiful static websites
 {{< /hextra/hero-subtitle >}}
+</div>
 
-<div class="mt-8">
+<div class="mb-6">
 {{< hextra/hero-button text="Get Started" link="docs" >}}
 </div>
+
+<div class="mt-6"></div>
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
@@ -64,7 +70,7 @@ layout: hextra-home
   >}}
   {{< hextra/feature-card
     title="And Much More..."
-    icon="github"
+    icon="sparkles"
     subtitle="Syntax highlighting / Table of contents / SEO / RSS / LaTeX / Mermaid / Customizable / and more..."
   >}}
 {{< /hextra/feature-grid >}}
