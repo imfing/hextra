@@ -1,9 +1,9 @@
 {{- $name := .Get "name" | default (.Get 0) -}}
-{{- $icon := index site.Data.icons (.Get 0) -}}
-{{- $attributes := "height=1em"}}
+{{- $icon := index site.Data.icons $name -}}
+{{- $attributes := .Get "attributes" | default "height=1em"}}
 
 {{- if not $icon -}}
-  {{ errorf "icon %q not found" (.Get 0) }}
+  {{ errorf "icon %q not found" $name }}
 {{- end -}}
 
 {{- $icon = replaceRE "<svg" (printf "<svg %s" $attributes) $icon -}}

@@ -1,0 +1,28 @@
+{{- $title := .Get "title" -}}
+{{- $subtitle := .Get "subtitle" -}}
+{{- $class := .Get "class" -}}
+{{- $image := .Get "image" -}}
+{{- $imageClass := .Get "imageClass" -}}
+{{- $style := .Get "style" -}}
+{{- $icon := .Get "icon" -}}
+
+
+<div
+  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
+  class="{{ $class }} hextra-feature-card relative overflow-hidden rounded-3xl border border-gray-200 hover:border-gray-300 dark:border-neutral-800 dark:hover:border-neutral-700 before:pointer-events-none before:absolute before:inset-0 before:bg-glass-gradient"
+>
+  <div class="relative w-full p-6">
+    <h3 class="text-2xl font-medium leading-6 mb-2 flex items-center">
+      {{ with $icon -}}
+        <span class="pr-2">
+          {{- partial "utils/icon.html" (dict "name" . "attributes" "height=1.5rem") -}}
+        </span>
+      {{ end -}}
+      <span>{{ $title }}</span>
+    </h3>
+    <p class="text-gray-500 dark:text-gray-400 text-sm leading-6">{{ $subtitle | markdownify }}</p>
+  </div>
+  {{- with $image -}}
+    <img src="{{ . }}" class="absolute max-w-none {{ $imageClass }}" alt="{{ $title }}" />
+  {{- end -}}
+</div>
