@@ -49,9 +49,9 @@
     document.getElementById('giscus').appendChild(giscusScript);
 
     // Update giscus theme when theme switcher is clicked
-    const toggle = document.querySelector('.theme-toggle');
-    if (toggle) {
-      toggle.addEventListener('click', setGiscusTheme);
+    const toggles = document.querySelectorAll(".theme-toggle");
+    if (toggles) {
+      toggles.forEach(toggle => toggle.addEventListener('click', setGiscusTheme));
     }
   });
 </script>
