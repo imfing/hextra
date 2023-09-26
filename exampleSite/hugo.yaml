@@ -124,19 +124,19 @@ params:
     enable: true
     base: "https://github.com/imfing/hextra/edit/main/exampleSite/content"
 
-  comment:
+  comments:
     enable: false
     type: giscus
 
     # https://giscus.app/
     giscus:
-      repo: "imfing/hextra"
-      repoId: "R_kgDOJ9fJag"
-      category: "General"
-      categoryId: "DIC_kwDOJ9fJas4CY7gW"
-      # mapping: "pathname"
+      repo: imfing/hextra
+      repoId: R_kgDOJ9fJag
+      category: General
+      categoryId: DIC_kwDOJ9fJas4CY7gW
+      # mapping: pathname
       # strict: 0
       # reactionsEnabled: 1
       # emitMetadata: 0
-      # inputPosition: "top"
-      # lang: "en"
+      # inputPosition: top
+      # lang: en
