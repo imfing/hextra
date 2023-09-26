@@ -33,7 +33,7 @@
       "data-category": "{{ .category }}",
       "data-category-id": "{{ .categoryId }}",
       "data-mapping": "{{ .mapping | default `pathname` }}",
-      "data-strict": "{{ (string .Site.Params.giscus.strict) | default 0 }}",
+      "data-strict": "{{ (string .strict) | default 0 }}",
       "data-reactions-enabled": "{{ (string .reactionsEnabled) |  default 1 }}",
       "data-emit-metadata": "{{ (string .emitMetadata) | default 0 }}",
       "data-input-position": "{{ .inputPosition | default `top` }}",
