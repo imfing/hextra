@@ -26,6 +26,7 @@ languages:
     title: "Hextra テーマ"
   zh-cn:
     languageName: 简体中文
+    languageCode: zh-CN
     weight: 3
     title: Hextra
 
