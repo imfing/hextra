@@ -1,0 +1,8 @@
+{{- $commentEnable := site.Params.comment.enable | default false -}}
+{{- $commentPageEnable := .Params.comment | default true -}}
+
+{{- if and $commentEnable $commentPageEnable -}}
+  {{- if eq site.Params.comment.type "giscus" -}}
+    {{ partial "components/giscus.html" . }}
+  {{- end -}}
+{{- end -}}
