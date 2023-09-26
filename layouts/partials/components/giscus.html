@@ -1,6 +1,6 @@
 {{- $lang := site.Language.LanguageCode | default `en` -}}
 
-{{- with site.Params.comment.giscus -}}
+{{- with site.Params.comments.giscus -}}
 <script>
   /*
    * "preferred color scheme" theme in giscus works using "prefers-color-scheme" in media query.
@@ -57,4 +57,6 @@
 </script>
 
 <div id="giscus"></div>
+{{- else -}}
+  {{ warnf "giscus is not configured" }}
 {{- end -}}
