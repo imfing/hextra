@@ -1,6 +1,6 @@
-{{- with site.Params.comment.giscus -}}
+{{- $lang := site.Language.Lang | default `en` -}}
 
-{{- $lang = site.Language.Lang | default `en` -}}
+{{- with site.Params.comment.giscus -}}
 <script>
   /*
    * "preferred color scheme" theme in giscus works using "prefers-color-scheme" in media query.
@@ -40,9 +40,6 @@
       "data-theme": getGiscusTheme(),
       "data-lang": "{{ .lang | default $lang }}",
       "crossorigin": "anonymous",
-      {{ if .lazyLoading -}}
-      "data-loading": "lazy",
-      {{ end -}}
       "async": "",
     };
 
@@ -58,5 +55,6 @@
     }
   });
 </script>
+
 <div id="giscus"></div>
 {{- end -}}
