@@ -1,8 +1,8 @@
 // Search functionality using FlexSearch.
 
-// Change shortcut key to cmd+k on Mac.
+// Change shortcut key to cmd+k on Mac, iPad or iPhone.
 document.addEventListener("DOMContentLoaded", function () {
-  if (navigator.userAgent.includes('Macintosh')) {
+  if (/iPad|iPhone|Macintosh/.test(navigator.userAgent)) {
     // select the kbd element under the .search-wrapper class
     const keys = document.querySelectorAll(".search-wrapper kbd");
     keys.forEach(key => {
