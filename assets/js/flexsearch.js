@@ -1,5 +1,16 @@
 // Search functionality using FlexSearch.
 
+// Change shortcut key to cmd+k on Mac.
+document.addEventListener("DOMContentLoaded", function () {
+  if (navigator.userAgent.includes('Macintosh')) {
+    // select the kbd element under the .search-wrapper class
+    const keys = document.querySelectorAll(".search-wrapper kbd");
+    keys.forEach(key => {
+      key.innerHTML = '<span class="text-xs">⌘</span>K';
+    });
+  }
+});
+
 // Render the search data as JSON.
 // {{ $searchDataFile := printf "%s.search-data.json" .Language.Lang }}
 // {{ $searchData := resources.Get "json/search-data.json" | resources.ExecuteAsTemplate $searchDataFile . }}
