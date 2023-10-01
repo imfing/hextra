@@ -697,6 +697,12 @@ video {
 .h-2 {
   height: 0.5rem;
 }
+.h-3 {
+  height: 0.75rem;
+}
+.h-3\.5 {
+  height: 0.875rem;
+}
 .h-4 {
   height: 1rem;
 }
@@ -940,6 +946,10 @@ video {
 .border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
+.border-gray-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 .border-orange-100 {
   --tw-border-opacity: 1;
@@ -1369,6 +1379,9 @@ video {
 }
 .duration-200 {
   transition-duration: 200ms;
+}
+.duration-75 {
+  transition-duration: 75ms;
 }
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
@@ -2660,6 +2673,10 @@ body {
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
+.hover\:border-gray-900:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(17 24 39 / var(--tw-border-opacity));
+}
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -2918,6 +2935,11 @@ body {
     border-color: currentColor;
   }
 
+  .contrast-more\:border-gray-800 {
+    --tw-border-opacity: 1;
+    border-color: rgb(31 41 55 / var(--tw-border-opacity));
+  }
+
   .contrast-more\:border-gray-900 {
     --tw-border-opacity: 1;
     border-color: rgb(17 24 39 / var(--tw-border-opacity));
@@ -2992,6 +3014,10 @@ body {
 }
 :is(html[class~="dark"] .dark\:border-gray-100\/20) {
   border-color: rgb(243 244 246 / 0.2);
+}
+:is(html[class~="dark"] .dark\:border-gray-400) {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 :is(html[class~="dark"] .dark\:border-neutral-700) {
   --tw-border-opacity: 1;
@@ -3151,6 +3177,10 @@ body {
   content: var(--tw-content);
   --tw-invert: invert(100%);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+:is(html[class~="dark"] .dark\:hover\:border-gray-100:hover) {
+  --tw-border-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
 :is(html[class~="dark"] .dark\:hover\:border-gray-600:hover) {
   --tw-border-opacity: 1;
