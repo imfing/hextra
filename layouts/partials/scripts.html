@@ -5,8 +5,9 @@
 {{- $jsCodeCopy := resources.Get "js/code-copy.js" -}}
 {{- $jsFileTree := resources.Get "js/filetree.js" -}}
 {{- $jsSidebar := resources.Get "js/sidebar.js" -}}
+{{- $jsBackToTop := resources.Get "js/back-to-top.js" -}}
 
-{{- $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs $jsLang $jsFileTree $jsSidebar | resources.Concat "js/main.js" -}}
+{{- $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs $jsLang $jsFileTree $jsSidebar $jsBackToTop | resources.Concat "js/main.js" -}}
 {{- if hugo.IsProduction -}}
   {{- $scripts = $scripts | minify | fingerprint -}}
 {{- end -}}
