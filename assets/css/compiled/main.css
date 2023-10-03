@@ -1505,6 +1505,10 @@ video {
 .content p:first-child {
   margin-top: 0px;
 }
+.content .not-prose p {
+  margin-top: 0px;
+  line-height: 1.5;
+}
 .content a {
   --tw-text-opacity: 1;
   color: hsl(var(--primary-hue) 100% 45% / var(--tw-text-opacity));
