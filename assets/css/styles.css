@@ -21,10 +21,12 @@ body {
 
 :root {
   --primary-hue: 212deg;
+  --primary-saturation: 100%;
   --navbar-height: 4rem;
   --menu-height: 3.75rem;
 }
 
 .dark {
   --primary-hue: 204deg;
+  --primary-saturation: 100%;
 }

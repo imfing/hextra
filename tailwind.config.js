@@ -3,10 +3,10 @@ const colors = require('tailwindcss/colors')
 const makePrimaryColor =
   l =>
     ({ opacityValue }) => {
-      if (opacityValue === undefined) {
-        return `hsl(var(--primary-hue) 100% ${l}%)`
-      }
-      return `hsl(var(--primary-hue) 100% ${l}% / ${opacityValue})`
+      return (
+        `hsl(var(--primary-hue) var(--primary-saturation) ${l}%` +
+        (opacityValue ? ` / ${opacityValue})` : ')')
+      )
     }
 
 /** @type {import('tailwindcss').Config} */
