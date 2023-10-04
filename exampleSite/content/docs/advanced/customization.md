@@ -34,11 +34,12 @@ The color of text mixed with `other text` can customized with:
 
 ### Primary Color
 
-The primary color of the theme can be customized by setting the `--primary-hue` variable:
+The primary color of the theme can be customized by setting the `--primary-hue` and `--primary-saturation` variables:
 
 ```css {filename="assets/css/custom.css"}
 :root {
   --primary-hue: 100deg;
+  --primary-saturation: 90%;
 }
 ```
 
