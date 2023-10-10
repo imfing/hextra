@@ -5,15 +5,23 @@
 {{- $prev := cond $reversePagination .PrevInSection .NextInSection -}}
 {{- $next := cond $reversePagination .NextInSection .PrevInSection -}}
 
-{{- with .Params.prev -}}
-  {{- with $.Site.GetPage . -}}
-    {{- if $reversePagination }}{{ $next = . }}{{ else }}{{ $prev = . }}{{ end -}}
+{{- if eq .Params.prev false }}
+  {{- if $reversePagination }}{{ $next = false }}{{ else }}{{ $prev = false }}{{ end -}}
+{{ else }}
+  {{- with .Params.prev -}}
+    {{- with $.Site.GetPage . -}}
+      {{- if $reversePagination }}{{ $next = . }}{{ else }}{{ $prev = . }}{{ end -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
-{{- with .Params.next -}}
-  {{- with $.Site.GetPage . -}}
-    {{- if $reversePagination }}{{ $prev = . }}{{ else }}{{ $next = . }}{{ end -}}
+{{- if eq .Params.next false }}
+  {{- if $reversePagination }}{{ $prev = false }}{{ else }}{{ $next = false }}{{ end -}}
+{{ else }}
+  {{- with .Params.next -}}
+    {{- with $.Site.GetPage . -}}
+      {{- if $reversePagination }}{{ $prev = . }}{{ else }}{{ $next = . }}{{ end -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

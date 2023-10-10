@@ -1,9 +1,42 @@
+{{- $context := . -}}
 {{- $link := .Get "link" -}}
 {{- $title := .Get "title" -}}
 {{- $icon := .Get "icon" -}}
-{{- $subtitle := .Get "subtitle" }}
-{{- $image := .Get "image" }}
-{{- $context := . -}}
+{{- $subtitle := .Get "subtitle" -}}
+{{- $image := .Get "image" -}}
+{{- $width := 0 -}}
+{{- $height := 0 -}}
+{{- $imageStyle := .Get "imageStyle" -}}
+
+{{/* Image processing options */}}
+{{- $method := .Get "method" | default "Resize" | humanize -}}
+{{- $options := .Get "options" | default "800x webp q80" -}}
+
+{{- if and $image (not (urls.Parse $image).Scheme) -}}
+  {{/* Process images in assets */}}
+  {{- with resources.Get $image -}}
+    {{- $processed := "" -}}
+    {{- if eq $method "Resize" -}}
+      {{- $processed = (.Resize $options) -}}
+    {{- else if eq $method "Fit" -}}
+      {{- $processed = (.Fit $options) -}}
+    {{- else if eq $method "Fill" -}}
+      {{- $processed = (.Fill $options) -}}
+    {{- else if eq $method "Crop" -}}
+      {{- $processed = (.Crop $options) -}}
+    {{- else -}}
+      {{- errorf "Invalid image processing command: Must be one of Crop, Fit, Fill or Resize." -}}
+    {{- end -}}
+    {{- $width = $processed.Width -}}
+    {{- $height = $processed.Height -}}
+    {{- $image = $processed.RelPermalink -}}
+  {{- else -}}
+    {{/* Otherwise, use relative link of the image */}}
+    {{- if hasPrefix $image "/" -}}
+      {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 
 {{ $linkClass := "hover:border-gray-300 bg-transparent shadow-sm dark:border-neutral-800 hover:bg-slate-50 hover:shadow-md dark:hover:border-neutral-700 dark:hover:bg-neutral-900" }}
 {{- with $image -}}
@@ -13,6 +46,7 @@
 {{- $external := strings.HasPrefix $link "http" -}}
 {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
 
+
 <a
   class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
   href="{{ $href }}"
@@ -21,7 +55,15 @@
   {{- end -}}
 >
   {{- with $image -}}
-    <img alt="{{ $title }}" loading="lazy" decoding="async" style="color: transparent;" src="{{ $image | safeURL }}" />
+    <img
+      alt="{{ $title }}"
+      loading="lazy"
+      decoding="async"
+      src="{{ $image | safeURL }}"
+      {{ with $width }}width="{{ . }}"{{ end }}
+      {{ with $height }}height="{{ . }}"{{ end }}
+      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
+    />
   {{- end -}}
 
   {{- $padding := "p-4" -}}
@@ -31,10 +73,10 @@
 
 
   <span class="flex font-semibold items-start gap-2 {{ $padding }} text-gray-700 hover:text-gray-900 dark:text-neutral-200 dark:hover:text-neutral-50">
-    {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{ end -}}
+    {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{- end -}}
     {{- $title -}}
   </span>
   {{- with $subtitle -}}
-    <div class="line-clamp-3 text-sm font-normal text-gray-500 dark:text-gray-400 px-4 mb-4 mt-2">{{ $subtitle }}</div>
+    <div class="line-clamp-3 text-sm font-normal text-gray-500 dark:text-gray-400 px-4 mb-4 mt-2">{{- $subtitle | markdownify -}}</div>
   {{- end -}}
 </a>

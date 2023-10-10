@@ -7,6 +7,8 @@ enableGitInfo: true
 # enableEmoji: false
 hasCJKLanguage: true
 
+# googleAnalytics: G-XXXXXXXXXX
+
 outputs:
   home: [HTML]
   page: [HTML]
@@ -24,13 +26,14 @@ languages:
     title: "Hextra テーマ"
   zh-cn:
     languageName: 简体中文
+    languageCode: zh-CN
     weight: 3
     title: Hextra
 
 module:
   hugoVersion:
     extended: true
-    min: "0.111.0"
+    min: "0.112.0"
 
   workspace: hugo.work
   imports:
@@ -51,20 +54,24 @@ menu:
       name: Documentation
       pageRef: /docs
       weight: 1
+    - identifier: showcase
+      name: Showcase
+      pageRef: /showcase
+      weight: 2
     - identifier: blog
       name: Blog
       pageRef: /blog
-      weight: 2
+      weight: 3
     - identifier: about
       name: About
       pageRef: /about
-      weight: 3
-    - name: Search
       weight: 4
+    - name: Search
+      weight: 5
       params:
         type: search
     - name: GitHub
-      weight: 5
+      weight: 6
       url: "https://github.com/imfing/hextra"
       params:
         icon: github
@@ -93,13 +100,19 @@ params:
     logo:
       path: images/logo.svg
       dark: images/logo-dark.svg
-      # link: /
       # width: 40
       # height: 20
+      # link: /
+    width: wide
+
+  page:
+    # full (100%), wide (90rem), normal (1280px)
+    width: normal
 
   footer:
     displayCopyright: true
     displayPoweredBy: true
+    width: normal
 
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
@@ -110,3 +123,20 @@ params:
   editURL:
     enable: true
     base: "https://github.com/imfing/hextra/edit/main/exampleSite/content"
+
+  comments:
+    enable: false
+    type: giscus
+
+    # https://giscus.app/
+    giscus:
+      repo: imfing/hextra
+      repoId: R_kgDOJ9fJag
+      category: General
+      categoryId: DIC_kwDOJ9fJas4CY7gW
+      # mapping: pathname
+      # strict: 0
+      # reactionsEnabled: 1
+      # emitMetadata: 0
+      # inputPosition: top
+      # lang: en

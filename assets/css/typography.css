@@ -20,6 +20,9 @@
   p {
     @apply mt-6 leading-7 first:mt-0;
   }
+  .not-prose p {
+    @apply mt-0 leading-normal;
+  }
   a {
     @apply text-primary-600 underline decoration-from-font [text-underline-position:from-font];
   }

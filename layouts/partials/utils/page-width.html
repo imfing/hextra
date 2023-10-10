@@ -1,0 +1,27 @@
+{{/* Get page width from site configuration */}}
+
+{{/* Default page width */}}
+{{- $pageWidth := "" -}}
+
+{{/* Get page width setting from page front matter or site params */}}
+{{ with .Params.width -}}
+  {{ $pageWidth = . -}}
+{{ else -}}
+  {{ with .Site.Params.page.width -}}
+    {{ $pageWidth = . -}}
+  {{ end -}}
+{{ end -}}
+
+{{- with $pageWidth -}}
+  {{ if eq . "wide" -}}
+    {{ $pageWidth = "max-w-[90rem]" -}}
+  {{ else if eq . "full" -}}
+    {{ $pageWidth = "max-w-full" -}}
+  {{ else -}}
+    {{ $pageWidth = "max-w-screen-xl" -}}
+  {{ end -}}
+{{ else -}}
+  {{ $pageWidth = "max-w-screen-xl" -}}
+{{ end -}}
+
+{{ return $pageWidth }}

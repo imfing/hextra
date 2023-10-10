@@ -3,16 +3,21 @@ const colors = require('tailwindcss/colors')
 const makePrimaryColor =
   l =>
     ({ opacityValue }) => {
-      if (opacityValue === undefined) {
-        return `hsl(var(--primary-hue) 100% ${l}%)`
-      }
-      return `hsl(var(--primary-hue) 100% ${l}% / ${opacityValue})`
+      return (
+        `hsl(var(--primary-hue) var(--primary-saturation) ${l}%` +
+        (opacityValue ? ` / ${opacityValue})` : ')')
+      )
     }
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './**/hugo_stats.json',
+  ],
+  safelist: [
+    'max-w-screen-xl',
+    'max-w-[90rem]',
+    'max-w-full'
   ],
   theme: {
     screens: {

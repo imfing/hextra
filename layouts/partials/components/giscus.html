@@ -1,0 +1,62 @@
+{{- $lang := site.Language.LanguageCode | default `en` -}}
+
+{{- with site.Params.comments.giscus -}}
+<script>
+  /*
+   * "preferred color scheme" theme in giscus works using "prefers-color-scheme" in media query.
+   * but, hugo's theme switch function works by using "color-theme" in local storage.
+   * This solution was created with reference to:
+   * https://github.com/giscus/giscus/issues/336#issuecomment-1214366281
+  */
+  function getGiscusTheme() {
+    return localStorage.getItem("color-theme");
+  }
+
+  function setGiscusTheme() {
+    function sendMessage(message) {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    }
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(),
+      },
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const giscusAttributes = {
+      "src": "https://giscus.app/client.js",
+      "data-repo": "{{ .repo }}",
+      "data-repo-id": "{{ .repoId }}",
+      "data-category": "{{ .category }}",
+      "data-category-id": "{{ .categoryId }}",
+      "data-mapping": "{{ .mapping | default `pathname` }}",
+      "data-strict": "{{ (string .strict) | default 0 }}",
+      "data-reactions-enabled": "{{ (string .reactionsEnabled) |  default 1 }}",
+      "data-emit-metadata": "{{ (string .emitMetadata) | default 0 }}",
+      "data-input-position": "{{ .inputPosition | default `top` }}",
+      "data-theme": getGiscusTheme(),
+      "data-lang": "{{ .lang | default $lang }}",
+      "crossorigin": "anonymous",
+      "async": "",
+    };
+
+    // Dynamically create script tag
+    const giscusScript = document.createElement("script");
+    Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+    document.getElementById('giscus').appendChild(giscusScript);
+
+    // Update giscus theme when theme switcher is clicked
+    const toggles = document.querySelectorAll(".theme-toggle");
+    if (toggles) {
+      toggles.forEach(toggle => toggle.addEventListener('click', setGiscusTheme));
+    }
+  });
+</script>
+
+<div id="giscus"></div>
+{{- else -}}
+  {{ warnf "giscus is not configured" }}
+{{- end -}}

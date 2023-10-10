@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <div class="mx-auto flex max-w-screen-xl">
+  <div class='mx-auto flex {{ partial "utils/page-width" . }}'>
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
     {{ partial "toc.html" . }}
     <article class="w-full break-words flex min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
@@ -10,6 +10,8 @@
         <div class="content">
           {{ .Content }}
         </div>
+        <div class="mt-16"></div>
+        {{ partial "components/comments.html" . }}
       </main>
     </article>
   </div>

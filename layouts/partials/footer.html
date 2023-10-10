@@ -2,21 +2,29 @@
 
 {{- $copyright := (T "copyright") | default "© 2023 Hextra." -}}
 
+{{- $footerWidth := "max-w-screen-xl" -}}
+{{- with .Site.Params.footer.width -}}
+  {{ if eq . "wide" -}}
+    {{ $footerWidth = "max-w-[90rem]" -}}
+  {{ else if eq . "full" -}}
+    {{ $footerWidth = "max-w-full" -}}
+  {{ end -}}
+{{- end -}}
 
 <footer class="hextra-footer bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900 print:bg-transparent">
   {{- if $enableFooterSwitches }}
-    <div class="mx-auto flex max-w-screen-xl gap-2 py-2 px-4">
+    <div class='mx-auto flex gap-2 py-2 px-4 {{ $footerWidth }}'>
       {{- partial "language-switch.html" (dict "context" .) -}}
       {{- partial "theme-toggle.html" -}}
     </div>
   {{ end -}}
   <hr class="dark:border-neutral-800" />
   <div
-    class="mx-auto flex max-w-screen-xl justify-center py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-600 dark:text-gray-400 md:justify-start"
+    class='{{ $footerWidth }} mx-auto flex justify-center py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-600 dark:text-gray-400 md:justify-start'
   >
     <div class="flex w-full flex-col items-center sm:items-start">
       {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="font-semibold">{{ template "theme-credit" . }}</div>{{ end }}
-      {{- if .Site.Params.footer.displayCopyright }}<p class="mt-6 text-xs">{{ $copyright | markdownify }}</p>{{ end }}
+      {{- if .Site.Params.footer.displayCopyright }}<div class="mt-6 text-xs">{{ $copyright | markdownify }}</div>{{ end }}
     </div>
   </div>
 </footer>

@@ -16,16 +16,29 @@
     {{ end -}}
   </title>
   <meta name="description" content="{{ partial "utils/page-description.html" . }}" />
+
   {{ partial "opengraph.html" . }}
   {{ template "_internal/schema.html" . -}}
   {{ template "_internal/twitter_cards.html" . -}}
+
   {{ partialCached "head-css.html" . }}
+
+
+  <!-- Google Analytics -->
+  {{- if and .Site.GoogleAnalytics (eq hugo.Environment "production") }}
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    {{ partial "google-analytics.html" . }}
+  {{- end }}
+
+
   <script>
     /* Initialize light/dark mode */
     if (localStorage.getItem("color-theme") === "dark" || (!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
       document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
     } else {
       document.documentElement.classList.remove("dark");
+      document.documentElement.style.colorScheme = "light";
     }
   </script>
 
