@@ -17,8 +17,8 @@
 <div class="overflow-x-auto mt-6 flex rounded-lg border py-2 ltr:pr-4 rtl:pl-4 contrast-more:border-current contrast-more:dark:border-current {{ $class }}">
   <div class="select-none text-xl ltr:pl-3 ltr:pr-2 rtl:pr-3 rtl:pl-2" style='font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";'>{{ $emoji }}</div>
   <div class="w-full min-w-0 leading-7">
-    <p class="mt-6 leading-7 first:mt-0">
+    <div class="mt-6 leading-7 first:mt-0">
       {{ .Inner | markdownify }}
-    </p>
+    </div>
   </div>
 </div>
