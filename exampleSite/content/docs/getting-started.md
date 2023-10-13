@@ -74,7 +74,7 @@ $ hugo mod init github.com/username/my-site
 $ hugo mod get github.com/imfing/hextra
 ```
 
-Configure your `hugo.yaml` file to use Hextra theme by including the following:
+Configure `hugo.yaml` to use Hextra theme by adding the following:
 
 ```yaml
 module:
@@ -145,7 +145,7 @@ $ hugo new site my-site --format=yaml
 git submodule add https://github.com/imfing/hextra.git themes/hextra
 ```
 
-Configure your `hugo.yaml` file to use Hextra theme by including the following:
+Configure `hugo.yaml` to use Hextra theme by adding the following:
 
 ```yaml
 theme: hextra
@@ -170,15 +170,15 @@ Voila! You can see your new site at `http://localhost:1313/`.
 
 {{% /steps %}}
 
-{{< callout type="info" >}}
-  When using [CI/CD](https://en.wikipedia.org/wiki/CI/CD) for Hugo website deployment, it's essential to ensure that the following command is executed before running the `hugo` command.
 
-  ```shell
-  git submodule update --init
-  ```
+When using [CI/CD](https://en.wikipedia.org/wiki/CI/CD) for Hugo website deployment, it's essential to ensure that the following command is executed before running the `hugo` command.
 
-  Failure to run this command will result in your theme folder not being populated with the necessary Hextra theme files, leading to a build failure.
-{{< /callout >}}
+```shell
+git submodule update --init
+```
+
+Failure to run this command will result in the theme folder not being populated with Hextra theme files, leading to a build failure.
+
 
 
 {{% details title="How to update theme?" %}}
