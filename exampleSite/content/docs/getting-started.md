@@ -21,7 +21,7 @@ We have provided a [GitHub Actions workflow](https://docs.github.com/en/pages/ge
 
 There are several ways to use a Hugo theme, all of which are supported by Hextra.
 
-1. **Hugo module (recommended)**: The easiest and recommended way to use Hextra is by incorporating it as a [Hugo Module](https://gohugo.io/hugo-modules/). Hugo modules allow you to include external dependencies, like themes or content, in your Hugo website directly from a specific repository. 
+1. **Hugo Modules (recommended)**: The easiest and recommended way to use Hextra. [Hugo modules](https://gohugo.io/hugo-modules/) allow you to include external dependencies, like theme or content, in your website directly from a specific repository. 
 
     In this method:
     - theme files are fetched from the Hextra repository by Hugo
@@ -32,7 +32,7 @@ There are several ways to use a Hugo theme, all of which are supported by Hextra
       hugo mod get -u github.com/imfing/hextra
       ```
 
-2. **Git submodule**: You can also add Hextra as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Git submodule allows you to include a Git repository in an existing Git repository. 
+2. **Git Submodule**: You can also add Hextra as a [Git Submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Git submodule allows you to include a Git repository in an existing Git repository.
 
     In this method:
     - theme files are fetched from the Hextra repository by Git
