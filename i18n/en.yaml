@@ -1,7 +1,9 @@
-onThisPage: "On this page"
+backToTop: "Scroll to top"
+changeLanguage: "Change language"
+changeTheme: "Change theme"
+copyright: "© 2023 Hextra Project."
 editThisPage: "Edit this page on GitHub →"
 lastUpdated: "Last updated on"
-
-backToTop: "Scroll to top"
-
-copyright: "© 2023 Hextra Project."
+onThisPage: "On this page"
+readMore: "Read more →"
+searchPlaceholder: "Search..."
