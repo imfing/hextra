@@ -19,29 +19,11 @@ We have provided a [GitHub Actions workflow](https://docs.github.com/en/pages/ge
 
 ## Start as New Project
 
-There are several ways to use a Hugo theme, all of which are supported by Hextra.
+There are two main ways to add the Hextra theme to your Hugo project.
 
-1. **Hugo Modules (recommended)**: The easiest and recommended way to use Hextra. [Hugo modules](https://gohugo.io/hugo-modules/) allow you to include external dependencies, like theme or content, in your website directly from a specific repository. 
+1. **Hugo Modules (Recommended)**: The simplest and recommended method. [Hugo modules](https://gohugo.io/hugo-modules/) let you pull in the theme directly from its online source. Theme is downloaded automatically and managed by Hugo.
 
-    In this method:
-    - theme files are fetched from the Hextra repository by Hugo
-    - theme files are stored in Hugo's module cache folder
-    - theme can be updated by running
-
-      ```shell
-      hugo mod get -u github.com/imfing/hextra
-      ```
-
-2. **Git Submodule**: You can also add Hextra as a [Git Submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Git submodule allows you to include a Git repository in an existing Git repository.
-
-    In this method:
-    - theme files are fetched from the Hextra repository by Git
-    - theme files are stored in your project's `themes` folder
-    - theme can be updated by running
-
-      ```shell
-      git submodule update --remote
-      ```
+2. **Git Submodule**: Alternatively, add Hextra as a [Git Submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). The theme will be downloaded by Git and stored in your project's `themes` folder.
 
 ### Setup Hextra as Hugo module
 
@@ -178,7 +160,6 @@ git submodule update --init
 ```
 
 Failure to run this command will result in the theme folder not being populated with Hextra theme files, leading to a build failure.
-
 
 
 {{% details title="How to update theme?" %}}
