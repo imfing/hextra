@@ -117,8 +117,12 @@ params:
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
 
+  # Search
+  # flexsearch is enabled by default
   search:
     enable: true
+    type: flexsearch
+
 
   editURL:
     enable: true
