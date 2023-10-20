@@ -25,7 +25,7 @@
 
 {{ if eq $type "fulltext" }}
   {{ if eq $len 0 }}
-    {{ $data = $data | merge (dict "" ($page.Plain)) }}
+    {{ $data = $data | merge (dict "" ($page.Plain | htmlUnescape | chomp)) }}
   {{ else }}
     {{/* Split the raw content from bottom to top */}}
     {{ range seq $len }}
@@ -34,12 +34,12 @@
       {{ $headingTitle := index $headingTitles $i }}
 
       {{ if eq $i 0 }}
-        {{ $data = $data | merge (dict $headingKey ($content | markdownify | plainify | chomp)) }}
+        {{ $data = $data | merge (dict $headingKey ($content | markdownify | plainify | htmlUnescape | chomp)) }}
       {{ else }}
         {{ $parts := split $content (printf "\n%s\n" $headingTitle) }}
         {{ $lastPart := index $parts (sub (len $parts) 1) }}
 
-        {{ $data = $data | merge (dict $headingKey ($lastPart | markdownify | plainify | chomp)) }}
+        {{ $data = $data | merge (dict $headingKey ($lastPart | markdownify | plainify | htmlUnescape | chomp)) }}
         {{ $content = strings.TrimSuffix $lastPart $content }}
         {{ $content = strings.TrimSuffix (printf "\n%s\n" $headingTitle) $content }}
       {{ end }}
@@ -54,7 +54,7 @@
   {{/* Use empty data object since title is included in search-data.json */}}
   {{ $data = $data | merge (dict "" "") }}
 {{ else if (eq $type "summary" ) }}
-  {{ $data = $data | merge (dict "" ($page.Summary | plainify | chomp)) }}
+  {{ $data = $data | merge (dict "" ($page.Summary | plainify | htmlUnescape | chomp)) }}
 {{ end }}
 
 {{ return $data }}
