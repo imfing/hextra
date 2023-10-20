@@ -1,5 +1,6 @@
 {{/* Split page raw content into fragments */}}
-{{ $page := . }}
+{{ $page := .context }}
+{{ $type := .type | default "fulltext" }}
 
 {{ $headingKeys := slice }}
 {{ $headingTitles := slice }}
@@ -22,24 +23,36 @@
 {{ $len := len $headingKeys }}
 {{ $data := dict }}
 
-{{ if eq $len 0 }}
-  {{ $data = $data | merge (dict "" $page.Plain) }}
-{{ else }}
-  {{ range seq $len }}
-    {{ $i := sub $len . }}
-    {{ $headingKey := index $headingKeys $i }}
-    {{ $headingTitle := index $headingTitles $i }}
+{{ if eq $type "fulltext" }}
+  {{ if eq $len 0 }}
+    {{ $data = $data | merge (dict "" ($page.Plain)) }}
+  {{ else }}
+    {{/* Split the raw content from bottom to top */}}
+    {{ range seq $len }}
+      {{ $i := sub $len . }}
+      {{ $headingKey := index $headingKeys $i }}
+      {{ $headingTitle := index $headingTitles $i }}
 
-    {{ if eq $i 0 }}
-      {{ $data = $data | merge (dict $headingKey ($content | markdownify | plainify)) }}
-    {{ else }}
-      {{ $parts := split $content (printf "\n%s\n" $headingTitle) }}
-      {{ $lastPart := index $parts (sub (len $parts) 1) }}
+      {{ if eq $i 0 }}
+        {{ $data = $data | merge (dict $headingKey ($content | markdownify | plainify | chomp)) }}
+      {{ else }}
+        {{ $parts := split $content (printf "\n%s\n" $headingTitle) }}
+        {{ $lastPart := index $parts (sub (len $parts) 1) }}
 
-      {{ $data = $data | merge (dict $headingKey ($lastPart | markdownify | plainify)) }}
-      {{ $content = strings.TrimSuffix $lastPart $content }}
-      {{ $content = strings.TrimSuffix (printf "\n%s\n" $headingTitle) $content }}
+        {{ $data = $data | merge (dict $headingKey ($lastPart | markdownify | plainify | chomp)) }}
+        {{ $content = strings.TrimSuffix $lastPart $content }}
+        {{ $content = strings.TrimSuffix (printf "\n%s\n" $headingTitle) $content }}
+      {{ end }}
     {{ end }}
   {{ end }}
+{{ else if (eq $type "heading" ) }}
+  {{/* Put heading keys with empty content to the data object */}}
+  {{ range $headingKeys }}
+    {{ $data = $data | merge (dict . "") }}
+  {{ end }}
+{{ else if (eq $type "title") }}
+  {{/* Use empty data object since title is included in search-data.json */}}
+  {{ $data = $data | merge (dict "" "") }}
 {{ end }}
+
 {{ return $data }}

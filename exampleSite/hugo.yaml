@@ -123,6 +123,10 @@ params:
     enable: true
     type: flexsearch
 
+    flexsearch:
+      # index page by: fulltext | title | heading
+      # default: fulltext
+      index: fulltext
 
   editURL:
     enable: true
