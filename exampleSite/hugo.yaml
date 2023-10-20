@@ -112,7 +112,7 @@ params:
   theme:
     # light | dark | system
     default: system
-    displayToggle: false
+    displayToggle: true
 
   footer:
     displayCopyright: true
