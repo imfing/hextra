@@ -198,6 +198,37 @@ By default, the page width is set to `normal`.
 
 Similarly, the width of the navbar and footer can be customized by the `params.navbar.width` and `params.footer.width` parameters.
 
+### Search Index
+
+Fulltext search powered by [FlexSearch](https://github.com/nextapps-de/flexsearch) is enabled by default.
+To customize the search index, set the `params.search.flexsearch.index` parameter in the config file:
+
+```yaml {filename="hugo.yaml"}
+params:
+  # Search
+  search:
+    enable: true
+    type: flexsearch
+
+    flexsearch:
+      # index page by: fulltext | summary | heading | title
+      index: fulltext
+```
+
+available options for `flexsearch.index`:
+- `fulltext` - include full content of the page (default)
+- `summary` - include the summary of the page, see [Hugo Content Summaries](https://gohugo.io/content-management/summaries/) for more details
+- `heading` - include level 1 and level 2 headings
+- `title` - only include the page title
+
+To exclude a page from the search index, set the `excludeSearch: true` in the front matter of the page:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+excludeSearch: true
+---
+```
 
 ### Google Analytics
 
