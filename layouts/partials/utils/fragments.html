@@ -53,6 +53,8 @@
 {{ else if (eq $type "title") }}
   {{/* Use empty data object since title is included in search-data.json */}}
   {{ $data = $data | merge (dict "" "") }}
+{{ else if (eq $type "summary" ) }}
+  {{ $data = $data | merge (dict "" ($page.Summary | plainify | chomp)) }}
 {{ end }}
 
 {{ return $data }}
