@@ -150,19 +150,13 @@
   >
     {{- .title -}}
     {{- with .context }}
-      {{- if or .RegularPages .Sections }}
-        <span class="hextra-sidebar-collapsible-button">
-          {{- template "sidebear-collapsible-button" -}}
-        </span>
-      {{- end }}
+      {{- if or .RegularPages .Sections }}{{ partialCached "sidebear-collapsible-button" . }}{{ end -}}
     {{ end -}}
   </a>
 {{- end -}}
 
-{{- define "sidebar-separator" -}}
-  <div class="mt-4 border-t py-4 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400" />
-{{- end -}}
-
-{{- define "sidebear-collapsible-button" -}}
-  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+{{- define "partials/sidebear-collapsible-button" -}}
+  <span class="hextra-sidebar-collapsible-button">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
+  </span>
 {{- end -}}
