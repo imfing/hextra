@@ -13,7 +13,7 @@
 <aside class="sidebar-container flex flex-col print:hidden md:top-16 md:shrink-0 md:w-64 md:self-start max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
   <!-- Search bar on small screen -->
   <div class="px-4 pt-4 md:hidden">
-    {{ partial "search.html" }}
+    {{ partialCached "search.html" $context }}
   </div>
   <div class="hextra-scrollbar overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
     <ul class="flex flex-col gap-1 md:hidden">
