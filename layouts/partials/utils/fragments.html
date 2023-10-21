@@ -48,6 +48,7 @@
   {{ end }}
 {{ else if (eq $type "heading" ) }}
   {{/* Put heading keys with empty content to the data object */}}
+  {{ $data = dict "" "" }}
   {{ range $headingKeys }}
     {{ $data = $data | merge (dict . "") }}
   {{ end }}
