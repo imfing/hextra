@@ -5,7 +5,7 @@ weight: 2
 
 Hugo reads its configuration from `hugo.yaml` in the root of your Hugo site.
 The config file is where you can configure all aspects of your site.
-You can find the config file for this site in `exampleSite/hugo.yaml` as a good starting point.
+Check out the config file for this site [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) on GitHub to get a comprehensive idea of available settings and best practices.
 
 <!--more-->
 
@@ -181,6 +181,26 @@ Include both `favicon.ico` and `favicon.svg` files in your project to ensure you
 While `favicon.ico` is generally for older browsers, `favicon.svg` is supported by modern ones. The optional `favicon-dark.svg` can be included for a tailored experience in dark mode.
 Feel free to use tools like [favicon.io](https://favicon.io/) or [favycon](https://github.com/ruisaraiva19/favycon) to generate these icons.
 
+### Light and Dark Theme
+
+Use the `theme` setting to customize the appearance of your website in terms of its color scheme.
+
+```yaml {filename="hugo.yaml"}
+params:
+  theme:
+    # light | dark | system
+    default: system
+    displayToggle: true
+```
+
+Options for `theme.default`:
+
+- `light` - always use light mode
+- `dark` - always use dark mode
+- `system` - sync with the operating system setting (default)
+
+The `theme.displayToggle` parameter allows you to display a toggle button for changing themes.
+When set to `true`, visitors can switch between light or dark mode, overriding the `theme.default` setting.
 
 ### Page Width
 
@@ -215,7 +235,8 @@ params:
       index: content
 ```
 
-available options for `flexsearch.index`:
+Options for `flexsearch.index`:
+
 - `content` - full content of the page (default)
 - `summary` - summary of the page, see [Hugo Content Summaries](https://gohugo.io/content-management/summaries/) for more details
 - `heading` - level 1 and level 2 headings
