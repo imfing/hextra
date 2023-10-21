@@ -124,9 +124,8 @@ params:
     type: flexsearch
 
     flexsearch:
-      # index page by: fulltext | summary | heading | title
-      # default: fulltext
-      index: fulltext
+      # index page by: content | summary | heading | title
+      index: content
 
   editURL:
     enable: true

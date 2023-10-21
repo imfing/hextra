@@ -1,6 +1,6 @@
 {{/* Split page raw content into fragments */}}
 {{ $page := .context }}
-{{ $type := .type | default "fulltext" }}
+{{ $type := .type | default "content" }}
 
 {{ $headingKeys := slice }}
 {{ $headingTitles := slice }}
@@ -23,7 +23,8 @@
 {{ $len := len $headingKeys }}
 {{ $data := dict }}
 
-{{ if eq $type "fulltext" }}
+{{ if eq $type "content" }}
+  {{/* Include full content of the page */}}
   {{ if eq $len 0 }}
     {{ $data = $data | merge (dict "" ($page.Plain | htmlUnescape | chomp)) }}
   {{ else }}

@@ -200,7 +200,7 @@ Similarly, the width of the navbar and footer can be customized by the `params.n
 
 ### Search Index
 
-Fulltext search powered by [FlexSearch](https://github.com/nextapps-de/flexsearch) is enabled by default.
+Full-text search powered by [FlexSearch](https://github.com/nextapps-de/flexsearch) is enabled by default.
 To customize the search index, set the `params.search.flexsearch.index` parameter in the config file:
 
 ```yaml {filename="hugo.yaml"}
@@ -211,14 +211,14 @@ params:
     type: flexsearch
 
     flexsearch:
-      # index page by: fulltext | summary | heading | title
-      index: fulltext
+      # index page by: content | summary | heading | title
+      index: content
 ```
 
 available options for `flexsearch.index`:
-- `fulltext` - include full content of the page (default)
-- `summary` - include the summary of the page, see [Hugo Content Summaries](https://gohugo.io/content-management/summaries/) for more details
-- `heading` - include level 1 and level 2 headings
+- `content` - full content of the page (default)
+- `summary` - summary of the page, see [Hugo Content Summaries](https://gohugo.io/content-management/summaries/) for more details
+- `heading` - level 1 and level 2 headings
 - `title` - only include the page title
 
 To exclude a page from the search index, set the `excludeSearch: true` in the front matter of the page:

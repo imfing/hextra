@@ -1,7 +1,7 @@
 {{/* FlexSearch Index Data */}}
-{{- $indexType := site.Params.search.flexsearch.index | default "fulltext" -}}
+{{- $indexType := site.Params.search.flexsearch.index | default "content" -}}
 
-{{- if not (in (slice "fulltext" "heading" "title" "summary") $indexType) -}}
+{{- if not (in (slice "content" "summary" "heading" "title" ) $indexType) -}}
   {{- errorf "unknown flexsearch index type: %s" $indexType -}}
 {{- end -}}
 
