@@ -109,6 +109,11 @@ params:
     # full (100%), wide (90rem), normal (1280px)
     width: normal
 
+  theme:
+    # light | dark | system
+    default: system
+    displayToggle: true
+
   footer:
     displayCopyright: true
     displayPoweredBy: true

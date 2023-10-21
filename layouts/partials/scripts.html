@@ -1,4 +1,4 @@
-{{- $jsTheme := resources.Get "js/theme.js" -}}
+{{- $jsTheme := resources.Get "js/theme.js" | resources.ExecuteAsTemplate "theme.js" . -}}
 {{- $jsMenu := resources.Get "js/menu.js" -}}
 {{- $jsTabs := resources.Get "js/tabs.js" -}}
 {{- $jsLang := resources.Get "js/lang.js" -}}

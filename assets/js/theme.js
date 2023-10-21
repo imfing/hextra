@@ -1,40 +1,51 @@
-// Dark theme toggle
+// Light / Dark theme toggle
+(function () {
+  const defaultTheme = '{{ site.Params.theme.default | default `system`}}'
 
-const themeToggleButtons = document.querySelectorAll(".theme-toggle");
+  const themeToggleButtons = document.querySelectorAll(".theme-toggle");
 
-// Change the icons inside the button based on previous settings
-if (
-  localStorage.getItem("color-theme") === "dark" ||
-  (!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
-) {
-  themeToggleButtons.forEach((el) => el.dataset.theme = "dark");
-} else {
-  themeToggleButtons.forEach((el) => el.dataset.theme = "light");
-}
+  // Change the icons of the buttons based on previous settings or system theme
+  if (
+    localStorage.getItem("color-theme") === "dark" ||
+    (!("color-theme" in localStorage) &&
+      ((window.matchMedia("(prefers-color-scheme: dark)").matches && defaultTheme === "system") || defaultTheme === "dark"))
+  ) {
+    themeToggleButtons.forEach((el) => el.dataset.theme = "dark");
+  } else {
+    themeToggleButtons.forEach((el) => el.dataset.theme = "light");
+  }
 
-themeToggleButtons.forEach((el) => {
-  el.addEventListener("click", function () {
-    if (localStorage.getItem("color-theme")) {
-      if (localStorage.getItem("color-theme") === "light") {
-        document.documentElement.classList.add("dark");
-        document.documentElement.style.colorScheme = "dark";
-        localStorage.setItem("color-theme", "dark");
+  // Add click event handler to the buttons
+  themeToggleButtons.forEach((el) => {
+    el.addEventListener("click", function () {
+      if (localStorage.getItem("color-theme")) {
+        if (localStorage.getItem("color-theme") === "light") {
+          setDarkTheme();
+          localStorage.setItem("color-theme", "dark");
+        } else {
+          setLightTheme();
+          localStorage.setItem("color-theme", "light");
+        }
       } else {
-        document.documentElement.classList.remove("dark");
-        document.documentElement.style.colorScheme = "light";
-        localStorage.setItem("color-theme", "light");
+        if (document.documentElement.classList.contains("dark")) {
+          setLightTheme();
+          localStorage.setItem("color-theme", "light");
+        } else {
+          setDarkTheme();
+          localStorage.setItem("color-theme", "dark");
+        }
       }
-    } else {
-      if (document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.remove("dark");
-        document.documentElement.style.colorScheme = "light";
-        localStorage.setItem("color-theme", "light");
-      } else {
-        document.documentElement.classList.add("dark");
-        document.documentElement.style.colorScheme = "dark";
-        localStorage.setItem("color-theme", "dark");
-      }
-    }
-    el.dataset.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+      el.dataset.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    });
   });
-});
+
+  // Listen for system theme changes
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    if (defaultTheme === "system" && !("color-theme" in localStorage)) {
+      e.matches ? setDarkTheme() : setLightTheme();
+      themeToggleButtons.forEach((el) =>
+        el.dataset.theme = document.documentElement.classList.contains("dark") ? "dark" : "light"
+      );
+    }
+  });
+})();
