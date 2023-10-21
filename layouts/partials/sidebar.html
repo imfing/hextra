@@ -19,7 +19,7 @@
     <ul class="flex flex-col gap-1 md:hidden">
       <!-- Nav -->
       {{ template "sidebar-main" (dict "context" site.Home "pageURL" $pageURL "page" $context "toc" true) -}}
-      {{ template "sidebar-footer" }}
+      {{ partialCached "sidebar/footer" $context }}
     </ul>
 
     <!-- Sidebar on large screen -->
@@ -29,7 +29,7 @@
     {{- else -}}
       <ul class="flex flex-col gap-1 max-md:hidden">
         {{ template "sidebar-main" (dict "context" $navRoot "page" $context  "pageURL" $pageURL) }}
-        {{ template "sidebar-footer" }}
+        {{ partialCached "sidebar/footer" $context }}
       </ul>
     {{ end -}}
   </div>
@@ -122,7 +122,7 @@
   {{ end }}
 {{- end -}}
 
-{{- define "sidebar-footer" -}}
+{{- define "partials/sidebar/footer" -}}
   {{- range site.Menus.sidebar -}}
     {{- $name := or (T .Identifier) .Name -}}
     {{ if eq .Params.type "separator" }}
@@ -150,12 +150,12 @@
   >
     {{- .title -}}
     {{- with .context }}
-      {{- if or .RegularPages .Sections }}{{ partialCached "sidebear-collapsible-button" . }}{{ end -}}
+      {{- if or .RegularPages .Sections }}{{ partialCached "sidebar/collapsible-button" . }}{{ end -}}
     {{ end -}}
   </a>
 {{- end -}}
 
-{{- define "partials/sidebear-collapsible-button" -}}
+{{- define "partials/sidebar/collapsible-button" -}}
   <span class="hextra-sidebar-collapsible-button">
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5 hover:bg-gray-800/5 dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="origin-center transition-transform rtl:-rotate-180"></path></svg>
   </span>
