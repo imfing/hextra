@@ -1,0 +1,64 @@
+<aside class="sidebar-container flex flex-col print:hidden md:top-16 md:shrink-0 md:w-64 md:self-start max-md:[transform:translate3d(0,-100%,0)] md:sticky">
+  {{- partialCached "sidebar/mobile-search" . -}}
+
+  <div class="hextra-scrollbar overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
+    <ul class="flex flex-col gap-1 max-md:hidden">
+      {{ partial "sidebar/tree" (dict "context" .FirstSection "page" . "level" 0) }}
+    </ul>
+  </div>
+</aside>
+
+{{- define "partials/sidebar/mobile-search" -}}
+  <div class="px-4 pt-4 md:hidden">
+    {{- partialCached "search.html" . -}}
+  </div>
+{{- end -}}
+
+{{- define "partials/sidebar/link" -}}
+  {{- $external := strings.HasPrefix .link "http" -}}
+  {{- $open := .open | default true -}}
+  <a
+    class="flex items-center justify-between gap-2 cursor-pointer rounded px-2 py-1.5 text-sm transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
+    text-gray-500 hover:bg-gray-100 hover:text-gray-900 contrast-more:border contrast-more:border-transparent contrast-more:text-gray-900 contrast-more:hover:border-gray-900 dark:text-neutral-400 dark:hover:bg-primary-100/5 dark:hover:text-gray-50 contrast-more:dark:text-gray-50 contrast-more:dark:hover:border-gray-50"
+    href="{{ .link }}"
+    {{ if $external }}target="_blank" rel="noreferer"{{ end }}
+  >
+    {{- .title -}}
+    {{- with .context }}
+      {{- if or .RegularPages .Sections }}{{ partialCached "sidebar/collapsible-button" . }}{{ end -}}
+    {{ end -}}
+  </a>
+{{- end -}}
+
+{{- define "partials/sidebar/tree" -}}
+  {{- if ge .level 4 -}}
+    {{- return -}}
+  {{- end -}}
+
+  {{- $context := .context -}}
+  {{- $page := .page }}
+  {{- $level := .level -}}
+
+  {{- with $items := union .context.RegularPages .context.Sections -}}
+    {{- if eq $level 0 -}}
+      {{- range $items.ByWeight }}
+        <li class="">
+          {{- partial "sidebar/link" (dict "context" . "title" .LinkTitle "link" .RelPermalink) -}}
+          {{- partial "sidebar/tree" (dict "context" . "page" $page "level" (add $level 1)) -}}
+        </li>
+      {{- end -}}
+    {{- else -}}
+      <div class="pt-1 ltr:pr-0 overflow-hidden transition-all ease-in-out duration-200">
+        <ul class='relative flex flex-col gap-1 before:absolute before:inset-y-1 before:w-px before:bg-gray-200 before:content-[""] ltr:ml-3 ltr:pl-3 ltr:before:left-0 rtl:mr-3 rtl:pr-3 rtl:before:right-0 dark:before:bg-neutral-800'>
+          {{- range $items.ByWeight }}
+            {{- $title := .LinkTitle | default .File.BaseFileName -}}
+            <li class="flex flex-col gap-1">
+              {{- partial "sidebar/link" (dict "context" . "title" $title "link" .RelPermalink) -}}
+              {{- partial "sidebar/tree" (dict "context" . "page" $page "level" (add $level 1)) -}}
+            </li>
+          {{- end -}}
+        </ul>
+      </div>
+    {{- end -}}
+  {{- end }}
+{{- end -}}

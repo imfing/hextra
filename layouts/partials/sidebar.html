@@ -6,7 +6,6 @@
 {{- $sidebarClass := cond $disableSidebar (cond $displayPlaceholder "md:hidden xl:block" "md:hidden") "md:sticky" -}}
 
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
-{{- $navPages := union $navRoot.RegularPages $navRoot.Sections -}}
 {{- $pageURL := $context.RelPermalink -}}
 
 
