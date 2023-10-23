@@ -1,0 +1,32 @@
+{{ $context := . -}}
+
+{{- $pages := union .RegularPages .Sections -}}
+{{- $pages = where $pages "Params.sidebar.exclude" "!=" true -}}
+
+{{- $data := slice -}}
+
+{{- range $pages.ByWeight -}}
+  {{ $structure := (partial "sidebar/section-walk" .) | unmarshal -}}
+  {{ $data = $data | append $structure -}}
+{{ end -}}
+
+{{- define "partials/sidebar/section-walk" -}}
+  {{- with . -}}
+  {
+    "title": "{{ .LinkTitle | default .File.BaseFileName }}",
+    "link": "{{ .RelPermalink }}",
+    "open": {{ .Params.sidebar.open | default false }}
+    {{- if .IsSection }},
+    "section": [
+      {{ $pages := union .RegularPages .Sections -}}
+      {{ $pages = where $pages "Params.sidebar.exclude" "!=" true -}}
+      {{ range $index, $page := $pages.ByWeight -}}
+        {{ partial "sidebar/section-walk" . }}{{ if not (ge $index (sub (len $pages) 1)) }},{{ end -}}
+      {{ end -}}
+    ]
+    {{ end -}}
+  }
+  {{- end }}
+{{- end -}}
+
+{{ return ($data | jsonify) }}
