@@ -15,6 +15,7 @@
   {
     "title": "{{ .LinkTitle | default .File.BaseFileName }}",
     "link": "{{ .RelPermalink }}",
+    "toc": {{ partial "sidebar/section-page-toc" . }},
     "open": {{ .Params.sidebar.open | default false }}
     {{- if .IsSection }},
     "section": [
@@ -29,4 +30,22 @@
   {{- end }}
 {{- end -}}
 
-{{ return ($data | jsonify) }}
+{{- define "partials/sidebar/section-page-toc" -}}
+  {{/* Get level 2 headings list used mainly for mobile navigation */}}
+  [
+    {{- with .Fragments.Headings -}}
+      {{/* Loop over level 1 headings */}}
+      {{- range . }}
+        {{- with .Headings }}
+          {{ $headings := . }}
+          {{- range $index, $heading := $headings }}
+            {{ $heading.Title | jsonify (dict "noHTMLEscape" true) }}
+            {{- if not (ge $index (sub (len $headings) 1)) }},{{ end -}}
+          {{ end -}}
+        {{- end -}}
+      {{ end -}}
+    {{- end -}}
+  ]
+{{- end -}}
+
+{{ return ($data | jsonify (dict "noHTMLEscape" true)) }}
