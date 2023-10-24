@@ -1,0 +1,13 @@
+{{- $context := .context -}}
+{{- $page := .page -}}
+{{- $pageLink := .page.RelPermalink -}}
+{{- range .tree -}}
+  {{- $active := eq $pageLink .link -}}
+  {{- $shouldOpen := or (.open) (hasPrefix $pageLink .link) $active | default true }}
+  <li class="{{ if $shouldOpen }}open{{ end }}">
+    {{- template "sidebar-item-link" (dict "context" . "active" $active "title" .title "link" .link) -}}
+    {{- if .section -}}
+      {{- partial "sidebar/render-tree-branch" (dict "context" $context "entry" .section "page" $page) -}}
+    {{- end -}}
+  </li>
+{{ end }}
