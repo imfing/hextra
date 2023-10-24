@@ -16,14 +16,15 @@
   <div class="hextra-scrollbar overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
     <ul class="flex flex-col gap-1 md:hidden">
       {{/* Mobile Navigation */}}
-      {{/* TODO: add back mobile navigation tree */}}
+      {{ $treeMobile := partialCached "sidebar/section-tree" site.Home site.Home }}
+      {{ template "sidebar-render-tree" (dict "context" site.Home "page" $context "tree" ($treeMobile | unmarshal)) }}
       {{ partialCached "sidebar/extra" $context }}
     </ul>
 
     {{/* Sidebar on large screen */}}
     <ul class="flex flex-col gap-1 max-md:hidden">
       {{ $tree := partialCached "sidebar/section-tree" $navRoot $navRoot }}
-      {{ partial "sidebar/render-tree" (dict "context" $navRoot "page" $context "tree" ($tree | unmarshal)) }}
+      {{ template "sidebar-render-tree" (dict "context" $navRoot "page" $context "tree" ($tree | unmarshal)) }}
       {{ partialCached "sidebar/extra" $context }}
     </ul>
   </div>
@@ -31,7 +32,7 @@
   {{ partial "sidebar/switches" (dict "context" $context "disableSidebar" $disableSidebar) }}
 </aside>
 
-{{- define "partials/sidebar/render-tree" -}}
+{{- define "sidebar-render-tree" -}}
   {{- $context := .context -}}
   {{- $page := .page -}}
   {{- $pageLink := .page.RelPermalink -}}
@@ -39,15 +40,15 @@
     {{- $active := eq $pageLink .link -}}
     {{- $shouldOpen := or (.open) (hasPrefix $pageLink .link) $active | default true }}
     <li class="{{ if $shouldOpen }}open{{ end }}">
-      {{- partial "sidebar/link" (dict "context" . "active" $active "title" .title "link" .link) -}}
+      {{- template "sidebar-item-link" (dict "context" . "active" $active "title" .title "link" .link) -}}
       {{- if .section -}}
-        {{- partial "sidebar/render-tree-branch" (dict "context" $context "entry" .section "page" $page) -}}
+        {{- template "sidebar-render-tree-branch" (dict "context" $context "entry" .section "page" $page) -}}
       {{- end -}}
     </li>
   {{ end }}
 {{- end -}}
 
-{{- define "partials/sidebar/render-tree-branch" -}}
+{{- define "sidebar-render-tree-branch" -}}
   {{- $context := .context -}}
   {{- $page := .page -}}
   {{- $entry := .entry -}}
@@ -59,9 +60,9 @@
         {{- $active := eq $pageLink .link -}}
         {{- $shouldOpen := or (.open) (hasPrefix $pageLink .link) $active | default true }}
         <li class="flex flex-col gap-1 {{ if $shouldOpen }}open{{ end }}">
-          {{- partial "sidebar/link" (dict "context" . "active" $active "title" .title "link" .link) -}}
+          {{- template "sidebar-item-link" (dict "context" . "active" $active "title" .title "link" .link) -}}
           {{- if .section -}}
-            {{- partial "sidebar/render-tree-branch" (dict "context" $context "entry" .section "page" $page) -}}
+            {{- template "sidebar-render-tree-branch" (dict "context" $context "entry" .section "page" $page) -}}
           {{- end -}}
         </li>
       {{- end -}}
@@ -75,7 +76,7 @@
   </div>
 {{- end -}}
 
-{{- define "partials/sidebar/link" -}}
+{{- define "sidebar-item-link" -}}
   {{- $external := strings.HasPrefix .link "http" -}}
   <a
     class="flex items-center justify-between gap-2 cursor-pointer rounded px-2 py-1.5 text-sm transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
