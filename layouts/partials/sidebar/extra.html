@@ -5,6 +5,6 @@
       <span class="cursor-default">{{ $name }}</span>
     </li>
   {{ else }}
-    <li>{{ template "sidebar-item-link" dict "active" false "title" $name "link" (.URL | relLangURL) }}</li>
+    <li>{{ partial "sidebar/link" (dict "active" false "title" $name "link" (.URL | relLangURL)) }}</li>
   {{ end }}
 {{- end -}}
