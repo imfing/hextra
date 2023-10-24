@@ -87,7 +87,7 @@
     href="{{ .link }}"
     {{ if $external }}target="_blank" rel="noreferer"{{ end }}
   >
-    {{- .title -}}
+    {{- .title | htmlUnescape | safeHTML -}}
     {{- with .context }}
       {{- if or .RegularPages .Sections .section }}{{ partialCached "sidebar/collapsible-button" . }}{{ end -}}
     {{ end -}}
