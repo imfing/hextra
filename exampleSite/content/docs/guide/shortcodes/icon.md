@@ -8,7 +8,9 @@ To use this shortcode inline, inline shortcode needs to be enabled in the config
 enableInlineShortcodes: true
 ```
 
-The list of available icons can be found in `data/icons.yaml`.
+List of available icons can be found in [`data/icons.yaml`](https://github.com/imfing/hextra/blob/main/data/icons.yaml).
+
+<!--more-->
 
 ## Example
 
@@ -25,14 +27,20 @@ The list of available icons can be found in `data/icons.yaml`.
 
 [Heroicons](https://v1.heroicons.com/) v1 outline icons are available out of the box.
 
-You can also add your own icons by adding them to `data/icon.yaml`:
+### How to add your own icons
 
-```yaml {filename="data/icon.yaml"}
+Create `data/icons.yaml` file, then add your own SVG icons in the following format:
+
+```yaml {filename="data/icons.yaml"}
 your-icon: <svg>your icon svg content</svg>
 ```
 
-which can then be used like this:
+It then can be used in the shortcode like this:
 
 ```
 {{</* icon "your-icon" */>}}
+
+{{</* card icon="your-icon" */>}}
 ```
+
+Tip: [Iconify Design](https://iconify.design/) is a great place to find SVG icons for your site.
