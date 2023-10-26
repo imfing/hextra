@@ -5,7 +5,14 @@
 {{- $imageClass := .Get "imageClass" -}}
 {{- $style := .Get "style" -}}
 {{- $icon := .Get "icon" -}}
+{{- $link := .Get "link" -}}
+{{- $external := and $link (strings.HasPrefix $link "http") -}}
 
+{{ if $link }}
+  <a
+    href="{{ $link }}"{{ with $external }} target="_blank" rel="noreferrer"{{ end }}
+  >
+{{ end }}
 
 <div
   {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
@@ -26,3 +33,7 @@
     <img src="{{ . }}" class="absolute max-w-none {{ $imageClass }}" alt="{{ $title }}" />
   {{- end -}}
 </div>
+
+{{- if $link }}
+  </a>
+{{ end }}
