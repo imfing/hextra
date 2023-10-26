@@ -7,15 +7,11 @@
 {{- $icon := .Get "icon" -}}
 {{- $link := .Get "link" -}}
 
-{{ if $link }}
-  {{- $external := hasPrefix $link "http" -}}
-  {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
-  <a
-    href="{{ $href }}" {{ with $external }} target="_blank" rel="noreferrer"{{ end -}}
-  >
-{{ end }}
+{{- $external := hasPrefix $link "http" -}}
+{{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
 
-<div
+<a
+  {{ with $link }}href="{{ $href }}" {{ with $external }} target="_blank" rel="noreferrer"{{ end }}{{ end }}
   {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
   class="{{ $class }} hextra-feature-card relative overflow-hidden rounded-3xl border border-gray-200 hover:border-gray-300 dark:border-neutral-800 dark:hover:border-neutral-700 before:pointer-events-none before:absolute before:inset-0 before:bg-glass-gradient"
 >
@@ -33,8 +29,4 @@
   {{- with $image -}}
     <img src="{{ . }}" class="absolute max-w-none {{ $imageClass }}" alt="{{ $title }}" />
   {{- end -}}
-</div>
-
-{{- if $link }}
-  </a>
-{{ end -}}
+</a>
