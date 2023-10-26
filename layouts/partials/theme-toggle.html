@@ -1,6 +1,8 @@
 {{- $hideLabel := .hideLabel | default false -}}
 
 {{- $changeTheme := (T "changeTheme") | default "Change theme" -}}
+{{- $light := (T "light") | default "Light" -}}
+{{- $dark := (T "dark") | default "Dark" -}}
 
 
 <button
@@ -8,12 +10,12 @@
   data-theme="light"
   class="theme-toggle group h-7 rounded-md px-2 text-left text-xs font-medium text-gray-600 transition-colors dark:text-gray-400 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100/5 dark:hover:text-gray-50"
   type="button"
-  aria-label="Toggle Dark Mode"
+  aria-label="{{ $changeTheme }}"
 >
   <div class="flex items-center gap-2 capitalize">
     {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12 class=\"group-data-[theme=light]:hidden\"") -}}
-    {{- if not $hideLabel }}<span class="group-data-[theme=light]:hidden">Light</span>{{ end -}}
+    {{- if not $hideLabel }}<span class="group-data-[theme=light]:hidden">{{ $light }}</span>{{ end -}}
     {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12 class=\"group-data-[theme=dark]:hidden\"") -}}
-    {{- if not $hideLabel }}<span class="group-data-[theme=dark]:hidden">Dark</span>{{ end -}}
+    {{- if not $hideLabel }}<span class="group-data-[theme=dark]:hidden">{{ $dark }}</span>{{ end -}}
   </div>
 </button>
