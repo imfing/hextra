@@ -49,9 +49,8 @@
 
 <a
   class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
-  href="{{ $href }}"
-  {{- if $external }}
-    target="_blank" rel="noreferrer"
+  {{- if $link -}}
+    href="{{ $href }}" {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
   {{- end -}}
 >
   {{- with $image -}}
