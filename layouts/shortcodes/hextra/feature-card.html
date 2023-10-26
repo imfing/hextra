@@ -6,11 +6,12 @@
 {{- $style := .Get "style" -}}
 {{- $icon := .Get "icon" -}}
 {{- $link := .Get "link" -}}
-{{- $external := and $link (strings.HasPrefix $link "http") -}}
 
 {{ if $link }}
+  {{- $external := hasPrefix $link "http" -}}
+  {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
   <a
-    href="{{ $link }}"{{ with $external }} target="_blank" rel="noreferrer"{{ end }}
+    href="{{ $href }}" {{ with $external }} target="_blank" rel="noreferrer"{{ end -}}
   >
 {{ end }}
 
@@ -36,4 +37,4 @@
 
 {{- if $link }}
   </a>
-{{ end }}
+{{ end -}}
