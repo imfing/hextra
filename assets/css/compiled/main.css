@@ -1136,9 +1136,6 @@ video {
 .pr-\[max\(env\(safe-area-inset-right\)\2c 1\.5rem\)\] {
   padding-right: max(env(safe-area-inset-right),1.5rem);
 }
-.pt-1 {
-  padding-top: 0.25rem;
-}
 .pt-4 {
   padding-top: 1rem;
 }
@@ -1385,9 +1382,6 @@ video {
 }
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .\[-webkit-tap-highlight-color\:transparent\] {
   -webkit-tap-highlight-color: transparent;
@@ -2480,6 +2474,7 @@ article details > summary::before {
 }
 .sidebar-container li.open > div {
   height: auto;
+  padding-top: 0.25rem;
 }
 .sidebar-container li.open > a > span > svg > path {
   --tw-rotate: 90deg;

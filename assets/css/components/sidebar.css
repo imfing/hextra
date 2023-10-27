@@ -13,7 +13,7 @@
     @apply h-0;
   }
   li.open > div {
-    @apply h-auto;
+    @apply h-auto pt-1;
   }
   li.open > a > span > svg > path {
     @apply rotate-90;
