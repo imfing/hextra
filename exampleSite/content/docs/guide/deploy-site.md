@@ -5,7 +5,7 @@ next: /docs/advanced
 ---
 
 Hugo generates static websites, allowing for flexible hosting options.
-This page provides detailed tutorials for deploying your Hextra site on various platforms.
+This page provides guides for deploying your Hextra site on various platforms.
 
 <!--more-->
 
