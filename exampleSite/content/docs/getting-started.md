@@ -14,6 +14,7 @@ You will be able to quickly get started by using the above template repository.
 <img src="https://docs.github.com/assets/cb-77734/mw-1440/images/help/repository/use-this-template-button.webp" width="500">
 
 We have provided a [GitHub Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow) which can help automatically build and deploy your site to GitHub Pages, and host it for free.
+For more options, check out [Deploy Site](../guide/deploy-site).
 
 [🌐 Demo ↗](https://imfing.github.io/hextra-starter-template/)
 
