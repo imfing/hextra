@@ -2241,7 +2241,7 @@ article details > summary::before {
 }
 .chroma .ln,
   .chroma .lnt:not(.hl > .lnt),
-  .chroma .hl {
+  .chroma .hl:not(.line) {
   min-width: 2.6rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -2250,7 +2250,7 @@ article details > summary::before {
 }
 :is(html[class~="dark"] .chroma .ln),:is(html[class~="dark"] 
   .chroma .lnt:not(.hl > .lnt)),:is(html[class~="dark"] 
-  .chroma .hl) {
+  .chroma .hl:not(.line)) {
   --tw-text-opacity: 1;
   color: rgb(212 212 212 / var(--tw-text-opacity));
 }
