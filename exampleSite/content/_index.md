@@ -57,7 +57,7 @@ layout: hextra-home
     subtitle="No dependency or Node.js is needed to use Hextra. Powered by Hugo, one of *the fastest* static site generators, building your site in just seconds with a single binary."
   >}}
   {{< hextra/feature-card
-    title="Reponsive with Dark Mode Included"
+    title="Responsive with Dark Mode Included"
     subtitle="Looks great on different screen sizes. Built-in dark mode support, with auto-switching based on user's system preference."
   >}}
   {{< hextra/feature-card
