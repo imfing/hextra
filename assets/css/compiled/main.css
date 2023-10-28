@@ -1765,50 +1765,6 @@ span:target + .subheading-anchor:after {
   --tw-text-opacity: 1;
   color: rgb(115 115 115 / var(--tw-text-opacity));
 }
-article.typesetting-article {
-  font-size: 17px;
-  font-feature-settings:
-    'rlig' 1,
-    'calt' 1;
-}
-article.typesetting-article h1 {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
-    font-size: 2.5rem;
-}
-article.typesetting-article h2 {
-  border-style: none;
-}
-article.typesetting-article a {
-  text-decoration-line: none;
-}
-article.typesetting-article a:hover {
-  text-decoration-line: underline;
-}
-article.typesetting-article p {
-  line-height: 2rem;
-}
-article.typesetting-article code {
-  border-style: none;
-}
-:is(html[class~="dark"] article.typesetting-article code) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 64 64 / var(--tw-bg-opacity));
-}
-:is(html[class~="dark"] article.typesetting-article pre code) {
-  background-color: transparent;
-}
-article.typesetting-article .subheading-anchor + a {
-  text-decoration-line: none;
-}
-article.typesetting-article .subheading-anchor + a::after {
-  content: var(--tw-content);
-  display: none;
-}
-article.typesetting-article .subheading-anchor + a:hover {
-  text-decoration-line: none;
-}
 article details > summary::-webkit-details-marker {
   display: none;
 }
