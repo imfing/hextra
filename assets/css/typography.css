@@ -1,33 +1,27 @@
 .content {
-  h1 {
+  :where(h1):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100;
   }
-  h2 {
+  :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-10 border-b pb-1 text-3xl border-neutral-200/70 contrast-more:border-neutral-400 dark:border-primary-100/10 contrast-more:dark:border-neutral-400;
   }
-  h3 {
+  :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-8 text-2xl;
   }
-  h4 {
+  :where(h4):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-8 text-xl;
   }
-  h5 {
+  :where(h5):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-8 text-lg;
   }
-  h6 {
+  :where(h6):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply font-semibold tracking-tight text-slate-900 dark:text-slate-100 mt-8 text-base;
   }
-  p {
+  :where(p):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply mt-6 leading-7 first:mt-0;
   }
-  .not-prose p {
-    @apply mt-0 leading-normal;
-  }
-  a {
+  :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply text-primary-600 underline decoration-from-font [text-underline-position:from-font];
-  }
-  .not-prose a {
-    @apply text-current no-underline;
   }
   blockquote {
     @apply mt-6 border-gray-300 italic text-gray-700 dark:border-gray-700 dark:text-gray-400 first:mt-0 ltr:border-l-2 ltr:pl-6 rtl:border-r-2 rtl:pr-6;
@@ -75,11 +69,8 @@
   pre:not(.code-block pre).mermaid {
     @apply bg-transparent rounded-none dark:bg-transparent;
   }
-  img {
+  :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply mx-auto my-4 rounded-md;
-  }
-  .not-prose img {
-    @apply m-0 rounded-none;
   }
   figure {
     figcaption {
