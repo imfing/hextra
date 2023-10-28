@@ -1151,6 +1151,9 @@ video {
 .text-center {
   text-align: center;
 }
+.align-middle {
+  vertical-align: middle;
+}
 .align-text-bottom {
   vertical-align: text-bottom;
 }
@@ -1402,7 +1405,7 @@ video {
 .\[word-break\:break-word\] {
   word-break: break-word;
 }
-.content h1 {
+.content :where(h1):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-top: 0.5rem;
   font-size: 2.25rem;
   font-weight: 700;
@@ -1410,11 +1413,11 @@ video {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity));
 }
-:is(html[class~="dark"] .content h1) {
+:is(html[class~="dark"] .content :where(h1):not(:where([class~=not-prose],[class~=not-prose] *))) {
   --tw-text-opacity: 1;
   color: rgb(241 245 249 / var(--tw-text-opacity));
 }
-.content h2 {
+.content :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-top: 2.5rem;
   border-bottom-width: 1px;
   border-color: rgb(229 229 229 / 0.7);
@@ -1427,24 +1430,24 @@ video {
 }
 @media (prefers-contrast: more) {
 
-  .content h2 {
+  .content :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
     --tw-border-opacity: 1;
     border-color: rgb(163 163 163 / var(--tw-border-opacity));
   }
 }
-:is(html[class~="dark"] .content h2) {
+:is(html[class~="dark"] .content :where(h2):not(:where([class~=not-prose],[class~=not-prose] *))) {
   border-color: hsl(var(--primary-hue) var(--primary-saturation) 94% / 0.1);
   --tw-text-opacity: 1;
   color: rgb(241 245 249 / var(--tw-text-opacity));
 }
 @media (prefers-contrast: more) {
 
-  :is(html[class~="dark"] .content h2) {
+  :is(html[class~="dark"] .content :where(h2):not(:where([class~=not-prose],[class~=not-prose] *))) {
     --tw-border-opacity: 1;
     border-color: rgb(163 163 163 / var(--tw-border-opacity));
   }
 }
-.content h3 {
+.content :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-top: 2rem;
   font-size: 1.5rem;
   font-weight: 600;
@@ -1452,11 +1455,11 @@ video {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity));
 }
-:is(html[class~="dark"] .content h3) {
+:is(html[class~="dark"] .content :where(h3):not(:where([class~=not-prose],[class~=not-prose] *))) {
   --tw-text-opacity: 1;
   color: rgb(241 245 249 / var(--tw-text-opacity));
 }
-.content h4 {
+.content :where(h4):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-top: 2rem;
   font-size: 1.25rem;
   font-weight: 600;
@@ -1464,11 +1467,11 @@ video {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity));
 }
-:is(html[class~="dark"] .content h4) {
+:is(html[class~="dark"] .content :where(h4):not(:where([class~=not-prose],[class~=not-prose] *))) {
   --tw-text-opacity: 1;
   color: rgb(241 245 249 / var(--tw-text-opacity));
 }
-.content h5 {
+.content :where(h5):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-top: 2rem;
   font-size: 1.125rem;
   font-weight: 600;
@@ -1476,11 +1479,11 @@ video {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity));
 }
-:is(html[class~="dark"] .content h5) {
+:is(html[class~="dark"] .content :where(h5):not(:where([class~=not-prose],[class~=not-prose] *))) {
   --tw-text-opacity: 1;
   color: rgb(241 245 249 / var(--tw-text-opacity));
 }
-.content h6 {
+.content :where(h6):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-top: 2rem;
   font-size: 1rem;
   font-weight: 600;
@@ -1488,31 +1491,23 @@ video {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity));
 }
-:is(html[class~="dark"] .content h6) {
+:is(html[class~="dark"] .content :where(h6):not(:where([class~=not-prose],[class~=not-prose] *))) {
   --tw-text-opacity: 1;
   color: rgb(241 245 249 / var(--tw-text-opacity));
 }
-.content p {
+.content :where(p):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-top: 1.5rem;
   line-height: 1.75rem;
 }
-.content p:first-child {
+.content :where(p):not(:where([class~=not-prose],[class~=not-prose] *)):first-child {
   margin-top: 0px;
 }
-.content .not-prose p {
-  margin-top: 0px;
-  line-height: 1.5;
-}
-.content a {
+.content :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
   --tw-text-opacity: 1;
   color: hsl(var(--primary-hue) var(--primary-saturation) 45% / var(--tw-text-opacity));
   text-decoration-line: underline;
   text-decoration-thickness: from-font;
   text-underline-position: from-font;
-}
-.content .not-prose a {
-  color: currentColor;
-  text-decoration-line: none;
 }
 .content blockquote {
   margin-top: 1.5rem;
@@ -1709,16 +1704,12 @@ video {
 :is(html[class~="dark"] .content pre:not(.code-block pre).mermaid) {
   background-color: transparent;
 }
-.content img {
+.content :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
   margin-left: auto;
   margin-right: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.375rem;
-}
-.content .not-prose img {
-  margin: 0px;
-  border-radius: 0px;
 }
 .content figure figcaption {
   margin-top: 0.5rem;
