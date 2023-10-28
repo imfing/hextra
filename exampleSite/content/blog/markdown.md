@@ -4,6 +4,10 @@ date: 2020-01-01
 authors:
   - name: John Doe
     link: https://example.com/johndoe
+tags:
+  - Markdown
+  - Example
+  - Guide
 excludeSearch: true
 ---
 

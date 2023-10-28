@@ -1,6 +1,6 @@
 {{ define "main" }}
-{{- $readMore := (T "readMore") | default "Read more →" -}}
-  <div class='mx-auto flex {{ partial "utils/page-width" . }}'>
+  {{- $readMore := (T "readMore") | default "Read more →" -}}
+  <div class="mx-auto flex {{ partial `utils/page-width` . }}">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
     <article class="w-full break-words flex min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main class="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
@@ -10,11 +10,20 @@
         {{ range .Pages.ByDate.Reverse }}
           <div class="mb-10">
             <h3><a style="color: inherit; text-decoration: none;" class="block font-semibold mt-8 text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-            <p class="opacity-80 mt-6 leading-7">
-              {{- partial "utils/page-description" . }}
-              <span class="inline-block"> <a class="text-[color:hsl(var(--primary-hue),100%,50%)] underline underline-offset-2 decoration-from-font" href="{{ .RelPermalink }}">{{ $readMore }}</a> </span>
+            {{- if site.Params.blog.list.displayTags -}}
+              {{ with .Params.tags }}
+                <p class="opacity-50 text-sm leading-7">
+                  {{- range . }}<a class="inline-block mr-2">#{{ . }}</a>{{ end -}}
+                </p>
+              {{ end -}}
+            {{- end -}}
+            <p class="opacity-80 mt-4 leading-7">{{- partial "utils/page-description" . -}}</p>
+            <p class="opacity-80 mt-1 leading-7">
+              <a class="text-[color:hsl(var(--primary-hue),100%,50%)] underline underline-offset-2 decoration-from-font" href="{{ .RelPermalink }}">
+                {{- $readMore -}}
+              </a>
             </p>
-            <p class="opacity-50 text-sm mt-6 leading-7">{{ partial "utils/format-date" .Date }}</p>
+            <p class="opacity-50 text-sm mt-4 leading-7">{{ partial "utils/format-date" .Date }}</p>
           </div>
         {{ end }}
       </main>

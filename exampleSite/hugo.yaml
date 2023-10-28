@@ -136,6 +136,10 @@ params:
     enable: true
     base: "https://github.com/imfing/hextra/edit/main/exampleSite/content"
 
+  blog:
+    list:
+      displayTags: true
+
   comments:
     enable: false
     type: giscus
