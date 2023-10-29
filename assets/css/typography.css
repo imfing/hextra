@@ -66,7 +66,7 @@
   :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply mx-auto my-4 rounded-md;
   }
-  figure {
+  :where(figure):not(:where([class~=not-prose],[class~=not-prose] *)) {
     figcaption {
       @apply text-sm text-gray-500 dark:text-gray-400 mt-2 block text-center;
     }
