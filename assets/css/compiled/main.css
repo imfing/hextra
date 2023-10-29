@@ -1687,11 +1687,11 @@ video {
   border-color: rgb(255 255 255 / 0.1);
   background-color: rgb(255 255 255 / 0.1);
 }
-.content :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose], [class~=not-prose] *)) {
+.content :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
   border-radius: 0px;
   background-color: transparent;
 }
-:is(html[class~="dark"] .content :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose], [class~=not-prose] *))) {
+:is(html[class~="dark"] .content :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *))) {
   background-color: transparent;
 }
 .content :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
