@@ -60,7 +60,7 @@
   :where(kbd):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply border-black border-opacity-[0.04] bg-opacity-[0.03] bg-black break-words rounded-md border py-0.5 px-[.25em] text-[.9em] dark:border-white/10 dark:bg-white/10;
   }
-  :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose], [class~=not-prose] *)) {
+  :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
     @apply bg-transparent rounded-none dark:bg-transparent;
   }
   :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
