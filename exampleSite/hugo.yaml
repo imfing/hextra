@@ -115,6 +115,7 @@ params:
     displayToggle: true
 
   footer:
+    enable: true
     displayCopyright: true
     displayPoweredBy: true
     width: normal
