@@ -7,7 +7,7 @@ prev: /docs/guide
 ## Directory Structure
 
 By default, Hugo searches for Markdown files in the `content` directory, and the structure of the directory determines the final output structure of your website.
-Take the example site as an example:
+Take this site as an example:
 
 <!--more-->
 
@@ -45,6 +45,28 @@ content
     └── post-1.md // <- /blog/post-1/
 ```
 
+## Layouts
+
+Hextra offers three layouts for different content types:
+
+| Layout    | Directory             | Features                                                         |
+| :-------- | :-------------------- | :--------------------------------------------------------------- |
+| `docs`    | `content/docs/`       | Ideal for structured documentation, same as this section.        |
+| `blog`    | `content/blog/`       | For blog postings, with both listing and detailed article views. |
+| `default` | All other directories | Single-page article view without sidebar.                        |
+
+To customize a section to mirror the behavior of a built-in layout, specify the desired type in the front matter of the section's `_index.md`.
+
+```yaml {filename="content/my-docs/_index.md"}
+---
+title: My Docs
+cascade:
+  type: docs
+---
+```
+
+The above example configuration ensures that the content files inside `content/my-docs/` will be treated as documentation (`docs` type) by default.
+
 ## Sidebar Navigation
 
 The sidebar navigation is generated automatically based on the content organization alphabetically. To manually configure the sidebar order, we can use the `weight` parameter in the front matter of the Markdown files.
@@ -62,7 +84,8 @@ weight: 2
 
 ## Configure Content Directory
 
-If we need to use a different directory for our content, we can do so by setting the [`contentDir`](https://gohugo.io/getting-started/configuration/#contentdir) parameter in our site configuration file.
+By default, the root `content/` directory is used by Hugo to build the site.
+If you need to use a different directory for content, for example `docs/`, this can be done by setting the [`contentDir`](https://gohugo.io/getting-started/configuration/#contentdir) parameter in the site configuration `hugo.yaml`.
 
 ## Add Images
 
