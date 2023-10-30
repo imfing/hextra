@@ -25,9 +25,6 @@
 
 
   <!-- Google Analytics -->
-  {{- with .Site.GoogleAnalytics -}}
-    {{- warnf "The `googleAnalytics` option is deprecated from Hugo v0.120.0, please use `services.googleAnalytics.ID`." -}}
-  {{- end -}}
   {{- if and (eq hugo.Environment "production") (or .Site.GoogleAnalytics .Site.Config.Services.GoogleAnalytics.ID) }}
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     {{ partial "google-analytics.html" . }}
