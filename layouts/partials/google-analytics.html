@@ -1,4 +1,10 @@
-{{ with .Site.GoogleAnalytics }}
+{{/* site.GoogleAnalytics is deprecated in Hugo v0.120.0 */}}
+{{/* it will be removed in a future version */}}
+{{- $gtagID := "" -}}
+{{- with site.GoogleAnalytics -}}{{ $gtagID = . }}{{- end -}}
+{{- with site.Config.Services.GoogleAnalytics.ID -}}{{ $gtagID = . }}{{- end -}}
+
+{{- with $gtagID }}
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
   <script>
@@ -10,4 +16,4 @@
 
     gtag("config", "{{ . }}");
   </script>
-{{ end }}
+{{ end -}}

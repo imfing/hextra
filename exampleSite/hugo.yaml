@@ -7,7 +7,9 @@ enableGitInfo: true
 # enableEmoji: false
 hasCJKLanguage: true
 
-# googleAnalytics: G-XXXXXXXXXX
+# services:
+#   googleAnalytics:
+#     ID: G-MEASUREMENT_ID
 
 outputs:
   home: [HTML]

@@ -252,8 +252,10 @@ excludeSearch: true
 
 ### Google Analytics
 
-To enable Google Analytics, set the `googleAnalytics` parameter in the config file:
+To enable [Google Analytics](https://marketingplatform.google.com/about/analytics/), set `services.googleAnalytics.ID` flag in `hugo.yaml`:
 
 ```yaml {filename="hugo.yaml"}
-googleAnalytics: G-XXXXXXXXXX
+services:
+  googleAnalytics:
+    ID: G-MEASUREMENT_ID
 ```
