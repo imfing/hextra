@@ -14,11 +14,11 @@ This page provides guides for deploying your Hextra site on various platforms.
 
 [GitHub Pages](https://docs.github.com/pages) is the recommended way to deploy and host your website for free.
 
-If you bootstrap the site using [hextra-starter-template][hextra-starter-template], it has provided GitHub Actions workflow out-of-the-box that helps automatically deploy to GitHub Pages.
+If you bootstrap the site using [hextra-starter-template](https://github.com/imfing/hextra-starter-template), it has provided GitHub Actions workflow out-of-the-box that helps automatically deploy to GitHub Pages.
 
 {{% details title="GitHub Actions Configuration" closed="true" %}}
 
-Below is an example configuration from [hextra-starter-template][hextra-starter-template]:
+Below is an example configuration from [hextra-starter-template](https://github.com/imfing/hextra-starter-template):
 
 ```yaml {filename=".github/workflows/pages.yaml"}
 # Sample workflow for building and deploying a Hugo site to GitHub Pages
@@ -104,7 +104,7 @@ jobs:
   ![](https://user-images.githubusercontent.com/5097752/266784808-99676430-884e-42ab-b901-f6534a0d6eee.png)
 {{< /callout >}}
 
-By default, the above GitHub Actions workflow assumes that the site is deploying to `https://<USERNAME>.github.io/<REPO>/`.
+By default, the above GitHub Actions workflow `.github/workflows/pages.yaml` assumes that the site is deploying to `https://<USERNAME>.github.io/<REPO>/`.
 
 If you are deploying to `https://<USERNAME>.github.io/` then modify the `--baseURL`:
 
@@ -158,6 +158,4 @@ Check [Hugo on Netlify](https://docs.netlify.com/integrations/frameworks/hugo/) 
    1. Set Build Command to `hugo --gc --minify`
    2. Set Install Command to `yum install golang`
 
-![image](https://github.com/imfing/hextra/assets/5097752/887d949b-8d05-413f-a2b4-7ab92192d0b3)
-
-[hextra-starter-template]: https://github.com/imfing/hextra-starter-template
+![Vercel Deployment Configuration](https://github.com/imfing/hextra/assets/5097752/887d949b-8d05-413f-a2b4-7ab92192d0b3)
