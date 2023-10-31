@@ -59,7 +59,7 @@
     {{- if .Title }}
       <li class="my-2 scroll-my-6 scroll-py-6">
         <a class="{{ $class }} inline-block text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 contrast-more:text-gray-900 contrast-more:underline contrast-more:dark:text-gray-50 w-full break-words" href="#{{ anchorize .ID }}">
-          {{- .Title | safeHTML }}
+          {{- .Title | safeHTML | plainify }}
         </a>
       </li>
     {{- end -}}
