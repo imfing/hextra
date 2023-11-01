@@ -1,16 +1,13 @@
-# Navbar
-documentation: "ドキュメンテーション"
-blog: "ブログ"
-about: "このサイトについて"
-
-more: "もっと"
-hugoDocs: "Hugoドキュメント ↗"
-
-searchPlaceholder: "検索ドキュメント..."
-noResultsFound: "検索結果が見つかりませんでした"
-
-onThisPage: "このページでは"
-editThisPage: "このページをGitHubで編集する →"
+backToTop: "トップにスクロール"
+changeLanguage: "言語を変更"
+changeTheme: "テーマを変更"
+copyright: "© 2023 Hextra プロジェクト。"
+dark: "ダーク"
+editThisPage: "このページをGitHubで編集 →"
 lastUpdated: "最終更新日"
-
-copyright: "© 2023 Hextra Project."
+light: "ライト"
+noResultsFound: "結果が見つかりませんでした。"
+onThisPage: "このページの内容"
+poweredBy: "提供元 Hextra"
+readMore: "もっと読む →"
+searchPlaceholder: "検索..."
