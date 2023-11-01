@@ -1,10 +1,3 @@
-documentation: "文档"
-showcase: "项目展示"
-blog: "博客"
-about: "关于"
-more: "更多"
-hugoDocs: "Hugo 文档 ↗"
-
 backToTop: "返回顶部"
 changeLanguage: "切换语言"
 changeTheme: "切换主题"

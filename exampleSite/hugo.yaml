@@ -22,14 +22,10 @@ languages:
     languageName: English
     weight: 1
     title: Hextra
-  ja:
-    languageName: 日本語
-    weight: 2
-    title: "Hextra テーマ"
   zh-cn:
     languageName: 简体中文
     languageCode: zh-CN
-    weight: 3
+    weight: 2
     title: Hextra
 
 module:
