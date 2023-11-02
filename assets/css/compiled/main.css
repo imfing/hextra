@@ -2501,6 +2501,19 @@ nav .search-wrapper {
   --tw-shadow-color: rgb(115 115 115 / 0.4);
   --tw-shadow: var(--tw-shadow-colored);
 }
+@supports (
+  ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)))
+) {
+  .code-copy-btn {
+    --tw-bg-opacity: .85;
+    --tw-backdrop-blur: blur(12px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+            backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  }
+  :is(html[class~="dark"] .code-copy-btn) {
+    --tw-bg-opacity: 0.8;
+  }
+}
 html {
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
