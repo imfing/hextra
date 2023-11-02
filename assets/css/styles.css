@@ -8,6 +8,7 @@
 @import "components/sidebar.css";
 @import "components/navbar.css";
 @import "components/scrollbar.css";
+@import "components/code-copy.css";
 
 html {
   @apply text-base antialiased;
