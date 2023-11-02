@@ -1,0 +1,7 @@
+@supports (
+  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
+) {
+  .code-copy-btn {
+    @apply backdrop-blur-md bg-opacity-[.85] dark:bg-opacity-80;
+  }
+}
