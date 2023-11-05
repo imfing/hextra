@@ -5,7 +5,7 @@ weight: 2
 
 Hugo reads its configuration from `hugo.yaml` in the root of your Hugo site.
 The config file is where you can configure all aspects of your site.
-You can find the config file for this site in `exampleSite/hugo.yaml` as a good starting point.
+Check out the config file for this site [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) on GitHub to get a comprehensive idea of available settings and best practices.
 
 <!--more-->
 
@@ -132,7 +132,7 @@ params:
     base: "https://github.com/your-username/your-repo/edit/main"
 ```
 
-The edit links will be automatically generated for each page.
+The edit links will be automatically generated for each page based on the provided url as root directory.
 If you want to set edit link for a specific page, you can set the `params.editURL` parameter in the front matter of the page:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
@@ -181,6 +181,26 @@ Include both `favicon.ico` and `favicon.svg` files in your project to ensure you
 While `favicon.ico` is generally for older browsers, `favicon.svg` is supported by modern ones. The optional `favicon-dark.svg` can be included for a tailored experience in dark mode.
 Feel free to use tools like [favicon.io](https://favicon.io/) or [favycon](https://github.com/ruisaraiva19/favycon) to generate these icons.
 
+### Theme Configuration
+
+Use the `theme` setting to configure the default theme mode and toggle button, allowing visitors to switch between light or dark mode.
+
+```yaml {filename="hugo.yaml"}
+params:
+  theme:
+    # light | dark | system
+    default: system
+    displayToggle: true
+```
+
+Options for `theme.default`:
+
+- `light` - always use light mode
+- `dark` - always use dark mode
+- `system` - sync with the operating system setting (default)
+
+The `theme.displayToggle` parameter allows you to display a toggle button for changing themes.
+When set to `true`, visitors can switch between light or dark mode, overriding the default setting.
 
 ### Page Width
 
@@ -193,16 +213,49 @@ params:
     width: wide
 ```
 
-There are three available options: `full`, `wide`, and `normal`.
-By default, the page width is set to `normal`.
+There are three available options: `full`, `wide`, and `normal`. By default, the page width is set to `normal`.
 
 Similarly, the width of the navbar and footer can be customized by the `params.navbar.width` and `params.footer.width` parameters.
 
+### Search Index
+
+Full-text search powered by [FlexSearch](https://github.com/nextapps-de/flexsearch) is enabled by default.
+To customize the search index, set the `params.search.flexsearch.index` parameter in the config file:
+
+```yaml {filename="hugo.yaml"}
+params:
+  # Search
+  search:
+    enable: true
+    type: flexsearch
+
+    flexsearch:
+      # index page by: content | summary | heading | title
+      index: content
+```
+
+Options for `flexsearch.index`:
+
+- `content` - full content of the page (default)
+- `summary` - summary of the page, see [Hugo Content Summaries](https://gohugo.io/content-management/summaries/) for more details
+- `heading` - level 1 and level 2 headings
+- `title` - only include the page title
+
+To exclude a page from the search index, set the `excludeSearch: true` in the front matter of the page:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+excludeSearch: true
+---
+```
 
 ### Google Analytics
 
-To enable Google Analytics, set the `googleAnalytics` parameter in the config file:
+To enable [Google Analytics](https://marketingplatform.google.com/about/analytics/), set `services.googleAnalytics.ID` flag in `hugo.yaml`:
 
 ```yaml {filename="hugo.yaml"}
-googleAnalytics: G-XXXXXXXXXX
+services:
+  googleAnalytics:
+    ID: G-MEASUREMENT_ID
 ```

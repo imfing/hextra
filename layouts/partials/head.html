@@ -25,7 +25,7 @@
 
 
   <!-- Google Analytics -->
-  {{- if and .Site.GoogleAnalytics (eq hugo.Environment "production") }}
+  {{- if and (eq hugo.Environment "production") (or .Site.GoogleAnalytics .Site.Config.Services.GoogleAnalytics.ID) }}
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     {{ partial "google-analytics.html" . }}
   {{- end }}
@@ -33,12 +33,24 @@
 
   <script>
     /* Initialize light/dark mode */
-    if (localStorage.getItem("color-theme") === "dark" || (!("color-theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+    const defaultTheme = '{{ site.Params.theme.default | default `system`}}';
+
+    const setDarkTheme = () => {
       document.documentElement.classList.add("dark");
       document.documentElement.style.colorScheme = "dark";
-    } else {
+    }
+    const setLightTheme = () => {
       document.documentElement.classList.remove("dark");
       document.documentElement.style.colorScheme = "light";
+    }
+
+    if ("color-theme" in localStorage) {
+      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
+    } else {
+      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
+      if (defaultTheme === "system") {
+        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
+      }
     }
   </script>
 

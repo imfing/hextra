@@ -7,7 +7,7 @@ sidebar:
   open: true
 ---
 
-Explore the following sections to learn to compose content using Hextra:
+Explore the following sections to learn how to use Hextra:
 
 <!--more-->
 
@@ -19,4 +19,5 @@ Explore the following sections to learn to compose content using Hextra:
   {{< card link="latex" title="LaTeX" icon="variable" >}}
   {{< card link="diagrams" title="Diagrams" icon="chart-square-bar" >}}
   {{< card link="shortcodes" title="Shortcodes" icon="template" >}}
+  {{< card link="deploy-site" title="Deploy Site" icon="server" >}}
 {{< /cards >}}

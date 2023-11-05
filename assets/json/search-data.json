@@ -1,3 +1,10 @@
+{{/* FlexSearch Index Data */}}
+{{- $indexType := site.Params.search.flexsearch.index | default "content" -}}
+
+{{- if not (in (slice "content" "summary" "heading" "title" ) $indexType) -}}
+  {{- errorf "unknown flexsearch index type: %s" $indexType -}}
+{{- end -}}
+
 {{- $pages := where .Site.Pages "Kind" "in" (slice "page" "section") -}}
 {{- $pages = where $pages "Params.excludeSearch" "!=" true -}}
 {{- $pages = where $pages "Content" "!=" "" -}}
@@ -7,7 +14,7 @@
 {{- range $index, $page := $pages -}}
   {{- $pageTitle := $page.LinkTitle | default $page.File.BaseFileName -}}
   {{- $pageLink := $page.RelPermalink -}}
-  {{- $data := partial "utils/fragments" $page -}}
+  {{- $data := partial "utils/fragments" (dict "context" $page "type" $indexType) -}}
   {{- $output = $output | merge (dict $pageLink (dict "title" $pageTitle "data" $data)) -}}
 {{- end -}}
 

@@ -7,7 +7,9 @@ enableGitInfo: true
 # enableEmoji: false
 hasCJKLanguage: true
 
-# googleAnalytics: G-XXXXXXXXXX
+# services:
+#   googleAnalytics:
+#     ID: G-MEASUREMENT_ID
 
 outputs:
   home: [HTML]
@@ -20,14 +22,10 @@ languages:
     languageName: English
     weight: 1
     title: Hextra
-  ja:
-    languageName: 日本語
-    weight: 2
-    title: "Hextra テーマ"
   zh-cn:
     languageName: 简体中文
     languageCode: zh-CN
-    weight: 3
+    weight: 2
     title: Hextra
 
 module:
@@ -109,7 +107,13 @@ params:
     # full (100%), wide (90rem), normal (1280px)
     width: normal
 
+  theme:
+    # light | dark | system
+    default: system
+    displayToggle: true
+
   footer:
+    enable: true
     displayCopyright: true
     displayPoweredBy: true
     width: normal
@@ -117,12 +121,23 @@ params:
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
 
+  # Search
+  # flexsearch is enabled by default
   search:
     enable: true
+    type: flexsearch
+
+    flexsearch:
+      # index page by: content | summary | heading | title
+      index: content
 
   editURL:
     enable: true
     base: "https://github.com/imfing/hextra/edit/main/exampleSite/content"
+
+  blog:
+    list:
+      displayTags: true
 
   comments:
     enable: false

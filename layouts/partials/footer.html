@@ -1,6 +1,8 @@
 {{- $enableFooterSwitches := .Scratch.Get "enableFooterSwitches" | default false -}}
+{{- $displayThemeToggle := site.Params.theme.displayToggle | default true -}}
 
 {{- $copyright := (T "copyright") | default "© 2023 Hextra." -}}
+{{- $poweredBy := (T "poweredBy") | default "Powered by Hextra" -}}
 
 {{- $footerWidth := "max-w-screen-xl" -}}
 {{- with .Site.Params.footer.width -}}
@@ -11,19 +13,22 @@
   {{ end -}}
 {{- end -}}
 
+
 <footer class="hextra-footer bg-gray-100 pb-[env(safe-area-inset-bottom)] dark:bg-neutral-900 print:bg-transparent">
-  {{- if $enableFooterSwitches }}
-    <div class='mx-auto flex gap-2 py-2 px-4 {{ $footerWidth }}'>
+  {{- if $enableFooterSwitches -}}
+    <div class="mx-auto flex gap-2 py-2 px-4 {{ $footerWidth }}">
       {{- partial "language-switch.html" (dict "context" .) -}}
-      {{- partial "theme-toggle.html" -}}
+      {{- with $displayThemeToggle }}{{ partial "theme-toggle.html" }}{{ end -}}
     </div>
-  {{ end -}}
-  <hr class="dark:border-neutral-800" />
+    {{- if or site.IsMultiLingual $displayThemeToggle -}}
+      <hr class="dark:border-neutral-800" />
+    {{- end -}}
+  {{- end -}}
   <div
-    class='{{ $footerWidth }} mx-auto flex justify-center py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-600 dark:text-gray-400 md:justify-start'
+    class="{{ $footerWidth }} mx-auto flex justify-center py-12 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] text-gray-600 dark:text-gray-400 md:justify-start"
   >
     <div class="flex w-full flex-col items-center sm:items-start">
-      {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="font-semibold">{{ template "theme-credit" . }}</div>{{ end }}
+      {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{ end }}
       {{- if .Site.Params.footer.displayCopyright }}<div class="mt-6 text-xs">{{ $copyright | markdownify }}</div>{{ end }}
     </div>
   </div>
@@ -32,7 +37,7 @@
 {{- define "theme-credit" -}}
   <a class="flex text-sm items-center gap-1 text-current" target="_blank" rel="noopener noreferrer" title="Hextra GitHub Homepage" href="https://github.com/imfing/hextra">
     <span
-      >Powered by Hextra
+      >{{ . | safeHTML }}
       {{- partial "utils/icon.html" (dict "name" "hextra" "attributes" "height=1em class=\"inline-block ml-1 align-text-bottom\"") -}}
     </span>
   </a>

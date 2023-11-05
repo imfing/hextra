@@ -9,28 +9,40 @@ prev: /docs
 
 {{< icon "github" >}}&nbsp;[imfing/hextra-starter-template](https://github.com/imfing/hextra-starter-template)
 
-You will be able to quickly get started by using the above template repository.
+You could quickly get started by using the above template repository.
 
 <img src="https://docs.github.com/assets/cb-77734/mw-1440/images/help/repository/use-this-template-button.webp" width="500">
 
 We have provided a [GitHub Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow) which can help automatically build and deploy your site to GitHub Pages, and host it for free.
+For more options, check out [Deploy Site](../guide/deploy-site).
 
 [🌐 Demo ↗](https://imfing.github.io/hextra-starter-template/)
 
 ## Start as New Project
 
-### Prerequisites
+There are two main ways to add the Hextra theme to your Hugo project:
 
-Before we start, make sure we have [Hugo](https://gohugo.io/) installed.
-Please refer to Hugo's [official installation guide](https://gohugo.io/installation/) for more details.
+1. **Hugo Modules (Recommended)**: The simplest and recommended method. [Hugo modules](https://gohugo.io/hugo-modules/) let you pull in the theme directly from its online source. Theme is downloaded automatically and managed by Hugo.
 
-[Hugo modules](https://gohugo.io/hugo-modules/) are the recommended way to manage Hugo themes. To use Hugo modules, we need to install [Git](https://git-scm.com/) and [Go](https://go.dev/).
+2. **Git Submodule**: Alternatively, add Hextra as a [Git Submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules). The theme is downloaded by Git and stored in your project's `themes` folder.
+
+### Setup Hextra as Hugo module
+
+#### Prerequisites
+
+Before starting, you need to have the following software installed:
+
+- [Hugo (extended version)](https://gohugo.io/installation/)
+- [Git](https://git-scm.com/)
+- [Go](https://go.dev/)
+
+#### Steps
 
 {{% steps %}}
 
 ### Initialize a new Hugo site
 
-```bash
+```shell
 $ hugo new site my-site --format=yaml
 ```
 
@@ -45,7 +57,7 @@ $ hugo mod init github.com/username/my-site
 $ hugo mod get github.com/imfing/hextra
 ```
 
-Edit `hugo.yaml` to enable Hextra theme:
+Configure `hugo.yaml` to use Hextra theme by adding the following:
 
 ```yaml
 module:
@@ -55,7 +67,7 @@ module:
 
 ### Create your first content pages
 
-Let's create a new content page for the home page and the documentation page:
+Create new content page for the home page and the documentation page:
 
 ```shell
 $ hugo new content/_index.md
@@ -68,25 +80,106 @@ $ hugo new content/docs/_index.md
 $ hugo server --buildDrafts --disableFastRender
 ```
 
-Voila! You can see your new site at `http://localhost:1313/`.
+Voila, your new site preview is available at `http://localhost:1313/`.
 
 {{% /steps %}}
 
 
-## Update Theme
-
 {{% details title="How to update theme?" %}}
 
-To update the theme to the [latest released version](https://github.com/imfing/hextra/releases), run the following command:
+To update all Hugo modules in your project to their latest versions, run the following command:
 
 ```shell
 $ hugo mod get -u
+```
+
+To update Hextra to the [latest released version](https://github.com/imfing/hextra/releases), run the following command:
+
+```shell
+hugo mod get -u github.com/imfing/hextra
 ```
 
 See [Hugo Modules](https://gohugo.io/hugo-modules/use-modules/#update-all-modules) for more details.
 
 {{% /details %}}
 
+### Setup Hextra as Git submodule
+
+#### Prerequisites
+
+Before starting, you need to have the following software installed:
+
+- [Hugo (extended version)](https://gohugo.io/installation/)
+- [Git](https://git-scm.com/)
+
+#### Steps
+
+{{% steps %}}
+
+### Initialize a new Hugo site
+
+```shell
+$ hugo new site my-site --format=yaml
+```
+
+### Add Hextra theme as a Git submodule
+
+```shell
+git submodule add https://github.com/imfing/hextra.git themes/hextra
+```
+
+Configure `hugo.yaml` to use Hextra theme by adding the following:
+
+```yaml
+theme: hextra
+```
+
+### Create your first content pages
+
+Create new content page for the home page and the documentation page:
+
+```shell
+$ hugo new content/_index.md
+$ hugo new content/docs/_index.md
+```
+
+### Preview the site locally
+
+```shell
+$ hugo server --buildDrafts --disableFastRender
+```
+
+Your new site preview is available at `http://localhost:1313/`.
+
+{{% /steps %}}
+
+
+When using [CI/CD](https://en.wikipedia.org/wiki/CI/CD) for Hugo website deployment, it's essential to ensure that the following command is executed before running the `hugo` command.
+
+```shell
+git submodule update --init
+```
+
+Failure to run this command results in the theme folder not being populated with Hextra theme files, leading to a build failure.
+
+
+{{% details title="How to update theme?" %}}
+
+To update all submodules in your repository to their latest commits, run the following command:
+
+```shell
+$ git submodule update --remote
+```
+
+To update Hextra to the latest commit, run the following command:
+
+```shell
+git submodule update --remote themes/hextra
+```
+
+See [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) for more details.
+
+{{% /details %}}
 
 ## Next
 

@@ -1,4 +1,4 @@
-{{- $jsTheme := resources.Get "js/theme.js" -}}
+{{- $jsTheme := resources.Get "js/theme.js" | resources.ExecuteAsTemplate "theme.js" . -}}
 {{- $jsMenu := resources.Get "js/menu.js" -}}
 {{- $jsTabs := resources.Get "js/tabs.js" -}}
 {{- $jsLang := resources.Get "js/lang.js" -}}
@@ -13,16 +13,22 @@
 {{- end -}}
 <script defer src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
 
-{{/* FlexSearch */}}
+
+{{/* Search */}}
 {{- if (site.Params.search.enable | default true) -}}
-  {{- $jsSearchScript := printf "%s.search.js" .Language.Lang -}}
-  {{- $jsSearch := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $jsSearchScript . -}}
-  {{- if hugo.IsProduction -}}
-    {{- $jsSearch = $jsSearch | minify | fingerprint -}}
+  {{- $searchType := site.Params.search.type | default "flexsearch" -}}
+  {{- if eq $searchType "flexsearch" -}}
+    {{- $jsSearchScript := printf "%s.search.js" .Language.Lang -}}
+    {{- $jsSearch := resources.Get "js/flexsearch.js" | resources.ExecuteAsTemplate $jsSearchScript . -}}
+    {{- if hugo.IsProduction -}}
+      {{- $jsSearch = $jsSearch | minify | fingerprint -}}
+    {{- end -}}
+    {{- $flexSearchJS := resources.Get "lib/flexsearch/flexsearch.bundle.min.js" | fingerprint -}}
+    <script defer src="{{ $flexSearchJS.RelPermalink }}" integrity="{{ $flexSearchJS.Data.Integrity }}"></script>
+    <script defer src="{{ $jsSearch.RelPermalink }}" integrity="{{ $jsSearch.Data.Integrity }}"></script>
+  {{- else -}}
+    {{- warnf `search type "%s" is not supported` $searchType -}}
   {{- end -}}
-  {{- $flexSearchJS := resources.Get "lib/flexsearch/flexsearch.bundle.min.js" | fingerprint -}}
-  <script defer src="{{ $flexSearchJS.RelPermalink }}" integrity="{{ $flexSearchJS.Data.Integrity }}"></script>
-  <script defer src="{{ $jsSearch.RelPermalink }}" integrity="{{ $jsSearch.Data.Integrity }}"></script>
 {{- end -}}
 
 {{/* Mermaid */}}

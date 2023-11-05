@@ -1,6 +1,6 @@
 ---
 title: Tabs
-next: /docs/advanced/
+next: /docs/guide/deploy-site
 ---
 
 ## Example

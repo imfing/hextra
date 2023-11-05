@@ -86,4 +86,4 @@ By default, copy button is enabled for code blocks.
 
 ## Supported Languages
 
-For a list of supported languages, please see [Chroma's documentation](https://github.com/alecthomas/chroma#supported-languages).
+For a list of supported languages, please see the [Chroma documentation](https://github.com/alecthomas/chroma#supported-languages).

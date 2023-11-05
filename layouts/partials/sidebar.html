@@ -10,6 +10,7 @@
 {{- $pageURL := $context.RelPermalink -}}
 
 
+<div class="mobile-menu-overlay [transition:background-color_1.5s_ease] fixed inset-0 z-10 bg-black/80 dark:bg-black/60 hidden"></div>
 <aside class="sidebar-container flex flex-col print:hidden md:top-16 md:shrink-0 md:w-64 md:self-start max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
   <!-- Search bar on small screen -->
   <div class="px-4 pt-4 md:hidden">
@@ -34,17 +35,21 @@
     {{ end -}}
   </div>
   {{/* Hide theme switch when sidebar is disabled */}}
-  {{ $switchesClass := cond $disableSidebar "md:hidden" "" }}
-  <div class="{{ $switchesClass }} {{ with site.IsMultiLingual }}justify-end{{ end }} sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
-    {{- with site.IsMultiLingual }}
-      {{ partial "language-switch" (dict "context" $context "grow" true) }}
-      {{ partial "theme-toggle" (dict "hideLabel" true) }}
-    {{ else }}
-      <div class="flex grow flex-col">
-        {{ partial "theme-toggle" }}
-      </div>
-    {{ end -}}
-  </div>
+  {{ $switchesClass := cond $disableSidebar "md:hidden" "" -}}
+  {{ $displayThemeToggle := (site.Params.theme.displayToggle | default true) -}}
+
+  {{ if or site.IsMultiLingual $displayThemeToggle }}
+    <div class="{{ $switchesClass }} {{ with site.IsMultiLingual }}justify-end{{ end }} sticky bottom-0 bg-white dark:bg-dark mx-4 py-4 shadow-[0_-12px_16px_#fff] flex items-center gap-2 dark:border-neutral-800 dark:shadow-[0_-12px_16px_#111] contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:shadow-none border-t" data-toggle-animation="show">
+      {{- with site.IsMultiLingual -}}
+        {{- partial "language-switch" (dict "context" $context "grow" true) -}}
+        {{- with $displayThemeToggle }}{{ partial "theme-toggle" (dict "hideLabel" true) }}{{ end -}}
+      {{- else -}}
+        {{- with $displayThemeToggle -}}
+          <div class="flex grow flex-col">{{ partial "theme-toggle" }}</div>
+        {{- end -}}
+      {{- end -}}
+    </div>
+  {{- end -}}
 </aside>
 
 {{- define "sidebar-main" -}}
@@ -76,13 +81,13 @@
         </li>
       {{- end -}}
     {{- else -}}
-      <div class="pt-1 ltr:pr-0 overflow-hidden transition-all ease-in-out duration-200">
+      <div class="ltr:pr-0 overflow-hidden">
         <ul class='relative flex flex-col gap-1 before:absolute before:inset-y-1 before:w-px before:bg-gray-200 before:content-[""] ltr:ml-3 ltr:pl-3 ltr:before:left-0 rtl:mr-3 rtl:pr-3 rtl:before:right-0 dark:before:bg-neutral-800'>
           {{- range $items.ByWeight }}
             {{- $active := eq $pageURL .RelPermalink -}}
             {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
             {{- $title := .LinkTitle | default .File.BaseFileName -}}
-            <li class="flex flex-col gap-1 {{ if $shouldOpen }}open{{ end }}">
+            <li class="flex flex-col {{ if $shouldOpen }}open{{ end }}">
               {{- template "sidebar-item-link" dict "context" . "active" $active "title" $title "link" .RelPermalink -}}
               {{- if and $toc $active -}}
                 {{ template "sidebar-toc" dict "page" . }}

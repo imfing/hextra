@@ -1,7 +1,13 @@
-onThisPage: "Ở trang này"
+backToTop: "Lướt lên đầu trang"
+changeLanguage: "Đổi ngôn ngữ"
+changeTheme: "Đổi chủ đề"
+copyright: "© 2023 Hextra Project."
+dark: "Tối"
 editThisPage: "Sửa trang này trên GitHub →"
 lastUpdated: "Lần cuối cập nhật lúc"
-
-backToTop: "Lướt lên đầu trang"
-
-copyright: "© 2023 Hextra Project."
+light: "Sáng"
+noResultsFound: "Không tìm thấy kết quả."
+onThisPage: "Ở trang này"
+poweredBy: "Chạy bởi Hextra"
+readMore: "Đọc thêm →"
+searchPlaceholder: "Tìm kiếm..."

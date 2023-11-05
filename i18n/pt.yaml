@@ -1,7 +1,13 @@
-onThisPage: "Nesta página"
-editThisPage: "Edita esta página no GitHub →"
-lastUpdated: "Última actualização"
-
 backToTop: "Voltar ao topo"
-
+changeLanguage: "Mudar a língua"
+changeTheme: "Mudar tema"
 copyright: "© 2023 Projecto Hextra."
+dark: "Escuro"
+editThisPage: "Edita esta página no GitHub →"
+lastUpdated: "Última modificação"
+light: "Claro"
+noResultsFound: "Nenhum resultado encontrado"
+onThisPage: "Nesta página"
+poweredBy: "Com a tecnologia de Hextra"
+readMore: "Ler mais →"
+searchPlaceholder: "Procurar..."

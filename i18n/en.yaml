@@ -1,7 +1,13 @@
-onThisPage: "On this page"
+backToTop: "Scroll to top"
+changeLanguage: "Change language"
+changeTheme: "Change theme"
+copyright: "© 2023 Hextra Project."
+dark: "Dark"
 editThisPage: "Edit this page on GitHub →"
 lastUpdated: "Last updated on"
-
-backToTop: "Scroll to top"
-
-copyright: "© 2023 Hextra Project."
+light: "Light"
+noResultsFound: "No results found."
+onThisPage: "On this page"
+poweredBy: "Powered by Hextra"
+readMore: "Read more →"
+searchPlaceholder: "Search..."
