@@ -35,12 +35,12 @@
       {{ $headingTitle := index $headingTitles $i }}
 
       {{ if eq $i 0 }}
-        {{ $data = $data | merge (dict $headingKey ($content | markdownify | plainify | htmlUnescape | chomp)) }}
+        {{ $data = $data | merge (dict $headingKey ($content | $page.RenderString | plainify | htmlUnescape | chomp)) }}
       {{ else }}
         {{ $parts := split $content (printf "\n%s\n" $headingTitle) }}
         {{ $lastPart := index $parts (sub (len $parts) 1) }}
 
-        {{ $data = $data | merge (dict $headingKey ($lastPart | markdownify | plainify | htmlUnescape | chomp)) }}
+        {{ $data = $data | merge (dict $headingKey ($lastPart | $page.RenderString | plainify | htmlUnescape | chomp)) }}
         {{ $content = strings.TrimSuffix $lastPart $content }}
         {{ $content = strings.TrimSuffix (printf "\n%s\n" $headingTitle) $content }}
       {{ end }}
