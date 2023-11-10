@@ -32,10 +32,17 @@
       {{- if eq .Params.type "search" -}}
         {{- partial "search.html" (dict "params" .Params) -}}
       {{- else -}}
-        {{- $external := strings.HasPrefix .URL "http" -}}
+        {{- $link := .URL -}}
+        {{- $external := strings.HasPrefix $link "http" -}}
+        {{- with .PageRef -}}
+          {{- if hasPrefix . "/" -}}
+            {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+          {{- end -}}
+        {{- end -}}
+
         {{/* Display icon menu item */}}
         {{- if .Params.icon -}}
-          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="noreferer"{{ end }} href="{{ .URL | relLangURL }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
+          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="noreferer"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
             {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
             <span class="sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
@@ -44,7 +51,7 @@
           {{- $activeClass := cond $active "font-medium" "text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" -}}
           <a
             title="{{ or (T .Identifier) .Name | safeHTML }}"
-            href="{{ .URL | relLangURL }}"
+            href="{{ $link }}"
             {{ if $external }}target="_blank" rel="noreferer"{{ end }}
             class="text-sm contrast-more:text-gray-700 contrast-more:dark:text-gray-100 relative -ml-2 hidden whitespace-nowrap p-2 md:inline-block {{ $activeClass }}"
           >
