@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <div class='mx-auto flex {{ partial "utils/page-width" . }}'>
+  <div class="mx-auto flex {{ partial `utils/page-width` . }}">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
     {{ partial "toc.html" . }}
     <article class="w-full break-words flex min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
@@ -8,18 +8,24 @@
         <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{{ .Title }}</h1>
         {{ with $date := .Date }}
           <div class="mt-4 mb-16 text-gray-500 text-sm">
-            {{ partial "utils/format-date" $date }}
-            {{- if $.Params.authors }}&nbsp;by&nbsp;{{ end -}}
-            {{- with $.Params.authors -}}
-              {{- range $i, $author := . -}}
-                {{- if $i }},{{ end -}}
-                {{- if $author.link -}}
-                  <a href="{{ $author.link }}" target="_blank" class="mx-1 text-current underline [text-underline-position:from-font] decoration-from-font">{{ $author.name }}</a>
-                {{- else -}}
-                  <span>{{ $author.name }}</span>
+            <span class="mr-2">{{ partial "utils/format-date" $date }}</span>
+            {{- $postedBy := (T "postedBy") | default "Posted by" -}}
+            {{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}
+            <div class="flex flex-wrap items-center gap-y-4 mt-2">
+              {{- with $.Params.authors -}}
+                <span>{{ $postedBy }}</span>
+                {{- range $i, $author := . -}}
+                  {{- if and $i (not $author.image) }},{{ end -}}
+                  {{/* TODO: handle the case when no link is provided. */}}
+                  <a href="{{ $author.link }}" target="_blank" class="group flex items-center text-current gap-x-2 ml-2">
+                    {{- with $author.image }}
+                      <img src="{{ . }}" alt="{{ $author.name }}" class="inline-block w-8 h-8 rounded-full" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+                    {{ end -}}
+                    <div class="group-hover:underline">{{ $author.name }}</div>
+                  </a>
                 {{- end -}}
               {{- end -}}
-            {{- end -}}
+            </div>
           </div>
         {{ end }}
         <div class="content">
