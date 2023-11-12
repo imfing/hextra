@@ -1,5 +1,5 @@
 {{- $alt := .PlainText | safeHTML -}}
-{{- $lazyLoading := .Page.Site.Params.enableImagelazyLoading | default true -}}
+{{- $lazyLoading := .Page.Site.Params.enableImageLazyLoading | default true -}}
 {{- $dest := .Destination -}}
 
 {{- $isRemote := not (urls.Parse $dest).Scheme -}}
