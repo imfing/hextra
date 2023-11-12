@@ -70,15 +70,21 @@
   {{- with $items := union .context.RegularPages .context.Sections -}}
     {{- if eq $level 0 -}}
       {{- range $items.ByWeight }}
-        {{- $active := eq $pageURL .RelPermalink -}}
-        {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
-        <li class="{{ if $shouldOpen }}open{{ end }}">
-          {{- template "sidebar-item-link" dict "context" . "active" $active "title" .LinkTitle "link" .RelPermalink -}}
-          {{- if and $toc $active -}}
-            {{- template "sidebar-toc" dict "page" . -}}
-          {{- end -}}
-          {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
-        </li>
+        {{- if .Params.sidebar.separator -}}
+          <li class="[word-break:break-word] mt-5 mb-2 px-2 py-1.5 text-sm font-semibold text-gray-900 first:mt-0 dark:text-gray-100">
+            <span class="cursor-default">{{ .LinkTitle }}</span>
+          </li>
+        {{- else -}}
+          {{- $active := eq $pageURL .RelPermalink -}}
+          {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
+          <li class="{{ if $shouldOpen }}open{{ end }}">
+            {{- template "sidebar-item-link" dict "context" . "active" $active "title" .LinkTitle "link" .RelPermalink -}}
+            {{- if and $toc $active -}}
+              {{- template "sidebar-toc" dict "page" . -}}
+            {{- end -}}
+            {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
+          </li>
+        {{- end -}}
       {{- end -}}
     {{- else -}}
       <div class="ltr:pr-0 overflow-hidden">
@@ -158,10 +164,6 @@
       {{- end }}
     {{ end -}}
   </a>
-{{- end -}}
-
-{{- define "sidebar-separator" -}}
-  <div class="mt-4 border-t py-4 dark:border-neutral-800 contrast-more:border-neutral-400 dark:contrast-more:border-neutral-400" />
 {{- end -}}
 
 {{- define "sidebar-collapsible-button" -}}
