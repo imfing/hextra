@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if ("lang" in codeElement.dataset) {
           code = code.replace(/\n\n/g, '\n');
         }
-        console.log(code);
         navigator.clipboard.writeText(code).then(function () {
           button.classList.add('copied');
           setTimeout(function () {
