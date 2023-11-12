@@ -70,4 +70,4 @@ For further information, refer to the [Hugo Templates](https://gohugo.io/templat
 
 ## Further Customization
 
-Didn't find what you were looking for? Feel free to [open an issue](https://github.com/imfing/hextra/issues) or make a contribution to the theme!
+Didn't find what you were looking for? Feel free to [open a discussion](https://github.com/imfing/hextra/discussions) or make a contribution to the theme!
