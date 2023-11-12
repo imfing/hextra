@@ -47,8 +47,8 @@ The primary color of the theme can be customized by setting the `--primary-hue` 
 
 List of available syntax highlighting themes are available at [Chroma Styles Gallery](https://xyproto.github.io/splash/docs/all.html). The stylesheet can be generated using the command:
 
-```bash
-$ hugo gen chromastyles --style=github
+```shell
+hugo gen chromastyles --style=github
 ```
 
 To override the default syntax highlighting theme, we can add the generated styles to the custom CSS file.
