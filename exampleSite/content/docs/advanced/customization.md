@@ -47,8 +47,8 @@ The primary color of the theme can be customized by setting the `--primary-hue` 
 
 List of available syntax highlighting themes are available at [Chroma Styles Gallery](https://xyproto.github.io/splash/docs/all.html). The stylesheet can be generated using the command:
 
-```bash
-$ hugo gen chromastyles --style=github
+```shell
+hugo gen chromastyles --style=github
 ```
 
 To override the default syntax highlighting theme, we can add the generated styles to the custom CSS file.
@@ -70,4 +70,4 @@ For further information, refer to the [Hugo Templates](https://gohugo.io/templat
 
 ## Further Customization
 
-Didn't find what you were looking for? Feel free to [open an issue](https://github.com/imfing/hextra/issues) or make a contribution to the theme!
+Didn't find what you were looking for? Feel free to [open a discussion](https://github.com/imfing/hextra/discussions) or make a contribution to the theme!

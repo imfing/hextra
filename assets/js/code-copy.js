@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add click event listener for copy button
     button.addEventListener('click', function (e) {
       e.preventDefault();
-      const targetId = button.getAttribute('data-clipboard-target');
-      const target = document.querySelector(targetId);
+      // Get the code target
+      const target = button.parentElement.previousElementSibling;
       let codeElement;
       if (target.tagName === 'CODE') {
         codeElement = target;
@@ -44,9 +44,12 @@ document.addEventListener('DOMContentLoaded', function () {
         codeElement = codeElements[codeElements.length - 1];
       }
       if (codeElement) {
+        let code = codeElement.innerText;
         // Replace double newlines with single newlines in the innerText
         // as each line inside <span> has trailing newline '\n'
-        const code = codeElement.innerText.replace(/\n\n/g, '\n');
+        if ("lang" in codeElement.dataset) {
+          code = code.replace(/\n\n/g, '\n');
+        }
         navigator.clipboard.writeText(code).then(function () {
           button.classList.add('copied');
           setTimeout(function () {

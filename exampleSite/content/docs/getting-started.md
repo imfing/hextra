@@ -43,18 +43,18 @@ Before starting, you need to have the following software installed:
 ### Initialize a new Hugo site
 
 ```shell
-$ hugo new site my-site --format=yaml
+hugo new site my-site --format=yaml
 ```
 
 ### Configure Hextra theme via module
 
 ```shell
 # initialize hugo module
-$ cd my-site
-$ hugo mod init github.com/username/my-site
+cd my-site
+hugo mod init github.com/username/my-site
 
 # add Hextra theme
-$ hugo mod get github.com/imfing/hextra
+hugo mod get github.com/imfing/hextra
 ```
 
 Configure `hugo.yaml` to use Hextra theme by adding the following:
@@ -70,14 +70,14 @@ module:
 Create new content page for the home page and the documentation page:
 
 ```shell
-$ hugo new content/_index.md
-$ hugo new content/docs/_index.md
+hugo new content/_index.md
+hugo new content/docs/_index.md
 ```
 
 ### Preview the site locally
 
 ```shell
-$ hugo server --buildDrafts --disableFastRender
+hugo server --buildDrafts --disableFastRender
 ```
 
 Voila, your new site preview is available at `http://localhost:1313/`.
@@ -90,7 +90,7 @@ Voila, your new site preview is available at `http://localhost:1313/`.
 To update all Hugo modules in your project to their latest versions, run the following command:
 
 ```shell
-$ hugo mod get -u
+hugo mod get -u
 ```
 
 To update Hextra to the [latest released version](https://github.com/imfing/hextra/releases), run the following command:
@@ -119,7 +119,7 @@ Before starting, you need to have the following software installed:
 ### Initialize a new Hugo site
 
 ```shell
-$ hugo new site my-site --format=yaml
+hugo new site my-site --format=yaml
 ```
 
 ### Add Hextra theme as a Git submodule
@@ -139,14 +139,14 @@ theme: hextra
 Create new content page for the home page and the documentation page:
 
 ```shell
-$ hugo new content/_index.md
-$ hugo new content/docs/_index.md
+hugo new content/_index.md
+hugo new content/docs/_index.md
 ```
 
 ### Preview the site locally
 
 ```shell
-$ hugo server --buildDrafts --disableFastRender
+hugo server --buildDrafts --disableFastRender
 ```
 
 Your new site preview is available at `http://localhost:1313/`.
@@ -168,7 +168,7 @@ Failure to run this command results in the theme folder not being populated with
 To update all submodules in your repository to their latest commits, run the following command:
 
 ```shell
-$ git submodule update --remote
+git submodule update --remote
 ```
 
 To update Hextra to the latest commit, run the following command:
