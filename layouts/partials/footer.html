@@ -36,9 +36,11 @@
 
 {{- define "theme-credit" -}}
   <a class="flex text-sm items-center gap-1 text-current" target="_blank" rel="noopener noreferrer" title="Hextra GitHub Homepage" href="https://github.com/imfing/hextra">
-    <span
-      >{{ . | safeHTML }}
-      {{- partial "utils/icon.html" (dict "name" "hextra" "attributes" "height=1em class=\"inline-block ml-1 align-text-bottom\"") -}}
+    <span>
+      {{- . | markdownify -}}
+      {{- if strings.Contains . "Hextra" -}}
+        {{- partial "utils/icon.html" (dict "name" "hextra" "attributes" `height=1em class="inline-block ml-1 align-text-bottom"`) -}}
+      {{- end -}}
     </span>
   </a>
 {{- end -}}
