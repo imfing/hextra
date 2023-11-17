@@ -7,9 +7,9 @@
         {{ partial "breadcrumb.html" . }}
         <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{{ .Title }}</h1>
         <div class="mt-4 mb-16 text-gray-500 text-sm flex items-center flex-wrap gap-y-2">
-          {{- with $date := .Date }}<span class="mr-2">{{ partial "utils/format-date" $date }}</span>{{ end -}}
+          {{- with $date := .Date }}<span class="mr-1">{{ partial "utils/format-date" $date }}</span>{{ end -}}
           {{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}
-          {{ if and .Date .Params.authors }}<span class="mr-1">·</span>{{ end -}}
+          {{ if and .Date .Params.authors }}<span class="mx-1">·</span>{{ end -}}
           {{- with $.Params.authors -}}
             {{- range $i, $author := . -}}
               {{- if reflect.IsMap $author -}}
