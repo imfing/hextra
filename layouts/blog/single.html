@@ -6,28 +6,30 @@
       <main class="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
         {{ partial "breadcrumb.html" . }}
         <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{{ .Title }}</h1>
-        {{ with $date := .Date }}
-          <div class="mt-4 mb-16 text-gray-500 text-sm">
-            <span class="mr-2">{{ partial "utils/format-date" $date }}</span>
-            {{- $postedBy := (T "postedBy") | default "Posted by" -}}
-            {{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}
-            <div class="flex flex-wrap items-center gap-y-4 mt-2">
-              {{- with $.Params.authors -}}
-                <span>{{ $postedBy }}</span>
-                {{- range $i, $author := . -}}
-                  {{- if and $i (not $author.image) }},{{ end -}}
-                  {{/* TODO: handle the case when no link is provided. */}}
-                  <a href="{{ $author.link }}" target="_blank" class="group flex items-center text-current gap-x-2 ml-2">
-                    {{- with $author.image }}
-                      <img src="{{ . }}" alt="{{ $author.name }}" class="inline-block w-8 h-8 rounded-full" {{ if $lazyLoading }}loading="lazy"{{ end }} />
-                    {{ end -}}
-                    <div class="group-hover:underline">{{ $author.name }}</div>
-                  </a>
-                {{- end -}}
+        <div class="mt-4 mb-16 text-gray-500 text-sm flex items-center flex-wrap gap-y-2">
+          {{- with $date := .Date }}<span class="mr-2">{{ partial "utils/format-date" $date }}</span>{{ end -}}
+          {{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}
+          {{ if and .Date .Params.authors }}<span class="mr-1">·</span>{{ end -}}
+          {{- with $.Params.authors -}}
+            {{- range $i, $author := . -}}
+              {{- if reflect.IsMap $author -}}
+                {{- if and $i (not $author.image) }}<span class="mr-1">,</span>{{ end -}}
+                <a
+                  {{ with $author.link }}href="{{ . }}" target="_blank"{{ end }}
+                  class="group inline-flex items-center text-current gap-x-1.5 mx-1"
+                  {{ with $author.name }}title="{{ . }}"{{ end }}
+                >
+                  {{- with $author.image }}
+                    <img src="{{ . }}" alt="{{ $author.name }}" class="inline-block h-4 w-4 rounded-full" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+                  {{ end -}}
+                  <div class="group-hover:underline">{{ $author.name }}</div>
+                </a>
+              {{- else -}}
+                {{- if $i }}<span class="mr-1">,</span>{{ end -}}<span class="mx-1">{{ $author }}</span>
               {{- end -}}
-            </div>
-          </div>
-        {{ end }}
+            {{- end -}}
+          {{- end -}}
+        </div>
         <div class="content">
           {{ .Content }}
         </div>
