@@ -8,6 +8,7 @@
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
 {{- $pageURL := $context.RelPermalink -}}
 
+{{/* EXPERIMENTAL */}}
 {{- if .context.Params.sidebar.hide -}}
   {{- $disableSidebar = true -}}
   {{- $displayPlaceholder = true -}}
