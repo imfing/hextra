@@ -19,8 +19,13 @@
                   class="group inline-flex items-center text-current gap-x-1.5 mx-1"
                   {{ with $author.name }}title="{{ . }}"{{ end }}
                 >
-                  {{- with $author.image }}
-                    <img src="{{ . }}" alt="{{ $author.name }}" class="inline-block h-4 w-4 rounded-full" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+                  {{- with $image := $author.image }}
+                    {{- $isLocal := not (urls.Parse $image).Scheme -}}
+                    {{- $startsWithSlash := hasPrefix $image "/" -}}
+                    {{- if and $isLocal $startsWithSlash }}
+                      {{- $image = (relURL (strings.TrimPrefix "/" $image)) -}}
+                    {{ end -}}
+                    <img src="{{ $image | safeURL }}" alt="{{ $author.name }}" class="inline-block h-4 w-4 rounded-full" {{ if $lazyLoading }}loading="lazy"{{ end }} />
                   {{ end -}}
                   <div class="group-hover:underline">{{ $author.name }}</div>
                 </a>
