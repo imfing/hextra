@@ -1,27 +1,40 @@
 {{ define "main" }}
-  <div class='mx-auto flex {{ partial "utils/page-width" . }}'>
+  <div class="mx-auto flex {{ partial `utils/page-width` . }}">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
     {{ partial "toc.html" . }}
     <article class="w-full break-words flex min-h-[calc(100vh-var(--navbar-height))] min-w-0 justify-center pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main class="w-full min-w-0 max-w-6xl px-6 pt-4 md:px-12">
         {{ partial "breadcrumb.html" . }}
         <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{{ .Title }}</h1>
-        {{ with $date := .Date }}
-          <div class="mt-4 mb-16 text-gray-500 text-sm">
-            {{ partial "utils/format-date" $date }}
-            {{- if $.Params.authors }}&nbsp;by&nbsp;{{ end -}}
-            {{- with $.Params.authors -}}
-              {{- range $i, $author := . -}}
-                {{- if $i }},{{ end -}}
-                {{- if $author.link -}}
-                  <a href="{{ $author.link }}" target="_blank" class="mx-1 text-current underline [text-underline-position:from-font] decoration-from-font">{{ $author.name }}</a>
-                {{- else -}}
-                  <span>{{ $author.name }}</span>
-                {{- end -}}
+        <div class="mt-4 mb-16 text-gray-500 text-sm flex items-center flex-wrap gap-y-2">
+          {{- with $date := .Date }}<span class="mr-1">{{ partial "utils/format-date" $date }}</span>{{ end -}}
+          {{- $lazyLoading := site.Params.enableImageLazyLoading | default true -}}
+          {{ if and .Date .Params.authors }}<span class="mx-1">·</span>{{ end -}}
+          {{- with $.Params.authors -}}
+            {{- range $i, $author := . -}}
+              {{- if reflect.IsMap $author -}}
+                {{- if and $i (not $author.image) }}<span class="mr-1">,</span>{{ end -}}
+                <a
+                  {{ with $author.link }}href="{{ . }}" target="_blank"{{ end }}
+                  class="group inline-flex items-center text-current gap-x-1.5 mx-1"
+                  {{ with $author.name }}title="{{ . }}"{{ end }}
+                >
+                  {{- with $image := $author.image }}
+                    {{- $isLocal := not (urls.Parse $image).Scheme -}}
+                    {{- $startsWithSlash := hasPrefix $image "/" -}}
+                    {{- if and $isLocal $startsWithSlash }}
+                      {{- $image = (relURL (strings.TrimPrefix "/" $image)) -}}
+                    {{ end -}}
+                    <img src="{{ $image | safeURL }}" alt="{{ $author.name }}" class="inline-block h-4 w-4 rounded-full" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+                  {{ end -}}
+                  <div class="group-hover:underline">{{ $author.name }}</div>
+                </a>
+              {{- else -}}
+                {{- if $i }}<span class="mr-1">,</span>{{ end -}}<span class="mx-1">{{ $author }}</span>
               {{- end -}}
             {{- end -}}
-          </div>
-        {{ end }}
+          {{- end -}}
+        </div>
         <div class="content">
           {{ .Content }}
         </div>

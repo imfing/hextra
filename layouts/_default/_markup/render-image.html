@@ -1,13 +1,13 @@
 {{- $alt := .PlainText | safeHTML -}}
-{{- $lazyLoading := .Page.Site.Params.enableImagelazyLoading | default true -}}
+{{- $lazyLoading := .Page.Site.Params.enableImageLazyLoading | default true -}}
 {{- $dest := .Destination -}}
 
-{{- $isRemote := not (urls.Parse $dest).Scheme -}}
+{{- $isLocal := not (urls.Parse $dest).Scheme -}}
 {{- $isPage := and (eq .Page.Kind "page") (not .Page.BundleType) -}}
 {{- $startsWithSlash := hasPrefix $dest "/" -}}
 {{- $startsWithRelative := hasPrefix $dest "../" -}}
 
-{{- if and $dest $isRemote -}}
+{{- if and $dest $isLocal -}}
   {{- if $startsWithSlash -}}
     {{/* Images under static directory */}}
     {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
