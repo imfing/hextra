@@ -68,6 +68,7 @@
   {{- $toc := .toc | default false -}}
 
   {{- with $items := union .context.RegularPages .context.Sections -}}
+    {{- $items = where $items "Params.sidebar.exclude" "!=" true -}}
     {{- if eq $level 0 -}}
       {{- range $items.ByWeight }}
         {{- if .Params.sidebar.separator -}}
