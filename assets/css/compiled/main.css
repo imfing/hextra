@@ -1183,6 +1183,9 @@ video {
 .align-text-bottom {
   vertical-align: text-bottom;
 }
+.align-logo-footer {
+  vertical-align: 2px;
+}
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
