@@ -90,6 +90,16 @@ params:
 For the main sidebar, it is automatically generated from the structure of the content directory.
 See the [Organize Files](/docs/guide/organize-files) page for more details.
 
+To exclude a single page from the left sidebar, set the `sidebar.exclude` parameter in the front matter of the page:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+sidebar:
+  exclude: true
+---
+```
+
 ### Extra Links
 
 Sidebar extra links are defined under the `menu.sidebar` section in the config file:
