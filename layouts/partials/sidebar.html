@@ -6,8 +6,13 @@
 {{- $sidebarClass := cond $disableSidebar (cond $displayPlaceholder "md:hidden xl:block" "md:hidden") "md:sticky" -}}
 
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
-{{- $navPages := union $navRoot.RegularPages $navRoot.Sections -}}
 {{- $pageURL := $context.RelPermalink -}}
+
+{{/* EXPERIMENTAL */}}
+{{- if .context.Params.sidebar.hide -}}
+  {{- $disableSidebar = true -}}
+  {{- $displayPlaceholder = true -}}
+{{- end -}}
 
 
 <div class="mobile-menu-overlay [transition:background-color_1.5s_ease] fixed inset-0 z-10 bg-black/80 dark:bg-black/60 hidden"></div>
@@ -68,6 +73,7 @@
   {{- $toc := .toc | default false -}}
 
   {{- with $items := union .context.RegularPages .context.Sections -}}
+    {{- $items = where $items "Params.sidebar.exclude" "!=" true -}}
     {{- if eq $level 0 -}}
       {{- range $items.ByWeight }}
         {{- if .Params.sidebar.separator -}}
@@ -117,7 +123,7 @@
             <li>
               <a
                 href="#{{ anchorize .ID }}"
-                class="flex rounded px-2 py-1.5 text-sm transition-colors [word-break:break-word] cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:border flex gap-2 before:opacity-25 before:content-['#'] text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-neutral-400 dark:hover:bg-primary-100/5 dark:hover:text-gray-50 contrast-more:text-gray-900 contrast-more:dark:text-gray-50 contrast-more:border-transparent contrast-more:hover:border-gray-900 contrast-more:dark:hover:border-gray-50"
+                class="flex rounded px-2 py-1.5 text-sm transition-colors [word-break:break-word] cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:border gap-2 before:opacity-25 before:content-['#'] text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-neutral-400 dark:hover:bg-primary-100/5 dark:hover:text-gray-50 contrast-more:text-gray-900 contrast-more:dark:text-gray-50 contrast-more:border-transparent contrast-more:hover:border-gray-900 contrast-more:dark:hover:border-gray-50"
               >
                 {{- .Title -}}
               </a>
