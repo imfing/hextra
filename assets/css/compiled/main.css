@@ -1183,9 +1183,6 @@ video {
 .align-text-bottom {
   vertical-align: text-bottom;
 }
-.align-\[-2\.5px\] {
-  vertical-align: -2.5px;
-}
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
