@@ -143,7 +143,7 @@ params:
 ```
 
 The edit links will be automatically generated for each page based on the provided url as root directory.
-If you want to set edit link for a specific page, you can set the `params.editURL` parameter in the front matter of the page:
+If you want to set edit link for a specific page, you can set the `editURL` parameter in the front matter of the page:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
