@@ -148,8 +148,7 @@ If you want to set edit link for a specific page, you can set the `params.editUR
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
 title: Configuration
-params:
-  editURL: "https://example.com/edit/this/page"
+editURL: "https://example.com/edit/this/page"
 ---
 ```
 
