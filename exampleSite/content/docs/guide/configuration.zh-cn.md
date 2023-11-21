@@ -119,7 +119,6 @@ params:
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
 title: Configuration
-params:
-  editURL: "https://example.com/edit/this/page"
+editURL: "https://example.com/edit/this/page"
 ---
 ```
