@@ -114,7 +114,7 @@ params:
 ```
 
 将为每个页面自动生成编辑链接。
-如需为特定页面设置编辑链接，可以在页面的 `front matter` 中设置 `params.editURL`：
+如需为特定页面设置编辑链接，可以在页面的 `front matter` 中设置 `editURL`：
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
