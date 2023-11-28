@@ -2683,10 +2683,6 @@ body {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
-.hover\:text-gray-800:hover {
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
-}
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
@@ -3215,10 +3211,6 @@ body {
 :is(html[class~="dark"] .dark\:hover\:text-gray-100:hover) {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
-}
-:is(html[class~="dark"] .dark\:hover\:text-gray-200:hover) {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 :is(html[class~="dark"] .dark\:hover\:text-gray-300:hover) {
   --tw-text-opacity: 1;

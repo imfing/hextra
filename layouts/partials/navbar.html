@@ -48,7 +48,39 @@
           </a>
         {{- else -}}
           {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
-          {{- $activeClass := cond $active "font-medium" "text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" -}}
+          {{- $activeClass := cond $active "font-medium" "" -}}
+          {{- if .HasChildren }}
+            <div class="hextra-navbar-collapsible-button flex relative items-center cursor-pointer -ml-2 p-2">
+              <a
+                title="{{ or (T .Identifier) .Name | safeHTML }}"
+                href="{{ $link }}"
+                {{ if $external }}target="_blank" rel="noreferer"{{ end }}
+                class="text-sm hidden whitespace-nowrap md:inline-block contrast-more:text-gray-700 contrast-more:dark:text-gray-100 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 {{ $activeClass }}"
+              >
+                <span class="text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
+              </a>
+              <span>
+                {{- template "navbar-collapsible-button" -}}
+              </span>
+              <ul class="hextra-navbar-submenu hidden absolute top-full bg-white w-max px-3 dark:bg-slate-900 border-slate-200 dark:border-slate-800 dark:bg-gradient-to-t dark:from-slate-800 dark:to-slate-800/30 py-2 ml-4 rounded shadow-[0_2px_4px_rgba(0,0,0,.02),1px_1px_1px_rgba(0,0,0,.06)]">
+                {{ range .Children }}
+                  {{- $url := .URL | relLangURL -}}
+                  {{- $subexternal := strings.HasPrefix $url "http" -}}
+                  {{- with .Page -}}
+                    {{- $url = .RelPermalink -}}
+                  {{- end -}}
+                  <li >
+                    <a
+                      title="{{ or (T .Identifier) .Name | safeHTML }}"
+                      href="{{ $url }}"
+                      {{ if $subexternal }}target="_blank" rel="noreferer"{{ end }}
+                      class="text-sm flex py-2 leading-tight cursor-pointer contrast-more:text-gray-700 contrast-more:dark:text-gray-100 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 {{ if (eq $.RelPermalink $url) }}font-medium{{ end }}"
+                    >{{ or (T .Identifier) .Name | safeHTML }}</a>  
+                  </li>
+                {{ end }}
+              </ul>
+            </div>
+          {{- else -}}
           <a
             title="{{ or (T .Identifier) .Name | safeHTML }}"
             href="{{ $link }}"
@@ -57,6 +89,7 @@
           >
             <span class="text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
@@ -67,3 +100,10 @@
     </button>
   </nav>
 </div>
+
+
+{{- define "navbar-collapsible-button" -}}
+<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-[18px] min-w-[18px] rounded-sm p-0.5">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 8.25l-7.5 7.5-7.5-7.5" class="origin-center transition-transform rtl:-rotate-180"></path>
+</svg>
+{{- end -}}
