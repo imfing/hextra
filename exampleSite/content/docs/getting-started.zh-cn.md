@@ -26,8 +26,6 @@ prev: /docs
 
 [Hugo 模块](https://gohugo.io/hugo-modules/)是管理 Hugo 主题的推荐方式。要使用 Hugo 模块，我们需要安装 [Git](https://git-scm.com/) 和 [Go](https://go.dev/)。
 
-{{% steps %}}
-
 ### 初始化 Hugo 站点
 
 ```shell
