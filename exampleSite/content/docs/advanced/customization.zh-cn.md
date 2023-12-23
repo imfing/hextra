@@ -30,7 +30,7 @@ Hextra 在 `hugo.yaml` 中提供了一些自定义选项来配置主题。
 
 ### 代码高亮
 
-代码高亮风格的详细信息可在 [Chroma Styles Gallery](https://xyproto.github.io/splash/docs/all.html) 中找到。 可以使用以下命令生成样式表：
+代码高亮风格的详细信息可在 [Chroma Styles Gallery](https://xyproto.github.io/splash/docs/all.html) 中找到。可以使用以下命令生成样式表：
 
 ```shell
 hugo gen chromastyles --style=github
