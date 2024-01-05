@@ -42,7 +42,8 @@
 
         {{/* Display icon menu item */}}
         {{- if .Params.icon -}}
-          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="noreferer {{ if eq .Params.icon "mastodon" }}me{{ end }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
+          {{- $rel := cond (eq .Params.icon "mastodon") "noreferer me" "noreferer" }}
+          <a class="p-2 text-current" {{ if $external }}target="_blank" rel="{{ $rel }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
             {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
             <span class="sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
