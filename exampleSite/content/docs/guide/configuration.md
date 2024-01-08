@@ -139,6 +139,7 @@ To configure the page edit link, we can set the `params.editURL.base` parameter 
 ```yaml {filename="hugo.yaml"}
 params:
   editURL:
+    enable: true
     base: "https://github.com/your-username/your-repo/edit/main"
 ```
 
