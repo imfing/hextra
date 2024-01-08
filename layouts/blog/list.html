@@ -8,6 +8,7 @@
         <h1 class="text-center mt-2 text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{{ .Title }}</h1>
         <div class="content">{{ .Content }}</div>
         {{ range .Pages.ByDate.Reverse }}
+          {{- if not .Params.hideOnBlog -}}
           <div class="mb-10">
             <h3><a style="color: inherit; text-decoration: none;" class="block font-semibold mt-8 text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             {{- if site.Params.blog.list.displayTags -}}
@@ -25,6 +26,7 @@
             </p>
             <p class="opacity-50 text-sm mt-4 leading-7">{{ partial "utils/format-date" .Date }}</p>
           </div>
+          {{- end -}}
         {{ end }}
       </main>
     </article>
