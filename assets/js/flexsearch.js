@@ -18,9 +18,28 @@ document.addEventListener("DOMContentLoaded", function () {
 //   {{ $searchData := $searchData | minify | fingerprint }}
 // {{ end }}
 // {{ $noResultsFound := (T "noResultsFound") | default "No results found." }}
+// {{ warnf ">>>> %t" $.Site.relativeURLs }}
+
+
 
 (function () {
-  const searchDataURL = '{{ $searchData.RelPermalink }}';
+
+// {{ if .Site.Params.relativeURLs }}
+// function calculateRelativePath() {
+//   const path = window.location.pathname;
+//   const pathSegments = path.split('/').filter(segment => segment.length > 0);
+//   const depth = pathSegments.length - 2;
+//   let relativePath = depth > 0 ? '' : './';
+//   for (let i = 0; i < depth; i++) {
+//     relativePath += '../';
+//   }
+//   relativePath += '{{ $searchData.RelPermalink }}';
+//   return relativePath;
+// }
+// const searchDataURL = calculateRelativePath();
+// {{ else }}
+// const searchDataURL = '{{ $searchData.RelPermalink }}';
+// {{ end }}
 
   const inputElements = document.querySelectorAll('.search-input');
   for (const el of inputElements) {
