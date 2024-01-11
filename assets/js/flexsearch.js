@@ -220,11 +220,11 @@ const searchDataURL = '{{ $searchData.RelPermalink }}';
 
       for (const heading in data[route].data) {
         const [hash, text] = heading.split('#');
-        // {{ if .Site.Params.RelativeSearch }}
+        // {{ if .Site.Params.RelativeSearch.Enabled }}
         function calculateRelativePath() {
           const path = window.location.pathname;
           const pathSegments = path.split('/').filter(segment => segment.length > 0);
-          const depth = pathSegments.length - 2;
+          const depth = pathSegments.length - '{{ .Site.Params.RelativeSearch.Rootdepth }}';
           let relativePath = depth > 0 ? '' : './';
           for (let i = 0; i < depth; i++) {
             relativePath += '../';
