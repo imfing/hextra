@@ -18,27 +18,26 @@ document.addEventListener("DOMContentLoaded", function () {
 //   {{ $searchData := $searchData | minify | fingerprint }}
 // {{ end }}
 // {{ $noResultsFound := (T "noResultsFound") | default "No results found." }}
-// {{ warnf ">>>> %t" $.Site.relativeURLs }}
-
 
 
 (function () {
 
-// {{ if .Site.Params.relativeURLs }}
-// function calculateRelativePath() {
-//   const path = window.location.pathname;
-//   const pathSegments = path.split('/').filter(segment => segment.length > 0);
-//   const depth = pathSegments.length - 2;
-//   let relativePath = depth > 0 ? '' : './';
-//   for (let i = 0; i < depth; i++) {
-//     relativePath += '../';
-//   }
-//   relativePath += '{{ $searchData.RelPermalink }}';
-//   return relativePath;
-// }
-// const searchDataURL = calculateRelativePath();
+// {{ if .Site.Params.RelativeSearch.Enabled }}
+// {{ $trimmedPath := strings.TrimPrefix "/" $searchData.RelPermalink }}
+function calculateRelativePath() {
+  const path = window.location.pathname;
+  const pathSegments = path.split('/').filter(segment => segment.length > 0);
+  const depth = pathSegments.length - '{{ .Site.Params.RelativeSearch.Rootdepth }}';
+  let relativePath = depth > 0 ? '' : './';
+  for (let i = 0; i < depth; i++) {
+    relativePath += '../';
+  }
+  relativePath += '{{ $trimmedPath }}';
+  return relativePath;
+}
+const searchDataURL = calculateRelativePath();
 // {{ else }}
-// const searchDataURL = '{{ $searchData.RelPermalink }}';
+const searchDataURL = '{{ $searchData.RelPermalink }}';
 // {{ end }}
 
   const inputElements = document.querySelectorAll('.search-input');
@@ -221,7 +220,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
       for (const heading in data[route].data) {
         const [hash, text] = heading.split('#');
-        const url = route.trimEnd('/') + (hash ? '#' + hash : '');
+        // {{ if .Site.Params.RelativeSearch }}
+        function calculateRelativePath() {
+          const path = window.location.pathname;
+          const pathSegments = path.split('/').filter(segment => segment.length > 0);
+          const depth = pathSegments.length - 2;
+          let relativePath = depth > 0 ? '' : './';
+          for (let i = 0; i < depth; i++) {
+            relativePath += '../';
+          }
+          return relativePath;
+        }
+        let url = calculateRelativePath() + route.trimEnd().replace(/^\//, '') + (hash ? '#' + hash : '');
+        console.log(url);
+        // {{ else }}
+        const url = route.trimEnd() + (hash ? '#' + hash : '');
+        // {{ end }}
+        
         const title = text || data[route].title;
 
         const content = data[route].data[heading] || '';
