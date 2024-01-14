@@ -13,7 +13,7 @@
             {{- if site.Params.blog.list.displayTags -}}
               {{ with .Params.tags }}
                 <p class="opacity-50 text-sm leading-7">
-                  {{- range . }}<a class="inline-block mr-2">#{{ . }}</a>{{ end -}}
+                  {{- range . }}<a class="inline-block mr-2" href="{{ (urlize (printf " tags/%s/" . )) | absLangURL }}">#{{ . }}</a>{{ end -}}
                 </p>
               {{ end -}}
             {{- end -}}
