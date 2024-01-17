@@ -8,36 +8,36 @@ A built-in component to display a collapsible content.
 
 ## Example
 
-{{% details title="Details" %}}
+{{< details title="Details" >}}
 
 This is the content of the details.
 
 Markdown is **supported**.
 
-{{% /details %}}
+{{< /details >}}
 
-{{% details title="Click me to reveal" closed="true" %}}
+{{< details title="Click me to reveal" closed="true" >}}
 
 This will be hidden by default.
 
-{{% /details %}}
+{{< /details >}}
 
 ## Usage
 
 ````markdown
-{{%/* details title="Details" */%}}
+{{</* details title="Details" */>}}
 
 This is the content of the details.
 
 Markdown is **supported**.
 
-{{%/* /details */%}}
+{{</* /details */>}}
 ````
 
 ````markdown
-{{%/* details title="Click me to reveal" closed="true" */%}}
+{{</* details title="Click me to reveal" closed="true" */>}}
 
 This will be hidden by default.
 
-{{%/* /details */%}}
+{{</* /details */>}}
 ````
