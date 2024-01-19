@@ -16,6 +16,7 @@
     {{ end -}}
   </title>
   <meta name="description" content="{{ partial "utils/page-description.html" . }}" />
+  <link rel="canonical" href="{{ .Permalink }}">
 
   {{ partial "opengraph.html" . }}
   {{ template "_internal/schema.html" . -}}
