@@ -26,8 +26,18 @@
       <div class="{{ $borderClass }} sticky bottom-0 flex flex-col items-start gap-2 pb-8 dark:border-neutral-800 contrast-more:border-t contrast-more:border-neutral-400 contrast-more:shadow-none contrast-more:dark:border-neutral-400">
         {{- if site.Params.editURL.enable -}}
           {{- $editURL := site.Params.editURL.base | default "" -}}
-          {{- with .File -}}{{ $editURL = urls.JoinPath $editURL (replace .Path "\\" "/") }}{{- end -}}
-          {{- with .Params.editURL -}}{{ $editURL = . }}{{- end -}}
+          {{- with .Params.editURL -}}
+            {{/* if `editURL` is set in the front matter */}}
+            {{- $editURL = . -}}
+          {{- else -}}
+            {{- with .File -}}
+              {{/* `.FileInfo.Meta.SourceRoot` is a Hugo internal field, e.g. `/path/to/repo/content/en/` */}}
+              {{- $sourceDir := replace (strings.TrimPrefix .FileInfo.Meta.BaseDir .FileInfo.Meta.SourceRoot) "\\" "/" -}}
+              {{- $sourceDir = strings.TrimPrefix "/content" $sourceDir -}}
+              {{- $path := replace .Path "\\" "/" -}}
+              {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
+            {{- end -}}
+          {{- end -}}
           <a class="text-xs font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 contrast-more:text-gray-800 contrast-more:dark:text-gray-50" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
         {{- end -}}
         {{/* Scroll To Top */}}
