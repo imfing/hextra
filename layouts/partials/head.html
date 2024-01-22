@@ -16,7 +16,12 @@
     {{ end -}}
   </title>
   <meta name="description" content="{{ partial "utils/page-description.html" . }}" />
-  <link rel="canonical" href="{{ .Permalink }}">
+  
+  {{ with .Params.canonical }}
+    <link rel="canonical" href="{{ . }}" itemprop="url" />
+  {{ else }}
+    <link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
+  {{ end }}
 
   {{ partial "opengraph.html" . }}
   {{ template "_internal/schema.html" . -}}
