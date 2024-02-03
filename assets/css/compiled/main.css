@@ -1701,6 +1701,12 @@ video {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+/* This CSS rule targets the first nested unordered (ul) or ordered (ol) list 
+     inside the first list item (li) of any parent ul or ol. 
+     The rule sets the top margin of the selected list to zero. */
+.content :where(ul, ol) > li:first-child > :where(ul, ol):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  margin-top: 0px;
+}
 .content :where(kbd):not(:where([class~=not-prose],[class~=not-prose] *)) {
   overflow-wrap: break-word;
   border-radius: 0.375rem;
