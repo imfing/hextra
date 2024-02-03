@@ -57,6 +57,12 @@
       @apply my-2;
     }
   }
+  /* This CSS rule targets the first nested unordered (ul) or ordered (ol) list 
+     inside the first list item (li) of any parent ul or ol. 
+     The rule sets the top margin of the selected list to zero. */
+  :where(ul, ol) > li:first-child > :where(ul, ol):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply mt-0;
+  }
   :where(kbd):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply border-black border-opacity-[0.04] bg-opacity-[0.03] bg-black break-words rounded-md border py-0.5 px-[.25em] text-[.9em] dark:border-white/10 dark:bg-white/10;
   }
