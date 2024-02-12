@@ -22,11 +22,13 @@
     {{ partial "search.html" }}
   </div>
   <div class="hextra-scrollbar overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
+    {{- if not site.Params.sidebar.emptyMobile -}}
     <ul class="flex flex-col gap-1 md:hidden">
       <!-- Nav -->
       {{ template "sidebar-main" (dict "context" site.Home "pageURL" $pageURL "page" $context "toc" true) -}}
       {{ template "sidebar-footer" }}
     </ul>
+    {{- end -}}
 
     <!-- Sidebar on large screen -->
     {{- if $disableSidebar -}}
