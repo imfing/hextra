@@ -24,7 +24,7 @@
 
       {{/* TOC bottom part */}}
       <div class="{{ $borderClass }} hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
-        {{- if site.Params.editURL.enable -}}
+        {{- if and (site.Params.editURL.enable) (eq site.Params.editURL.where "toc") -}}
           {{- $editURL := site.Params.editURL.base | default "" -}}
           {{- with .Params.editURL -}}
             {{/* if `editURL` is set in the front matter */}}
