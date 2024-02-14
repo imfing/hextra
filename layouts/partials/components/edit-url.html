@@ -1,0 +1,19 @@
+{{- $editThisPage := (T "editThisPage") | default "Edit this page"}}
+
+<div class="mt-12 mb-8 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400">
+  {{- if and (site.Params.editURL.enable) (eq site.Params.editURL.location .source) -}}
+    {{- $editURL := site.Params.editURL.base | default "" -}}
+    {{- with .Params.editURL -}}
+      {{/* if `editURL` is set in the front matter */}}
+      {{- $editURL = . -}}
+    {{- else -}}
+      {{- with .File -}}
+        {{/* `.FileInfo.Meta.SourceRoot` is a Hugo internal field, e.g. `/path/to/repo/content/en/` */}}
+        {{- $sourceDir := replace (strings.TrimPrefix .FileInfo.Meta.BaseDir .FileInfo.Meta.SourceRoot) "\\" "/" -}}
+        {{- $sourceDir = strings.TrimPrefix "/content" $sourceDir -}}
+        {{- $path := replace .Path "\\" "/" -}}
+        {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
+      {{- end -}}
+    {{- end -}}
+    <a class="mb-4 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
+  {{- end -}}
