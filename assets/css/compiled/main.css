@@ -2186,6 +2186,10 @@ article details > summary::before {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
 }
+.code-block .filename + pre:not(.lntable pre) {
+    /* Override padding for code blocks with filename but no highlight */
+    padding-top: 3rem;
+  }
 .code-block pre:not(.lntable pre) {
   margin-bottom: 1rem;
   border-radius: 0.75rem;
