@@ -12,6 +12,11 @@
   .filename {
     @apply absolute top-0 z-[1] w-full truncate rounded-t-xl bg-primary-700/5 py-2 px-4 text-xs text-gray-700 dark:bg-primary-300/10 dark:text-gray-200;
   }
+
+  .filename + pre:not(.lntable pre) {
+    /* Override padding for code blocks with filename but no highlight */
+    @apply pt-12;
+  }
 }
 
 .code-block pre:not(.lntable pre) {
