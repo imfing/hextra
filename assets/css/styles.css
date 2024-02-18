@@ -11,13 +11,13 @@
 @import "components/code-copy.css";
 
 html {
-  @apply text-base antialiased;
+  @apply hx-text-base hx-antialiased;
   font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  @apply w-full bg-white dark:bg-dark dark:text-gray-100;
+  @apply hx-w-full hx-bg-white dark:hx-bg-dark dark:hx-text-gray-100;
 }
 
 :root {
