@@ -1352,6 +1352,11 @@ video {
   --tw-shadow-colored: 0 2px 4px var(--tw-shadow-color), 0 1px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.shadow-\[0_2px_4px_rgba\(0\2c 0\2c 0\2c \.02\)\2c 1px_1px_1px_rgba\(0\2c 0\2c 0\2c \.06\)\] {
+  --tw-shadow: 0 2px 4px rgba(0,0,0,.02),1px 1px 1px rgba(0,0,0,.06);
+  --tw-shadow-colored: 0 2px 4px var(--tw-shadow-color), 1px 1px 1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -3428,6 +3433,9 @@ body {
 
   .md\:justify-start {
     justify-content: flex-start;
+  }
+  .md\:justify-between {
+    justify-content: space-between;
   }
 
   .md\:self-start {
