@@ -8,3 +8,5 @@ title: "Blog"
   {{< icon name="rss" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 </div>
+
+Checkout the unlisted post, find it here `/blog/hidden`.
