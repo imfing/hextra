@@ -21,7 +21,7 @@
     @apply hx-mt-6 hx-leading-7 first:hx-mt-0;
   }
   :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-text-primary-600 hx-underline hx-decoration-from-font [text-underline-position:hx-from-font];
+    @apply hx-text-primary-600 hx-underline hx-decoration-from-font [text-underline-position:from-font];
   }
   :where(blockquote):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx-mt-6 hx-border-gray-300 hx-italic hx-text-gray-700 dark:hx-border-gray-700 dark:hx-text-gray-400 first:hx-mt-0 ltr:hx-border-l-2 ltr:hx-pl-6 rtl:hx-border-r-2 rtl:hx-pr-6;
