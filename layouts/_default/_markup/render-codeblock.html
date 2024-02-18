@@ -13,7 +13,7 @@
   {{- else -}}
     <pre><code>{{ .Inner }}</code></pre>
   {{- end -}}
-  <div class="hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 {{ if $filename }}top-8{{ else }}top-0{{ end }}">
+  <div class="hx-opacity-0 hx-transition group-hover/code:hx-opacity-100 hx-flex hx-gap-1 hx-absolute hx-m-[11px] hx-right-0 {{ if $filename }}hx-top-8{{ else }}hx-top-0{{ end }}">
     <button
       class="code-copy-btn group/copybtn hx-transition-all active:hx-opacity-50 hx-bg-primary-700/5 hx-border hx-border-black/5 hx-text-gray-600 hover:hx-text-gray-900 hx-rounded-md hx-p-1.5 dark:hx-bg-primary-300/10 dark:hx-border-white/10 dark:hx-text-gray-400 dark:hover:hx-text-gray-50"
       title="{{ $copyCode }}"

@@ -63,7 +63,7 @@
   {{- end -}}
 
   {{- $padding := (mul $level 4) -}}
-  {{- $class := cond (eq $level 0) "hx-font-semibold" (printf "ltr:pl-%d rtl:pr-%d" $padding $padding) -}}
+  {{- $class := cond (eq $level 0) "hx-font-semibold" (printf "ltr:hx-pl-%d rtl:hx-pr-%d" $padding $padding) -}}
 
   {{- range $headings }}
     {{- if .Title }}
