@@ -6,7 +6,7 @@
 {{- $changeLanguage := (T "changeLanguage") | default "Change language" -}}
 
 {{- if site.IsMultiLingual -}}
-  <div class="hx-flex hx-justify-items-start {{ if $grow }}grow{{ end }}">
+  <div class="hx-flex hx-justify-items-start {{ if $grow }}hx-grow{{ end }}">
     <button
       title="{{ $changeLanguage }}"
       data-state="closed"
@@ -21,7 +21,7 @@
     </button>
     <ul
       class="language-options hx-hidden hx-z-20 hx-max-h-64 hx-overflow-auto hx-rounded-md hx-ring-1 hx-ring-black/5 hx-bg-white hx-py-1 hx-text-sm hx-shadow-lg dark:hx-ring-white/20 dark:hx-bg-neutral-800"
-      style="position: hx-fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
+      style="position: fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
     >
       {{ range site.Languages }}
         {{ $link := partial "utils/lang-link" (dict "lang" .Lang "context" $page) }}
