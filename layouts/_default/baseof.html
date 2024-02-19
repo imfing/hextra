@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}">
   {{- partial "head.html" . -}}
-  <body dir="ltr">
+  <body dir="{{ .Site.Language.LanguageDirection }}">
     {{- partial "navbar.html" . -}}
     {{- block "main" . }}{{ end -}}
     {{- if or (eq .Site.Params.footer.enable nil) (.Site.Params.footer.enable) }}
