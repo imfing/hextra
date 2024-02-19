@@ -113,6 +113,9 @@ params:
     # full (100%), wide (90rem), normal (1280px)
     width: normal
 
+  sidebar:
+    emptyMobile: false
+
   theme:
     # light | dark | system
     default: system
