@@ -44,7 +44,7 @@
         class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
       >
         {{- $next.LinkTitle -}}
-        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx-inline hx-h-5 hx-shrink-0\"") -}}
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180\"") -}}
       </a>
     {{- end -}}
   </div>
