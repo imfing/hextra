@@ -38,9 +38,9 @@
   {{- end -}}
 {{- end -}}
 
-{{ $linkClass := "hover:border-gray-300 bg-transparent shadow-sm dark:border-neutral-800 hover:bg-slate-50 hover:shadow-md dark:hover:border-neutral-700 dark:hover:bg-neutral-900" }}
+{{ $linkClass := "hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900" }}
 {{- with $image -}}
-  {{ $linkClass = "hover:border-gray-300 bg-gray-100 shadow dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-50 hover:shadow-lg dark:hover:border-neutral-500 dark:hover:bg-neutral-700" }}
+  {{ $linkClass = "hover:hx-border-gray-300 hx-bg-gray-100 hx-shadow dark:hx-border-neutral-700 dark:hx-bg-neutral-800 dark:hx-text-gray-50 hover:hx-shadow-lg dark:hover:hx-border-neutral-500 dark:hover:hx-bg-neutral-700" }}
 {{- end -}}
 
 {{- $external := strings.HasPrefix $link "http" -}}
@@ -48,7 +48,7 @@
 
 
 <a
-  class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
+  class="hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 {{ $linkClass }}"
   {{- if $link -}}
     href="{{ $href }}" {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
   {{- end -}}
@@ -65,18 +65,18 @@
     />
   {{- end -}}
 
-  {{- $padding := "p-4" -}}
+  {{- $padding := "hx-p-4" -}}
   {{- with $subtitle -}}
-    {{- $padding = "pt-4 px-4" -}}
+    {{- $padding = "hx-pt-4 hx-px-4" -}}
   {{- end -}}
 
 
-  <span class="flex font-semibold items-start gap-2 {{ $padding }} text-gray-700 hover:text-gray-900 dark:text-neutral-200 dark:hover:text-neutral-50">
+  <span class="hx-flex hx-font-semibold hx-items-start hx-gap-2 {{ $padding }} hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50">
     {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{- end -}}
     {{- $title -}}
   </span>
   {{- with $subtitle -}}
-    <div class="line-clamp-3 text-sm font-normal text-gray-500 dark:text-gray-400 px-4 mb-4 mt-2">{{- $subtitle | markdownify -}}</div>
+    <div class="hx-line-clamp-3 hx-text-sm hx-font-normal hx-text-gray-500 dark:hx-text-gray-400 hx-px-4 hx-mb-4 hx-mt-2">{{- $subtitle | markdownify -}}</div>
   {{- end -}}
 </a>
 {{- /* Strip trailing newline. */ -}}
