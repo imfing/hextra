@@ -41,7 +41,7 @@ module:
 
   workspace: hugo.work
   imports:
-    path: github.com/imfing/hextra
+    - path: github.com/imfing/hextra
 
 markup:
   goldmark:
