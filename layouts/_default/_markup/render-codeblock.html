@@ -6,7 +6,7 @@
 
 <div class="code-block hx-relative hx-mt-6 first:hx-mt-0 group/code">
   {{- if $filename -}}
-    <div class="filename">{{ $filename }}</div>
+    <div class="filename" dir="auto">{{ $filename }}</div>
   {{- end -}}
   {{- if transform.CanHighlight $lang -}}
     <div>{{- highlight .Inner $lang .Options -}}</div>
