@@ -9,9 +9,9 @@
     <span data-state="{{ $state }}" class="data-[state=closed]:hx-hidden">
       {{- partial "utils/icon" (dict "name" "folder-open" "attributes" "width=1em") -}}
     </span>
-    <span class="hx-ml-1">{{ $name }}</span>
+    <span class="ltr:hx-ml-1 rtl:hx-mr-1">{{ $name }}</span>
   </button>
-  <ul data-state="{{ $state }}" class="hx-pl-5 data-[state=closed]:hx-hidden">
+  <ul data-state="{{ $state }}" class="ltr:hx-pl-5 rtl:hx-pr-5 data-[state=closed]:hx-hidden">
     {{- .Inner -}}
   </ul>
 </li>
