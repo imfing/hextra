@@ -118,3 +118,7 @@ article details > summary {
     padding: 0 0.6em;
   }
 }
+
+:lang(fa) ol {
+  list-style-type: persian;
+}
