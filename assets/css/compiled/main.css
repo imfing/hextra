@@ -2284,7 +2284,7 @@ article details > summary::before {
   margin-left: -41px;
 }
 :is([dir="rtl"] .steps h3):before {
-  margin-right: -41px;
+  margin-right: -44px;
 }
 .steps h3:before {
     content: counter(step);
