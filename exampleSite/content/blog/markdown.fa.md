@@ -1,6 +1,6 @@
 ---
 title: راهنمای استفاده سینتکس مارک‌داون
-date: 2020-01-01
+date: 2024-03-03
 authors:
   - name: imfing
     link: https://github.com/imfing
@@ -8,6 +8,9 @@ authors:
   - name: Octocat
     link: https://github.com/octocat
     image: https://github.com/octocat.png
+  - name: Goudarz Jafari
+    link: https://github.com/Goudarz
+    image: https://github.com/Goudarz.png
 tags:
   - Markdown
   - مثال
@@ -78,12 +81,18 @@ _شما **می‌توانید** آنها را ترکیب کنید_
 #### مرتب شده
 
 ```
-۱. مورد ۱
-۲. مورد ۲
-۳. مورد ۳
-   ۱. مورد ۳الف
-   ۲. مورد ۳ب
+1. مورد ۱
+2. مورد ۲
+3. مورد ۳
+   1. مورد ۳الف
+   2. مورد ۳ب
 ```
+
+1. مورد ۱
+2. مورد ۲
+3. مورد ۳
+   1. مورد ۳الف
+   2. مورد ۳ب
 
 ### عکس‌ها
 

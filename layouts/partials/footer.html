@@ -39,7 +39,7 @@
     <span>
       {{- . | markdownify -}}
       {{- if strings.Contains . "Hextra" -}}
-        {{- partial "utils/icon.html" (dict "name" "hextra" "attributes" `height=1em class="hx-inline-block hx-ml-1 hx-align-[-2.5px]"`) -}}
+        {{- partial "utils/icon.html" (dict "name" "hextra" "attributes" `height=1em class="hx-inline-block ltr:hx-ml-1 rtl:hx-mr-1 hx-align-[-2.5px]"`) -}}
       {{- end -}}
     </span>
   </a>
