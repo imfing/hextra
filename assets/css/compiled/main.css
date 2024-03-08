@@ -248,9 +248,7 @@ video {
   height: auto;
 }/* Make elements with the HTML hidden attribute stay hidden by default */[hidden] {
   display: none;
-}html:lang(fa) {
-    font-family: Vazirmatn, sans-serif;
-  }*, ::before, ::after{
+}*, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -1694,7 +1692,9 @@ video {
 }.dark {
   --primary-hue: 204deg;
   --primary-saturation: 100%;
-}.placeholder\:hx-text-gray-500::-moz-placeholder{
+}html:lang(fa) {
+    font-family: Vazirmatn, sans-serif;
+  }.placeholder\:hx-text-gray-500::-moz-placeholder{
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }.placeholder\:hx-text-gray-500::placeholder{
@@ -1900,6 +1900,8 @@ video {
 }:is([dir="ltr"] .ltr\:before\:hx-left-0)::before{
   content: var(--tw-content);
   left: 0px;
+}:is([dir="rtl"] .rtl\:hx-end-1){
+  inset-inline-end: 0.25rem;
 }:is([dir="rtl"] .rtl\:hx-left-1){
   left: 0.25rem;
 }:is([dir="rtl"] .rtl\:hx-left-1\.5){

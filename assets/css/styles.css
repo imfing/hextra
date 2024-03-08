@@ -33,8 +33,6 @@ body {
   --primary-saturation: 100%;
 }
 
-@layer base {
   html:lang(fa) {
     font-family: Vazirmatn, sans-serif;
   }
-}
