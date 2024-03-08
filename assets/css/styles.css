@@ -9,6 +9,7 @@
 @import "components/navbar.css";
 @import "components/scrollbar.css";
 @import "components/code-copy.css";
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css?family=Vazirmatn');
 
 html {
   @apply hx-text-base hx-antialiased;
@@ -30,4 +31,10 @@ body {
 .dark {
   --primary-hue: 204deg;
   --primary-saturation: 100%;
+}
+
+@layer base {
+  html:lang(fa) {
+    font-family: Vazirmatn, sans-serif;
+  }
 }
