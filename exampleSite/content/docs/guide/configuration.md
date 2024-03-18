@@ -260,6 +260,25 @@ excludeSearch: true
 ---
 ```
 
+To customize the search tokenize, set the `params.search.flexsearch.tokenize` parameter in the config file:
+
+```hugo.yaml
+params:
+    # ...
+    flexsearch:
+      # full | forward | reverse | strict 
+      tokenize: forward
+```
+
+Options for [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search):
+
+- `strict` - index whole words
+- `forward` - incrementally index words in forward direction
+- `reverse` - incrementally index words in both directions
+- `full` - index every possible combination
+
+
+
 ### Google Analytics
 
 To enable [Google Analytics](https://marketingplatform.google.com/about/analytics/), set `services.googleAnalytics.ID` flag in `hugo.yaml`:
