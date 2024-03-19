@@ -28,22 +28,24 @@
 {{- if or $prev $next -}}
   <div class="hx-mb-8 hx-flex hx-items-center hx-border-t hx-pt-8 dark:hx-border-neutral-800 contrast-more:hx-border-neutral-400 dark:contrast-more:hx-border-neutral-400 print:hx-hidden">
     {{- if $prev -}}
+      {{- $linkTitle := partial "utils/title" $prev -}}
       <a
         href="{{ $prev.RelPermalink }}"
-        title="{{ $prev.LinkTitle }}"
+        title="{{ $linkTitle }}"
         class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-pr-4 rtl:hx-pl-4"
       >
         {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx-inline hx-h-5 hx-shrink-0 ltr:hx-rotate-180\"") -}}
-        {{- $prev.LinkTitle -}}
+        {{- $linkTitle -}}
       </a>
     {{- end -}}
     {{- if $next -}}
+      {{- $linkTitle := partial "utils/title" $next -}}
       <a
         href="{{ $next.RelPermalink }}"
-        title="{{ $next.LinkTitle }}"
+        title="{{ $linkTitle }}"
         class="hx-flex hx-max-w-[50%] hx-items-center hx-gap-1 hx-py-4 hx-text-base hx-font-medium hx-text-gray-600 hx-transition-colors [word-break:break-word] hover:hx-text-primary-600 dark:hx-text-gray-300 md:hx-text-lg ltr:hx-ml-auto ltr:hx-pl-4 ltr:hx-text-right rtl:hx-mr-auto rtl:hx-pr-4 rtl:hx-text-left"
       >
-        {{- $next.LinkTitle -}}
+        {{- $linkTitle -}}
         {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx-inline hx-h-5 hx-shrink-0 rtl:-hx-rotate-180\"") -}}
       </a>
     {{- end -}}
