@@ -2,12 +2,12 @@
   {{- range .Ancestors.Reverse }}
     {{- if not .IsHome }}
       <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
-        <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+        <a href="{{ .Permalink }}">{{- partial "utils/title" . -}}</a>
       </div>
       {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180\"") -}}
     {{ end -}}
   {{ end -}}
   <div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">
-    {{- .LinkTitle -}}
+    {{- partial "utils/title" . -}}
   </div>
 </div>

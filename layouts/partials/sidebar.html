@@ -78,13 +78,14 @@
       {{- range $items.ByWeight }}
         {{- if .Params.sidebar.separator -}}
           <li class="[word-break:break-word] hx-mt-5 hx-mb-2 hx-px-2 hx-py-1.5 hx-text-sm hx-font-semibold hx-text-gray-900 first:hx-mt-0 dark:hx-text-gray-100">
-            <span class="hx-cursor-default">{{ .LinkTitle }}</span>
+            <span class="hx-cursor-default">{{ partial "utils/title" . }}</span>
           </li>
         {{- else -}}
           {{- $active := eq $pageURL .RelPermalink -}}
           {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
           <li class="{{ if $shouldOpen }}open{{ end }}">
-            {{- template "sidebar-item-link" dict "context" . "active" $active "title" .LinkTitle "link" .RelPermalink -}}
+            {{- $linkTitle := partial "utils/title" . -}}
+            {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
             {{- if and $toc $active -}}
               {{- template "sidebar-toc" dict "page" . -}}
             {{- end -}}
@@ -98,9 +99,9 @@
           {{- range $items.ByWeight }}
             {{- $active := eq $pageURL .RelPermalink -}}
             {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
-            {{- $title := .LinkTitle | default .File.BaseFileName -}}
+            {{- $linkTitle := partial "utils/title" . -}}
             <li class="hx-flex hx-flex-col {{ if $shouldOpen }}open{{ end }}">
-              {{- template "sidebar-item-link" dict "context" . "active" $active "title" $title "link" .RelPermalink -}}
+              {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
               {{- if and $toc $active -}}
                 {{ template "sidebar-toc" dict "page" . }}
               {{- end }}
