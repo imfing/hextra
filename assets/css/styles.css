@@ -17,7 +17,7 @@ html {
 }
 
 body {
-  @apply hx-w-full hx-bg-white dark:hx-bg-dark dark:hx-text-gray-100;
+  @apply hx-w-full hx-bg-white dark:hx-bg-dark dark:hx-text-neutral-100;
 }
 
 :root {

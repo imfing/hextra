@@ -1,6 +1,6 @@
 .search-wrapper {
   li {
-    @apply hx-mx-2.5 hx-break-words hx-rounded-md contrast-more:hx-border hx-text-gray-800 contrast-more:hx-border-transparent dark:hx-text-gray-300;
+    @apply hx-mx-2.5 hx-break-words hx-rounded-md contrast-more:hx-border hx-text-neutral-800 contrast-more:hx-border-transparent dark:hx-text-neutral-300;
     a {
       @apply hx-block hx-scroll-m-12 hx-px-2.5 hx-py-2;
     }
@@ -15,17 +15,17 @@
   }
 
   .no-result {
-    @apply hx-block hx-select-none hx-p-8 hx-text-center hx-text-sm hx-text-gray-400;
+    @apply hx-block hx-select-none hx-p-8 hx-text-center hx-text-sm hx-text-neutral-400;
   }
 
   .prefix {
     @apply hx-mx-2.5 hx-mb-2 hx-mt-6 hx-select-none hx-border-b hx-border-black/10 hx-px-2.5 hx-pb-1.5 hx-text-xs hx-font-semibold
-    hx-uppercase hx-text-gray-500 first:hx-mt-0 dark:hx-border-white/20 dark:hx-text-gray-300 contrast-more:hx-border-gray-600
-    contrast-more:hx-text-gray-900 contrast-more:dark:hx-border-gray-50 contrast-more:dark:hx-text-gray-50;
+    hx-uppercase hx-text-neutral-500 first:hx-mt-0 dark:hx-border-white/20 dark:hx-text-neutral-300 contrast-more:hx-border-neutral-600
+    contrast-more:hx-text-neutral-900 contrast-more:dark:hx-border-neutral-50 contrast-more:dark:hx-text-neutral-50;
   }
 
   .excerpt {
-    @apply hx-overflow-hidden hx-text-ellipsis hx-mt-1 hx-text-sm hx-leading-[1.35rem] hx-text-gray-600 dark:hx-text-gray-400 contrast-more:dark:hx-text-gray-50;
+    @apply hx-overflow-hidden hx-text-ellipsis hx-mt-1 hx-text-sm hx-leading-[1.35rem] hx-text-neutral-600 dark:hx-text-neutral-400 contrast-more:dark:hx-text-neutral-50;
     display: -webkit-box;
     line-clamp: 1;
     -webkit-line-clamp: 1;

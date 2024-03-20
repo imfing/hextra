@@ -38,14 +38,14 @@
               {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
             {{- end -}}
           {{- end -}}
-          <a class="hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
+          <a class="hx-text-xs hx-font-medium hx-text-neutral-500 hover:hx-text-neutral-900 dark:hx-text-neutral-400 dark:hover:hx-text-neutral-100 contrast-more:hx-text-neutral-800 contrast-more:dark:hx-text-neutral-50" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
         {{- end -}}
         {{/* Scroll To Top */}}
-        <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
+        <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-neutral-500 hover:hx-text-neutral-900 dark:hx-text-neutral-400 dark:hover:hx-text-neutral-100 contrast-more:hx-text-neutral-800 contrast-more:dark:hx-text-neutral-50">
           <span>
             {{- $backToTop -}}
           </span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-gray-500 hover:hx-border-gray-900 dark:hx-border-gray-400 dark:hover:hx-border-gray-100 contrast-more:hx-border-gray-800 contrast-more:dark:hx-border-gray-50">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx-inline ltr:hx-ml-1 rtl:hx-mr-1 hx-h-3.5 hx-w-3.5 hx-border hx-rounded-full hx-border-neutral-500 hover:hx-border-neutral-900 dark:hx-border-neutral-400 dark:hover:hx-border-neutral-100 contrast-more:hx-border-neutral-800 contrast-more:dark:hx-border-neutral-50">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
           </svg>
         </button>
@@ -68,7 +68,7 @@
   {{- range $headings }}
     {{- if .Title }}
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="{{ $class }} hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#{{ anchorize .ID }}">
+        <a class="{{ $class }} hx-inline-block hx-text-neutral-500 hover:hx-text-neutral-900 dark:hx-text-neutral-400 dark:hover:hx-text-neutral-300 contrast-more:hx-text-neutral-900 contrast-more:hx-underline contrast-more:dark:hx-text-neutral-50 hx-w-full hx-break-words" href="#{{ anchorize .ID }}">
           {{- .Title | safeHTML | plainify | htmlUnescape }}
         </a>
       </li>

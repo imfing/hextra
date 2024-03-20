@@ -24,7 +24,7 @@ The font family of the content can be customized using:
 
 ### Inline Code Element
 
-The color of text mixed with `other text` can customized with:
+The color of text mixed with `other text` can be customized with:
 
 ```css {filename="assets/css/custom.css"}
 .content code:not(.code-block code) {
@@ -32,14 +32,46 @@ The color of text mixed with `other text` can customized with:
 }
 ```
 
-### Primary Color
+### Custom Colors
 
-The primary color of the theme can be customized by setting the `--primary-hue` and `--primary-saturation` variables:
+You can provide a custom color palettes to override the defaults.
+
+To generate a custom color palette you can use a site like [tints.dev](https://www.tints.dev/).
 
 ```css {filename="assets/css/custom.css"}
 :root {
-  --primary-hue: 100deg;
-  --primary-saturation: 90%;
+  /* Primary/brand color */
+  --colors-primary-50: "#EBF6FF";
+  --colors-primary-100: "#D2EDFE";
+  --colors-primary-200: "#A4DEFE";
+  --colors-primary-300: "#7CD7FD";
+  --colors-primary-400: "#4FD1FD";
+  --colors-primary-500: "#21CFFC";
+  --colors-primary-600: "#03ABE2";
+  --colors-primary-700: "#0278AB";
+  --colors-primary-800: "#02486F";
+  --colors-primary-900: "#012237";
+  --colors-primary-950: "#00111E";
+
+  /* The colors of text */
+  --colors-neutral-50: "#ECF2F8";
+  --colors-neutral-100: "#DCE6EF";
+  --colors-neutral-200: "#B7C9DC";
+  --colors-neutral-300: "#99B0C7";
+  --colors-neutral-400: "#7994AF";
+  --colors-neutral-500: "#617A94";
+  --colors-neutral-600: "#4E5E6E";
+  --colors-neutral-700: "#3B454F";
+  --colors-neutral-800: "#24292D";
+  --colors-neutral-900: "#0D0E0F";
+  --colors-neutral-950: "#070808";
+
+  /* Background colors */
+
+  /* Light mode */
+  --colors-bright: "#eceeee";
+  /* Dark mode */
+  --colors-dark: "#0c0d0e";
 }
 ```
 

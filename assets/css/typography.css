@@ -1,57 +1,57 @@
 .content {
-  :where(h1):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100;
+  :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-neutral-900 dark:hx-text-neutral-100;
   }
-  :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-10 hx-border-b hx-pb-1 hx-text-3xl hx-border-neutral-200/70 contrast-more:hx-border-neutral-400 dark:hx-border-primary-100/10 contrast-more:dark:hx-border-neutral-400;
+  :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply hx-font-semibold hx-tracking-tight hx-text-neutral-900 dark:hx-text-neutral-100 hx-mt-10 hx-border-b hx-pb-1 hx-text-3xl hx-border-neutral-200/70 contrast-more:hx-border-neutral-400 dark:hx-border-primary-100/10 contrast-more:dark:hx-border-neutral-400;
   }
-  :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-8 hx-text-2xl;
+  :where(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply hx-font-semibold hx-tracking-tight hx-text-neutral-900 dark:hx-text-neutral-100 hx-mt-8 hx-text-2xl;
   }
-  :where(h4):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-8 hx-text-xl;
+  :where(h4):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply hx-font-semibold hx-tracking-tight hx-text-neutral-900 dark:hx-text-neutral-100 hx-mt-8 hx-text-xl;
   }
-  :where(h5):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-8 hx-text-lg;
+  :where(h5):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply hx-font-semibold hx-tracking-tight hx-text-neutral-900 dark:hx-text-neutral-100 hx-mt-8 hx-text-lg;
   }
-  :where(h6):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-8 hx-text-base;
+  :where(h6):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply hx-font-semibold hx-tracking-tight hx-text-neutral-900 dark:hx-text-neutral-100 hx-mt-8 hx-text-base;
   }
-  :where(p):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-mt-6 hx-leading-7 first:hx-mt-0;
   }
-  :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-text-primary-600 hx-underline hx-decoration-from-font [text-underline-position:from-font];
   }
-  :where(blockquote):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mt-6 hx-border-gray-300 hx-italic hx-text-gray-700 dark:hx-border-gray-700 dark:hx-text-gray-400 first:hx-mt-0 ltr:hx-border-l-2 ltr:hx-pl-6 rtl:hx-border-r-2 rtl:hx-pr-6;
+  :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply hx-mt-6 hx-border-neutral-300 hx-italic hx-text-neutral-700 dark:hx-border-neutral-700 dark:hx-text-neutral-400 first:hx-mt-0 ltr:hx-border-l-2 ltr:hx-pl-6 rtl:hx-border-r-2 rtl:hx-pr-6;
   }
-  :where(pre):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
+  :where(pre):not(:where(.code-block pre, [class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-bg-primary-700/5 hx-mb-4 hx-overflow-x-auto hx-rounded-xl hx-font-medium hx-subpixel-antialiased dark:hx-bg-primary-300/10 hx-text-[.9em] contrast-more:hx-border contrast-more:hx-border-primary-900/20 contrast-more:hx-contrast-150 contrast-more:dark:hx-border-primary-100/40 hx-py-4;
   }
-  :where(code):not(:where(.code-block code, [class~=not-prose],[class~=not-prose] *)) {
+  :where(code):not(:where(.code-block code, [class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-border-black hx-border-opacity-[0.04] hx-bg-opacity-[0.03] hx-bg-black hx-break-words hx-rounded-md hx-border hx-py-0.5 hx-px-[.25em] hx-text-[.9em] dark:hx-border-white/10 dark:hx-bg-white/10;
   }
-  :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) {
+  :where(table):not(:where(.code-block table, [class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-block hx-overflow-x-auto hx-mt-6 hx-p-0 first:hx-mt-0;
 
     tr {
-      @apply hx-m-0 hx-border-t hx-border-gray-300 hx-p-0 dark:hx-border-gray-600 even:hx-bg-gray-100 even:dark:hx-bg-gray-600/20;
+      @apply hx-m-0 hx-border-t hx-border-neutral-300 hx-p-0 dark:hx-border-neutral-600 even:hx-bg-neutral-100 even:dark:hx-bg-neutral-600/20;
     }
     th {
-      @apply hx-m-0 hx-border hx-border-gray-300 hx-px-4 hx-py-2 hx-font-semibold dark:hx-border-gray-600;
+      @apply hx-m-0 hx-border hx-border-neutral-300 hx-px-4 hx-py-2 hx-font-semibold dark:hx-border-neutral-600;
     }
     td {
-      @apply hx-m-0 hx-border hx-border-gray-300 hx-px-4 hx-py-2 dark:hx-border-gray-600;
+      @apply hx-m-0 hx-border hx-border-neutral-300 hx-px-4 hx-py-2 dark:hx-border-neutral-600;
     }
   }
-  :where(ol):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  :where(ol):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-mt-6 hx-list-decimal first:hx-mt-0 ltr:hx-ml-6 rtl:hx-mr-6;
     li {
       @apply hx-my-2;
     }
   }
-  :where(ul):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  :where(ul):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-mt-6 hx-list-disc first:hx-mt-0 ltr:hx-ml-6 rtl:hx-mr-6;
     li {
       @apply hx-my-2;
@@ -60,21 +60,21 @@
   /* This CSS rule targets the first nested unordered (ul) or ordered (ol) list
      inside the list item (li) of any parent ul or ol.
      The rule sets the top margin of the selected list to zero. */
-  :where(ul, ol) > li > :where(ul, ol):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  :where(ul, ol) > li > :where(ul, ol):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-mt-0;
   }
-  :where(kbd):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  :where(kbd):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-border-black hx-border-opacity-[0.04] hx-bg-opacity-[0.03] hx-bg-black hx-break-words hx-rounded-md hx-border hx-py-0.5 hx-px-[.25em] hx-text-[.9em] dark:hx-border-white/10 dark:hx-bg-white/10;
   }
-  :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
+  :where(pre.mermaid):not(:where(.code-block pre, [class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-bg-transparent hx-rounded-none dark:hx-bg-transparent;
   }
-  :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     @apply hx-mx-auto hx-my-4 hx-rounded-md;
   }
-  :where(figure):not(:where([class~=not-prose],[class~=not-prose] *)) {
+  :where(figure):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     figcaption {
-      @apply hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 hx-mt-2 hx-block hx-text-center;
+      @apply hx-text-sm hx-text-neutral-500 dark:hx-text-neutral-400 hx-mt-2 hx-block hx-text-center;
     }
   }
   .footnotes {
@@ -98,9 +98,9 @@
 
   &:after {
     @apply hx-content-['#'] hx-px-1;
-    @apply hx-text-gray-300 dark:hx-text-neutral-700;
+    @apply hx-text-neutral-300 dark:hx-text-neutral-700;
     span:target + & {
-      @apply hx-text-gray-400;
+      @apply hx-text-neutral-400;
       @apply dark:hx-text-neutral-500;
     }
   }

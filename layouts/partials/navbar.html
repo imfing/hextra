@@ -49,12 +49,12 @@
           </a>
         {{- else -}}
           {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
-          {{- $activeClass := cond $active "hx-font-medium" "hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200" -}}
+          {{- $activeClass := cond $active "hx-font-medium" "hx-text-neutral-600 hover:hx-text-neutral-800 dark:hx-text-neutral-400 dark:hover:hx-text-neutral-200" -}}
           <a
             title="{{ or (T .Identifier) .Name | safeHTML }}"
             href="{{ $link }}"
             {{ if $external }}target="_blank" rel="noreferer"{{ end }}
-            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block {{ $activeClass }}"
+            class="hx-text-sm contrast-more:hx-text-neutral-700 contrast-more:dark:hx-text-neutral-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block {{ $activeClass }}"
           >
             <span class="hx-text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
@@ -63,7 +63,7 @@
     {{- end -}}
 
 
-    <button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden">
+    <button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-neutral-400/20 md:hx-hidden">
       {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" "height=24") -}}
     </button>
   </nav>
