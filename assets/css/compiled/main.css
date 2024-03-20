@@ -1545,7 +1545,7 @@ video {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
-.content :where(pre):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
+.content :where(pre):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *)) {
   margin-bottom: 1rem;
   overflow-x: auto;
   border-radius: 0.75rem;
@@ -1559,23 +1559,23 @@ video {
 }
 @media (prefers-contrast: more) {
 
-  .content :where(pre):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
+  .content :where(pre):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *)) {
     border-width: 1px;
     border-color: hsl(var(--primary-hue) var(--primary-saturation) 24% / 0.2);
     --tw-contrast: contrast(1.5);
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
   }
 }
-:is(html[class~="dark"] .content :where(pre):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *))) {
+:is(html[class~="dark"] .content :where(pre):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *))) {
   background-color: hsl(var(--primary-hue) var(--primary-saturation) 77% / 0.1);
 }
 @media (prefers-contrast: more) {
 
-  :is(html[class~="dark"] .content :where(pre):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *))) {
+  :is(html[class~="dark"] .content :where(pre):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *))) {
     border-color: hsl(var(--primary-hue) var(--primary-saturation) 94% / 0.4);
   }
 }
-.content :where(code):not(:where(.code-block code, [class~=not-prose],[class~=not-prose] *)) {
+.content :where(code):not(:where(.hextra-code-block code, [class~=not-prose],[class~=not-prose] *)) {
   overflow-wrap: break-word;
   border-radius: 0.375rem;
   border-width: 1px;
@@ -1589,38 +1589,38 @@ video {
   padding-right: .25em;
   font-size: .9em;
 }
-:is(html[class~="dark"] .content :where(code):not(:where(.code-block code, [class~=not-prose],[class~=not-prose] *))) {
+:is(html[class~="dark"] .content :where(code):not(:where(.hextra-code-block code, [class~=not-prose],[class~=not-prose] *))) {
   border-color: rgb(255 255 255 / 0.1);
   background-color: rgb(255 255 255 / 0.1);
 }
-.content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) {
+.content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) {
   margin-top: 1.5rem;
   display: block;
   overflow-x: auto;
   padding: 0px;
 }
-.content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)):first-child {
+.content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)):first-child {
   margin-top: 0px;
 }
-.content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) tr {
+.content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) tr {
   margin: 0px;
   border-top-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
   padding: 0px;
 }
-.content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) tr:nth-child(even) {
+.content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) tr:nth-child(even) {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
-:is(html[class~="dark"] .content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) tr) {
+:is(html[class~="dark"] .content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) tr) {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
-:is(html[class~="dark"] .content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) tr):nth-child(even) {
+:is(html[class~="dark"] .content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) tr):nth-child(even) {
   background-color: rgb(75 85 99 / 0.2);
 }
-.content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) th {
+.content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) th {
   margin: 0px;
   border-width: 1px;
   --tw-border-opacity: 1;
@@ -1631,11 +1631,11 @@ video {
   padding-bottom: 0.5rem;
   font-weight: 600;
 }
-:is(html[class~="dark"] .content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) th) {
+:is(html[class~="dark"] .content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) th) {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
-.content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) td {
+.content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) td {
   margin: 0px;
   border-width: 1px;
   --tw-border-opacity: 1;
@@ -1645,7 +1645,7 @@ video {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-:is(html[class~="dark"] .content :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) td) {
+:is(html[class~="dark"] .content :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) td) {
   --tw-border-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-border-opacity));
 }
@@ -1707,11 +1707,11 @@ video {
   border-color: rgb(255 255 255 / 0.1);
   background-color: rgb(255 255 255 / 0.1);
 }
-.content :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
+.content :where(pre.mermaid):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *)) {
   border-radius: 0px;
   background-color: transparent;
 }
-:is(html[class~="dark"] .content :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *))) {
+:is(html[class~="dark"] .content :where(pre.mermaid):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *))) {
   background-color: transparent;
 }
 .content :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
@@ -2117,11 +2117,11 @@ article details > summary::before {
 .dark .highlight .chroma .gl { text-decoration: underline }
 /* TextWhitespace */
 .dark .highlight .chroma .w { color: #6e7681 }
-.code-block {
+.hextra-code-block {
   font-size: .9em;
   line-height: 1.25rem;
 }
-.code-block pre {
+.hextra-code-block pre {
   overflow-x: auto;
   background-color: hsl(var(--primary-hue) var(--primary-saturation) 39% / 0.05);
   font-size: .9em;
@@ -2131,23 +2131,23 @@ article details > summary::before {
 }
 @media (prefers-contrast: more) {
 
-  .code-block pre {
+  .hextra-code-block pre {
     border-width: 1px;
     border-color: hsl(var(--primary-hue) var(--primary-saturation) 24% / 0.2);
     --tw-contrast: contrast(1.5);
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
   }
 }
-:is(html[class~="dark"] .code-block pre) {
+:is(html[class~="dark"] .hextra-code-block pre) {
   background-color: hsl(var(--primary-hue) var(--primary-saturation) 77% / 0.1);
 }
 @media (prefers-contrast: more) {
 
-  :is(html[class~="dark"] .code-block pre) {
+  :is(html[class~="dark"] .hextra-code-block pre) {
     border-color: hsl(var(--primary-hue) var(--primary-saturation) 94% / 0.4);
   }
 }
-.code-block .filename {
+.hextra-code-block .filename {
   position: absolute;
   top: 0px;
   z-index: 1;
@@ -2166,16 +2166,16 @@ article details > summary::before {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-:is(html[class~="dark"] .code-block .filename) {
+:is(html[class~="dark"] .hextra-code-block .filename) {
   background-color: hsl(var(--primary-hue) var(--primary-saturation) 77% / 0.1);
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
 }
-.code-block .filename + pre:not(.lntable pre) {
+.hextra-code-block .filename + pre:not(.lntable pre) {
     /* Override padding for code blocks with filename but no highlight */
     padding-top: 3rem;
   }
-.code-block pre:not(.lntable pre) {
+.hextra-code-block pre:not(.lntable pre) {
   margin-bottom: 1rem;
   border-radius: 0.75rem;
   padding-left: 1rem;
@@ -2183,7 +2183,7 @@ article details > summary::before {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-.code-block div:nth-of-type(2) pre {
+.hextra-code-block div:nth-of-type(2) pre {
   padding-top: 3rem;
   padding-bottom: 1rem;
 }
@@ -2542,13 +2542,13 @@ nav .search-wrapper {
 @supports (
   ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)))
 ) {
-  .code-copy-btn {
+  .hextra-hextra-code-copy-btn {
     --tw-bg-opacity: .85;
     --tw-backdrop-blur: blur(12px);
     -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
             backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
   }
-  :is(html[class~="dark"] .code-copy-btn) {
+  :is(html[class~="dark"] .hextra-hextra-code-copy-btn) {
     --tw-bg-opacity: 0.8;
   }
 }
