@@ -2,7 +2,7 @@
 @import "chroma/light.css";
 @import "chroma/dark.css";
 
-.code-block {
+.hextra-code-block {
   @apply hx-text-[.9em] hx-leading-5;
 
   pre {
@@ -19,11 +19,11 @@
   }
 }
 
-.code-block pre:not(.lntable pre) {
+.hextra-code-block pre:not(.lntable pre) {
   @apply hx-px-4 hx-mb-4 hx-py-4 hx-rounded-xl;
 }
 
-.code-block div:nth-of-type(2) pre {
+.hextra-code-block div:nth-of-type(2) pre {
   @apply hx-pt-12 hx-pb-4;
 }
 

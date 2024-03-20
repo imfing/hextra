@@ -26,13 +26,13 @@
   :where(blockquote):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx-mt-6 hx-border-gray-300 hx-italic hx-text-gray-700 dark:hx-border-gray-700 dark:hx-text-gray-400 first:hx-mt-0 ltr:hx-border-l-2 ltr:hx-pl-6 rtl:hx-border-r-2 rtl:hx-pr-6;
   }
-  :where(pre):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
+  :where(pre):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *)) {
     @apply hx-bg-primary-700/5 hx-mb-4 hx-overflow-x-auto hx-rounded-xl hx-font-medium hx-subpixel-antialiased dark:hx-bg-primary-300/10 hx-text-[.9em] contrast-more:hx-border contrast-more:hx-border-primary-900/20 contrast-more:hx-contrast-150 contrast-more:dark:hx-border-primary-100/40 hx-py-4;
   }
-  :where(code):not(:where(.code-block code, [class~=not-prose],[class~=not-prose] *)) {
+  :where(code):not(:where(.hextra-code-block code, [class~=not-prose],[class~=not-prose] *)) {
     @apply hx-border-black hx-border-opacity-[0.04] hx-bg-opacity-[0.03] hx-bg-black hx-break-words hx-rounded-md hx-border hx-py-0.5 hx-px-[.25em] hx-text-[.9em] dark:hx-border-white/10 dark:hx-bg-white/10;
   }
-  :where(table):not(:where(.code-block table, [class~=not-prose],[class~=not-prose] *)) {
+  :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) {
     @apply hx-block hx-overflow-x-auto hx-mt-6 hx-p-0 first:hx-mt-0;
 
     tr {
@@ -66,7 +66,7 @@
   :where(kbd):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx-border-black hx-border-opacity-[0.04] hx-bg-opacity-[0.03] hx-bg-black hx-break-words hx-rounded-md hx-border hx-py-0.5 hx-px-[.25em] hx-text-[.9em] dark:hx-border-white/10 dark:hx-bg-white/10;
   }
-  :where(pre.mermaid):not(:where(.code-block pre, [class~=not-prose],[class~=not-prose] *)) {
+  :where(pre.mermaid):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *)) {
     @apply hx-bg-transparent hx-rounded-none dark:hx-bg-transparent;
   }
   :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
