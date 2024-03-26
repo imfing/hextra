@@ -23,15 +23,15 @@
       class="language-options hx-hidden hx-z-20 hx-max-h-64 hx-overflow-auto hx-rounded-md hx-ring-1 hx-ring-black/5 hx-bg-white hx-py-1 hx-text-sm hx-shadow-lg dark:hx-ring-white/20 dark:hx-bg-neutral-800"
       style="position: fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
     >
-      {{ range site.Languages }}
+      {{ range $page.Translations }}
         {{ $link := partial "utils/lang-link" (dict "lang" .Lang "context" $page) }}
         <li class="hx-flex hx-flex-col">
           <a
             href="{{ $link }}"
             class="hx-text-gray-800 dark:hx-text-gray-100 hover:hx-bg-primary-50 hover:hx-text-primary-600 hover:dark:hx-bg-primary-500/10 hover:dark:hx-text-primary-600 hx-relative hx-cursor-pointer hx-whitespace-nowrap hx-py-1.5 hx-transition-colors ltr:hx-pl-3 ltr:hx-pr-9 rtl:hx-pr-3 rtl:hx-pl-9"
           >
-            {{- .LanguageName -}}
-            {{- if eq .LanguageName site.Language.LanguageName -}}
+            {{- .Language.LanguageName -}}
+            {{- if eq .Language.LanguageName site.Language.LanguageName -}}
               <span class="hx-absolute hx-inset-y-0 hx-flex hx-items-center ltr:hx-right-3 rtl:hx-left-3">
                 {{- partial "utils/icon" (dict "name" "check" "attributes" "height=1em width=1em") -}}
               </span>
