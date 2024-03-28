@@ -228,6 +228,25 @@ excludeSearch: true
 ---
 ```
 
+要自定义检索分词，请在配置文件中设置`params.search.flexsearch.tokenize`：
+
+```hugo.yaml
+params:
+    # ...
+    flexsearch:
+      # full | forward | reverse | strict 
+      tokenize: forward
+```
+
+[`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search)的可选项:
+
+- `strict` - 严格单词匹配
+- `forward` - 单词前缀匹配
+- `reverse` - 单词前后缀匹配
+- `full` - 单词子串匹配。
+
+> 在默认的分词逻辑下，中文一句话就是一个“单词”
+
 ### Google Analytics
 
 要启用 [Google Analytics](https://marketingplatform.google.com/about/analytics/)，设置 `services.googleAnalytics.ID`:
