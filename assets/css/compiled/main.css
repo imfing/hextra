@@ -2542,13 +2542,13 @@ nav .search-wrapper {
 @supports (
   ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)))
 ) {
-  .hextra-hextra-code-copy-btn {
+  .hextra-code-copy-btn {
     --tw-bg-opacity: .85;
     --tw-backdrop-blur: blur(12px);
     -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
             backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
   }
-  :is(html[class~="dark"] .hextra-hextra-code-copy-btn) {
+  :is(html[class~="dark"] .hextra-code-copy-btn) {
     --tw-bg-opacity: 0.8;
   }
 }
