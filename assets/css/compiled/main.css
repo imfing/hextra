@@ -2512,30 +2512,30 @@ nav .search-wrapper {
 .hamburger-menu svg.open > g:nth-of-type(2) path {
         transform: translate3d(0, -4px, 0);
       }
-.hextra-scrollbar {
+.hextra-scrollbar, .hextra-scrollbar * {
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: oklch(55.55% 0 0 / 40%) transparent; /* Firefox */
 
   scrollbar-gutter: stable;
 }
-.hextra-scrollbar::-webkit-scrollbar {
+.hextra-scrollbar::-webkit-scrollbar, .hextra-scrollbar *::-webkit-scrollbar {
   height: 0.75rem;
   width: 0.75rem;
 }
-.hextra-scrollbar::-webkit-scrollbar-track {
+.hextra-scrollbar::-webkit-scrollbar-track, .hextra-scrollbar *::-webkit-scrollbar-track {
   background-color: transparent;
 }
-.hextra-scrollbar::-webkit-scrollbar-thumb {
+.hextra-scrollbar::-webkit-scrollbar-thumb, .hextra-scrollbar *::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
-.hextra-scrollbar:hover::-webkit-scrollbar-thumb {
+.hextra-scrollbar:hover::-webkit-scrollbar-thumb, .hextra-scrollbar *:hover::-webkit-scrollbar-thumb {
     border: 3px solid transparent;
     background-color: var(--tw-shadow-color);
     background-clip: content-box;
     --tw-shadow-color: rgb(115 115 115 / 0.2);
     --tw-shadow: var(--tw-shadow-colored);
   }
-.hextra-scrollbar:hover::-webkit-scrollbar-thumb:hover {
+.hextra-scrollbar:hover::-webkit-scrollbar-thumb:hover, .hextra-scrollbar *:hover::-webkit-scrollbar-thumb:hover {
   --tw-shadow-color: rgb(115 115 115 / 0.4);
   --tw-shadow: var(--tw-shadow-colored);
 }
@@ -2551,6 +2551,40 @@ nav .search-wrapper {
   :is(html[class~="dark"] .hextra-code-copy-btn) {
     --tw-bg-opacity: 0.8;
   }
+}
+.hextra-jupyter-code-cell {
+  scrollbar-gutter: auto;
+  margin-top: 1.5rem;
+}
+.hextra-jupyter-code-cell .hextra-jupyter-code-cell-source {
+  font-size: .875rem;
+}
+.hextra-jupyter-code-cell .hextra-jupyter-code-cell-source .chroma,
+    .hextra-jupyter-code-cell .hextra-jupyter-code-cell-source pre {
+  margin: 0px;
+}
+.hextra-jupyter-code-cell .hextra-jupyter-code-cell-outputs-container {
+  overflow: hidden;
+  border-bottom-right-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  border-width: 1px;
+  border-top-width: 0px;
+  font-size: .75rem;
+}
+:is(html[class~="dark"] .hextra-jupyter-code-cell .hextra-jupyter-code-cell-outputs-container) {
+  --tw-border-opacity: 1;
+  border-color: rgb(38 38 38 / var(--tw-border-opacity));
+}
+.hextra-jupyter-code-cell .hextra-jupyter-code-cell-outputs-container .hextra-jupyter-code-cell-outputs {
+  max-height: 50vh;
+  overflow: auto;
+}
+.hextra-jupyter-code-cell .hextra-jupyter-code-cell-outputs-container .hextra-jupyter-code-cell-outputs pre {
+  padding: 1rem;
+}
+.hextra-jupyter-code-cell:has(.hextra-jupyter-code-cell-outputs) .hextra-jupyter-code-cell-source .chroma {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 html {
   font-size: 1rem;

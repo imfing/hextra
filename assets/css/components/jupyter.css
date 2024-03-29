@@ -1,7 +1,5 @@
 .hextra-jupyter-code-cell {
-  * {
-    scrollbar-gutter: auto;
-  }
+  scrollbar-gutter: auto;
 
   @apply hx-mt-6;
 
