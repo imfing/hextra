@@ -77,6 +77,15 @@
       @apply hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 hx-mt-2 hx-block hx-text-center;
     }
   }
+  /* Definition list */
+  :where(dl):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    dt {
+      @apply hx-mt-6 hx-font-semibold;
+    }
+    dd {
+      @apply hx-my-2 hx-ps-6;
+    }
+  }
   .footnotes {
     @apply hx-mt-12 hx-text-sm;
   }
