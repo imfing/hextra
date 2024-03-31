@@ -1730,6 +1730,16 @@ video {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
 }
+/* Definition list */
+.content :where(dl):not(:where([class~=not-prose],[class~=not-prose] *)) dt {
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+.content :where(dl):not(:where([class~=not-prose],[class~=not-prose] *)) dd {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-inline-start: 1.5rem;
+}
 .content .footnotes {
   margin-top: 3rem;
   font-size: .875rem;
