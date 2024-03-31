@@ -9,6 +9,7 @@
 @import "components/navbar.css";
 @import "components/scrollbar.css";
 @import "components/code-copy.css";
+@import "components/hextra/feature-grid.css";
 
 html {
   @apply hx-text-base hx-antialiased;
