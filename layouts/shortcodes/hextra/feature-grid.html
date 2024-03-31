@@ -1,7 +1,7 @@
 {{- $cols := .Get "cols" | default 3 -}}
 {{- $style := .Get "style" | default "" -}}
 
-{{- $css := printf "--hextra-feature-grid-cols:%v;%s" $cols $style -}}
+{{- $css := printf "--hextra-feature-grid-cols: %v; %s" $cols $style -}}
 
 
 <div
