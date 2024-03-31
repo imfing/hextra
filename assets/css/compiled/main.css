@@ -2224,7 +2224,7 @@ article details > summary::before {
   background-color: hsl(var(--primary-hue) var(--primary-saturation) 32% / 0.1);
 }
 .hextra-cards {
-  grid-template-columns: repeat(auto-fill, minmax(max(250px, calc((100% - 1rem * 2) / var(--rows))), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(max(250px, calc((100% - 1rem * 2) / var(--hextra-cards-grid-cols))), 1fr));
 }
 .hextra-card img {
   -webkit-user-select: none;
