@@ -1,0 +1,5 @@
+.hextra-feature-grid {
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(var(--hextra-feature-grid-cols), minmax(0, 1fr));
+  }
+}
