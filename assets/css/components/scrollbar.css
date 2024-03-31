@@ -1,4 +1,4 @@
-.hextra-scrollbar {
+.hextra-scrollbar, .hextra-scrollbar * {
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: oklch(55.55% 0 0 / 40%) transparent; /* Firefox */
 
