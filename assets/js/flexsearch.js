@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     el.addEventListener('keyup', search);
     el.addEventListener('keydown', handleKeyDown);
     el.addEventListener('input', handleInputChange);
-    el.addEventListener('focusout', () => { setShortcutElementsOpacity(100) });
   }
 
   const shortcutElements = document.querySelectorAll('.search-wrapper kbd');
@@ -94,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.target !== resultsElement &&
       !resultsElement.contains(e.target)
     ) {
+      setShortcutElementsOpacity(100);
       hideSearchResults();
     }
   });
