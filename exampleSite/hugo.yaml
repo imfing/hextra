@@ -142,7 +142,7 @@ params:
 
   editURL:
     enable: true
-    where: "single" # single | toc
+    location: "toc" # single | toc
     base: "https://github.com/imfing/hextra/edit/main/exampleSite/content"
 
   blog:

@@ -2,23 +2,8 @@
 {{- $editThisPage := (T "editThisPage") | default "Edit this page"}}
 
 {{- if site.Params.displayUpdatedDate -}}
-  <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">
-  {{- if and (site.Params.editURL.enable) (eq site.Params.editURL.where "single") -}}
-    {{- $editURL := site.Params.editURL.base | default "" -}}
-    {{- with .Params.editURL -}}
-      {{/* if `editURL` is set in the front matter */}}
-      {{- $editURL = . -}}
-    {{- else -}}
-      {{- with .File -}}
-        {{/* `.FileInfo.Meta.SourceRoot` is a Hugo internal field, e.g. `/path/to/repo/content/en/` */}}
-        {{- $sourceDir := replace (strings.TrimPrefix .FileInfo.Meta.BaseDir .FileInfo.Meta.SourceRoot) "\\" "/" -}}
-        {{- $sourceDir = strings.TrimPrefix "/content" $sourceDir -}}
-        {{- $path := replace .Path "\\" "/" -}}
-        {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
-      {{- end -}}
-    {{- end -}}
-    <a class="mb-4 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
-  {{- end -}}
+<div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">
+{{ partial "components/edit-url.html" (dict "source" "single" "context" .) }}
   {{- with .Lastmod -}}
     {{ $datetime := (time.Format "2006-01-02T15:04:05.000Z" .) }}
     <div class="hx-mt-4">{{ $lastUpdated }} <time datetime="{{ $datetime }}">{{ partial "utils/format-date" . }}</time></div>
