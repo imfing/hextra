@@ -1,0 +1,32 @@
+{{- $page := .page -}}
+{{- $by := .by | default "weight" -}}
+{{- $order := .order | default "asc" -}}
+
+{{- $pages := slice }}
+
+{{- if eq $by "weight" }}
+  {{- $pages = $page.Pages.ByWeight }}
+{{- else if eq $by "date" }}
+  {{- $pages = $page.Pages.ByDate }}
+{{- else if eq $by "title" }}
+  {{- $pages = $page.Pages.ByTitle }}
+{{- else if eq $by "expiryDate" }}
+  {{- $pages = $page.Pages.ByExpiryDate }}
+{{- else if eq $by "publishDate" }}
+  {{- $pages = $page.Pages.ByPublishDate }}
+{{- else if eq $by "lastmod" }}
+  {{- $pages = $page.Pages.ByLastmod }}
+{{- else if eq $by "linkTitle" }}
+  {{- $pages = $page.Pages.ByLinkTitle }}
+{{- else if eq $by "length" }}
+  {{- $pages = $page.Pages.ByLength }}
+{{- else }}
+  {{- warnf "sort-pages: unknown sort field %q" $by -}}
+  {{- $pages = $page.Pages }}
+{{ end -}}
+
+{{- if eq $order "desc" }}
+  {{- $pages = $pages.Reverse }}
+{{- end -}}
+
+{{- return $pages -}}
