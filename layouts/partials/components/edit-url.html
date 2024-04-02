@@ -1,9 +1,13 @@
-{{- $context := .context -}}
 {{- $editThisPage := (T "editThisPage") | default "Edit this page"}}
+
+{{- $context := .context -}}
+
 {{- $linkClass := "mb-4 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400" -}}
+
 {{- if and (site.Params.editURL.enable) (eq site.Params.editURL.location .source) -}}
   {{- $editURL := site.Params.editURL.base | default "" -}}
-  {{- with .Params.editURL -}}
+
+  {{- with $context.Params.editURL -}}
     {{/* if `editURL` is set in the front matter */}}
     {{- $editURL = . -}}
   {{- else -}}
@@ -15,8 +19,10 @@
       {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
     {{- end -}}
   {{- end -}}
+
   {{- if eq site.Params.editURL.location "toc" -}}
     {{- $linkClass = "hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50" -}}
   {{- end -}}
+
   <a class="{{ $linkClass }}" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
 {{- end -}}
