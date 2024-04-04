@@ -1,0 +1,41 @@
+{{- $context := .context -}}
+
+{{- $disableSidebar := .disableSidebar | default false -}}
+{{- $displayPlaceholder := .displayPlaceholder | default false -}}
+
+{{- $sidebarClass := cond $disableSidebar (cond $displayPlaceholder "md:hidden xl:block" "md:hidden") "md:sticky" -}}
+
+{{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
+{{- $pageURL := $context.RelPermalink -}}
+
+{{ $data := partialCached "components/sidebar/read-data" $context $context.FirstSection }}
+
+
+<aside class="hextra-sidebar-container flex flex-col print:hidden md:top-16 md:shrink-0 md:w-64 md:self-start max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
+  {{/* Search bar on small screen */}}
+  {{- partialCached "sidebar/mobile-search" . -}}
+
+
+  <div class="hextra-scrollbar overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
+    <ul class="flex flex-col gap-1 md:hidden"></ul>
+  </div>
+
+  {{/* Sidebar on large screen */}}
+  <ul class="flex flex-col gap-1 max-md:hx-hidden"></ul>
+</aside>
+
+{{ with $data }}
+  {{ warnf "The data file for the sidebar is still unstable. Please use caution when upgrading." }}
+  <pre>
+    {{ . | jsonify (dict "indent" "  ") }}
+  </pre
+  >
+{{ else }}
+
+{{ end }}
+
+{{- define "partials/sidebar/mobile-search" -}}
+  <div class="px-4 pt-4 md:hx-hidden">
+    {{- partialCached "search.html" . -}}
+  </div>
+{{- end -}}

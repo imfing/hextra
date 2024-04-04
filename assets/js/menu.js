@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   const menu = document.querySelector('.hamburger-menu');
   const overlay = document.querySelector('.mobile-menu-overlay');
-  const sidebarContainer = document.querySelector('.sidebar-container');
+  const sidebarContainer = document.querySelector('.hextra-sidebar-container');
 
   // Initialize the overlay
   const overlayClasses = ['hx-fixed', 'hx-inset-0', 'hx-z-10', 'hx-bg-black/80', 'dark:hx-bg-black/60'];
