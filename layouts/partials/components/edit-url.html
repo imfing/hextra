@@ -2,7 +2,7 @@
 
 {{- $context := .context -}}
 
-{{- $linkClass := "mb-4 block text-xs text-gray-500 ltr:text-right rtl:text-left dark:text-gray-400" -}}
+{{- $linkClass := "hx-mb-4 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400" -}}
 
 {{- if and (site.Params.editURL.enable) (eq site.Params.editURL.location .source) -}}
   {{- $editURL := site.Params.editURL.base | default "" -}}
