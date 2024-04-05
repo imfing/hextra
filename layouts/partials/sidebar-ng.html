@@ -8,34 +8,31 @@
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
 {{- $pageURL := $context.RelPermalink -}}
 
-{{ $data := partialCached "components/sidebar/read-data" $context $context.FirstSection }}
+{{ $data := partialCached "components/sidebar/get-section-data" $context $context.Section }}
 
 
-<aside class="hextra-sidebar-container flex flex-col print:hidden md:top-16 md:shrink-0 md:w-64 md:self-start max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
+<div class="mobile-menu-overlay [transition:background-color_1.5s_ease] hx-fixed hx-inset-0 hx-z-10 hx-bg-black/80 dark:hx-bg-black/60 hx-hidden"></div>
+
+<aside class="hextra-sidebar-container hx-flex hx-flex-col print:hx-hidden md:hx-top-16 md:hx-shrink-0 md:hx-w-64 md:hx-self-start max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
   {{/* Search bar on small screen */}}
   {{- partialCached "sidebar/mobile-search" . -}}
 
 
-  <div class="hextra-scrollbar overflow-y-auto overflow-x-hidden p-4 grow md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
-    <ul class="flex flex-col gap-1 md:hidden"></ul>
-  </div>
+  <div class="hextra-scrollbar hx-overflow-y-auto hx-overflow-x-hidden hx-p-4 hx-grow md:hx-h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
+    <ul class="hx-flex hx-flex-col hx-gap-1 md:hx-hidden"></ul>
 
-  {{/* Sidebar on large screen */}}
-  <ul class="flex flex-col gap-1 max-md:hx-hidden"></ul>
+    {{/* Sidebar on large screen */}}
+    <ul class="hx-flex hx-flex-col hx-gap-1 max-md:hx-hidden">
+      {{ with $data }}
+        {{ warnf "The data file for the sidebar is still unstable. Please use caution when upgrading." }}
+        <pre>{{ . | jsonify (dict "indent" "  ") }}</pre>
+      {{ end }}
+    </ul>
+  </div>
 </aside>
 
-{{ with $data }}
-  {{ warnf "The data file for the sidebar is still unstable. Please use caution when upgrading." }}
-  <pre>
-    {{ . | jsonify (dict "indent" "  ") }}
-  </pre
-  >
-{{ else }}
-
-{{ end }}
-
 {{- define "partials/sidebar/mobile-search" -}}
-  <div class="px-4 pt-4 md:hx-hidden">
+  <div class="hx-px-4 hx-pt-4 md:hx-hidden">
     {{- partialCached "search.html" . -}}
   </div>
 {{- end -}}
