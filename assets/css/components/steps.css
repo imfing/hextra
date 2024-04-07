@@ -2,10 +2,16 @@
   counter-increment: step;
 
   &:before {
-    @apply absolute w-[33px] h-[33px];
-    @apply border-4 border-white bg-gray-100 dark:border-dark dark:bg-neutral-800;
-    @apply rounded-full text-neutral-400 text-base font-normal text-center -indent-px;
-    @apply mt-[3px] ml-[-41px];
+    @apply hx-absolute hx-w-[33px] hx-h-[33px];
+    @apply hx-border-4 hx-border-white hx-bg-gray-100 dark:hx-border-dark dark:hx-bg-neutral-800;
+    @apply hx-rounded-full hx-text-neutral-400 hx-text-base hx-font-normal hx-text-center -hx-indent-px;
+    @apply hx-mt-[3px] ltr:hx-ml-[-41px] rtl:hx-mr-[-44px];
     content: counter(step);
+  }
+}
+
+:lang(fa) .steps h3 {
+  &:before {
+    content: counter(step, persian);
   }
 }

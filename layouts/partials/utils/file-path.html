@@ -1,0 +1,21 @@
+{{/* This utility is used to get the file path from absolute, relative path or URL. */}}
+
+{{- $path := .path -}}
+{{- $page := .page -}}
+
+{{- $isLocal := not (urls.Parse $path).Scheme -}}
+{{- $isPage := and (eq $page.Kind "page") (not $page.BundleType) -}}
+{{- $startsWithSlash := hasPrefix $path "/" -}}
+{{- $startsWithRelative := hasPrefix $path "../" -}}
+
+{{- if and $path $isLocal -}}
+  {{- if $startsWithSlash -}}
+    {{/* File under static directory */}}
+    {{- $path = (relURL (strings.TrimPrefix "/" $path)) -}}
+  {{- else if and $isPage (not $startsWithRelative) -}}
+    {{/* File is a sibling to the individual page file */}}
+    {{ $path = (printf "../%s" $path) }}
+  {{- end -}}
+{{- end -}}
+
+{{- return $path -}}

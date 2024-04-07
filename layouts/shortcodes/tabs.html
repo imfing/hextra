@@ -6,10 +6,10 @@
 {{- end -}}
 
 
-<div class="mt-4 flex w-max min-w-full border-b border-gray-200 pb-px dark:border-neutral-800">
+<div class="hx-mt-4 hx-flex hx-w-max hx-min-w-full hx-border-b hx-border-gray-200 hx-pb-px dark:hx-border-neutral-800">
   {{- range $i, $item := $items -}}
     <button
-      class="tabs-toggle data-[state=selected]:border-primary-500 data-[state=selected]:text-primary-600 mr-2 rounded-t p-2 font-medium leading-5 transition-colors -mb-0.5 select-none border-b-2 border-transparent text-gray-600 hover:border-gray-200 hover:text-black dark:text-gray-200 dark:hover:border-neutral-800 dark:hover:text-white"
+      class="tabs-toggle data-[state=selected]:hx-border-primary-500 data-[state=selected]:hx-text-primary-600 hx-mr-2 hx-rounded-t hx-p-2 hx-font-medium hx-leading-5 hx-transition-colors -hx-mb-0.5 hx-select-none hx-border-b-2 hx-border-transparent hx-text-gray-600 hover:hx-border-gray-200 hover:hx-text-black dark:hx-text-gray-200 dark:hover:hx-border-neutral-800 dark:hover:hx-text-white"
       role="tab"
       type="button"
       aria-controls="tabs-panel-{{ $i }}"

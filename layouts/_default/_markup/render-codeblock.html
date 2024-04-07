@@ -1,25 +1,12 @@
 {{- $class := .Attributes.class | default "" -}}
 {{- $filename := .Attributes.filename | default "" -}}
 {{- $lang := .Attributes.lang | default .Type -}}
-{{- $copyCode := (T "copyCode") | default "Copy code" -}}
 
 
-<div class="code-block relative mt-6 first:mt-0 group/code">
-  {{- if $filename -}}
-    <div class="filename">{{ $filename }}</div>
-  {{- end -}}
-  {{- if transform.CanHighlight $lang -}}
-    <div>{{- highlight .Inner $lang .Options -}}</div>
-  {{- else -}}
-    <pre><code>{{ .Inner }}</code></pre>
-  {{- end -}}
-  <div class="opacity-0 transition group-hover/code:opacity-100 flex gap-1 absolute m-[11px] right-0 {{ if $filename }}top-8{{ else }}top-0{{ end }}">
-    <button
-      class="code-copy-btn group/copybtn transition-all active:opacity-50 bg-primary-700/5 border border-black/5 text-gray-600 hover:text-gray-900 rounded-md p-1.5 dark:bg-primary-300/10 dark:border-white/10 dark:text-gray-400 dark:hover:text-gray-50"
-      title="{{ $copyCode }}"
-    >
-      <div class="group-[.copied]/copybtn:hidden copy-icon pointer-events-none h-4 w-4"></div>
-      <div class="hidden group-[.copied]/copybtn:block success-icon pointer-events-none h-4 w-4"></div>
-    </button>
-  </div>
+<div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
+  {{ partial "components/codeblock" (dict "filename" $filename "lang" $lang "content" .Inner "options" .Options) }}
+
+  {{- if or (eq site.Params.highlight.copy.enable nil) (site.Params.highlight.copy.enable) }}
+    {{- partialCached "components/codeblock-copy-button" (dict "filename" $filename) $filename }}
+  {{ end }}
 </div>

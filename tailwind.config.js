@@ -11,6 +11,7 @@ const makePrimaryColor =
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  prefix: 'hx-',
   content: [
     './**/hugo_stats.json',
   ],

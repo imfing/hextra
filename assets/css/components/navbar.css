@@ -1,6 +1,6 @@
 nav {
   .search-wrapper {
-    @apply hidden md:inline-block;
+    @apply hx-hidden md:hx-inline-block;
   }
 }
 
@@ -8,13 +8,13 @@ nav {
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
   .nav-container-blur {
-    @apply backdrop-blur-md bg-white/[.85] dark:!bg-dark/80;
+    @apply hx-backdrop-blur-md hx-bg-white/[.85] dark:!hx-bg-dark/80;
   }
 }
 
 .hamburger-menu svg {
   g {
-    @apply origin-center;
+    @apply hx-origin-center;
     transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
   }
   path {
@@ -37,16 +37,16 @@ nav {
 
   &.open > {
     path {
-      @apply opacity-0;
+      @apply hx-opacity-0;
     }
     g:nth-of-type(1) {
-      @apply rotate-45;
+      @apply hx-rotate-45;
       path {
         transform: translate3d(0, 4px, 0);
       }
     }
     g:nth-of-type(2) {
-      @apply -rotate-45;
+      @apply -hx-rotate-45;
       path {
         transform: translate3d(0, -4px, 0);
       }
