@@ -38,45 +38,15 @@
   {{- end -}}
 {{- end -}}
 
-{{ $linkClass := "hover:border-gray-300 bg-transparent shadow-sm dark:border-neutral-800 hover:bg-slate-50 hover:shadow-md dark:hover:border-neutral-700 dark:hover:bg-neutral-900" }}
-{{- with $image -}}
-  {{ $linkClass = "hover:border-gray-300 bg-gray-100 shadow dark:border-neutral-700 dark:bg-neutral-800 dark:text-gray-50 hover:shadow-lg dark:hover:border-neutral-500 dark:hover:bg-neutral-700" }}
-{{- end -}}
-
-{{- $external := strings.HasPrefix $link "http" -}}
-{{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
-
-
-<a
-  class="hextra-card group flex flex-col justify-start overflow-hidden rounded-lg border border-gray-200 text-current no-underline dark:shadow-none hover:shadow-gray-100 dark:hover:shadow-none shadow-gray-100 active:shadow-sm active:shadow-gray-200 transition-all duration-200 {{ $linkClass }}"
-  {{- if $link -}}
-    href="{{ $href }}" {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
-  {{- end -}}
->
-  {{- with $image -}}
-    <img
-      alt="{{ $title }}"
-      loading="lazy"
-      decoding="async"
-      src="{{ $image | safeURL }}"
-      {{ with $width }}width="{{ . }}"{{ end }}
-      {{ with $height }}height="{{ . }}"{{ end }}
-      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
-    />
-  {{- end -}}
-
-  {{- $padding := "p-4" -}}
-  {{- with $subtitle -}}
-    {{- $padding = "pt-4 px-4" -}}
-  {{- end -}}
-
-
-  <span class="flex font-semibold items-start gap-2 {{ $padding }} text-gray-700 hover:text-gray-900 dark:text-neutral-200 dark:hover:text-neutral-50">
-    {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{- end -}}
-    {{- $title -}}
-  </span>
-  {{- with $subtitle -}}
-    <div class="line-clamp-3 text-sm font-normal text-gray-500 dark:text-gray-400 px-4 mb-4 mt-2">{{- $subtitle | markdownify -}}</div>
-  {{- end -}}
-</a>
-{{- /* Strip trailing newline. */ -}}
+{{- partial "shortcodes/card" (dict
+  "page"        .Page
+  "link"        $link
+  "title"       $title
+  "icon"        $icon
+  "subtitle"    $subtitle
+  "image"       $image
+  "width"       $width
+  "height"      $height
+  "imageStyle"  $imageStyle
+  )
+-}}

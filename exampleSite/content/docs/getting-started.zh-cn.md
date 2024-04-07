@@ -26,23 +26,21 @@ prev: /docs
 
 [Hugo 模块](https://gohugo.io/hugo-modules/)是管理 Hugo 主题的推荐方式。要使用 Hugo 模块，我们需要安装 [Git](https://git-scm.com/) 和 [Go](https://go.dev/)。
 
-{{% steps %}}
-
 ### 初始化 Hugo 站点
 
-```bash
-$ hugo new site my-site --format=yaml
+```shell
+hugo new site my-site --format=yaml
 ```
 
-### 通过模块配置 Hextra 主题
+### 通过 Hugo Module 安装
 
 ```shell
 # 初始化 Hugo 模块
-$ cd my-site
-$ hugo mod init github.com/username/my-site
+cd my-site
+hugo mod init github.com/username/my-site
 
 # 添加 Hextra 
-$ hugo mod get github.com/imfing/hextra
+hugo mod get github.com/imfing/hextra
 ```
 
 编辑 `hugo.yaml` 以启用 Hextra：
@@ -53,31 +51,92 @@ module:
     - path: github.com/imfing/hextra
 ```
 
+### 通过 Git Submodule 安装
+
+#### 先决条件
+
+在我们开始之前，你必须先确保以下软件已经安装：
+
+- [Hugo (extended version)](https://gohugo.io/installation/)
+- [Git](https://git-scm.com/)
+
+#### 步骤
+
+{{% steps %}}
+
+### 初始化 Hugo 站点
+
+```shell
+hugo new site my-site --format=yaml
+```
+
+### 将 Hextra 添加为 Git Submodule
+
+```shell
+git submodule add https://github.com/imfing/hextra.git themes/hextra
+```
+
+添加以下内容来配置 `hugo.yaml` 以使用 Hextra：
+
+```yaml
+theme: hextra
+```
+
 ### 创建你的第一个内容页
 
 让我们为主页和文档页面创建一个新的内容页面：
 
 ```shell
-$ hugo new content/_index.md
-$ hugo new content/docs/_index.md
+hugo new content/_index.md
+hugo new content/docs/_index.md
 ```
 
 ### 在本地预览站点
 
 ```shell
-$ hugo server --buildDrafts --disableFastRender
+hugo server --buildDrafts --disableFastRender
 ```
 
 瞧！你现在可以在 `http://localhost:1313/` 看到你的新站点。
 
 {{% /steps %}}
 
+
+
+
+使用 [CI/CD](https://en.wikipedia.org/wiki/CI/CD) 进行部署时，必须确保在运行 `hugo` 命令之前执行以下命令。
+
+```shell
+git submodule update --init
+```
+
+如果不运行此命令，theme 中将不会存在 Hextra 文件，进而导致构建失败。
+
+
+{{% details title="如何更新主题？" %}}
+
+如需把项目中所有的 Hugo Modules 都升级到最新，在终端中运行此命令：
+
+```shell
+hugo mod get -u
+```
+
+如需把 Hextra 升级到[最新的发行版本](https://github.com/imfing/hextra/releases), 在终端中运行此命令：
+
+```shell
+hugo mod get -u github.com/imfing/hextra
+```
+
+如果你需要获得更多信息，参见 [Hugo Modules](https://gohugo.io/hugo-modules/use-modules/#update-all-modules).
+
+{{% /details %}}
+
 ## 接下来
 
-你可以探索以下部分来添加更多内容：
+探索这些文档以便添加更多内容：
 
 {{< cards >}}
-  {{< card link="../guide/organize-files" title="目录结构" icon="document-duplicate" >}}
-  {{< card link="../guide/configuration" title="配置文件指南" icon="adjustments" >}}
+  {{< card link="../guide/organize-files" title="Organize Files" icon="document-duplicate" >}}
+  {{< card link="../guide/configuration" title="Configuration" icon="adjustments" >}}
   {{< card link="../guide/markdown" title="Markdown" icon="markdown" >}}
 {{< /cards >}}

@@ -27,6 +27,12 @@ languages:
     languageCode: zh-CN
     weight: 2
     title: Hextra
+  fa:
+    languageName: فارسی
+    languageCode: fa
+    languageDirection: rtl
+    weight: 3
+    title: هگزترا
 
 module:
   hugoVersion:
@@ -35,7 +41,7 @@ module:
 
   workspace: hugo.work
   imports:
-    path: github.com/imfing/hextra
+    - path: github.com/imfing/hextra
 
 markup:
   goldmark:
@@ -130,6 +136,9 @@ params:
     flexsearch:
       # index page by: content | summary | heading | title
       index: content
+      # full | forward | reverse | strict
+      # https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search
+      tokenize: forward
 
   editURL:
     enable: true
@@ -138,6 +147,9 @@ params:
   blog:
     list:
       displayTags: true
+      # date | lastmod | publishDate | title | weight
+      sortBy: date
+      sortOrder: desc # or "asc"
 
   comments:
     enable: false

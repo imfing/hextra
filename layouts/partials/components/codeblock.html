@@ -1,0 +1,13 @@
+{{ $filename := .filename | default "" -}}
+{{ $lang := .lang | default "" }}
+{{ $content := .content }}
+{{ $options := .options | default (dict) }}
+
+{{- if $filename -}}
+  <div class="filename" dir="auto">{{ $filename }}</div>
+{{- end -}}
+{{- if transform.CanHighlight $lang -}}
+  <div>{{- highlight $content $lang $options -}}</div>
+{{- else -}}
+  <pre><code>{{ $content }}</code></pre>
+{{- end -}}

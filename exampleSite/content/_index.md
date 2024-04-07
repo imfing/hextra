@@ -4,52 +4,52 @@ layout: hextra-home
 ---
 
 {{< hextra/hero-badge >}}
-  <div class="w-2 h-2 rounded-full bg-primary-400"></div>
+  <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
   <span>Free, open source</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 
-<div class="mt-6 mb-6">
+<div class="hx-mt-6 hx-mb-6">
 {{< hextra/hero-headline >}}
-  Build modern websites&nbsp;<br class="sm:block hidden" />with Markdown and Hugo
+  Build modern websites&nbsp;<br class="sm:hx-block hx-hidden" />with Markdown and Hugo
 {{< /hextra/hero-headline >}}
 </div>
 
-<div class="mb-12">
+<div class="hx-mb-12">
 {{< hextra/hero-subtitle >}}
-  Fast, batteries-included Hugo theme&nbsp;<br class="sm:block hidden" />for creating beautiful static websites
+  Fast, batteries-included Hugo theme&nbsp;<br class="sm:hx-block hx-hidden" />for creating beautiful static websites
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="mb-6">
+<div class="hx-mb-6">
 {{< hextra/hero-button text="Get Started" link="docs" >}}
 </div>
 
-<div class="mt-6"></div>
+<div class="hx-mt-6"></div>
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     title="Fast and Full-featured"
     subtitle="Simple and easy to use, yet powerful and feature-rich."
-    class="aspect-auto md:aspect-[1.1/1] max-md:min-h-[340px]"
+    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
     image="images/hextra-doc.webp"
-    imageClass="top-[40%] left-[24px] w-[180%] sm:w-[110%] dark:opacity-80"
+    imageClass="hx-top-[40%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Markdown is All You Need"
     subtitle="Compose with just Markdown. Enrich with Shortcode components."
-    class="aspect-auto md:aspect-[1.1/1] max-lg:min-h-[340px]"
+    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-lg:hx-min-h-[340px]"
     image="images/hextra-markdown.webp"
-    imageClass="top-[40%] left-[36px] w-[180%] sm:w-[110%] dark:opacity-80"
+    imageClass="hx-top-[40%] hx-left-[36px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="Full Text Search"
     subtitle="Built-in full text search with FlexSearch, no extra setup required."
-    class="aspect-auto md:aspect-[1.1/1] max-md:min-h-[340px]"
+    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
     image="images/hextra-search.webp"
-    imageClass="top-[40%] left-[36px] w-[110%] sm:w-[110%] dark:opacity-80"
+    imageClass="hx-top-[40%] hx-left-[36px] hx-w-[110%] sm:hx-w-[110%] dark:hx-opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
