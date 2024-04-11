@@ -7,6 +7,6 @@
     {{- if or (eq .Site.Params.footer.enable nil) (.Site.Params.footer.enable) }}
       {{ partial "footer.html" . }}
     {{ end }}
+    {{ partial "scripts.html" . }}
   </body>
-  {{ partial "scripts.html" . }}
 </html>
