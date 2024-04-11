@@ -1,7 +1,10 @@
 {{- $enableFooterSwitches := .Scratch.Get "enableFooterSwitches" | default false -}}
 {{- $displayThemeToggle := site.Params.theme.displayToggle | default true -}}
 
-{{- $copyright := (T "copyright") | default "© 2023 Hextra." -}}
+{{- $currentYear := now.Format "2006" -}}
+{{- $publicationYear := .Site.Params.footer.since | default $currentYear -}}
+{{- $copyrightText := (T "copyright") | default "Hextra" -}}
+{{- $copyright := cond (eq $publicationYear $currentYear) (printf "© %s %s" $currentYear $copyrightText) (printf "© %s-%s %s" $publicationYear $currentYear $copyrightText) -}}
 {{- $poweredBy := (T "poweredBy") | default "Powered by Hextra" -}}
 
 {{- $footerWidth := "hx-max-w-screen-xl" -}}

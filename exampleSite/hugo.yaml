@@ -123,6 +123,7 @@ params:
     displayCopyright: true
     displayPoweredBy: true
     width: normal
+    since: "2023"
 
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
