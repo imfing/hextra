@@ -1,6 +1,5 @@
 {{- $items := .items -}}
 {{- $pageLink := .link -}}
-{{ $shouldOpen := true }}
 
 
 <div class="ltr:hx-pr-0 hx-overflow-hidden">
@@ -9,6 +8,10 @@
   >
     {{- range $items }}
       {{- $active := or (eq $pageLink .link) (eq (strings.TrimSuffix "/" $pageLink) .link) -}}
+      {{- $containsPage := hasPrefix $pageLink .link -}}
+      {{- $shouldOpen := or (.open) $containsPage $active | default false -}}
+
+
       <li class="hx-flex hx-flex-col {{ if $shouldOpen }}open{{ end }}">
         {{- partial "components/sidebar/item-link" (dict "active" $active "title" .title "link" .link "items" .items) -}}
         {{- if .items -}}

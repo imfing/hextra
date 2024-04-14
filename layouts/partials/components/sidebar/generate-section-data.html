@@ -1,0 +1,51 @@
+{{- $context := . -}}
+
+{{- $pages := union .RegularPages .Sections -}}
+{{- $pages = where $pages "Params.sidebar.exclude" "!=" true -}}
+
+{{- $data := slice -}}
+
+{{- range $pages.ByWeight -}}
+  {{ $structure := (partial "sidebar/section-walk" .) | unmarshal -}}
+  {{ $data = $data | append $structure -}}
+{{ end -}}
+
+{{- define "partials/sidebar/section-walk" -}}
+  {{- with . -}}
+  {
+    "title": "{{ .LinkTitle | default .File.BaseFileName }}",
+    "link": "{{ .RelPermalink }}",
+    "toc": {{ partial "sidebar/section-page-toc" . }},
+    "open": {{ .Params.sidebar.open | default false }}
+    {{- if .IsSection }},
+    "items": [
+      {{ $pages := union .RegularPages .Sections -}}
+      {{ $pages = where $pages "Params.sidebar.exclude" "!=" true -}}
+      {{ range $index, $page := $pages.ByWeight -}}
+        {{ partial "sidebar/section-walk" . }}{{ if not (ge $index (sub (len $pages) 1)) }},{{ end -}}
+      {{ end -}}
+    ]
+    {{ end -}}
+  }
+  {{- end }}
+{{- end -}}
+
+{{- define "partials/sidebar/section-page-toc" -}}
+  {{/* Get level 2 headings list used mainly for mobile navigation */}}
+  [
+    {{- with .Fragments.Headings -}}
+      {{/* Loop over level 1 headings */}}
+      {{- range . }}
+        {{- with .Headings }}
+          {{ $headings := . }}
+          {{- range $index, $heading := $headings }}
+            {{ $heading.Title | jsonify (dict "noHTMLEscape" true) }}
+            {{- if not (ge $index (sub (len $headings) 1)) }},{{ end -}}
+          {{ end -}}
+        {{- end -}}
+      {{ end -}}
+    {{- end -}}
+  ]
+{{- end -}}
+
+{{ return ($data | jsonify (dict "noHTMLEscape" true)) }}

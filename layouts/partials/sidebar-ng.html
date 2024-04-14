@@ -8,8 +8,8 @@
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
 {{- $pageURL := $context.RelPermalink -}}
 
-{{ $data := partialCached "components/sidebar/get-section-data" $context $context.Section }}
-
+{{/*  {{ $data := partialCached "components/sidebar/get-section-data" $context $context.Section }}  */}}
+{{ $data := partial "components/sidebar/generate-section-data" $navRoot | unmarshal }}
 
 <div class="mobile-menu-overlay [transition:background-color_1.5s_ease] hx-fixed hx-inset-0 hx-z-10 hx-bg-black/80 dark:hx-bg-black/60 hx-hidden"></div>
 
