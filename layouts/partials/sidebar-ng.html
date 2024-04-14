@@ -27,6 +27,7 @@
         {{ warnf "The data file for the sidebar is still unstable. Please use caution when upgrading." }}
         <pre>{{ . | jsonify (dict "indent" "  ") }}</pre>
       {{ end }}
+      {{ partialCached "components/sidebar/footer" $context site.Home }}
     </ul>
   </div>
 </aside>

@@ -1,0 +1,12 @@
+{{- range site.Menus.sidebar }}
+  {{- $name := or (T .Identifier) .Name }}
+  {{- if eq .Params.type "separator" }}
+    <li class="[word-break:break-word] hx-mt-5 hx-mb-2 hx-px-2 hx-py-1.5 hx-text-sm hx-font-semibold hx-text-gray-900 first:hx-mt-0 dark:hx-text-gray-100">
+      <span class="hx-cursor-default">{{ $name }}</span>
+    </li>
+  {{- else }}
+    <li>
+      {{- partial "components/sidebar/item-link" (dict "active" false "title" $name "link" (.URL | relLangURL)) -}}
+    </li>
+  {{- end }}
+{{- end -}}
