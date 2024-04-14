@@ -25,7 +25,7 @@
     <ul class="hx-flex hx-flex-col hx-gap-1 max-md:hx-hidden">
       {{ with $data }}
         {{ warnf "The data file for the sidebar is still unstable. Please use caution when upgrading." }}
-        <pre>{{ . | jsonify (dict "indent" "  ") }}</pre>
+        {{ partial "components/sidebar/render-data" (dict "data" . "page" $context) }}
       {{ end }}
       {{ partialCached "components/sidebar/footer" $context site.Home }}
     </ul>

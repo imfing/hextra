@@ -15,4 +15,5 @@
       {{- partialCached "components/sidebar/collapsible-button" . }}
     {{- end }}
   {{ end -}}
+  {{- with .items }}{{- partialCached "components/sidebar/collapsible-button" site.Home }}{{ end -}}
 </a>
