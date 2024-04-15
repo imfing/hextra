@@ -1,4 +1,4 @@
-{{- $lang := site.Language.LanguageCode | default `en` -}}
+{{- $lang := site.Language.Lang | default `en` -}}
 
 {{- with site.Params.comments.giscus -}}
 <script>
