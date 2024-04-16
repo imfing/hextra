@@ -1,4 +1,26 @@
-{{- $lang := site.Language.Lang | default `en` -}}
+{{ $default_chinese := "zh-CN" }}
+
+{{ $sl   := site.Language }}
+{{ $giscus_lang := $sl.Lang | default `en` }}
+
+{{/* 
+  Special case for Chinese.
+  Giscus uses the geophraphical language code for these.
+  See: https://github.com/giscus/giscus/tree/main/locales
+  */}}
+{{ if eq $giscus_lang "zh" }}
+  {{/* Create a code formatted for Giscus: zh-CN or zn-TW. */}}
+  {{ $code := lower $sl.LanguageCode }}
+  
+  {{ if (hasSuffix $code "-cn") }}
+    {{ $giscus_lang = "zh-CN" }}
+  {{ else if (hasSuffix $code "-tw") }}
+    {{ $giscus_lang = "zh-TW" }}
+  {{ else }}
+    {{ $giscus_lang = $default_chinese }}
+  {{ end }}
+{{ end }}
+
 
 {{- with site.Params.comments.giscus -}}
 <script>
@@ -38,7 +60,7 @@
       "data-emit-metadata": "{{ (string .emitMetadata) | default 0 }}",
       "data-input-position": "{{ .inputPosition | default `top` }}",
       "data-theme": getGiscusTheme(),
-      "data-lang": "{{ .lang | default $lang }}",
+      "data-lang": "{{ .lang | default $giscus_lang }}",
       "crossorigin": "anonymous",
       "async": "",
     };
