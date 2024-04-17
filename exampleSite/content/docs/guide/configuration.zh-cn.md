@@ -130,7 +130,7 @@ editURL: "https://example.com/edit/this/page"
 在此文件中，填写新的版权文本，像这样：
 
 ```yaml {filename="i18n/en.yaml"}
-copyright: "© 2023 YOUR TEXT HERE"
+copyright: "© 2024 YOUR TEXT HERE"
 ```
 你可以在 GitHub 存储库中找到示例 [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) 文件。另外，你可以在版权文本中使用 Markdown 格式。
 
