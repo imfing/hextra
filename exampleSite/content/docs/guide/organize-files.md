@@ -82,6 +82,49 @@ weight: 2
   It is recommended to keep the sidebar not too deep. If you have a lot of content, consider **splitting them into multiple sections**.
 {{< /callout >}}
 
+## Breadcrumb Navigation
+
+Breadcrumbs are auto-generated based on the directory structure of `/content`. 
+
+For example, consider the file structure demonstrated atop this page. Given that structure, the breadcrumbs atop the page at `/docs/guide/organize-files/` would appear automatically as follows:
+
+```
+Documentation > Guide > Organize Files
+```
+
+### Customizing Breadcrumb Link Titles
+
+By default, each breadcrumb link is generated based on that page's `title` parameter.
+
+You can customize this by specifying a `linkTitle` in that page's front matter.
+
+For example, if we wanted the breadcrumb to be `Foo Bar` instead of `Organize Files`:
+
+```yaml {filename="content/docs/guide/organize-files.md"}
+---
+linkTitle: Foo Bar
+title: Organize Files
+weight: 2
+---
+```
+
+This would now generate the following breadcrumbs:
+```
+Documentation > Guide > Foo Bar
+```
+
+### Hiding Breadcrumbs
+
+You can hide breadcrumbs completely from a page by specfying `hideBreadcrumbs: true` in its front matter:
+
+```yaml {filename="content/docs/guide/organize-files.md"}
+---
+hideBreadcrumbs: true
+title: Organize Files
+weight: 2
+---
+```
+
 ## Configure Content Directory
 
 By default, the root `content/` directory is used by Hugo to build the site.
