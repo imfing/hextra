@@ -86,7 +86,7 @@ weight: 2
 
 Breadcrumbs are auto-generated based on the directory structure of `/content`. 
 
-For example, consider the file structure demonstrated atop this page. Given that structure, the breadcrumbs atop the page at `/docs/guide/organize-files/` would appear automatically as follows:
+For example, consider the file structure [demonstrated above](#directory-structure). Given that structure, the breadcrumbs atop the page at `/docs/guide/organize-files/` would appear automatically as follows:
 
 ```
 Documentation > Guide > Organize Files
@@ -94,17 +94,14 @@ Documentation > Guide > Organize Files
 
 ### Customizing Breadcrumb Link Titles
 
-By default, each breadcrumb link is generated based on that page's `title` parameter.
+By default, each breadcrumb link is generated based on that page's `title` parameter. You can customize this by specifying a `linkTitle`.
 
-You can customize this by specifying a `linkTitle` in that page's front matter.
-
-For example, if we wanted the breadcrumb to be `Foo Bar` instead of `Organize Files`:
+For example, if instead of `Organize Files` we wanted the breadcrumb to be `Foo Bar`:
 
 ```yaml {filename="content/docs/guide/organize-files.md"}
 ---
 linkTitle: Foo Bar
 title: Organize Files
-weight: 2
 ---
 ```
 
@@ -121,7 +118,6 @@ You can hide breadcrumbs completely from a page by specfying `hideBreadcrumbs: t
 ---
 hideBreadcrumbs: true
 title: Organize Files
-weight: 2
 ---
 ```
 
