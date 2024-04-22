@@ -84,7 +84,7 @@ weight: 2
 
 ## Breadcrumb Navigation
 
-Breadcrumbs are auto-generated based on the directory structure of `/content`. 
+Breadcrumbs are auto-generated based on the directory structure of `/content`.
 
 For example, consider the file structure [demonstrated above](#directory-structure). Given that structure, the breadcrumbs atop the page at `/docs/guide/organize-files/` would appear automatically as follows:
 
@@ -112,11 +112,11 @@ Documentation > Guide > Foo Bar
 
 ### Hiding Breadcrumbs
 
-You can hide breadcrumbs completely from a page by specfying `hideBreadcrumbs: true` in its front matter:
+You can hide breadcrumbs completely from a page by specfying `breadcrumbs: false` in its front matter:
 
 ```yaml {filename="content/docs/guide/organize-files.md"}
 ---
-hideBreadcrumbs: true
+breadcrumbs: false
 title: Organize Files
 ---
 ```

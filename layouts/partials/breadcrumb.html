@@ -1,4 +1,4 @@
-{{- if not (default false .Params.hideBreadcrumbs) }}
+{{- if (default true .Params.breadcrumbs) }}
   <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
     {{- range .Ancestors.Reverse }}
       {{- if not .IsHome }}
