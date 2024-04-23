@@ -1,5 +1,5 @@
 ---
-title: Tabs
+title: 标签页
 next: /docs/guide/deploy-site
 ---
 

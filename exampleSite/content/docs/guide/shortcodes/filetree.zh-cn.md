@@ -1,6 +1,5 @@
 ---
 title: 文件树
-linkTitle: FileTree
 ---
 
 ## 示例

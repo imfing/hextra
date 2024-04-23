@@ -1,6 +1,5 @@
 ---
 title: 标注
-linkTitle: Callout
 aliases:
 - callouts
 prev: /docs/guide/shortcodes
