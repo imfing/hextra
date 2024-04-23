@@ -1,5 +1,5 @@
 ---
-title: Deploy Site
+title: 部署站点
 prev: /docs/guide/shortcodes
 next: /docs/advanced
 ---
