@@ -61,7 +61,7 @@ Open source projects powered by Hextra
   {{< card
         link="https://hoa.moe/"
         title="HITSZ OpenAuto"
-        image="https://raw.githubusercontent.com/HITSZ-OpenAuto/images/main/logos/HITSZOpenAutoShadow.png"
+        image="https://raw.githubusercontent.com/HITSZ-OpenAuto/hoa.moe/main/static/images/showcase-new.png"
         imageStyle="object-fit:cover; aspect-ratio:16/9;" 
   >}}
 
