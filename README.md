@@ -1,9 +1,12 @@
 <div align="center">
   <h1 align="center">Hextra</h1>
+  <h5 align="center"><a href="README.md">English</a> | <a href="README.zh-cn.md">简体中文</a> ｜ <a href="README.fa.md">فارسی</a></h5>
   <p align="center">Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.</p>
 
 Demo → [imfing.github.io/hextra](https://imfing.github.io/hextra/)
 </div>
+
+
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/5097752/263550533-c18343ca-3848-4230-b5c0-ee989d7916da.png">
