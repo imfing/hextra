@@ -1,21 +1,19 @@
 {{- $items := .items -}}
 {{- $pageLink := .link -}}
+{{- $cached := .cached | default false }}
 
 
 <div class="ltr:hx-pr-0 hx-overflow-hidden">
-  <ul
-    class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'
-  >
+  <ul class="sidebar-item-list-container">
     {{- range $items }}
-      {{- $active := or (eq $pageLink .link) (eq (strings.TrimSuffix "/" $pageLink) .link) -}}
+      {{- $active := and (not $cached) (or (eq $pageLink .link) (eq (strings.TrimSuffix "/" $pageLink) .link)) -}}
       {{- $containsPage := hasPrefix $pageLink .link -}}
       {{- $shouldOpen := or (.open) $containsPage $active | default false -}}
 
-
-      <li class="hx-flex hx-flex-col {{ if $shouldOpen }}open{{ end }}">
+      <li class="sidebar-item-list hx-flex hx-flex-col {{ if $shouldOpen }}open{{ end }}">
         {{- partial "components/sidebar/item-link" (dict "active" $active "title" .title "link" .link "items" .items) -}}
         {{- if .items -}}
-          {{- partial "components/sidebar/render-items" (dict "items" .items "link" .link) -}}
+          {{- partial "components/sidebar/render-items" (dict "items" .items "link" .link "cached" $cached) -}}
         {{- end -}}
       </li>
     {{- end -}}

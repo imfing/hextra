@@ -4,7 +4,7 @@
 {{- $jsLang := resources.Get "js/lang.js" -}}
 {{- $jsCodeCopy := resources.Get "js/code-copy.js" -}}
 {{- $jsFileTree := resources.Get "js/filetree.js" -}}
-{{- $jsSidebar := resources.Get "js/sidebar.js" -}}
+{{- $jsSidebar := resources.Get "js/sidebar.js" | resources.ExecuteAsTemplate "sidebar.js" . -}}
 {{- $jsBackToTop := resources.Get "js/back-to-top.js" -}}
 
 {{- $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs $jsLang $jsFileTree $jsSidebar $jsBackToTop | resources.Concat "js/main.js" -}}

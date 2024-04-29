@@ -1,15 +1,16 @@
 {{- $page := .page -}}
 {{- $pageLink :=  $page.RelPermalink -}}
+{{- $cached := .cached | default false }}
 
 {{- range .data -}}
-  {{- $active := or (eq $pageLink .link) (eq (strings.TrimSuffix "/" $pageLink) .link) -}}
+  {{- $active := and (not $cached) (or (eq $pageLink .link) (eq (strings.TrimSuffix "/" $pageLink) .link)) -}}
   {{- $containsPage := hasPrefix $pageLink .link -}}
   {{- $shouldOpen := or (.open) $containsPage $active | default false -}}
 
-  <li class="{{ if $shouldOpen }}open{{ end }}">
+  <li class="sidebar-item-list {{ if $shouldOpen }}open{{ end }}">
     {{- partial "components/sidebar/item-link" (dict "active" $active "title" .title "link" .link "items" .items) -}}
     {{- if .items -}}
-      {{- partial "components/sidebar/render-items" (dict "items" .items "link" $pageLink) -}}
+      {{- partial "components/sidebar/render-items" (dict "items" .items "link" $pageLink "cached" $cached) -}}
     {{- end -}}
   </li>
 {{ end }}

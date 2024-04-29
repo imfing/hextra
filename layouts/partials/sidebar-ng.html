@@ -45,9 +45,9 @@
       <ul class="hx-flex hx-flex-col hx-gap-1 max-md:hx-hidden">
         {{- with $data -}}
           {{- if $shouldCache -}}
-            {{- partialCached "components/sidebar/render-data" (dict "data" . "page" $context) $navRoot -}}
+            {{- partialCached "components/sidebar/render-data" (dict "data" . "page" $context "cached" $shouldCache) $navRoot -}}
           {{- else -}}
-            {{- partial "components/sidebar/render-data" (dict "data" . "page" $context) -}}
+            {{- partial "components/sidebar/render-data" (dict "data" . "page" $context "cached" $shouldCache) -}}
           {{- end -}}
         {{- end -}}
         {{- partialCached "components/sidebar/bottom" $context site.Home -}}
