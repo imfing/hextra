@@ -4,7 +4,7 @@
   directory. For example, the English sidebar data is stored in `data/en/sidebar.yaml`.
 */}}
 {{ $data := "" }}
-{{ $section := .Section | default "" }}
+{{ $section := .Section | default "index" }}
 {{ $filename := "sidebar" }}
 
 {{ if hugo.IsMultilingual }}
