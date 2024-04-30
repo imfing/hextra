@@ -5,8 +5,7 @@
       "extended": true,
       "version": "0.124.1"
     },
-    "ghcr.io/devcontainers/features/node:1": {},
-    "ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {}
+    "ghcr.io/devcontainers/features/node:1": {}
   },
   "customizations": {
     "vscode": {
