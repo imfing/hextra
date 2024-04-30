@@ -13,7 +13,7 @@
 {{- define "partials/sidebar/section-walk" -}}
   {{- with . -}}
   {
-    "title": "{{ .LinkTitle | default .File.BaseFileName }}",
+    "title": "{{ partial "utils/title" . }}",
     "link": "{{ .RelPermalink }}",
     "toc": {{ partial "sidebar/section-page-toc" . }},
     "open": {{ .Params.sidebar.open | default false }}
