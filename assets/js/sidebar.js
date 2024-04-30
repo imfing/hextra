@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (currentPagePath === linkPath) {
           // add active class to the link
-          link.classList.add("sidebar-item-active");
-          link.classList.remove("sidebar-item-inactive");
+          link.classList.add("active");
+          link.classList.remove("inactive");
 
           if (!isVisible(link)) {
             return;
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // recursively open parent lists
           let parent = link.parentElement;
           while (parent && !parent.classList.contains("hextra-sidebar-container")) {
-            if (parent.tagName === "LI" && parent.classList.contains("sidebar-item-list")) {
+            if (parent.tagName === "LI" && parent.classList.contains("hextra-sidebar-item-list")) {
               parent.classList.add("open");
             }
             parent = parent.parentElement;

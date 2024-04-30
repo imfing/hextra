@@ -1,10 +1,10 @@
 {{- $external := strings.HasPrefix .link "http" -}}
 
-{{- $activeClass := cond (.active) "sidebar-item-active" "sidebar-item-inactive" -}}
+{{- $activeClass := cond (.active) "active" "inactive" -}}
 
 
 <a
-  class="sidebar-item {{ $activeClass }} [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]"
+  class="hextra-sidebar-item-link {{ $activeClass }} [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]"
   href="{{ .link }}"
   {{ if $external }}target="_blank" rel="noreferer"{{ end }}
 >
