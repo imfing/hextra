@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // recursively open parent lists
           let parent = link.parentElement;
           while (parent && !parent.classList.contains("hextra-sidebar-container")) {
-            if (parent.tagName === "LI" && parent.classList.contains("hextra-sidebar-item-list")) {
+            if (parent.tagName === "LI" && parent.classList.contains("hextra-sidebar-item")) {
               parent.classList.add("open");
             }
             parent = parent.parentElement;
