@@ -21,6 +21,11 @@
 
 {{- $shouldCache := site.Params.page.sidebar.cache | default false -}}
 
+{{/* EXPERIMENTAL */}}
+{{- if .context.Params.sidebar.hide -}}
+  {{- $disableSidebar = true -}}
+  {{- $displayPlaceholder = true -}}
+{{- end -}}
 
 <div class="mobile-menu-overlay [transition:background-color_1.5s_ease] hx-fixed hx-inset-0 hx-z-10 hx-bg-black/80 dark:hx-bg-black/60 hx-hidden"></div>
 
