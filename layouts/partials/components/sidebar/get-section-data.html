@@ -5,14 +5,14 @@
 */}}
 {{ $data := "" }}
 {{ $section := .Section | default "" }}
-{{ $sidebarKey := "sidebar" }}
+{{ $filename := "sidebar" }}
 
 {{ if hugo.IsMultilingual }}
-  {{ with (index site.Data site.Language.Lang $sidebarKey $section) }}
+  {{ with (index site.Data site.Language.Lang $filename $section) }}
     {{ $data = . }}
   {{ end }}
 {{ else }}
-  {{ with (index site.Data $sidebarKey $section) }}
+  {{ with (index site.Data $filename $section) }}
     {{ $data = . }}
   {{ end }}
 {{ end }}
