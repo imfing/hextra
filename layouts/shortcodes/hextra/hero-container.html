@@ -16,7 +16,7 @@
   class="{{ $class }} hextra-feature-grid hx-grid hx-min-w-full not-prose"
   {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
 >
-  <div class="hx-mx-auto">
+  <div class="hx-w-max">
     {{ .Inner }}
   </div>
   {{- with $image }}
