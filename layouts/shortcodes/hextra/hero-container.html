@@ -13,14 +13,14 @@
 {{- $href := cond (hasPrefix $imageLink "/") ($imageLink | relURL) $imageLink -}}
 
 <div
-  class="{{ $class }} hextra-feature-grid hx-grid sm:max-lg:hx-grid-cols-2 max-sm:hx-grid-cols-1 hx-gap-4 hx-min-w-full not-prose"
+  class="{{ $class }} hextra-feature-grid hx-grid hx-min-w-full not-prose"
   {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
 >
-  <div class="grid-col-span-1 hx-w-max">
+  <div class="hx-mx-auto">
     {{ .Inner }}
   </div>
   {{- with $image }}
-  <div class="hx-mx-auto hx-px-6">
+  <div class="hx-mx-auto hx-gap-4">
     {{ with $href }}<a href="{{ $href }}" {{ with $imageLinkExternal }}target="_blank" rel="noreferrer"{{ end }}>{{ end }}
       <img
         {{ with $imageClass }}class="{{ $imageClass }}"{{ end }} src="{{ $image }}" 
