@@ -1,5 +1,4 @@
 {{- $class := .Get "class" -}}
-{{- $cols := .Get "cols" | default 2 -}}
 {{- $image := .Get "image" -}}
 {{- $imageClass := .Get "imageClass" -}}
 {{- $imageLink := .Get "imageLink" -}}
@@ -9,7 +8,7 @@
 {{- $imageHeight := .Get "imageHeight" | default 350 -}}
 {{- $style := .Get "style" -}}
 
-{{- $css := printf "--hextra-feature-grid-cols: %v; %s" $cols $style -}}
+{{- $css := printf "--hextra-feature-grid-cols: %v; %s" 2 $style -}}
 {{- $href := cond (hasPrefix $imageLink "/") ($imageLink | relURL) $imageLink -}}
 
 <div
