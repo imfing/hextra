@@ -21,7 +21,7 @@
   class="{{ $class }} hextra-feature-grid hx-grid sm:max-lg:hx-grid-cols-2 max-sm:hx-grid-cols-1 hx-gap-4 hx-w-full not-prose"
   {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
 >
-  <div class="hx-w-full hx-mx-auto">
+  <div class="hx-w-full">
     {{ .Inner }}
   </div>
   {{- with $image }}
