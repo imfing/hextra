@@ -1,4 +1,5 @@
 {{- $class := .Get "class" -}}
+{{- $cols := .Get "cols" | default 2 -}}
 {{- $image := .Get "image" -}}
 {{- $imageClass := .Get "imageClass" -}}
 {{- $imageLink := .Get "imageLink" -}}
@@ -8,18 +9,18 @@
 {{- $imageHeight := .Get "imageHeight" | default 350 -}}
 {{- $style := .Get "style" -}}
 
-{{- $css := printf "--hextra-feature-grid-cols: %v; %s" 2 $style -}}
+{{- $css := printf "--hextra-feature-grid-cols: %v; %s" $cols $style -}}
 {{- $href := cond (hasPrefix $imageLink "/") ($imageLink | relURL) $imageLink -}}
 
 <div
-  class="{{ $class }} hextra-feature-grid hx-grid hx-min-w-full not-prose"
+  class="{{ $class }} hextra-feature-grid hx-grid sm:max-lg:hx-grid-cols-2 max-sm:hx-grid-cols-1 hx-gap-4 hx-w-full not-prose"
   {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
 >
-  <div class="hx-w-max">
+  <div class="hx-mx-auto">
     {{ .Inner }}
   </div>
   {{- with $image }}
-  <div class="hx-mx-auto hx-gap-4">
+  <div class="hx-mx-auto">
     {{ with $href }}<a href="{{ $href }}" {{ with $imageLinkExternal }}target="_blank" rel="noreferrer"{{ end }}>{{ end }}
       <img
         {{ with $imageClass }}class="{{ $imageClass }}"{{ end }} src="{{ $image }}" 
