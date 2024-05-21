@@ -11,6 +11,9 @@
 
 {{- $css := printf "--hextra-feature-grid-cols: %v; %s" $cols $style -}}
 {{- $href := cond (hasPrefix $imageLink "/") ($imageLink | relURL) $imageLink -}}
+{{- if hasPrefix $image "/" -}}
+  {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+{{- end -}}
 
 <div
   class="{{ $class }} hextra-feature-grid hx-grid sm:max-lg:hx-grid-cols-2 max-sm:hx-grid-cols-1 hx-gap-4 hx-w-full not-prose"
