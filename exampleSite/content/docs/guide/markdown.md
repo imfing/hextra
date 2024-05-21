@@ -14,7 +14,7 @@ Hugo supports [Markdown](https://en.wikipedia.org/wiki/Markdown) syntax for form
 | Style   | Syntax     | Example   | Output   |
 | --------  | -------- | ------ | ------ |
 | Bold | `**bold text**` | `**bold text**` | **bold text** |
-| Italic | `*italicized text*` | `*italicized text* | *italicized text* |
+| Italic | `*italicized text*` | `*italicized text*` | *italicized text* |
 | Strikethrough | `~~strikethrough text~~` | `~~strikethrough text~~` | ~~strikethrough text~~ |
 | Subscript | `<sub></sub>` | `This is a <sub>subscript</sub> text` | This is a <sub>subscript</sub> text |
 | Superscript | `<sup></sup>` | `This is a <sup>superscript</sup> text` | This is a <sup>superscript</sup> text |
