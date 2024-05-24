@@ -14,6 +14,13 @@ layout: wide
 {{< cards >}}
 
   {{< card
+        link="https://github.com/axivo/website"
+        title="AXIVO Docs"
+        image="https://github.com/imfing/hextra/assets/19806136/146b00e0-4ee2-41a3-b063-c9b568f3ef30"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
         link="https://github.com/infracourse/web"
         title="Stanford CS 40"
         image="https://github.com/imfing/hextra/assets/5097752/8c29470b-3994-41c8-be9a-5b41476e6f3c"
