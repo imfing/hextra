@@ -16,7 +16,7 @@ Open source projects powered by Hextra
   {{< card
         link="https://github.com/axivo/website"
         title="AXIVO Docs"
-        image="https://github.com/imfing/hextra/assets/19806136/146b00e0-4ee2-41a3-b063-c9b568f3ef30"
+        image="https://github.com/imfing/hextra/assets/19806136/f22f0710-23a0-430b-8bad-616283b8a3e5"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 
