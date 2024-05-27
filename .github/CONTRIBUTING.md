@@ -57,7 +57,7 @@ We recommend that you search existing [issues][issues] or discussions before ope
 
 ### Local development setup
 
-- [Hugo][hugo] >= v0.115.0 (extended version)
+- [Hugo][hugo] >= v0.124.0 (extended version)
 - [Node.js][nodejs]
 - [Go][go]
 
