@@ -4,6 +4,7 @@
 {{- $logoHeight := .Site.Params.navbar.logo.height | default "20" -}}
 {{- $logoDarkPath := .Site.Params.navbar.logo.dark | default $logoPath -}}
 
+{{- $menu := .Site.Params.sectionPagesMenu | default "main" -}}
 {{- $navWidth := "hx-max-w-[90rem]" -}}
 {{- with .Site.Params.navbar.width -}}
   {{ if eq . "normal" -}}
@@ -28,7 +29,7 @@
     </a>
 
     {{- $currentPage := . -}}
-    {{- range .Site.Menus.main -}}
+    {{- range (index .Site.Menus $menu) -}}
       {{- if eq .Params.type "search" -}}
         {{- partial "search.html" (dict "params" .Params) -}}
       {{- else -}}
@@ -48,7 +49,7 @@
             <span class="hx-sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- else -}}
-          {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
+          {{- $active := or ($currentPage.HasMenuCurrent $menu .) ($currentPage.IsMenuCurrent $menu .) -}}
           {{- $activeClass := cond $active "hx-font-medium" "hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200" -}}
           <a
             title="{{ or (T .Identifier) .Name | safeHTML }}"
