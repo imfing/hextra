@@ -47,7 +47,7 @@ Hugo از مدیریت ترجمه با نام پرونده پشتیبانی می
 برای ترجمه آیتم‌های منو در نوار پیمایش، باید فیلد `identifier` را تنظیم کنیم:
 
 ```yaml {filename="hugo.yaml"}
-menu:
+menus:
   main:
     - identifier: documentation
       name: Documentation

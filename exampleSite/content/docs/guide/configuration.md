@@ -16,7 +16,7 @@ Check out the config file for this site [`exampleSite/hugo.yaml`](https://github
 Top right menu is defined under the `menu.main` section in the config file:
 
 ```yaml {filename="hugo.yaml"}
-menu:
+menus:
   main:
     - name: Documentation
       pageRef: /docs
@@ -105,7 +105,7 @@ sidebar:
 Sidebar extra links are defined under the `menu.sidebar` section in the config file:
 
 ```yaml {filename="hugo.yaml"}
-menu:
+menus:
   sidebar:
     - name: More
       params:

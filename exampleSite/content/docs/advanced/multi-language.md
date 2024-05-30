@@ -47,7 +47,7 @@ Note: Hugo also supports [Translation by content directory](https://gohugo.io/co
 To translate menu items in the navigation bar, we need to set the `identifier` field:
 
 ```yaml {filename="hugo.yaml"}
-menu:
+menus:
   main:
     - identifier: documentation
       name: Documentation

@@ -52,7 +52,7 @@ markup:
 
 enableInlineShortcodes: true
 
-menu:
+menus:
   main:
     - identifier: documentation
       name: Documentation

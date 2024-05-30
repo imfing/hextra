@@ -47,7 +47,7 @@ Hugo 支持按文件名管理翻译。例如，如果我们有一个英文文件
 要翻译导航栏中的菜单项，我们需要设置 `identifier` 字段：
 
 ```yaml {filename="hugo.yaml"}
-menu:
+menus:
   main:
     - identifier: documentation
       name: Documentation

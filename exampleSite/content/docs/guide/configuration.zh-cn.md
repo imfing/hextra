@@ -16,7 +16,7 @@ Hugo 从 Hugo 网站根目录下的 `hugo.yaml` 读取配置。
 右上角的菜单在配置文件的 `menu.main` 中配置：
 
 ```yaml {filename="hugo.yaml"}
-menu:
+menus:
   main:
     - name: Documentation
       pageRef: /docs
@@ -77,7 +77,7 @@ menu:
 侧边栏的额外链接在配置文件的 `menu.sidebar` 部分中配置：
 
 ```yaml {filename="hugo.yaml"}
-menu:
+menus:
   sidebar:
     - name: More
       params:
