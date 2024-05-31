@@ -4,7 +4,7 @@
 {{- $logoHeight := .Site.Params.navbar.logo.height | default "20" -}}
 {{- $logoDarkPath := .Site.Params.navbar.logo.dark | default $logoPath -}}
 
-{{- $menu := .Site.Params.sectionPagesMenu | default "main" -}}
+{{- $menu := .Site.SectionPagesMenu | default "main" -}}
 {{- $navWidth := "hx-max-w-[90rem]" -}}
 {{- with .Site.Params.navbar.width -}}
   {{ if eq . "normal" -}}
