@@ -219,15 +219,6 @@ params:
 - `heading` - 一级和二级标题
 - `title` - 仅搜索标题
 
-要从搜索索引中排除页面，更改 front matter 中的 `excludeSearch: true`:
-
-```yaml {filename="content/docs/guide/configuration.md"}
----
-title: Configuration
-excludeSearch: true
----
-```
-
 要自定义检索分词，请在配置文件中设置`params.search.flexsearch.tokenize`：
 
 ```hugo.yaml
@@ -246,6 +237,15 @@ params:
 - `full` - 单词子串匹配。
 
 > 在默认的分词逻辑下，中文一句话就是一个“单词”
+
+要从搜索索引中排除页面，更改 front matter 中的 `excludeSearch: true`:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+excludeSearch: true
+---
+```
 
 ### Google Analytics
 
