@@ -1,0 +1,21 @@
+{{- $items := .items -}}
+{{- $pageLink := .link -}}
+{{- $cached := .cached | default false }}
+
+
+<div class="ltr:hx-pr-0 hx-overflow-hidden">
+  <ul class="hextra-sidebar-item-list">
+    {{- range $items }}
+      {{- $active := and (not $cached) (or (eq $pageLink .link) (eq (strings.TrimSuffix "/" $pageLink) .link)) -}}
+      {{- $containsPage := hasPrefix $pageLink .link -}}
+      {{- $shouldOpen := or (.open) $containsPage $active | default false -}}
+
+      <li class="hextra-sidebar-item hx-flex hx-flex-col {{ if $shouldOpen }}open{{ end }}">
+        {{- partial "components/sidebar/item-link" (dict "active" $active "title" .title "link" .link "items" .items) -}}
+        {{- if .items -}}
+          {{- partial "components/sidebar/render-items" (dict "items" .items "link" $pageLink "cached" $cached) -}}
+        {{- end -}}
+      </li>
+    {{- end -}}
+  </ul>
+</div>
