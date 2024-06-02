@@ -251,6 +251,16 @@ Options for `flexsearch.index`:
 - `heading` - level 1 and level 2 headings
 - `title` - only include the page title
 
+To customize the search tokenize, set the `params.search.flexsearch.tokenize` parameter in the config file:
+
+```yaml {filename="hugo.yaml"}
+params:
+    # ...
+    flexsearch:
+      # full | forward | reverse | strict 
+      tokenize: forward
+```
+
 To exclude a page from the search index, set the `excludeSearch: true` in the front matter of the page:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
@@ -258,16 +268,6 @@ To exclude a page from the search index, set the `excludeSearch: true` in the fr
 title: Configuration
 excludeSearch: true
 ---
-```
-
-To customize the search tokenize, set the `params.search.flexsearch.tokenize` parameter in the config file:
-
-```hugo.yaml
-params:
-    # ...
-    flexsearch:
-      # full | forward | reverse | strict 
-      tokenize: forward
 ```
 
 Options for [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search):
