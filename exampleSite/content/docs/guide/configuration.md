@@ -261,6 +261,13 @@ params:
       tokenize: forward
 ```
 
+Options for [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search):
+
+- `strict` - index whole words
+- `forward` - incrementally index words in forward direction
+- `reverse` - incrementally index words in both directions
+- `full` - index every possible combination
+
 To exclude a page from the search index, set the `excludeSearch: true` in the front matter of the page:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
@@ -269,15 +276,6 @@ title: Configuration
 excludeSearch: true
 ---
 ```
-
-Options for [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search):
-
-- `strict` - index whole words
-- `forward` - incrementally index words in forward direction
-- `reverse` - incrementally index words in both directions
-- `full` - index every possible combination
-
-
 
 ### Google Analytics
 
