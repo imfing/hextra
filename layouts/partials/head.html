@@ -10,6 +10,10 @@
   <title>
     {{- if .IsHome -}}
       {{ .Site.Title -}}
+    {{ else if eq .Kind "page" -}}
+      {{ with .Title }}{{ . }} – {{ end -}}
+      {{ $sectionTitle := index .Site.Params.sectionsTitles .Section }}
+      {{ $sectionTitle | default .Site.Title }}
     {{ else -}}
       {{ with .Title }}{{ . }} – {{ end -}}
       {{ .Site.Title -}}
