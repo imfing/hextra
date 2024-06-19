@@ -78,11 +78,9 @@ def main():
     say_hello()
 ```
 
-
 ### Copy Button
 
 By default, copy button is enabled for code blocks.
-
 
 ## Supported Languages
 
