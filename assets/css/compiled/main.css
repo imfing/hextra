@@ -914,8 +914,14 @@ video {
 .hx-overflow-x-hidden {
   overflow-x: hidden;
 }
+.hx-overflow-y-hidden {
+  overflow-y: hidden;
+}
 .hx-overscroll-contain {
   overscroll-behavior: contain;
+}
+.hx-overscroll-x-contain {
+  overscroll-behavior-x: contain;
 }
 .hx-text-ellipsis {
   text-overflow: ellipsis;
