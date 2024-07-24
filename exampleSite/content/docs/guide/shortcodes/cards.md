@@ -7,6 +7,7 @@ linkTitle: Cards
 
 {{< cards >}}
   {{< card link="../callout" title="Callout" icon="warning" >}}
+  {{< card link="../callout" title="Card with tag" icon="tag" tag="A custom tag">}}
   {{< card link="/" title="No Icon" >}}
 {{< /cards >}}
 
@@ -21,6 +22,7 @@ linkTitle: Cards
 ```
 {{</* cards */>}}
   {{</* card link="../callout" title="Callout" icon="warning" */>}}
+  {{</* card link="../callout" title="Card with tag" icon="warning" tag= "A custom tag" */>}}
   {{</* card link="/" title="No Icon" */>}}
 {{</* /cards */>}}
 ```
@@ -35,13 +37,15 @@ linkTitle: Cards
 
 ## Card Parameters
 
-| Parameter  | Description                           |
-|----------- |---------------------------------------|
-| `link`     | URL (internal or external).           |
-| `title`    | Title heading for the card.           |
-| `subtitle` | Subtitle heading (supports Markdown). |
-| `icon`     | Name of the icon.                     |
-
+| Parameter  | Description                                                     |
+|----------- |-----------------------------------------------------------------|
+| `link`     | URL (internal or external).                                     |
+| `title`    | Title heading for the card.                                     |
+| `subtitle` | Subtitle heading (supports Markdown).                           |
+| `icon`     | Name of the icon.                                               |
+| `tag`      | Text in tag.                                                    |
+| `tagColor` | Color of the tag: `gray` (default), `yellow`, `red` and `blue`. |
+  
 ## Image Card
 
 Additionally, the card supports adding image and processing through these parameters:
@@ -62,3 +66,23 @@ Hextra auto-detects if image processing is needed during build and applies the `
 It currently supports these `method`: `Resize`, `Fit`, `Fill` and `Crop`.
 
 For more on Hugo's built in image processing commands, methods, and options see their [Image Processing Documentation](https://gohugo.io/content-management/image-processing/).
+
+## Tags
+
+The card supports adding tags with custom text and colors:
+
+{{< cards >}}
+  {{< card link="../callout" title="Card with default tag color" tag= "tag text" >}}
+  {{< card link="../callout" title="Card with red tag" tag= "tag text" tagColor="red" >}}
+  {{< card link="../callout" title="Card with blue tag" tag= "tag text" tagColor="blue" >}}
+  {{< card link="../callout" title="Card with yellow tag" tag= "tag text" tagColor="yellow" >}}
+{{< /cards >}}
+
+```
+{{</* cards */>}}
+  {{</* card link="../callout" title="Card with default tag color" tag= "tag text" */>}}
+  {{</* card link="../callout" title="Card with default red tag" tag= "tag text" tagColor="red" */>}}
+  {{</* card link="../callout" title="Card with blue tag" tag= "tag text" tagColor="blue" */>}}
+  {{</* card link="../callout" title="Card with yellow tag" tag= "tag text" tagColor="yellow" */>}}
+{{</* /cards */>}}
+```
