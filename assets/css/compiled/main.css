@@ -1215,12 +1215,11 @@ video {
   font-size: .75rem;
 }
 .hx-text-xxs {
-  font-size: 0.65rem;
+  font-size: .65rem;
 }
 .hx-font-bold {
   font-weight: 700;
 }
-
 .hx-font-extrabold {
   font-weight: 800;
 }
@@ -2262,6 +2261,9 @@ article details > summary::before {
 .hextra-cards {
   grid-template-columns: repeat(auto-fill, minmax(max(250px, calc((100% - 1rem * 2) / var(--hextra-cards-grid-cols))), 1fr));
 }
+.hextra-card {
+  position: relative;
+}
 .hextra-card img {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -2277,12 +2279,20 @@ article details > summary::before {
 }
 .hextra-card p {
   margin-top: 0.5rem;
+  position: relative;
 }
 .dark .hextra-card svg {
   color: #ffffff66;
 }
 .dark .hextra-card:hover svg {
   color: currentColor;
+}
+/* If tag, position upright on the card */
+.hx-tag {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
 }
 .steps h3 {
   counter-increment: step;
