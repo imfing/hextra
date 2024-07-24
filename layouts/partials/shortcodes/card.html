@@ -7,6 +7,8 @@
 {{- $width := .width -}}
 {{- $height := .height -}}
 {{- $imageStyle := .imageStyle -}}
+{{- $tag := .tag -}}
+{{- $tagColor := .tagColor -}}
 
 {{ $linkClass := "hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900" }}
 {{- with $image -}}
@@ -50,5 +52,16 @@
   {{- with $subtitle -}}
     <div class="hextra-card-subtitle hx-line-clamp-3 hx-text-sm hx-font-normal hx-text-gray-500 dark:hx-text-gray-400 hx-px-4 hx-mb-4 hx-mt-2">{{- $subtitle | markdownify -}}</div>
   {{- end -}}
+
+  {{- if $tag }}
+  {{ $defaultClass := "hx-text-gray-600 hx-text-xxs hx-bg-gray-100 hx-border dark:hx-bg-neutral-800 dark:hx-text-neutral-200" }}
+  {{ $yellowClass := "hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200" }}
+  {{ $blueClass := "hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200" }}
+  {{ $redClass := "hx-border-red-200 hx-bg-red-100 hx-text-red-900 dark:hx-border-red-200/30 dark:hx-bg-red-900/30 dark:hx-text-red-200" }}
+
+  {{ $class := cond (eq $tagColor "yellow") $yellowClass (cond (eq $tagColor "blue") $blueClass (cond (eq $tagColor "red") $redClass $defaultClass)) }}
+
+  <span class="hx-flex hx-tag hx-text-xxs hx-border hx-rounded-full hx-px-2 hx-py-1 {{ $class }}">{{ $tag }}</span>
+{{- end -}}
 </a>
 {{- /* Strip trailing newline. */ -}}

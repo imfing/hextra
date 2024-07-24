@@ -1214,9 +1214,13 @@ video {
 .hx-text-xs {
   font-size: .75rem;
 }
+.hx-text-xxs {
+  font-size: 0.65rem;
+}
 .hx-font-bold {
   font-weight: 700;
 }
+
 .hx-font-extrabold {
   font-weight: 800;
 }
