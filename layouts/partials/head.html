@@ -36,6 +36,11 @@
     {{ partial "google-analytics.html" . }}
   {{- end }}
 
+  <!-- Umami -->
+  {{- if and hugo.IsProduction .Site.Params.umami.serverURL .Site.Params.umami.id }}
+    {{ partial "umami.html" . }}
+  {{- end }}
+
 
   <script>
     /* Initialize light/dark mode */
