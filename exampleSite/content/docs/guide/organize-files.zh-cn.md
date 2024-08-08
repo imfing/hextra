@@ -6,7 +6,7 @@ prev: /docs/guide
 
 ## 目录结构
 
-默认情况下，Hugo 在 `context` 目录中搜索 Markdown 文件，目录的结构决定了网站的最终输出结构。
+默认情况下，Hugo 在 `content` 目录中搜索 Markdown 文件，目录的结构决定了网站的最终输出结构。
 以示例网站为例：
 
 <!--more-->
