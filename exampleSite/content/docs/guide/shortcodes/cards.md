@@ -7,12 +7,12 @@ linkTitle: Cards
 
 {{< cards >}}
   {{< card link="../callout" title="Callout" icon="warning" >}}
-  {{< card link="../callout" title="Card with tag" icon="tag" tag="A custom tag">}}
+  {{< card link="../callout" title="Card with tag" icon="tag" tag="custom tag">}}
   {{< card link="/" title="No Icon" >}}
 {{< /cards >}}
 
 {{< cards >}}
-  {{< card link="/" title="Image Card" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplash Landscape" >}}
+  {{< card link="/" title="Image Card" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" subtitle="Internet Image" >}}
   {{< card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." >}}
   {{< card link="/" title="Local Image" image="images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" >}}
 {{< /cards >}}
@@ -69,20 +69,21 @@ For more on Hugo's built in image processing commands, methods, and options see 
 
 ## Tags
 
-The card supports adding tags with custom text and colors:
+Card supports adding tags which could be useful to show extra status information.
 
 {{< cards >}}
-  {{< card link="../callout" title="Card with default tag color" tag= "tag text" >}}
-  {{< card link="../callout" title="Card with red tag" tag= "tag text" tagColor="red" >}}
-  {{< card link="../callout" title="Card with blue tag" tag= "tag text" tagColor="blue" >}}
-  {{< card link="../callout" title="Card with yellow tag" tag= "tag text" tagColor="yellow" >}}
+  {{< card link="../callout" title="Card with default tag" tag="tag text" >}}
+  {{< card link="../callout" title="Card with error tag" tag="tag text" tagType="error" >}}
+  {{< card link="../callout" title="Card with info tag" tag="tag text" tagType="info" >}}
+  {{< card link="../callout" title="Card with warning tag" tag="tag text" tagType="warning" >}}
+  {{< card link="/" title="Image Card" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" subtitle="Internet Image" tag="tag text" tagType="error" >}}
 {{< /cards >}}
 
 ```
 {{</* cards */>}}
-  {{</* card link="../callout" title="Card with default tag color" tag= "tag text" */>}}
-  {{</* card link="../callout" title="Card with default red tag" tag= "tag text" tagColor="red" */>}}
-  {{</* card link="../callout" title="Card with blue tag" tag= "tag text" tagColor="blue" */>}}
-  {{</* card link="../callout" title="Card with yellow tag" tag= "tag text" tagColor="yellow" */>}}
+  {{</* card link="../callout" title="Card with default tag color" tag="tag text" */>}}
+  {{</* card link="../callout" title="Card with default red tag" tag="tag text" tagType="error" */>}}
+  {{</* card link="../callout" title="Card with blue tag" tag="tag text" tagType="info" */>}}
+  {{</* card link="../callout" title="Card with yellow tag" tag="tag text" tagType="warning" */>}}
 {{</* /cards */>}}
 ```

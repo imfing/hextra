@@ -8,7 +8,7 @@
 {{- $height := 0 -}}
 {{- $imageStyle := .Get "imageStyle" -}}
 {{- $tag := .Get "tag" -}}
-{{- $tagColor := .Get "tagColor" -}}
+{{- $tagType := .Get "tagType" -}}
 
 {{/* Image processing options */}}
 {{- $method := .Get "method" | default "Resize" | humanize -}}
@@ -51,6 +51,6 @@
   "height"      $height
   "imageStyle"  $imageStyle
   "tag"         $tag
-  "tagColor"    $tagColor
+  "tagType"     $tagType
   )
 -}}
