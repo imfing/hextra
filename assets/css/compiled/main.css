@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.9 | MIT License | https://tailwindcss.com
 *//*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -596,10 +596,6 @@ video {
   margin-left: auto;
   margin-right: auto;
 }
-.hx-my-1 {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-}
 .hx-my-1\.5 {
   margin-top: 0.375rem;
   margin-bottom: 0.375rem;
@@ -607,9 +603,6 @@ video {
 .hx-my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-.-hx-mb-0 {
-  margin-bottom: -0px;
 }
 .-hx-mb-0\.5 {
   margin-bottom: -0.125rem;
@@ -719,9 +712,6 @@ video {
 .hx-h-2 {
   height: 0.5rem;
 }
-.hx-h-3 {
-  height: 0.75rem;
-}
 .hx-h-3\.5 {
   height: 0.875rem;
 }
@@ -757,9 +747,6 @@ video {
 }
 .hx-w-2 {
   width: 0.5rem;
-}
-.hx-w-3 {
-  width: 0.75rem;
 }
 .hx-w-3\.5 {
   width: 0.875rem;
@@ -887,10 +874,6 @@ video {
 }
 .hx-gap-4 {
   gap: 1rem;
-}
-.hx-gap-x-1 {
-  -moz-column-gap: 0.25rem;
-       column-gap: 0.25rem;
 }
 .hx-gap-x-1\.5 {
   -moz-column-gap: 0.375rem;
@@ -1066,9 +1049,6 @@ video {
   -webkit-background-clip: text;
           background-clip: text;
 }
-.hx-p-0 {
-  padding: 0px;
-}
 .hx-p-0\.5 {
   padding: 0.125rem;
 }
@@ -1087,10 +1067,6 @@ video {
 .hx-p-6 {
   padding: 1.5rem;
 }
-.hx-px-1 {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-}
 .hx-px-1\.5 {
   padding-left: 0.375rem;
   padding-right: 0.375rem;
@@ -1098,6 +1074,10 @@ video {
 .hx-px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+.hx-px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
 .hx-px-3 {
   padding-left: 0.75rem;
@@ -1213,9 +1193,6 @@ video {
 }
 .hx-text-xs {
   font-size: .75rem;
-}
-.hx-text-xxs {
-  font-size: .65rem;
 }
 .hx-font-bold {
   font-weight: 700;
@@ -2128,7 +2105,7 @@ article details > summary::before {
 /* GenericDeleted */
 .dark .highlight .chroma .gd { color: #ffa198; background-color: #490202 }
 /* GenericEmph */
-.dark .highlight .chroma .ge { font-style: italic }
+.dark .highlight .chroma .ge { color: inherit; font-style: italic }
 /* GenericError */
 .dark .highlight .chroma .gr { color: #ffa198 }
 /* GenericHeading */
@@ -2287,12 +2264,12 @@ article details > summary::before {
 .dark .hextra-card:hover svg {
   color: currentColor;
 }
-/* If tag, position upright on the card */
-.hx-tag {
+.hextra-card-tag {
   position: absolute;
   top: 5px;
   right: 5px;
   z-index: 10;
+  font-size: .65rem;
 }
 .steps h3 {
   counter-increment: step;
@@ -2514,7 +2491,7 @@ nav .search-wrapper {
     background-color: rgb(255 255 255 / .85);
     --tw-backdrop-blur: blur(12px);
     -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-            backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+    backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
   }
   .nav-container-blur:is(html[class~="dark"] *) {
     background-color: rgb(17 17 17 / 0.8) !important;
@@ -2589,7 +2566,7 @@ nav .search-wrapper {
     --tw-bg-opacity: .85;
     --tw-backdrop-blur: blur(12px);
     -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-            backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+    backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
   }
   .hextra-code-copy-btn:is(html[class~="dark"] *) {
     --tw-bg-opacity: 0.8;
@@ -2818,27 +2795,27 @@ body:is(html[class~="dark"] *) {
 .hx-group\/copybtn.copied .group-\[\.copied\]\/copybtn\:hx-hidden {
   display: none;
 }
-.data-\[state\=selected\]\:hx-block[data-state=selected] {
+.data-\[state\=selected\]\:hx-block[data-state="selected"] {
   display: block;
 }
-.data-\[state\=closed\]\:hx-hidden[data-state=closed] {
+.data-\[state\=closed\]\:hx-hidden[data-state="closed"] {
   display: none;
 }
-.data-\[state\=open\]\:hx-hidden[data-state=open] {
+.data-\[state\=open\]\:hx-hidden[data-state="open"] {
   display: none;
 }
-.data-\[state\=selected\]\:hx-border-primary-500[data-state=selected] {
+.data-\[state\=selected\]\:hx-border-primary-500[data-state="selected"] {
   --tw-border-opacity: 1;
   border-color: hsl(var(--primary-hue) var(--primary-saturation) 50% / var(--tw-border-opacity));
 }
-.data-\[state\=selected\]\:hx-text-primary-600[data-state=selected] {
+.data-\[state\=selected\]\:hx-text-primary-600[data-state="selected"] {
   --tw-text-opacity: 1;
   color: hsl(var(--primary-hue) var(--primary-saturation) 45% / var(--tw-text-opacity));
 }
-.hx-group[data-theme=dark] .group-data-\[theme\=dark\]\:hx-hidden {
+.hx-group[data-theme="dark"] .group-data-\[theme\=dark\]\:hx-hidden {
   display: none;
 }
-.hx-group[data-theme=light] .group-data-\[theme\=light\]\:hx-hidden {
+.hx-group[data-theme="light"] .group-data-\[theme\=light\]\:hx-hidden {
   display: none;
 }
 @media (prefers-contrast: more) {
@@ -3383,9 +3360,6 @@ body:is(html[class~="dark"] *) {
     display: block;
   }
 }
-.ltr\:hx-right-1:where([dir="ltr"], [dir="ltr"] *) {
-  right: 0.25rem;
-}
 .ltr\:hx-right-1\.5:where([dir="ltr"], [dir="ltr"] *) {
   right: 0.375rem;
 }
@@ -3459,9 +3433,6 @@ body:is(html[class~="dark"] *) {
   .ltr\:md\:hx-left-auto:where([dir="ltr"], [dir="ltr"] *) {
     left: auto;
   }
-}
-.rtl\:hx-left-1:where([dir="rtl"], [dir="rtl"] *) {
-  left: 0.25rem;
 }
 .rtl\:hx-left-1\.5:where([dir="rtl"], [dir="rtl"] *) {
   left: 0.375rem;
