@@ -33,10 +33,10 @@
   color: currentColor;
 }
 
-/* If tag, position upright on the card */
-.hx-tag {
+.hextra-card-tag {
   position: absolute;
   top: 5px;
   right: 5px;
   z-index: 10;
+  font-size: .65rem;
 }
