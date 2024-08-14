@@ -130,7 +130,7 @@ editURL: "https://example.com/edit/this/page"
 在此文件中，填写新的版权文本，像这样：
 
 ```yaml {filename="i18n/en.yaml"}
-copyright: "© 2023 YOUR TEXT HERE"
+copyright: "© 2024 YOUR TEXT HERE"
 ```
 你可以在 GitHub 存储库中找到示例 [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) 文件。另外，你可以在版权文本中使用 Markdown 格式。
 
@@ -218,6 +218,25 @@ params:
 - `summary` - 概述 [Hugo Content Summaries](https://gohugo.io/content-management/summaries/)
 - `heading` - 一级和二级标题
 - `title` - 仅搜索标题
+
+要自定义检索分词，请在配置文件中设置`params.search.flexsearch.tokenize`：
+
+```hugo.yaml
+params:
+    # ...
+    flexsearch:
+      # full | forward | reverse | strict 
+      tokenize: forward
+```
+
+[`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search)的可选项:
+
+- `strict` - 严格单词匹配
+- `forward` - 单词前缀匹配
+- `reverse` - 单词前后缀匹配
+- `full` - 单词子串匹配。
+
+> 在默认的分词逻辑下，中文一句话就是一个“单词”
 
 要从搜索索引中排除页面，更改 front matter 中的 `excludeSearch: true`:
 

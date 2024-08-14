@@ -1,9 +1,12 @@
-{{- $style := .Get "style" -}}
+{{- $cols := .Get "cols" | default 3 -}}
+{{- $style := .Get "style" | default "" -}}
+
+{{- $css := printf "--hextra-feature-grid-cols: %v; %s" $cols $style -}}
 
 
 <div
-  class="hx-grid sm:hx-grid-cols-2 lg:hx-grid-cols-3 hx-grid-cols-1 hx-gap-4 hx-w-full not-prose"
-  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
+  class="hextra-feature-grid hx-grid sm:max-lg:hx-grid-cols-2 max-sm:hx-grid-cols-1 hx-gap-4 hx-w-full not-prose"
+  {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
 >
   {{ .Inner }}
 </div>

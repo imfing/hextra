@@ -7,7 +7,8 @@
         <br class="hx-mt-1.5 hx-text-sm" />
         <h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">{{ .Title }}</h1>
         <div class="content">{{ .Content }}</div>
-        {{ range .Pages.ByDate.Reverse }}
+        {{- $pages := partial "utils/sort-pages" (dict "page" . "by" site.Params.blog.list.sortBy "order" site.Params.blog.list.sortOrder) -}}
+        {{- range $pages }}
           <div class="hx-mb-10">
             <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             {{- if site.Params.blog.list.displayTags -}}
@@ -25,9 +26,9 @@
             </p>
             <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">{{ partial "utils/format-date" .Date }}</p>
           </div>
-        {{ end }}
+        {{ end -}}
       </main>
     </article>
     <div class="max-xl:hx-hidden hx-h-0 hx-w-64 hx-shrink-0"></div>
   </div>
-{{ end }}
+{{- end -}}

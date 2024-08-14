@@ -161,7 +161,7 @@ To modify the copyright text displayed in your website's footer, you'll need to 
 In this file, specify your new copyright text as shown below:
 
 ```yaml {filename="i18n/en.yaml"}
-copyright: "© 2023 YOUR TEXT HERE"
+copyright: "© 2024 YOUR TEXT HERE"
 ```
 
 For your reference, an example [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) file can be found in the GitHub repository. Additionally, you could use Markdown format in the copyright text.
@@ -250,6 +250,23 @@ Options for `flexsearch.index`:
 - `summary` - summary of the page, see [Hugo Content Summaries](https://gohugo.io/content-management/summaries/) for more details
 - `heading` - level 1 and level 2 headings
 - `title` - only include the page title
+
+To customize the search tokenize, set the `params.search.flexsearch.tokenize` parameter in the config file:
+
+```yaml {filename="hugo.yaml"}
+params:
+    # ...
+    flexsearch:
+      # full | forward | reverse | strict 
+      tokenize: forward
+```
+
+Options for [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search):
+
+- `strict` - index whole words
+- `forward` - incrementally index words in forward direction
+- `reverse` - incrementally index words in both directions
+- `full` - index every possible combination
 
 To exclude a page from the search index, set the `excludeSearch: true` in the front matter of the page:
 

@@ -1,0 +1,9 @@
+{{/* Shortcode to include a PDF file in a page. */}}
+
+{{- $path := .Get 0 -}}
+{{- $url := partial "utils/file-path" (dict "page" .Page "path" $path) -}}
+
+
+<div class="hextra-pdf">
+  <iframe src="{{ $url | safeURL }}" width="100%" style="min-height: 32rem;" frameborder="0"></iframe>
+</div>
