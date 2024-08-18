@@ -9,7 +9,6 @@ next: /docs/guide/shortcodes/callout
 
 Hextra provides a collection of beautiful shortcodes to enhance your content.
 
-
 {{< cards >}}
   {{< card link="callout" title="Callout" icon="warning" >}}
   {{< card link="cards" title="Cards" icon="card" >}}
@@ -18,4 +17,12 @@ Hextra provides a collection of beautiful shortcodes to enhance your content.
   {{< card link="icon" title="Icon" icon="badge-check" >}}
   {{< card link="steps" title="Steps" icon="one" >}}
   {{< card link="tabs" title="Tabs" icon="collection" >}}
+{{< /cards >}}
+
+<div style="padding-top:4rem"></div>
+
+Additional shortcodes provided by Hugo and Hextra:
+
+{{< cards >}}
+  {{< card link="others" title="Others" icon="view-grid" >}}
 {{< /cards >}}
