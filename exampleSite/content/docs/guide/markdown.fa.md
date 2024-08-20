@@ -117,18 +117,18 @@ Hugo از سینتکس [مارک‌داون](https://en.wikipedia.org/wiki/Markd
 
 ### عکس‌ها
 
-![landscape](https://source.unsplash.com/featured/800x600?landscape)
+![landscape](https://picsum.photos/800/600)
 
 ```markdown {filename=Markdown}
-![landscape](https://source.unsplash.com/featured/800x600?landscape)
+![landscape](https://picsum.photos/800/600)
 ```
 
 با توضیحات:
 
-![landscape](https://source.unsplash.com/featured/800x600?landscape "یک چشم‌انداز Unsplash")
+![landscape](https://picsum.photos/800/600 "یک چشم‌انداز Unsplash")
 
 ```markdown {filename=Markdown}
-![landscape](https://source.unsplash.com/featured/800x600?landscape "یک چشم‌انداز Unsplash")
+![landscape](https://picsum.photos/800/600 "یک چشم‌انداز Unsplash")
 ```
 
 ## پیکربندی
