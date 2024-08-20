@@ -117,18 +117,18 @@ Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容�
 
 ### 图片
 
-![landscape](https://source.unsplash.com/featured/800x600?landscape)
+![landscape](https://picsum.photos/800/600)
 
 ```markdown {filename=Markdown}
-![landscape](https://source.unsplash.com/featured/800x600?landscape)
+![landscape](https://picsum.photos/800/600)
 ```
 
 带有标题：
 
-![landscape](https://source.unsplash.com/featured/800x600?landscape "Unsplash Landscape")
+![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
 
 ```markdown {filename=Markdown}
-![landscape](https://source.unsplash.com/featured/800x600?landscape "Unsplash Landscape")
+![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
 ```
 
 ## 配置
