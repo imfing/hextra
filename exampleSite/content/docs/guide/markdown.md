@@ -117,18 +117,18 @@ Tables aren't part of the core Markdown spec, but Hugo supports them out-of-the-
 
 ### Images
 
-![landscape](https://source.unsplash.com/featured/800x600?landscape)
+![landscape](https://picsum.photos/800/600)
 
 ```markdown {filename=Markdown}
-![landscape](https://source.unsplash.com/featured/800x600?landscape)
+![landscape](https://picsum.photos/800/600)
 ```
 
 With caption:
 
-![landscape](https://source.unsplash.com/featured/800x600?landscape "Unsplash Landscape")
+![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
 
 ```markdown {filename=Markdown}
-![landscape](https://source.unsplash.com/featured/800x600?landscape "Unsplash Landscape")
+![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
 ```
 
 ## Configuration
