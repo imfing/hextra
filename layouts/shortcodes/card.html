@@ -1,6 +1,7 @@
 {{- $context := . -}}
 {{- $link := .Get "link" -}}
 {{- $title := .Get "title" -}}
+{{- $linktooltip := .Get "linktooltip" -}}
 {{- $icon := .Get "icon" -}}
 {{- $subtitle := .Get "subtitle" -}}
 {{- $image := .Get "image" -}}
@@ -9,6 +10,7 @@
 {{- $imageStyle := .Get "imageStyle" -}}
 {{- $tag := .Get "tag" -}}
 {{- $tagType := .Get "tagType" -}}
+{{- $tagtooltip := .Get "tagtooltip" -}}
 
 {{/* Image processing options */}}
 {{- $method := .Get "method" | default "Resize" | humanize -}}
@@ -44,6 +46,7 @@
   "page"        .Page
   "link"        $link
   "title"       $title
+  "linktooltip" $linktooltip
   "icon"        $icon
   "subtitle"    $subtitle
   "image"       $image
@@ -52,5 +55,6 @@
   "imageStyle"  $imageStyle
   "tag"         $tag
   "tagType"     $tagType
+  "tagtooltip"  $tagtooltip
   )
 -}}

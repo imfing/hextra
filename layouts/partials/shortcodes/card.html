@@ -1,6 +1,7 @@
 {{- $page := .page -}}
 {{- $link := .link -}}
 {{- $title := .title -}}
+{{- $linktooltip := .linktooltip -}}
 {{- $icon := .icon -}}
 {{- $subtitle := .subtitle -}}
 {{- $image := .image -}}
@@ -9,6 +10,7 @@
 {{- $imageStyle := .imageStyle -}}
 {{- $tag := .tag -}}
 {{- $tagType := .tagType -}}
+{{- $tagtooltip := .tagtooltip -}}
 
 {{ $linkClass := "hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900" }}
 {{- with $image -}}
@@ -25,6 +27,7 @@
     href="{{ $href }}"
     {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
   {{- end -}}
+  {{- with $linktooltip }}title="{{- . -}}"{{ end -}}
 >
   {{- with $image -}}
     <img
@@ -61,7 +64,7 @@
 
     {{ $tagClass := cond (eq $tagType "info") $infoClass (cond (eq $tagType "warning") $warningClass (cond (eq $tagType "error") $errorClass $defaultClass)) }}
     <div class="hextra-card-tag">
-      <span class="hx-inline-block hx-rounded-full hx-px-2.5 hx-leading-6 {{ $tagClass }}">{{ $tag }}</span>
+      <span class="hx-inline-block hx-rounded-full hx-px-2.5 hx-leading-6 {{ $tagClass }}" {{- with $tagtooltip }}title="{{- . -}}"{{ end -}} >{{ $tag }}</span>
     </div>
   {{- end -}}
 </a>
