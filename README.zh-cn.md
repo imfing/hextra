@@ -1,5 +1,6 @@
 <div align="center">
   <h1 align="center">Hextra</h1>
+  <sup align="center"><a href="README.md">English</a> | <a href="README.zh-cn.md">简体中文</a> ｜ <a href="README.fa.md">فارسی</a></sup>
   <p align="center">用于创建美观的静态站点的现代化, 响应式, 功能强大的 Hugo 主题.</p>
 
 演示 → [imfing.github.io/hextra](https://imfing.github.io/hextra/)

@@ -78,11 +78,18 @@ def main():
     say_hello()
 ```
 
-
 ### Copy Button
 
-By default, copy button is enabled for code blocks.
+By default, copy button is enabled for code blocks. Its behavior can changed by modifying the site configuration file:
 
+```yaml {linenos=table,linenostart=42,filename="hugo.yaml"}
+params:
+  highlight:
+    copy:
+      enable: true
+      # hover | always
+      display: hover
+```
 
 ## Supported Languages
 

@@ -1,7 +1,7 @@
 {{- $enableFooterSwitches := .Scratch.Get "enableFooterSwitches" | default false -}}
 {{- $displayThemeToggle := site.Params.theme.displayToggle | default true -}}
 
-{{- $copyright := (T "copyright") | default "© 2023 Hextra." -}}
+{{- $copyright := (T "copyright") | default "© 2024 Hextra." -}}
 {{- $poweredBy := (T "poweredBy") | default "Powered by Hextra" -}}
 
 {{- $footerWidth := "hx-max-w-screen-xl" -}}
@@ -20,7 +20,7 @@
       {{- partial "language-switch.html" (dict "context" .) -}}
       {{- with $displayThemeToggle }}{{ partial "theme-toggle.html" }}{{ end -}}
     </div>
-    {{- if or site.IsMultiLingual $displayThemeToggle -}}
+    {{- if or hugo.IsMultilingual $displayThemeToggle -}}
       <hr class="dark:hx-border-neutral-800" />
     {{- end -}}
   {{- end -}}

@@ -1,0 +1,38 @@
+{{- $class := .Get "class" -}}
+{{- $cols := .Get "cols" | default 2 -}}
+{{- $image := .Get "image" -}}
+{{- $imageCard := .Get "imageCard" | default false -}}
+{{- $imageClass := .Get "imageClass" -}}
+{{- $imageLink := .Get "imageLink" -}}
+{{- $imageLinkExternal := hasPrefix $imageLink "http" -}}
+{{- $imageStyle := .Get "imageStyle" -}}
+{{- $imageTitle := .Get "imageTitle" -}}
+{{- $imageWidth := .Get "imageWidth" | default 350 -}}
+{{- $imageHeight := .Get "imageHeight" | default 350 -}}
+{{- $style := .Get "style" -}}
+
+{{- $css := printf "--hextra-feature-grid-cols: %v; %s" $cols $style -}}
+{{- $href := cond (hasPrefix $imageLink "/") ($imageLink | relURL) $imageLink -}}
+{{- if hasPrefix $image "/" -}}
+  {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+{{- end -}}
+
+<div
+  class="{{ $class }} hextra-feature-grid hx-grid sm:max-lg:hx-grid-cols-2 max-sm:hx-grid-cols-1 hx-gap-4 hx-w-full not-prose"
+  {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
+>
+  <div class="hx-w-full">
+    {{ .Inner }}
+  </div>
+  {{- with $image }}
+  <div class="hx-mx-auto">
+    <a
+      {{ with $imageLink }}href="{{ $href }}" {{ with $imageLinkExternal }} target="_blank" rel="noreferrer"{{ end }}{{ end }}
+      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
+      class="{{ $imageClass }} {{ if $imageCard }}hextra-feature-card not-prose hx-block hx-relative hx-p-6 hx-overflow-hidden hx-rounded-3xl hx-border hx-border-gray-200 hover:hx-border-gray-300 dark:hx-border-neutral-800 dark:hover:hx-border-neutral-700 before:hx-pointer-events-none before:hx-absolute before:hx-inset-0 before:hx-bg-glass-gradient{{ end }}"
+    >
+      <img src="{{ $image }}" width="{{ $imageWidth }}" height="{{ $imageHeight }}" {{ with $imageTitle }}alt="{{ $imageTitle }}"{{ end }}/>
+    </a>
+  </div>
+  {{ end -}}
+</div>

@@ -136,7 +136,7 @@ params:
     flexsearch:
       # index page by: content | summary | heading | title
       index: content
-      # full | forward | reverse | strict 
+      # full | forward | reverse | strict
       # https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search
       tokenize: forward
 
@@ -147,6 +147,15 @@ params:
   blog:
     list:
       displayTags: true
+      # date | lastmod | publishDate | title | weight
+      sortBy: date
+      sortOrder: desc # or "asc"
+
+  highlight:
+    copy:
+      enable: true
+      # hover | always
+      display: hover
 
   comments:
     enable: false

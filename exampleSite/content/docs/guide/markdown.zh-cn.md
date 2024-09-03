@@ -28,20 +28,40 @@ Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容�
 
 [^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
 
+```markdown {filename=Markdown}
+> Don't communicate by sharing memory, share memory by communicating.<br>
+> — <cite>Rob Pike[^1]</cite>
+
+[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
+```
+
 ### 表格
 
 表格并非核心 Markdown 规范，但 Hugo 支持开箱即用的表格：
 
-   Name | Age
---------|------
-    Bob | 27
-  Alice | 23
+|   Name | Age  |
+|--------|------|
+|    Bob | 27   |
+|  Alice | 23   |
+
+```markdown {filename=Markdown}
+|   Name | Age  |
+|--------|------|
+|    Bob | 27   |
+|  Alice | 23   |
+```
 
 #### Markdown 表格中的内联
 
 | Italics   | Bold     | Code   |
 | --------  | -------- | ------ |
 | *italics* | **bold** | `code` |
+
+```markdown {filename=Markdown}
+| Italics   | Bold     | Code   |
+| --------  | -------- | ------ |
+| *italics* | **bold** | `code` |
+```
 
 ### 代码块
 
@@ -57,11 +77,23 @@ Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容�
 2. Second item
 3. Third item
 
+```markdown {filename=Markdown}
+1. First item
+2. Second item
+3. Third item
+```
+
 #### 无序列表
 
 * List item
 * Another item
 * And another item
+
+```markdown {filename=Markdown}
+* List item
+* Another item
+* And another item
+```
 
 #### 嵌套列表
 
@@ -73,13 +105,31 @@ Hugo 支持 [Markdown](https://en.wikipedia.org/wiki/Markdown) 来书写内容�
   * Milk
   * Cheese
 
+```markdown {filename=Markdown}
+* Fruit
+  * Apple
+  * Orange
+  * Banana
+* Dairy
+  * Milk
+  * Cheese
+```
+
 ### 图片
 
-![](https://source.unsplash.com/featured/800x600?landscape)
+![landscape](https://picsum.photos/800/600)
+
+```markdown {filename=Markdown}
+![landscape](https://picsum.photos/800/600)
+```
 
 带有标题：
 
-![](https://source.unsplash.com/featured/800x600?landscape "Unsplash Landscape")
+![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
+
+```markdown {filename=Markdown}
+![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
+```
 
 ## 配置
 
