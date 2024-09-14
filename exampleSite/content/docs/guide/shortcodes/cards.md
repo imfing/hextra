@@ -7,8 +7,8 @@ linkTitle: Cards
 
 {{< cards >}}
   {{< card link="../callout" title="Callout" icon="warning" >}}
-  {{< card link="../callout" title="Card with tag" icon="tag" tag="custom tag">}}
-  {{< card link="/" title="No Icon" >}}
+  {{< card link="../callout" title="Card with tag" icon="tag" tag="A custom tag with Tooltip" tagtooltip="Tooltip for Tag">}}
+  {{< card link="/" title="No Icon, but with Tooltip" linktooltip="Tooltip for Link" >}}
 {{< /cards >}}
 
 {{< cards >}}
@@ -22,8 +22,8 @@ linkTitle: Cards
 ```
 {{</* cards */>}}
   {{</* card link="../callout" title="Callout" icon="warning" */>}}
-  {{</* card link="../callout" title="Card with tag" icon="warning" tag= "A custom tag" */>}}
-  {{</* card link="/" title="No Icon" */>}}
+  {{</* card link="../callout" title="Card with tag" tag="A custom tag with Tooltip" tagtooltip="Tooltip for Tag" */>}}
+  {{</* card link="/" title="No Icon, but with Tooltip" linktooltip="Tooltip for Link" */>}}
 {{</* /cards */>}}
 ```
 
@@ -37,14 +37,16 @@ linkTitle: Cards
 
 ## Card Parameters
 
-| Parameter  | Description                                                     |
-|----------- |-----------------------------------------------------------------|
-| `link`     | URL (internal or external).                                     |
-| `title`    | Title heading for the card.                                     |
-| `subtitle` | Subtitle heading (supports Markdown).                           |
-| `icon`     | Name of the icon.                                               |
-| `tag`      | Text in tag.                                                    |
-| `tagColor` | Color of the tag: `gray` (default), `yellow`, `red` and `blue`. |
+| Parameter     | Description                                                           |
+|---------------|-----------------------------------------------------------------------|
+| `link`        | URL (internal or external).                                           |
+| `title`       | Title heading for the card.                                           |
+| `linktooltip` | Tooltip (title-attribut) for the link.                                |
+| `subtitle`    | Subtitle heading (supports Markdown).                                 |
+| `icon`        | Name of the icon.                                                     |
+| `tag`         | Text in tag.                                                          |
+| `tagType`     | Type of the tag: `info` (blue), `warning` (yellow) and `error` (red). |
+| `tagtooltip`  | Tooltip (title-attribut) for the Tag.                                 |
   
 ## Image Card
 
