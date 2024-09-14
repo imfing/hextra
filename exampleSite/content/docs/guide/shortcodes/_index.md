@@ -24,5 +24,6 @@ Hextra provides a collection of beautiful shortcodes to enhance your content.
 Additional shortcodes provided by Hugo and Hextra:
 
 {{< cards >}}
+  {{< card link="jupyter" title="Jupyter Notebook" icon="jupyter" tag="alpha" >}}
   {{< card link="others" title="Others" icon="view-grid" >}}
 {{< /cards >}}
