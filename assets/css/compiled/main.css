@@ -2577,6 +2577,23 @@ nav .search-wrapper {
     grid-template-columns: repeat(var(--hextra-feature-grid-cols), minmax(0, 1fr))
 }
   }
+.hextra-jupyter-code-cell {
+  scrollbar-gutter: auto;
+  margin-top: 1.5rem;
+}
+.hextra-jupyter-code-cell .hextra-jupyter-code-cell-outputs-container {
+  overflow: hidden;
+  font-size: .75rem;
+}
+.hextra-jupyter-code-cell .hextra-jupyter-code-cell-outputs-container .hextra-jupyter-code-cell-outputs {
+  max-height: 50vh;
+  overflow: auto;
+}
+.hextra-jupyter-code-cell .hextra-jupyter-code-cell-outputs-container .hextra-jupyter-code-cell-outputs pre {
+  max-width: 100%;
+  overflow: auto;
+  font-size: .75rem;
+}
 html {
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
