@@ -5,7 +5,7 @@
     <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
         <div class="content">
-          <h1>{{ .Title }}</h1>
+          {{ if .Title }}<h1>{{ .Title }}</h1>{{ end }}
           {{ .Content }}
         </div>
         <div class="hx-mt-16"></div>
