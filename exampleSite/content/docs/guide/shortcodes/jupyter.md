@@ -1,5 +1,6 @@
 ---
-title: "Jupyter Notebook"
+title: "Jupyter Notebook Component"
+linktitle: "Jupyter Notebook"
 math: true
 sidebar:
   exclude: true
@@ -71,8 +72,8 @@ You can also use a remote notebook by providing the URL to the notebook file. Fo
 
 ## Example Notebook
 
-The following is an example of a notebook file that is included in the project assets folder.
+{{< callout type="info" >}}The following is an example of a notebook file that is included in the project assets folder.{{< /callout >}}
 
-{{% jupyter "notebook.ipynb" %}}
+{{% jupyter "example.ipynb" %}}
 
 [page-bundles]: https://gohugo.io/content-management/page-bundles/#leaf-bundles
