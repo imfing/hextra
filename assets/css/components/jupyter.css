@@ -3,27 +3,15 @@
 
   @apply hx-mt-6;
 
-  .hextra-jupyter-code-cell-source {
-    @apply hx-text-sm;
-    .chroma,
-    pre {
-      @apply hx-m-0;
-    }
-  }
-
   .hextra-jupyter-code-cell-outputs-container {
-    @apply hx-text-xs hx-overflow-hidden hx-border hx-border-t-0 hx-rounded-b-xl dark:hx-border-neutral-800;
+    @apply hx-text-xs hx-overflow-hidden;
 
     .hextra-jupyter-code-cell-outputs {
       @apply hx-overflow-auto hx-max-h-[50vh];
 
       pre {
-        @apply hx-p-4;
+        @apply hx-text-xs hx-overflow-auto hx-max-w-full;
       }
     }
   }
-}
-
-.hextra-jupyter-code-cell:has(.hextra-jupyter-code-cell-outputs) .hextra-jupyter-code-cell-source .chroma {
-  @apply hx-rounded-b-none;
 }

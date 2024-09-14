@@ -53,12 +53,12 @@
                 {{- else if eq (index $output "output_type") "stream" -}}
                   {{- $text := index $output "text" -}}
                   {{- $textContent := (cond (reflect.IsSlice $text) (delimit $text "") $text) -}}
-                  <pre class="not-prose hx-text-sm">{{- $textContent -}}</pre>
+                  <pre class="not-prose">{{- $textContent -}}</pre>
                 {{- else if eq (index $output "output_type") "execute_result" -}}
                   {{- $data := index $output "data" -}}
                   {{- $text := index $data "text/plain" -}}
                   {{- $textContent := (cond (reflect.IsSlice $text) (delimit $text "") $text) -}}
-                  <pre class="not-prose hx-text-sm">{{- $textContent -}}</pre>
+                  <pre class="not-prose">{{- $textContent -}}</pre>
                   {{- $html := index $data "text/html" -}}
                   {{- if $html -}}
                     {{- $htmlText := delimit $html "" -}}
