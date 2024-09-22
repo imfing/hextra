@@ -10,6 +10,43 @@ sidebar:
   These shortcodes are considered less stable and may be changed anytime.
 {{< /callout >}}
 
+## Badge
+
+```
+{{</* badge "Badge" */>}}
+```
+
+Result:
+
+{{< badge "Badge" >}}
+
+Variants:
+
+```
+{{</* badge content="info" type="info" */>}}
+{{</* badge content="warning" type="warning" */>}}
+{{</* badge content="error" type="error" */>}}
+```
+
+Result:
+
+{{< badge content="info" type="info" >}}
+
+{{< badge content="warning" type="warning" >}}
+
+{{< badge content="error" type="error" >}}
+
+With link:
+
+```
+{{</* badge content="Releases" link="https://github.com/imfing/hextra/releases" */>}}
+```
+
+Result:
+
+{{< badge content="Releases" link="https://github.com/imfing/hextra/releases" >}}
+
+
 ## YouTube
 
 Embed a YouTube video.
@@ -41,13 +78,3 @@ You can also place the PDF file in your project directory and use the relative p
 Example:
 
 {{< pdf "https://upload.wikimedia.org/wikipedia/commons/1/13/Example.pdf" >}}
-
-## Badge
-
-```
-{{</* badge "content" */>}}
-```
-
-Result:
-
-{{< badge "content" >}}
