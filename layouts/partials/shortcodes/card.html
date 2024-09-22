@@ -54,12 +54,13 @@
   {{- end -}}
 
   {{- if $tag }}
-    {{ partial "shortcodes/badge.html" (dict
+    {{- partial "shortcodes/badge.html" (dict
       "content" $tag
       "type" $tagType
       "class" "hextra-card-tag"
       "border" true
-    ) }}
+      )
+    -}}
   {{- end -}}
 </a>
 {{- /* Strip trailing newline. */ -}}

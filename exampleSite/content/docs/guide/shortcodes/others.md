@@ -41,3 +41,13 @@ You can also place the PDF file in your project directory and use the relative p
 Example:
 
 {{< pdf "https://upload.wikimedia.org/wikipedia/commons/1/13/Example.pdf" >}}
+
+## Badge
+
+```
+{{</* badge "content" */>}}
+```
+
+Result:
+
+{{< badge "content" >}}
