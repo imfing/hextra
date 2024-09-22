@@ -1176,6 +1176,9 @@ video {
 .hx-text-4xl {
   font-size: 2.25rem;
 }
+.hx-text-\[\.65rem\] {
+  font-size: .65rem;
+}
 .hx-text-\[10px\] {
   font-size: 10px;
 }
@@ -2269,7 +2272,6 @@ article details > summary::before {
   top: 5px;
   right: 5px;
   z-index: 10;
-  font-size: .65rem;
 }
 .steps h3 {
   counter-increment: step;
@@ -2593,6 +2595,10 @@ nav .search-wrapper {
   max-width: 100%;
   overflow: auto;
   font-size: .75rem;
+}
+.hextra-badge {
+  display: inline-flex;
+  align-items: center;
 }
 html {
   font-size: 1rem;
