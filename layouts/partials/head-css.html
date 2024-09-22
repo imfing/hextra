@@ -1,6 +1,6 @@
 {{- if and (not hugo.IsProduction) (eq hugo.Environment "theme") }}
   {{- $styles := resources.Get "css/styles.css" }}
-  {{- $styles = $styles | resources.PostCSS (dict "inlineImports" true) }}
+  {{- $styles = $styles | postCSS (dict "inlineImports" true) }}
   <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
 {{- else }}
   {{- $styles := resources.Get "css/compiled/main.css" -}}
