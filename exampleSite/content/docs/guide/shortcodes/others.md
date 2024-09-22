@@ -30,10 +30,8 @@ Variants:
 
 Result:
 
-{{< badge content="info" type="info" >}}
-
-{{< badge content="warning" type="warning" >}}
-
+{{< badge content="info" type="info" >}} &nbsp;
+{{< badge content="warning" type="warning" >}} &nbsp;
 {{< badge content="error" type="error" >}}
 
 With link:
