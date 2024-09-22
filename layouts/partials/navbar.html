@@ -56,6 +56,12 @@
             {{ if $external }}target="_blank" rel="noreferer"{{ end }}
             class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block {{ $activeClass }}"
           >
+            {{ with .Params.hero_icon -}}
+              <span style="float: left; padding-right: 0.3em; padding-top: 2px; opacity: 0.75">
+                {{ partial "utils/icon.html" (dict "name" . "attributes" "height=18") }}
+              </span>
+            {{- end }}
+
             <span class="hx-text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- end -}}
