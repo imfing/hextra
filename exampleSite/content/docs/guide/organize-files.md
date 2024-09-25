@@ -112,7 +112,7 @@ Documentation > Guide > Foo Bar
 
 ### Hiding Breadcrumbs
 
-You can hide breadcrumbs completely from a page by specfying `breadcrumbs: false` in its front matter:
+You can hide breadcrumbs completely from a page by specifying `breadcrumbs: false` in its front matter:
 
 ```yaml {filename="content/docs/guide/organize-files.md"}
 ---
