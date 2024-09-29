@@ -16,7 +16,7 @@ Open source projects powered by Hextra
   {{< card
         link="https://github.com/welding-torch/installc"
         title="Install C"
-        image="![image](https://github.com/user-attachments/assets/c9a85327-c7e7-40f1-830a-b4190a5e47bd)"
+        image="https://github.com/user-attachments/assets/c9a85327-c7e7-40f1-830a-b4190a5e47bd"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 
