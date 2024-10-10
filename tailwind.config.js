@@ -3,12 +3,18 @@ const colors = require('tailwindcss/colors')
 const makePrimaryColor =
   l =>
     ({ opacityValue }) => {
-      // we convert the passed in lightness value to be relative to 50% (full saturation)
-      let finalLightness = (l - 50);
-      return (
-        `hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) ${finalLightness > 0 ? "+" : "-"} ${Math.abs(finalLightness)}%)` +
-        (opacityValue ? ` / ${opacityValue})` : ')')
-      )
+      let result = "hsl(var(--primary-hue) var(--primary-saturation) ";
+        if (l <= 50) {
+          // Interpolate between lower values
+          result+= `calc(calc(var(--primary-lightness) / 50) * ${l})`;
+        }
+        else {
+          // Interpolate between higher values
+          result+= `calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * ${l - 50})`;
+        }
+
+      result += (opacityValue ? ` / ${opacityValue})` : ')');
+      return result;
     }
 
 /** @type {import('tailwindcss').Config} */
