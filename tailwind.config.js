@@ -4,9 +4,9 @@ const makePrimaryColor =
   l =>
     ({ opacityValue }) => {
       // we convert the passed in lightness value to a multiplier relative to 50% (full color)
-      let finalLightness = 1 + ((l - 50) / 100);
+      let finalLightness = (l - 50);
       return (
-        `hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) * ${finalLightness})` +
+        `hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) ${finalLightness > 0 ? "+" : "-"} ${Math.abs(finalLightness)}%)` +
         (opacityValue ? ` / ${opacityValue})` : ')')
       )
     }
