@@ -3,7 +3,7 @@ const colors = require('tailwindcss/colors')
 const makePrimaryColor =
   l =>
     ({ opacityValue }) => {
-      // we convert the passed in lightness value to a multiplier relative to 50% (full color)
+      // we convert the passed in lightness value to be relative to 50% (full saturation)
       let finalLightness = (l - 50);
       return (
         `hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) ${finalLightness > 0 ? "+" : "-"} ${Math.abs(finalLightness)}%)` +
