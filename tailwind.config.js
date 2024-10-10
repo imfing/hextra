@@ -3,13 +3,8 @@ const colors = require('tailwindcss/colors')
 const makePrimaryColor =
   l =>
     ({ opacityValue }) => {
-      // the `l` we get is the lightness value we want adjust. 0% is black, 100% is white, 50% is the midpoint
-      // So we need to convert it to a percentage that is relative to 50% lightness
-      // e.g if we get 45 that means we want to make the color 5% darker
-      // if we get 55 that means we want to make the color 5% lighter
-      // etc.
-      let finalLightness = Math.round((1 + ((l - 50) / 100)) * 1000) / 1000;
-
+      // we convert the passed in lightness value to a multiplier relative to 50% (full color)
+      let finalLightness = 1 + ((l - 50) / 100);
       return (
         `hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) * ${finalLightness})` +
         (opacityValue ? ` / ${opacityValue})` : ')')
