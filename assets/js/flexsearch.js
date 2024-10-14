@@ -323,7 +323,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       for (let j = 0; j < sectionResults.length; j++) {
         const { doc } = sectionResults[j]
-        console.log(doc)
         const isMatchingTitle = doc.display !== undefined
         if (isMatchingTitle) {
           pageTitleMatches[i]++
