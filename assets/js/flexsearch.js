@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const crumbData = data[searchUrl];
         if (!crumbData) {
-          console.warn('Empty page data for', searchUrl, ', will produce incomplete breadcrumb title for section in search results.');
+          console.warn('Empty or excluded page', searchUrl, ', will not be included for search result breadcrumb for', route);
           continue;
         }
 
