@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const crumbData = data[searchUrl];
         if (!crumbData) {
-          console.warn('No data for', searchUrl, ', will produce incomplete section title in search results.');
+          console.warn('Empty page data for', searchUrl, ', will produce incomplete breadcrumb title for section in search results.');
           continue;
         }
 
