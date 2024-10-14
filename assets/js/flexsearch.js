@@ -222,18 +222,17 @@ document.addEventListener("DOMContentLoaded", function () {
     for (const route in data) {
       let pageContent = '';
       ++pageId;
-
       const urlParts = route.split('/').filter(x => x != "" && !x.startsWith('#'));
+
       let crumb = '';
       let searchUrl = '/'
-
       for (let i = 0; i < urlParts.length; i++) {
         const urlPart = urlParts[i];
         searchUrl += urlPart + '/'
 
         const crumbData = data[searchUrl];
         if (!crumbData) {
-          console.warn('Empty or excluded page', searchUrl, ', will not be included for search result breadcrumb for', route);
+          console.warn('Excluded page', searchUrl, '- will not be included for search result breadcrumb for', route);
           continue;
         }
 
@@ -250,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       for (const heading in data[route].data) {
         const [hash, text] = heading.split('#');
-        const url = route.trimEnd('/') + (hash ? '#' + hash : '')
+        const url = route.trimEnd('/') + (hash ? '#' + hash : '');
         const title = text || data[route].title;
 
         const content = data[route].data[heading] || '';

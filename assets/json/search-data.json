@@ -7,7 +7,6 @@
 
 {{- $pages := where .Site.Pages "Kind" "in" (slice "page" "section") -}}
 {{- $pages = where $pages "Params.excludeSearch" "!=" true -}}
-{{- $pages = where $pages "Content" "!=" "" -}}
 
 {{- $output := dict -}}
 
