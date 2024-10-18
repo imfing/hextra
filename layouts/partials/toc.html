@@ -24,22 +24,7 @@
 
       {{/* TOC bottom part */}}
       <div class="{{ $borderClass }} hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
-        {{- if site.Params.editURL.enable -}}
-          {{- $editURL := site.Params.editURL.base | default "" -}}
-          {{- with .Params.editURL -}}
-            {{/* if `editURL` is set in the front matter */}}
-            {{- $editURL = . -}}
-          {{- else -}}
-            {{- with .File -}}
-              {{/* `.FileInfo.Meta.SourceRoot` is a Hugo internal field, e.g. `/path/to/repo/content/en/` */}}
-              {{- $sourceDir := replace (strings.TrimPrefix .FileInfo.Meta.BaseDir .FileInfo.Meta.SourceRoot) "\\" "/" -}}
-              {{- $sourceDir = strings.TrimPrefix "/content" $sourceDir -}}
-              {{- $path := replace .Path "\\" "/" -}}
-              {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
-            {{- end -}}
-          {{- end -}}
-          <a class="hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50" href="{{ $editURL }}" target="_blank" rel="noreferer">{{ $editThisPage }}</a>
-        {{- end -}}
+      {{ partial "components/edit-url.html" (dict "source" "toc" "context" .) }}
         {{/* Scroll To Top */}}
         <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx-transition-all hx-duration-75 hx-opacity-0 hx-text-xs hx-font-medium hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-100 contrast-more:hx-text-gray-800 contrast-more:dark:hx-text-gray-50">
           <span>
