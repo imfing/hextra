@@ -42,7 +42,7 @@
 
         {{/* Display icon menu item */}}
         {{- if .Params.icon -}}
-          {{- $rel := cond (eq .Params.icon "mastodon") "noreferer me" "noreferer" }}
+          {{- $rel := cond (eq .Params.icon "mastodon") "noreferrer me" "noreferrer" }}
           <a class="hx-p-2 hx-text-current" {{ if $external }}target="_blank" rel="{{ $rel }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
             {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
             <span class="hx-sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
@@ -53,7 +53,7 @@
           <a
             title="{{ or (T .Identifier) .Name | safeHTML }}"
             href="{{ $link }}"
-            {{ if $external }}target="_blank" rel="noreferer"{{ end }}
+            {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
             class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block {{ $activeClass }}"
           >
             <span class="hx-text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
