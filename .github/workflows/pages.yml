@@ -31,7 +31,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.131.0
+      HUGO_VERSION: 0.136.5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,10 +41,10 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.22'
+          go-version: '1.23'
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
       - name: Setup Hugo
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
@@ -54,11 +54,12 @@ jobs:
           # For maximum backward compatibility with Hugo modules
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
+        # Use the latest release of the theme to build exampleSite
         run: |
-          hugo \
-            --minify \
-            --themesDir=../.. --source=exampleSite \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+          cd exampleSite && rm go.mod
+          hugo mod init github.com/imfing/hextra/exampleSite
+          hugo mod get -u github.com/imfing/hextra
+          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
