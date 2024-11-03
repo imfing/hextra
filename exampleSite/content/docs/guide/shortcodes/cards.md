@@ -22,7 +22,7 @@ linkTitle: Cards
 ```
 {{</* cards */>}}
   {{</* card link="../callout" title="Callout" icon="warning" */>}}
-  {{</* card link="../callout" title="Card with tag" icon="warning" tag= "A custom tag" */>}}
+  {{</* card link="../callout" title="Card with tag" icon="tag" tag= "A custom tag" */>}}
   {{</* card link="/" title="No Icon" */>}}
 {{</* /cards */>}}
 ```
@@ -87,3 +87,30 @@ Card supports adding tags which could be useful to show extra status information
   {{</* card link="../callout" title="Card with yellow tag" tag="tag text" tagType="warning" */>}}
 {{</* /cards */>}}
 ```
+
+## Columns
+
+You can specify the maximum number of columns for cards to span by passing the `cols` parameter to the `cards` shortcode. Note that columns will still be collapsed on smaller screens.
+
+{{< cards cols="1" >}}
+  {{< card link="/" title="Top Card" >}}
+  {{< card link="/" title="Bottom Card" >}}
+{{< /cards >}}
+
+{{< cards cols="2" >}}
+  {{< card link="/" title="Left Card" >}}
+  {{< card link="/" title="Right Card" >}}
+{{< /cards >}}
+
+```
+{{</* cards cols="1" */>}}
+  {{</* card link="/" title="Top Card" */>}}
+  {{</* card link="/" title="Bottom Card" */>}}
+{{</* /cards */>}}
+
+{{</* cards cols="2" */>}}
+  {{</* card link="/" title="Left Card" */>}}
+  {{</* card link="/" title="Right Card" */>}}
+{{</* /cards */>}}
+```
+
