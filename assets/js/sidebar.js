@@ -3,6 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
   enableCollapsibles();
 });
 
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 function enableCollapsibles() {
   const buttons = document.querySelectorAll(".hextra-sidebar-collapsible-button");
   buttons.forEach(function (button) {
@@ -16,10 +28,9 @@ function enableCollapsibles() {
   });
 }
 
-function saveSidebarPosition() {
-  const sidebarScrollbar = document.querySelector("aside.sidebar-container > .hextra-scrollbar");
-  if (sidebarScrollbar) {
-    const scrollPosition = sidebarScrollbar.scrollTop;
+function saveSidebarPosition(scrollPosition) {
+  const currentPosition = sessionStorage.getItem('sidebarScrollPosition');
+  if (currentPosition === null || parseInt(currentPosition) !== scrollPosition) {
     sessionStorage.setItem('sidebarScrollPosition', scrollPosition);
   }
 }
@@ -36,8 +47,12 @@ function restoreSidebarPosition() {
       });
     }
 
+    const debouncedSave = debounce((position) => {
+      saveSidebarPosition(position);
+    }, 150);
+    
     sidebarScrollbar.addEventListener('scroll', function() {
-      saveSidebarPosition();
+      debouncedSave(this.scrollTop);
     });
   }
 }
