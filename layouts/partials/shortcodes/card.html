@@ -7,6 +7,8 @@
 {{- $width := .width -}}
 {{- $height := .height -}}
 {{- $imageStyle := .imageStyle -}}
+{{- $tag := .tag -}}
+{{- $tagType := .tagType -}}
 
 {{ $linkClass := "hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900" }}
 {{- with $image -}}
@@ -49,6 +51,16 @@
   </span>
   {{- with $subtitle -}}
     <div class="hextra-card-subtitle hx-line-clamp-3 hx-text-sm hx-font-normal hx-text-gray-500 dark:hx-text-gray-400 hx-px-4 hx-mb-4 hx-mt-2">{{- $subtitle | markdownify -}}</div>
+  {{- end -}}
+
+  {{- if $tag }}
+    {{- partial "shortcodes/badge.html" (dict
+      "content" $tag
+      "type" $tagType
+      "class" "hextra-card-tag"
+      "border" true
+      )
+    -}}
   {{- end -}}
 </a>
 {{- /* Strip trailing newline. */ -}}

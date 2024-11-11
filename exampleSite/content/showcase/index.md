@@ -12,6 +12,26 @@ Open source projects powered by Hextra
 </p>
 
 {{< cards >}}
+  {{< card
+        link="https://github.com/mightymoud/sidekick"
+        title="Sidekick"
+        image="https://github.com/user-attachments/assets/4ae2a9d7-77b6-42eb-a9d7-5c4599f0f812"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
+        link="https://github.com/welding-torch/installc"
+        title="Install C"
+        image="https://github.com/user-attachments/assets/c9a85327-c7e7-40f1-830a-b4190a5e47bd"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
+        link="https://github.com/axivo/website"
+        title="AXIVO Docs"
+        image="https://github.com/imfing/hextra/assets/19806136/f22f0710-23a0-430b-8bad-616283b8a3e5"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
 
   {{< card
         link="https://github.com/infracourse/web"

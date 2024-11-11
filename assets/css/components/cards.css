@@ -2,6 +2,10 @@
   grid-template-columns: repeat(auto-fill, minmax(max(250px, calc((100% - 1rem * 2) / var(--hextra-cards-grid-cols))), 1fr));
 }
 
+.hextra-card {
+  position: relative;
+}
+
 .hextra-card img {
   user-select: none;
 }
@@ -18,6 +22,7 @@
 
 .hextra-card p {
   margin-top: 0.5rem;
+  position: relative;
 }
 
 .dark .hextra-card svg {
@@ -26,4 +31,11 @@
 
 .dark .hextra-card:hover svg {
   color: currentColor;
+}
+
+.hextra-card-tag {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
 }

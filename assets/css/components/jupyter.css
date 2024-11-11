@@ -1,0 +1,17 @@
+.hextra-jupyter-code-cell {
+  scrollbar-gutter: auto;
+
+  @apply hx-mt-6;
+
+  .hextra-jupyter-code-cell-outputs-container {
+    @apply hx-text-xs hx-overflow-hidden;
+
+    .hextra-jupyter-code-cell-outputs {
+      @apply hx-overflow-auto hx-max-h-[50vh];
+
+      pre {
+        @apply hx-text-xs hx-overflow-auto hx-max-w-full;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{{- if .IsNamedParams -}}
+  {{- $content := .Get "content" -}}
+  {{- $type := .Get "type" | default "" -}}
+  {{- $class := .Get "class" | default "" -}}
+  {{- $link := .Get "link" | default "" -}}
+
+  {{- if $link -}}
+    <a href="{{ $link }}" title="{{ $content | plainify }}" target="_blank">
+      {{- partial "shortcodes/badge.html" (dict
+        "content" $content 
+        "type" $type
+        "class" $class
+        "border" true
+        )
+      -}}
+    </a>
+  {{- else -}}
+    {{- partial "shortcodes/badge.html" (dict
+      "content" $content 
+      "type" $type
+      "class" $class
+      "border" true
+      )
+    -}}
+  {{- end -}}
+{{- else -}}
+  {{- $content := .Get 0 -}}
+  {{- partial "shortcodes/badge.html" (dict
+    "content" $content 
+    "border" true
+    )
+  -}}
+{{- end -}}

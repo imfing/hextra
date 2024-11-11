@@ -1,0 +1,81 @@
+{{/* Render Jupyter Notebook */}}
+{{- $path := .Get 0 -}}
+{{- $data := "" -}}
+{{- $page := .Page -}}
+
+{{- $isLocal := not (urls.Parse $path).Scheme -}}
+{{- $isPage := and (eq .Page.Kind "page") (not .Page.BundleType) -}}
+
+{{/* https://gohugo.io/functions/transform/unmarshal/ */}}
+{{- if (not $isLocal) -}}
+  {{- with resources.GetRemote $path -}}
+    {{- with unmarshal .Content -}}{{- $data = . -}}{{- end -}}
+  {{- else -}}
+    {{- errorf "Remote resource not found: %s" $path -}}
+  {{- end -}}
+{{- else if (not $isPage) -}}
+  {{- with .Page.Resources.Get $path -}}
+    {{- with unmarshal .Content -}}{{- $data = . -}}{{- end -}}
+  {{- else -}}
+    {{- errorf "Local resource not found: %s" $path -}}
+  {{- end -}}
+{{- else -}}
+  {{- with resources.Get $path -}}
+    {{- with unmarshal .Content -}}{{- $data = . -}}{{- end -}}
+  {{- else -}}
+    {{- errorf "Local resource not found: %s" $path -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $language := index $data "metadata" "language_info" "name" | default "python" -}}
+
+{{- with index $data "cells" -}}
+  {{- range $cell := . -}}
+    {{- if eq (index $cell "cell_type") "code" -}}
+      {{- $source := index $cell "source" -}}
+      {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}
+{{- with ($sourceContent | strings.Chomp) -}}
+{{ (printf "\n\n```%s\n%s\n```\n" $language .) | safeHTML -}}
+{{- end -}}
+
+      <div class="hextra-jupyter-code-cell hextra-scrollbar">
+        {{- $outputs := index $cell "outputs" -}}
+        {{- with $outputs -}}
+          <div class="hextra-jupyter-code-cell-outputs-container">
+            <div class="hextra-jupyter-code-cell-outputs">
+              {{- range $output := . -}}
+                {{- if eq (index $output "output_type") "display_data" -}}
+                  {{- $data := index $output "data" -}}
+                  {{- $image := index $data "image/png" -}}
+                  {{- if $image -}}
+                    <img src="data:image/png;base64,{{- $image -}}" alt="image" />
+                  {{- end -}}
+                {{- else if eq (index $output "output_type") "stream" -}}
+                  {{- $text := index $output "text" -}}
+                  {{- $textContent := (cond (reflect.IsSlice $text) (delimit $text "") $text) -}}
+                  <pre class="not-prose">{{- $textContent -}}</pre>
+                {{- else if eq (index $output "output_type") "execute_result" -}}
+                  {{- $data := index $output "data" -}}
+                  {{- $text := index $data "text/plain" -}}
+                  {{- $textContent := (cond (reflect.IsSlice $text) (delimit $text "") $text) -}}
+                  <pre class="not-prose">{{- $textContent -}}</pre>
+                  {{- $html := index $data "text/html" -}}
+                  {{- if $html -}}
+                    {{- $htmlText := delimit $html "" -}}
+                    <div>
+                      {{- $htmlText | safeHTML -}}
+                    </div>
+                  {{- end -}}
+                {{- end -}}
+              {{- end -}}
+            </div>
+          </div>
+        {{- end -}}
+      </div>
+    {{- else if eq (index $cell "cell_type") "markdown" -}}
+        {{- $source := index $cell "source" }}
+        {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) }}
+{{ (printf "\n%s\n" $sourceContent) | safeHTML }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

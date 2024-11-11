@@ -6,7 +6,7 @@
   {{ else -}}
     <meta name="robots" content="noindex, nofollow" />
   {{ end -}}
-  {{ partialCached "favicons.html" . }}
+  {{ partialCached "favicons.html" . -}}
   <title>
     {{- if .IsHome -}}
       {{ .Site.Title -}}
@@ -17,25 +17,24 @@
   </title>
   <meta name="description" content="{{ partial "utils/page-description.html" . }}" />
 
-  {{ with .Params.canonical }}
+  {{- with .Params.canonical -}}
     <link rel="canonical" href="{{ . }}" itemprop="url" />
-  {{ else }}
+  {{- else -}}
     <link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
-  {{ end }}
+  {{- end -}}
 
-  {{ partial "opengraph.html" . }}
-  {{ template "_internal/schema.html" . -}}
-  {{ template "_internal/twitter_cards.html" . -}}
+  {{- partial "opengraph.html" . -}}
+  {{- template "_internal/schema.html" . -}}
+  {{- template "_internal/twitter_cards.html" . -}}
 
-  {{ partialCached "head-css.html" . }}
+  {{- partialCached "head-css.html" . -}}
 
 
-  <!-- Google Analytics -->
-  {{- if and (eq hugo.Environment "production") (or .Site.GoogleAnalytics .Site.Config.Services.GoogleAnalytics.ID) }}
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    {{ partial "google-analytics.html" . }}
-  {{- end }}
-
+<!-- Google Analytics -->
+{{- if and (eq hugo.Environment "production") .Site.Config.Services.GoogleAnalytics.ID }}
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+  {{ partial "google-analytics.html" . }}
+{{- end }}
 
   <script>
     /* Initialize light/dark mode */

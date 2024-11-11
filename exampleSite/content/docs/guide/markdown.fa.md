@@ -28,20 +28,40 @@ Hugo از سینتکس [مارک‌داون](https://en.wikipedia.org/wiki/Markd
 
 [^1]: نقل‌قول بالا گزیده‌ای از [سخنرانی](https://www.youtube.com/watch?v=PAAkCSZUG1c) راب پایک در Gopherfest، در تاریخ ۲۷ آبان ۱۳۹۴ است.
 
+```markdown {filename=Markdown}
+> با اشتراک‌گذاری حافظه ارتباط برقرار نکنید، حافظه را با برقراری ارتباط به اشتراک بگذارید.<br>
+> — <cite>راب پایک[^1]</cite>
+
+[^1]: نقل‌قول بالا گزیده‌ای از [سخنرانی](https://www.youtube.com/watch?v=PAAkCSZUG1c) راب پایک در Gopherfest، در تاریخ ۲۷ آبان ۱۳۹۴ است.
+```
+
 ### جدول‌ها
 
 جدول‌ها بخشی از مشخصات اصلی مارک‌داون نیستند، اما Hugo از آنها در خارج از جعبه پشتیبانی می‌کند.
 
-   نام | سن
---------|------
-    گودرز | ۳۰
-  آصف | ۳۴
+|     نام | سن  |
+|--------|------|
+|    گودرز |  ۳۰|
+|  آصف |    ۳۴  |
+
+```markdown {filename=Markdown}
+|     نام | سن  |
+|--------|------|
+|    گودرز |  ۳۰|
+|  آصف |    ۳۴  |
+```
 
 #### مارک‌داون درون‌خطی درون جدول‌ها
 
 | کج   | توپر     | کد   |
 | --------  | -------- | ------ |
 | *کج* | **توپر** | `کد` |
+
+```markdown {filename=Markdown}
+| کج   | توپر     | کد   |
+| --------  | -------- | ------ |
+| *کج* | **توپر** | `کد` |
+```
 
 ### بلوک‌های کد
 
@@ -57,11 +77,23 @@ Hugo از سینتکس [مارک‌داون](https://en.wikipedia.org/wiki/Markd
 2. دومین آیتم
 3. سومین آیتم
 
+```markdown {filename=Markdown}
+1. اولین آیتم
+2. دومین آیتم
+3. سومین آیتم
+```
+
 #### فهرست مرتب‌نشده
 
 * فهرست آیتم
 * یک آیتم دیگه
 * و یک آیتم دیگه
+
+```markdown {filename=Markdown}
+* فهرست آیتم
+* یک آیتم دیگه
+* و یک آیتم دیگه
+```
 
 #### فهرست تو در تو
 
@@ -73,13 +105,31 @@ Hugo از سینتکس [مارک‌داون](https://en.wikipedia.org/wiki/Markd
   * شیر
   * پنیر
 
+```markdown {filename=Markdown}
+* میوه
+  * سیب
+  * پرتقال
+  * موز
+* لبنیات
+  * شیر
+  * پنیر
+```
+
 ### عکس‌ها
 
-![](https://source.unsplash.com/featured/800x600?landscape)
+![landscape](https://picsum.photos/800/600)
+
+```markdown {filename=Markdown}
+![landscape](https://picsum.photos/800/600)
+```
 
 با توضیحات:
 
-![](https://source.unsplash.com/featured/800x600?landscape "یک چشم‌انداز Unsplash")
+![landscape](https://picsum.photos/800/600 "یک چشم‌انداز Unsplash")
+
+```markdown {filename=Markdown}
+![landscape](https://picsum.photos/800/600 "یک چشم‌انداز Unsplash")
+```
 
 ## پیکربندی
 

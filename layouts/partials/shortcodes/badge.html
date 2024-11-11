@@ -1,0 +1,16 @@
+{{- $content := .content -}}
+{{- $type := .type -}}
+{{- $class := .class | default "" -}}
+{{- $border := .border | default false -}}
+
+{{- $defaultClass := "hx-text-gray-600 hx-bg-gray-100 dark:hx-bg-neutral-800 dark:hx-text-neutral-200 hx-border-gray-200 dark:hx-border-neutral-700" -}}
+{{- $warningClass := "hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200" -}}
+{{- $infoClass := "hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200" -}}
+{{- $errorClass := "hx-border-red-200 hx-bg-red-100 hx-text-red-900 dark:hx-border-red-200/30 dark:hx-bg-red-900/30 dark:hx-text-red-200" -}}
+
+{{- $borderClass := cond (eq $border true) "hx-border" "" -}}
+{{- $badgeClass := cond (eq $type "info") $infoClass (cond (eq $type "warning") $warningClass (cond (eq $type "error") $errorClass $defaultClass)) -}}
+<div class="hextra-badge {{ $class }}">
+  <div class="hx-inline-flex hx-items-center hx-rounded-full hx-px-2.5 hx-leading-6 hx-text-[.65rem] {{ $borderClass }} {{ $badgeClass }}">{{- $content -}}</div>
+</div>
+{{- /* Strip trailing newline. */ -}}

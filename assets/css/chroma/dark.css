@@ -74,7 +74,7 @@
   /* CommentPreprocFile */ .chroma .cpf { color: #8b949e; font-weight: bold; font-style: italic }
   /* Generic */ .chroma .g {  }
   /* GenericDeleted */ .chroma .gd { color: #ffa198; background-color: #490202 }
-  /* GenericEmph */ .chroma .ge { font-style: italic }
+  /* GenericEmph */ .chroma .ge { color: inherit; font-style: italic }
   /* GenericError */ .chroma .gr { color: #ffa198 }
   /* GenericHeading */ .chroma .gh { color: #79c0ff; font-weight: bold }
   /* GenericInserted */ .chroma .gi { color: #56d364; background-color: #0f5323 }

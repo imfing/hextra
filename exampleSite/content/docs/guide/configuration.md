@@ -186,10 +186,10 @@ To customize the [favicon](https://en.wikipedia.org/wiki/Favicon) for your site,
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-Include both `favicon.ico` and `favicon.svg` files in your project to ensure your site's favicons display correctly.
+Include `favicon.ico`, `favicon.svg` and `favicon-dark.svg` files in your project to ensure your site's favicons display correctly.
 
-While `favicon.ico` is generally for older browsers, `favicon.svg` is supported by modern ones. The optional `favicon-dark.svg` can be included for a tailored experience in dark mode.
-Feel free to use tools like [favicon.io](https://favicon.io/) or [favycon](https://github.com/ruisaraiva19/favycon) to generate these icons.
+While `favicon.ico` is generally for older browsers, `favicon.svg` and `favicon-dark.svg` are supported by modern browsers.
+Use tools like [favicon.io](https://favicon.io/) or [favycon](https://github.com/ruisaraiva19/favycon) to generate such icons.
 
 ### Theme Configuration
 
@@ -250,6 +250,23 @@ Options for `flexsearch.index`:
 - `summary` - summary of the page, see [Hugo Content Summaries](https://gohugo.io/content-management/summaries/) for more details
 - `heading` - level 1 and level 2 headings
 - `title` - only include the page title
+
+To customize the search tokenize, set the `params.search.flexsearch.tokenize` parameter in the config file:
+
+```yaml {filename="hugo.yaml"}
+params:
+    # ...
+    flexsearch:
+      # full | forward | reverse | strict 
+      tokenize: forward
+```
+
+Options for [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search):
+
+- `strict` - index whole words
+- `forward` - incrementally index words in forward direction
+- `reverse` - incrementally index words in both directions
+- `full` - index every possible combination
 
 To exclude a page from the search index, set the `excludeSearch: true` in the front matter of the page:
 

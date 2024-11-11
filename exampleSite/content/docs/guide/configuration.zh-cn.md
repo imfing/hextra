@@ -219,6 +219,25 @@ params:
 - `heading` - 一级和二级标题
 - `title` - 仅搜索标题
 
+要自定义检索分词，请在配置文件中设置`params.search.flexsearch.tokenize`：
+
+```hugo.yaml
+params:
+    # ...
+    flexsearch:
+      # full | forward | reverse | strict 
+      tokenize: forward
+```
+
+[`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search)的可选项:
+
+- `strict` - 严格单词匹配
+- `forward` - 单词前缀匹配
+- `reverse` - 单词前后缀匹配
+- `full` - 单词子串匹配。
+
+> 在默认的分词逻辑下，中文一句话就是一个“单词”
+
 要从搜索索引中排除页面，更改 front matter 中的 `excludeSearch: true`:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
