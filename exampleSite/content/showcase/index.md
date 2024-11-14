@@ -13,6 +13,13 @@ Open source projects powered by Hextra
 
 {{< cards >}}
   {{< card
+        link="https://github.com/jonaspleyer/cellular_raza"
+        title="cellular_raza"
+        image="https://github.com/user-attachments/assets/f24c6455-b70a-419b-b025-e3d60101b673"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
         link="https://github.com/mightymoud/sidekick"
         title="Sidekick"
         image="https://github.com/user-attachments/assets/4ae2a9d7-77b6-42eb-a9d7-5c4599f0f812"
