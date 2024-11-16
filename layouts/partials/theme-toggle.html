@@ -1,3 +1,6 @@
+{{- $navbar := .navbar | default false -}}
+{{- $height := 12 -}}
+{{- if $navbar -}}{{- $height = 24 -}}{{- end -}}
 {{- $hideLabel := .hideLabel | default false -}}
 
 {{- $changeTheme := (T "changeTheme") | default "Change theme" -}}
@@ -13,9 +16,9 @@
   aria-label="{{ $changeTheme }}"
 >
   <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize">
-    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12 class=\"group-data-[theme=light]:hx-hidden\"") -}}
+    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" (printf "height=%d class=\"group-data-[theme=light]:hx-hidden\"" $height)) -}}
     {{- if not $hideLabel }}<span class="group-data-[theme=light]:hx-hidden">{{ $light }}</span>{{ end -}}
-    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12 class=\"group-data-[theme=dark]:hx-hidden\"") -}}
+    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" (printf "height=%d class=\"group-data-[theme=dark]:hx-hidden\"" $height)) -}}
     {{- if not $hideLabel }}<span class="group-data-[theme=dark]:hx-hidden">{{ $dark }}</span>{{ end -}}
   </div>
 </button>
