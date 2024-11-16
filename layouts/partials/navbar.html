@@ -31,6 +31,8 @@
     {{- range .Site.Menus.main -}}
       {{- if eq .Params.type "search" -}}
         {{- partial "search.html" (dict "params" .Params) -}}
+      {{- else if eq .Params.type "theme-toggle" -}}
+        {{- partial "theme-toggle.html" (dict "hideLabel" (.Params.hideLabel | default true)) -}}
       {{- else -}}
         {{- $link := .URL -}}
         {{- $external := strings.HasPrefix $link "http" -}}
