@@ -1,7 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
-  restoreSidebarPosition();
-  enableCollapsibles();
+  initializeSidebar();
 });
+
+function initializeSidebar() {
+  const sidebarScrollbar = document.querySelector("aside.sidebar-container > .hextra-scrollbar");
+  if (!sidebarScrollbar) return;
+
+  enableCollapsibles();
+  restoreSidebarPosition(sidebarScrollbar);
+
+  const debouncedSave = debounce((position) => {
+    saveSidebarPosition(position);
+  }, 150);
+  
+  sidebarScrollbar.addEventListener('scroll', function() {
+    debouncedSave(this.scrollTop);
+  });
+
+  document.querySelectorAll('a').forEach(link => {
+    if (link.hostname === window.location.hostname) {
+      link.addEventListener('click', function(e) {
+        saveSidebarPosition(sidebarScrollbar.scrollTop);
+      });
+    }
+  });
+}
 
 function debounce(func, wait) {
   let timeout;
@@ -29,30 +52,15 @@ function enableCollapsibles() {
 }
 
 function saveSidebarPosition(scrollPosition) {
-  const currentPosition = sessionStorage.getItem('sidebarScrollPosition');
-  if (currentPosition === null || parseInt(currentPosition) !== scrollPosition) {
-    sessionStorage.setItem('sidebarScrollPosition', scrollPosition);
-  }
+  localStorage.setItem('sidebarScrollPosition', scrollPosition);
 }
 
-function restoreSidebarPosition() {
-  const sidebarScrollbar = document.querySelector("aside.sidebar-container > .hextra-scrollbar");
-  if (sidebarScrollbar) {
-    const savedPosition = sessionStorage.getItem('sidebarScrollPosition');
-    
-    if (savedPosition !== null) {
-      sidebarScrollbar.scrollTo({
-        top: parseInt(savedPosition),
-        behavior: 'instant'
-      });
-    }
-
-    const debouncedSave = debounce((position) => {
-      saveSidebarPosition(position);
-    }, 150);
-    
-    sidebarScrollbar.addEventListener('scroll', function() {
-      debouncedSave(this.scrollTop);
+function restoreSidebarPosition(sidebarScrollbar) {
+  const savedPosition = localStorage.getItem('sidebarScrollPosition');
+  
+  if (savedPosition !== null) {
+    requestAnimationFrame(() => {
+      sidebarScrollbar.scrollTop = parseInt(savedPosition);
     });
   }
 }
