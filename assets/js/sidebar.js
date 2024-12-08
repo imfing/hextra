@@ -1,7 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
-  scrollToActiveItem();
-  enableCollapsibles();
+  initializeSidebar();
 });
+
+function initializeSidebar() {
+  const sidebarScrollbar = document.querySelector("aside.sidebar-container > .hextra-scrollbar");
+  if (!sidebarScrollbar) return;
+
+  enableCollapsibles();
+  restoreSidebarPosition(sidebarScrollbar);
+
+  const debouncedSave = debounce((position) => {
+    saveSidebarPosition(position);
+  }, 150);
+  
+  sidebarScrollbar.addEventListener('scroll', function() {
+    debouncedSave(this.scrollTop);
+  });
+
+  document.querySelectorAll('a').forEach(link => {
+    if (link.hostname === window.location.hostname) {
+      link.addEventListener('click', function(e) {
+        saveSidebarPosition(sidebarScrollbar.scrollTop);
+      });
+    }
+  });
+}
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
 
 function enableCollapsibles() {
   const buttons = document.querySelectorAll(".hextra-sidebar-collapsible-button");
@@ -16,21 +51,16 @@ function enableCollapsibles() {
   });
 }
 
-function scrollToActiveItem() {
-  const sidebarScrollbar = document.querySelector("aside.sidebar-container > .hextra-scrollbar");
-  const activeItems = document.querySelectorAll(".sidebar-active-item");
-  const visibleActiveItem = Array.from(activeItems).find(function (activeItem) {
-    return activeItem.getBoundingClientRect().height > 0;
-  });
+function saveSidebarPosition(scrollPosition) {
+  localStorage.setItem('sidebarScrollPosition', scrollPosition);
+}
 
-  if (!visibleActiveItem) {
-    return;
+function restoreSidebarPosition(sidebarScrollbar) {
+  const savedPosition = localStorage.getItem('sidebarScrollPosition');
+  
+  if (savedPosition !== null) {
+    requestAnimationFrame(() => {
+      sidebarScrollbar.scrollTop = parseInt(savedPosition);
+    });
   }
-
-  const yOffset = visibleActiveItem.clientHeight;
-  const yDistance = visibleActiveItem.getBoundingClientRect().top - sidebarScrollbar.getBoundingClientRect().top;
-  sidebarScrollbar.scrollTo({
-    behavior: "instant",
-    top: yDistance - yOffset
-  });
 }
