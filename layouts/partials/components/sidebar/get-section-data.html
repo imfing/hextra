@@ -1,0 +1,20 @@
+{{/* Get section sidebar config from Hugo `data` directory
+
+  If the site is multilingual, the sidebar data is stored in a language-specific
+  directory. For example, the English sidebar data is stored in `data/en/sidebar.yaml`.
+*/}}
+{{ $data := "" }}
+{{ $section := .Section | default "index" }}
+{{ $filename := "sidebar" }}
+
+{{ if hugo.IsMultilingual }}
+  {{ with (index site.Data site.Language.Lang $filename $section) }}
+    {{ $data = . }}
+  {{ end }}
+{{ else }}
+  {{ with (index site.Data $filename $section) }}
+    {{ $data = . }}
+  {{ end }}
+{{ end }}
+
+{{ return $data }}
