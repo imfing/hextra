@@ -1,0 +1,10 @@
+{{- $style := .Get "style" -}}
+{{- $heading := int (strings.TrimPrefix "h" (.Get "heading" | default "h2")) -}}
+{{- $size := cond (ge $heading 4) "xl" (cond (eq $heading 3) "2xl" "4xl") -}}
+
+<h{{ $heading }}
+  class="not-prose hx-text-{{ $size }} hx-font-bold hx-leading-none hx-tracking-tighter md:hx-text-3xl hx-py-2 hx-bg-clip-text hx-text-transparent hx-bg-gradient-to-r hx-from-gray-900 hx-to-gray-600 dark:hx-from-gray-100 dark:hx-to-gray-400"
+  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
+>
+  {{ .Inner | markdownify }}
+</h{{ $heading }}>
