@@ -1,4 +1,7 @@
 {
+  "plugins": [
+    "prettier-plugin-go-template"
+  ],
   "goTemplateBracketSpacing": true,
   "htmlWhitespaceSensitivity": "css",
   "printWidth": 200,

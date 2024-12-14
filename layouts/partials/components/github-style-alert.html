@@ -1,0 +1,42 @@
+{{- $content := .content -}}
+{{- $alertType := .alertType -}}
+{{- $alertTitle := .alertTitle -}}
+
+{{- $icons := dict
+  "note" "information-circle"
+  "tip" "light-bulb"
+  "important" "information-circle"
+  "warning" "exclamation"
+  "caution" "exclamation-circle"
+-}}
+
+{{- $icon := index $icons $alertType -}}
+{{- $title := or $alertTitle (or (i18n $alertType) (title $alertType)) -}}
+
+{{- $defaultClass := "hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300" }}
+
+{{- $alertClasses := dict
+  "note" "hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200"
+  "tip" "hx-border-green-200 hx-bg-green-100 hx-text-green-900 dark:hx-border-green-200/30 dark:hx-bg-green-900/30 dark:hx-text-green-200"
+  "important" "hx-border-indigo-200 hx-bg-indigo-100 hx-text-indigo-900 dark:hx-border-indigo-200/30 dark:hx-bg-indigo-900/30 dark:hx-text-indigo-200"
+  "warning" "hx-border-amber-200 hx-bg-amber-100 hx-text-amber-900 dark:hx-border-amber-200/30 dark:hx-bg-amber-900/30 dark:hx-text-amber-200"
+  "caution" "hx-border-red-200 hx-bg-red-100 hx-text-red-900 dark:hx-border-red-200/30 dark:hx-bg-red-900/30 dark:hx-text-red-200"
+-}}
+
+{{- $class := index $alertClasses $alertType | default $defaultClass -}}
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current {{ $class }}">
+  <p class="hx-flex hx-items-center hx-font-medium">
+    {{- with $icon -}}
+      {{- partial "utils/icon.html" (dict "name" . "attributes" `height=16px class="hx-inline-block hx-align-middle hx-mr-2"`) -}}
+    {{- end -}}
+    {{- $title -}}
+  </p>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      {{- $content -}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{{- $content := .content -}}
+{{- $emoji := .emoji -}}
+{{- $icon := .icon -}}
+
+{{- $defaultClass := "hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300" -}}
+
+{{- $class := .class | default $defaultClass -}}
+
+
+<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current {{ $class }}">
+  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2">
+    {{- with $emoji -}}
+      <div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+        {{- . -}}
+      </div>
+    {{- else -}}
+      {{- with $icon -}}
+        {{ partial "utils/icon.html" (dict "name" . "attributes" `height=1.2em class="hx-inline-block hx-align-middle"`) -}}
+      {{- end -}}
+    {{- end -}}
+  </div>
+
+  <div class="hx-w-full hx-min-w-0 hx-leading-7">
+    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
+      {{- $content -}}
+    </div>
+  </div>
+</div>
