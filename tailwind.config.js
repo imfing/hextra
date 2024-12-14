@@ -61,8 +61,11 @@ module.exports = {
       neutral: colors.neutral,
       red: colors.red,
       orange: colors.orange,
+      green: colors.green,
+      indigo: colors.indigo,
       blue: colors.blue,
       yellow: colors.yellow,
+      amber: colors.amber,
       primary: {
         50: makePrimaryColor(97),
         100: makePrimaryColor(94),

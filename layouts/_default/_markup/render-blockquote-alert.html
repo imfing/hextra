@@ -1,20 +1,9 @@
-{{- $supportedAlertTypes := slice "note" "tip" "important" "warning" "caution" -}}
-{{- $emojis := dict
-  "note" ":memo:"
-  "tip" ":bulb:"
-  "important" ":information_source:"
-  "warning" ":warning:"
-  "caution" ":exclamation:"
--}}
-
-{{- if not (in $supportedAlertTypes .AlertType) -}}
-  <blockquote>
-    {{- .Text -}}
-  </blockquote>
-{{- else -}}
-  {{- $emoji := emojify (index $emojis .AlertType) -}}
-  {{- $content := .Text -}}
-  {{- $icon := "" -}}
-  {{- $class := "" -}}
-  {{- partial "shortcodes/callout.html" (dict "content" $content "emoji" $emoji "icon" $icon "class" $class) -}}
+{{- if not (in (slice "note" "tip" "important" "warning" "caution") .AlertType) -}}
+  {{- warnf "Alert type %s is not supported" .AlertType -}}
 {{- end -}}
+
+{{- $content := .Text -}}
+{{- $alertType := .AlertType -}}
+{{- $alertTitle := .AlertTitle -}}
+
+{{- partial "components/github-style-alert.html" (dict "content" $content "alertType" $alertType "alertTitle" $alertTitle) -}}
