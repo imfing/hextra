@@ -54,7 +54,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.131.0
+      HUGO_VERSION: 0.138.0
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -146,7 +146,7 @@ For more details, check out:
 3. If you are not using [hextra-starter-template][hextra-starter-template], configure the following manually:
    - Configure the Build command to `hugo --gc --minify`
    - Specify the Publish directory to `public`
-   - Add Environment variable `HUGO_VERSION` and set to `0.132.2`
+   - Add Environment variable `HUGO_VERSION` and set to `0.138.0`, or alternatively, set it in `netlify.toml` file
 4. Deploy!
 
 Check [Hugo on Netlify](https://docs.netlify.com/integrations/frameworks/hugo/) for more details.
