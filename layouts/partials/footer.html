@@ -15,7 +15,7 @@
 
 
 <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent">
-  {{- if $enableFooterSwitches -}}
+  {{- if and $enableFooterSwitches (or hugo.IsMultilingual $displayThemeToggle) -}}
     <div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 {{ $footerWidth }}">
       {{- partial "language-switch.html" (dict "context" .) -}}
       {{- with $displayThemeToggle }}{{ partial "theme-toggle.html" }}{{ end -}}
