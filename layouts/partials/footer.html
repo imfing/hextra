@@ -24,14 +24,23 @@
       <hr class="dark:hx-border-neutral-800" />
     {{- end -}}
   {{- end -}}
-  <div
-    class="{{ $footerWidth }} hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
-  >
-    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start">
-      {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="hx-font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{ end }}
-      {{- if .Site.Params.footer.displayCopyright }}<div class="hx-mt-6 hx-text-xs">{{ $copyright | markdownify }}</div>{{ end }}
+
+  {{- if .Site.Params.footer.custom -}}
+    <div
+      class="{{ $footerWidth }} hx-pl-[max(env(safe-area-inset-left),0rem)] hx-pr-[max(env(safe-area-inset-right),0rem)] hx-text-gray-600 dark:hx-text-gray-400"
+    >
+      {{ partial "custom/footer.html" (dict "context" . "footerButtonColor" "hx-rounded-md hx-transition-colors hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50" ) }}
     </div>
-  </div>
+  {{- else -}}
+    <div
+      class="{{ $footerWidth }} hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+    >
+      <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start">
+          {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="hx-font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{ end }}
+          {{- if .Site.Params.footer.displayCopyright }}<div class="hx-mt-6 hx-text-xs">{{ $copyright | markdownify }}</div>{{ end }}
+      </div>
+    </div>
+  {{- end -}}
 </footer>
 
 {{- define "theme-credit" -}}

@@ -62,6 +62,27 @@ You may add custom scripts to the end of the head for every page by adding the f
 layouts/partials/custom/head-end.html
 ```
 
+## Custom Footer
+
+You can replace the footer completely - excluding the language and theme buttons - by creating a file `layouts/partials/custom/footer.html` in your site __and__ setting `custom: true` in the `footer` section of your `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+ footer:
+    enable: true
+    custom: true
+    # These settings are ignored by the custom footer
+    displayCopyright: false
+    displayPoweredBy: true
+    # This setting is respected by the custom footer
+    with: "wide"
+```
+
+Variables available in the footer are:
+
+- `{{ .footerButtonColor }}` - The color/background color of a footer button
+
+_Note: The custom footer inherits the default footer background color and text color._
+
 ## Custom Layouts
 
 The layouts of the theme can be overridden by creating a file with the same name in the `layouts` directory of your site.
