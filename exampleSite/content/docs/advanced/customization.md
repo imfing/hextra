@@ -62,18 +62,18 @@ You may add custom scripts to the end of the head for every page by adding the f
 layouts/partials/custom/head-end.html
 ```
 
-## Custom Footer
+## Custom Footer Section
 
-You can replace the footer completely - excluding the language and theme buttons - by creating a file `layouts/partials/custom/footer.html` in your site __and__ setting `custom: true` in the `footer` section of your `hugo.yaml`:
+You can add a custom section the footer between the language/theme buttons and the Copyright/Powered By section by creating a file `layouts/partials/custom/footer.html` in your site __and__ setting `customSection: true` in the `footer` section of your `hugo.yaml`:
 
 ```yaml {filename="hugo.yaml"}
  footer:
     enable: true
-    custom: true
-    # These settings are ignored by the custom footer
+    customSection: true
+    # These settings are still respected
     displayCopyright: false
     displayPoweredBy: true
-    # This setting is respected by the custom footer
+    # This setting applies to the custom section
     with: "wide"
 ```
 
