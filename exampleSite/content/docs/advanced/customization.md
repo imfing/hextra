@@ -83,6 +83,33 @@ The following classes can be used to customize various parts of the theme.
 
 - `hextra-cards` - The cards grid container
 
+##### Jupyter Notebook
+
+- `hextra-jupyter-code-cell` - The Jupyter code cell container
+- `hextra-jupyter-code-cell-outputs-container` - The Jupyter code cell outputs container
+- `hextra-jupyter-code-cell-outputs` - The Jupyter code cell output div element
+
+##### PDF
+
+- `hextra-pdf` - The PDF container element
+
+##### Steps
+
+- `steps` - The steps container
+
+##### Tabs
+
+- `hextra-tabs-panel` - The tabs panel container
+- `hextra-tabs-toggle` - The tabs toggle button
+
+##### Filetree
+
+- `hextra-filetree` - The filetree container
+
+##### Folder
+
+- `hextra-filetree-folder` - The filetree folder container
+
 #### Navbar
 
 - `nav-container` - The navbar container
@@ -122,6 +149,18 @@ The following classes can be used to customize various parts of the theme.
 
 - `hextra-code-copy-btn-container` - The code copy button container
 - `hextra-code-copy-btn` - The code copy button
+
+#### Code Block
+
+- `hextra-code-block` - The code block container
+
+#### Feature Card
+
+- `hextra-feature-card` - The feature card link element
+
+#### Feature Grid
+
+- `hextra-feature-grid` - The feature grid container
 
 #### Breadcrumbs
 
