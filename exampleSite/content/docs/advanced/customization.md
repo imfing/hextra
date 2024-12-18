@@ -46,7 +46,7 @@ The primary color of the theme can be customized by setting the `--primary-hue`,
 
 ### Further Theme Customization
 
-The theme can be further customized by overriding the default styles. An example for customizing the footer element:
+The theme can be further customized by overriding the default styles via the exposed css classes. An example for customizing the footer element:
 
 ```css {filename="assets/css/custom.css"}
 .hextra-footer {
