@@ -875,6 +875,9 @@ video {
 .hx-gap-4 {
   gap: 1rem;
 }
+.hx-gap-6 {
+  gap: 1.5rem;
+}
 .hx-gap-x-1\.5 {
   -moz-column-gap: 0.375rem;
        column-gap: 0.375rem;
@@ -1152,6 +1155,9 @@ video {
 .hx-pb-px {
   padding-bottom: 1px;
 }
+.hx-pl-\[max\(env\(safe-area-inset-left\)\,0rem\)\] {
+  padding-left: max(env(safe-area-inset-left),0rem);
+}
 .hx-pl-\[max\(env\(safe-area-inset-left\)\,1\.5rem\)\] {
   padding-left: max(env(safe-area-inset-left),1.5rem);
 }
@@ -1166,6 +1172,9 @@ video {
 }
 .hx-pr-\[max\(env\(safe-area-inset-left\)\,1\.5rem\)\] {
   padding-right: max(env(safe-area-inset-left),1.5rem);
+}
+.hx-pr-\[max\(env\(safe-area-inset-right\)\,0rem\)\] {
+  padding-right: max(env(safe-area-inset-right),0rem);
 }
 .hx-pr-\[max\(env\(safe-area-inset-right\)\,1\.5rem\)\] {
   padding-right: max(env(safe-area-inset-right),1.5rem);

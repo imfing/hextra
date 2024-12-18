@@ -184,6 +184,21 @@ You may add custom scripts to the end of the head for every page by adding the f
 layouts/partials/custom/head-end.html
 ```
 
+## Custom Footer Section
+
+You can add a custom section the footer between the language/theme buttons and the Copyright/Powered By section by creating a file `layouts/partials/custom/footer.html` in your site.
+
+```html {filename="layouts/partials/custom/footer.html"}
+<!-- Your footer element here -->
+```
+
+Available variables in the footer section are:
+
+- `.aboveVisible`: `true` if the Language or Theme button(s) are visible above the footer along with a horizontal separator.
+- `.belowVisible`: `true` if the Copyright or PoweredBy text are visible below the footer.
+
+_Note: The custom footer inherits the default footer background color text color and the `width` setting in `hugo.yaml#footer` section._
+
 ## Custom Layouts
 
 The layouts of the theme can be overridden by creating a file with the same name in the `layouts` directory of your site.
