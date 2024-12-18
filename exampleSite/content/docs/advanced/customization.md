@@ -64,24 +64,13 @@ layouts/partials/custom/head-end.html
 
 ## Custom Footer Section
 
-You can add a custom section the footer between the language/theme buttons and the Copyright/Powered By section by creating a file `layouts/partials/custom/footer.html` in your site __and__ setting `customSection: true` in the `footer` section of your `hugo.yaml`:
+You can add a custom section the footer between the language/theme buttons and the Copyright/Powered By section by creating a file `layouts/partials/custom/footer.html` in your site.
 
-```yaml {filename="hugo.yaml"}
- footer:
-    enable: true
-    customSection: true
-    # These settings are still respected
-    displayCopyright: false
-    displayPoweredBy: true
-    # This setting applies to the custom section
-    with: "wide"
+```html {filename="layouts/partials/custom/footer.html"}
+<!-- Your footer element here -->
 ```
 
-Variables available in the footer are:
-
-- `{{ .footerButtonColor }}` - The color/background color of a footer button
-
-_Note: The custom footer inherits the default footer background color and text color._
+_Note: The custom footer inherits the default footer background color text color and the `width` setting in `hugo.yaml#footer` section._
 
 ## Custom Layouts
 
