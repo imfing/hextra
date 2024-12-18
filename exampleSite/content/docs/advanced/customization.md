@@ -74,7 +74,7 @@ The following classes can be used to customize various parts of the theme.
 
 ##### Card
 
-- `hextra-card` - The badge element
+- `hextra-card` - The card element
 - `hextra-card-image` - The card image element
 - `hextra-card-icon` - The card icon element
 - `hextra-card-subtitle` - The card subtitle element
