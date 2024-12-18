@@ -95,7 +95,7 @@ Open source projects powered by Hextra
   >}}
 
   {{< card
-        link="https://lutheranconfessions.org/"
+        link="https://github.com/remysheppard/lutheran-confessions"
         title="LutheranConfessions"
         image="https://github.com/imfing/hextra/assets/5097752/ad6625e4-88cd-4cad-b102-5399997d0359"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
