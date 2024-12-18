@@ -70,6 +70,11 @@ You can add a custom section the footer between the language/theme buttons and t
 <!-- Your footer element here -->
 ```
 
+Available variables in the footer section are:
+
+- `.aboveVisible`: `true` if the Language or Theme button(s) are visible above the footer along with a horizontal separator.
+- `.belowVisible`: `true` if the Copyright or PoweredBy text are visible below the footer.
+
 _Note: The custom footer inherits the default footer background color text color and the `width` setting in `hugo.yaml#footer` section._
 
 ## Custom Layouts
