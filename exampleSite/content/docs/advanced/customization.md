@@ -79,7 +79,7 @@ The following classes can be used to customize various parts of the theme.
 - `hextra-card-icon` - The card icon element
 - `hextra-card-subtitle` - The card subtitle element
 
-#### Cards
+##### Cards
 
 - `hextra-cards` - The cards grid container
 
