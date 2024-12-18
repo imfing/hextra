@@ -29,14 +29,16 @@
     >
       {{ partial "custom/footer.html" . }}
     </div>
-    <div
-      class="{{ $footerWidth }} hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
-    >
-      <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start hx-gap-6">
-          {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="hx-font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{ end }}
-          {{- if .Site.Params.footer.displayCopyright }}<div class="hx-text-xs">{{ $copyright | markdownify }}</div>{{ end }}
+    {{- if or (.Site.Params.footer.displayPoweredBy | default true) .Site.Params.footer.displayCopyright}}
+      <div
+        class="{{ $footerWidth }} hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+      >
+        <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start hx-gap-6">
+            {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="hx-font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{ end }}
+            {{- if .Site.Params.footer.displayCopyright }}<div class="hx-text-xs">{{ $copyright | markdownify }}</div>{{ end }}
+        </div>
       </div>
-    </div>
+    {{- end -}}
 </footer>
 
 {{- define "theme-credit" -}}
