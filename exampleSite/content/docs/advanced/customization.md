@@ -119,6 +119,7 @@ The following classes can be used to customize various parts of the theme.
 #### Footer
 
 - `hextra-footer` - The footer element
+- `custom-footer` - The custom footer section container
 
 #### Search
 
