@@ -8,8 +8,17 @@
    * This solution was created with reference to:
    * https://github.com/giscus/giscus/issues/336#issuecomment-1214366281
   */
-  function getGiscusTheme() {
+  function getHugoTheme() {
     return localStorage.getItem("color-theme");
+  }
+  
+  function getGiscusTheme() {
+    let giscusTheme = "{{ (string .theme) | default `light` }}";
+    if(getHugoTheme() == 'light') {
+      return giscusTheme.replace('dark', 'light');
+    } else {
+      return giscusTheme.replace('light', 'dark');
+    }
   }
 
   function setGiscusTheme() {
