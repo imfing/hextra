@@ -1,10 +1,27 @@
 {{ $filename := .filename | default "" -}}
+{{ $filename_uri_base := .filename_uri_base | default "" -}}
 {{ $lang := .lang | default "" }}
 {{ $content := .content }}
 {{ $options := .options | default (dict) }}
 
 {{- if $filename -}}
-  <div class="filename" dir="auto">{{ $filename }}</div>
+  <div class="filename" dir="auto">
+    {{- if $filename_uri_base -}}
+      {{- $attributes := "height=1em"}}
+      {{- $icon := index site.Data.icons "external-link" -}}
+      {{- $icon = replaceRE "<svg" (printf "<svg %s" $attributes) $icon -}}
+      {{- $baseEndsWithSlash := hasSuffix $filename_uri_base "/" -}}
+      {{- $filename_uri_base = cond $baseEndsWithSlash ( substr $filename_uri_base 0 -1 ) $filename_uri_base -}}
+      {{- $filenameStartsWithSlash := hasPrefix $filename "/" -}}
+      {{- $filename = cond $filenameStartsWithSlash ( substr $filename 1 ) $filename -}}
+      <a style="color: inherit; text-decoration: none;" href="{{ $filename_uri_base }}/{{ $filename }}" target="_blank" rel="noopener noreferrer">
+          {{ $filename }}
+          <span class="hx-inline-block hx-align-text-bottom icon">{{- $icon | safeHTML -}}</span>
+      </a>
+    {{- else -}}
+      {{ $filename }}
+    {{- end -}}
+  </div>
 {{- end -}}
 {{- if transform.CanHighlight $lang -}}
   <div>{{- highlight $content $lang $options -}}</div>
