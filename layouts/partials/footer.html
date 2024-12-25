@@ -37,7 +37,7 @@
       >
         <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start">
             {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="hx-font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{- end -}}
-            {{- if .Site.Params.footer.displayCopyright }}<div class="hx-text-xs">{{ $copyright | markdownify }}</div>{{- end -}}
+            {{- if .Site.Params.footer.displayCopyright }}<div class="hx-mt-6 hx-text-xs">{{ $copyright | markdownify }}</div>{{- end -}}
         </div>
       </div>
     {{- end -}}
