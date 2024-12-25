@@ -1155,9 +1155,6 @@ video {
 .hx-pb-px {
   padding-bottom: 1px;
 }
-.hx-pl-\[max\(env\(safe-area-inset-left\)\,0rem\)\] {
-  padding-left: max(env(safe-area-inset-left),0rem);
-}
 .hx-pl-\[max\(env\(safe-area-inset-left\)\,1\.5rem\)\] {
   padding-left: max(env(safe-area-inset-left),1.5rem);
 }
@@ -1172,9 +1169,6 @@ video {
 }
 .hx-pr-\[max\(env\(safe-area-inset-left\)\,1\.5rem\)\] {
   padding-right: max(env(safe-area-inset-left),1.5rem);
-}
-.hx-pr-\[max\(env\(safe-area-inset-right\)\,0rem\)\] {
-  padding-right: max(env(safe-area-inset-right),0rem);
 }
 .hx-pr-\[max\(env\(safe-area-inset-right\)\,1\.5rem\)\] {
   padding-right: max(env(safe-area-inset-right),1.5rem);

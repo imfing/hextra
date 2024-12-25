@@ -27,7 +27,7 @@
     {{- end -}}
   {{- end -}}
     <div
-      class="custom-footer {{ $footerWidth }} hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400"
+      class="hextra-custom-footer {{ $footerWidth }} hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400"
     >
       {{ partial "custom/footer.html" (dict "context" . "aboveVisible" $footerSwitchesVisible "belowVisible" $copyrightSectionVisible ) }}
     </div>
