@@ -119,7 +119,7 @@ The following classes can be used to customize various parts of the theme.
 #### Footer
 
 - `hextra-footer` - The footer element
-- `custom-footer` - The custom footer section container
+- `hextra-custom-footer` - The custom footer section container
 
 #### Search
 
@@ -187,7 +187,7 @@ layouts/partials/custom/head-end.html
 
 ## Custom Footer Section
 
-You can add a custom section the footer between the language/theme buttons and the Copyright/Powered By section by creating a file `layouts/partials/custom/footer.html` in your site.
+You can add a custom section the footer between the language/theme buttons and the "Copyright"/"Powered By" section by creating a file `layouts/partials/custom/footer.html` in your site.
 
 ```html {filename="layouts/partials/custom/footer.html"}
 <!-- Your footer element here -->
@@ -195,8 +195,8 @@ You can add a custom section the footer between the language/theme buttons and t
 
 Available variables in the footer section are:
 
-- `.aboveVisible`: `true` if the Language or Theme button(s) are visible above the footer along with a horizontal separator.
-- `.belowVisible`: `true` if the Copyright or PoweredBy text are visible below the footer.
+- `.switchesVisible`: `true` if the language/theme button(s) are visible above the footer along with a horizontal separator.
+- `.copyrightVisible`: `true` if the "Copyright" and "Powered By" text are visible at the bottom of the footer.
 
 _Note: The custom footer inherits the default footer background color text color and the `width` setting in `hugo.yaml#footer` section._
 
