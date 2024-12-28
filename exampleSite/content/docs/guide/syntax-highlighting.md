@@ -40,20 +40,19 @@ def say_hello():
     print("Hello!")
 ```
 
-### Link to file
+### Link to File
 
-In addition to file name you can provide base URL in attribute `filename_uri_base`, which would be concatenated with the file name to render a link.
+You can use the `base_url` attribute to provide a base URL that will be combined with the file name to generate a link.
 
-Note that filename can be relative to the base path, if you would like file name to contain path in which it is located:
+The file name can include a relative path if it specifies the file's location within the base path.
 
 ````markdown {filename="Markdown"}
-```go {filename_uri_base="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
+```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
 go 1.20
 ```
 ````
 
-
-```go {filename_uri_base="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
+```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
 go 1.20
 ```
 
