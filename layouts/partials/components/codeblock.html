@@ -5,24 +5,23 @@
 {{ $options := .options | default (dict) }}
 
 {{- if $filename -}}
-  <div class="filename" dir="auto">
+  <div class="filename not-prose" dir="auto">
     {{- if $filename_uri_base -}}
-      {{- $attributes := "height=1em"}}
-      {{- $icon := index site.Data.icons "external-link" -}}
-      {{- $icon = replaceRE "<svg" (printf "<svg %s" $attributes) $icon -}}
-      {{- $baseEndsWithSlash := hasSuffix $filename_uri_base "/" -}}
-      {{- $filename_uri_base = cond $baseEndsWithSlash ( substr $filename_uri_base 0 -1 ) $filename_uri_base -}}
-      {{- $filenameStartsWithSlash := hasPrefix $filename "/" -}}
-      {{- $filename = cond $filenameStartsWithSlash ( substr $filename 1 ) $filename -}}
-      <a style="color: inherit; text-decoration: none;" href="{{ $filename_uri_base }}/{{ $filename }}" target="_blank" rel="noopener noreferrer">
-          {{ $filename }}
-          <span class="hx-inline-block hx-align-text-bottom icon">{{- $icon | safeHTML -}}</span>
+
+      {{- $filename_uri_base = strings.TrimSuffix "/" $filename_uri_base -}}
+      {{- $filename = strings.TrimPrefix "/" $filename -}}
+      {{- $file_uri := urls.JoinPath $filename_uri_base $filename -}}
+
+      <a class="hx-no-underline hx-inline-flex hx-items-center hx-gap-1" href="{{ $file_uri }}" target="_blank" rel="noopener noreferrer">
+          {{- $filename -}}
+          {{- partial "utils/icon" (dict "name" "external-link" "attributes" "height=1em") -}}
       </a>
     {{- else -}}
-      {{ $filename }}
+      {{- $filename -}}
     {{- end -}}
   </div>
 {{- end -}}
+
 {{- if transform.CanHighlight $lang -}}
   <div>{{- highlight $content $lang $options -}}</div>
 {{- else -}}
