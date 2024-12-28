@@ -3,6 +3,7 @@
   {{- $type := .Get "type" | default "" -}}
   {{- $class := .Get "class" | default "" -}}
   {{- $link := .Get "link" | default "" -}}
+  {{- $icon := .Get "icon" | default "" -}}
 
   {{- if $link -}}
     <a href="{{ $link }}" title="{{ $content | plainify }}" target="_blank">
@@ -11,6 +12,7 @@
         "type" $type
         "class" $class
         "border" true
+        "icon" $icon
         )
       -}}
     </a>
@@ -20,6 +22,7 @@
       "type" $type
       "class" $class
       "border" true
+      "icon" $icon
       )
     -}}
   {{- end -}}

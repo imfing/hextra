@@ -1,0 +1,11 @@
+{{- $version := .Get "version" | default "" -}}
+{{- $icon := .Get "icon" | default "" -}}
+{{- $defaultLink := cond (eq $version "") "https://github.com/imfing/hextra/tree/main" (printf "https://github.com/imfing/hextra/releases/tag/%s" $version) -}}
+{{- $link := .Get "link" | default $defaultLink -}}
+{{- $content := cond (eq $version "") "New in main branch" (printf "New in %s" $version) -}}
+
+<div style="margin-top: 1rem; display: inline-flex;">
+  <a href="{{ $link }}" title="{{ $link | plainify }}" target="_blank">
+    {{- partial "shortcodes/badge" (dict "content" $content "border" true "icon" $icon) -}}
+  </a>
+</div>
