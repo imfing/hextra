@@ -1,37 +1,19 @@
-{{ $calloutEmojiDict := dict "info" "ℹ️" "warning" "⚠️" "error" "🚫" }}
-{{ $type := .Get "type" | default "default" }}
+{{- $calloutEmojiDict := dict "info" "ℹ️" "warning" "⚠️" "error" "🚫" -}}
+{{- $type := .Get "type" | default "default" -}}
 {{/* If emoji is not set, use the emoji from dict */}}
-{{ $emoji := .Get "emoji" }}
-{{ if eq $emoji "" }}
-  {{ $emoji = index $calloutEmojiDict $type }}
-{{ end }}
+{{- $emoji := .Get "emoji" -}}
+{{- if eq $emoji "" -}}
+  {{- $emoji = index $calloutEmojiDict $type -}}
+{{- end -}}
 {{/* Also allow using "icon" */}}
-{{ $icon := .Get "icon" }}
+{{- $icon := .Get "icon" -}}
+{{- $content := .InnerDeindent | markdownify -}}
 
-{{ $defaultClass := "hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300" }}
-{{ $infoClass := "hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200" }}
-{{ $warningClass := "hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200" }}
-{{ $errorClass := "hx-border-red-200 hx-bg-red-100 hx-text-red-900 dark:hx-border-red-200/30 dark:hx-bg-red-900/30 dark:hx-text-red-200" }}
+{{- $defaultClass := "hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300" -}}
+{{- $infoClass := "hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200" -}}
+{{- $warningClass := "hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200" -}}
+{{- $errorClass := "hx-border-red-200 hx-bg-red-100 hx-text-red-900 dark:hx-border-red-200/30 dark:hx-bg-red-900/30 dark:hx-text-red-200" -}}
 
-{{ $class := cond (eq $type "info") $infoClass (cond (eq $type "warning") $warningClass (cond (eq $type "error") $errorClass $defaultClass)) }}
+{{- $class := cond (eq $type "info") $infoClass (cond (eq $type "warning") $warningClass (cond (eq $type "error") $errorClass $defaultClass)) -}}
 
-
-<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-rounded-lg hx-border hx-py-2 ltr:hx-pr-4 rtl:hx-pl-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current {{ $class }}">
-  <div class="ltr:hx-pl-3 ltr:hx-pr-2 rtl:hx-pr-3 rtl:hx-pl-2">
-    {{- with $emoji -}}
-      <div class="hx-select-none hx-text-xl" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
-        {{ . }}
-      </div>
-    {{- else -}}
-      {{- with $icon }}
-        {{ partial "utils/icon.html" (dict "name" . "attributes" `height=1.2em class="hx-inline-block hx-align-middle"`) -}}
-      {{- end -}}
-    {{- end -}}
-  </div>
-
-  <div class="hx-w-full hx-min-w-0 hx-leading-7">
-    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0">
-      {{ .InnerDeindent | markdownify }}
-    </div>
-  </div>
-</div>
+{{- partial "shortcodes/callout.html" (dict "content" $content "emoji" $emoji "icon" $icon "class" $class) -}}

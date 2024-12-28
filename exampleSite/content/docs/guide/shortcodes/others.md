@@ -34,16 +34,15 @@ Result:
 {{< badge content="warning" type="warning" >}} &nbsp;
 {{< badge content="error" type="error" >}}
 
-With link:
+With link and icon:
 
 ```
-{{</* badge content="Releases" link="https://github.com/imfing/hextra/releases" */>}}
+{{</* badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" */>}}
 ```
 
 Result:
 
-{{< badge content="Releases" link="https://github.com/imfing/hextra/releases" >}}
-
+{{< badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" >}}
 
 ## YouTube
 

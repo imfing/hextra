@@ -1,5 +1,7 @@
 {{- $enableFooterSwitches := .Scratch.Get "enableFooterSwitches" | default false -}}
 {{- $displayThemeToggle := site.Params.theme.displayToggle | default true -}}
+{{- $footerSwitchesVisible := and $enableFooterSwitches (or hugo.IsMultilingual $displayThemeToggle) -}}
+{{- $copyrightSectionVisible := or (.Site.Params.footer.displayPoweredBy | default true) .Site.Params.footer.displayCopyright -}}
 
 {{- $copyright := (T "copyright") | default "© 2024 Hextra." -}}
 {{- $poweredBy := (T "poweredBy") | default "Powered by Hextra" -}}
@@ -15,7 +17,7 @@
 
 
 <footer class="hextra-footer hx-bg-gray-100 hx-pb-[env(safe-area-inset-bottom)] dark:hx-bg-neutral-900 print:hx-bg-transparent">
-  {{- if $enableFooterSwitches -}}
+  {{- if $footerSwitchesVisible -}}
     <div class="hx-mx-auto hx-flex hx-gap-2 hx-py-2 hx-px-4 {{ $footerWidth }}">
       {{- partial "language-switch.html" (dict "context" .) -}}
       {{- with $displayThemeToggle }}{{ partial "theme-toggle.html" }}{{ end -}}
@@ -24,14 +26,21 @@
       <hr class="dark:hx-border-neutral-800" />
     {{- end -}}
   {{- end -}}
-  <div
-    class="{{ $footerWidth }} hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
-  >
-    <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start">
-      {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="hx-font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{ end }}
-      {{- if .Site.Params.footer.displayCopyright }}<div class="hx-mt-6 hx-text-xs">{{ $copyright | markdownify }}</div>{{ end }}
+    <div
+      class="hextra-custom-footer {{ $footerWidth }} hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400"
+    >
+      {{- partial "custom/footer.html" (dict "context" . "switchesVisible" $footerSwitchesVisible "copyrightVisible" $copyrightSectionVisible) -}}
     </div>
-  </div>
+    {{- if $copyrightSectionVisible -}}
+      <div
+        class="{{ $footerWidth }} hx-mx-auto hx-flex hx-justify-center hx-py-12 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-right),1.5rem)] hx-text-gray-600 dark:hx-text-gray-400 md:hx-justify-start"
+      >
+        <div class="hx-flex hx-w-full hx-flex-col hx-items-center sm:hx-items-start">
+            {{- if (.Site.Params.footer.displayPoweredBy | default true) }}<div class="hx-font-semibold">{{ template "theme-credit" $poweredBy }}</div>{{- end -}}
+            {{- if .Site.Params.footer.displayCopyright }}<div class="hx-mt-6 hx-text-xs">{{ $copyright | markdownify }}</div>{{- end -}}
+        </div>
+      </div>
+    {{- end -}}
 </footer>
 
 {{- define "theme-credit" -}}

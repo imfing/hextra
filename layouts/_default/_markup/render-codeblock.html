@@ -1,12 +1,13 @@
 {{- $class := .Attributes.class | default "" -}}
 {{- $filename := .Attributes.filename | default "" -}}
+{{- $base_url := .Attributes.base_url | default "" -}}
 {{- $lang := .Attributes.lang | default .Type -}}
 
 
 <div class="hextra-code-block hx-relative hx-mt-6 first:hx-mt-0 hx-group/code">
-  {{ partial "components/codeblock" (dict "filename" $filename "lang" $lang "content" .Inner "options" .Options) }}
+  {{- partial "components/codeblock" (dict "filename" $filename "lang" $lang "base_url" $base_url "content" .Inner "options" .Options) -}}
 
-  {{- if or (eq site.Params.highlight.copy.enable nil) (site.Params.highlight.copy.enable) }}
-    {{- partialCached "components/codeblock-copy-button" (dict "filename" $filename) $filename }}
-  {{ end }}
+  {{- if or (eq site.Params.highlight.copy.enable nil) (site.Params.highlight.copy.enable) -}}
+    {{- partialCached "components/codeblock-copy-button" (dict "filename" $filename) $filename -}}
+  {{- end -}}
 </div>

@@ -173,3 +173,4 @@ params:
       # emitMetadata: 0
       # inputPosition: top
       # lang: en
+      # theme: noborder_dark
