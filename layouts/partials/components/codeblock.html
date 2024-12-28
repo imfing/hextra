@@ -1,19 +1,19 @@
 {{ $filename := .filename | default "" -}}
-{{ $filename_uri_base := .filename_uri_base | default "" -}}
+{{ $base_url := .base_url | default "" -}}
 {{ $lang := .lang | default "" }}
 {{ $content := .content }}
 {{ $options := .options | default (dict) }}
 
 {{- if $filename -}}
   <div class="filename not-prose" dir="auto">
-    {{- if $filename_uri_base -}}
+    {{- if $base_url -}}
 
-      {{- $filename_uri_base = strings.TrimSuffix "/" $filename_uri_base -}}
+      {{- $base_url = strings.TrimSuffix "/" $base_url -}}
       {{- $filename = strings.TrimPrefix "/" $filename -}}
-      {{- $file_uri := urls.JoinPath $filename_uri_base $filename -}}
+      {{- $file_url := urls.JoinPath $base_url $filename -}}
 
-      <a class="hx-no-underline hx-inline-flex hx-items-center hx-gap-1" href="{{ $file_uri }}" target="_blank" rel="noopener noreferrer">
-          {{- $filename -}}
+      <a class="hx-no-underline hx-inline-flex hx-items-center hx-gap-1" href="{{ $file_url }}" target="_blank" rel="noopener noreferrer">
+          <span>{{- $filename -}}</span>
           {{- partial "utils/icon" (dict "name" "external-link" "attributes" "height=1em") -}}
       </a>
     {{- else -}}
