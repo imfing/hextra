@@ -197,6 +197,8 @@
       "dark:placeholder:hx-text-gray-400",
       "data-[state=closed]:hx-hidden",
       "data-[state=open]:hx-hidden",
+      "data-[state=selected]:dark:hx-border-primary-500",
+      "data-[state=selected]:dark:hx-text-primary-600",
       "data-[state=selected]:hx-block",
       "data-[state=selected]:hx-border-primary-500",
       "data-[state=selected]:hx-text-primary-600",
