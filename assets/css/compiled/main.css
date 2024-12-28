@@ -3258,6 +3258,14 @@ body:is(html[class~="dark"] *) {
   --tw-ring-opacity: 1;
   --tw-ring-color: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 32) / var(--tw-ring-opacity));
 }
+.data-\[state\=selected\]\:dark\:hx-border-primary-500:is(html[class~="dark"] *)[data-state="selected"] {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 50) / var(--tw-border-opacity));
+}
+.data-\[state\=selected\]\:dark\:hx-text-primary-600:is(html[class~="dark"] *)[data-state="selected"] {
+  --tw-text-opacity: 1;
+  color: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 45) / var(--tw-text-opacity));
+}
 @media (prefers-contrast: more) {
 
   .contrast-more\:dark\:hx-border-current:is(html[class~="dark"] *) {
