@@ -37,6 +37,8 @@ Blockquote with attribution
 
 ### Alerts
 
+{{< new-feature version="v0.9.0" >}}
+
 Alerts are a Markdown extension based on the blockquote syntax that you can use to emphasize critical information.
 [GitHub-style alerts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) are supported.
 Please make sure you are using the latest version of Hextra and [Hugo v0.134.0](https://github.com/gohugoio/hugo/releases/tag/v0.134.0) or later.

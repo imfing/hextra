@@ -10,6 +10,10 @@ A built-in component to show important information to the reader.
 
 <!--more-->
 
+> [!NOTE]
+> [GitHub-style alerts](../../markdown#alerts) are supported since [v0.9.0](https://github.com/imfing/hextra/releases/tag/v0.9.0).
+> It leverages Markdown syntax to render the callout which ensures better portability and readability of the content.
+
 ## Example
 
 {{< callout emoji="👾">}}
