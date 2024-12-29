@@ -1,7 +1,7 @@
 {{ define "main" }}
   <div class='hx-mx-auto hx-flex {{ partial "utils/page-width" . }}'>
     {{- if not (in (slice "taxonomy" "term") .Kind) -}}
-      {{- partial "sidebar-ng.html" (dict "context" .) -}}
+      {{- partial "sidebar.html" (dict "context" .) -}}
     {{- end -}}
     {{ partial "toc.html" . }}
     <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">

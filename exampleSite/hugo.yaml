@@ -113,6 +113,10 @@ params:
     # full (100%), wide (90rem), normal (1280px)
     width: normal
 
+    # TODO: move one level up
+    sidebar:
+      source: data
+
   theme:
     # light | dark | system
     default: system

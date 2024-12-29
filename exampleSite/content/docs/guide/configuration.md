@@ -87,7 +87,7 @@ params:
 
 ### Main Sidebar
 
-For the main sidebar, it is automatically generated from the structure of the content directory.
+By default, the main sidebar is automatically generated from the structure of the content directory.
 See the [Organize Files](/docs/guide/organize-files) page for more details.
 
 To exclude a single page from the left sidebar, set the `sidebar.exclude` parameter in the front matter of the page:
@@ -118,6 +118,33 @@ menu:
       url: "https://gohugo.io/documentation/"
       weight: 3
 ```
+
+### Sidebar from Data
+
+Alternatively, you can define the sidebar structure in the `data` directory. This gives you more flexibility to define sidebar differently than your content structure. To enable this, set the `params.sidebar.source` parameter in the config file to `data`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  sidebar:
+    source: data
+```
+
+To define the sidebar data, create a file named `sidebar.yaml` in the `data` directory.
+
+```yaml {filename="data/sidebar.yaml"}
+docs:
+  - title: Documentation
+    link: /docs/
+  - title: Guide
+    link: /docs/guide/
+    open: false
+    items:
+      - title: Configuration
+        link: /docs/guide/configuration/
+  # ...
+```
+
+If your site is multilingual, you can define the sidebar data for each language, for example in `data/en/sidebar.yaml` file.
 
 ## Right Sidebar
 
