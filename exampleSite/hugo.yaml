@@ -44,11 +44,17 @@ module:
     - path: github.com/imfing/hextra
 
 markup:
+  highlight:
+    noClasses: false
   goldmark:
     renderer:
       unsafe: true
-  highlight:
-    noClasses: false
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+        enable: true
 
 enableInlineShortcodes: true
 
