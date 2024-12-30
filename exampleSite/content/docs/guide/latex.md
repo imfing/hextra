@@ -8,7 +8,7 @@ $\KaTeX$ is used for rendering LaTeX math expressions. It can be enabled per pag
 
 <!--more-->
 
-```yaml {filename="Markdown"}
+```yaml {filename="page.md"}
 ---
 title: "My Page with LaTeX"
 math: true
@@ -40,6 +40,43 @@ will be rendered as:
 
 $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 
+> [!IMPORTANT]
+> Please enable and configure the [passthrough extension](https://gohugo.io/content-management/mathematics/) in the Hugo configuration file. It preserves raw content within the delimiters to avoid rendering issues for complex expressions.
+
+```yaml {filename="hugo.yaml"}
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+        enable: true
+```
+
+For example, using the aligned environment:
+
+```latex {filename="page.md"}
+$$
+\begin{aligned}
+  \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\
+  \nabla \cdot \mathbf{B} &= 0 \\
+  \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \nabla \times \mathbf{B} &= \mu_0 \left( \mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
+\end{aligned}
+$$
+```
+
+will be rendered as:
+
+$$
+\begin{aligned}
+  \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\
+  \nabla \cdot \mathbf{B} &= 0 \\
+  \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \nabla \times \mathbf{B} &= \mu_0 \left( \mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
+\end{aligned}
+$$
 
 ## Supported Functions
 
