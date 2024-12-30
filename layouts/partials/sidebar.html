@@ -15,20 +15,14 @@
 {{- $pageURL := $context.RelPermalink -}}
 
 {{- $data := slice -}}
-{{- $dataMobile := slice -}}
+{{- $dataMobile := (partialCached "components/sidebar/generate-mobile-data" site.Home site.Home) | unmarshal -}}
 
 {{- if (eq site.Params.page.sidebar.source "data") -}}
   {{/* Get sidebar data from Hugo `data` directory */}}
   {{- $data = partialCached "components/sidebar/get-section-data" $context $context.Section -}}
-  {{- $dataMobile = $data -}}
 {{- else -}}
   {{/* Generate and cache sidebar data in memory */}}
   {{- $data = (partialCached "components/sidebar/generate-section-data" $navRoot $navRoot) | unmarshal -}}
-  {{- $dataMobile = (partialCached "components/sidebar/generate-section-data" site.Home site.Home) | unmarshal -}}
-{{- end -}}
-
-{{- if not (hugo.IsProduction) -}}
-  {{ with $data }}{{ warnf "%v" (debug.Dump .) }}{{ end }}
 {{- end -}}
 
 {{/* Cache rendered sidebar */}}

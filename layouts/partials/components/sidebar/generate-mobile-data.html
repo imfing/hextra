@@ -1,0 +1,35 @@
+{{/* Generate mobile navigation data based on main menu */}}
+
+{{- $context := . -}}
+
+{{- $data := slice -}}
+
+{{- range .Site.Menus.main -}}
+  {{- if not (eq .Params.type "search") -}}
+    {{- $title := or (T .Identifier) .Name -}}
+    {{- $link := .URL -}}
+    {{- $external := strings.HasPrefix $link "http" -}}
+    {{- with .PageRef -}}
+      {{- if hasPrefix . "/" -}}
+        {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- with .Page -}}
+      {{- $page := . -}}
+
+      {{- if and $page.IsSection (eq $page.Type "docs") -}}
+        {{- $page = (partial "utils/translated-page" (dict "page" $page "lang" site.Language.LanguageCode)) -}}
+        {{- $sectionData := (partial "components/sidebar/generate-section-data" $page) | unmarshal -}}
+        {{- $data = $data | append (dict "title" $title "link" $link "items" $sectionData) -}}
+      {{- else -}}
+        {{- $data = $data | append (dict "title" $title "link" $link) -}}
+      {{- end -}}
+    {{- else -}}
+      {{/* TODO: handle other cases like external links */}}
+      {{- $data = $data | append (dict "title" $title "link" $link) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return ($data | jsonify (dict "noHTMLEscape" true)) -}}
