@@ -1,16 +1,16 @@
 ---
-title: "多语言"
+title: "多语言支持"
 weight: 1
 prev: /docs/advanced
 ---
 
-Hextra 支持使用 Hugo 的[多语言模式](https://gohugo.io/content-management/multilingual/) 创建多语言的网站。
+Hextra 支持使用 Hugo 的[多语言模式](https://gohugo.io/content-management/multilingual/)创建多语言网站。
 
 <!--more-->
 
-## 启用多语言支持
+## 启用多语言
 
-为了使我们的网站支持多语言，我们需要告诉 Hugo 需要支持的语言。 在站点配置文件中添加：
+要使我们的网站支持多语言，我们需要告诉 Hugo 支持的语言。我们需要在站点配置文件中添加：
 
 ```yaml {filename="hugo.yaml"}
 defaultContentLanguage: en
@@ -26,9 +26,9 @@ languages:
     weight: 3
 ```
 
-## 按文件名管理翻译
+## 通过文件名管理翻译
 
-Hugo 支持按文件名管理翻译。例如，如果我们有一个英文文件 `content/docs/_index.md`，我们可以创建一个翻译为法语的文件 `content/docs/_index.fr.md`。
+Hugo 支持通过文件名管理翻译。例如，如果我们有一个英文文件 `content/docs/_index.md`，我们可以创建一个文件 `content/docs/_index.fr.md` 作为法语翻译。
 
 {{< filetree/container >}}
   {{< filetree/folder name="content" >}}
@@ -40,7 +40,7 @@ Hugo 支持按文件名管理翻译。例如，如果我们有一个英文文件
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-注意：Hugo 还支持[按内容目录管理翻译](https://gohugo.io/content-management/multilingual/#translation-by-content-directory)。
+注意：Hugo 还支持[通过内容目录进行翻译](https://gohugo.io/content-management/multilingual/#translation-by-content-directory)。
 
 ## 翻译菜单项
 
@@ -59,16 +59,25 @@ menu:
       weight: 2
 ```
 
+并在相应的 i18n 文件中进行翻译：
+
+```yaml {filename="i18n/fr.yaml"}
+documentation: Documentation
+blog: Blog
+```
+
 ## 翻译字符串
 
-要翻译其他地方的字符串，我们需要将翻译添加到相应的 `i18n` 文件中：
+要翻译其他地方的字符串，我们需要将翻译添加到相应的 i18n 文件中：
 
 ```yaml {filename="i18n/fr.yaml"}
 readMore: Lire la suite
 ```
 
-## 更多参考
+主题中使用的字符串列表可以在 `i18n/en.yaml` 文件中找到。
 
-- [Hugo Multilingual Mode](https://gohugo.io/content-management/multilingual/)
-- [Hugo Multilingual Part 1: Content translation](https://www.regisphilibert.com/blog/2018/08/hugo-multilingual-part-1-managing-content-translation/)
-- [Hugo Multilingual Part 2: Strings localization](https://www.regisphilibert.com/blog/2018/08/hugo-multilingual-part-2-i18n-string-localization/)
+## 了解更多
+
+- [Hugo 多语言模式](https://gohugo.io/content-management/multilingual/)
+- [Hugo 多语言第一部分：内容翻译](https://www.regisphilibert.com/blog/2018/08/hugo-multilingual-part-1-managing-content-translation/)
+- [Hugo 多语言第二部分：字符串本地化](https://www.regisphilibert.com/blog/2018/08/hugo-multilingual-part-2-i18n-string-localization/)

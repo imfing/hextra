@@ -2,42 +2,42 @@
 title: 详情
 ---
 
-用于显示可折叠内容的内置组件。
+一个内置组件，用于显示可折叠的内容。
 
 <!--more-->
 
 ## 示例
 
-{{% details title="Details" %}}
+{{% details title="详情" %}}
 
-这是细节的内容
+这是详情的内容。
 
-Markdown is **supported**.
-
-{{% /details %}}
-
-{{% details title="Click me to reveal" closed="true" %}}
-
-默认情况下这将被隐藏
+支持 **Markdown**。
 
 {{% /details %}}
 
-## Usage
+{{% details title="点击我展开" closed="true" %}}
+
+默认情况下，这部分内容会被隐藏。
+
+{{% /details %}}
+
+## 用法
 
 ````markdown
-{{%/* details title="Details" */%}}
+{{%/* details title="详情" */%}}
 
-这是细节的内容
+这是详情的内容。
 
-**支持** Markdown
+支持 **Markdown**。
 
 {{%/* /details */%}}
 ````
 
 ````markdown
-{{%/* details title="Click me to reveal" closed="true" */%}}
+{{%/* details title="点击我展开" closed="true" */%}}
 
-默认情况下这将被隐藏
+默认情况下，这部分内容会被隐藏。
 
 {{%/* /details */%}}
 ````

@@ -1,18 +1,18 @@
 ---
 title: 评论系统
-linkTitle: Comments
+linkTitle: 评论
 ---
 
-Hextra 支持在你的网站中添加评论系统。
-目前已经支持 [giscus](https://giscus.app/).
+Hextra 支持为您的网站添加评论系统。
+目前支持 [giscus](https://giscus.app/)。
 
 <!--more-->
 
 ## giscus
 
-[giscus](https://giscus.app/) 是由 [GitHub Discussions](https://docs.github.com/en/discussions)驱动的评论系统。Giscus 免费并且开源。
+[giscus](https://giscus.app/) 是一个由 [GitHub Discussions](https://docs.github.com/en/discussions) 提供支持的评论系统。它是免费且开源的。
 
-如需启用 Giscus, 你需要在配置文件中添加以下内容：
+要启用 giscus，您需要在网站配置文件中添加以下内容：
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -21,19 +21,19 @@ params:
     type: giscus
 
     giscus:
-      repo: <repository>
-      repoId: <repository ID>
-      category: <category>
-      categoryId: <category ID>
+      repo: <仓库>
+      repoId: <仓库 ID>
+      category: <分类>
+      categoryId: <分类 ID>
 ```
 
-Giscus 配置可以参考 [giscus.app](https://giscus.app/)，还可以在那里找到更多详细信息。
+giscus 的配置可以从 [giscus.app](https://giscus.app/) 网站生成。更多详细信息也可以在那里找到。
 
-可以在 front matter 中启用或禁用特定页面的评论：
+可以在页面的 front matter 中为特定页面启用或禁用评论：
 
 ```yaml {filename="content/docs/about.md"}
 ---
-title: About
+title: 关于
 comments: true
 ---
 ```

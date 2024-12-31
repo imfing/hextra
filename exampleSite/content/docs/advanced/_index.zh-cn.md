@@ -1,15 +1,16 @@
 ---
-linkTitle: 高级配置
-title: 高级配置
+linkTitle: 高级
+title: 高级主题
 prev: /docs/guide/shortcodes/tabs
 next: /docs/advanced/multi-language
 ---
 
-此部分提供了 Hextra 的一些高级配置。
+本节涵盖了一些主题的高级内容。
 
 <!--more-->
 
 {{< cards >}}
   {{< card link="multi-language" title="多语言" icon="translate" >}}
-  {{< card link="customization" title="定制化" icon="pencil" >}}
+  {{< card link="customization" title="自定义" icon="pencil" >}}
+  {{< card link="comments" title="评论系统" icon="chat-alt" >}}
 {{< /cards >}}

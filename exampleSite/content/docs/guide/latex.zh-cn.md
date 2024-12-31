@@ -1,33 +1,34 @@
 ---
-title: "LaTeX 公式"
+title: "数学公式"
 weight: 4
 math: true
 ---
 
-$\KaTeX$ 用于呈现 LaTeX 数学表达式。可在 `frontmatter` 将 `math` 设置为 `true` 来启用。
+$\KaTeX$ 用于渲染 LaTeX 数学表达式。可以通过在页面前置设置中将 `math` 设置为 `true` 来启用它。
 
 <!--more-->
 
-```yaml {filename="Markdown"}
+```yaml {filename="page.md"}
 ---
-title: "My Page with LaTeX"
+title: "我的页面包含 LaTeX"
 math: true
 ---
+
 ```
 
-启用后，KaTeX 中的脚本，样式表和字体将自动包含在你的网站中。这样就可以在 Markdown 内容中使用 LaTeX 数学表达式。
+启用后，KaTeX 的脚本、样式表和字体将自动包含在您的站点中。您可以在 Markdown 内容中开始使用 LaTeX 数学表达式。
 
 ## 示例
 
-Markdown 内容支持行内和独立段落的 LaTeX 数学表达式。
+Markdown 内容中支持内联和独立段落的 LaTeX 数学表达式。
 
-### 行内
+### 内联
 
 ```markdown {filename="page.md"}
-This $\sigma(z) = \frac{1}{1 + e^{-z}}$ is inline.
+这个 $\sigma(z) = \frac{1}{1 + e^{-z}}$ 是内联的。
 ```
 
-This $\sigma(z) = \frac{1}{1 + e^{-z}}$ is inline.
+这个 $\sigma(z) = \frac{1}{1 + e^{-z}}$ 是内联的。
 
 ### 独立段落
 
@@ -35,20 +36,57 @@ This $\sigma(z) = \frac{1}{1 + e^{-z}}$ is inline.
 $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 ```
 
-将被渲染为：
+将渲染为：
 
 $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 
+> [!IMPORTANT]
+> 请在 Hugo 配置文件中启用并配置 [passthrough 扩展](https://gohugo.io/content-management/mathematics/)。它保留分隔符内的原始内容，以避免复杂表达式的渲染问题。
 
-## 支持的功能
+```yaml {filename="hugo.yaml"}
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+        enable: true
+```
 
-有关支持的符号列表，转至 [KaTeX 支持的公式](https://katex.org/docs/supported.html)。
+例如，使用对齐环境：
 
-## 化学表达式
+```latex {filename="page.md"}
+$$
+\begin{aligned}
+  \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\
+  \nabla \cdot \mathbf{B} &= 0 \\
+  \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \nabla \times \mathbf{B} &= \mu_0 \left( \mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
+\end{aligned}
+$$
+```
 
-通过 [mhchem](https://mhchem.github.io/MathJax-mhchem/) 支持化学表达式。
+将渲染为：
 
-行内：$\ce{H2O}$ 是水。
+$$
+\begin{aligned}
+  \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\
+  \nabla \cdot \mathbf{B} &= 0 \\
+  \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \nabla \times \mathbf{B} &= \mu_0 \left( \mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
+\end{aligned}
+$$
+
+## 支持的函数
+
+有关支持的函数列表，请参阅 [KaTeX 支持的函数](https://katex.org/docs/supported.html)。
+
+## 化学
+
+通过 [mhchem](https://mhchem.github.io/MathJax-mhchem/) 扩展支持化学表达式。
+
+内联：$\ce{H2O}$ 是水。
 
 独立段落：
 

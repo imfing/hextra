@@ -1,5 +1,6 @@
 ---
-title: 文件树
+title: 文件树组件
+linkTitle: 文件树
 ---
 
 ## 示例

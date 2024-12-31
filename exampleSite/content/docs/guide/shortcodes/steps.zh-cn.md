@@ -2,7 +2,7 @@
 title: 步骤
 ---
 
-A built-in component to display a series of steps.
+一个内置组件，用于显示一系列步骤。
 
 ## 示例
 
@@ -23,20 +23,25 @@ A built-in component to display a series of steps.
 {{% /steps %}}
 
 
-## 使用
+## 用法
 
-将 Markdown h3 标题放入 `steps` 短代码中。
+{{< callout emoji="ℹ️" >}}
+  请注意，此短代码**仅适用于 Markdown 内容**。
+  如果将 HTML 内容或其他短代码作为步骤内容，可能无法按预期渲染。
+{{< /callout >}}
+
+在 `steps` 短代码中放置 Markdown 的 h3 标题。
 
 ```
 {{%/* steps */%}}
 
-### Step 1
+### 第一步
 
-This is the first step.
+这是第一步。
 
-### Step 2
+### 第二步
 
-This is the second step.
+这是第二步。
 
 {{%/* /steps */%}}
 ```

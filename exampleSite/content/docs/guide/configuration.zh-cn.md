@@ -1,33 +1,33 @@
 ---
-title: 配置文件
+title: 配置
 weight: 2
 ---
 
-Hugo 从 Hugo 网站根目录下的 `hugo.yaml` 读取配置。
-在配置文件中，您可以配置站点的所有选项。
-你可以在 `exampleSite/hugo.yaml` 中找到此站点的配置文件作为开始。
+Hugo 从您 Hugo 站点根目录下的 `hugo.yaml` 文件中读取配置。
+配置文件是您可以配置站点所有方面的地方。
+查看此站点的配置文件 [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) 在 GitHub 上，以全面了解可用的设置和最佳实践。
 
 <!--more-->
 
-## 导航栏
+## 导航
 
 ### 菜单
 
-右上角的菜单在配置文件的 `menu.main` 中配置：
+右上角的菜单在配置文件的 `menu.main` 部分中定义：
 
 ```yaml {filename="hugo.yaml"}
 menu:
   main:
-    - name: Documentation
+    - name: 文档
       pageRef: /docs
       weight: 1
-    - name: Blog
+    - name: 博客
       pageRef: /blog
       weight: 2
-    - name: About
+    - name: 关于
       pageRef: /about
       weight: 3
-    - name: Search
+    - name: 搜索
       weight: 4
       params:
         type: search
@@ -38,55 +38,83 @@ menu:
         icon: github
 ```
 
-有几种不同类型的菜单项：
+有不同类型的菜单项：
 
-1. Link to a page in the site with `pageRef`
+1. 使用 `pageRef` 链接到站点内的页面
     ```yaml
-    - name: Documentation
+    - name: 文档
       pageRef: /docs
     ```
-2. Link to an external URL with `url`
+2. 使用 `url` 链接到外部 URL
     ```yaml
     - name: GitHub
       url: "https://github.com"
     ```
-3. Search bar with `type: search`
+3. 使用 `type: search` 的搜索栏
     ```yaml
-    - name: Search
+    - name: 搜索
       params:
         type: search
     ```
-4. Icon
+4. 图标
     ```yaml
     - name: GitHub
       params:
         icon: github
     ```
 
-这些菜单项可以通过设置 `weight` 进行排序。
+这些菜单项可以通过设置 `weight` 参数进行排序。
+
+### 徽标和标题
+
+要修改默认徽标，编辑 `hugo.yaml` 并在 `static` 目录下添加徽标文件的路径。
+您还可以更改用户点击徽标时重定向的链接，以及设置徽标的宽度和高度（以像素为单位）。
+
+```yaml {filename="hugo.yaml"}
+params:
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: images/logo.svg
+      dark: images/logo-dark.svg
+      link: /
+      width: 40
+      height: 20
+```
 
 ## 侧边栏
 
 ### 主侧边栏
 
-主侧边栏是自动从 `content` 目录结构生成的。
-有关更多详细信息，转至 [目录结构](/docs/guide/organize-files)。
+主侧边栏是根据内容目录的结构自动生成的。
+有关更多详细信息，请参阅 [组织文件](/docs/guide/organize-files) 页面。
+
+要从左侧边栏中排除单个页面，请在页面的 front matter 中设置 `sidebar.exclude` 参数：
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: 配置
+sidebar:
+  exclude: true
+---
+```
 
 ### 额外链接
 
-侧边栏的额外链接在配置文件的 `menu.sidebar` 部分中配置：
+侧边栏的额外链接在配置文件的 `menu.sidebar` 部分中定义：
 
 ```yaml {filename="hugo.yaml"}
 menu:
   sidebar:
-    - name: More
+    - name: 更多
       params:
         type: separator
       weight: 1
-    - name: "About"
+    - name: "关于"
       pageRef: "/about"
       weight: 2
-    - name: "Hugo Docs ↗"
+    - name: "Hugo 文档 ↗"
       url: "https://gohugo.io/documentation/"
       weight: 3
 ```
@@ -95,50 +123,54 @@ menu:
 
 ### 目录
 
-目录是根据内容文件中的标题自动生成的，可以在 `front matter` 设置 `toc：false` 来禁用它。
+目录是根据内容文件中的标题自动生成的。可以通过在页面的 front matter 中设置 `toc: false` 来禁用它。
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
-title: Configuration
+title: 配置
 toc: false
 ---
 ```
 
-### 编辑此页链接
+### 页面编辑链接
 
-要配置编辑此页链接，我们可以在配置文件中设置 `params.editURL.base`：
+要配置页面编辑链接，我们可以在配置文件中设置 `params.editURL.base` 参数：
+
 ```yaml {filename="hugo.yaml"}
 params:
   editURL:
+    enable: true
     base: "https://github.com/your-username/your-repo/edit/main"
 ```
 
-将为每个页面自动生成编辑链接。
-如需为特定页面设置编辑链接，可以在页面的 `front matter` 中设置 `editURL`：
+编辑链接将根据提供的 URL 作为根目录自动为每个页面生成。
+如果要为特定页面设置编辑链接，可以在页面的 front matter 中设置 `editURL` 参数：
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
-title: Configuration
+title: 配置
 editURL: "https://example.com/edit/this/page"
 ---
 ```
-## Footer
 
-### 版权声明
+## 页脚
 
-如需修改网站页脚中显示的版权文本，您需要创建一个名为“i18n/en.yaml”的文件。
-在此文件中，填写新的版权文本，像这样：
+### 版权
+
+要修改网站页脚中显示的版权文本，您需要创建一个名为 `i18n/en.yaml` 的文件。
+在此文件中，指定您的新版权文本，如下所示：
 
 ```yaml {filename="i18n/en.yaml"}
-copyright: "© 2024 YOUR TEXT HERE"
+copyright: "© 2024 您的文本"
 ```
-你可以在 GitHub 存储库中找到示例 [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) 文件。另外，你可以在版权文本中使用 Markdown 格式。
+
+作为参考，可以在 GitHub 仓库中找到示例 [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) 文件。此外，您可以在版权文本中使用 Markdown 格式。
 
 ## 其他
 
-### Favicon
+### 网站图标
 
-如需自定义 [favicon](https://en.wikipedia.org/wiki/Favicon)，请将图标文件放在 `static` 文件夹下以覆盖 [主题中的默认 favicon](https://github.com/imfing/hextra/tree/main/static)：
+要为您的站点自定义 [网站图标](https://en.wikipedia.org/wiki/Favicon)，请将图标文件放在 `static` 文件夹下，以覆盖 [主题的默认网站图标](https://github.com/imfing/hextra/tree/main/static)：
 
 {{< filetree/container >}}
   {{< filetree/folder name="static" >}}
@@ -154,15 +186,14 @@ copyright: "© 2024 YOUR TEXT HERE"
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-在您的项目中包含 `favicon.ico` 和 `favicon.svg` 文件，以确保网站的网站图标正确显示。
+在您的项目中包含 `favicon.ico`、`favicon.svg` 和 `favicon-dark.svg` 文件，以确保您的站点图标正确显示。
 
-虽然 `favicon.ico` 通常适用于较旧的浏览器，但 `favicon.svg` 受到现代浏览器的支持，所以更现代的做法是添加 `favicon-dark.svg` 以便在黑暗模式下提供较好的体验体验。
+虽然 `favicon.ico` 通常用于旧版浏览器，但 `favicon.svg` 和 `favicon-dark.svg` 受现代浏览器支持。
+使用 [favicon.io](https://favicon.io/) 或 [favycon](https://github.com/ruisaraiva19/favycon) 等工具生成此类图标。
 
-请随意使用 [favicon.io](https://favicon.io/) 或 [favycon](https://github.com/ruisaraiva19/favycon) 等工具来生成这些图标。
+### 主题配置
 
-### 颜色主题配置
-
-使用`theme`设置来配置默认主题模式和切换按钮，允许访问者在浅色或深色模式之间切换。
+使用 `theme` 设置来配置默认主题模式和切换按钮，允许访问者在浅色或深色模式之间切换。
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -172,18 +203,18 @@ params:
     displayToggle: true
 ```
 
-`theme.default` 的可选项：
+`theme.default` 的选项：
 
-- `light` - 仅使用浅色模式
-- `dark` - 仅使用神色模式
-- `system` - 跟随系统
+- `light` - 始终使用浅色模式
+- `dark` - 始终使用深色模式
+- `system` - 与操作系统设置同步（默认）
 
-`theme.displayToggle` 控制显示用于更改主题的切换按钮。
-当设置为“true”时，访问者可以在浅色或深色模式之间切换，覆盖默认设置。
+`theme.displayToggle` 参数允许您显示一个切换按钮以更改主题。
+当设置为 `true` 时，访问者可以在浅色或深色模式之间切换，覆盖默认设置。
 
-### 页宽
+### 页面宽度
 
-页面的宽度可以通过配置文件中的`params.page.width`参数来调整：
+页面的宽度可以通过配置文件中的 `params.page.width` 参数进行自定义：
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -192,36 +223,37 @@ params:
     width: wide
 ```
 
-有三个可选项：`full`, `wide`, and `normal`. 默认的页宽模式是 `normal`.
+有三个可用选项：`full`、`wide` 和 `normal`。默认情况下，页面宽度设置为 `normal`。
 
-同样的，导航栏和 `footer` 的宽度也可通过 `params.navbar.width` 和 `params.footer.width` 调整。
+同样，导航栏和页脚的宽度可以通过 `params.navbar.width` 和 `params.footer.width` 参数进行自定义。
 
-### 搜索
+### 搜索索引
 
-默认情况下启用由 [FlexSearch](https://github.com/nextapps-de/flexsearch) 提供全文搜索。
-要自定义搜索索引，请在配置文件中设置 `params.search.flexsearch.index` ：
+默认启用由 [FlexSearch](https://github.com/nextapps-de/flexsearch) 提供的全文搜索。
+要自定义搜索索引，请在配置文件中设置 `params.search.flexsearch.index` 参数：
 
 ```yaml {filename="hugo.yaml"}
 params:
-  # Search
+  # 搜索
   search:
     enable: true
     type: flexsearch
 
     flexsearch:
-      # index page by: content | summary | heading | title
+      # 按以下内容索引页面：content | summary | heading | title
       index: content
 ```
-`flexsearch.index` 的可选项：
 
-- `content` - 全内容搜索
-- `summary` - 概述 [Hugo Content Summaries](https://gohugo.io/content-management/summaries/)
+`flexsearch.index` 的选项：
+
+- `content` - 页面的完整内容（默认）
+- `summary` - 页面的摘要，请参阅 [Hugo 内容摘要](https://gohugo.io/content-management/summaries/) 了解更多详细信息
 - `heading` - 一级和二级标题
-- `title` - 仅搜索标题
+- `title` - 仅包括页面标题
 
-要自定义检索分词，请在配置文件中设置`params.search.flexsearch.tokenize`：
+要自定义搜索分词，请在配置文件中设置 `params.search.flexsearch.tokenize` 参数：
 
-```hugo.yaml
+```yaml {filename="hugo.yaml"}
 params:
     # ...
     flexsearch:
@@ -229,27 +261,25 @@ params:
       tokenize: forward
 ```
 
-[`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search)的可选项:
+[`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search) 的选项：
 
-- `strict` - 严格单词匹配
-- `forward` - 单词前缀匹配
-- `reverse` - 单词前后缀匹配
-- `full` - 单词子串匹配。
+- `strict` - 索引整个单词
+- `forward` - 向前方向逐步索引单词
+- `reverse` - 双向逐步索引单词
+- `full` - 索引所有可能的组合
 
-> 在默认的分词逻辑下，中文一句话就是一个“单词”
-
-要从搜索索引中排除页面，更改 front matter 中的 `excludeSearch: true`:
+要从搜索索引中排除页面，请在页面的 front matter 中设置 `excludeSearch: true`：
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
-title: Configuration
+title: 配置
 excludeSearch: true
 ---
 ```
 
 ### Google Analytics
 
-要启用 [Google Analytics](https://marketingplatform.google.com/about/analytics/)，设置 `services.googleAnalytics.ID`:
+要启用 [Google Analytics](https://marketingplatform.google.com/about/analytics/)，请在 `hugo.yaml` 中设置 `services.googleAnalytics.ID` 标志：
 
 ```yaml {filename="hugo.yaml"}
 services:

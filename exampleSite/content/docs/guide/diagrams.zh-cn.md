@@ -4,15 +4,15 @@ weight: 6
 next: /docs/guide/shortcodes
 ---
 
-目前，Hextra 支持 [Mermaid](#mermaid) 的图表。
+目前，Hextra 支持使用 [Mermaid](#mermaid) 来绘制图表。
 
 <!--more-->
 
 ## Mermaid
 
-[Mermaid](https://github.com/mermaid-js/mermaid#readme) 是一个基于 JavaScript 的图表绘制工具，它的文本定义和 Markdown 类似，可在浏览器中动态创建图表。例如：流程图、序列图、饼图等。
+[Mermaid](https://github.com/mermaid-js/mermaid#readme) 是一个基于 JavaScript 的图表工具，它通过类似 Markdown 的文本定义，在浏览器中动态生成图表。例如，Mermaid 可以渲染流程图、序列图、饼图等。
 
-在 Hextra 中使用 Mermaid 就像使用代码块一样简单：
+在 Hextra 中使用 Mermaid 非常简单，只需编写一个语言设置为 `mermaid` 的代码块：
 
 ````markdown
 ```mermaid
@@ -24,7 +24,7 @@ graph TD;
 ```
 ````
 
-将呈现为：
+将会渲染为：
 
 ```mermaid
 graph TD;
@@ -34,20 +34,20 @@ graph TD;
     C-->D;
 ```
 
-Sequence diagram：
+序列图示例：
 
 ```mermaid
 sequenceDiagram
     participant Alice
     participant Bob
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
+    Alice->>John: 你好 John，最近怎么样？
+    loop 健康检查
+        John->>John: 与疑病症作斗争
     end
-    Note right of John: Rational thoughts <br/>prevail!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!
+    Note right of John: 理性思考 <br/>占据上风！
+    John-->>Alice: 很好！
+    John->>Bob: 你怎么样？
+    Bob-->>John: 非常好！
 ```
 
-如需获取更多信息，转至 [Mermaid Documentation](https://mermaid-js.github.io/mermaid/#/)。
+更多信息，请参考 [Mermaid 文档](https://mermaid-js.github.io/mermaid/#/)。
