@@ -1,0 +1,17 @@
+{{/*
+  Utility to retrieve a translated page given a page and a language code.
+
+  If the page is not translated, it returns the original page.
+*/}}
+{{- $page := .page -}}
+{{- $lang := .lang -}}
+
+{{- if $page.IsTranslated -}}
+  {{- range $page.AllTranslations -}}
+    {{- if eq .Language.LanguageCode $lang -}}
+      {{- $page = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $page -}}
