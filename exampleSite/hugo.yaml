@@ -22,17 +22,22 @@ languages:
     languageName: English
     weight: 1
     title: Hextra
-  zh-cn:
-    languageName: 简体中文
-    languageCode: zh-CN
-    weight: 2
-    title: Hextra
   fa:
     languageName: فارسی
     languageCode: fa
     languageDirection: rtl
-    weight: 3
+    weight: 2
     title: هگزترا
+  ja:
+    languageName: 日本語
+    languageCode: ja
+    weight: 3
+    title: Hextra
+  zh-cn:
+    languageName: 简体中文
+    languageCode: zh-CN
+    weight: 4
+    title: Hextra
 
 module:
   hugoVersion:
