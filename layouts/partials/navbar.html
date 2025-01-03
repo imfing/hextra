@@ -30,7 +30,7 @@
     {{- $currentPage := . -}}
     {{- range .Site.Menus.main -}}
       {{- if eq .Params.type "search" -}}
-        {{- partial "search.html" (dict "params" .Params "default" true) -}}
+        {{- partial "search.html" (dict "params" .Params "keybinding" true) -}}
       {{- else -}}
         {{- $link := .URL -}}
         {{- $external := strings.HasPrefix $link "http" -}}

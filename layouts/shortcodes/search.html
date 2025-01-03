@@ -1,4 +1,4 @@
-{{- $id := or (.Get "name") "" }}
-{{- $default := or (.Get "default") false }}
+{{- $name := or (.Get "name") "" }}
+{{- $keybinding := or (.Get "keybinding") false }}
 
-{{ partial "partials/search.html" (dict "context" . "id" $id "default" $default) }}
+{{ partial "partials/search.html" (dict "context" . "name" $name "keybinding" $keybinding) }}
