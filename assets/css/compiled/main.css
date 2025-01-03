@@ -2482,6 +2482,14 @@ article details > summary::before {
   --tw-text-opacity: 1;
   color: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 45) / var(--tw-text-opacity));
 }
+.search-results a {
+  color: inherit;
+  text-decoration-line: none;
+}
+.search-results {
+  margin-left: 0px;
+  margin-right: 0px;
+}
 @media (max-width: 767px) {
   .sidebar-container {
     position: fixed;
