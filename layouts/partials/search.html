@@ -1,10 +1,11 @@
 {{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
 {{- $name := .name -}}
 {{- $keybinding := .keybinding | default false -}}
+{{- $baseUrl := .baseUrl | default "/" -}}
 
 <script defer="">
   document.addEventListener("DOMContentLoaded", function () {
-    const searchClass = search("{{- $name -}}", {{- $keybinding -}});
+    const searchClass = search("{{- $name -}}", {{- $keybinding -}}, "{{- $baseUrl -}}");
   });
 </script>
 

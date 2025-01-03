@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // {{ end }}
 // {{ $noResultsFound := (T "noResultsFound") | default "No results found." }}
 
-var search = function (id, defaultSearch) {
+var search = function (id, defaultSearch, baseUrl) {
   const searchDataURL = '{{ $searchData.RelPermalink }}';
 
   const wrapperClass = `.search-wrapper-${id}`;
@@ -229,6 +229,10 @@ var search = function (id, defaultSearch) {
     const data = await resp.json();
     let pageId = 0;
     for (const route in data) {
+      if (!route.startsWith(baseUrl)) {
+        continue;
+      }
+
       let pageContent = '';
       ++pageId;
       const urlParts = route.split('/').filter(x => x != "" && !x.startsWith('#'));
