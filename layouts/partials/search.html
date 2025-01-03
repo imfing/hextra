@@ -1,7 +1,5 @@
 {{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
-{{- $seed := now.Unix -}}
-{{- $randomId := printf "%.10s" (sha256 $seed) -}}
-{{- $name := .name | default $randomId -}}
+{{- $name := .name -}}
 {{- $keybinding := .keybinding | default false -}}
 
 <script defer="">
