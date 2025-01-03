@@ -1,0 +1,3 @@
+{{- $id := or (.Get "id") "" }}
+
+{{ partial "partials/search.html" (dict "context" . "id" $id) }}
