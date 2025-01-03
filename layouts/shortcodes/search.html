@@ -1,4 +1,8 @@
 {{- $name := (.Get "name") }}
 {{- $keybinding := or (.Get "keybinding") false }}
 
+{{- if not $name }}
+  {{- errorf "search shortcode: name property is required" -}}
+{{- end -}}
+
 {{ partial "partials/search.html" (dict "context" . "name" $name "keybinding" $keybinding) }}

@@ -57,7 +57,12 @@ var search = function (id, defaultSearch) {
         resultsElement: inputs[0].querySelector(resultsClass)
       };
     }
-    return undefined;
+
+    return {
+      wrapper: undefined,
+      inputElement: undefined,
+      resultsElement: undefined
+    };
   }
 
   const INPUTS = ['input', 'select', 'button', 'textarea']
