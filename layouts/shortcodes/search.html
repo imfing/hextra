@@ -1,3 +1,4 @@
-{{- $id := or (.Get "id") "" }}
+{{- $id := or (.Get "name") "" }}
+{{- $default := or (.Get "default") false }}
 
-{{ partial "partials/search.html" (dict "context" . "id" $id) }}
+{{ partial "partials/search.html" (dict "context" . "id" $id "default" $default) }}

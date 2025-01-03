@@ -36,11 +36,3 @@
     @apply hx-text-primary-600;
   }
 }
-
-.search-results a {
-  @apply hx-text-inherit hx-no-underline;
-}
-
-.search-results {
-  @apply hx-mx-0;
-}

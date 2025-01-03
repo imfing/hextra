@@ -414,7 +414,7 @@ var search = function (id, defaultSearch) {
       }
       let li = createElement(`
         <li>
-          <a data-index="${i}" href="${result.route}" class=${i === 0 ? "active" : ""}>
+          <a data-index="${i}" href="${result.route}" class=not-prose ${i === 0 ? "active" : ""}>
             <div class="title">`+ highlightMatches(result.children.title, query) + `</div>` +
         (result.children.content ?
           `<div class="excerpt">` + highlightMatches(result.children.content, query) + `</div>` : '') + `
