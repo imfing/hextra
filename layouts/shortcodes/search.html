@@ -1,4 +1,4 @@
-{{- $name := or (.Get "name") "" }}
+{{- $name := (.Get "name") }}
 {{- $keybinding := or (.Get "keybinding") false }}
 
 {{ partial "partials/search.html" (dict "context" . "name" $name "keybinding" $keybinding) }}
