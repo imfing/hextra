@@ -229,10 +229,6 @@ var search = function (id, defaultSearch, baseUrl) {
     const data = await resp.json();
     let pageId = 0;
     for (const route in data) {
-      if (!route.startsWith(baseUrl)) {
-        continue;
-      }
-
       let pageContent = '';
       ++pageId;
       const urlParts = route.split('/').filter(x => x != "" && !x.startsWith('#'));
@@ -335,6 +331,10 @@ var search = function (id, defaultSearch, baseUrl) {
 
       for (let j = 0; j < sectionResults.length; j++) {
         const { doc } = sectionResults[j]
+        if (!doc.url.startsWith(baseUrl)) {
+          continue;
+        }
+
         const isMatchingTitle = doc.display !== undefined
         if (isMatchingTitle) {
           pageTitleMatches[i]++
