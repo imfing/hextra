@@ -203,6 +203,10 @@ var search = function (id, defaultSearch, baseUrl) {
    * @returns {Promise<void>} A promise that resolves when the index is preloaded.
    */
   async function preloadIndex() {
+    // Only run once
+    if (window.pageIndex !== undefined) {
+      return;
+    }
     const tokenize = '{{- site.Params.search.flexsearch.tokenize | default  "forward" -}}';
     window.pageIndex = new FlexSearch.Document({
       tokenize,
