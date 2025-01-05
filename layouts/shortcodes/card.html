@@ -13,7 +13,7 @@
 {{/* Image processing options */}}
 {{- $method := .Get "method" | default "Resize" | humanize -}}
 {{- $options := .Get "options" | default "800x webp q80" -}}
-{{- $process := .Get "process" | default (delimit (slice $method $options) " " " ") -}}
+{{- $process := .Get "process" | default (printf "%s %s" $method $options) -}}
 
 {{- with or (.Page.Resources.Get $image) (resources.Get $image) -}}
   {{/* Retrieve the $image resource from local or global resources */}}
