@@ -1,0 +1,30 @@
+{{ define "main" }}
+  <div class='hx-mx-auto hx-flex {{ partial "utils/page-width" . }}'>
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
+    {{ partial "toc.html" (dict "Params" (dict "toc" false)) }}
+    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
+        <br class="hx-mt-1.5 hx-text-sm" />
+        {{ if .Title }}<h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">{{ .Title }}</h1>{{ end }}
+        <div class="hx-mb-16"></div>
+        <div class="content">
+          {{ .Content }}
+        </div>
+        <div class="hx-grid hx-grid-cols-1 md:hx-grid-cols-2 lg:hx-grid-cols-3 xl:hx-grid-cols-4 hx-gap-4">
+          {{ range .Data.Terms }}
+            <div class="hx-w-full">
+              <a
+                href="{{ .Page.RelPermalink }}"
+                title="{{ .Page.LinkTitle }}"
+                class="hx-font-medium hover:hx-text-primary-600"
+              >
+                {{- .Page.LinkTitle -}}
+                <span class="hx-text-sm hx-text-gray-500">&nbsp;{{ .Count }}</span>
+              </a>
+            </div>
+          {{ end }}
+        </div>
+      </main>
+    </article>
+  </div>
+{{ end }}
