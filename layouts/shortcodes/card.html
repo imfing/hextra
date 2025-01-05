@@ -9,14 +9,17 @@
 {{- $imageStyle := .Get "imageStyle" -}}
 {{- $tag := .Get "tag" -}}
 {{- $tagType := .Get "tagType" -}}
+{{/* hugo process argument string /*}}
 {{- $process := .Get "process" | default "resize 800x webp q80" -}}
 
 {{- with or (.Page.Resources.Get $image) (resources.Get $image) -}}
+  {{/* Retrieve the $image resource from local or global resources */}}
   {{- $processed := .Process $process -}}
   {{- $width = $processed.Width -}}
   {{- $height = $processed.Height -}}
   {{- $image = $processed.RelPermalink -}}
 {{ else }}
+  {{/* Otherwise, use relative link of the image */}}
   {{- if hasPrefix $image "/" -}}
     {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
   {{- end -}}
