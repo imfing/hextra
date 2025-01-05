@@ -9,8 +9,11 @@
 {{- $imageStyle := .Get "imageStyle" -}}
 {{- $tag := .Get "tag" -}}
 {{- $tagType := .Get "tagType" -}}
-{{/* hugo process argument string /*}}
-{{- $process := .Get "process" | default "resize 800x webp q80" -}}
+
+{{/* Image processing options */}}
+{{- $method := .Get "method" | default "Resize" | humanize -}}
+{{- $options := .Get "options" | default "800x webp q80" -}}
+{{- $process := .Get "process" | default (delimit (slice $method $options) " " " ") -}}
 
 {{- with or (.Page.Resources.Get $image) (resources.Get $image) -}}
   {{/* Retrieve the $image resource from local or global resources */}}
