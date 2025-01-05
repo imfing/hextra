@@ -140,6 +140,7 @@
       "dark:hover:hx-text-gray-300",
       "dark:hover:hx-text-gray-50",
       "dark:hover:hx-text-neutral-50",
+      "dark:hover:hx-text-primary-400",
       "dark:hover:hx-text-white",
       "dark:hx-bg-amber-900/30",
       "dark:hx-bg-black/60",
@@ -333,6 +334,7 @@
       "hx-gap-x-1.5",
       "hx-gap-y-2",
       "hx-grid",
+      "hx-grid-cols-1",
       "hx-group",
       "hx-group/code",
       "hx-group/copybtn",
@@ -545,6 +547,7 @@
       "language-options",
       "language-switcher",
       "last-of-type:hx-mb-0",
+      "lg:hx-grid-cols-3",
       "lntable",
       "lntd",
       "ltr:before:hx-left-0",
@@ -577,6 +580,7 @@
       "max-sm:hx-grid-cols-1",
       "max-xl:hx-hidden",
       "md:hx-aspect-[1.1/1]",
+      "md:hx-grid-cols-2",
       "md:hx-h-[calc(100vh-var(--navbar-height)-var(--menu-height))]",
       "md:hx-hidden",
       "md:hx-inline-block",
@@ -640,7 +644,8 @@
       "subheading-anchor",
       "success-icon",
       "theme-toggle",
-      "xl:hx-block"
+      "xl:hx-block",
+      "xl:hx-grid-cols-4"
     ],
     "ids": null
   }
