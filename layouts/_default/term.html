@@ -10,19 +10,22 @@
         <div class="content">
           {{ .Content }}
         </div>
-        <div class="hx-grid hx-grid-cols-1 md:hx-grid-cols-2 lg:hx-grid-cols-3 xl:hx-grid-cols-4 hx-gap-4">
-          {{ range .Data.Terms }}
-            <div class="hx-w-full">
-              <a
-                href="{{ .Page.RelPermalink }}"
-                title="{{ .Page.LinkTitle }}"
-                class="hx-font-medium hover:hx-text-primary-600"
-              >
-                {{- .Page.LinkTitle -}}
-                <span class="hx-text-sm hx-text-gray-500">&nbsp;{{ .Count }}</span>
-              </a>
+        <div>
+          {{- range .Pages -}}
+            <div>
+              <h3>
+                <a
+                  style="color: inherit; text-decoration: none;"
+                  class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl"
+                  href="{{ .RelPermalink }}"
+                  title="{{ .LinkTitle }}"
+                >
+                  {{ .Title }}
+                </a>
+              </h3>
+              <p class="hx-opacity-50 hx-text-sm hx-leading-7">{{ partial "utils/format-date" .Date }}</p>
             </div>
-          {{ end }}
+          {{- end -}}
         </div>
       </main>
     </article>
