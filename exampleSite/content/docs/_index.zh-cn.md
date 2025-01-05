@@ -38,4 +38,3 @@ Hextra 是一个现代、快速且功能齐全的 [Hugo][hugo] 主题，基于 [
 [hugo]: https://gohugo.io/
 [flex-search]: https://github.com/nextapps-de/flexsearch
 [tailwind-css]: https://tailwindcss.com/
-```
