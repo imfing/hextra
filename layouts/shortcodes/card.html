@@ -9,34 +9,16 @@
 {{- $imageStyle := .Get "imageStyle" -}}
 {{- $tag := .Get "tag" -}}
 {{- $tagType := .Get "tagType" -}}
+{{- $process := .Get "process" | default "resize 800x webp q80" -}}
 
-{{/* Image processing options */}}
-{{- $method := .Get "method" | default "Resize" | humanize -}}
-{{- $options := .Get "options" | default "800x webp q80" -}}
-
-{{- if and $image (not (urls.Parse $image).Scheme) -}}
-  {{/* Process images in assets */}}
-  {{- with resources.Get $image -}}
-    {{- $processed := "" -}}
-    {{- if eq $method "Resize" -}}
-      {{- $processed = (.Resize $options) -}}
-    {{- else if eq $method "Fit" -}}
-      {{- $processed = (.Fit $options) -}}
-    {{- else if eq $method "Fill" -}}
-      {{- $processed = (.Fill $options) -}}
-    {{- else if eq $method "Crop" -}}
-      {{- $processed = (.Crop $options) -}}
-    {{- else -}}
-      {{- errorf "Invalid image processing command: Must be one of Crop, Fit, Fill or Resize." -}}
-    {{- end -}}
-    {{- $width = $processed.Width -}}
-    {{- $height = $processed.Height -}}
-    {{- $image = $processed.RelPermalink -}}
-  {{- else -}}
-    {{/* Otherwise, use relative link of the image */}}
-    {{- if hasPrefix $image "/" -}}
-      {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
-    {{- end -}}
+{{- with or (.Page.Resources.Get $image) (resources.Get $image) -}}
+  {{- $processed := .Process $process -}}
+  {{- $width = $processed.Width -}}
+  {{- $height = $processed.Height -}}
+  {{- $image = $processed.RelPermalink -}}
+{{ else }}
+  {{- if hasPrefix $image "/" -}}
+    {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
   {{- end -}}
 {{- end -}}
 
@@ -53,4 +35,4 @@
   "tag"         $tag
   "tagType"     $tagType
   )
--}}
+-}
