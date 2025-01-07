@@ -195,7 +195,7 @@ You can add extra section in the footer by creating a file `layouts/partials/cus
 The added section will be added before the copyright section in the footer.
 You can use [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) and [Hugo template syntax](https://gohugo.io/templates/) to add your own content.
 
-Hugo variables available in the footer section are: `.switchesVisible` and `.copyrightVisible`.
+Hugo variables available in the footer section are: `.switchesVisible` and `.displayCopyright`.
 
 ## Custom Layouts
 
