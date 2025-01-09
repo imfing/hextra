@@ -1,4 +1,4 @@
-{{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
+{{- $placeholder := (or .placeholder (T "searchPlaceholder")) | default "Search..." -}}
 {{- $name := .name -}}
 {{- $keybinding := .keybinding | default false -}}
 {{- $baseUrl := .baseUrl | default "/" -}}
