@@ -29,6 +29,7 @@ body {
   --primary-lightness: 50%;
   --navbar-height: 4rem;
   --menu-height: 3.75rem;
+  --menu-height:3.75em;
 }
 
 .dark {
