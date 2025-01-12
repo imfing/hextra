@@ -1,0 +1,49 @@
+docs:
+  - title: Documentation
+    link: /docs/
+  - title: Getting Started
+    link: /docs/getting-started/
+  - title: Guide
+    link: /docs/guide/
+    open: false
+    items:
+      - title: Organize Files
+        link: /docs/guide/organize-files/
+      - title: Configuration
+        link: /docs/guide/configuration/
+      - title: Markdown
+        link: /docs/guide/markdown/
+      - title: Syntax Highlighting
+        link: /docs/guide/syntax-highlighting/
+      - title: LaTeX
+        link: /docs/guide/latex/
+      - title: Diagrams
+        link: /docs/guide/diagrams/
+      - title: Shortcodes
+        link: /docs/guide/shortcodes/
+        items:
+          - title: Callout
+            link: /docs/guide/shortcodes/callout/
+          - title: Cards
+            link: /docs/guide/shortcodes/cards/
+          - title: Details
+            link: /docs/guide/shortcodes/details/
+          - title: FileTree
+            link: /docs/guide/shortcodes/filetree/
+          - title: Icon
+            link: /docs/guide/shortcodes/icon/
+          - title: Steps
+            link: /docs/guide/shortcodes/steps/
+          - title: Tabs
+            link: /docs/guide/shortcodes/tabs/
+      - title: Deploy Site
+        link: /docs/guide/deploy-site/
+  - title: Advanced
+    link: /docs/advanced/
+    items:
+      - title: Multi-language
+        link: /docs/advanced/multi-language/
+      - title: Comments
+        link: /docs/advanced/comments/
+      - title: Customization
+        link: /docs/advanced/customization/
