@@ -1,7 +1,17 @@
 <link rel="icon shortcut" href="{{ "favicon.ico" | relURL }}" sizes="32x32" />
 <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
-<link rel="icon" href="{{ "favicon-dark.svg" | relURL }}" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
-<link rel="icon" href="{{ "favicon-16x16.png" | relURL }}" type="image/png" sizes="16x16" />
-<link rel="icon" href="{{ "favicon-32x32.png" | relURL }}" type="image/png" sizes="32x32" />
-<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}" sizes="180x180" />
-<link fetchpriority="low" href="{{ "site.webmanifest" | relURL }}" rel="manifest" />
+{{- if fileExists "static/favicon-dark.svg" -}}
+  <link rel="icon" href="{{ "favicon-dark.svg" | relURL }}" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+{{- end -}}
+{{- if fileExists "static/favicon-16x16.png" -}}
+  <link rel="icon" href="{{ "favicon-16x16.png" | relURL }}" type="image/png" sizes="16x16" />
+{{- end -}}
+{{- if fileExists "static/favicon-32x32.png" -}}
+  <link rel="icon" href="{{ "favicon-32x32.png" | relURL }}" type="image/png" sizes="32x32" />
+{{- end -}}
+{{- if fileExists "static/apple-touch-icon.png" -}}
+  <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}" sizes="180x180" />
+{{- end -}}
+{{- if fileExists "static/site.webmanifest" -}}
+  <link fetchpriority="low" href="{{ "site.webmanifest" | relURL }}" rel="manifest" />
+{{- end -}}
