@@ -1,5 +1,6 @@
-{{- $placeholder := (or .placeholder (T "searchPlaceholder")) | default "Search..." -}}
 {{- $name := .name -}}
+{{- $searchPlaceHolder := printf "%s%s" "searchPlaceHolder" $name}}
+{{- $placeholder := (or .placeholder ((or (T $searchPlaceHolder) (T "searchPlaceholder")))) | default "Search..." -}}
 {{- $keybinding := .keybinding | default false -}}
 {{- $baseUrl := .baseUrl | default "/" -}}
 
@@ -29,7 +30,7 @@
 
   <div>
     <ul
-      class="search-results search-results-{{ $name }} not-prose hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-screen hx-min-h-[100px] hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      class="search-results search-results-{{ $name }} not-prose hextra-scrollbar hx-hidden hx-border hx-border-gray-200 hx-bg-white hx-text-gray-100 dark:hx-border-neutral-800 dark:hx-bg-neutral-900 hx-absolute hx-top-full hx-z-20 hx-mt-2 hx-overflow-auto hx-overscroll-contain hx-rounded-xl hx-py-2.5 hx-shadow-xl hx-max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] md:hx-max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx-inset-x-0 ltr:md:hx-left-auto rtl:md:hx-right-auto contrast-more:hx-border contrast-more:hx-border-gray-900 contrast-more:dark:hx-border-gray-50 hx-w-full hx-min-h-[100px]"
       style="transition: max-height 0.2s ease 0s;"
     ></ul>
   </div>
