@@ -42,7 +42,7 @@ Parameter `name` is required and must be unique.
 | `name`        | Globally unique identifier (Required)                                                                                 |
 | `placeholder` | Custom placeholder. By default `searchPlaceHolder{name}` is used, then `searchPlaceholder` .                          |
 | `keybinding`  | Should respond to keybinding. Note: Only the first last search element on the whole page will capture the keybinding. |
-| `baseUrl`     | How narrow the search should be. `/` (whole site) by default.                                                         |
+| `base-url`     | How narrow the search should be. `/` (whole site) by default.                                                         |
 
 ## Styling
 
