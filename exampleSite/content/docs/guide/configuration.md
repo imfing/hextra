@@ -212,6 +212,22 @@ Options for `theme.default`:
 The `theme.displayToggle` parameter allows you to display a toggle button for changing themes.
 When set to `true`, visitors can switch between light or dark mode, overriding the default setting.
 
+### Page Last Modification
+
+The date of the page's last modification can be displayed by enabling the `params.displayUpdatedDate` flag. To use Git commit date as the source, enable also the `enableGitInfo` flag.
+
+To customize the date format, set the `params.dateFormat` parameter. Its layout matches Hugo's [`time.Format`](https://gohugo.io/functions/time/format/).
+
+```yaml {filename="hugo.yaml"}
+# Parse Git commit
+enableGitInfo: true
+
+params:
+  # Display the last modification date
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
+```
+
 ### Page Width
 
 The width of the page can be customized by the `params.page.width` parameter in the config file:

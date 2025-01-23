@@ -3,6 +3,7 @@ baseURL: "https://example.com/"
 title: "Hextra"
 
 enableRobotsTXT: true
+# Parse Git commit
 enableGitInfo: true
 # enableEmoji: false
 hasCJKLanguage: true
@@ -135,6 +136,7 @@ params:
     displayPoweredBy: true
     width: normal
 
+  # Display the last modification date
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
 
