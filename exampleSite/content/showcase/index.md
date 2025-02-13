@@ -13,6 +13,13 @@ Open source projects powered by Hextra
 
 {{< cards >}}
   {{< card
+        link="https://github.com/regolith-linux/regolith-desktop.com"
+        title="Regolith Desktop"
+        image="https://github.com/user-attachments/assets/4bbedd7d-67ef-4363-91f1-acb4a0c5f8d0"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
         link="https://github.com/modelcontextprotocol/specification"
         title="Model Context Protocol Specification"
         image="https://github.com/user-attachments/assets/1bb4f952-b8fc-43b5-9cbd-cd7213c2ba90"
