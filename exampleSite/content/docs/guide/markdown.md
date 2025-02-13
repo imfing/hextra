@@ -171,6 +171,8 @@ With caption:
 ![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
 ```
 
+For more advanced functionality, use Hugo's built-in [Figure shortcode](https://gohugo.io/shortcodes/figure/).
+
 ## Configuration
 
 Hugo uses [Goldmark](https://github.com/yuin/goldmark) for Markdown parsing.
