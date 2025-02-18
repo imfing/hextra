@@ -1,0 +1,10 @@
+{{- $name := (.Get "name") }}
+{{- $keybinding := or (.Get "keybinding") false }}
+{{- $baseUrl := or (.Get "base-url") "/" }}
+{{- $placeholder := .Get "placeholder" }}
+
+{{- if not $name }}
+  {{- errorf "search shortcode: name property is required" -}}
+{{- end -}}
+
+{{ partial "partials/search.html" (dict "context" . "name" $name "keybinding" $keybinding "baseUrl" $baseUrl "placeholder" $placeholder) }}
