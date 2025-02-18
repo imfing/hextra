@@ -1,0 +1,18 @@
+{{- $external := strings.HasPrefix .link "http" -}}
+
+{{- $activeClass := cond (.active) "active" "inactive" -}}
+
+
+<a
+  class="hextra-sidebar-item-link {{ $activeClass }} [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]"
+  href="{{ .link }}"
+  {{ if $external }}target="_blank" rel="noreferer"{{ end }}
+>
+  {{- .title -}}
+  {{- with .context }}
+    {{- if or .RegularPages .Sections }}
+      {{- partialCached "components/sidebar/collapsible-button" . }}
+    {{- end }}
+  {{ end -}}
+  {{- with .items }}{{- partialCached "components/sidebar/collapsible-button" site.Home }}{{ end -}}
+</a>
