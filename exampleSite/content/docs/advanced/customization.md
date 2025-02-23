@@ -145,7 +145,7 @@ The following classes can be used to customize various parts of the theme.
 
 - `theme-toggle` - The theme toggle button
 
-#### Cody Copy Button
+#### Code Copy Button
 
 - `hextra-code-copy-btn-container` - The code copy button container
 - `hextra-code-copy-btn` - The code copy button
