@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.toggle('md:hx-overflow-auto');
   }
 
+  function hideOverlay() {
+    // Hide the overlay
+    overlay.classList.remove(...overlayClasses);
+    overlay.classList.add('hx-bg-transparent');
+  }
+
   menu.addEventListener('click', (e) => {
     e.preventDefault();
     toggleMenu();
@@ -33,8 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
       overlay.classList.remove('hx-bg-transparent');
     } else {
       // Hide the overlay
-      overlay.classList.remove(...overlayClasses);
-      overlay.classList.add('hx-bg-transparent');
+      hideOverlay();
     }
   });
 
@@ -43,7 +48,23 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleMenu();
 
     // Hide the overlay
-    overlay.classList.remove(...overlayClasses);
-    overlay.classList.add('hx-bg-transparent');
+    hideOverlay();
+  });
+
+  // Select all anchor tags in the sidebar container
+  const sidebarLinks = sidebarContainer.querySelectorAll('a');
+
+  // Add click event listener to each anchor tag
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Check if the href attribute contains a hash symbol (links to a heading)
+      if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+        // Only dismiss overlay on mobile view
+        if (window.innerWidth < 768) {
+          toggleMenu();
+          hideOverlay();
+        }
+      }
+    });
   });
 });
