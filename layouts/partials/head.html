@@ -59,5 +59,21 @@
     }
   </script>
 
+  <!-- KaTeX-->
+  {{ $noop := .WordCount }}
+  {{ if .Page.Store.Get "hasMath" }}
+    {{ $katex_css_url := printf "https://cdn.jsdelivr.net/npm/katex@latest/dist/katex%s.css" (cond hugo.IsProduction ".min" "") -}}
+    {{ with try (resources.GetRemote $katex_css_url) -}}
+      {{ with .Err -}}
+        {{ errorf "Could not retrieve KaTeX css file from CDN. Reason: %s." . -}}
+      {{ else with.Value -}}
+        {{ with resources.Copy (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) . }}
+          {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous">
+        {{ end -}}
+      {{ end -}}
+    {{ end -}}
+  {{ end }}
+
   {{ partial "custom/head-end.html" . }}
 </head>

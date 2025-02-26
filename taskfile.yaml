@@ -21,8 +21,4 @@ tasks:
     desc: Download libs from CDN
     cmds:
       - curl -o assets/lib/flexsearch/flexsearch.bundle.min.js https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.min.js
-      - curl -o assets/lib/katex/katex.min.js https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js
-      - curl -o assets/lib/katex/katex.min.css https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css
-      - curl -o assets/lib/katex/auto-render.min.js https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js
-      - curl -o assets/lib/katex/mhchem.min.js https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/mhchem.min.js
       - curl -o assets/lib/mermaid/mermaid.min.js https://cdn.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.min.js
