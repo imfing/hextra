@@ -163,6 +163,9 @@ params:
       # date | lastmod | publishDate | title | weight
       sortBy: date
       sortOrder: desc # or "asc"
+    
+    article:
+      displayPagination: true
 
   highlight:
     copy:

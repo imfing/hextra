@@ -38,10 +38,12 @@
         <div class="content">
           {{ .Content }}
         </div>
-        {{ partial "components/last-updated.html" . }}
-        {{ .Scratch.Set "reversePagination" true }}
-        {{ partial "components/pager.html" . }}
-        {{ partial "components/comments.html" . }}
+        {{- partial "components/last-updated.html" . -}}
+        {{- if (site.Params.blog.article.displayPagination | default true) -}}
+          {{- .Scratch.Set "reversePagination" true -}}
+          {{- partial "components/pager.html" . -}}
+        {{ end }}
+        {{- partial "components/comments.html" . -}}
       </main>
     </article>
   </div>
