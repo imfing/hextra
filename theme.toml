@@ -9,7 +9,7 @@ homepage = "https://github.com/imfing/hextra/"
 demosite = "https://imfing.github.io/hextra/"
 tags = ["Modern", "Elegant", "Blog", "Documentation", "Responsive", "Clean", "Light", "Dark", "Minimal"]
 features = ["Responsive", "Dark Mode", "Search", "Syntax Highlighting", "Multilingual", "Social", "Blog", "RSS", "Customization"]
-min_version = "0.124.0"
+min_version = "0.134.0"
 
 [author]
   name = "Xin"
