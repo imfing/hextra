@@ -1,0 +1,14 @@
+{{- $jsTheme := resources.Get "js/theme.js" | resources.ExecuteAsTemplate "theme.js" . -}}
+{{- $jsMenu := resources.Get "js/menu.js" -}}
+{{- $jsTabs := resources.Get "js/tabs.js" -}}
+{{- $jsLang := resources.Get "js/lang.js" -}}
+{{- $jsCodeCopy := resources.Get "js/code-copy.js" -}}
+{{- $jsFileTree := resources.Get "js/filetree.js" -}}
+{{- $jsSidebar := resources.Get "js/sidebar.js" -}}
+{{- $jsBackToTop := resources.Get "js/back-to-top.js" -}}
+
+{{- $scripts := slice $jsTheme $jsMenu $jsCodeCopy $jsTabs $jsLang $jsFileTree $jsSidebar $jsBackToTop | resources.Concat "js/main.js" -}}
+{{- if hugo.IsProduction -}}
+  {{- $scripts = $scripts | minify | fingerprint -}}
+{{- end -}}
+<script defer src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>

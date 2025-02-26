@@ -1,0 +1,33 @@
+{{/* Mermaid */}}
+
+{{- $mermaidJS := resources.Get "lib/mermaid/mermaid.min.js" | fingerprint -}}
+<script defer src="{{ $mermaidJS.RelPermalink }}" integrity="{{ $mermaidJS.Data.Integrity }}"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Store original mermaid code for each diagram
+    document.querySelectorAll(".mermaid").forEach(el => {
+      el.dataset.original = el.innerHTML;
+    });
+
+    const theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
+    mermaid.initialize({ startOnLoad: true, theme: theme });
+
+    let timeout;
+    new MutationObserver(() => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
+        document.querySelectorAll(".mermaid").forEach(el => {
+          // Reset to original content, preserving HTML
+          el.innerHTML = el.dataset.original;
+          el.removeAttribute("data-processed");
+        });
+        mermaid.initialize({ startOnLoad: true, theme: theme });
+        mermaid.init();
+      }, 150);
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+  });
+</script>
