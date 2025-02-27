@@ -4,7 +4,7 @@ weight: 4
 math: true
 ---
 
-$\KaTeX$ 用于渲染 LaTeX 数学表达式。可以通过在页面前置设置中将 `math` 设置为 `true` 来启用它。
+\(\KaTeX\) 用于渲染 LaTeX 数学表达式。可以通过在页面前置设置中将 `math` 设置为 `true` 来启用它。
 
 <!--more-->
 
@@ -25,10 +25,10 @@ Markdown 内容中支持内联和独立段落的 LaTeX 数学表达式。
 ### 内联
 
 ```markdown {filename="page.md"}
-这个 $\sigma(z) = \frac{1}{1 + e^{-z}}$ 是内联的。
+这个 \(\sigma(z) = \frac{1}{1 + e^{-z}}\) 是内联的。
 ```
 
-这个 $\sigma(z) = \frac{1}{1 + e^{-z}}$ 是内联的。
+这个 \(\sigma(z) = \frac{1}{1 + e^{-z}}\) 是内联的。
 
 ### 独立段落
 
@@ -86,7 +86,7 @@ $$
 
 通过 [mhchem](https://mhchem.github.io/MathJax-mhchem/) 扩展支持化学表达式。
 
-内联：$\ce{H2O}$ 是水。
+内联：\(\ce{H2O}\) 是水。
 
 独立段落：
 
