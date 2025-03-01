@@ -144,14 +144,13 @@
         <span class="hx-cursor-default">{{ $name }}</span>
       </li>
     {{ else }}
-        {{- $newURL := .URL -}}
-        {{- with .PageRef -}}
-          {{- if hasPrefix . "/" -}}
-            {{/* {{- $link = relLangURL (strings.TrimPrefix "/" .) -}} */}}
-            {{ $newURL = relLangURL (strings.TrimPrefix "/" .) }}
-          {{- end -}}
+      {{- $link := .URL -}}
+      {{- with .PageRef -}}
+        {{- if hasPrefix . "/" -}}
+          {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
         {{- end -}}
-      <li>{{ template "sidebar-item-link" dict "active" false "title" $name "link" $newURL }}</li>
+      {{- end -}}
+      <li>{{ template "sidebar-item-link" dict "active" false "title" $name "link" $link }}</li>
     {{ end }}
   {{- end -}}
 {{- end -}}
