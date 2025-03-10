@@ -25,5 +25,5 @@
 {{- if transform.CanHighlight $lang -}}
   <div>{{- highlight $content $lang $options -}}</div>
 {{- else -}}
-  <pre><code>{{ $content }}</code></pre>
+  <div><pre><code>{{ $content }}</code></pre></div>
 {{- end -}}
