@@ -3,7 +3,7 @@
   "features": {
     "ghcr.io/devcontainers/features/hugo:1": {
       "extended": true,
-      "version": "0.131.0"
+      "version": "0.145.0"
     },
     "ghcr.io/devcontainers/features/node:1": {}
   },
