@@ -54,6 +54,7 @@
     var(--primary-hue) var(--primary-saturation)
       calc(calc(var(--primary-lightness) / 50) * 24)
   );
+  --color-dark: #111;
 }
 
 html {

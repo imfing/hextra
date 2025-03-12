@@ -1,6 +1,6 @@
 nav {
   .search-wrapper {
-    @apply hx:hidden md:hx:inline-block;
+    @apply hx:hidden hx:md:inline-block;
   }
 }
 
@@ -8,7 +8,7 @@ nav {
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
   .nav-container-blur {
-    @apply hx:backdrop-blur-md hx:bg-white/[.85] dark:!hx:bg-dark/80;
+    @apply hx:backdrop-blur-md hx:bg-white/[.85] hx:dark:bg-dark/80!;
   }
 }
 
@@ -46,7 +46,7 @@ nav {
       }
     }
     g:nth-of-type(2) {
-      @apply -hx:rotate-45;
+      @apply hx:-rotate-45;
       path {
         transform: translate3d(0, -4px, 0);
       }
