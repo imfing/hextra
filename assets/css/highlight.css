@@ -1,6 +1,6 @@
 /* Code syntax highlight */
-@import "chroma/light.css";
-@import "chroma/dark.css";
+@import "./chroma/light.css";
+@import "./chroma/dark.css";
 
 .hextra-code-block {
   @apply hx-text-[.9em] hx-leading-5;
