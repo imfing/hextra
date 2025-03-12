@@ -10,7 +10,7 @@ tasks:
     depends: [build]
     desc: Compile production CSS using PostCSS to `assets/css/compiled/main.css`
     cmds:
-      - npx postcss --config postcss.config.js --env production assets/css/styles.css -o assets/css/compiled/main.css
+      - npx postcss --config postcss.config.mjs --env production assets/css/styles.css -o assets/css/compiled/main.css
 
   dev:
     desc: Start development server for Hextra theme

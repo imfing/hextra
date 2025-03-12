@@ -2,7 +2,7 @@
   "scripts": {
     "dev:theme": "hugo server --logLevel=debug --config=hugo.yaml,../dev.toml --environment=theme --source=exampleSite --themesDir=../.. --disableFastRender -D --port 1313",
     "dev": "hugo server --source=exampleSite --themesDir=../.. --disableFastRender -D --port 1313",
-    "build:css": "npx postcss --config postcss.config.js --env production assets/css/styles.css -o assets/css/compiled/main.css",
+    "build:css": "npx postcss --config postcss.config.mjs --env production assets/css/styles.css -o assets/css/compiled/main.css",
     "build": "hugo --gc --minify --themesDir=../.. --source=exampleSite"
   },
   "devDependencies": {
