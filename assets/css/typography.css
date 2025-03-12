@@ -21,7 +21,7 @@
     @apply hx:mt-6 hx:leading-7 hx:first:mt-0;
   }
   :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx:text-primary-600 hx:underline hx:decoration-from-font [text-underline-position:from-font];
+    @apply hx:text-primary-600 hx:underline;
   }
   :where(blockquote):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx:mt-6 hx:border-gray-300 hx:italic hx:text-gray-700 hx:dark:border-gray-700 hx:dark:text-gray-400 hx:first:mt-0 hx:ltr:border-l-2 hx:ltr:pl-6 hx:rtl:border-r-2 hx:rtl:pr-6;
