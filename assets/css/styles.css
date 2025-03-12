@@ -1,4 +1,4 @@
-@import "./tailwind.css";
+@import "./tailwind.css" prefix(hx);
 
 @import "./typography.css";
 @import "./highlight.css";
@@ -14,13 +14,13 @@
 @import "./components/badge.css";
 
 html {
-  @apply hx-text-base hx-antialiased;
+  @apply hx:text-base hx:antialiased;
   font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  @apply hx-w-full hx-bg-white dark:hx-bg-dark dark:hx-text-gray-100;
+  @apply hx:w-full hx:bg-white hx:dark:bg-dark hx:dark:text-gray-100;
 }
 
 :root {
