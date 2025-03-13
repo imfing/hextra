@@ -766,9 +766,6 @@ video {
   width: -moz-max-content;
   width: max-content;
 }
-.hx-w-screen {
-  width: 100vw;
-}
 .hx-min-w-0 {
   min-width: 0px;
 }
@@ -789,9 +786,6 @@ video {
 }
 .hx-max-w-\[90rem\] {
   max-width: 90rem;
-}
-.hx-max-w-\[min\(calc\(100vw-2rem\)\,calc\(100\%\+20rem\)\)\] {
-  max-width: min(calc(100vw - 2rem),calc(100% + 20rem));
 }
 .hx-max-w-none {
   max-width: none;
@@ -2480,6 +2474,10 @@ article details > summary::before {
 .search-wrapper .match {
   --tw-text-opacity: 1;
   color: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 45) / var(--tw-text-opacity));
+}
+.search-results-desktop {
+  width: 100vw;
+  max-width: min(calc(100vw - 2rem),calc(100% + 20rem));
 }
 @media (max-width: 767px) {
   .sidebar-container {

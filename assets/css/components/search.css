@@ -36,3 +36,7 @@
     @apply hx-text-primary-600;
   }
 }
+
+.search-results-desktop {
+  @apply hx-w-screen hx-max-w-[min(calc(100vw-2rem),calc(100%+20rem))];
+}
