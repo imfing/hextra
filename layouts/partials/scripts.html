@@ -9,8 +9,3 @@
 {{- if and (.Page.Store.Get "hasMermaid") (not .Page.IsHome) -}}
   {{- partial "scripts/mermaid.html" . -}}
 {{- end -}}
-
-{{/* KaTex */}}
-{{- if .Page.Params.math -}}
-  {{- partial "scripts/katex.html" . -}}
-{{- end -}}
