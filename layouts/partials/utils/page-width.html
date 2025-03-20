@@ -14,14 +14,14 @@
 
 {{- with $pageWidth -}}
   {{ if eq . "wide" -}}
-    {{ $pageWidth = "hx-max-w-[90rem]" -}}
+    {{ $pageWidth = "hx:max-w-[90rem]" -}}
   {{ else if eq . "full" -}}
     {{ $pageWidth = "max-w-full" -}}
   {{ else -}}
-    {{ $pageWidth = "hx-max-w-screen-xl" -}}
+    {{ $pageWidth = "hx:max-w-screen-xl" -}}
   {{ end -}}
 {{ else -}}
-  {{ $pageWidth = "hx-max-w-screen-xl" -}}
+  {{ $pageWidth = "hx:max-w-screen-xl" -}}
 {{ end -}}
 
 {{ return $pageWidth }}
