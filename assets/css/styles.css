@@ -1,17 +1,5 @@
-@import "./tailwind.css" prefix(hx);
-
-@import "./typography.css";
-@import "./highlight.css";
-@import "./components/cards.css";
-@import "./components/steps.css";
-@import "./components/search.css";
-@import "./components/sidebar.css";
-@import "./components/navbar.css";
-@import "./components/scrollbar.css";
-@import "./components/code-copy.css";
-@import "./components/hextra/feature-grid.css";
-@import "./components/jupyter.css";
-@import "./components/badge.css";
+@import "tailwindcss" prefix(hx);
+@source "./**/hugo_stats.json";
 
 @theme {
   --color-primary-50: hsl(
@@ -80,3 +68,16 @@ body {
   --primary-saturation: 100%;
   --primary-lightness: 50%;
 }
+
+@import "./typography.css";
+@import "./highlight.css";
+@import "./components/cards.css";
+@import "./components/steps.css";
+@import "./components/search.css";
+@import "./components/sidebar.css";
+@import "./components/navbar.css";
+@import "./components/scrollbar.css";
+@import "./components/code-copy.css";
+@import "./components/hextra/feature-grid.css";
+@import "./components/jupyter.css";
+@import "./components/badge.css";
