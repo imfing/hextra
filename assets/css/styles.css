@@ -1,5 +1,6 @@
 @import "tailwindcss" prefix(hx);
 @source "./**/hugo_stats.json";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-primary-50: hsl(

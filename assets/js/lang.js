@@ -5,7 +5,7 @@
       e.preventDefault();
       switcher.dataset.state = switcher.dataset.state === 'open' ? 'closed' : 'open';
       const optionsElement = switcher.nextElementSibling;
-      optionsElement.classList.toggle('hx-hidden');
+      optionsElement.classList.toggle('hx:hidden');
 
       // Calculate position of language options element
       const switcherRect = switcher.getBoundingClientRect();
@@ -21,7 +21,7 @@
       languageSwitchers.forEach((switcher) => {
         switcher.dataset.state = 'closed';
         const optionsElement = switcher.nextElementSibling;
-        optionsElement.classList.add('hx-hidden');
+        optionsElement.classList.add('hx:hidden');
       });
     }
   });
