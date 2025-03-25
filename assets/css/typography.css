@@ -88,6 +88,10 @@
   }
   .footnotes {
     @apply hx:mt-12 hx:text-sm;
+
+    hr {
+      @apply hx:border-gray-200 hx:dark:border-neutral-800;
+    }
   }
 }
 

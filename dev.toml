@@ -8,7 +8,7 @@
     source = 'assets/watching/hugo_stats\.json'
     target = 'styles\.css'
   [[build.cachebusters]]
-    source = '(postcss|tailwind)\.config\.js'
+    source = '(postcss|tailwind)\.config\.mjs'
     target = 'css'
   [[build.cachebusters]]
     source = 'assets/.*\.(js|ts|jsx|tsx)'

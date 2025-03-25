@@ -26,7 +26,7 @@
 {{- $class := index $alertClasses $alertType | default $defaultClass -}}
 
 
-<div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current {{ $class }}">
+<div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:border-gray-200 hx:contrast-more:border-current hx:contrast-more:dark:border-current {{ $class }}">
   <p class="hx:flex hx:items-center hx:font-medium">
     {{- with $icon -}}
       {{- partial "utils/icon.html" (dict "name" . "attributes" `height=16px class="hx:inline-block hx:align-middle hx:mr-2"`) -}}

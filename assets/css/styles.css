@@ -3,53 +3,21 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary-50: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 47)
-  );
-  --color-primary-100: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 44)
-  );
-  --color-primary-200: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 36)
-  );
-  --color-primary-300: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 27)
-  );
-  --color-primary-400: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 16)
-  );
-  --color-primary-500: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      var(--primary-lightness)
-  );
-  --color-primary-600: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      calc(calc(var(--primary-lightness) / 50) * 45)
-  );
-  --color-primary-700: hsl(
-    var(--primary-hue) var(--primary-saturation)
-    calc(calc(var(--primary-lightness) / 50) * 39)
-  );
-  --color-primary-800: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      calc(calc(var(--primary-lightness) / 50) * 32)
-  );
-  --color-primary-900: hsl(
-    var(--primary-hue) var(--primary-saturation)
-      calc(calc(var(--primary-lightness) / 50) * 24)
-  );
+  --color-primary-50: hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 47));
+  --color-primary-100: hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 44));
+  --color-primary-200: hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 36));
+  --color-primary-300: hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 27));
+  --color-primary-400: hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 16));
+  --color-primary-500: hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness));
+  --color-primary-600: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 45));
+  --color-primary-700: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 39));
+  --color-primary-800: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 32));
+  --color-primary-900: hsl(var(--primary-hue) var(--primary-saturation) calc(calc(var(--primary-lightness) / 50) * 24));
   --color-dark: #111;
 }
 
 html {
   @apply hx:text-base hx:antialiased;
-  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
-  -webkit-tap-highlight-color: transparent;
 }
 
 body {
