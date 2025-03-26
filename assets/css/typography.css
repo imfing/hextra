@@ -109,9 +109,9 @@
     @apply hx:no-underline!;
   }
 
+  @apply hx:after:text-gray-300 hx:dark:after:text-neutral-700;
   &:after {
     @apply hx:content-['#'] hx:px-1;
-    @apply hx:text-gray-300 hx:dark:text-neutral-700;
     span:target + & {
       @apply hx:text-gray-400;
       @apply hx:dark:text-neutral-500;
