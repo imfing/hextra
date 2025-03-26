@@ -12,44 +12,39 @@ nav {
   }
 }
 
-.hamburger-menu svg {
-  g {
-    @apply hx:origin-center;
-    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  path {
-    opacity: 1;
-    transition:
-      transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s,
-      opacity 0.2s ease 0.2s;
-  }
+/* Hamburger Menu - Flattened Structure */
+.hamburger-menu svg g {
+  @apply hx:origin-center hx:transition-all hx:duration-100 hx:ease-out;
+}
 
-  &.open {
-    path {
-      transition:
-        transform 0.2s cubic-bezier(0.25, 1, 0.5, 1),
-        opacity 0s ease 0.2s;
-    }
-    g {
-      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
-    }
-  }
+.hamburger-menu svg path {
+  @apply hx:opacity-100 hx:transition-all hx:duration-100 hx:ease-out hx:delay-100;
+}
 
-  &.open > {
-    path {
-      @apply hx:opacity-0;
-    }
-    g:nth-of-type(1) {
-      @apply hx:rotate-45;
-      path {
-        transform: translate3d(0, 4px, 0);
-      }
-    }
-    g:nth-of-type(2) {
-      @apply hx:-rotate-45;
-      path {
-        transform: translate3d(0, -4px, 0);
-      }
-    }
-  }
+.hamburger-menu svg.open path {
+  @apply hx:transition-transform hx:duration-100 hx:ease-out hx:delay-0;
+}
+
+.hamburger-menu svg.open g {
+  @apply hx:transition-transform hx:duration-100 hx:ease-out hx:delay-100;
+}
+
+.hamburger-menu svg.open > path {
+  @apply hx:opacity-0;
+}
+
+.hamburger-menu svg.open > g:nth-of-type(1) {
+  @apply hx:rotate-45;
+}
+
+.hamburger-menu svg.open > g:nth-of-type(1) path {
+  @apply hx:translate-y-1;
+}
+
+.hamburger-menu svg.open > g:nth-of-type(2) {
+  @apply hx:-rotate-45;
+}
+
+.hamburger-menu svg.open > g:nth-of-type(2) path {
+  @apply hx:-translate-y-1;
 }

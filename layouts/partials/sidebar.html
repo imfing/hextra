@@ -15,7 +15,6 @@
 {{- end -}}
 
 
-<div class="mobile-menu-overlay [transition:background-color_1.5s_ease] hx:fixed hx:inset-0 hx:z-10 hx:bg-black/80 hx:dark:bg-black/60 hx:hidden"></div>
 <aside class="sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
   <!-- Search bar on small screen -->
   <div class="hx:px-4 hx:pt-4 hx:md:hidden">
@@ -180,5 +179,5 @@
 {{- end -}}
 
 {{- define "sidebar-collapsible-button" -}}
-  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform rtl:-hx:rotate-180"></path></svg>
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg>
 {{- end -}}

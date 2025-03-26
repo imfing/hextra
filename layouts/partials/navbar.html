@@ -54,7 +54,7 @@
             title="{{ or (T .Identifier) .Name | safeHTML }}"
             href="{{ $link }}"
             {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
-            class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative -hx:ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-block {{ $activeClass }}"
+            class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-block {{ $activeClass }}"
           >
             <span class="hx:text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
@@ -63,7 +63,7 @@
     {{- end -}}
 
 
-    <button type="button" aria-label="Menu" class="hamburger-menu -hx:mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden">
+    <button type="button" aria-label="Menu" class="hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden">
       {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" "height=24") -}}
     </button>
   </nav>
