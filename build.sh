@@ -12,7 +12,7 @@ MAIN_VERSION="main:latest"
 VERSIONS=(
   "main:latest" # latest version always builds from main
   "v0.9.6:v0.9"
-  # Add more versions as needed in format "ref:display_name"
+  "v0.8.6:v0.8"
 )
 
 # Parse main version
