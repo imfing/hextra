@@ -37,6 +37,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # fetch all history for .GitInfo and .Lastmod
+          fetch-tags: true
           submodules: recursive
 
       - name: Setup Go
