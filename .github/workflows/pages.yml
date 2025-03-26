@@ -1,5 +1,5 @@
-# Sample workflow for building and deploying a Hugo site to GitHub Pages
-name: Deploy Hugo site to Pages
+# Build and deploy Hextra docs site to GitHub Pages
+name: Deploy Hextra docs site to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -36,34 +36,38 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # fetch all history for .GitInfo and .Lastmod
+          fetch-depth: 0 # fetch all history for .GitInfo and .Lastmod
+          fetch-tags: true
           submodules: recursive
+
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.23'
+          go-version: "1.24"
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
       - name: Setup Hugo
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-      - name: Build with Hugo
+
+      - name: Make build script executable
+        run: chmod +x ./build.sh
+
+      - name: Build all site versions
         env:
-          # For maximum backward compatibility with Hugo modules
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
-        # Use the latest release of the theme to build exampleSite
         run: |
-          cd exampleSite && rm go.mod
-          hugo mod init github.com/imfing/hextra/exampleSite
-          hugo mod get -u github.com/imfing/hextra
-          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          ./build.sh "${{ steps.pages.outputs.base_url }}"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./exampleSite/public
+          path: ./public
 
   # Deployment job
   deploy:
