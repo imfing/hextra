@@ -31,7 +31,7 @@ layout: hextra-home
   {{< hextra/feature-card
     title="高速かつ多機能"
     subtitle="シンプルで使いやすく、それでいて強力で豊富な機能を備えています。"
-    class="hx:aspect-auto hx:md:aspect-[1.1/1] max-hx:md:min-h-[340px]"
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/hextra-doc.webp"
     imageClass="hx:top-[40%] hx:left-[24px] hx:w-[180%] hx:sm:w-[110%] hx:dark:opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
@@ -47,7 +47,7 @@ layout: hextra-home
   {{< hextra/feature-card
     title="全文検索"
     subtitle="FlexSearchによる全文検索が内蔵されており、追加の設定は不要です。"
-    class="hx:aspect-auto hx:md:aspect-[1.1/1] max-hx:md:min-h-[340px]"
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/hextra-search.webp"
     imageClass="hx:top-[40%] hx:left-[36px] hx:w-[110%] hx:sm:w-[110%] hx:dark:opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"

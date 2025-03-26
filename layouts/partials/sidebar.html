@@ -16,7 +16,7 @@
 
 
 <div class="mobile-menu-overlay [transition:background-color_1.5s_ease] hx:fixed hx:inset-0 hx:z-10 hx:bg-black/80 hx:dark:bg-black/60 hx:hidden"></div>
-<aside class="sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
+<aside class="sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
   <!-- Search bar on small screen -->
   <div class="hx:px-4 hx:pt-4 hx:md:hidden">
     {{ partial "search.html" }}
@@ -30,10 +30,10 @@
 
     <!-- Sidebar on large screen -->
     {{- if $disableSidebar -}}
-      {{- if $displayPlaceholder }}<div class="max-hx:xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div>{{ end -}}
+      {{- if $displayPlaceholder }}<div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div>{{ end -}}
       {{ .context.Scratch.Set "enableFooterSwitches" true }}
     {{- else -}}
-      <ul class="hx:flex hx:flex-col hx:gap-1 max-hx:md:hidden">
+      <ul class="hx:flex hx:flex-col hx:gap-1 hx:max-md:hidden">
         {{ template "sidebar-main" (dict "context" $navRoot "page" $context  "pageURL" $pageURL) }}
         {{ template "sidebar-footer" }}
       </ul>
