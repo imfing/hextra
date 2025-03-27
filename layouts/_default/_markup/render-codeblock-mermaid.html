@@ -1,4 +1,4 @@
 <pre class="mermaid hx-mt-6">
-  {{- .Inner | safeHTML -}}
+  {{ .Inner | htmlEscape | safeHTML }}
 </pre>
 {{- .Page.Store.Set "hasMermaid" true -}}
