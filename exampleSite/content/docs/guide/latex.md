@@ -3,20 +3,7 @@ title: "LaTeX"
 weight: 4
 math: true
 ---
-
-$\KaTeX$ is used for rendering LaTeX math expressions. It can be enabled per page by setting `math` to `true` in the page front matter.
-
-<!--more-->
-
-```yaml {filename="page.md"}
----
-title: "My Page with LaTeX"
-math: true
----
-
-```
-
-When enabled, the scripts, stylesheets and fonts from KaTeX will be included automatically in your site. You can start using LaTeX math expressions in your Markdown content.
+\(\KaTeX\) is used for rendering LaTeX math expressions. No manual activation is needed, you can start using LaTeX math expressions in your Markdown content right away.
 
 ## Example
 
@@ -25,10 +12,10 @@ Both inline and separate paragraph LaTeX math expressions are supported in the M
 ### Inline
 
 ```markdown {filename="page.md"}
-This $\sigma(z) = \frac{1}{1 + e^{-z}}$ is inline.
+This \(\sigma(z) = \frac{1}{1 + e^{-z}}\) is inline.
 ```
 
-This $\sigma(z) = \frac{1}{1 + e^{-z}}$ is inline.
+This \(\sigma(z) = \frac{1}{1 + e^{-z}}\) is inline.
 
 ### Separate Paragraph
 
@@ -86,7 +73,7 @@ For a list of supported functions, see [KaTeX supported functions](https://katex
 
 Chemistry expressions are supported via [mhchem](https://mhchem.github.io/MathJax-mhchem/) extension.
 
-Inline: $\ce{H2O}$ is water.
+Inline: \(\ce{H2O}\) is water.
 
 Separate paragraph:
 
