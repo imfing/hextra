@@ -15,7 +15,7 @@ Open source projects powered by Hextra
   {{< card
         link="https://github.com/claceio/clace"
         title="Clace"
-        image="https://github.com/user-attachments/assets/55de142c-eb21-4402-81db-bc64417eaae2"
+        image="https://github.com/user-attachments/assets/af4dbd21-a492-48dd-96fd-8542c548bd03"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 
