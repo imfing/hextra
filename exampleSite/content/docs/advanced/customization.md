@@ -109,6 +109,14 @@ The following classes can be used to customize various parts of the theme.
 
 - `hextra-filetree-folder` - The filetree folder container
 
+#### Search
+
+These styles will apply to __all__ search elements, including shortcodes and the search elements in the Navbar.
+
+- `search-wrapper` - The search wrapper container
+- `search-input` - The search input element
+- `search-results` - The search results list container
+
 #### Navbar
 
 - `nav-container` - The navbar container
@@ -120,11 +128,17 @@ The following classes can be used to customize various parts of the theme.
 - `hextra-footer` - The footer element
 - `hextra-custom-footer` - The custom footer section container
 
-#### Search
+#### Search in Desktop Nav Bar
 
-- `search-wrapper` - The search wrapper container
-- `search-input` - The search input element
-- `search-results` - The search results list container
+- `search-wrapper-desktop` - The search wrapper container for the desktop search element
+- `search-input-desktop` - The search input element for the desktop search element
+- `search-results-desktop` - The search results list container for the desktop search element
+
+#### Search in Mobile Nav Bar
+
+- `search-wrapper-mobile` - The search wrapper container for the mobile search element
+- `search-input-mobile` - The search input element for the mobile search element
+- `search-results-mobile` - The search results list container for the mobile search element
 
 #### Table of Contents
 

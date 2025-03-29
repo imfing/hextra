@@ -19,10 +19,14 @@ document.addEventListener("DOMContentLoaded", function () {
 // {{ end }}
 // {{ $noResultsFound := (T "noResultsFound") | default "No results found." }}
 
-(function () {
+var search = function (id, defaultSearch, baseUrl) {
   const searchDataURL = '{{ $searchData.RelPermalink }}';
 
-  const inputElements = document.querySelectorAll('.search-input');
+  const wrapperClass = `.search-wrapper-${id}`;
+  const inputClass = `.search-input-${id}`;
+  const resultsClass = `.search-results-${id}`;
+
+  const inputElements = document.querySelectorAll(inputClass);
   for (const el of inputElements) {
     el.addEventListener('focus', init);
     el.addEventListener('keyup', search);
@@ -30,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     el.addEventListener('input', handleInputChange);
   }
 
-  const shortcutElements = document.querySelectorAll('.search-wrapper kbd');
+  const shortcutElements = document.querySelectorAll(`${wrapperClass} kbd`);
 
   function setShortcutElementsOpacity(opacity) {
     shortcutElements.forEach(el => {
@@ -45,15 +49,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Get the search wrapper, input, and results elements.
   function getActiveSearchElement() {
-    const inputs = Array.from(document.querySelectorAll('.search-wrapper')).filter(el => el.clientHeight > 0);
+    const inputs = Array.from(document.querySelectorAll(wrapperClass)).filter(el => el.clientHeight > 0);
     if (inputs.length === 1) {
       return {
         wrapper: inputs[0],
-        inputElement: inputs[0].querySelector('.search-input'),
-        resultsElement: inputs[0].querySelector('.search-results')
+        inputElement: inputs[0].querySelector(inputClass),
+        resultsElement: inputs[0].querySelector(resultsClass)
       };
     }
-    return undefined;
+
+    return {
+      wrapper: undefined,
+      inputElement: undefined,
+      resultsElement: undefined
+    };
   }
 
   const INPUTS = ['input', 'select', 'button', 'textarea']
@@ -72,10 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
       (activeElement && activeElement.isContentEditable))
       return;
 
-    if (
+    if (defaultSearch && (
       e.key === '/' ||
       (e.key === 'k' &&
-        (e.metaKey /* for Mac */ || /* for non-Mac */ e.ctrlKey))
+        (e.metaKey /* for Mac */ || /* for non-Mac */ e.ctrlKey)))
     ) {
       e.preventDefault();
       inputElement.focus();
@@ -194,6 +203,10 @@ document.addEventListener("DOMContentLoaded", function () {
    * @returns {Promise<void>} A promise that resolves when the index is preloaded.
    */
   async function preloadIndex() {
+    // Only run once
+    if (window.pageIndex !== undefined) {
+      return;
+    }
     const tokenize = '{{- site.Params.search.flexsearch.tokenize | default  "forward" -}}';
 
     const isCJK = () => {
@@ -334,6 +347,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       for (let j = 0; j < sectionResults.length; j++) {
         const { doc } = sectionResults[j]
+        if (!doc.url.startsWith(baseUrl)) {
+          continue;
+        }
+
         const isMatchingTitle = doc.display !== undefined
         if (isMatchingTitle) {
           pageTitleMatches[i]++
@@ -422,7 +439,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       let li = createElement(`
         <li>
-          <a data-index="${i}" href="${result.route}" class=${i === 0 ? "active" : ""}>
+          <a data-index="${i}" href="${result.route}" class=not-prose ${i === 0 ? "active" : ""}>
             <div class="title">`+ highlightMatches(result.children.title, query) + `</div>` +
         (result.children.content ?
           `<div class="excerpt">` + highlightMatches(result.children.content, query) + `</div>` : '') + `
@@ -436,4 +453,4 @@ document.addEventListener("DOMContentLoaded", function () {
     resultsElement.appendChild(fragment);
     resultsElement.dataset.count = results.length;
   }
-})();
+};
