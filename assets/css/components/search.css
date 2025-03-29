@@ -1,31 +1,31 @@
 .search-wrapper {
   li {
-    @apply hx-mx-2.5 hx-break-words hx-rounded-md contrast-more:hx-border hx-text-gray-800 contrast-more:hx-border-transparent dark:hx-text-gray-300;
+    @apply hx:mx-2.5 hx:break-words hx:rounded-md hx:contrast-more:border hx:text-gray-800 hx:contrast-more:border-transparent hx:dark:text-gray-300;
     a {
-      @apply hx-block hx-scroll-m-12 hx-px-2.5 hx-py-2;
+      @apply hx:block hx:scroll-m-12 hx:px-2.5 hx:py-2;
     }
 
     .title {
-      @apply hx-text-base hx-font-semibold hx-leading-5;
+      @apply hx:text-base hx:font-semibold hx:leading-5;
     }
 
     .active {
-      @apply hx-rounded-md hx-bg-primary-500/10 contrast-more:hx-border-primary-500;
+      @apply hx:rounded-md hx:bg-primary-500/10 hx:contrast-more:border-primary-500;
     }
   }
 
   .no-result {
-    @apply hx-block hx-select-none hx-p-8 hx-text-center hx-text-sm hx-text-gray-400;
+    @apply hx:block hx:select-none hx:p-8 hx:text-center hx:text-sm hx:text-gray-400;
   }
 
   .prefix {
-    @apply hx-mx-2.5 hx-mb-2 hx-mt-6 hx-select-none hx-border-b hx-border-black/10 hx-px-2.5 hx-pb-1.5 hx-text-xs hx-font-semibold
-    hx-uppercase hx-text-gray-500 first:hx-mt-0 dark:hx-border-white/20 dark:hx-text-gray-300 contrast-more:hx-border-gray-600
-    contrast-more:hx-text-gray-900 contrast-more:dark:hx-border-gray-50 contrast-more:dark:hx-text-gray-50;
+    @apply hx:mx-2.5 hx:mb-2 hx:mt-6 hx:select-none hx:border-b hx:border-black/10 hx:px-2.5 hx:pb-1.5 hx:text-xs hx:font-semibold
+    hx:uppercase hx:text-gray-500 hx:first:mt-0 hx:dark:border-white/20 hx:dark:text-gray-300 hx:contrast-more:border-gray-600
+    hx:contrast-more:text-gray-900 hx:contrast-more:dark:border-gray-50 hx:contrast-more:dark:text-gray-50;
   }
 
   .excerpt {
-    @apply hx-overflow-hidden hx-text-ellipsis hx-mt-1 hx-text-sm hx-leading-[1.35rem] hx-text-gray-600 dark:hx-text-gray-400 contrast-more:dark:hx-text-gray-50;
+    @apply hx:overflow-hidden hx:text-ellipsis hx:mt-1 hx:text-sm hx:leading-[1.35rem] hx:text-gray-600 hx:dark:text-gray-400 hx:contrast-more:dark:text-gray-50;
     display: -webkit-box;
     line-clamp: 1;
     -webkit-line-clamp: 1;
@@ -33,6 +33,6 @@
   }
 
   .match {
-    @apply hx-text-primary-600;
+    @apply hx:text-primary-600;
   }
 }

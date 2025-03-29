@@ -1,5 +1,6 @@
 ---
 title: Icon
+next: /docs/guide/shortcodes/steps
 ---
 
 To use this shortcode inline, inline shortcode needs to be enabled in the config:

@@ -1,7 +1,7 @@
 <h{{ .Level }}>
   {{- .Text | safeHTML -}}
   {{- if gt .Level 1 -}}
-    <span class="hx-absolute -hx-mt-20" id="{{ .Anchor | safeURL }}"></span>
+    <span class="hx:absolute hx:-mt-20" id="{{ .Anchor | safeURL }}"></span>
     <a href="#{{ .Anchor | safeURL }}" class="subheading-anchor" aria-label="Permalink for this section"></a>
   {{- end -}}
 </h{{ .Level }}>

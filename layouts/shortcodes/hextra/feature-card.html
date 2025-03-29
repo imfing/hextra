@@ -17,20 +17,20 @@
 <a
   {{ with $link }}href="{{ $href }}" {{ with $external }} target="_blank" rel="noreferrer"{{ end }}{{ end }}
   {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
-  class="{{ $class }} hextra-feature-card not-prose hx-block hx-relative hx-overflow-hidden hx-rounded-3xl hx-border hx-border-gray-200 hover:hx-border-gray-300 dark:hx-border-neutral-800 dark:hover:hx-border-neutral-700 before:hx-pointer-events-none before:hx-absolute before:hx-inset-0 before:hx-bg-glass-gradient"
+  class="{{ $class }} hextra-feature-card not-prose hx:block hx:relative hx:overflow-hidden hx:rounded-3xl hx:border hx:border-gray-200 hx:hover:border-gray-300 hx:dark:border-neutral-800 hx:dark:hover:border-neutral-700 hx:before:pointer-events-none hx:before:absolute hx:before:inset-0 hx:before:bg-glass-gradient"
 >
-  <div class="hx-relative hx-w-full hx-p-6">
-    <h3 class="hx-text-2xl hx-font-medium hx-leading-6 hx-mb-2 hx-flex hx-items-center">
+  <div class="hx:relative hx:w-full hx:p-6">
+    <h3 class="hx:text-2xl hx:font-medium hx:leading-6 hx:mb-2 hx:flex hx:items-center">
       {{ with $icon -}}
-        <span class="hx-pr-2">
+        <span class="hx:pr-2">
           {{- partial "utils/icon.html" (dict "name" . "attributes" "height=1.5rem") -}}
         </span>
       {{ end -}}
       <span>{{ $title }}</span>
     </h3>
-    <p class="hx-text-gray-500 dark:hx-text-gray-400 hx-text-sm hx-leading-6">{{ $subtitle | markdownify }}</p>
+    <p class="hx:text-gray-500 hx:dark:text-gray-400 hx:text-sm hx:leading-6">{{ $subtitle | markdownify }}</p>
   </div>
   {{- with $image -}}
-    <img src="{{ . }}" class="hx-absolute hx-max-w-none {{ $imageClass }}" alt="{{ $title }}" />
+    <img src="{{ . }}" class="hx:absolute hx:max-w-none {{ $imageClass }}" alt="{{ $title }}" />
   {{- end -}}
 </a>

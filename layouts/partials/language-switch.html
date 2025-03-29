@@ -6,33 +6,33 @@
 {{- $changeLanguage := (T "changeLanguage") | default "Change language" -}}
 
 {{- if hugo.IsMultilingual -}}
-  <div class="hx-flex hx-justify-items-start {{ if $grow }}hx-grow{{ end }}">
+  <div class="hx:flex hx:justify-items-start {{ if $grow }}hx:grow{{ end }}">
     <button
       title="{{ $changeLanguage }}"
       data-state="closed"
-      class="language-switcher hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 hx-grow"
+      class="language-switcher hx:cursor-pointer hx:h-7 hx:rounded-md hx:px-2 hx:text-left hx:text-xs hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:grow"
       type="button"
       aria-label="{{ $changeLanguage }}"
     >
-      <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize">
+      <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
         {{- partial "utils/icon" (dict "name" "globe-alt" "attributes" "height=12") -}}
         {{- if not $hideLabel }}<span>{{ site.Language.LanguageName }}</span>{{ end -}}
       </div>
     </button>
     <ul
-      class="language-options hx-hidden hx-z-20 hx-max-h-64 hx-overflow-auto hx-rounded-md hx-ring-1 hx-ring-black/5 hx-bg-white hx-py-1 hx-text-sm hx-shadow-lg dark:hx-ring-white/20 dark:hx-bg-neutral-800"
+      class="language-options hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-md hx:ring-1 hx:ring-black/5 hx:bg-white hx:py-1 hx:text-sm hx:shadow-lg hx:dark:ring-white/20 hx:dark:bg-neutral-800"
       style="position: fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
     >
       {{ range site.Languages }}
         {{ $link := partial "utils/lang-link" (dict "lang" .Lang "context" $page) }}
-        <li class="hx-flex hx-flex-col">
+        <li class="hx:flex hx:flex-col">
           <a
             href="{{ $link }}"
-            class="hx-text-gray-800 dark:hx-text-gray-100 hover:hx-bg-primary-50 hover:hx-text-primary-600 hover:dark:hx-bg-primary-500/10 hover:dark:hx-text-primary-600 hx-relative hx-cursor-pointer hx-whitespace-nowrap hx-py-1.5 hx-transition-colors ltr:hx-pl-3 ltr:hx-pr-9 rtl:hx-pr-3 rtl:hx-pl-9"
+            class="hx:text-gray-800 hx:dark:text-gray-100 hx:hover:bg-primary-50 hx:hover:text-primary-600 hx:hover:dark:bg-primary-500/10 hx:hover:dark:text-primary-600 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9"
           >
             {{- .LanguageName -}}
             {{- if eq .LanguageName site.Language.LanguageName -}}
-              <span class="hx-absolute hx-inset-y-0 hx-flex hx-items-center ltr:hx-right-3 rtl:hx-left-3">
+              <span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3">
                 {{- partial "utils/icon" (dict "name" "check" "attributes" "height=1em width=1em") -}}
               </span>
             {{- end -}}

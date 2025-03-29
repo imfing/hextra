@@ -12,7 +12,7 @@
       {{- $filename = strings.TrimPrefix "/" $filename -}}
       {{- $file_url := urls.JoinPath $base_url $filename -}}
 
-      <a class="hx-no-underline hx-inline-flex hx-items-center hx-gap-1" href="{{ $file_url }}" target="_blank" rel="noopener noreferrer">
+      <a class="hx:no-underline hx:inline-flex hx:items-center hx:gap-1" href="{{ $file_url }}" target="_blank" rel="noopener noreferrer">
           <span>{{- $filename -}}</span>
           {{- partial "utils/icon" (dict "name" "external-link" "attributes" "height=1em") -}}
       </a>

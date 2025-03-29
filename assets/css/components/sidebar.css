@@ -1,7 +1,7 @@
-@media (max-width: 767px) {
+@media (max-width: 48rem) {
   .sidebar-container {
-    @apply hx-fixed hx-pt-[calc(var(--navbar-height))] hx-top-0 hx-w-full hx-bottom-0 hx-z-[15] hx-overscroll-contain hx-bg-white dark:hx-bg-dark;
-    transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
+    @apply hx:fixed hx:pt-[calc(var(--navbar-height))] hx:top-0 hx:w-full hx:bottom-0 hx:z-[15] hx:overscroll-contain hx:bg-white hx:dark:bg-dark;
+    transition: transform 0.4s cubic-bezier(0.52, 0.16, 0.04, 1);
     will-change: transform, opacity;
     contain: layout style;
     backface-visibility: hidden;
@@ -10,12 +10,12 @@
 
 .sidebar-container {
   li > div {
-    @apply hx-h-0;
+    @apply hx:h-0;
   }
   li.open > div {
-    @apply hx-h-auto hx-pt-1;
+    @apply hx:h-auto hx:pt-1;
   }
   li.open > a > span > svg > path {
-    @apply hx-rotate-90;
+    @apply hx:rotate-90;
   }
 }

@@ -9,10 +9,10 @@
 {{- $icon := .Get "icon" -}}
 {{- $content := .InnerDeindent | markdownify -}}
 
-{{- $defaultClass := "hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300" -}}
-{{- $infoClass := "hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200" -}}
-{{- $warningClass := "hx-border-yellow-100 hx-bg-yellow-50 hx-text-yellow-900 dark:hx-border-yellow-200/30 dark:hx-bg-yellow-700/30 dark:hx-text-yellow-200" -}}
-{{- $errorClass := "hx-border-red-200 hx-bg-red-100 hx-text-red-900 dark:hx-border-red-200/30 dark:hx-bg-red-900/30 dark:hx-text-red-200" -}}
+{{- $defaultClass := "hx:border-orange-100 hx:bg-orange-50 hx:text-orange-800 hx:dark:border-orange-400/30 hx:dark:bg-orange-400/20 hx:dark:text-orange-300" -}}
+{{- $infoClass := "hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200" -}}
+{{- $warningClass := "hx:border-yellow-100 hx:bg-yellow-50 hx:text-yellow-900 hx:dark:border-yellow-200/30 hx:dark:bg-yellow-700/30 hx:dark:text-yellow-200" -}}
+{{- $errorClass := "hx:border-red-200 hx:bg-red-100 hx:text-red-900 hx:dark:border-red-200/30 hx:dark:bg-red-900/30 hx:dark:text-red-200" -}}
 
 {{- $class := cond (eq $type "info") $infoClass (cond (eq $type "warning") $warningClass (cond (eq $type "error") $errorClass $defaultClass)) -}}
 

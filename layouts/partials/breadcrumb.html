@@ -1,14 +1,14 @@
 {{- if (default true .Params.breadcrumbs) }}
-  <div class="hx-mt-1.5 hx-flex hx-items-center hx-gap-1 hx-overflow-hidden hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 contrast-more:hx-text-current">
+  <div class="hx:mt-1.5 hx:flex hx:items-center hx:gap-1 hx:overflow-hidden hx:text-sm hx:text-gray-500 hx:dark:text-gray-400 hx:contrast-more:text-current">
     {{- range .Ancestors.Reverse }}
       {{- if not .IsHome }}
-        <div class="hx-whitespace-nowrap hx-transition-colors hx-min-w-[24px] hx-overflow-hidden hx-text-ellipsis hover:hx-text-gray-900 dark:hover:hx-text-gray-100">
+        <div class="hx:whitespace-nowrap hx:transition-colors hx:min-w-[24px] hx:overflow-hidden hx:text-ellipsis hx:hover:text-gray-900 hx:dark:hover:text-gray-100">
           <a href="{{ .RelPermalink }}">{{- partial "utils/title" . -}}</a>
         </div>
-        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx-w-3.5 hx-shrink-0 rtl:-hx-rotate-180\"") -}}
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx:w-3.5 hx:shrink-0 hx:rtl:-rotate-180\"") -}}
       {{ end -}}
     {{ end -}}
-    <div class="hx-whitespace-nowrap hx-transition-colors hx-font-medium hx-text-gray-700 contrast-more:hx-font-bold contrast-more:hx-text-current dark:hx-text-gray-100 contrast-more:dark:hx-text-current">
+    <div class="hx:whitespace-nowrap hx:transition-colors hx:font-medium hx:text-gray-700 hx:contrast-more:font-bold hx:contrast-more:text-current hx:dark:text-gray-100 hx:contrast-more:dark:text-current">
       {{- partial "utils/title" . -}}
     </div>
   </div>

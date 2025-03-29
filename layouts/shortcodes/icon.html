@@ -8,6 +8,6 @@
 
 {{- $icon = replaceRE "<svg" (printf "<svg %s" $attributes) $icon -}}
 
-<span class="hx-inline-block hx-align-text-bottom icon">
+<span class="hx:inline-block hx:align-text-bottom icon">
   {{- $icon | safeHTML -}}
 </span>

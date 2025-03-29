@@ -3,10 +3,10 @@
 {{- if site.Params.displayUpdatedDate -}}
   {{- with .Lastmod -}}
     {{ $datetime := (time.Format "2006-01-02T15:04:05.000Z" .) }}
-    <div class="hx-mt-12 hx-mb-8 hx-block hx-text-xs hx-text-gray-500 ltr:hx-text-right rtl:hx-text-left dark:hx-text-gray-400">{{ $lastUpdated }} <time datetime="{{ $datetime }}">{{ partial "utils/format-date" . }}</time></div>
+    <div class="hx:mt-12 hx:mb-8 hx:block hx:text-xs hx:text-gray-500 hx:ltr:text-right hx:rtl:text-left hx:dark:text-gray-400">{{ $lastUpdated }} <time datetime="{{ $datetime }}">{{ partial "utils/format-date" . }}</time></div>
   {{- else -}}
-    <div class="hx-mt-16"></div>
+    <div class="hx:mt-16"></div>
   {{- end -}}
 {{- else -}}
-  <div class="hx-mt-16"></div>
+  <div class="hx:mt-16"></div>
 {{- end -}}

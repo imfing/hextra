@@ -1,9 +1,9 @@
 {{ define "main" }}
-  <div class="hx-mx-auto hx-flex hx-max-w-[90rem]">
+  <div class="hx:mx-auto hx:flex hx:max-w-[90rem]">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
-    <article class="hx-w-full hx-break-words hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-pt-4 hx-pb-8 hx-pl-[max(env(safe-area-inset-left),1.5rem)] hx-pr-[max(env(safe-area-inset-left),1.5rem)]">
-      <br class="hx-mt-1.5 hx-text-sm" />
-      {{ if .Title }}<h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">{{ .Title }}</h1>{{ end }}
+    <article class="hx:w-full hx:break-words hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:pt-4 hx:pb-8 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-left),1.5rem)]">
+      <br class="hx:mt-1.5 hx:text-sm" />
+      {{ if .Title }}<h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">{{ .Title }}</h1>{{ end }}
       <div class="content">
         {{ .Content }}
       </div>

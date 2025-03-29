@@ -1,9 +1,9 @@
 {{- $name := .Get "name" -}}
 
 
-<li class="hx-flex hx-list-none">
-  <span class="hx-inline-flex hx-cursor-default hx-items-center hx-py-1">
+<li class="hx:flex hx:list-none">
+  <span class="hx:inline-flex hx:cursor-default hx:items-center hx:py-1">
     {{- partial "utils/icon" (dict "name" "document-text" "attributes" "width=1em") -}}
-    <span class="ltr:hx-ml-1 rtl:hx-mr-1">{{ $name | markdownify }}</span>
+    <span class="hx:ltr:ml-1 hx:rtl:mr-1">{{ $name | markdownify }}</span>
   </span>
 </li>

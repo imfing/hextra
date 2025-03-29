@@ -10,9 +10,9 @@
 {{- $tag := .tag -}}
 {{- $tagType := .tagType -}}
 
-{{ $linkClass := "hover:hx-border-gray-300 hx-bg-transparent hx-shadow-sm dark:hx-border-neutral-800 hover:hx-bg-slate-50 hover:hx-shadow-md dark:hover:hx-border-neutral-700 dark:hover:hx-bg-neutral-900" }}
+{{ $linkClass := "hx:hover:border-gray-300 hx:bg-transparent hx:shadow-xs hx:dark:border-neutral-800 hx:hover:bg-slate-50 hx:hover:shadow-md hx:dark:hover:border-neutral-700 hx:dark:hover:bg-neutral-900" }}
 {{- with $image -}}
-  {{ $linkClass = "hover:hx-border-gray-300 hx-bg-gray-100 hx-shadow dark:hx-border-neutral-700 dark:hx-bg-neutral-800 dark:hx-text-gray-50 hover:hx-shadow-lg dark:hover:hx-border-neutral-500 dark:hover:hx-bg-neutral-700" }}
+  {{ $linkClass = "hx:hover:border-gray-300 hx:bg-gray-100 hx:shadow-sm hx:dark:border-neutral-700 hx:dark:bg-neutral-800 hx:dark:text-gray-50 hx:hover:shadow-lg hx:dark:hover:border-neutral-500 hx:dark:hover:bg-neutral-700" }}
 {{- end -}}
 
 {{- $external := strings.HasPrefix $link "http" -}}
@@ -20,7 +20,7 @@
 
 
 <a
-  class="hextra-card hx-group hx-flex hx-flex-col hx-justify-start hx-overflow-hidden hx-rounded-lg hx-border hx-border-gray-200 hx-text-current hx-no-underline dark:hx-shadow-none hover:hx-shadow-gray-100 dark:hover:hx-shadow-none hx-shadow-gray-100 active:hx-shadow-sm active:hx-shadow-gray-200 hx-transition-all hx-duration-200 {{ $linkClass }}"
+  class="hextra-card hx:group hx:flex hx:flex-col hx:justify-start hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:text-current hx:no-underline hx:dark:shadow-none hx:hover:shadow-gray-100 hx:dark:hover:shadow-none hx:shadow-gray-100 hx:active:shadow-sm hx:active:shadow-gray-200 hx:transition-all hx:duration-200 {{ $linkClass }}"
   {{- if $link -}}
     href="{{ $href }}"
     {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
@@ -39,18 +39,18 @@
     />
   {{- end -}}
 
-  {{- $padding := "hx-p-4" -}}
+  {{- $padding := "hx:p-4" -}}
   {{- with $subtitle -}}
-    {{- $padding = "hx-pt-4 hx-px-4" -}}
+    {{- $padding = "hx:pt-4 hx:px-4" -}}
   {{- end -}}
 
 
-  <span class="hextra-card-icon hx-flex hx-font-semibold hx-items-start hx-gap-2 {{ $padding }} hx-text-gray-700 hover:hx-text-gray-900 dark:hx-text-neutral-200 dark:hover:hx-text-neutral-50">
+  <span class="hextra-card-icon hx:flex hx:font-semibold hx:items-start hx:gap-2 {{ $padding }} hx:text-gray-700 hx:hover:text-gray-900 hx:dark:text-neutral-200 hx:dark:hover:text-neutral-50">
     {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{- end -}}
     {{- $title -}}
   </span>
   {{- with $subtitle -}}
-    <div class="hextra-card-subtitle hx-line-clamp-3 hx-text-sm hx-font-normal hx-text-gray-500 dark:hx-text-gray-400 hx-px-4 hx-mb-4 hx-mt-2">{{- $subtitle | markdownify -}}</div>
+    <div class="hextra-card-subtitle hx:line-clamp-3 hx:text-sm hx:font-normal hx:text-gray-500 hx:dark:text-gray-400 hx:px-4 hx:mb-4 hx:mt-2">{{- $subtitle | markdownify -}}</div>
   {{- end -}}
 
   {{- if $tag }}

@@ -8,14 +8,14 @@
 <button
   title="{{ $changeTheme }}"
   data-theme="light"
-  class="theme-toggle hx-group hx-h-7 hx-rounded-md hx-px-2 hx-text-left hx-text-xs hx-font-medium hx-text-gray-600 hx-transition-colors dark:hx-text-gray-400 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50"
+  class="theme-toggle hx:cursor-pointer hx:group hx:h-7 hx:rounded-md hx:px-2 hx:text-left hx:text-xs hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50"
   type="button"
   aria-label="{{ $changeTheme }}"
 >
-  <div class="hx-flex hx-items-center hx-gap-2 hx-capitalize">
-    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12 class=\"group-data-[theme=light]:hx-hidden\"") -}}
-    {{- if not $hideLabel }}<span class="group-data-[theme=light]:hx-hidden">{{ $light }}</span>{{ end -}}
-    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12 class=\"group-data-[theme=dark]:hx-hidden\"") -}}
-    {{- if not $hideLabel }}<span class="group-data-[theme=dark]:hx-hidden">{{ $dark }}</span>{{ end -}}
+  <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
+    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12 class=\"hx:group-data-[theme=light]:hidden\"") -}}
+    {{- if not $hideLabel }}<span class="hx:group-data-[theme=light]:hidden">{{ $light }}</span>{{ end -}}
+    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12 class=\"hx:group-data-[theme=dark]:hidden\"") -}}
+    {{- if not $hideLabel }}<span class="hx:group-data-[theme=dark]:hidden">{{ $dark }}</span>{{ end -}}
   </div>
 </button>

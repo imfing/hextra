@@ -1,17 +1,17 @@
 {{- $name := .Get "name" -}}
 {{- $state := .Get "state" | default "open" }}
 
-<li class="hx-group hx-flex hx-list-none hx-flex-col">
-  <button class="hextra-filetree-folder hx-inline-flex hx-cursor-pointer hx-items-center hx-py-1 hover:hx-opacity-60">
-    <span data-state="{{ $state }}" class="data-[state=open]:hx-hidden">
+<li class="hx:group hx:flex hx:list-none hx:flex-col">
+  <button class="hextra-filetree-folder hx:inline-flex hx:cursor-pointer hx:items-center hx:py-1 hx:hover:opacity-60">
+    <span data-state="{{ $state }}" class="hx:data-[state=open]:hidden">
       {{- partial "utils/icon" (dict "name" "folder" "attributes" "width=1em") -}}
     </span>
-    <span data-state="{{ $state }}" class="data-[state=closed]:hx-hidden">
+    <span data-state="{{ $state }}" class="hx:data-[state=closed]:hidden">
       {{- partial "utils/icon" (dict "name" "folder-open" "attributes" "width=1em") -}}
     </span>
-    <span class="ltr:hx-ml-1 rtl:hx-mr-1">{{ $name }}</span>
+    <span class="hx:ltr:ml-1 hx:rtl:mr-1">{{ $name }}</span>
   </button>
-  <ul data-state="{{ $state }}" class="ltr:hx-pl-5 rtl:hx-pr-5 data-[state=closed]:hx-hidden">
+  <ul data-state="{{ $state }}" class="hx:ltr:pl-5 hx:rtl:pr-5 hx:data-[state=closed]:hidden">
     {{- .InnerDeindent -}}
   </ul>
 </li>

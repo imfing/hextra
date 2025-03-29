@@ -1,34 +1,34 @@
 {{ define "main" }}
   {{- $readMore := (T "readMore") | default "Read more →" -}}
-  <div class="hx-mx-auto hx-flex {{ partial `utils/page-width` . }}">
+  <div class="hx:mx-auto hx:flex {{ partial `utils/page-width` . }}">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
-    <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
-        <br class="hx-mt-1.5 hx-text-sm" />
-        {{ if .Title }}<h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">{{ .Title }}</h1>{{ end }}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx:w-full hx:min-w-0 hx:max-w-6xl hx:px-6 hx:pt-4 hx:md:px-12">
+        <br class="hx:mt-1.5 hx:text-sm" />
+        {{ if .Title }}<h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">{{ .Title }}</h1>{{ end }}
         <div class="content">{{ .Content }}</div>
         {{- $pages := partial "utils/sort-pages" (dict "page" . "by" site.Params.blog.list.sortBy "order" site.Params.blog.list.sortOrder) -}}
         {{- range $pages }}
-          <div class="hx-mb-10">
-            <h3><a style="color: inherit; text-decoration: none;" class="hx-block hx-font-semibold hx-mt-8 hx-text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <div class="hx:mb-10">
+            <h3><a style="color: inherit; text-decoration: none;" class="hx:block hx:font-semibold hx:mt-8 hx:text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
             {{- if site.Params.blog.list.displayTags -}}
               {{ with .Params.tags }}
-                <p class="hx-opacity-50 hx-text-sm hx-leading-7">
-                  {{- range . }}<a class="hx-inline-block hx-mr-2">#{{ . }}</a>{{ end -}}
+                <p class="hx:opacity-50 hx:text-sm hx:leading-7">
+                  {{- range . }}<a class="hx:inline-block hx:mr-2">#{{ . }}</a>{{ end -}}
                 </p>
               {{ end -}}
             {{- end -}}
-            <p class="hx-opacity-80 hx-mt-4 hx-leading-7">{{- partial "utils/page-description" . -}}</p>
-            <p class="hx-opacity-80 hx-mt-1 hx-leading-7">
-              <a class="hx-text-[color:hsl(var(--primary-hue),100%,50%)] hx-underline hx-underline-offset-2 hx-decoration-from-font" href="{{ .RelPermalink }}">
+            <p class="hx:opacity-80 hx:mt-4 hx:leading-7">{{- partial "utils/page-description" . -}}</p>
+            <p class="hx:opacity-80 hx:mt-1 hx:leading-7">
+              <a class="hx:text-[color:hsl(var(--primary-hue),100%,50%)] hx:underline hx:underline-offset-2 hx:decoration-from-font" href="{{ .RelPermalink }}">
                 {{- $readMore -}}
               </a>
             </p>
-            <p class="hx-opacity-50 hx-text-sm hx-mt-4 hx-leading-7">{{ partial "utils/format-date" .Date }}</p>
+            <p class="hx:opacity-50 hx:text-sm hx:mt-4 hx:leading-7">{{ partial "utils/format-date" .Date }}</p>
           </div>
         {{ end -}}
       </main>
     </article>
-    <div class="max-xl:hx-hidden hx-h-0 hx-w-64 hx-shrink-0"></div>
+    <div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div>
   </div>
 {{- end -}}

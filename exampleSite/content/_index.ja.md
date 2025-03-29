@@ -4,52 +4,52 @@ layout: hextra-home
 ---
 
 {{< hextra/hero-badge >}}
-  <div class="hx-w-2 hx-h-2 hx-rounded-full hx-bg-primary-400"></div>
+  <div class="hx:w-2 hx:h-2 hx:rounded-full hx:bg-primary-400"></div>
   <span>無料、オープンソース</span>
   {{< icon name="arrow-circle-right" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 
-<div class="hx-mt-6 hx-mb-6">
+<div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-headline >}}
-  MarkdownとHugoで&nbsp;<br class="sm:hx-block hx-hidden" />モダンなウェブサイトを構築
+  MarkdownとHugoで&nbsp;<br class="hx:sm:block hx:hidden" />モダンなウェブサイトを構築
 {{< /hextra/hero-headline >}}
 </div>
 
-<div class="hx-mb-12">
+<div class="hx:mb-12">
 {{< hextra/hero-subtitle >}}
-  美しい静的ウェブサイトを作るための&nbsp;<br class="sm:hx-block hx-hidden" />高速でバッテリー同梱型のHugoテーマ
+  美しい静的ウェブサイトを作るための&nbsp;<br class="hx:sm:block hx:hidden" />高速でバッテリー同梱型のHugoテーマ
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx-mb-6">
+<div class="hx:mb-6">
 {{< hextra/hero-button text="始める" link="docs" >}}
 </div>
 
-<div class="hx-mt-6"></div>
+<div class="hx:mt-6"></div>
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
     title="高速かつ多機能"
     subtitle="シンプルで使いやすく、それでいて強力で豊富な機能を備えています。"
-    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/hextra-doc.webp"
-    imageClass="hx-top-[40%] hx-left-[24px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
+    imageClass="hx:top-[40%] hx:left-[24px] hx:w-[180%] hx:sm:w-[110%] hx:dark:opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(194,97,254,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="MarkdownだけでOK"
     subtitle="Markdownだけで作成可能。ショートコードコンポーネントで充実させることもできます。"
-    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-lg:hx-min-h-[340px]"
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-lg:min-h-[340px]"
     image="/images/hextra-markdown.webp"
-    imageClass="hx-top-[40%] hx-left-[36px] hx-w-[180%] sm:hx-w-[110%] dark:hx-opacity-80"
+    imageClass="hx:top-[40%] hx:left-[36px] hx:w-[180%] hx:sm:w-[110%] hx:dark:opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(142,53,74,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card
     title="全文検索"
     subtitle="FlexSearchによる全文検索が内蔵されており、追加の設定は不要です。"
-    class="hx-aspect-auto md:hx-aspect-[1.1/1] max-md:hx-min-h-[340px]"
+    class="hx:aspect-auto hx:md:aspect-[1.1/1] hx:max-md:min-h-[340px]"
     image="/images/hextra-search.webp"
-    imageClass="hx-top-[40%] hx-left-[36px] hx-w-[110%] sm:hx-w-[110%] dark:hx-opacity-80"
+    imageClass="hx:top-[40%] hx:left-[36px] hx:w-[110%] hx:sm:w-[110%] hx:dark:opacity-80"
     style="background: radial-gradient(ellipse at 50% 80%,rgba(221,210,59,0.15),hsla(0,0%,100%,0));"
   >}}
   {{< hextra/feature-card

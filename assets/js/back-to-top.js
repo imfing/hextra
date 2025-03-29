@@ -5,9 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (backToTop) {
     document.addEventListener("scroll", (e) => {
       if (window.scrollY > 300) {
-        backToTop.classList.remove("hx-opacity-0");
+        backToTop.classList.remove("hx:opacity-0");
       } else {
-        backToTop.classList.add("hx-opacity-0");
+        backToTop.classList.add("hx:opacity-0");
       }
     });
   }

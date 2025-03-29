@@ -7,7 +7,7 @@
 
 <a
   {{ if $link }}href="{{ $href }}"{{ end }}
-  class="{{ $class }} not-prose hx-inline-flex hx-items-center hx-rounded-full hx-gap-2 hx-px-3 hx-py-1 hx-text-xs hx-text-gray-600 dark:hx-text-gray-400 hx-bg-gray-100 dark:hx-bg-neutral-800 dark:hx-border-neutral-800 hx-border hover:hx-border-gray-400 dark:hover:hx-text-gray-50 dark:hover:hx-border-gray-600 hx-transition-all hx-ease-in hx-duration-200"
+  class="{{ $class }} not-prose hx:inline-flex hx:items-center hx:rounded-full hx:gap-2 hx:px-3 hx:py-1 hx:text-xs hx:text-gray-600 hx:dark:text-gray-400 hx:bg-gray-100 hx:dark:bg-neutral-800 hx:border-gray-200 hx:dark:border-neutral-800 hx:border hx:hover:border-gray-400 hx:dark:hover:text-gray-50 hx:dark:hover:border-gray-600 hx:transition-all hx:ease-in hx:duration-200"
   {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
   {{ if $external }}target="_blank" rel="noreferrer"{{ end -}}
 >

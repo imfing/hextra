@@ -1,126 +1,130 @@
 .content {
   :where(h1):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100;
+    @apply hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100;
   }
   :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-10 hx-border-b hx-pb-1 hx-text-3xl hx-border-neutral-200/70 contrast-more:hx-border-neutral-400 dark:hx-border-primary-100/10 contrast-more:dark:hx-border-neutral-400;
+    @apply hx:font-semibold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100 hx:mt-10 hx:border-b hx:pb-1 hx:text-3xl hx:border-neutral-200/70 hx:contrast-more:border-neutral-400 hx:dark:border-primary-100/10 hx:contrast-more:dark:border-neutral-400;
   }
   :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-8 hx-text-2xl;
+    @apply hx:font-semibold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100 hx:mt-8 hx:text-2xl;
   }
   :where(h4):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-8 hx-text-xl;
+    @apply hx:font-semibold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100 hx:mt-8 hx:text-xl;
   }
   :where(h5):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-8 hx-text-lg;
+    @apply hx:font-semibold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100 hx:mt-8 hx:text-lg;
   }
   :where(h6):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-font-semibold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100 hx-mt-8 hx-text-base;
+    @apply hx:font-semibold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100 hx:mt-8 hx:text-base;
   }
   :where(p):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mt-6 hx-leading-7 first:hx-mt-0;
+    @apply hx:mt-6 hx:leading-7 hx:first:mt-0;
   }
   :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-text-primary-600 hx-underline hx-decoration-from-font [text-underline-position:from-font];
+    @apply hx:text-primary-600 hx:underline hx:decoration-from-font;
   }
   :where(blockquote):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mt-6 hx-border-gray-300 hx-italic hx-text-gray-700 dark:hx-border-gray-700 dark:hx-text-gray-400 first:hx-mt-0 ltr:hx-border-l-2 ltr:hx-pl-6 rtl:hx-border-r-2 rtl:hx-pr-6;
+    @apply hx:mt-6 hx:border-gray-300 hx:italic hx:text-gray-700 hx:dark:border-gray-700 hx:dark:text-gray-400 hx:first:mt-0 hx:ltr:border-l-2 hx:ltr:pl-6 hx:rtl:border-r-2 hx:rtl:pr-6;
   }
   :where(pre):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-bg-primary-700/5 hx-mb-4 hx-overflow-x-auto hx-rounded-xl hx-font-medium hx-subpixel-antialiased dark:hx-bg-primary-300/10 hx-text-[.9em] contrast-more:hx-border contrast-more:hx-border-primary-900/20 contrast-more:hx-contrast-150 contrast-more:dark:hx-border-primary-100/40 hx-py-4;
+    @apply hx:bg-primary-700/5 hx:mb-4 hx:overflow-x-auto hx:rounded-xl hx:font-medium hx:subpixel-antialiased hx:dark:bg-primary-300/10 hx:text-[.9em] hx:contrast-more:border hx:contrast-more:border-primary-900/20 hx:contrast-more:contrast-150 hx:contrast-more:dark:border-primary-100/40 hx:py-4;
   }
   :where(code):not(:where(.hextra-code-block code, [class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-border-black hx-border-opacity-[0.04] hx-bg-opacity-[0.03] hx-bg-black hx-break-words hx-rounded-md hx-border hx-py-0.5 hx-px-[.25em] hx-text-[.9em] dark:hx-border-white/10 dark:hx-bg-white/10;
+    @apply hx:border-black/4 hx:bg-black/3 hx:break-words hx:rounded-md hx:border hx:py-0.5 hx:px-[.25em] hx:text-[.9em] hx:dark:border-white/10 hx:dark:bg-white/10;
   }
   :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-block hx-overflow-x-auto hx-mt-6 hx-p-0 first:hx-mt-0;
+    @apply hx:block hx:overflow-x-auto hx:mt-6 hx:p-0 hx:first:mt-0;
 
     tr {
-      @apply hx-m-0 hx-border-t hx-border-gray-300 hx-p-0 dark:hx-border-gray-600 even:hx-bg-gray-100 even:dark:hx-bg-gray-600/20;
+      @apply hx:m-0 hx:border-t hx:border-gray-300 hx:p-0 hx:dark:border-gray-600 hx:even:bg-gray-100 hx:even:dark:bg-gray-600/20;
     }
     th {
-      @apply hx-m-0 hx-border hx-border-gray-300 hx-px-4 hx-py-2 hx-font-semibold dark:hx-border-gray-600;
+      @apply hx:m-0 hx:border hx:border-gray-300 hx:px-4 hx:py-2 hx:font-semibold hx:dark:border-gray-600;
     }
     td {
-      @apply hx-m-0 hx-border hx-border-gray-300 hx-px-4 hx-py-2 dark:hx-border-gray-600;
+      @apply hx:m-0 hx:border hx:border-gray-300 hx:px-4 hx:py-2 hx:dark:border-gray-600;
     }
   }
   :where(ol):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mt-6 hx-list-decimal first:hx-mt-0 ltr:hx-ml-6 rtl:hx-mr-6;
+    @apply hx:mt-6 hx:list-decimal hx:first:mt-0 hx:ltr:ml-6 hx:rtl:mr-6;
     li {
-      @apply hx-my-2;
+      @apply hx:my-2;
     }
   }
   :where(ul):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mt-6 hx-list-disc first:hx-mt-0 ltr:hx-ml-6 rtl:hx-mr-6;
+    @apply hx:mt-6 hx:list-disc hx:first:mt-0 hx:ltr:ml-6 hx:rtl:mr-6;
     li {
-      @apply hx-my-2;
+      @apply hx:my-2;
     }
   }
   /* This CSS rule targets the first nested unordered (ul) or ordered (ol) list
      inside the list item (li) of any parent ul or ol.
      The rule sets the top margin of the selected list to zero. */
   :where(ul, ol) > li > :where(ul, ol):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mt-0;
+    @apply hx:mt-0;
   }
   :where(kbd):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-border-black hx-border-opacity-[0.04] hx-bg-opacity-[0.03] hx-bg-black hx-break-words hx-rounded-md hx-border hx-py-0.5 hx-px-[.25em] hx-text-[.9em] dark:hx-border-white/10 dark:hx-bg-white/10;
+    @apply hx:border-black/4 hx:bg-black/3 hx:break-words hx:rounded-md hx:border hx:py-0.5 hx:px-[.25em] hx:text-[.9em] hx:dark:border-white/10 hx:dark:bg-white/10;
   }
   :where(pre.mermaid):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-bg-transparent hx-rounded-none dark:hx-bg-transparent;
+    @apply hx:bg-transparent hx:rounded-none hx:dark:bg-transparent;
   }
   :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx-mx-auto hx-my-4 hx-rounded-md;
+    @apply hx:mx-auto hx:my-4 hx:rounded-md;
   }
   :where(figure):not(:where([class~=not-prose],[class~=not-prose] *)) {
     figcaption {
-      @apply hx-text-sm hx-text-gray-500 dark:hx-text-gray-400 hx-mt-2 hx-block hx-text-center;
+      @apply hx:text-sm hx:text-gray-500 hx:dark:text-gray-400 hx:mt-2 hx:block hx:text-center;
     }
   }
   /* Definition list */
   :where(dl):not(:where([class~=not-prose],[class~=not-prose] *)) {
     dt {
-      @apply hx-mt-6 hx-font-semibold;
+      @apply hx:mt-6 hx:font-semibold;
     }
     dd {
-      @apply hx-my-2 hx-ps-6;
+      @apply hx:my-2 hx:ps-6;
     }
   }
   .footnotes {
-    @apply hx-mt-12 hx-text-sm;
+    @apply hx:mt-12 hx:text-sm;
+
+    hr {
+      @apply hx:border-gray-200 hx:dark:border-neutral-800;
+    }
   }
 }
 
 .subheading-anchor {
-  @apply hx-opacity-0 hx-transition-opacity ltr:hx-ml-1 rtl:hx-mr-1;
+  @apply hx:opacity-0 hx:transition-opacity hx:ltr:ml-1 hx:rtl:mr-1;
 
   span:target + &,
   :hover > &,
   &:focus {
-    @apply hx-opacity-100;
+    @apply hx:opacity-100;
   }
 
   span + &,
   :hover > & {
-    @apply !hx-no-underline;
+    @apply hx:no-underline!;
   }
 
+  @apply hx:after:text-gray-300 hx:dark:after:text-neutral-700;
   &:after {
-    @apply hx-content-['#'] hx-px-1;
-    @apply hx-text-gray-300 dark:hx-text-neutral-700;
+    @apply hx:content-['#'] hx:px-1;
     span:target + & {
-      @apply hx-text-gray-400;
-      @apply dark:hx-text-neutral-500;
+      @apply hx:text-gray-400;
+      @apply hx:dark:text-neutral-500;
     }
   }
 }
 
 article details > summary {
   &::-webkit-details-marker {
-    @apply hx-hidden;
+    @apply hx:hidden;
   }
   &::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='hx-h-5 hx-w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='hx:h-5 hx:w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z' clip-rule='evenodd' /%3E%3C/svg%3E");
     height: 1.2em;
     width: 1.2em;
     vertical-align: -4px;

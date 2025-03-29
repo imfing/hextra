@@ -4,26 +4,26 @@
 {{- $logoHeight := .Site.Params.navbar.logo.height | default "20" -}}
 {{- $logoDarkPath := .Site.Params.navbar.logo.dark | default $logoPath -}}
 
-{{- $navWidth := "hx-max-w-[90rem]" -}}
+{{- $navWidth := "hx:max-w-[90rem]" -}}
 {{- with .Site.Params.navbar.width -}}
   {{ if eq . "normal" -}}
-    {{ $navWidth = "hx-max-w-screen-xl" -}}
+    {{ $navWidth = "hx:max-w-screen-xl" -}}
   {{ else if eq . "full" -}}
     {{ $navWidth = "max-w-full" -}}
   {{ end -}}
 {{- end -}}
 
-<div class="nav-container hx-sticky hx-top-0 hx-z-20 hx-w-full hx-bg-transparent print:hx-hidden">
-  <div class="nav-container-blur hx-pointer-events-none hx-absolute hx-z-[-1] hx-h-full hx-w-full hx-bg-white dark:hx-bg-dark hx-shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] contrast-more:hx-shadow-[0_0_0_1px_#000] dark:hx-shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] contrast-more:dark:hx-shadow-[0_0_0_1px_#fff]"></div>
+<div class="nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden">
+  <div class="nav-container-blur hx:pointer-events-none hx:absolute hx:z-[-1] hx:h-full hx:w-full hx:bg-white hx:dark:bg-dark hx:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] hx:contrast-more:shadow-[0_0_0_1px_#000] hx:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] hx:contrast-more:dark:shadow-[0_0_0_1px_#fff]"></div>
 
-  <nav class="hx-mx-auto hx-flex hx-items-center hx-justify-end hx-gap-2 hx-h-16 hx-px-6 {{ $navWidth }}">
-    <a class="hx-flex hx-items-center hover:hx-opacity-75 ltr:hx-mr-auto rtl:hx-ml-auto" href="{{ $logoLink }}">
+  <nav class="hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6 {{ $navWidth }}">
+    <a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href="{{ $logoLink }}">
       {{- if (.Site.Params.navbar.displayLogo | default true) }}
-        <img class="hx-mr-2 hx-block dark:hx-hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
-        <img class="hx-mr-2 hx-hidden dark:hx-block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+        <img class="hx:mr-2 hx:block hx:dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+        <img class="hx:mr-2 hx:hidden hx:dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
       {{- end }}
       {{- if (.Site.Params.navbar.displayTitle | default true) }}
-        <span class="hx-mr-2 hx-font-extrabold hx-inline hx-select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
+        <span class="hx:mr-2 hx:font-extrabold hx:inline hx:select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
       {{- end }}
     </a>
 
@@ -43,27 +43,27 @@
         {{/* Display icon menu item */}}
         {{- if .Params.icon -}}
           {{- $rel := cond (eq .Params.icon "mastodon") "noreferrer me" "noreferrer" }}
-          <a class="hx-p-2 hx-text-current" {{ if $external }}target="_blank" rel="{{ $rel }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
+          <a class="hx:p-2 hx:text-current" {{ if $external }}target="_blank" rel="{{ $rel }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
             {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
-            <span class="hx-sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
+            <span class="hx:sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- else -}}
           {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
-          {{- $activeClass := cond $active "hx-font-medium" "hx-text-gray-600 hover:hx-text-gray-800 dark:hx-text-gray-400 dark:hover:hx-text-gray-200" -}}
+          {{- $activeClass := cond $active "hx:font-medium" "hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200" -}}
           <a
             title="{{ or (T .Identifier) .Name | safeHTML }}"
             href="{{ $link }}"
             {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
-            class="hx-text-sm contrast-more:hx-text-gray-700 contrast-more:dark:hx-text-gray-100 hx-relative -hx-ml-2 hx-hidden hx-whitespace-nowrap hx-p-2 md:hx-inline-block {{ $activeClass }}"
+            class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-block {{ $activeClass }}"
           >
-            <span class="hx-text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
+            <span class="hx:text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- end -}}
       {{- end -}}
     {{- end -}}
 
 
-    <button type="button" aria-label="Menu" class="hamburger-menu -hx-mr-2 hx-rounded hx-p-2 active:hx-bg-gray-400/20 md:hx-hidden">
+    <button type="button" aria-label="Menu" class="hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden">
       {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" "height=24") -}}
     </button>
   </nav>

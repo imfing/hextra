@@ -1,53 +1,53 @@
 /* Code syntax highlight */
-@import "chroma/light.css";
-@import "chroma/dark.css";
+@import "./chroma/light.css";
+@import "./chroma/dark.css";
 
 .hextra-code-block {
-  @apply hx-text-[.9em] hx-leading-5;
+  @apply hx:text-[.9em] hx:leading-5;
 
   pre {
-    @apply hx-text-[.9em] hx-bg-primary-700/5 hx-overflow-x-auto hx-font-medium hx-subpixel-antialiased dark:hx-bg-primary-300/10 contrast-more:hx-border contrast-more:hx-border-primary-900/20 contrast-more:hx-contrast-150 contrast-more:dark:hx-border-primary-100/40;
+    @apply hx:text-[.9em] hx:bg-primary-700/5 hx:overflow-x-auto hx:font-medium hx:subpixel-antialiased hx:dark:bg-primary-300/10 hx:contrast-more:border hx:contrast-more:border-primary-900/20 hx:contrast-more:contrast-150 hx:contrast-more:dark:border-primary-100/40;
   }
 
   .filename {
-    @apply hx-absolute hx-top-0 hx-z-[1] hx-w-full hx-truncate hx-rounded-t-xl hx-bg-primary-700/5 hx-py-2 hx-px-4 hx-text-xs hx-text-gray-700 dark:hx-bg-primary-300/10 dark:hx-text-gray-200;
+    @apply hx:absolute hx:top-0 hx:z-[1] hx:w-full hx:truncate hx:rounded-t-xl hx:bg-primary-700/5 hx:py-2 hx:px-4 hx:text-xs hx:text-gray-700 hx:dark:bg-primary-300/10 hx:dark:text-gray-200;
   }
 
   .filename + pre:not(.lntable pre) {
     /* Override padding for code blocks with filename but no highlight */
-    @apply hx-pt-12;
+    @apply hx:pt-12;
   }
 }
 
 .hextra-code-block pre:not(.lntable pre) {
-  @apply hx-px-4 hx-mb-4 hx-py-4 hx-rounded-xl;
+  @apply hx:px-4 hx:mb-4 hx:py-4 hx:rounded-xl;
 }
 
 .hextra-code-block div:nth-of-type(2) pre {
-  @apply hx-pt-12 hx-pb-4;
+  @apply hx:pt-12 hx:pb-4;
 }
 
 .chroma {
   .lntable {
-    @apply hx-m-0 hx-block hx-w-auto hx-overflow-auto hx-rounded-xl;
+    @apply hx:m-0 hx:block hx:w-auto hx:overflow-auto hx:rounded-xl;
 
     pre {
-      @apply hx-pt-4 hx-pb-4;
+      @apply hx:pt-4 hx:pb-4;
     }
   }
   .ln,
   .lnt:not(.hl > .lnt),
   .hl:not(.line) {
-    @apply hx-pl-4 hx-pr-4 hx-min-w-[2.6rem] hx-text-neutral-600 dark:hx-text-neutral-300;
+    @apply hx:pl-4 hx:pr-4 hx:min-w-[2.6rem] hx:text-neutral-600 hx:dark:text-neutral-300;
   }
   .lntd {
-    @apply hx-p-0 hx-align-top;
+    @apply hx:p-0 hx:align-top;
   }
   .lntd:last-of-type {
-    @apply hx-w-full;
+    @apply hx:w-full;
   }
   /* LineHighlight */
   .hl {
-    @apply hx-block hx-w-full hx-bg-primary-800/10;
+    @apply hx:block hx:w-full hx:bg-primary-800/10;
   }
 }

@@ -1,17 +1,22 @@
-.steps h3 {
-  counter-increment: step;
-
-  &:before {
-    @apply hx-absolute hx-w-[33px] hx-h-[33px];
-    @apply hx-border-4 hx-border-white hx-bg-gray-100 dark:hx-border-dark dark:hx-bg-neutral-800;
-    @apply hx-rounded-full hx-text-neutral-400 hx-text-base hx-font-normal hx-text-center -hx-indent-px;
-    @apply hx-mt-[3px] ltr:hx-ml-[-41px] rtl:hx-mr-[-44px];
-    content: counter(step);
+.steps {
+  :where(h2, h3, h4, h5, h6):not(.no-step-marker) {
+    counter-increment: step;
+    @apply hx:ltr:before:ml-[-41px] hx:rtl:before:mr-[-44px];
+    /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
+    @apply hx:before:bg-gray-100 hx:dark:before:bg-neutral-800;
+    @apply hx:before:border-4 hx:before:border-white hx:dark:before:border-dark;
+    &:before {
+      content: counter(step);
+      @apply hx:absolute hx:size-[33px];
+      @apply hx:rounded-full hx:text-neutral-400 hx:text-base hx:font-normal hx:text-center hx:-indent-px;
+    }
   }
 }
 
-:lang(fa) .steps h3 {
-  &:before {
-    content: counter(step, persian);
+:lang(fa) .steps {
+  :where(h2, h3, h4, h5, h6):not(.no-step-marker) {
+    &:before {
+      content: counter(step, persian);
+    }
   }
 }
