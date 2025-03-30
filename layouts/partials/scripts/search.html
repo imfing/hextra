@@ -7,8 +7,18 @@
     {{- if hugo.IsProduction -}}
       {{- $jsSearch = $jsSearch | minify | fingerprint -}}
     {{- end -}}
-    {{- $flexSearchJS := resources.Get "lib/flexsearch/flexsearch.bundle.min.js" | fingerprint -}}
-    <script defer src="{{ $flexSearchJS.RelPermalink }}" integrity="{{ $flexSearchJS.Data.Integrity }}"></script>
+    {{- $flexSearchVersion := site.Params.search.flexsearch.version | default "0.8.143" -}}
+    {{- $flexSearchJsUrl := printf "https://cdn.jsdelivr.net/npm/flexsearch@%s/dist/flexsearch.bundle%s.js" $flexSearchVersion (cond hugo.IsProduction ".min" ".debug") -}}
+    {{ with try (resources.GetRemote $flexSearchJsUrl) -}}
+      {{ with .Err -}}
+        {{ errorf "Could not retrieve FlexSearch js file from %s. Reason: %s." $flexSearchJsUrl . -}}
+      {{ else with.Value -}}
+        {{ with resources.Copy (printf "js/flexsearch.js") . -}}
+          {{ $flexSearchJs := . | fingerprint -}}
+          <script defer src="{{ $flexSearchJs.RelPermalink }}" integrity="{{ $flexSearchJs.Data.Integrity }}" crossorigin="anonymous"></script>
+        {{ end -}}
+      {{ end -}}
+    {{ end -}}
     <script defer src="{{ $jsSearch.RelPermalink }}" integrity="{{ $jsSearch.Data.Integrity }}"></script>
   {{- else -}}
     {{- warnf `search type "%s" is not supported` $searchType -}}

@@ -196,18 +196,8 @@ document.addEventListener("DOMContentLoaded", function () {
   async function preloadIndex() {
     const tokenize = '{{- site.Params.search.flexsearch.tokenize | default  "forward" -}}';
 
-    const isCJK = () => {
-      const lang = document.documentElement.lang || "en";
-      return lang.startsWith("zh") || lang.startsWith("ja") || lang.startsWith("ko");
-    }
-
-    const encodeCJK = (str) => str.replace(/[\x00-\x7F]/g, "").split("");
-    const encodeDefault = (str) => (""+str).toLocaleLowerCase().split(/[\p{Z}\p{S}\p{P}\p{C}]+/u);
-    const encodeFunction = isCJK() ? encodeCJK : encodeDefault;
-
     window.pageIndex = new FlexSearch.Document({
       tokenize,
-      encode: encodeFunction,
       cache: 100,
       document: {
         id: 'id',
@@ -218,13 +208,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.sectionIndex = new FlexSearch.Document({
       tokenize,
-      encode: encodeFunction,
       cache: 100,
       document: {
         id: 'id',
         store: ['title', 'content', 'url', 'display', 'crumb'],
         index: "content",
-        tag: 'pageId'
+        tag: [{
+          field: "pageId"
+        }]
       }
     });
 
@@ -328,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
       pageTitleMatches[i] = 0;
 
       // Show the top 5 results for each page
-      const sectionResults = window.sectionIndex.search(query, 5, { enrich: true, suggest: true, tag: `page_${result.id}` })[0]?.result || [];
+      const sectionResults = window.sectionIndex.search(query, 5, { enrich: true, suggest: true, tag: { 'pageId': `page_${result.id}` } })[0]?.result || [];
       let isFirstItemOfPage = true
       const occurred = {}
 
