@@ -30,11 +30,11 @@
   {{- partialCached "head-css.html" . -}}
 
 
-<!-- Google Analytics -->
-{{- if and (eq hugo.Environment "production") .Site.Config.Services.GoogleAnalytics.ID }}
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-  {{ partial "google-analytics.html" . }}
-{{- end }}
+  <!-- Google Analytics -->
+  {{- if and (eq hugo.Environment "production") .Site.Config.Services.GoogleAnalytics.ID }}
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    {{ partial "google-analytics.html" . }}
+  {{- end }}
 
   <script>
     /* Initialize light/dark mode */
@@ -60,20 +60,20 @@
   </script>
 
   <!-- KaTeX-->
-  {{ $noop := .WordCount }}
-  {{ if .Page.Store.Get "hasMath" }}
-    {{ $katex_css_url := printf "https://cdn.jsdelivr.net/npm/katex@latest/dist/katex%s.css" (cond hugo.IsProduction ".min" "") -}}
-    {{ with try (resources.GetRemote $katex_css_url) -}}
+  {{ $noop := .WordCount -}}
+  {{ if .Page.Store.Get "hasMath" -}}
+    <!-- TODO: make url configurable -->
+    {{ $katexCssUrl := printf "https://cdn.jsdelivr.net/npm/katex@latest/dist/katex%s.css" (cond hugo.IsProduction ".min" "") -}}
+    {{ with try (resources.GetRemote $katexCssUrl) -}}
       {{ with .Err -}}
-        {{ errorf "Could not retrieve KaTeX css file from CDN. Reason: %s." . -}}
+        {{ errorf "Could not retrieve KaTeX css file from %s. Reason: %s." $katexCssUrl . -}}
       {{ else with.Value -}}
-        {{ with resources.Copy (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) . }}
-          {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
-<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous">
+        {{ with resources.Copy (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) . -}}
+          <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- . | fingerprint -}}" crossorigin="anonymous" />
         {{ end -}}
       {{ end -}}
     {{ end -}}
-  {{ end }}
+  {{ end -}}
 
-  {{ partial "custom/head-end.html" . }}
+  {{ partial "custom/head-end.html" . -}}
 </head>

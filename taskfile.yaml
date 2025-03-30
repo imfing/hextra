@@ -16,9 +16,3 @@ tasks:
     desc: Start development server for Hextra theme
     cmds:
       - npm run dev:theme
-
-  libs:
-    desc: Download libs from CDN
-    cmds:
-      - curl -o assets/lib/flexsearch/flexsearch.bundle.min.js https://cdn.jsdelivr.net/npm/flexsearch@0.7.31/dist/flexsearch.bundle.min.js
-      - curl -o assets/lib/mermaid/mermaid.min.js https://cdn.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.min.js
