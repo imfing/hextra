@@ -6,7 +6,7 @@
     {{ errorf "Could not retrieve Mermaid js file from %s. Reason: %s." $mermaidJsUrl . -}}
   {{ else with.Value -}}
     {{ with resources.Copy (printf "js/mermaid.min.js") . -}}
-      {{ $mermaidJs := . | resources.Fingerprint "sha512" -}}
+      {{ $mermaidJs := . | fingerprint -}}
       <script defer src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous"></script>
     {{ end -}}
   {{ end -}}
