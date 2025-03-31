@@ -196,8 +196,16 @@ document.addEventListener("DOMContentLoaded", function () {
   async function preloadIndex() {
     const tokenize = '{{- site.Params.search.flexsearch.tokenize | default  "forward" -}}';
 
+    // https://github.com/TryGhost/Ghost/pull/21148
+    const regex = new RegExp(
+      `[\u{4E00}-\u{9FFF}\u{3040}-\u{309F}\u{30A0}-\u{30FF}\u{AC00}-\u{D7A3}\u{3400}-\u{4DBF}\u{20000}-\u{2A6DF}\u{2A700}-\u{2B73F}\u{2B740}-\u{2B81F}\u{2B820}-\u{2CEAF}\u{2CEB0}-\u{2EBEF}\u{30000}-\u{3134F}\u{31350}-\u{323AF}\u{2EBF0}-\u{2EE5F}\u{F900}-\u{FAFF}\u{2F800}-\u{2FA1F}]|[0-9A-Za-zа-я\u00C0-\u017F\u0400-\u04FF\u0600-\u06FF\u0980-\u09FF\u1E00-\u1EFF\u0590-\u05FF]+`,
+      'mug'
+    );
+    const encode = (str) => { return ('' + str).toLowerCase().match(regex) ?? []; }
+
     window.pageIndex = new FlexSearch.Document({
       tokenize,
+      encode,
       cache: 100,
       document: {
         id: 'id',
@@ -208,6 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.sectionIndex = new FlexSearch.Document({
       tokenize,
+      encode,
       cache: 100,
       document: {
         id: 'id',
@@ -228,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const urlParts = route.split('/').filter(x => x != "" && !x.startsWith('#'));
 
       let crumb = '';
-      let searchUrl = '/'
+      let searchUrl = '/';
       for (let i = 0; i < urlParts.length; i++) {
         const urlPart = urlParts[i];
         searchUrl += urlPart + '/'
