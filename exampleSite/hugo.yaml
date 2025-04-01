@@ -122,7 +122,7 @@ params:
     width: wide
 
   page:
-    # full (100%), wide (90rem), normal (1280px)
+    # full (100%), wide (90rem), normal (80rem)
     width: normal
 
   theme:

@@ -1,0 +1,15 @@
+{{- $pageWidth := .Site.Params.page.width | default .Params.width -}}
+{{- $maxPageWidth := cond (eq $pageWidth "wide") "90rem" (cond (eq $pageWidth "full") "100%" "80rem") -}}
+
+<style>
+:root {
+  --hextra-max-page-width: {{ $maxPageWidth }};
+}
+
+.hextra-max-page-width {
+  width: 100%;
+  max-width: var(--hextra-max-page-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

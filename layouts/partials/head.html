@@ -11,7 +11,7 @@
     {{- if .IsHome -}}
       {{ .Site.Title -}}
     {{ else -}}
-      {{ with .Title }}{{ . }} – {{ end -}}
+      {{ with .Title }}{{ . }} –{{ end -}}
       {{ .Site.Title -}}
     {{ end -}}
   </title>
@@ -27,8 +27,33 @@
   {{- template "_internal/schema.html" . -}}
   {{- template "_internal/twitter_cards.html" . -}}
 
-  {{- partialCached "head-css.html" . -}}
+  {{- partial "head-config-css.html" . -}}
 
+  {{- if and (not hugo.IsProduction) (eq hugo.Environment "theme") }}
+    {{- $styles := resources.Get "css/styles.css" }}
+    {{- $styles = $styles | postCSS (dict "inlineImports" true) }}
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
+  {{- else }}
+    {{- $styles := resources.Get "css/compiled/main.css" -}}
+
+    {{- if hugo.IsProduction }}
+      {{- $styles = $styles | minify | fingerprint }}
+      <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
+      <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
+    {{- else }}
+      <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
+    {{- end }}
+  {{- end }}
+
+
+  <!-- Custom CSS -->
+  {{- $custom := resources.Get "css/custom.css" }}
+  {{- if hugo.IsProduction -}}
+    {{- $custom = $custom | minify | fingerprint }}
+    <link href="{{ $custom.RelPermalink }}" rel="stylesheet" integrity="{{ $custom.Data.Integrity }}" />
+  {{- else }}
+    <link href="{{ $custom.RelPermalink }}" rel="stylesheet" />
+  {{- end }}
 
   <!-- Google Analytics -->
   {{- if and (eq hugo.Environment "production") .Site.Config.Services.GoogleAnalytics.ID }}
