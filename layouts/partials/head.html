@@ -27,38 +27,26 @@
   {{- template "_internal/schema.html" . -}}
   {{- template "_internal/twitter_cards.html" . -}}
 
-  {{- partial "head-config-css.html" . -}}
+  {{- $mainCss := resources.Get "css/compiled/main.css" -}}
+  {{- $customCss := resources.Get "css/custom.css" -}}
+  {{- $configsCss := resources.Get "css/configs.css" | resources.ExecuteAsTemplate "css/configs.css" . -}}
 
-  {{- if and (not hugo.IsProduction) (eq hugo.Environment "theme") }}
-    {{- $styles := resources.Get "css/styles.css" }}
-    {{- $styles = $styles | postCSS (dict "inlineImports" true) }}
+  {{- if hugo.IsProduction }}
+    {{- $styles := slice $mainCss $configsCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
+    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
+  {{- else }}
+    {{- $styles := resources.Get "css/styles.css" | postCSS (dict "inlineImports" true) }}
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
-  {{- else }}
-    {{- $styles := resources.Get "css/compiled/main.css" -}}
-
-    {{- if hugo.IsProduction }}
-      {{- $styles = $styles | minify | fingerprint }}
-      <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
-      <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
-    {{- else }}
-      <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
-    {{- end }}
+    <link href="{{ $configsCss.RelPermalink }}" rel="stylesheet" />
+    <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
   {{- end }}
 
-
-  <!-- Custom CSS -->
-  {{- $custom := resources.Get "css/custom.css" }}
-  {{- if hugo.IsProduction -}}
-    {{- $custom = $custom | minify | fingerprint }}
-    <link href="{{ $custom.RelPermalink }}" rel="stylesheet" integrity="{{ $custom.Data.Integrity }}" />
-  {{- else }}
-    <link href="{{ $custom.RelPermalink }}" rel="stylesheet" />
-  {{- end }}
 
   <!-- Google Analytics -->
-  {{- if and (eq hugo.Environment "production") .Site.Config.Services.GoogleAnalytics.ID }}
+  {{- if and hugo.IsProduction .Site.Config.Services.GoogleAnalytics.ID }}
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    {{ partial "google-analytics.html" . }}
+    {{ partial "google-analytics.html" . -}}
   {{- end }}
 
   <script>
