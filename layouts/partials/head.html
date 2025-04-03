@@ -76,12 +76,17 @@
   {{ $noop := .WordCount -}}
   {{ if .Page.Store.Get "hasMath" -}}
     <!-- TODO: make url configurable -->
-    {{ $katexCssUrl := printf "https://cdn.jsdelivr.net/npm/katex@latest/dist/katex%s.css" (cond hugo.IsProduction ".min" "") -}}
+    {{ $katexBaseUrl := "https://cdn.jsdelivr.net/npm/katex@latest/dist" }} 
+    {{ $katexCssUrl := printf "%s/katex%s.css" $katexBaseUrl (cond hugo.IsProduction ".min" "") -}}
+    {{ $katexFontPattern := "url(fonts/" }}
+    {{ $katexFontSubstituted := printf "url(%s/fonts/" $katexBaseUrl }}
+  
     {{ with try (resources.GetRemote $katexCssUrl) -}}
       {{ with .Err -}}
         {{ errorf "Could not retrieve KaTeX css file from %s. Reason: %s." $katexCssUrl . -}}
       {{ else with.Value -}}
-        {{ with resources.Copy (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) . -}}
+        {{ $katexCssContent := strings.Replace .Content $katexFontPattern $katexFontSubstituted }}
+        {{ with resources.FromString (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) $katexCssContent -}}
           <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- . | fingerprint -}}" crossorigin="anonymous" />
         {{ end -}}
       {{ end -}}
