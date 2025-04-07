@@ -1,3 +1,12 @@
 {{- with . -}}
-  <a href="{{ .Destination | safeURL }}" {{ with .Title }}title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }}target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
+  <a href="{{ .Destination | safeURL }}" {{ with .Title }}title="{{ . }}"{{ end }}
+    {{ if strings.HasPrefix .Destination "http" }}target="_blank" rel="noopener"{{ end }}>
+    {{ .Text | safeHTML }}{{ if strings.HasPrefix .Destination "http" }}<svg
+      style="display: inline; vertical-align: baseline; margin-left: 0.12em"
+      stroke-linejoin="round" stroke-linecap="round"
+      fill="none" viewBox="0 0 24 24" height="1em"
+      stroke="currentColor" stroke-width="1.6">
+      <path d="M7 17L17 7"></path>
+      <path d="M7 7h10v10"></path>
+    </svg>{{ end }}</a>
 {{- end -}}
