@@ -13,7 +13,7 @@
     {{- with or (.PageInner.Resources.Get $url.Path) (resources.Get $url.Path) -}}
       {{/* Images under assets directory */}}
       {{- $query := cond $url.RawQuery (printf "?%s" $url.RawQuery) "" -}}
-      {{- $fragment := cond $url.Fragment (printf "?%s" $url.Fragment) "" -}}
+      {{- $fragment := cond $url.Fragment (printf "#%s" $url.Fragment) "" -}}
       {{- $dest = printf "%s%s%s" .RelPermalink $query $fragment -}}
     {{- else -}}
       {{/* Images under static directory */}}
