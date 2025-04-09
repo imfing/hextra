@@ -2,6 +2,11 @@
 
 {{- $grow := .grow -}}
 {{- $hideLabel := .hideLabel | default false -}}
+{{- $preserveIconColor := .preserveIconColor | default false -}}
+{{- $icon :=.icon | default "globe-alt" -}}
+{{- $size := .size | default 12 -}}
+{{- $buttonSize := .buttonSize | default 7 -}}
+{{- $position := .position | default "top" -}}
 
 {{- $changeLanguage := (T "changeLanguage") | default "Change language" -}}
 
@@ -10,18 +15,23 @@
     <button
       title="{{ $changeLanguage }}"
       data-state="closed"
-      class="language-switcher hx:cursor-pointer hx:h-7 hx:rounded-md hx:px-2 hx:text-left hx:text-xs hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:grow"
+      data-position="{{ $position }}"
+      class="language-switcher hx:cursor-pointer hx:h-{{ $buttonSize }} hx:rounded-md hx:px-2 hx:text-left hx:text-xs hx:font-medium {{ cond $preserveIconColor "" "hx:text-gray-600 hx:dark:text-gray-400" }} hx:transition-colors hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:grow"
       type="button"
       aria-label="{{ $changeLanguage }}"
     >
       <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
-        {{- partial "utils/icon" (dict "name" "globe-alt" "attributes" "height=12") -}}
+        {{- partial "utils/icon" (dict "name" $icon "attributes" (print "height=" $size)) -}}
         {{- if not $hideLabel }}<span>{{ site.Language.LanguageName }}</span>{{ end -}}
       </div>
     </button>
     <ul
       class="language-options hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-md hx:ring-1 hx:ring-black/5 hx:bg-white hx:py-1 hx:text-sm hx:shadow-lg hx:dark:ring-white/20 hx:dark:bg-neutral-800"
+      {{- if eq $position "bottom" -}}
+      style="position: fixed; inset: auto auto auto 0px; margin: 0px; min-width: 100px;"
+      {{- else -}}
       style="position: fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
+      {{- end -}}
     >
       {{ range site.Languages }}
         {{ $link := partial "utils/lang-link" (dict "lang" .Lang "context" $page) }}

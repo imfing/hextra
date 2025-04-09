@@ -120,6 +120,8 @@ params:
       # height: 20
       # link: /
     width: wide
+    displayThemeToggle: true
+    displayLanguageSwitch: true
 
   page:
     # full (100%), wide (90rem), normal (1280px)
