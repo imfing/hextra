@@ -29,7 +29,7 @@ body {
   --primary-saturation: 100%;
   --primary-lightness: 50%;
   --navbar-height: 4rem;
-  --menu-height: 3.8rem;
+  --menu-height: 3.75rem; /* 60px */
 }
 
 .dark {
