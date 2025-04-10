@@ -3,9 +3,9 @@
 {{- $grow := .grow -}}
 {{- $hideLabel := .hideLabel | default false -}}
 {{- $preserveIconColor := .preserveIconColor | default false -}}
-{{- $icon :=.icon | default "globe-alt" -}}
+{{- $icon := .icon | default "globe-alt" -}}
 {{- $size := .size | default 12 -}}
-{{- $buttonSize := .buttonSize | default 7 -}}
+{{- $isNavBar := .isNavBar | default false -}}
 {{- $position := .position | default "top" -}}
 
 {{- $changeLanguage := (T "changeLanguage") | default "Change language" -}}
@@ -16,7 +16,7 @@
       title="{{ $changeLanguage }}"
       data-state="closed"
       data-position="{{ $position }}"
-      class="language-switcher hx:cursor-pointer hx:h-{{ $buttonSize }} hx:rounded-md hx:px-2 hx:text-left hx:text-xs hx:font-medium {{ cond $preserveIconColor "" "hx:text-gray-600 hx:dark:text-gray-400" }} hx:transition-colors hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:grow"
+      class="language-switcher hx:cursor-pointer {{ if $isNavBar }} hx:h-10 {{ else }} hx:h-7 {{ end }} hx:rounded-md hx:px-2 hx:text-left hx:text-xs hx:font-medium {{ cond $preserveIconColor "" "hx:text-gray-600 hx:dark:text-gray-400" }} hx:transition-colors hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:grow"
       type="button"
       aria-label="{{ $changeLanguage }}"
     >
