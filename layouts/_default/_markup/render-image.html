@@ -1,27 +1,43 @@
 {{- $alt := .PlainText | safeHTML -}}
 {{- $lazyLoading := .Page.Site.Params.enableImageLazyLoading | default true -}}
 {{- $dest := .Destination -}}
+{{- $url := urls.Parse $dest -}}
 
-{{- $isLocal := not (urls.Parse $dest).Scheme -}}
+{{- $isLocal := not $url.Scheme -}}
 {{- $isPage := and (eq .Page.Kind "page") (not .Page.BundleType) -}}
 {{- $startsWithSlash := hasPrefix $dest "/" -}}
 {{- $startsWithRelative := hasPrefix $dest "../" -}}
 
 {{- if and $dest $isLocal -}}
   {{- if $startsWithSlash -}}
-    {{/* Images under static directory */}}
-    {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
+    {{- with or (.PageInner.Resources.Get $url.Path) (resources.Get $url.Path) -}}
+      {{/* Images under assets directory */}}
+      {{- $query := cond $url.RawQuery (printf "?%s" $url.RawQuery) "" -}}
+      {{- $fragment := cond $url.Fragment (printf "#%s" $url.Fragment) "" -}}
+      {{- $dest = printf "%s%s%s" .RelPermalink $query $fragment -}}
+    {{- else -}}
+      {{/* Images under static directory */}}
+      {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
+    {{- end -}}
   {{- else if and $isPage (not $startsWithRelative) -}}
     {{/* Images that are sibling to the individual page file */}}
     {{ $dest = (printf "../%s" $dest) }}
   {{- end -}}
 {{- end -}}
 
+{{- $attributes := "" -}}
+{{- range $key, $value := .Attributes -}}
+  {{- if $value -}}
+    {{- $pair := printf "%s=%q" $key ($value | transform.HTMLEscape) -}}
+    {{- $attributes = printf "%s %s" $attributes $pair -}}
+  {{- end -}}
+{{- end -}}
+
 {{- with .Title -}}
   <figure>
-    <img src="{{ $dest | safeURL }}" title="{{ . }}" alt="{{ $alt }}" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+    <img src="{{ $dest | safeURL }}" title="{{ . }}" alt="{{ $alt }}" {{ $attributes | safeHTMLAttr }} {{ if $lazyLoading }}loading="lazy"{{ end }} />
     <figcaption>{{ . }}</figcaption>
   </figure>
 {{- else -}}
-  <img src="{{ $dest | safeURL }}" alt="{{ $alt }}" {{ if $lazyLoading }}loading="lazy"{{ end }} />
+  <img src="{{ $dest | safeURL }}" alt="{{ $alt }}" {{ $attributes | safeHTMLAttr }} {{ if $lazyLoading }}loading="lazy"{{ end }} />
 {{- end -}}

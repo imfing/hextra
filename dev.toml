@@ -5,7 +5,7 @@
     enable = true
     disableIDs = true
   [[build.cachebusters]]
-    source = 'assets/watching/hugo_stats\.json'
+    source = 'assets/notwatching/hugo_stats\.json'
     target = 'styles\.css'
   [[build.cachebusters]]
     source = '(postcss|tailwind)\.config\.mjs'
@@ -23,4 +23,5 @@
     target = "assets"
   [[module.mounts]]
     source = "hugo_stats.json"
-    target = "assets/watching/hugo_stats.json"
+    target = "assets/notwatching/hugo_stats.json"
+    disableWatch = true

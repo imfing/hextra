@@ -1,3 +1,16 @@
+{{- $dest := .Destination -}}
+{{- $url := urls.Parse $dest -}}
+
+{{- if and $dest (hasPrefix $dest "/") -}}
+  {{- with or (.PageInner.GetPage $url.Path) (.PageInner.Resources.Get $url.Path) (resources.Get $url.Path) -}}
+    {{- $query := cond $url.RawQuery (printf "?%s" $url.RawQuery) "" -}}
+    {{- $fragment := cond $url.Fragment (printf "#%s" $url.Fragment) "" -}}
+    {{- $dest = printf "%s%s%s" .RelPermalink $query $fragment -}}
+  {{- else -}}
+    {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
+  {{- end -}}
+{{- end -}}
+    
 {{- with . -}}
-  <a href="{{ .Destination | safeURL }}" {{ with .Title }}title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }}target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
+  <a href="{{ $dest | safeURL }}" {{ with .Title }}title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }}target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
 {{- end -}}
