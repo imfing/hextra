@@ -243,7 +243,7 @@ There are three available options: `full`, `wide`, and `normal`. By default, the
 
 Similarly, the width of the navbar and footer can be customized by the `params.navbar.width` and `params.footer.width` parameters.
 
-### Search Index
+### FlexSearch Index
 
 Full-text search powered by [FlexSearch](https://github.com/nextapps-de/flexsearch) is enabled by default.
 To customize the search index, set the `params.search.flexsearch.index` parameter in the config file:
@@ -284,7 +284,7 @@ Options for [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#t
 - `reverse` - incrementally index words in both directions
 - `full` - index every possible combination
 
-To exclude a page from the search index, set the `excludeSearch: true` in the front matter of the page:
+To exclude a page from the FlexSearch search index, set the `excludeSearch: true` in the front matter of the page:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
@@ -302,3 +302,19 @@ services:
   googleAnalytics:
     ID: G-MEASUREMENT_ID
 ```
+
+### Google Search Index
+
+To [block Google Search](https://developers.google.com/search/docs/crawling-indexing/block-indexing) from indexing a page, set `noindex` to true in your page frontmatter:
+
+```yaml
+title: Configuration (archive version)
+noindex: true
+```
+
+To exclude an entire directory, use the [`cascade`](https://gohugo.io/configuration/cascade/) key in the parent `_index.md` file.
+
+> [!NOTE]
+> To block search crawlers, you can make a [`robots.txt` template](https://gohugo.io/templates/robots/).
+> However, `robots.txt` instructions do not necessarily keep a page out of Google search results.
+
