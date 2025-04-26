@@ -82,6 +82,76 @@ weight: 2
   It is recommended to keep the sidebar not too deep. If you have a lot of content, consider **splitting them into multiple sections**.
 {{< /callout >}}
 
+## Section Navigation
+
+
+### Section Pagination Order
+
+The order in which pages, accessed via [`PAGE.PrevInSection`](https://gohugo.io/methods/page/previnsection/) and [`PAGE.NextInSection`](https://gohugo.io/methods/page/nextinsection/) in a [page collection](https://gohugo.io/quick-reference/glossary/#page-collection), are ordered, is reversed by default.
+
+To disable this reversed ordering you can set the `reversePagination` custom parameter in the page front matter to `false`. By default `reversePagination` is set to `true`.
+
+#### Example
+
+Given the following directory structure:
+
+{{< filetree/container >}}
+  {{< filetree/folder name="content" >}}
+    {{< filetree/file name="_index.md" >}}
+    {{< filetree/folder name="blog" state="open" >}}
+      {{< filetree/file name="_index.md" >}}
+      {{< filetree/folder name="my-blog-series" state="open" >}}
+        {{< filetree/file name="_index.md" >}}
+        {{< filetree/folder name="post-a" state="open" >}}
+          {{< filetree/file name="index.md" >}}
+        {{< /filetree/folder >}}
+        {{< filetree/folder name="post-b" state="open" >}}
+          {{< filetree/file name="index.md" >}}
+        {{< /filetree/folder >}}
+        {{< filetree/folder name="post-c" state="open" >}}
+          {{< filetree/file name="index.md" >}}
+        {{< /filetree/folder >}}
+      {{< /filetree/folder >}}
+    {{< /filetree/folder >}}
+  {{< /filetree/folder >}}
+{{< /filetree/container >}}
+
+And the following front matter in the posts:
+
+```yaml {filename="content/blog/my-blog-series/post-a/index.md"}
+---
+title: Post A
+weight: 1
+---
+```
+```yaml {filename="content/blog/my-blog-series/post-b/index.md"}
+---
+title: Post B
+weight: 2
+---
+```
+```yaml {filename="content/blog/my-blog-series/post-c/index.md"}
+---
+title: Post C
+weight: 3
+---
+```
+
+If the reader is at the bottom of `post-b/index.md`, they will see that the next page is `post-a`, and the previous page is `post-c`. This is due to `reversePagination` being set to `true` by default. This is ok when we want our posts to be displayed in chronological order from latest to oldest. However, in the case of a blog series where there are multiple parts, we typically want people to read the first post, and then move to the second and so on. So we want to disable the reversed ordering.
+
+We can turn off `reversePagination` in every blog post in this series by adding the following front matter to `my-blog-series/_index.md`
+
+```yaml {filename="content/blog/my-blog-series/_index.md"}
+---
+title: My Blog Series
+cascade:
+    params:
+        reversePagination: false
+---
+```
+
+We are using [`cascade`](https://gohugo.io/content-management/front-matter/#cascade-1) here to propagate the setting to all posts in the `my-blog-series` so that `reversePagination` is set to `false` for all descendents. This will now ensure that when the reader is on `post-b/index.md` they will see that the next page is `post-c` and the previous page is `post-a`.
+
 ## Breadcrumb Navigation
 
 Breadcrumbs are auto-generated based on the directory structure of `/content`.
