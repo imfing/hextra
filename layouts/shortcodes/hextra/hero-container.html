@@ -1,38 +1,159 @@
-{{- $class := .Get "class" -}}
-{{- $cols := .Get "cols" | default 2 -}}
-{{- $image := .Get "image" -}}
-{{- $imageCard := .Get "imageCard" | default false -}}
-{{- $imageClass := .Get "imageClass" -}}
-{{- $imageLink := .Get "imageLink" -}}
-{{- $imageLinkExternal := hasPrefix $imageLink "http" -}}
-{{- $imageStyle := .Get "imageStyle" -}}
-{{- $imageTitle := .Get "imageTitle" -}}
-{{- $imageWidth := .Get "imageWidth" | default 350 -}}
-{{- $imageHeight := .Get "imageHeight" | default 350 -}}
-{{- $style := .Get "style" -}}
+{{- $defaulttWidth := "350" -}}
+{{- $defaultHeight := "350" -}}
+{{- $defaultCard   := "false" -}}
+{{- $separator     := "* "  -}}
 
-{{- $css := printf "--hextra-feature-grid-cols: %v; %s" $cols $style -}}
-{{- $href := cond (hasPrefix $imageLink "/") ($imageLink | relURL) $imageLink -}}
-{{- if hasPrefix $image "/" -}}
-  {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+{{- $nodeClass := .Get "class" -}}
+{{- $nodeStyle := .Get "style" -}}
+{{- $nodeCols  := .Get "cols" | default 2 -}}
+
+
+{{- $css := printf "--hextra-feature-grid-cols: %v; %s" $nodeCols $nodeStyle -}}
+
+{{- $images      := .Get "image"      -}}
+{{- $imageClass  := .Get "imageClass" -}}
+{{- $imageLink   := .Get "imageLink"  -}}
+{{- $imageStyle  := .Get "imageStyle" -}}
+{{- $imageTitle  := .Get "imageTitle" -}}
+{{- $imageCard   := .Get "imageCard"   | default $defaultCard -}}
+{{- $imageWidth  := .Get "imageWidth"  | default $defaulttWidth   -}}
+{{- $imageHeight := .Get "imageHeight" | default $defaultHeight   -}}
+
+
+
+{{- with $images -}}
+    {{- $images = split $images $separator -}}
+{{- end -}}
+{{- $totalImages := len $images -}}
+
+
+{{- with $imageCard -}}
+    {{- $imageCard = split $imageCard $separator -}}
 {{- end -}}
 
+{{ if not (eq $totalImages (len $imageCard)) }}
+    {{ range seq (sub $totalImages (len $imageCard) ) }}
+        {{- $imageCard = $imageCard | append (index $imageCard 0) -}}
+    {{ end }}
+{{ end }}
+
+
+
+
+{{- with $imageClass -}}
+    {{- $imageClass = split $imageClass $separator -}}
+
+    {{ if not (eq $totalImages (len $imageClass)) }}
+        {{ range seq (sub $totalImages (len $imageClass) ) }}
+            {{- $imageClass = $imageClass | append (index $imageClass 0) -}}
+        {{ end }}
+    {{ end }}
+{{- end -}}
+
+
+{{- with $imageLink -}}
+    {{- $imageLink = split $imageLink $separator -}}
+
+    {{ if not (eq $totalImages (len $imageLink)) }}
+        {{ range seq (sub $totalImages (len $imageLink) ) }}
+            {{- $imageLink = $imageLink | append (index $imageLink 0) -}}
+        {{ end }}
+    {{ end }}
+{{- end -}}
+
+{{- with $imageStyle -}}
+    {{- $imageStyle = split $imageStyle $separator -}}
+
+    {{ if not (eq $totalImages (len $imageStyle)) }}
+        {{ range seq (sub $totalImages (len $imageStyle) ) }}
+            {{- $imageStyle = $imageStyle | append (index $imageStyle 0) -}}
+        {{ end }}
+    {{ end }}
+{{- end -}}
+
+{{- with $imageTitle -}}
+    {{- $imageTitle = split $imageTitle $separator -}}
+
+    {{ if not (eq $totalImages (len $imageTitle)) }}
+        {{ range seq (sub $totalImages (len $imageTitle) ) }}
+            {{- $imageTitle = $imageTitle | append (index $imageTitle 0) -}}
+        {{ end }}
+    {{ end }}
+{{- end -}}
+
+
+
+{{- with $imageWidth -}}
+    {{- $imageWidth = split $imageWidth $separator -}}
+{{- end -}}
+{{ if not (eq $totalImages (len $imageWidth)) }}
+    {{ range seq (sub $totalImages (len $imageWidth) ) }}
+        {{- $imageWidth = $imageWidth | append (index $imageWidth 0) -}}
+    {{ end }}
+{{ end }}
+
+
+
+{{- with $imageHeight -}}
+    {{- $imageHeight = split $imageHeight $separator -}}
+{{- end -}}
+{{ if not (eq $totalImages (len $imageHeight)) }}
+    {{ range seq (sub $totalImages (len $imageHeight) ) }}
+        {{- $imageHeight = $imageHeight | append (index $imageHeight 0) -}}
+    {{ end }}
+{{ end }}
+
+
+
 <div
-  class="{{ $class }} hextra-feature-grid hx:grid hx:sm:max-lg:grid-cols-2 hx:max-sm:grid-cols-1 hx:gap-4 hx:w-full not-prose"
-  {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
+    class="{{ $nodeClass }} hextra-feature-grid hx:grid hx:sm:max-lg:grid-cols-2 hx:max-sm:grid-cols-1 hx:gap-4 hx:w-full not-prose"
+    {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
 >
-  <div class="hx:w-full">
-    {{ .Inner }}
-  </div>
-  {{- with $image }}
-  <div class="hx:mx-auto">
-    <a
-      {{ with $imageLink }}href="{{ $href }}" {{ with $imageLinkExternal }} target="_blank" rel="noreferrer"{{ end }}{{ end }}
-      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
-      class="{{ $imageClass }} {{ if $imageCard }}hextra-feature-card not-prose hx:block hx:relative hx:p-6 hx:overflow-hidden hx:rounded-3xl hx:border hx:border-gray-200 hx:hover:border-gray-300 hx:dark:border-neutral-800 hx:dark:hover:border-neutral-700 hx:before:pointer-events-none hx:before:absolute hx:before:inset-0 hx:before:bg-glass-gradient{{ end }}"
-    >
-      <img src="{{ $image }}" width="{{ $imageWidth }}" height="{{ $imageHeight }}" {{ with $imageTitle }}alt="{{ $imageTitle }}"{{ end }}/>
-    </a>
-  </div>
-  {{ end -}}
+    <div class="hx:mx-full">
+        {{ .Inner }}
+    </div>
+
+    {{ with $images }}
+        <div class="hx:mx-auto">
+            {{ if eq $totalImages 1 }}
+                {{  partial "image.html" (
+                    dict 
+                    "context" . 
+                    "image"       (index $images 0)
+                    "imageClass"  (cond (isset $imageClass 0 )  (index $imageClass 0) $imageClass )
+                    "imageLink"   (cond (isset $imageLink 0 )  (index $imageLink 0) $imageLink )
+                    "imageTitle"  (cond (isset $imageTitle 0 )  (index $imageTitle 0) $imageTitle )
+                    "imageStyle"  (cond (isset $imageStyle 0 )  (index $imageStyle 0) $imageStyle )
+                    "imageWidth"  (index $imageWidth 0)
+                    "imageHeight" (index $imageHeight 0)
+                    "imageCard"   (index $imageCard 0)
+                    ) 
+                }}
+            {{ else }}
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        {{ range $position, $image := $images }}
+                            <div class="swiper-slide">
+                                {{  partial "image.html" (
+                                    dict 
+                                    "context" . 
+                                    "image"        $image
+                                    "imageClass"  (index $imageClass  $position) 
+                                    "imageLink"   (index $imageLink   $position) 
+                                    "imageTitle"  (index $imageTitle  $position) 
+                                    "imageStyle"  (index $imageStyle  $position) 
+                                    "imageWidth"  (index $imageWidth  $position)
+                                    "imageHeight" (index $imageHeight $position)
+                                    "imageCard"   (index $imageCard   $position)
+                                    ) 
+                                }}
+                            </div>
+                        {{ end }}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            {{ end }}
+        </div>
+    {{ end }}
+
 </div>
