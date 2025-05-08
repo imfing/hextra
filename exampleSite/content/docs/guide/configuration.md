@@ -309,7 +309,8 @@ To [block Google Search](https://developers.google.com/search/docs/crawling-inde
 
 ```yaml
 title: Configuration (archive version)
-noindex: true
+params:
+  noindex: true
 ```
 
 To exclude an entire directory, use the [`cascade`](https://gohugo.io/configuration/cascade/) key in the parent `_index.md` file.
