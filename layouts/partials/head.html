@@ -29,16 +29,16 @@
 
   {{- $mainCss := resources.Get "css/compiled/main.css" -}}
   {{- $customCss := resources.Get "css/custom.css" -}}
-  {{- $configsCss := resources.Get "css/configs.css" | resources.ExecuteAsTemplate "css/configs.css" . -}}
+  {{- $variablesCss := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" . -}}
 
   {{- if hugo.IsProduction }}
-    {{- $styles := slice $mainCss $configsCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
+    {{- $styles := slice $mainCss $variablesCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
     <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
   {{- else }}
     {{- $styles := resources.Get "css/styles.css" | postCSS (dict "inlineImports" true) }}
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
-    <link href="{{ $configsCss.RelPermalink }}" rel="stylesheet" />
+    <link href="{{ $variablesCss.RelPermalink }}" rel="stylesheet" />
     <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
   {{- end }}
 
