@@ -1,4 +1,8 @@
 {{ define "main" }}
+  {{- if .Param "useSwiper" -}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  {{- end -}}
+
   <div class='hx:mx-auto hx:flex {{ partial "utils/page-width" . }}'>
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
     <div class="hx:w-full hx:break-words hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:pb-8 hx:pt-8 hx:md:pt-12 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-left),1.5rem)]">
@@ -7,4 +11,23 @@
       </div>
     </div>
   </div>
+
+  {{- if .Param "useSwiper" -}}
+    {{/*This can be customized to support some Swiper options*/}}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+        autoplay: {
+            delay:3000, // sec * 1000 
+            disableOnInteraction:false,
+            },
+            loop: true,
+            pagination: { // If we need pagination
+                el: '.swiper-pagination',
+                },
+            }
+        );
+    </script>
+  {{- end -}}
+
 {{ end }}

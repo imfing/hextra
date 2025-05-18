@@ -1,0 +1,31 @@
+{{- $context := .context -}}
+
+{{- $image       := .image      -}}
+{{- $imageClass  := .imageClass -}}
+{{- $imageLink   := .imageLink  -}}
+{{- $imageTitle  := .imageTitle -}}
+{{- $imageStyle  := .imageStyle -}}
+{{- $imageWidth  := .imageWidth  | default "350"   -}}
+{{- $imageHeight := .imageHeight | default "350"   -}}
+{{- $imageCard   := .imageCard   | default "false" -}}
+
+{{- $imageCard = hasPrefix $imageCard "true" -}}
+
+{{- $imageLinkExternal := hasPrefix $imageLink "http" -}}
+{{- $href := cond (hasPrefix $imageLink "/") ($imageLink | relURL) $imageLink -}}
+
+{{- if hasPrefix $image "/" -}}
+    {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+{{- end -}}
+
+{{- $imageDefaultClass := "hextra-feature-card not-prose hx:block hx:relative hx:p-6 hx:overflow-hidden hx:rounded-3xl hx:border hx:border-gray-200 hx:hover:border-gray-300 hx:dark:border-neutral-800 hx:dark:hover:border-neutral-700 hx:before:pointer-events-none hx:before:absolute hx:before:inset-0 hx:before:bg-glass-gradient" -}}
+
+{{- with $image -}}
+    <a
+        {{ with $imageLink }}href="{{ $href }}" {{ with $imageLinkExternal }} target="_blank" rel="noreferrer"{{ end }}{{ end }}
+        {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
+        class="{{ $imageClass }} {{ if $imageCard}} {{ $imageDefaultClass }} {{ end }}"
+    >
+        <img src="{{ $image }}" width="{{ $imageWidth }}" height="{{ int $imageHeight }}" {{ with $imageTitle }}alt="{{ $imageTitle }}"{{ end }}/>
+    </a>
+{{- end -}}
