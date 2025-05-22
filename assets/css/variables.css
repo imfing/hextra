@@ -1,0 +1,30 @@
+/* Hugo template to derive CSS variables from site and page parameters */
+
+/* Do not remove the following comment. It is used by Hugo to render CSS variables.
+{{- $pageWidth := .Params.width | default .Site.Params.page.width -}}
+{{- $maxPageWidth := cond (eq $pageWidth "wide") "90rem" (cond (eq $pageWidth "full") "100%" "80rem") -}}
+
+{{- $navbarWidth := .Site.Params.navbar.width -}}
+{{- $maxNavbarWidth := cond (eq $navbarWidth "wide") "90rem" (cond (eq $navbarWidth "full") "100%" "80rem") -}}
+
+{{- $footerWidth := .Site.Params.footer.width -}}
+{{- $maxFooterWidth := cond (eq $footerWidth "wide") "90rem" (cond (eq $footerWidth "full") "100%" "80rem") -}}
+*/
+
+:root {
+  --hextra-max-page-width: {{ $maxPageWidth }};
+  --hextra-max-navbar-width: {{ $maxNavbarWidth }};
+  --hextra-max-footer-width: {{ $maxFooterWidth }};
+}
+
+.hextra-max-page-width {
+  max-width: var(--hextra-max-page-width);
+}
+
+.hextra-max-navbar-width {
+  max-width: var(--hextra-max-navbar-width);
+}
+
+.hextra-max-footer-width {
+  max-width: var(--hextra-max-footer-width);
+}

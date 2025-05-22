@@ -12,7 +12,7 @@
     {{- if .IsHome -}}
       {{ .Site.Title -}}
     {{ else -}}
-      {{ with .Title }}{{ . }} – {{ end -}}
+      {{ with .Title }}{{ . }} –{{ end -}}
       {{ .Site.Title -}}
     {{ end -}}
   </title>
@@ -28,13 +28,26 @@
   {{- template "_internal/schema.html" . -}}
   {{- template "_internal/twitter_cards.html" . -}}
 
-  {{- partialCached "head-css.html" . -}}
+  {{- $mainCss := resources.Get "css/compiled/main.css" -}}
+  {{- $customCss := resources.Get "css/custom.css" -}}
+  {{- $variablesCss := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" . -}}
+
+  {{- if hugo.IsProduction }}
+    {{- $styles := slice $variablesCss $mainCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
+    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
+  {{- else }}
+    {{- $styles := resources.Get "css/styles.css" | postCSS (dict "inlineImports" true) }}
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
+    <link href="{{ $variablesCss.RelPermalink }}" rel="stylesheet" />
+    <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
+  {{- end }}
 
 
   <!-- Google Analytics -->
-  {{- if and (eq hugo.Environment "production") .Site.Config.Services.GoogleAnalytics.ID }}
+  {{- if and hugo.IsProduction .Site.Config.Services.GoogleAnalytics.ID }}
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    {{ partial "google-analytics.html" . }}
+    {{ partial "google-analytics.html" . -}}
   {{- end }}
 
   <script>
