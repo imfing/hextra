@@ -1,7 +1,7 @@
 /* Hugo template to derive CSS variables from site and page parameters */
 
 /* Do not remove the following comment. It is used by Hugo to render CSS variables.
-{{- $pageWidth := .Site.Params.page.width | default .Params.width -}}
+{{- $pageWidth := .Params.width | default .Site.Params.page.width -}}
 {{- $maxPageWidth := cond (eq $pageWidth "wide") "90rem" (cond (eq $pageWidth "full") "100%" "80rem") -}}
 
 {{- $navbarWidth := .Site.Params.navbar.width -}}
