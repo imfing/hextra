@@ -18,11 +18,12 @@
 
   <nav class="hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6 {{ $navWidth }}">
     <a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href="{{ $logoLink }}">
+      {{- $displayTitle := (.Site.Params.navbar.displayTitle | default true) }}
       {{- if (.Site.Params.navbar.displayLogo | default true) }}
-        <img class="hx:mr-2 hx:block hx:dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }} logo" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
-        <img class="hx:mr-2 hx:hidden hx:dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ .Site.Title }} logo dark" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+        <img class="hx:mr-2 hx:block hx:dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ cond $displayTitle `Logo` .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
+        <img class="hx:mr-2 hx:hidden hx:dark:block" src="{{ $logoDarkPath | relURL }}" alt="{{ cond $displayTitle `Dark Logo` .Site.Title }}" height="{{ $logoHeight }}" width="{{ $logoWidth }}" />
       {{- end }}
-      {{- if (.Site.Params.navbar.displayTitle | default true) }}
+      {{- if $displayTitle }}
         <span class="hx:mr-2 hx:font-extrabold hx:inline hx:select-none" title="{{ .Site.Title }}">{{- .Site.Title -}}</span>
       {{- end }}
     </a>
