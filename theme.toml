@@ -14,6 +14,3 @@ min_version = "0.134.0"
 [author]
   name = "Xin"
   homepage = "https://imfing.com"
-
-[params]
-  hextraRssDir = "blog"
