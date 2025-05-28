@@ -12,6 +12,12 @@ layout: wide
 </p>
 
 {{< cards >}}
+  {{< card
+        link="https://beginnerprivacy.com"
+        title="Beginner Privacy"
+        image="https://github.com/user-attachments/assets/a72582a8-7c54-40cd-b8e3-8fd77164687c"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
 
   {{< card
         link="https://github.com/axivo/website"
