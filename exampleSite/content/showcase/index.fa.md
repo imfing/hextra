@@ -12,6 +12,13 @@ layout: wide
 </p>
 
 {{< cards >}}
+  {{< card
+        link="https://beginnerprivacy.com"
+        title="Beginner Privacy"
+        image="https://github.com/user-attachments/assets/a72582a8-7c54-40cd-b8e3-8fd77164687c"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
   {{< card link="https://developers.osuny.org" title="Osuny" image="https://raw.githubusercontent.com/noesya/osuny-developers/main/static/images/showcase-hextra/screenshot.png" imageStyle="object-fit:cover; aspect-ratio:16/9;" >}}
   {{< card link="https://porter.sh/" title="Porter" image="https://repository-images.githubusercontent.com/155893691/aa249c80-fcf3-11ea-93b0-30079e8d7de4" imageStyle="object-fit:cover; aspect-ratio:16/9;" >}}
   {{< card link="https://lutheranconfessions.org/" title="LutheranConfessions" image="https://github.com/imfing/hextra/assets/5097752/ad6625e4-88cd-4cad-b102-5399997d0359" imageStyle="object-fit:cover; aspect-ratio:16/9;" >}}
