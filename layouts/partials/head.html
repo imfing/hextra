@@ -33,9 +33,8 @@
   {{- $variablesCss := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" . -}}
 
   {{- if and (not hugo.IsProduction) (eq hugo.Environment "theme") }}
-    {{- $styles := resources.Get "css/styles.css" }}
-    {{- $styles = $styles | postCSS (dict "inlineImports" true) }}
-    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
+    {{- $devStyles := resources.Get "css/styles.css" | postCSS (dict "inlineImports" true) }}
+    <link href="{{ $devStyles.RelPermalink }}" rel="stylesheet" />
   {{- else }}
     {{- if hugo.IsProduction }}
       {{- $styles := slice $variablesCss $mainCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
