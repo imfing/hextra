@@ -124,6 +124,15 @@ hugo new site my-site --format=yaml
 
 ### Add Hextra theme as a Git submodule
 
+Switch to the site directory and initialize a new Git repository:
+
+```shell
+cd my-site
+git init
+```
+
+Then, add Hextra theme as a Git submodule:
+
 ```shell
 git submodule add https://github.com/imfing/hextra.git themes/hextra
 ```
