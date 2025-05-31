@@ -95,7 +95,7 @@ menu:
       params:
         icon: github
     - identifier: development
-      name: Latest Dev
+      name: Development
       url: https://imfing.github.io/hextra/versions/latest/
       parent: versions
     - identifier: v0.9
