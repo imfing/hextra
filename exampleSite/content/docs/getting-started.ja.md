@@ -124,6 +124,15 @@ hugo new site my-site --format=yaml
 
 ### HextraテーマをGitサブモジュールとして追加
 
+サイトディレクトリに移動し、新しいGitリポジトリを初期化します：
+
+```shell
+cd my-site
+git init
+```
+
+次に、HextraテーマをGitサブモジュールとして追加します：
+
 ```shell
 git submodule add https://github.com/imfing/hextra.git themes/hextra
 ```
