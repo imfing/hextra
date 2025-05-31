@@ -25,8 +25,8 @@
   {{- end -}}
 
   {{- partial "opengraph.html" . -}}
-  {{- template "_internal/schema.html" . -}}
-  {{- template "_internal/twitter_cards.html" . -}}
+  {{- partial "schema.html" . -}}
+  {{- partial "twitter_cards.html" . -}}
 
   {{- $mainCss := resources.Get "css/compiled/main.css" -}}
   {{- $customCss := resources.Get "css/custom.css" -}}
