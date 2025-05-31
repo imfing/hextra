@@ -1,6 +1,8 @@
 ---
 title: Configuration
 weight: 2
+tags:
+  - Config
 ---
 
 Hugo reads its configuration from `hugo.yaml` in the root of your Hugo site.
@@ -226,6 +228,19 @@ params:
   # Display the last modification date
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
+```
+
+### Tags
+
+To display page tags, set following flags in the config file:
+
+```yaml {filename="hugo.yaml"}
+params:
+  blog:
+    list:
+      displayTags: true
+  docs:
+    displayTags: true
 ```
 
 ### Page Width
