@@ -41,7 +41,7 @@ Hugoは、テキストのフォーマットやリストの作成などに[Markdo
 
 アラートは、ブロッククォート構文に基づくMarkdown拡張で、重要な情報を強調するために使用できます。
 [GitHubスタイルのアラート](https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts)がサポートされています。
-Hextraの最新バージョンと[Hugo v0.134.0](https://github.com/gohugoio/hugo/releases/tag/v0.134.0)以降を使用していることを確認してください。
+Hextraの最新バージョンと[Hugo v0.146.0](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)以降を使用していることを確認してください。
 
 > [!NOTE]
 > ユーザーが知っておくべき有用な情報で、内容をざっと見る際にも役立ちます。
