@@ -32,20 +32,25 @@
   {{- $customCss := resources.Get "css/custom.css" -}}
   {{- $variablesCss := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" . -}}
 
-  {{- if and (not hugo.IsProduction) (eq hugo.Environment "theme") }}
+  {{- /* Production build */ -}}
+  {{- if hugo.IsProduction }}
+    {{- $styles := slice $variablesCss $mainCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
+    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
+
+  {{- /* Theme development mode (non-production + theme environment) */ -}}
+  {{- else if eq hugo.Environment "theme" }}
     {{- $devStyles := resources.Get "css/styles.css" | postCSS (dict "inlineImports" true) }}
     <link href="{{ $devStyles.RelPermalink }}" rel="stylesheet" />
+    <link href="{{ $variablesCss.RelPermalink }}" rel="stylesheet" />
+    <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
+
+  {{- /* User local development */ -}}
   {{- else }}
-    {{- if hugo.IsProduction }}
-      {{- $styles := slice $variablesCss $mainCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
-      <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
-      <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
-    {{- else }}
-      {{- $styles := resources.Get "css/compiled/main.css" -}}
-      <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
-      <link href="{{ $variablesCss.RelPermalink }}" rel="stylesheet" />
-      <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
-    {{- end }}
+    {{- $styles := resources.Get "css/compiled/main.css" -}}
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
+    <link href="{{ $variablesCss.RelPermalink }}" rel="stylesheet" />
+    <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
   {{- end }}
 
 
