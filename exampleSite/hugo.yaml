@@ -58,7 +58,7 @@ markup:
     extensions:
       passthrough:
         delimiters:
-          block: [['\[', '\]'], ['$$', '$$']]
+          block: [['\[', '\]'], ["$$", "$$"]]
           inline: [['\(', '\)']]
         enable: true
 
@@ -70,9 +70,8 @@ menu:
       name: Documentation
       pageRef: /docs
       weight: 1
-    - identifier: showcase
-      name: Showcase
-      pageRef: /showcase
+    - identifier: versions
+      name: Versions
       weight: 2
     - identifier: blog
       name: Blog
@@ -82,15 +81,27 @@ menu:
       name: About
       pageRef: /about
       weight: 4
-    - name: Search
+    - identifier: showcase
+      name: Showcase
+      pageRef: /showcase
       weight: 5
+    - name: Search
+      weight: 6
       params:
         type: search
     - name: GitHub
-      weight: 6
+      weight: 7
       url: "https://github.com/imfing/hextra"
       params:
         icon: github
+    - identifier: development
+      name: Development ↗
+      url: https://imfing.github.io/hextra/versions/latest/
+      parent: versions
+    - identifier: v0.9
+      name: v0.9 ↗
+      url: https://imfing.github.io/hextra/versions/v0.9/
+      parent: versions
 
   sidebar:
     - identifier: more
@@ -163,7 +174,7 @@ params:
       # date | lastmod | publishDate | title | weight
       sortBy: date
       sortOrder: desc # or "asc"
-    
+
     article:
       displayPagination: true
 
