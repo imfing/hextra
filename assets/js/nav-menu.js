@@ -1,4 +1,5 @@
 (function () {
+  const hiddenClass = "hx:hidden";
   const dropdownToggles = document.querySelectorAll(".hextra-nav-menu-toggle");
 
   dropdownToggles.forEach((toggle) => {
@@ -11,7 +12,7 @@
         if (otherToggle !== toggle) {
           otherToggle.dataset.state = "closed";
           const otherMenuItems = otherToggle.nextElementSibling;
-          otherMenuItems.classList.add("hx:hidden");
+          otherMenuItems.classList.add(hiddenClass);
         }
       });
 
@@ -29,10 +30,10 @@
         menuItemsElement.style.zIndex = "1000";
 
         // Show dropdown
-        menuItemsElement.classList.remove("hx:hidden");
+        menuItemsElement.classList.remove(hiddenClass);
       } else {
         // Hide dropdown
-        menuItemsElement.classList.add("hx:hidden");
+        menuItemsElement.classList.add(hiddenClass);
       }
     });
   });
@@ -43,7 +44,7 @@
       dropdownToggles.forEach((toggle) => {
         toggle.dataset.state = "closed";
         const menuItemsElement = toggle.nextElementSibling;
-        menuItemsElement.classList.add("hx:hidden");
+        menuItemsElement.classList.add(hiddenClass);
       });
     }
   });
@@ -54,7 +55,7 @@
       dropdownToggles.forEach((toggle) => {
         toggle.dataset.state = "closed";
         const menuItemsElement = toggle.nextElementSibling;
-        menuItemsElement.classList.add("hx:hidden");
+        menuItemsElement.classList.add(hiddenClass);
       });
     }
   });
