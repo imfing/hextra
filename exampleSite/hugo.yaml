@@ -95,11 +95,11 @@ menu:
       params:
         icon: github
     - identifier: development
-      name: Development
+      name: Development ↗
       url: https://imfing.github.io/hextra/versions/latest/
       parent: versions
     - identifier: v0.9
-      name: v0.9
+      name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
       parent: versions
 
