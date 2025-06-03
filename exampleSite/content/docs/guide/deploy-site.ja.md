@@ -54,7 +54,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.145.0
+      HUGO_VERSION: 0.147.7
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -146,7 +146,7 @@ run: |
 3. [hextra-starter-template][hextra-starter-template]を使用していない場合、以下の設定を手動で行います：
    - ビルドコマンドを `hugo --gc --minify` に設定します。
    - 公開ディレクトリを `public` に指定します。
-   - 環境変数 `HUGO_VERSION` を追加し、`0.145.0` に設定するか、`netlify.toml` ファイルに設定します。
+   - 環境変数 `HUGO_VERSION` を追加し、`0.147.7` に設定するか、`netlify.toml` ファイルに設定します。
 4. デプロイします！
 
 詳細については、[NetlifyでのHugo](https://docs.netlify.com/integrations/frameworks/hugo/)を確認してください。
