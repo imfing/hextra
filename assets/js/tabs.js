@@ -1,20 +1,50 @@
-document.querySelectorAll('.hextra-tabs-toggle').forEach(function (button) {
-  button.addEventListener('click', function (e) {
-    // set parent tabs to unselected
-    const tabs = Array.from(e.target.parentElement.querySelectorAll('.hextra-tabs-toggle'));
-    tabs.map(tab => tab.dataset.state = '');
-
-    // set current tab to selected
-    e.target.dataset.state = 'selected';
-
-    // set all panels to unselected
-    const panelsContainer = e.target.parentElement.parentElement.nextElementSibling;
-    Array.from(panelsContainer.children).forEach(function (panel) {
-      panel.dataset.state = '';
+(function () {
+  function updateGroup(container, index) {
+    const tabs = Array.from(container.querySelectorAll('.hextra-tabs-toggle'));
+    tabs.forEach((tab, i) => {
+      tab.dataset.state = i === index ? 'selected' : '';
+      if (i === index) {
+        tab.setAttribute('aria-selected', 'true');
+        tab.tabIndex = 0;
+      } else {
+        tab.removeAttribute('aria-selected');
+        tab.removeAttribute('tabindex');
+      }
     });
+    const panelsContainer = container.parentElement.nextElementSibling;
+    Array.from(panelsContainer.children).forEach((panel, i) => {
+      panel.dataset.state = i === index ? 'selected' : '';
+      if (i === index) {
+        panel.tabIndex = 0;
+      } else {
+        panel.removeAttribute('tabindex');
+      }
+    });
+  }
 
-    const panelId = e.target.getAttribute('aria-controls');
-    const panel = panelsContainer.querySelector(`#${panelId}`);
-    panel.dataset.state = 'selected';
+  const groups = document.querySelectorAll('[data-tab-group]');
+
+  groups.forEach((group) => {
+    const key = group.dataset.tabGroup;
+    const saved = localStorage.getItem('hextra-tab-' + key);
+    if (saved !== null) {
+      updateGroup(group, parseInt(saved, 10));
+    }
   });
-});
+
+  document.querySelectorAll('.hextra-tabs-toggle').forEach((button) => {
+    button.addEventListener('click', function (e) {
+      const container = e.target.parentElement;
+      const index = Array.from(container.querySelectorAll('.hextra-tabs-toggle')).indexOf(
+        e.target
+      );
+      const key = container.dataset.tabGroup;
+      document
+        .querySelectorAll('[data-tab-group="' + key + '"]')
+        .forEach((grp) => updateGroup(grp, index));
+      if (key) {
+        localStorage.setItem('hextra-tab-' + key, index.toString());
+      }
+    });
+  });
+})();
