@@ -54,7 +54,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.145.0
+      HUGO_VERSION: 0.147.7
     steps:
       - name: 检出
         uses: actions/checkout@v4
@@ -146,7 +146,7 @@ run: |
 3. 如果您没有使用 [hextra-starter-template][hextra-starter-template]，请手动配置以下内容：
    - 将构建命令配置为 `hugo --gc --minify`
    - 指定发布目录为 `public`
-   - 添加环境变量 `HUGO_VERSION` 并设置为 `0.145.0`，或者将其设置在 `netlify.toml` 文件中
+   - 添加环境变量 `HUGO_VERSION` 并设置为 `0.147.7`，或者将其设置在 `netlify.toml` 文件中
 4. 部署！
 
 查看 [Netlify 上的 Hugo](https://docs.netlify.com/integrations/frameworks/hugo/) 了解更多详情。
