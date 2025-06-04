@@ -11,13 +11,9 @@
         {{- range $pages }}
           <div class="hx:mb-10">
             <h3><a style="color: inherit; text-decoration: none;" class="hx:block hx:font-semibold hx:mt-8 hx:text-2xl " href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-            {{- if site.Params.blog.list.displayTags -}}
-              {{ with .Params.tags }}
-                <p class="hx:opacity-50 hx:text-sm hx:leading-7">
-                  {{- range . }}<a class="hx:inline-block hx:mr-2">#{{ . }}</a>{{ end -}}
-                </p>
-              {{ end -}}
-            {{- end -}}
+            {{ if site.Params.blog.list.displayTags }}
+              {{ partial "tags.html" . }}
+            {{ end }}
             <p class="hx:opacity-80 hx:mt-4 hx:leading-7">{{- partial "utils/page-description" . -}}</p>
             <p class="hx:opacity-80 hx:mt-1 hx:leading-7">
               <a class="hx:text-[color:hsl(var(--primary-hue),100%,50%)] hx:underline hx:underline-offset-2 hx:decoration-from-font" href="{{ .RelPermalink }}">
