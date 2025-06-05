@@ -95,10 +95,11 @@
     {{ with try (resources.GetRemote $katexCssUrl) -}}
       {{ with .Err -}}
         {{ errorf "Could not retrieve KaTeX css file from %s. Reason: %s." $katexCssUrl . -}}
-      {{ else with.Value -}}
+      {{ else with .Value -}}
         {{ $katexCssContent := strings.Replace .Content $katexFontPattern $katexFontSubstituted }}
         {{ with resources.FromString (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) $katexCssContent -}}
-          <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- . | fingerprint -}}" crossorigin="anonymous" />
+          {{ $cssHash := . | fingerprint "sha512" -}}
+          <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $cssHash.Data.Integrity -}}" crossorigin="anonymous" />
         {{ end -}}
       {{ end -}}
     {{ end -}}

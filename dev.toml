@@ -1,5 +1,5 @@
 # Theme development config for exampleSite
-# https://gohugo.io/getting-started/configuration/#configure-cache-busters
+# https://gohugo.io/configuration/build/#cache-busters
 [build]
   [build.buildStats]
     enable = true
