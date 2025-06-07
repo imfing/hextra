@@ -12,7 +12,7 @@
     {{- if .IsHome -}}
       {{ .Site.Title -}}
     {{ else -}}
-      {{ with .Title }}{{ . }} –{{ end -}}
+      {{ with .Title }}{{ . }} – {{ end -}}
       {{ .Site.Title -}}
     {{ end -}}
   </title>
