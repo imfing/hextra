@@ -13,6 +13,41 @@ next: /docs/guide/deploy-site
 
 {{< /tabs >}}
 
+### Sync Tabs
+
+Tabs with the same list of `items` can be synchronized. When enabled, selecting a tab updates all other tabs with the same `items` and remembers the selection across pages.
+
+Enable globally in your `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  tabs:
+    sync: true
+```
+
+Or enable it for a single page in the front matter:
+
+```yaml {filename="content/docs/my-page.md"}
+---
+title: My Page
+tabsSync: true
+---
+```
+
+With this enabled the following two tab blocks will always display the same selected item:
+
+```markdown
+{{</* tabs items="A,B" */>}}
+  {{</* tab */>}}A content{{</* /tab */>}}
+  {{</* tab */>}}B content{{</* /tab */>}}
+{{</* /tabs */>}}
+
+{{</* tabs items="A,B" */>}}
+  {{</* tab */>}}Second A content{{</* /tab */>}}
+  {{</* tab */>}}Second B content{{</* /tab */>}}
+{{</* /tabs */>}}
+```
+
 ## Usage
 
 ### Default

@@ -184,6 +184,9 @@ params:
       # hover | always
       display: hover
 
+  tabs:
+    sync: true
+
   comments:
     enable: false
     type: giscus
