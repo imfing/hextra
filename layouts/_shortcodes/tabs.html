@@ -1,10 +1,7 @@
 {{- $items := split (.Get "items") "," -}}
 {{- $defaultIndex := int ((.Get "defaultIndex") | default "0") -}}
 
-{{- $enableSync := site.Params.tabs.sync | default false -}}
-{{- with .Page.Params.tabsSync }}
-  {{- $enableSync = . -}}
-{{- end -}}
+{{- $enableSync := site.Params.page.tabs.sync | default false -}}
 
 {{- if not $items -}}
   {{ errorf "no items provided" }}

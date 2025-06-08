@@ -132,10 +132,6 @@ params:
       # link: /
     width: wide
 
-  page:
-    # full (100%), wide (90rem), normal (80rem)
-    width: normal
-
   theme:
     # light | dark | system
     default: system
@@ -184,8 +180,11 @@ params:
       # hover | always
       display: hover
 
-  tabs:
-    sync: true
+  page:
+    # full (100%), wide (90rem), normal (80rem)
+    width: normal
+    tabs:
+      sync: true
 
   comments:
     enable: false
