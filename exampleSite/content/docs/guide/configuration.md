@@ -325,7 +325,7 @@ To add [Open Graph](https://ogp.me/) metadata to a page, add values in the front
 
 As a page can have multiple `image` and `video` tags, place their values in an array.
 Other Open Graph properties can have only one value.
-For example, this page has an `og:image` tag (displayed as a preview on social shares) and an `og:audio` tag.
+For example, this page has an `og:image` tag (which configures an image to preview on social shares) and an `og:audio` tag.
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 title: "Configuration"
