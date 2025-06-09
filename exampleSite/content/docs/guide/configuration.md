@@ -328,7 +328,7 @@ Other Open Graph properties can have only one value.
 For example, this page has an `og:image` tag (displayed as a preview on social shares) and an `og:audio` tag.
 
 ```yaml {filename="content/docs/guide/configuration.md"}
-title: "Page Title"
+title: "Configuration"
 params:
   images:
     - "/img/config-image.jpg"
