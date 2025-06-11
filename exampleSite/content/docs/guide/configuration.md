@@ -239,7 +239,7 @@ params:
   blog:
     list:
       displayTags: true
-  docs:
+  toc:
     displayTags: true
 ```
 
