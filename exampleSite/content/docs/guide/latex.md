@@ -3,7 +3,7 @@ title: "LaTeX"
 weight: 4
 math: true
 ---
-\(\KaTeX\) is used for rendering LaTeX math expressions. No manual activation is needed, you can start using LaTeX math expressions in your Markdown content right away.
+\(\KaTeX\) is used for rendering LaTeX math expressions by default. No manual activation is needed, you can start using LaTeX math expressions in your Markdown content right away. To use MathJax instead, set `math.engine` to `mathjax` in your site parameters.
 
 ## Example
 

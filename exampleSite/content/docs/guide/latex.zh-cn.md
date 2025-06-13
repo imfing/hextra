@@ -4,7 +4,7 @@ weight: 4
 math: true
 ---
 
-\(\KaTeX\) 用于渲染 LaTeX 数学表达式。可以通过在页面前置设置中将 `math` 设置为 `true` 来启用它。
+\(\KaTeX\) 用于渲染 LaTeX 数学表达式。可以通过在页面前置设置中将 `math` 设置为 `true` 来启用它。如需使用 MathJax，请在站点参数中将 `math.engine` 设置为 `mathjax`。
 
 <!--more-->
 

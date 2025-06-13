@@ -8,3 +8,9 @@
 {{- if (.Store.Get "hasMermaid") -}}
   {{- partial "scripts/mermaid.html" . -}}
 {{- end -}}
+
+{{/* MathJax */}}
+{{- $engine := site.Params.math.engine | default "katex" -}}
+{{- if and (.Store.Get "hasMath") (eq $engine "mathjax") -}}
+  {{- partial "scripts/mathjax.html" . -}}
+{{- end -}}

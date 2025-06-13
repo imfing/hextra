@@ -184,6 +184,11 @@ params:
       # hover | always
       display: hover
 
+  # Mathematics rendering engine
+  math:
+    # katex | mathjax
+    engine: katex
+
   comments:
     enable: false
     type: giscus
