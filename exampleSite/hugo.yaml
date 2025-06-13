@@ -178,6 +178,9 @@ params:
     article:
       displayPagination: true
 
+  toc:
+    displayTags: true
+
   highlight:
     copy:
       enable: true

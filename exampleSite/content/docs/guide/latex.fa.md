@@ -4,7 +4,7 @@ weight: 4
 math: true
 ---
 
-\(\KaTeX\) برای رندر کردن عبارت‌های ریاضی LaTeX استفاده می‌شود. می‌توان آن را در هر صفحه با تنظیم `math` روی `true` در قسمت بالای صفحه فعال کرد. اگر می‌خواهید از MathJax استفاده کنید، پارامتر `math.engine` را در تنظیمات سایت روی `mathjax` قرار دهید.
+\(\KaTeX\) برای رندر کردن عبارت‌های ریاضی LaTeX استفاده می‌شود. می‌توان آن را در هر صفحه با تنظیم `math` روی `true` در قسمت بالای صفحه فعال کرد.
 
 <!--more-->
 
@@ -55,6 +55,15 @@ $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 
 ```markdown {filename="page.md"}
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+
+## موتور ریاضی
+
+برای استفاده از MathJax به جای KaTeX، پیکربندی زیر را اضافه کنید:
+
+```yaml {filename="hugo.yaml"}
+params:
+  math:
+    engine: mathjax
 ```
 
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$

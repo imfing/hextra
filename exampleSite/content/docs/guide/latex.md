@@ -3,7 +3,7 @@ title: "LaTeX"
 weight: 4
 math: true
 ---
-\(\KaTeX\) is used for rendering LaTeX math expressions by default. No manual activation is needed, you can start using LaTeX math expressions in your Markdown content right away. To use MathJax instead, set `math.engine` to `mathjax` in your site parameters.
+\(\KaTeX\) is used for rendering LaTeX math expressions by default. No manual activation is needed, you can start using LaTeX math expressions in your Markdown content right away.
 
 ## Example
 
@@ -79,6 +79,15 @@ Separate paragraph:
 
 ```markdown {filename="page.md"}
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+
+## Math engine
+
+To render equations with MathJax instead of KaTeX add the following to your configuration:
+
+```yaml {filename="hugo.yaml"}
+params:
+  math:
+    engine: mathjax
 ```
 
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$

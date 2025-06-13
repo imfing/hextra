@@ -4,7 +4,7 @@ weight: 4
 math: true
 ---
 
-\(\KaTeX\) は LaTeX の数式をレンダリングするために使用されます。ページのフロントマターで `math` を `true` に設定することで、ページごとに有効にすることができます。MathJax を使用する場合は、サイトパラメータで `math.engine` を `mathjax` に設定してください。
+\(\KaTeX\) は LaTeX の数式をレンダリングするために使用されます。ページのフロントマターで `math` を `true` に設定することで、ページごとに有効にすることができます。
 
 <!--more-->
 
@@ -92,6 +92,15 @@ $$
 
 ```markdown {filename="page.md"}
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+
+## 数式エンジン
+
+KaTeX の代わりに MathJax を利用する場合は次のように設定します:
+
+```yaml {filename="hugo.yaml"}
+params:
+  math:
+    engine: mathjax
 ```
 
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$

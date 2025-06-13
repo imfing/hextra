@@ -4,7 +4,7 @@ weight: 4
 math: true
 ---
 
-\(\KaTeX\) 用于渲染 LaTeX 数学表达式。可以通过在页面前置设置中将 `math` 设置为 `true` 来启用它。如需使用 MathJax，请在站点参数中将 `math.engine` 设置为 `mathjax`。
+\(\KaTeX\) 用于渲染 LaTeX 数学表达式。可以通过在页面前置设置中将 `math` 设置为 `true` 来启用它。
 
 <!--more-->
 
@@ -92,6 +92,15 @@ $$
 
 ```markdown {filename="page.md"}
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+
+## 数学引擎
+
+如果希望使用 MathJax 渲染公式，可以在配置中添加以下内容：
+
+```yaml {filename="hugo.yaml"}
+params:
+  math:
+    engine: mathjax
 ```
 
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$

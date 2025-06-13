@@ -1,5 +1,5 @@
 {{/* MathJax */}}
-{{ $mathjaxVersion := site.Params.math.mathjaxVersion | default "3.2.2" -}}
+{{ $mathjaxVersion := site.Params.math.mathjaxVersion | default "3" -}}
 {{ $mathjaxJsUrl := printf "https://cdn.jsdelivr.net/npm/mathjax@%s/es5/tex-chtml.js" $mathjaxVersion -}}
 {{ with try (resources.GetRemote $mathjaxJsUrl) -}}
   {{ with .Err -}}
@@ -16,7 +16,6 @@
     tex: {
       displayMath: [['\\[', '\\]'], ['$$', '$$']],
       inlineMath: [['\\(', '\\)']]
-    },
-    loader: { load: ['ui/safe'] }
+    }
   };
 </script>
