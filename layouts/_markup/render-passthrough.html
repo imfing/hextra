@@ -10,6 +10,11 @@
     {{- end }}
   {{- end }}
 {{- else -}}
+  {{/* MathJax - need to add delimiters back in */}}
   {{- $.Page.Store.Set "hasMath" true }}
-  {{- .Inner | safeHTML -}}
+  {{- if eq .Type "block" -}}
+    \[{{- .Inner -}}\]
+  {{- else -}}
+    \( {{- .Inner -}} \)
+  {{- end -}}
 {{- end -}}

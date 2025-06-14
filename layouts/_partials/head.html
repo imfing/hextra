@@ -104,6 +104,8 @@
         {{ end -}}
       {{ end -}}
     {{ end -}}
+  {{ else if and (.Page.Store.Get "hasMath") (eq $engine "mathjax") -}}
+    {{ partialCached "scripts/mathjax.html" . -}}
   {{ end -}}
 
   {{ partial "custom/head-end.html" . -}}

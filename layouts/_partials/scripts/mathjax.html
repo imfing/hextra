@@ -1,21 +1,21 @@
 {{/* MathJax */}}
 {{ $mathjaxVersion := site.Params.math.mathjaxVersion | default "3" -}}
 {{ $mathjaxJsUrl := printf "https://cdn.jsdelivr.net/npm/mathjax@%s/es5/tex-chtml.js" $mathjaxVersion -}}
-{{ with try (resources.GetRemote $mathjaxJsUrl) -}}
-  {{ with .Err -}}
-    {{ errorf "Could not retrieve MathJax js file from %s. Reason: %s." $mathjaxJsUrl . -}}
-  {{ else with .Value -}}
-    {{ with resources.Copy "js/mathjax.js" . -}}
-      {{ $mathjaxJs := . | fingerprint -}}
-      <script defer id="MathJax-script" src="{{ $mathjaxJs.RelPermalink }}" integrity="{{ $mathjaxJs.Data.Integrity }}" crossorigin="anonymous"></script>
-    {{ end -}}
-  {{ end -}}
-{{ end -}}
+<script defer id="MathJax-script" src="{{ $mathjaxJsUrl }}" crossorigin="anonymous" async></script>
 <script>
   MathJax = {
+    loader: {
+      load: ["ui/safe"],
+    },
     tex: {
-      displayMath: [['\\[', '\\]'], ['$$', '$$']],
-      inlineMath: [['\\(', '\\)']]
-    }
+      displayMath: [
+        ["\\[", "\\]"],
+        ["$$", "$$"],
+      ],
+      inlineMath: [
+        ["\\(", "\\)"],
+        ["$", "$"],
+      ],
+    },
   };
 </script>

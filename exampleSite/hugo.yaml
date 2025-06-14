@@ -58,7 +58,7 @@ markup:
     extensions:
       passthrough:
         delimiters:
-          block: [['\[', '\]'], ["$$", "$$"]]
+          block: [['\[', '\]'], ['$$', '$$']]
           inline: [['\(', '\)']]
         enable: true
 
@@ -186,11 +186,6 @@ params:
       enable: true
       # hover | always
       display: hover
-
-  # Mathematics rendering engine
-  math:
-    # katex | mathjax
-    engine: katex
 
   comments:
     enable: false
