@@ -58,7 +58,7 @@ markup:
     extensions:
       passthrough:
         delimiters:
-          block: [['\[', '\]'], ["$$", "$$"]]
+          block: [['\[', '\]'], ['$$', '$$']]
           inline: [['\(', '\)']]
         enable: true
 

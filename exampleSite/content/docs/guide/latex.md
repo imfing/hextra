@@ -1,9 +1,10 @@
 ---
 title: "LaTeX"
 weight: 4
-math: true
 ---
-\(\KaTeX\) is used for rendering LaTeX math expressions. No manual activation is needed, you can start using LaTeX math expressions in your Markdown content right away.
+
+By default, \(\KaTeX\) is used for rendering LaTeX math expressions.
+No manual activation is needed, you can start using LaTeX math expressions in your Markdown content right away.
 
 ## Example
 
@@ -15,7 +16,7 @@ Both inline and separate paragraph LaTeX math expressions are supported in the M
 This \(\sigma(z) = \frac{1}{1 + e^{-z}}\) is inline.
 ```
 
-This \(\sigma(z) = \frac{1}{1 + e^{-z}}\) is inline.
+This \( \sigma(z) = \frac{1}{1 + e^{-z}} \) is inline.
 
 ### Separate Paragraph
 
@@ -25,21 +26,7 @@ $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 
 will be rendered as:
 
-$$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
-
-> [!IMPORTANT]
-> Please enable and configure the [passthrough extension](https://gohugo.io/content-management/mathematics/) in the Hugo configuration file. It preserves raw content within the delimiters to avoid rendering issues for complex expressions.
-
-```yaml {filename="hugo.yaml"}
-markup:
-  goldmark:
-    extensions:
-      passthrough:
-        delimiters:
-          block: [['\[', '\]'], ['$$', '$$']]
-          inline: [['\(', '\)']]
-        enable: true
-```
+$$F(\omega) = \int\_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 
 For example, using the aligned environment:
 
@@ -65,6 +52,23 @@ $$
 \end{aligned}
 $$
 
+
+## Configuration
+
+> [!IMPORTANT]
+> Please enable and configure the [passthrough extension](https://gohugo.io/content-management/mathematics/) in the Hugo configuration file, so that Hugo can detect LaTeX math expressions in your Markdown content.
+
+```yaml {filename="hugo.yaml"}
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ["$$", "$$"]]
+          inline: [['\(', '\)']]
+        enable: true
+```
+
 ## Supported Functions
 
 For a list of supported functions, see [KaTeX supported functions](https://katex.org/docs/supported.html).
@@ -81,4 +85,25 @@ Separate paragraph:
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
 ```
 
+will be rendered as:
+
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+
+
+## Math Engine
+
+### MathJax
+
+By default, [KaTeX][katex] is used for rendering LaTeX math expressions during the build process, which is preferred.
+Alternatively, you can use [MathJax][mathjax] to render math expressions.
+
+To use it instead, add the following to the configuration `hugo.yaml` file:
+
+```yaml {filename="hugo.yaml"}
+params:
+  math:
+    engine: mathjax
+```
+
+[katex]: https://katex.org/
+[mathjax]: https://www.mathjax.org/
