@@ -1,22 +1,10 @@
 ---
 title: "LaTeX"
 weight: 4
-math: true
 ---
 
-\(\KaTeX\) برای رندر کردن عبارت‌های ریاضی LaTeX استفاده می‌شود. می‌توان آن را در هر صفحه با تنظیم `math` روی `true` در قسمت بالای صفحه فعال کرد.
-
-<!--more-->
-
-```yaml {filename="Markdown"}
----
-title: "صفحه من با LaTeX"
-math: true
----
-
-```
-
-وقتی فعال باشد، اسکریپت‌ها، شیوه‌نامه‌ها و فونت‌های KaTeX به طور خودکار در سایت شما قرار می‌گیرند. می‌توانید از عبارت‌های ریاضی LaTeX در محتوای مارک‌داون خود استفاده کنید.
+به طور پیش‌فرض، \(\KaTeX\) برای رندر کردن عبارت‌های ریاضی LaTeX استفاده می‌شود.
+نیازی به فعال‌سازی دستی نیست، می‌توانید فوراً از عبارت‌های ریاضی LaTeX در محتوای مارک‌داون خود استفاده کنید.
 
 ## مثال
 
@@ -40,6 +28,46 @@ $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 
 $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 
+به عنوان مثال، استفاده از محیط هم‌ترازی:
+
+```latex {filename="page.md"}
+$$
+\begin{aligned}
+  \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\
+  \nabla \cdot \mathbf{B} &= 0 \\
+  \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \nabla \times \mathbf{B} &= \mu_0 \left( \mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
+\end{aligned}
+$$
+```
+
+به صورت زیر رندر خواهد شد:
+
+$$
+\begin{aligned}
+  \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\
+  \nabla \cdot \mathbf{B} &= 0 \\
+  \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+  \nabla \times \mathbf{B} &= \mu_0 \left( \mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t} \right)
+\end{aligned}
+$$
+
+
+## پیکربندی
+
+> [!IMPORTANT]
+> لطفاً [افزونه passthrough](https://gohugo.io/content-management/mathematics/) را در فایل پیکربندی Hugo فعال و پیکربندی کنید تا Hugo بتواند عبارت‌های ریاضی LaTeX را در محتوای مارک‌داون شما تشخیص دهد.
+
+```yaml {filename="hugo.yaml"}
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ["$$", "$$"]]
+          inline: [['\(', '\)']]
+        enable: true
+```
 
 ## توابع پشتیبانی شده
 
@@ -55,10 +83,21 @@ $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 
 ```markdown {filename="page.md"}
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+```
+
+به صورت زیر رندر خواهد شد:
+
+$$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+
 
 ## موتور ریاضی
 
-برای استفاده از MathJax به جای KaTeX، پیکربندی زیر را اضافه کنید:
+### MathJax
+
+به طور پیش‌فرض، [KaTeX][katex] برای رندر کردن عبارت‌های ریاضی LaTeX در طول فرآیند ساخت استفاده می‌شود که روش ترجیحی است.
+به عنوان جایگزین، می‌توانید از [MathJax][mathjax] برای رندر کردن عبارت‌های ریاضی استفاده کنید.
+
+برای استفاده از آن، موارد زیر را به فایل پیکربندی `hugo.yaml` اضافه کنید:
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -66,4 +105,5 @@ params:
     engine: mathjax
 ```
 
-$$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+[katex]: https://katex.org/
+[mathjax]: https://www.mathjax.org/

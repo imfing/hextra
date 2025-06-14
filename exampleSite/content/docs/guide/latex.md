@@ -1,7 +1,6 @@
 ---
 title: "LaTeX"
 weight: 4
-math: true
 ---
 
 By default, \(\KaTeX\) is used for rendering LaTeX math expressions.
