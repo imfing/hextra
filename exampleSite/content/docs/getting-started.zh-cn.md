@@ -1,6 +1,9 @@
 ---
 title: 入门指南
 weight: 1
+tags:
+  - 文档
+  - 指南
 next: /docs/guide
 prev: /docs
 ---

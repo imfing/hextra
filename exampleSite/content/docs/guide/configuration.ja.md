@@ -212,6 +212,19 @@ params:
 `theme.displayToggle`パラメータを使用して、テーマを変更するためのトグルボタンを表示できます。
 `true`に設定すると、訪問者はデフォルト設定を上書きしてライトモードとダークモードを切り替えることができます。
 
+### タグ
+
+ページのタグを表示するには、設定ファイルで次のフラグを設定してください:
+
+```yaml {filename="hugo.yaml"}
+params:
+  blog:
+    list:
+      displayTags: true
+  toc:
+    displayTags: true
+```
+
 ### ページ幅
 
 ページの幅は、設定ファイルの`params.page.width`パラメータでカスタマイズできます：
