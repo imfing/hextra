@@ -212,6 +212,19 @@ params:
 `theme.displayToggle` 参数允许您显示一个切换按钮以更改主题。
 当设置为 `true` 时，访问者可以在浅色或深色模式之间切换，覆盖默认设置。
 
+### 标签
+
+要显示页面标签，请在配置文件中设置以下标志：
+
+```yaml {filename="hugo.yaml"}
+params:
+  blog:
+    list:
+      displayTags: true
+  toc:
+    displayTags: true
+```
+
 ### 页面宽度
 
 页面的宽度可以通过配置文件中的 `params.page.width` 参数进行自定义：

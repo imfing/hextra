@@ -1,6 +1,9 @@
 ---
 title: はじめに
 weight: 1
+tags:
+  - ドキュメント
+  - ガイド
 next: /docs/guide
 prev: /docs
 ---
