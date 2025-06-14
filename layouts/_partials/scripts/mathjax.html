@@ -1,0 +1,21 @@
+{{/* MathJax */}}
+{{ $mathjaxVersion := site.Params.math.mathjaxVersion | default "3" -}}
+{{ $mathjaxJsUrl := printf "https://cdn.jsdelivr.net/npm/mathjax@%s/es5/tex-chtml.js" $mathjaxVersion -}}
+<script defer id="MathJax-script" src="{{ $mathjaxJsUrl }}" crossorigin="anonymous" async></script>
+<script>
+  MathJax = {
+    loader: {
+      load: ["ui/safe"],
+    },
+    tex: {
+      displayMath: [
+        ["\\[", "\\]"],
+        ["$$", "$$"],
+      ],
+      inlineMath: [
+        ["\\(", "\\)"],
+        ["$", "$"],
+      ],
+    },
+  };
+</script>

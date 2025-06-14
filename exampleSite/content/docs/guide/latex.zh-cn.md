@@ -4,19 +4,8 @@ weight: 4
 math: true
 ---
 
-\(\KaTeX\) 用于渲染 LaTeX 数学表达式。可以通过在页面前置设置中将 `math` 设置为 `true` 来启用它。
-
-<!--more-->
-
-```yaml {filename="page.md"}
----
-title: "我的页面包含 LaTeX"
-math: true
----
-
-```
-
-启用后，KaTeX 的脚本、样式表和字体将自动包含在您的站点中。您可以在 Markdown 内容中开始使用 LaTeX 数学表达式。
+默认情况下，\(\KaTeX\) 用于渲染 LaTeX 数学表达式。
+无需手动激活，您可以直接在 Markdown 内容中开始使用 LaTeX 数学表达式。
 
 ## 示例
 
@@ -39,20 +28,6 @@ $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
 将渲染为：
 
 $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t} \, dt$$
-
-> [!IMPORTANT]
-> 请在 Hugo 配置文件中启用并配置 [passthrough 扩展](https://gohugo.io/content-management/mathematics/)。它保留分隔符内的原始内容，以避免复杂表达式的渲染问题。
-
-```yaml {filename="hugo.yaml"}
-markup:
-  goldmark:
-    extensions:
-      passthrough:
-        delimiters:
-          block: [['\[', '\]'], ['$$', '$$']]
-          inline: [['\(', '\)']]
-        enable: true
-```
 
 例如，使用对齐环境：
 
@@ -78,6 +53,23 @@ $$
 \end{aligned}
 $$
 
+
+## 配置
+
+> [!IMPORTANT]
+> 请在 Hugo 配置文件中启用并配置 [passthrough 扩展](https://gohugo.io/content-management/mathematics/)，以便 Hugo 可以检测 Markdown 内容中的 LaTeX 数学表达式。
+
+```yaml {filename="hugo.yaml"}
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block: [['\[', '\]'], ["$$", "$$"]]
+          inline: [['\(', '\)']]
+        enable: true
+```
+
 ## 支持的函数
 
 有关支持的函数列表，请参阅 [KaTeX 支持的函数](https://katex.org/docs/supported.html)。
@@ -94,4 +86,25 @@ $$
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
 ```
 
+将渲染为：
+
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
+
+
+## 数学引擎
+
+### MathJax
+
+默认情况下，使用 [KaTeX][katex] 在构建过程中渲染 LaTeX 数学表达式，这是首选方式。
+或者，您可以使用 [MathJax][mathjax] 来渲染数学表达式。
+
+要使用 MathJax，请将以下内容添加到 `hugo.yaml` 配置文件中：
+
+```yaml {filename="hugo.yaml"}
+params:
+  math:
+    engine: mathjax
+```
+
+[katex]: https://katex.org/
+[mathjax]: https://www.mathjax.org/

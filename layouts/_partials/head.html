@@ -85,7 +85,8 @@
 
   <!-- KaTeX-->
   {{ $noop := .WordCount -}}
-  {{ if .Page.Store.Get "hasMath" -}}
+  {{- $engine := site.Params.math.engine | default "katex" -}}
+  {{ if and (.Page.Store.Get "hasMath") (eq $engine "katex") -}}
     <!-- TODO: make url configurable -->
     {{ $katexBaseUrl := "https://cdn.jsdelivr.net/npm/katex@latest/dist" }}
     {{ $katexCssUrl := printf "%s/katex%s.css" $katexBaseUrl (cond hugo.IsProduction ".min" "") -}}
@@ -103,6 +104,8 @@
         {{ end -}}
       {{ end -}}
     {{ end -}}
+  {{ else if and (.Page.Store.Get "hasMath") (eq $engine "mathjax") -}}
+    {{ partialCached "scripts/mathjax.html" . -}}
   {{ end -}}
 
   {{ partial "custom/head-end.html" . -}}
