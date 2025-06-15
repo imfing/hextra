@@ -1,6 +1,9 @@
 ---
 title: شروع کنید
 weight: 1
+tags:
+  - مستندات
+  - راهنما
 next: /docs/guide
 prev: /docs
 ---
