@@ -186,8 +186,8 @@ params:
   page:
     # full (100%), wide (90rem), normal (80rem)
     width: normal
-    tabs:
-      sync: true
+    # tabs:
+    #   sync: true
 
   comments:
     enable: false

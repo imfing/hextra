@@ -7,9 +7,9 @@ next: /docs/guide/deploy-site
 
 {{< tabs items="macOS,Linux,Windows" >}}
 
-{{< tab >}}**macOS**: A desktop operating system by Apple.{{< /tab >}}
-{{< tab >}}**Linux**: An open-source operating system.{{< /tab >}}
-{{< tab >}}**Windows**: A desktop operating system by Microsoft.{{< /tab >}}
+  {{< tab >}}**macOS**: A desktop operating system by Apple.{{< /tab >}}
+  {{< tab >}}**Linux**: An open-source operating system.{{< /tab >}}
+  {{< tab >}}**Windows**: A desktop operating system by Microsoft.{{< /tab >}}
 
 {{< /tabs >}}
 
