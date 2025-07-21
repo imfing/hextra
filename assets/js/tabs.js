@@ -12,6 +12,7 @@
       }
     });
     const panelsContainer = container.parentElement.nextElementSibling;
+    if (!panelsContainer) return;
     Array.from(panelsContainer.children).forEach((panel, i) => {
       panel.dataset.state = i === index ? 'selected' : '';
       if (i === index) {
