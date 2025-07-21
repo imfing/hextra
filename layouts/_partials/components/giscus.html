@@ -16,9 +16,11 @@
     let giscusTheme = "{{ (string .theme) | default `light` }}";
     if(getHugoTheme() == 'light') {
       return giscusTheme.replace('dark', 'light');
-    } else {
+    }
+    if(getHugoTheme() == 'dark') {
       return giscusTheme.replace('light', 'dark');
     }
+    return giscusTheme;
   }
 
   function setGiscusTheme() {
