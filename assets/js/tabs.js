@@ -26,7 +26,7 @@
   const groups = document.querySelectorAll('[data-tab-group]');
 
   groups.forEach((group) => {
-    const key = group.dataset.tabGroup;
+    const key = encodeURIComponent(group.dataset.tabGroup);
     const saved = localStorage.getItem('hextra-tab-' + key);
     if (saved !== null) {
       updateGroup(group, parseInt(saved, 10));
@@ -39,9 +39,9 @@
       const index = Array.from(container.querySelectorAll('.hextra-tabs-toggle')).indexOf(
         e.target
       );
-      const key = container.dataset.tabGroup;
+      const key = encodeURIComponent(container.dataset.tabGroup);
       document
-        .querySelectorAll('[data-tab-group="' + key + '"]')
+        .querySelectorAll('[data-tab-group="' + container.dataset.tabGroup + '"]')
         .forEach((grp) => updateGroup(grp, index));
       if (key) {
         localStorage.setItem('hextra-tab-' + key, index.toString());

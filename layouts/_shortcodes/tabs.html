@@ -3,8 +3,18 @@
 
 {{- $enableSync := site.Params.page.tabs.sync | default false -}}
 
+{{- if not (.Get "items") -}}
+  {{ errorf "tabs shortcode: 'items' parameter is required" }}
+{{- end -}}
+
 {{- if not $items -}}
-  {{ errorf "no items provided" }}
+  {{ errorf "tabs shortcode: 'items' parameter cannot be empty" }}
+{{- end -}}
+
+{{- range $items -}}
+  {{- if eq (trim . " ") "" -}}
+    {{ errorf "tabs shortcode: empty item found in 'items' parameter" }}
+  {{- end -}}
 {{- end -}}
 
 <div class="hextra-scrollbar hx:overflow-x-auto hx:overflow-y-hidden hx:overscroll-x-contain">
