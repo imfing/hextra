@@ -1,0 +1,39 @@
+{{/*
+  Blog pagination component for list pages (e.g., blog list, category list)
+  
+  Usage: {{ partial "components/blog-pager.html" $paginator }}
+  
+  Parameters:
+  - . (context): Hugo paginator object
+*/}}
+
+{{- $paginator := . -}}
+{{- $prevText := (T "previous") | default "Prev" -}}
+{{- $nextText := (T "next") | default "Next" -}}
+{{- $prevLabel := printf "%s %d/%d" $prevText (sub $paginator.PageNumber 1) $paginator.TotalPages -}}
+{{- $nextLabel := printf "%s %d/%d" $nextText (add $paginator.PageNumber 1) $paginator.TotalPages -}}
+
+{{- if or $paginator.HasPrev $paginator.HasNext -}}
+  <div class="hx:mb-8 hx:flex hx:items-center hx:border-t hx:pt-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-neutral-400 hx:dark:contrast-more:border-neutral-400 hx:print:hidden">
+    {{- if $paginator.HasPrev -}}
+      <a
+        href="{{ $paginator.Prev.URL }}"
+        title="{{ $prevLabel }}"
+        class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:pr-4 hx:rtl:pl-4"
+      >
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx:inline hx:h-5 hx:shrink-0 hx:ltr:rotate-180\"") -}}
+        {{ $prevLabel }}
+      </a>
+    {{- end -}}
+    {{- if $paginator.HasNext -}}
+      <a
+        href="{{ $paginator.Next.URL }}"
+        title="{{ $nextLabel }}"
+        class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:ml-auto hx:ltr:pl-4 hx:ltr:text-right hx:rtl:mr-auto hx:rtl:pr-4 hx:rtl:text-left"
+      >
+        {{ $nextLabel }}
+        {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" "class=\"hx:inline hx:h-5 hx:shrink-0 hx:rtl:-rotate-180\"") -}}
+      </a>
+    {{- end -}}
+  </div>
+{{- end -}}
