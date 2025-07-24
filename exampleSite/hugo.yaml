@@ -171,7 +171,7 @@ params:
       sortBy: date
       sortOrder: desc # or "asc"
       # Pagination
-      pagerSize: 2
+      pagerSize: 20
 
     article:
       displayPagination: true
