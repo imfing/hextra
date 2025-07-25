@@ -134,6 +134,17 @@ toc: false
 ---
 ```
 
+### Page Title Display
+
+To hide the page title from being displayed in the layout, you can set the `titleHide` parameter in the front matter of the page:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+titleHide: true
+---
+```
+
 ### Page Edit Link
 
 To configure the page edit link, we can set the `params.editURL.base` parameter in the config file:
