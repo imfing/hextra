@@ -14,11 +14,14 @@
   
   function getGiscusTheme() {
     let giscusTheme = "{{ (string .theme) | default `light` }}";
-    if(getHugoTheme() == 'light') {
+    let hugoTheme = getHugoTheme();
+    if(hugoTheme == 'light') {
       return giscusTheme.replace('dark', 'light');
-    } else {
+    }
+    if(hugoTheme == 'dark') {
       return giscusTheme.replace('light', 'dark');
     }
+    return giscusTheme;
   }
 
   function setGiscusTheme() {
