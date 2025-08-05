@@ -26,9 +26,10 @@
   const groups = document.querySelectorAll('[data-tab-group]');
 
   groups.forEach((group) => {
-    const isSync = group.dataset.tabSync === 'true';
+    const tabGroupValue = group.dataset.tabGroup;
+    const isSync = tabGroupValue && tabGroupValue.includes(',');
     if (isSync) {
-      const key = encodeURIComponent(group.dataset.tabGroup);
+      const key = encodeURIComponent(tabGroupValue);
       const saved = localStorage.getItem('hextra-tab-' + key);
       if (saved !== null) {
         updateGroup(group, parseInt(saved, 10));
@@ -42,13 +43,14 @@
       const index = Array.from(container.querySelectorAll('.hextra-tabs-toggle')).indexOf(
         e.target
       );
-      const key = encodeURIComponent(container.dataset.tabGroup);
-      const isSync = container.dataset.tabSync === 'true';
+      const tabGroupValue = container.dataset.tabGroup;
+      const key = encodeURIComponent(tabGroupValue);
+      const isSync = tabGroupValue && tabGroupValue.includes(',');
       
       if (isSync) {
         // Sync behavior: update all tab groups with the same name
         document
-          .querySelectorAll('[data-tab-group="' + container.dataset.tabGroup + '"]')
+          .querySelectorAll('[data-tab-group="' + tabGroupValue + '"]')
           .forEach((grp) => updateGroup(grp, index));
         if (key) {
           localStorage.setItem('hextra-tab-' + key, index.toString());
