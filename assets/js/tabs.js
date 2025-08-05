@@ -26,10 +26,13 @@
   const groups = document.querySelectorAll('[data-tab-group]');
 
   groups.forEach((group) => {
-    const key = encodeURIComponent(group.dataset.tabGroup);
-    const saved = localStorage.getItem('hextra-tab-' + key);
-    if (saved !== null) {
-      updateGroup(group, parseInt(saved, 10));
+    const isSync = group.dataset.tabSync === 'true';
+    if (isSync) {
+      const key = encodeURIComponent(group.dataset.tabGroup);
+      const saved = localStorage.getItem('hextra-tab-' + key);
+      if (saved !== null) {
+        updateGroup(group, parseInt(saved, 10));
+      }
     }
   });
 
@@ -40,11 +43,19 @@
         e.target
       );
       const key = encodeURIComponent(container.dataset.tabGroup);
-      document
-        .querySelectorAll('[data-tab-group="' + container.dataset.tabGroup + '"]')
-        .forEach((grp) => updateGroup(grp, index));
-      if (key) {
-        localStorage.setItem('hextra-tab-' + key, index.toString());
+      const isSync = container.dataset.tabSync === 'true';
+      
+      if (isSync) {
+        // Sync behavior: update all tab groups with the same name
+        document
+          .querySelectorAll('[data-tab-group="' + container.dataset.tabGroup + '"]')
+          .forEach((grp) => updateGroup(grp, index));
+        if (key) {
+          localStorage.setItem('hextra-tab-' + key, index.toString());
+        }
+      } else {
+        // Non-sync behavior: update only this specific tab group
+        updateGroup(container, index);
       }
     });
   });
