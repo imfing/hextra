@@ -23,9 +23,9 @@
     });
   }
 
-  const groups = document.querySelectorAll('[data-tab-group]');
+  const syncGroups = document.querySelectorAll('[data-tab-group]');
 
-  groups.forEach((group) => {
+  syncGroups.forEach((group) => {
     const key = encodeURIComponent(group.dataset.tabGroup);
     const saved = localStorage.getItem('hextra-tab-' + key);
     if (saved !== null) {
@@ -39,12 +39,18 @@
       const index = Array.from(container.querySelectorAll('.hextra-tabs-toggle')).indexOf(
         e.target
       );
-      const key = encodeURIComponent(container.dataset.tabGroup);
-      document
-        .querySelectorAll('[data-tab-group="' + container.dataset.tabGroup + '"]')
-        .forEach((grp) => updateGroup(grp, index));
-      if (key) {
+      
+      if (container.dataset.tabGroup) {
+        // Sync behavior: update all tab groups with the same name
+        const tabGroupValue = container.dataset.tabGroup;
+        const key = encodeURIComponent(tabGroupValue);
+        document
+          .querySelectorAll('[data-tab-group="' + tabGroupValue + '"]')
+          .forEach((grp) => updateGroup(grp, index));
         localStorage.setItem('hextra-tab-' + key, index.toString());
+      } else {
+        // Non-sync behavior: update only this specific tab group
+        updateGroup(container, index);
       }
     });
   });
