@@ -23,17 +23,13 @@
     });
   }
 
-  const groups = document.querySelectorAll('[data-tab-group]');
+  const syncGroups = document.querySelectorAll('[data-tab-group]');
 
-  groups.forEach((group) => {
-    const tabGroupValue = group.dataset.tabGroup;
-    const isSync = tabGroupValue && tabGroupValue.includes(',');
-    if (isSync) {
-      const key = encodeURIComponent(tabGroupValue);
-      const saved = localStorage.getItem('hextra-tab-' + key);
-      if (saved !== null) {
-        updateGroup(group, parseInt(saved, 10));
-      }
+  syncGroups.forEach((group) => {
+    const key = encodeURIComponent(group.dataset.tabGroup);
+    const saved = localStorage.getItem('hextra-tab-' + key);
+    if (saved !== null) {
+      updateGroup(group, parseInt(saved, 10));
     }
   });
 
@@ -43,18 +39,15 @@
       const index = Array.from(container.querySelectorAll('.hextra-tabs-toggle')).indexOf(
         e.target
       );
-      const tabGroupValue = container.dataset.tabGroup;
-      const key = encodeURIComponent(tabGroupValue);
-      const isSync = tabGroupValue && tabGroupValue.includes(',');
       
-      if (isSync) {
+      if (container.dataset.tabGroup) {
         // Sync behavior: update all tab groups with the same name
+        const tabGroupValue = container.dataset.tabGroup;
+        const key = encodeURIComponent(tabGroupValue);
         document
           .querySelectorAll('[data-tab-group="' + tabGroupValue + '"]')
           .forEach((grp) => updateGroup(grp, index));
-        if (key) {
-          localStorage.setItem('hextra-tab-' + key, index.toString());
-        }
+        localStorage.setItem('hextra-tab-' + key, index.toString());
       } else {
         // Non-sync behavior: update only this specific tab group
         updateGroup(container, index);
