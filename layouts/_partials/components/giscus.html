@@ -13,15 +13,11 @@
   }
   
   function getGiscusTheme() {
-    let giscusTheme = "{{ (string .theme) | default `light` }}";
-    let hugoTheme = getHugoTheme();
-    if(hugoTheme == 'light') {
-      return giscusTheme.replace('dark', 'light');
+    if(getHugoTheme() == 'light') {
+      return "{{ (string .lightTheme) | default `light` }}";
+    } else {
+      return "{{ (string .darkTheme) | default `dark` }}";
     }
-    if(hugoTheme == 'dark') {
-      return giscusTheme.replace('light', 'dark');
-    }
-    return giscusTheme;
   }
 
   function setGiscusTheme() {
