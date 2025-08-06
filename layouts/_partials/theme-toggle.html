@@ -13,9 +13,7 @@
   aria-label="{{ $changeTheme }}"
 >
   <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
-    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12 class=\"hx:group-data-[theme=light]:hidden\"") -}}
-    {{- if not $hideLabel }}<span class="hx:group-data-[theme=light]:hidden">{{ $light }}</span>{{ end -}}
-    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12 class=\"hx:group-data-[theme=dark]:hidden\"") -}}
-    {{- if not $hideLabel }}<span class="hx:group-data-[theme=dark]:hidden">{{ $dark }}</span>{{ end -}}
+    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=24 class=\"hx:group-data-[theme=light]:hidden\"") -}}
+    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=24 class=\"hx:group-data-[theme=dark]:hidden\"") -}}
   </div>
 </button>

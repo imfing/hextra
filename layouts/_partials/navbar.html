@@ -20,6 +20,10 @@
     {{- range .Site.Menus.main -}}
       {{- if eq .Params.type "search" -}}
         {{- partial "search.html" (dict "params" .Params) -}}
+      {{- else if eq .Params.type "theme-toggle" -}}
+        {{- partial "theme-toggle.html" -}} 
+      {{- else if eq .Params.type "language-switch" -}}
+        {{- partial "language-switch.html" (dict "context" .) -}}
       {{- else -}}
         {{- $link := .URL -}}
         {{- $external := strings.HasPrefix $link "http" -}}
