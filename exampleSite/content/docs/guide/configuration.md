@@ -334,6 +334,26 @@ To exclude an entire directory, use the [`cascade`](https://gohugo.io/configurat
 > To block search crawlers, you can make a [`robots.txt` template](https://gohugo.io/templates/robots/).
 > However, `robots.txt` instructions do not necessarily keep a page out of Google search results.
 
+### LLMS.txt Support
+
+To enable [llms.txt](https://llmstxt.org/) output format for your site, which provides a structured plain text summary for [large language models](https://en.wikipedia.org/wiki/Large_language_model) and AI agents, add the `llms` output format to your site's `hugo.yaml`:
+
+```diff {filename="hugo.yaml"}
+outputs:
+- home: [HTML]
++ home: [html, llms]
+  page: [html]
+  section: [html, rss]
+```
+
+This will generate an `llms.txt` file at your site's root containing:
+- Site title and description
+- Hierarchical listing of all sections and pages
+- Page summaries and publication dates
+- Direct links to all content
+
+The llms.txt file is automatically generated from your content structure and makes your site more accessible to AI tools and language models for context and reference.
+
 ### Open Graph
 
 To add [Open Graph](https://ogp.me/) metadata to a page, add values in the frontmatter params.
