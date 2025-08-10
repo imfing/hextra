@@ -336,11 +336,11 @@ To exclude an entire directory, use the [`cascade`](https://gohugo.io/configurat
 
 ### LLMS.txt Support
 
-To enable [llms.txt](https://llmstxt.org/) output format for your site, which provides a structured plain text summary for [large language models](https://en.wikipedia.org/wiki/Large_language_model) and AI agents, add the `llms` output format to your site's `hugo.yaml`:
+To enable [llms.txt](https://llmstxt.org/) output format for your site, which provides a structured text outline for [large language models](https://en.wikipedia.org/wiki/Large_language_model) and AI agents, add the `llms` output format to your site's `hugo.yaml`:
 
 ```diff {filename="hugo.yaml"}
 outputs:
-- home: [HTML]
+- home: [html]
 + home: [html, llms]
   page: [html]
   section: [html, rss]
