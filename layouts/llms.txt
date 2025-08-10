@@ -1,0 +1,36 @@
+# {{ .Site.Title }}
+
+> {{ .Site.Params.description }}
+
+{{ range $section := site.Sections }}
+{{- template "llms-section-tree" dict "context" . "level" 2 }}
+{{ end }}
+
+{{- $rootPages := where site.RegularPages "Section" "" }}
+{{- if $rootPages }}
+
+## Root Pages
+{{- range $rootPages }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Summary | plainify | truncate 100 | strings.TrimSpace }}{{ if .Date }} - Published {{ .Date.Format "2006-01-02" }}{{ end }}
+{{- end }}
+{{- end }}
+
+---
+Generated on {{ now.Format "2006-01-02 15:04:05 UTC" }}
+Site: {{ .Site.BaseURL }}
+
+{{- define "llms-section-tree" -}}
+{{- $context := .context -}}
+{{- $level := .level | default 2 -}}
+{{- $headerHashes := strings.Repeat $level "#" -}}
+{{- "\n" -}}
+{{ $headerHashes }} {{ $context.Title }}
+
+{{- range $context.RegularPages }}
+- [{{ .Title }}]({{ .Permalink }}): {{ .Summary | plainify | truncate 100 | strings.TrimSpace }}{{ if .Date }} - Published {{ .Date.Format "2006-01-02" }}{{ end }}
+{{- end }}
+
+{{- range $context.Sections }}
+{{ template "llms-section-tree" dict "context" . "level" (add $level 1) }}
+{{- end }}
+{{- end -}}
