@@ -188,10 +188,26 @@ To customize the [favicon](https://en.wikipedia.org/wiki/Favicon) for your site,
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-Include `favicon.ico`, `favicon.svg` and `favicon-dark.svg` files in your project to ensure your site's favicons display correctly.
+#### Basic Setup
 
-While `favicon.ico` is generally for older browsers, `favicon.svg` and `favicon-dark.svg` are supported by modern browsers.
-Use tools like [favicon.io](https://favicon.io/) or [favycon](https://github.com/ruisaraiva19/favycon) to generate such icons.
+At minimum, include `favicon.svg` in your `static` folder. This will be used as the default favicon for your site.
+
+You can create an adaptive SVG favicon that responds to system theme preferences by using CSS media queries within the SVG itself, following the approach described in [Building an Adaptive Favicon](https://web.dev/articles/building/an-adaptive-favicon).
+
+#### Dark Mode Support
+
+For enhanced dark mode support, add `favicon-dark.svg` to your `static` folder alongside `favicon.svg`. When both files are present, Hextra will automatically:
+
+- Use `favicon.svg` for light mode or when no theme preference is detected
+- Switch to `favicon-dark.svg` when the user's system is set to dark mode
+- Respect the system's `prefers-color-scheme` setting for automatic switching
+
+The dark mode favicon switching works across all modern browsers, including Firefox, and provides a seamless experience that matches your site's theme.
+
+#### Additional Formats
+
+While `favicon.ico` is generally for older browsers, modern browsers support SVG favicons which are preferred for their scalability and small file size.
+Use tools like [favicon.io](https://favicon.io/) or [favycon](https://github.com/ruisaraiva19/favycon) to generate additional favicon formats if needed.
 
 ### Theme Configuration
 
