@@ -40,26 +40,15 @@
 {{- $page := .context -}}
 {{- $type := .type | default "content" -}}
 
-{{- /* Initialize slices to store heading data */ -}}
-{{- $headingKeys := slice -}}    {{- /* Keys for indexing (ID#Title or just Title) */ -}}
-{{- $headingTitles := slice -}}  {{- /* HTML heading tags for content splitting */ -}}
+{{- /* Process all headings */ -}}
+{{- $s := newScratch -}}
+{{- $s.Set "keys" slice -}}
+{{- $s.Set "titles" slice -}}
 
-{{- /* Process all h1 headings and their nested h2 headings */ -}}
-{{- range $h1 := $page.Fragments.Headings -}}
-  {{- /* Handle h1 headings - empty titles get special treatment */ -}}
-  {{- if eq $h1.Title "" -}}
-    {{- $headingKeys = $headingKeys | append $h1.Title -}}
-  {{- else -}}
-    {{- $headingKeys = $headingKeys | append (printf "%s#%s" $h1.ID $h1.Title) -}}
-  {{- end -}}
-  {{- $headingTitles = $headingTitles | append (printf "<h1>%s" $h1.Title) -}}
+{{- partial "utils/extract-headings.html" (dict "target" $page.Fragments "scratch" $s) -}}
 
-  {{- /* Process nested h2 headings */ -}}
-  {{- range $h2 := $h1.Headings -}}
-    {{- $headingKeys = $headingKeys | append (printf "%s#%s" $h2.ID $h2.Title) -}}
-    {{- $headingTitles = $headingTitles | append (printf "<h2>%s" $h2.Title) -}}
-  {{- end -}}
-{{- end -}}
+{{- $headingKeys := $s.Get "keys" -}}
+{{- $headingTitles := $s.Get "titles" -}}
 
 {{- $content := $page.Content | htmlUnescape -}}
 {{- $len := len $headingKeys -}}
