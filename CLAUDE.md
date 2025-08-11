@@ -14,9 +14,6 @@ Hextra is a modern, responsive Hugo theme designed for creating documentation we
 # Start development server with theme reloading (recommended for theme development)
 npm run dev:theme
 
-# Standard development mode
-npm run dev
-
 # Using Task runner
 task dev
 ```
