@@ -69,7 +69,7 @@
         {{ $data = $data | merge (dict $headingKey ($content | plainify | htmlUnescape | strings.TrimSpace)) }}
       {{ else }}
         {{ $parts := split $content (printf "%s" $headingTitle) }}
-        {{ $lastPart := index $parts (sub (len $parts) 1) | strings.TrimSpace }}
+        {{ $lastPart := index $parts (sub (len $parts) 1) }}
 
         {{ $data = $data | merge (dict $headingKey ($lastPart | plainify | htmlUnescape | strings.TrimSpace)) }}
         {{ $content = strings.TrimSuffix $lastPart $content }}
