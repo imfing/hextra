@@ -1,4 +1,12 @@
-// TOC Scroll Highlight
+/**
+ * TOC Scroll - Highlights active TOC links based on visible headings
+ * 
+ * Uses Intersection Observer to track heading visibility and applies
+ * 'hextra-toc-active' class to corresponding TOC links. Selects the
+ * topmost heading when multiple are visible.
+ * 
+ * Requires: .hextra-toc element, matching heading IDs, toc.css styles
+ */
 document.addEventListener("DOMContentLoaded", function () {
   const toc = document.querySelector(".hextra-toc");
   if (!toc) return;
