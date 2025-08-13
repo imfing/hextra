@@ -162,12 +162,12 @@ Optional nested classes used within the search UI:
 
 #### Language Switcher
 
-- `language-switcher` - The language switcher button
+- `hextra-language-switcher` - The language switcher button
 - `language-options` - The language options container
 
 #### Theme Toggle
 
-- `theme-toggle` - The theme toggle button
+- `hextra-theme-toggle` - The theme toggle button
 
 #### Code Copy Button
 

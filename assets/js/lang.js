@@ -1,5 +1,5 @@
 (function () {
-  const languageSwitchers = document.querySelectorAll('.language-switcher');
+  const languageSwitchers = document.querySelectorAll('.hextra-language-switcher');
   languageSwitchers.forEach((switcher) => {
     switcher.addEventListener('click', (e) => {
       e.preventDefault();
@@ -17,7 +17,7 @@
 
   // Dismiss language switcher when clicking outside
   document.addEventListener('click', (e) => {
-    if (e.target.closest('.language-switcher') === null) {
+    if (e.target.closest('.hextra-language-switcher') === null) {
       languageSwitchers.forEach((switcher) => {
         switcher.dataset.state = 'closed';
         const optionsElement = switcher.nextElementSibling;

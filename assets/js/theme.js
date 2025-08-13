@@ -2,7 +2,7 @@
 (function () {
   const defaultTheme = '{{ site.Params.theme.default | default `system`}}'
 
-  const themeToggleButtons = document.querySelectorAll(".theme-toggle");
+  const themeToggleButtons = document.querySelectorAll(".hextra-theme-toggle");
 
   // Change the icons of the buttons based on previous settings or system theme
   if (
