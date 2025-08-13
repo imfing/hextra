@@ -123,7 +123,16 @@ hugo mod get -u github.com/imfing/hextra
 hugo new site my-site --format=yaml
 ```
 
-### افزودن تم هگزترا به عنوان یک ساب‌ماژول Git
+### افزودن تم هگسترا به عنوان یک ساب‌ماژول Git
+
+به دایرکتوری سایت بروید و یک مخزن Git جدید را مقداردهی اولیه کنید:
+
+```shell
+cd my-site
+git init
+```
+
+سپس، تم هگسترا را به عنوان یک ساب‌ماژول Git اضافه کنید:
 
 ```shell
 git submodule add https://github.com/imfing/hextra.git themes/hextra

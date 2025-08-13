@@ -127,6 +127,15 @@ hugo new site my-site --format=yaml
 
 ### 将 Hextra 主题添加为 Git 子模块
 
+切换到站点目录并初始化新的 Git 仓库：
+
+```shell
+cd my-site
+git init
+```
+
+然后，将 Hextra 主题添加为 Git 子模块：
+
 ```shell
 git submodule add https://github.com/imfing/hextra.git themes/hextra
 ```
