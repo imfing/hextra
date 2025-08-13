@@ -51,13 +51,13 @@ Hextra provides CSS variables to customize the width of pages, navbar, and foote
 ```css {filename="assets/css/custom.css"}
 :root {
   /* Page width - also configurable via hugo.yaml params.page.width */
-  --hextra-max-page-width: 80rem;    /* default: 80rem (normal), 90rem (wide), 100% (full) */
-  
+  --hextra-max-page-width: 80rem; /* default: 80rem (normal), 90rem (wide), 100% (full) */
+
   /* Navbar width - also configurable via hugo.yaml params.navbar.width */
-  --hextra-max-navbar-width: 90rem;  /* independent navbar width */
-  
+  --hextra-max-navbar-width: 90rem; /* independent navbar width */
+
   /* Footer width - also configurable via hugo.yaml params.footer.width */
-  --hextra-max-footer-width: 80rem;  /* independent footer width */
+  --hextra-max-footer-width: 80rem; /* independent footer width */
 }
 ```
 
@@ -142,8 +142,9 @@ The following classes can be used to customize various parts of the theme.
 - `hextra-search-wrapper` - The search wrapper container
 - `hextra-search-input` - The search input element
 - `hextra-search-results` - The search results list container
-  
+
 Optional nested classes used within the search UI:
+
 - `hextra-search-title` - The result title element
 - `hextra-search-active` - The active result anchor
 - `hextra-search-no-result` - The empty state element
@@ -188,8 +189,6 @@ Optional nested classes used within the search UI:
 #### Feature Grid
 
 - `hextra-feature-grid` - The feature grid container
-
- 
 
 ### Syntax Highlighting
 
