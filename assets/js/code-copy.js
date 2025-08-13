@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.querySelectorAll('.hextra-code-copy-btn').forEach(function (button) {
     // Add copy and success icons
-    button.querySelector('.copy-icon')?.appendChild(getCopyIcon());
-    button.querySelector('.success-icon')?.appendChild(getSuccessIcon());
+    button.querySelector('.hextra-copy-icon')?.appendChild(getCopyIcon());
+    button.querySelector('.hextra-success-icon')?.appendChild(getSuccessIcon());
 
     // Add click event listener for copy button
     button.addEventListener('click', function (e) {

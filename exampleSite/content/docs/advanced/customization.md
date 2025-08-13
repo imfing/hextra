@@ -51,13 +51,13 @@ Hextra provides CSS variables to customize the width of pages, navbar, and foote
 ```css {filename="assets/css/custom.css"}
 :root {
   /* Page width - also configurable via hugo.yaml params.page.width */
-  --hextra-max-page-width: 80rem;    /* default: 80rem (normal), 90rem (wide), 100% (full) */
-  
+  --hextra-max-page-width: 80rem; /* default: 80rem (normal), 90rem (wide), 100% (full) */
+
   /* Navbar width - also configurable via hugo.yaml params.navbar.width */
-  --hextra-max-navbar-width: 90rem;  /* independent navbar width */
-  
+  --hextra-max-navbar-width: 90rem; /* independent navbar width */
+
   /* Footer width - also configurable via hugo.yaml params.footer.width */
-  --hextra-max-footer-width: 80rem;  /* independent footer width */
+  --hextra-max-footer-width: 80rem; /* independent footer width */
 }
 ```
 
@@ -111,7 +111,7 @@ The following classes can be used to customize various parts of the theme.
 
 ##### Steps
 
-- `steps` - The steps container
+- `hextra-steps` - The steps container
 
 ##### Tabs
 
@@ -128,9 +128,9 @@ The following classes can be used to customize various parts of the theme.
 
 #### Navbar
 
-- `nav-container` - The navbar container
-- `nav-container-blur` - The navbar container in blur element
-- `hamburger-menu` - The hamburger menu button
+- `hextra-nav-container` - The navbar container
+- `hextra-nav-container-blur` - The navbar container in blur element
+- `hextra-hamburger-menu` - The hamburger menu button
 
 #### Footer
 
@@ -139,9 +139,18 @@ The following classes can be used to customize various parts of the theme.
 
 #### Search
 
-- `search-wrapper` - The search wrapper container
-- `search-input` - The search input element
-- `search-results` - The search results list container
+- `hextra-search-wrapper` - The search wrapper container
+- `hextra-search-input` - The search input element
+- `hextra-search-results` - The search results list container
+
+Optional nested classes used within the search UI:
+
+- `hextra-search-title` - The result title element
+- `hextra-search-active` - The active result anchor
+- `hextra-search-no-result` - The empty state element
+- `hextra-search-prefix` - The breadcrumb/prefix label for grouped results
+- `hextra-search-excerpt` - The result snippet text
+- `hextra-search-match` - The highlighted query span
 
 #### Table of Contents
 
@@ -149,27 +158,29 @@ The following classes can be used to customize various parts of the theme.
 
 #### Sidebar
 
-- `mobile-menu-overlay` - The overlay element for the mobile menu
-- `sidebar-container` - The sidebar container
-- `sidebar-active-item` - The active item in the sidebar
+- `hextra-sidebar-container` - The sidebar container
+- `hextra-sidebar-active-item` - The active item in the sidebar
 
 #### Language Switcher
 
-- `language-switcher` - The language switcher button
-- `language-options` - The language options container
+- `hextra-language-switcher` - The language switcher button
+- `hextra-language-options` - The language options container
 
 #### Theme Toggle
 
-- `theme-toggle` - The theme toggle button
+- `hextra-theme-toggle` - The theme toggle button
 
 #### Code Copy Button
 
 - `hextra-code-copy-btn-container` - The code copy button container
 - `hextra-code-copy-btn` - The code copy button
+- `hextra-copy-icon` - The copy icon element
+- `hextra-success-icon` - The success icon element
 
 #### Code Block
 
 - `hextra-code-block` - The code block container
+- `hextra-code-filename` - The filename element for code blocks
 
 #### Feature Card
 
@@ -178,10 +189,6 @@ The following classes can be used to customize various parts of the theme.
 #### Feature Grid
 
 - `hextra-feature-grid` - The feature grid container
-
-#### Breadcrumbs
-
-No specific class is available for breadcrumbs.
 
 ### Syntax Highlighting
 
