@@ -1,4 +1,4 @@
-.hextra-content {
+.content {
   :where(h1):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100;
   }

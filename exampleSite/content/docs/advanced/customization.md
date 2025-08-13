@@ -80,7 +80,7 @@ The following classes can be used to customize various parts of the theme.
 #### General
 
 - `hextra-scrollbar` - The scrollbar element
-- `hextra-content` - Page content container
+- `content` - Page content container
 
 #### Shortcodes
 
