@@ -83,27 +83,11 @@
     }
   </script>
 
-  <!-- KaTeX-->
+  <!-- Math engine -->
   {{ $noop := .WordCount -}}
   {{- $engine := site.Params.math.engine | default "katex" -}}
   {{ if and (.Page.Store.Get "hasMath") (eq $engine "katex") -}}
-    <!-- TODO: make url configurable -->
-    {{ $katexBaseUrl := "https://cdn.jsdelivr.net/npm/katex@latest/dist" }}
-    {{ $katexCssUrl := printf "%s/katex%s.css" $katexBaseUrl (cond hugo.IsProduction ".min" "") -}}
-    {{ $katexFontPattern := "url(fonts/" }}
-    {{ $katexFontSubstituted := printf "url(%s/fonts/" $katexBaseUrl }}
-
-    {{ with try (resources.GetRemote $katexCssUrl) -}}
-      {{ with .Err -}}
-        {{ errorf "Could not retrieve KaTeX css file from %s. Reason: %s." $katexCssUrl . -}}
-      {{ else with .Value -}}
-        {{ $katexCssContent := strings.Replace .Content $katexFontPattern $katexFontSubstituted }}
-        {{ with resources.FromString (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) $katexCssContent -}}
-          {{ $cssHash := . | fingerprint "sha512" -}}
-          <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $cssHash.Data.Integrity -}}" crossorigin="anonymous" />
-        {{ end -}}
-      {{ end -}}
-    {{ end -}}
+    {{ partialCached "scripts/katex.html" . -}}
   {{ else if and (.Page.Store.Get "hasMath") (eq $engine "mathjax") -}}
     {{ partialCached "scripts/mathjax.html" . -}}
   {{ end -}}
