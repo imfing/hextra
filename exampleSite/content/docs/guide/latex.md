@@ -55,13 +55,11 @@ $$
 \end{aligned}
 $$
 
-## Supported Functions
-
 For a list of supported functions, see [KaTeX supported functions](https://katex.org/docs/supported.html).
 
-## Chemistry
+### Chemistry Expressions
 
-Chemistry expressions are supported via [mhchem](https://mhchem.github.io/MathJax-mhchem/) extension.
+The [mhchem][mhchem] extension is enabled by default, allowing you to easily render chemistry equations and formulas.
 
 Inline: \(\ce{H2O}\) is water.
 
@@ -76,8 +74,6 @@ will be rendered as:
 $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
 
 ## Configuration
-
-### Enable passthrough extension in Hugo
 
 > [!IMPORTANT]
 > Please enable and configure the [passthrough extension](https://gohugo.io/content-management/mathematics/) in the Hugo configuration file, so that Hugo can detect LaTeX math expressions in your Markdown content.
@@ -97,7 +93,7 @@ markup:
 
 [KaTeX][katex] is the default engine used to render LaTeX math expressions during the build process supported by [Hugo][hugo-transform-tomath].
 
-The default is KaTeX, but you can also switch to [MathJaX][mathjax] if you need features only available in MathJaX.
+The default is KaTeX, but you can also switch to [MathJax][mathjax] if you need features only available in MathJax.
 
 #### KaTeX
 
@@ -133,7 +129,7 @@ It will load the KaTeX CSS file from `assets/css/katex.min.css` instead of downl
 
 #### MathJax
 
-Alternatively, you can use [MathJax][mathjax] to render math expressions. To use it instead, add the following to the configuration `hugo.yaml` file:
+Alternatively, you can use [MathJax][mathjax] to render math expressions:
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -146,4 +142,5 @@ params:
 
 [katex]: https://katex.org/
 [mathjax]: https://www.mathjax.org/
+[mhchem]: https://mhchem.github.io/MathJax-mhchem/
 [hugo-transform-tomath]: https://gohugo.io/functions/transform/tomath/
