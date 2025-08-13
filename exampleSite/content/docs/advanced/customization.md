@@ -139,9 +139,17 @@ The following classes can be used to customize various parts of the theme.
 
 #### Search
 
-- `search-wrapper` - The search wrapper container
-- `search-input` - The search input element
-- `search-results` - The search results list container
+- `hextra-search-wrapper` - The search wrapper container
+- `hextra-search-input` - The search input element
+- `hextra-search-results` - The search results list container
+  
+Optional nested classes used within the search UI:
+- `hextra-search-title` - The result title element
+- `hextra-search-active` - The active result anchor
+- `hextra-search-no-result` - The empty state element
+- `hextra-search-prefix` - The breadcrumb/prefix label for grouped results
+- `hextra-search-excerpt` - The result snippet text
+- `hextra-search-match` - The highlighted query span
 
 #### Table of Contents
 
@@ -179,9 +187,7 @@ The following classes can be used to customize various parts of the theme.
 
 - `hextra-feature-grid` - The feature grid container
 
-#### Breadcrumbs
-
-No specific class is available for breadcrumbs.
+ 
 
 ### Syntax Highlighting
 
