@@ -86,6 +86,10 @@
       @apply hx:my-2 hx:ps-6;
     }
   }
+  /* Horizontal line */
+  :where(hr):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply hx:my-10 hx:first:mt-0 hx:last:mb-0 hx:border-gray-200 hx:dark:border-neutral-800;
+  }
   .footnotes {
     @apply hx:mt-12 hx:text-sm;
 
