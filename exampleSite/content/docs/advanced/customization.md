@@ -44,6 +44,23 @@ The primary color of the theme can be customized by setting the `--primary-hue`,
 }
 ```
 
+### Component Layout Variables
+
+Hextra provides CSS variables to customize the width of pages, navbar, and footer:
+
+```css {filename="assets/css/custom.css"}
+:root {
+  /* Page width - also configurable via hugo.yaml params.page.width */
+  --hextra-max-page-width: 80rem;    /* default: 80rem (normal), 90rem (wide), 100% (full) */
+  
+  /* Navbar width - also configurable via hugo.yaml params.navbar.width */
+  --hextra-max-navbar-width: 90rem;  /* independent navbar width */
+  
+  /* Footer width - also configurable via hugo.yaml params.footer.width */
+  --hextra-max-footer-width: 80rem;  /* independent footer width */
+}
+```
+
 ### Further Theme Customization
 
 The theme can be further customized by overriding the default styles via the exposed css classes. An example for customizing the footer element:
