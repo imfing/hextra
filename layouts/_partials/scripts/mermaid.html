@@ -1,17 +1,4 @@
-{{- /* Mermaid JS loader
-
-  Behavior (driven by site.params.mermaid):
-  - base (remote URL) + optional js:
-    - Construct remote JS URL: "{{ base }}/{{ js | default "mermaid[.min].js" }}".
-    - Fetch via resources.GetRemote, copy to assets, and emit <script> with integrity.
-  - base (local path) + js (asset path):
-    - Read JS from Hugo assets via resources.Get.
-    - Build and fingerprint; emit <script> with integrity.
-  - base (local path) only (no js):
-    - Link directly to "{{ base }}/mermaid[.min].js" (no processing).
-  - Nothing set:
-    - Default to CDN latest base; same as remote path above.
-*/ -}}
+{{- /* Mermaid */ }}
 
 {{- $mermaidBase := "" -}}
 {{- $useDefaultCdn := true -}}
