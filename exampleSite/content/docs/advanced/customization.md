@@ -157,9 +157,8 @@ Optional nested classes used within the search UI:
 
 #### Sidebar
 
-- `mobile-menu-overlay` - The overlay element for the mobile menu
-- `sidebar-container` - The sidebar container
-- `sidebar-active-item` - The active item in the sidebar
+- `hextra-sidebar-container` - The sidebar container
+- `hextra-sidebar-active-item` - The active item in the sidebar
 
 #### Language Switcher
 
