@@ -1,7 +1,7 @@
 // Hamburger menu for mobile navigation
 
 document.addEventListener('DOMContentLoaded', function () {
-  const menu = document.querySelector('.hamburger-menu');
+  const menu = document.querySelector('.hextra-hamburger-menu');
   const sidebarContainer = document.querySelector('.sidebar-container');
 
   function toggleMenu() {

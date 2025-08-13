@@ -128,9 +128,9 @@ The following classes can be used to customize various parts of the theme.
 
 #### Navbar
 
-- `nav-container` - The navbar container
-- `nav-container-blur` - The navbar container in blur element
-- `hamburger-menu` - The hamburger menu button
+- `hextra-nav-container` - The navbar container
+- `hextra-nav-container-blur` - The navbar container in blur element
+- `hextra-hamburger-menu` - The hamburger menu button
 
 #### Footer
 
