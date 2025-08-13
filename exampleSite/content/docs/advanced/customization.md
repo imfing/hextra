@@ -163,7 +163,7 @@ Optional nested classes used within the search UI:
 #### Language Switcher
 
 - `hextra-language-switcher` - The language switcher button
-- `language-options` - The language options container
+- `hextra-language-options` - The language options container
 
 #### Theme Toggle
 
