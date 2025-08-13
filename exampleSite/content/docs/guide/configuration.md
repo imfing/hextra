@@ -43,29 +43,50 @@ menu:
 There are different types of menu items:
 
 1. Link to a page in the site with `pageRef`
-    ```yaml
-    - name: Documentation
-      pageRef: /docs
-    ```
+   ```yaml
+   - name: Documentation
+     pageRef: /docs
+   ```
 2. Link to an external URL with `url`
-    ```yaml
-    - name: GitHub
-      url: "https://github.com"
-    ```
+   ```yaml
+   - name: GitHub
+     url: "https://github.com"
+   ```
 3. Search bar with `type: search`
-    ```yaml
-    - name: Search
-      params:
-        type: search
-    ```
+   ```yaml
+   - name: Search
+     params:
+       type: search
+   ```
 4. Icon
-    ```yaml
-    - name: GitHub
-      params:
-        icon: github
-    ```
+   ```yaml
+   - name: GitHub
+     params:
+       icon: github
+   ```
 
 These menu items can be sorted by setting the `weight` parameter.
+
+### Nested Menus
+
+You can create dropdown menus by defining child menu items. Child menus appear when clicking on the parent menu item.
+
+```yaml {filename="hugo.yaml"}
+menu:
+  main:
+    - identifier: sdk
+      name: SDK
+    - identifier: python
+      name: Python ↗
+      url: https://python.org
+      parent: sdk
+    - identifier: go
+      name: Go
+      url: https://go.dev
+      parent: sdk
+```
+
+Child menu items need to specify the `parent` parameter with the parent's `identifier` value.
 
 ### Logo and Title
 
@@ -302,9 +323,10 @@ To customize the search tokenize, set the `params.search.flexsearch.tokenize` pa
 
 ```yaml {filename="hugo.yaml"}
 params:
+  search:
     # ...
     flexsearch:
-      # full | forward | reverse | strict 
+      # full | forward | reverse | strict
       tokenize: forward
 ```
 
@@ -363,6 +385,7 @@ outputs:
 ```
 
 This will generate an `llms.txt` file at your site's root containing:
+
 - Site title and description
 - Hierarchical listing of all sections and pages
 - Page summaries and publication dates
