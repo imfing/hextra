@@ -80,7 +80,7 @@ The following classes can be used to customize various parts of the theme.
 #### General
 
 - `hextra-scrollbar` - The scrollbar element
-- `content` - Page content container
+- `hextra-content` - Page content container
 
 #### Shortcodes
 
@@ -111,7 +111,7 @@ The following classes can be used to customize various parts of the theme.
 
 ##### Steps
 
-- `steps` - The steps container
+- `hextra-steps` - The steps container
 
 ##### Tabs
 
@@ -173,10 +173,13 @@ Optional nested classes used within the search UI:
 
 - `hextra-code-copy-btn-container` - The code copy button container
 - `hextra-code-copy-btn` - The code copy button
+- `hextra-copy-icon` - The copy icon element
+- `hextra-success-icon` - The success icon element
 
 #### Code Block
 
 - `hextra-code-block` - The code block container
+- `hextra-code-filename` - The filename element for code blocks
 
 #### Feature Card
 

@@ -1,4 +1,4 @@
-.content {
+.hextra-content {
   :where(h1):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100;
   }
@@ -86,7 +86,7 @@
       @apply hx:my-2 hx:ps-6;
     }
   }
-  .footnotes {
+  .hextra-footnotes {
     @apply hx:mt-12 hx:text-sm;
 
     hr {
@@ -95,7 +95,7 @@
   }
 }
 
-.subheading-anchor {
+.hextra-subheading-anchor {
   @apply hx:opacity-0 hx:transition-opacity hx:ltr:ml-1 hx:rtl:mr-1;
 
   span:target + &,
