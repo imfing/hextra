@@ -392,7 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function highlightMatches(text, query) {
       const escapedQuery = query.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
       const regex = new RegExp(escapedQuery, 'gi');
-      return text.replace(regex, (match) => `<span class="match">${match}</span>`);
+      return text.replace(regex, (match) => `<span class="hextra-search-match">${match}</span>`);
     }
 
     // Create a DOM element from the HTML string.
