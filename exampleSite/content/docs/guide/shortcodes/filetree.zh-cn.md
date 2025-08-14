@@ -17,7 +17,7 @@ linkTitle: 文件树
   {{< filetree/file name="hugo.toml" >}}
 {{< /filetree/container >}}
 
-## 用法
+## 使用方法
 
 ```text {filename="Markdown"}
 {{</* filetree/container */>}}

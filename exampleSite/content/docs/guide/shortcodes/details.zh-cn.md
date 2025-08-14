@@ -12,7 +12,7 @@ title: 详情
 
 这是详情的内容。
 
-支持 **Markdown**。
+支持 **Markdown** 格式。
 
 {{% /details %}}
 
@@ -22,14 +22,14 @@ title: 详情
 
 {{% /details %}}
 
-## 用法
+## 使用方法
 
 ````markdown
 {{%/* details title="详情" */%}}
 
 这是详情的内容。
 
-支持 **Markdown**。
+支持 **Markdown** 格式。
 
 {{%/* /details */%}}
 ````
