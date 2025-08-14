@@ -18,9 +18,13 @@
 */ -}}
 {{- $noop := .WordCount -}}
 
-{{- $katexBase := "https://cdn.jsdelivr.net/npm/katex@latest/dist" -}}
+{{- $katexBase := "" -}}
 {{- with site.Params.math.katex.base -}}
   {{- $katexBase = . -}}
+{{- else -}}
+  {{- if not site.Params.math.katex.css -}}
+    {{- $katexBase = "https://cdn.jsdelivr.net/npm/katex@latest/dist" -}}
+  {{- end -}}
 {{- end -}}
 
 {{- $katexCssAsset := "" -}}
