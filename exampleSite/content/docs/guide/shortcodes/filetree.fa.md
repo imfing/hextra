@@ -1,8 +1,6 @@
 ---
 title: کامپوننت FileTree
 linkTitle: FileTree
-prev: /docs/guide/shortcodes
-next: /docs/guide/shortcodes/icon
 ---
 
 ## مثال
@@ -13,13 +11,13 @@ next: /docs/guide/shortcodes/icon
     {{< filetree/folder name="docs" state="closed" >}}
       {{< filetree/file name="_index.md" >}}
       {{< filetree/file name="introduction.md" >}}
-      {{< filetree/file name="introduction.fa.md" >}}
+      {{< filetree/file name="introduction.fr.md" >}}
     {{< /filetree/folder >}}
   {{< /filetree/folder >}}
   {{< filetree/file name="hugo.toml" >}}
 {{< /filetree/container >}}
 
-## استفاده
+## نحوه استفاده
 
 ```text {filename="Markdown"}
 {{</* filetree/container */>}}
@@ -28,7 +26,7 @@ next: /docs/guide/shortcodes/icon
     {{</* filetree/folder name="docs" state="closed" */>}}
       {{</* filetree/file name="_index.md" */>}}
       {{</* filetree/file name="introduction.md" */>}}
-      {{</* filetree/file name="introduction.fa.md" */>}}
+      {{</* filetree/file name="introduction.fr.md" */>}}
     {{</* /filetree/folder */>}}
   {{</* /filetree/folder */>}}
   {{</* filetree/file name="hugo.toml" */>}}
