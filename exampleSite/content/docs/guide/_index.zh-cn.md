@@ -7,7 +7,7 @@ sidebar:
   open: true
 ---
 
-探索以下部分，了解如何使用 Hextra：
+通过以下章节了解如何使用 Hextra：
 
 <!--more-->
 

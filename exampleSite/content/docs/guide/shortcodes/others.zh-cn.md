@@ -3,11 +3,12 @@ title: 其他短代码
 linkTitle: 其他
 sidebar:
   exclude: true
+next: /docs/guide/deploy-site
 ---
 
 {{< callout emoji="ℹ️" >}}
-  其中一些是 Hugo 内置的短代码。
-  这些短代码被认为不太稳定，可能会随时更改。
+  其中部分为Hugo内置短代码。
+  这些短代码稳定性较低，可能随时变更。
 {{< /callout >}}
 
 ## 徽章
@@ -16,7 +17,7 @@ sidebar:
 {{</* badge "徽章" */>}}
 ```
 
-结果：
+效果：
 
 {{< badge "徽章" >}}
 
@@ -28,7 +29,7 @@ sidebar:
 {{</* badge content="错误" type="error" */>}}
 ```
 
-结果：
+效果：
 
 {{< badge content="信息" type="info" >}} &nbsp;
 {{< badge content="警告" type="warning" >}} &nbsp;
@@ -37,22 +38,22 @@ sidebar:
 带链接和图标：
 
 ```
-{{</* badge content="发布" link="https://github.com/imfing/hextra/releases" icon="github" */>}}
+{{</* badge content="版本发布" link="https://github.com/imfing/hextra/releases" icon="github" */>}}
 ```
 
-结果：
+效果：
 
-{{< badge content="发布" link="https://github.com/imfing/hextra/releases" icon="github" >}}
+{{< badge content="版本发布" link="https://github.com/imfing/hextra/releases" icon="github" >}}
 
 ## YouTube
 
-嵌入 YouTube 视频。
+嵌入YouTube视频。
 
 ```
 {{</* youtube 视频ID */>}}
 ```
 
-结果：
+效果：
 
 {{< youtube id=dQw4w9WgXcQ loading=lazy >}}
 
@@ -60,13 +61,13 @@ sidebar:
 
 ## PDF
 
-使用 PDF 短代码，您可以在内容中嵌入 PDF 文件。
+通过PDF短代码可在内容中嵌入PDF文件。
 
 ```
 {{</* pdf "https://example.com/sample.pdf" */>}}
 ```
 
-您也可以将 PDF 文件放在项目目录中并使用相对路径。
+也可将PDF文件置于项目目录中并使用相对路径。
 
 ```
 {{</* pdf "path/to/file.pdf" */>}}

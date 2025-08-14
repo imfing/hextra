@@ -1,5 +1,6 @@
 ---
 title: アイコン
+next: /docs/guide/shortcodes/steps
 ---
 
 このショートコードをインラインで使用するには、設定でインラインショートコードを有効にする必要があります:
@@ -8,7 +9,7 @@ title: アイコン
 enableInlineShortcodes: true
 ```
 
-利用可能なアイコンのリストは、[`data/icons.yaml`](https://github.com/imfing/hextra/blob/main/data/icons.yaml) で確認できます。
+利用可能なアイコンの一覧は [`data/icons.yaml`](https://github.com/imfing/hextra/blob/main/data/icons.yaml) で確認できます。
 
 <!--more-->
 
@@ -29,13 +30,13 @@ enableInlineShortcodes: true
 
 ### 独自のアイコンを追加する方法
 
-`data/icons.yaml` ファイルを作成し、以下の形式で独自のSVGアイコンを追加します:
+`data/icons.yaml` ファイルを作成し、以下の形式で独自の SVG アイコンを追加します:
 
 ```yaml {filename="data/icons.yaml"}
 your-icon: <svg>your icon svg content</svg>
 ```
 
-その後、ショートコードで以下のように使用できます:
+追加したアイコンは以下のようにショートコードで使用できます:
 
 ```
 {{</* icon "your-icon" */>}}
@@ -43,4 +44,4 @@ your-icon: <svg>your icon svg content</svg>
 {{</* card icon="your-icon" */>}}
 ```
 
-ヒント: [Iconify Design](https://iconify.design/) は、サイト用のSVGアイコンを見つけるのに最適な場所です。
+ヒント: [Iconify Design](https://iconify.design/) はサイト用の SVG アイコンを見つけるのに最適な場所です。

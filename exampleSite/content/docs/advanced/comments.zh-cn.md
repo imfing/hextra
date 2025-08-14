@@ -10,7 +10,7 @@ Hextra 支持为您的网站添加评论系统。
 
 ## giscus
 
-[giscus](https://giscus.app/) 是一个由 [GitHub Discussions](https://docs.github.com/en/discussions) 提供支持的评论系统。它是免费且开源的。
+[giscus](https://giscus.app/) 是一个由 [GitHub Discussions](https://docs.github.com/en/discussions) 驱动的评论系统。它是免费且开源的。
 
 要启用 giscus，您需要在网站配置文件中添加以下内容：
 
@@ -27,7 +27,7 @@ params:
       categoryId: <分类 ID>
 ```
 
-giscus 的配置可以从 [giscus.app](https://giscus.app/) 网站生成。更多详细信息也可以在那里找到。
+giscus 的配置可以从 [giscus.app](https://giscus.app/) 网站生成。更多详情也可以在那里找到。
 
 可以在页面的 front matter 中为特定页面启用或禁用评论：
 

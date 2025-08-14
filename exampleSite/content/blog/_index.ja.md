@@ -1,10 +1,10 @@
 ---
-title: "博客"
+title: "ブログ"
 ---
 
 <div style="text-align: center; margin-top: 1em;">
 {{< hextra/hero-badge link="index.xml" >}}
-  <span>RSS 订阅</span>
+  <span>RSS フィード</span>
   {{< icon name="rss" attributes="height=14" >}}
 {{< /hextra/hero-badge >}}
 </div>
