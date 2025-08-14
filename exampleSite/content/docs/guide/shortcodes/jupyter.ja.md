@@ -6,15 +6,15 @@ sidebar:
   exclude: true
 ---
 
-{{< callout >}}Jupyter Notebook をショートコード経由で含める実験的な機能です。すべてのセルタイプがサポートされているわけではありません。{{< /callout >}}
+{{< callout >}}Jupyter Notebook をショートコード経由で組み込む実験的機能です。すべてのセルタイプがサポートされているわけではありません。{{< /callout >}}
 
-[Jupyter Notebook](https://jupyter.org/) は、[Project Jupyter](https://jupyter.org/) の言語に依存しない HTML ノートブックアプリケーションです。これを使用すると、ライブコード、数式、視覚化、および説明文を含むドキュメントを作成して共有できます。
+[Jupyter Notebook](https://jupyter.org/) は [Project Jupyter](https://jupyter.org/) の言語非依存な HTML ノートブックアプリケーションです。ライブコード、数式、可視化、説明文を含むドキュメントを作成・共有できます。
 
 <!--more-->
 
 ## 使用方法
 
-### ローカルノートブックを使用する
+### ローカルノートブックの使用
 
 Jupyter Notebook ショートコードを使用するには、プロジェクト内に Jupyter Notebook ファイルが必要です。[画像を追加する](../../organize-files#add-images)方法と同様に、Jupyter Notebook を `assets` フォルダに追加できます。
 
@@ -29,11 +29,11 @@ Jupyter Notebook ショートコードを使用するには、プロジェクト
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-`jupyter` ショートコードを使用してページに Jupyter Notebook を含めます：
+`jupyter` ショートコードを使用してページに Jupyter Notebook を組み込みます:
 
 ```markdown {filename="content/docs/my-page.md"}
 ---
-title: My Page
+title: マイページ
 math: true
 ---
 
@@ -55,16 +55,16 @@ math: true
 
 ```markdown {filename="content/docs/my-page/index.md"}
 ---
-title: My Page
+title: マイページ
 math: true
 ---
 
 {{%/* jupyter "notebook.ipynb" */%}}
 ```
 
-### リモートノートブックを使用する
+### リモートノートブックの使用
 
-ノートブックファイルの URL を指定して、リモートノートブックを使用することもできます。たとえば、[What is the Jupyter Notebook](https://github.com/jupyter/notebook/blob/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb) ノートブックをページに含めるには、次のショートコードを使用します：
+ノートブックファイルの URL を指定することで、リモートノートブックも使用できます。例えば、[What is the Jupyter Notebook](https://github.com/jupyter/notebook/blob/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb) ノートブックをページに組み込むには、以下のショートコードを使用します:
 
 ```
 {{%/* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */%}}
@@ -72,7 +72,7 @@ math: true
 
 ## ノートブックの例
 
-{{< callout type="info" >}}以下は、プロジェクトの assets フォルダに含まれているノートブックファイルの例です。{{< /callout >}}
+{{< callout type="info" >}}以下は、プロジェクトの assets フォルダに含まれるノートブックファイルの例です。{{< /callout >}}
 
 {{% jupyter "example.ipynb" %}}
 
