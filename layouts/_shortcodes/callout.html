@@ -1,3 +1,14 @@
+{{- /*
+A shortcode to create a callout.
+
+@param {string} type The type of the callout (default, info, warning, error).
+@param {string} content The content of the callout.
+@param {string} emoji The emoji of the callout (related to type or can be a custom emoji).
+@param {string} icon The icon of the callout.
+
+@example {{< callout type="info" >}}Content{{< /callout >}}
+*/ -}}
+
 {{- $calloutEmojiDict := dict "info" "ℹ️" "warning" "⚠️" "error" "🚫" -}}
 {{- $type := .Get "type" | default "default" -}}
 {{/* If emoji is not set, use the emoji from dict */}}

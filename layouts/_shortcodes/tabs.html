@@ -1,3 +1,12 @@
+{{- /*
+Create a tabbed interface with the given items.
+
+@param {string} items The items to display in the tabs.
+@param {string} defaultIndex The index of the default tab.
+
+@example {{< tabs items="JSON,YAML,TOML" >}}{{< /tabs >}}
+*/ -}}
+
 {{- $items := split (.Get "items") "," -}}
 {{- $defaultIndex := int ((.Get "defaultIndex") | default "0") -}}
 
