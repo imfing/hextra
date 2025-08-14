@@ -405,11 +405,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function handleMouseMove(e) {
       const target = e.target.closest('a');
       if (target) {
-        const active = resultsElement.querySelector('a.active');
+        const active = resultsElement.querySelector('a.hextra-search-active');
         if (active) {
-          active.classList.remove('active');
+          active.classList.remove('hextra-search-active');
         }
-        target.classList.add('active');
+        target.classList.add('hextra-search-active');
       }
     }
 
