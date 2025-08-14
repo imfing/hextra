@@ -53,7 +53,6 @@
     <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
   {{- end }}
 
-
   <!-- Google Analytics -->
   {{- if and hugo.IsProduction .Site.Config.Services.GoogleAnalytics.ID }}
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
@@ -92,5 +91,6 @@
     {{ partialCached "scripts/mathjax.html" . -}}
   {{ end -}}
 
+  {{ partial "utils/page-width-override.html" . }}
   {{ partial "custom/head-end.html" . -}}
 </head>

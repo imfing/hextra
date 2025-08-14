@@ -1,0 +1,7 @@
+{{- with .Params.width -}}
+<style>
+:root {
+  --hextra-max-page-width: {{ cond (eq . "wide") "90rem" (cond (eq . "full") "100%" "80rem") }};
+}
+</style>
+{{- end -}}
