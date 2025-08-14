@@ -61,6 +61,22 @@ Hextra provides CSS variables to customize the width of pages, navbar, and foote
 }
 ```
 
+### Tailwind Theme Variables
+
+Starting with Hextra v0.10.0, which is built on Tailwind CSS v4, you can customize the theme by overriding CSS variables inside the `@layer theme` block.
+
+This lets you customize the global look and feel without having to modify every individual class.
+
+```css {filename="assets/css/custom.css"}
+@layer theme {
+  :root {
+    --hx-default-mono-font-family: "JetBrains Mono", monospace;
+  }
+}
+```
+
+Check out [Tailwind Theme Variables documentation](https://tailwindcss.com/docs/theme#default-theme-variable-reference) for details.
+
 ### Further Theme Customization
 
 The theme can be further customized by overriding the default styles via the exposed css classes. An example for customizing the footer element:
