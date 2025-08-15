@@ -1,0 +1,22 @@
+{{/*
+    Utility function to determine if a given Page (expected context) should have breadcrumbs enabled based on its content type.
+    Returns a boolean value.
+      true - Breadcrumbs are enabled for the content type.
+      false - Breadcrumbs are not enabled for the content type.
+
+    Note: breadcrumbs are enabled by default for "blog" and "docs" content types.
+*/}}
+{{ $contentType := .Type }}
+{{ $ret := false }}
+{{ with .Site.Params.breadcrumbs.contentTypes }}
+  {{ if isset . $contentType }}
+    {{ $ret = index . $contentType }}
+  {{ else if eq $contentType "blog" "docs" }}
+      {{ $ret = true }}
+  {{ end }}
+{{ else }}
+  {{ if eq $contentType "blog" "docs" }}
+      {{ $ret = true }}
+  {{ end }}
+{{ end }}
+{{ return $ret }}

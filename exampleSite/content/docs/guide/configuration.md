@@ -230,6 +230,29 @@ Options for `theme.default`:
 The `theme.displayToggle` parameter allows you to display a toggle button for changing themes.
 When set to `true`, visitors can switch between light or dark mode, overriding the default setting.
 
+### Breadcrumbs
+
+By default, breadcrumbs are enabled for `docs` and `blog` content types. You can enable breadcrumbs in other content types using the `.params.breadcrumbs.contentTypes` map.
+
+The following will enable breadcrumbs for the the content type `portfolio`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  breadcrumbs:
+    contentTypes:
+      portfolio: true
+```
+
+In a similar way, breadcrumbs can be disabled on `docs` and `blog` content types:
+
+```yaml {filename="hugo.yaml"}
+params:
+  breadcrumbs:
+    contentTypes:
+      blog: false
+      docs: false
+```
+
 ### Page Last Modification
 
 The date of the page's last modification can be displayed by enabling the `params.displayUpdatedDate` flag. To use Git commit date as the source, enable also the `enableGitInfo` flag.

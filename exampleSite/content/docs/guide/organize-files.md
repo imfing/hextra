@@ -154,7 +154,7 @@ We are using [`cascade`](https://gohugo.io/content-management/front-matter/#casc
 
 ## Breadcrumb Navigation
 
-Breadcrumbs are auto-generated based on the directory structure of `/content`.
+Breadcrumbs are auto-generated for enabled content types based on the directory structure of `/content`. Enabling (and disabling) breadcrumbs for specific content types can be done using the [`params.breadcrumbs.contentTypes`](../configuration#breadcrumbs) parameter in the site configuration `hugo.yaml`
 
 For example, consider the file structure [demonstrated above](#directory-structure). Given that structure, the breadcrumbs atop the page at `/docs/guide/organize-files/` would appear automatically as follows:
 
