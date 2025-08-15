@@ -1,5 +1,12 @@
-{{- $name := .Get "name" -}}
+{{- /*
+A file in a file tree.
 
+@param {string} name The name of the file.
+
+@example {{< filetree/file name="_index.md" >}}
+*/ -}}
+
+{{- $name := .Get "name" -}}
 
 <li class="hx:flex hx:list-none">
   <span class="hx:inline-flex hx:cursor-default hx:items-center hx:py-1">

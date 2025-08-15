@@ -1,3 +1,13 @@
+{{- /*
+A simple hero section with a heading and optional style.
+
+@param {string} heading The heading level (default: h2).
+@param {string} style The style of the heading.
+@param {string} content The content of the heading.
+
+@example {{< hextra/hero-section heading="h3" >}}{{< /hextra/hero-section >}}>
+*/ -}}
+
 {{- $style := .Get "style" -}}
 {{- $heading := int (strings.TrimPrefix "h" (.Get "heading" | default "h2")) -}}
 {{- $size := cond (ge $heading 4) "xl" (cond (eq $heading 3) "2xl" "4xl") -}}

@@ -1,5 +1,12 @@
-{{- $style := .Get "style" -}}
+{{- /*
+A shortcode for displaying a hero subtitle.
 
+@param {string} style The style of the subtitle.
+
+@example {{< hextra/hero-subtitle >}}{{< /hextra/hero-subtitle >}}
+*/ -}}
+
+{{- $style := .Get "style" -}}
 
 <p
   class="not-prose hx:text-xl hx:text-gray-600 hx:dark:text-gray-400 hx:sm:text-xl"
