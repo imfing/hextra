@@ -392,7 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function highlightMatches(text, query) {
       const escapedQuery = query.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
       const regex = new RegExp(escapedQuery, 'gi');
-      return text.replace(regex, (match) => `<span class="match">${match}</span>`);
+      return text.replace(regex, (match) => `<span class="hextra-search-match">${match}</span>`);
     }
 
     // Create a DOM element from the HTML string.
@@ -405,11 +405,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function handleMouseMove(e) {
       const target = e.target.closest('a');
       if (target) {
-        const active = resultsElement.querySelector('a.active');
+        const active = resultsElement.querySelector('a.hextra-search-active');
         if (active) {
-          active.classList.remove('active');
+          active.classList.remove('hextra-search-active');
         }
-        target.classList.add('active');
+        target.classList.add('hextra-search-active');
       }
     }
 
