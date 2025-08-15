@@ -1,5 +1,5 @@
 nav {
-  .search-wrapper {
+  .hextra-search-wrapper {
     @apply hx:hidden hx:md:inline-block;
   }
 }
