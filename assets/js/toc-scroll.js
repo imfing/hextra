@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const headingIds = Array.from(tocLinks).map((link) => link.getAttribute("href").substring(1));
 
-  const headings = headingIds.map((id) => document.getElementById(id)).filter(Boolean);
+  const headings = headingIds.map((id) => document.getElementById(decodeURIComponent(id))).filter(Boolean);
   if (headings.length === 0) return;
 
   let currentActiveLink = null;
@@ -39,7 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return Math.abs(headingTop) < Math.abs(closestTop) ? heading : closest;
       });
 
-      const targetId = topMostHeading.id;
+      // Encode the id and make it lowercase to match the TOC link
+      const targetId = encodeURIComponent(topMostHeading.id).toLowerCase();
       const targetLink = toc.querySelector(`a[href="#${targetId}"]`);
 
       if (targetLink && targetLink !== currentActiveLink) {
@@ -64,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Handle direct navigation to page with hash
   function handleHashNavigation() {
-    const hash = window.location.hash;
+    const hash = window.location.hash; // already url encoded
     if (hash) {
       const targetLink = toc.querySelector(`a[href="${hash}"]`);
       if (targetLink) {
