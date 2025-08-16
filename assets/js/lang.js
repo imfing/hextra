@@ -9,8 +9,19 @@
 
       // Calculate position of language options element
       const switcherRect = switcher.getBoundingClientRect();
-      const translateY = switcherRect.top - window.innerHeight - 15;
-      optionsElement.style.transform = `translate3d(${switcherRect.left}px, ${translateY}px, 0)`;
+
+      let translateX = switcherRect.left;
+      let translateY = switcherRect.top - window.innerHeight - 15;
+
+      if (switcher.dataset.location === 'navbar') {
+        if (document.body.dir !== 'rtl') {
+          translateX = switcherRect.right - optionsElement.clientWidth;
+        }
+
+        translateY = switcherRect.top - window.innerHeight + 180;
+      }
+
+      optionsElement.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
       optionsElement.style.minWidth = `${Math.max(switcherRect.width, 50)}px`;
     });
   });

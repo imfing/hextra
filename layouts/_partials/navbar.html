@@ -7,6 +7,7 @@
   {{ end -}}
 {{- end -}}
 
+{{- $page := . -}}
 {{- $iconHeight := 24 -}}
 
 <div class="hextra-nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden">
@@ -39,6 +40,8 @@
           </a>
         {{- else if eq .Params.type "theme-toggle" -}}
           {{- partial "theme-toggle.html" (dict "iconHeight" $iconHeight "class" "hx:p-2" "hideLabel" (not .Params.label)) -}}
+        {{- else if eq .Params.type "language-switch" -}}
+          {{- partial "language-switch" (dict "context" $page "grow" false "hideLabel" (not .Params.label) "iconHeight" 24 "location" "navbar") -}}
         {{- else -}}
           {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
           {{- $activeClass := cond $active "hx:font-medium" "hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200" -}}
