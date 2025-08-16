@@ -4,18 +4,25 @@
 {{- $light := (T "light") | default "Light" -}}
 {{- $dark := (T "dark") | default "Dark" -}}
 
+{{- $navbar := .navbar | default false -}}
+{{- $iconHeight := 12 -}}
+{{- $textHeight := "hx:text-xs" -}}
+{{- if $navbar -}}
+  {{- $iconHeight = 24 -}}
+  {{- $textHeight = "hx:text-sm" -}}
+{{- end -}}
 
 <button
   title="{{ $changeTheme }}"
   data-theme="light"
-  class="hextra-theme-toggle hx:cursor-pointer hx:group hx:h-7 hx:rounded-md hx:px-2 hx:text-left hx:text-xs hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50"
+  class="hextra-theme-toggle hx:cursor-pointer hx:group hx:h-7 hx:rounded-md hx:px-2 hx:text-left {{ $textHeight }} hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50"
   type="button"
   aria-label="{{ $changeTheme }}"
 >
   <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
-    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" "height=12 class=\"hx:group-data-[theme=light]:hidden\"") -}}
+    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" (printf "height=%d class=\"hx:group-data-[theme=light]:hidden\"" $iconHeight)) -}}
     {{- if not $hideLabel }}<span class="hx:group-data-[theme=light]:hidden">{{ $light }}</span>{{ end -}}
-    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" "height=12 class=\"hx:group-data-[theme=dark]:hidden\"") -}}
+    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" (printf "height=%d class=\"hx:group-data-[theme=dark]:hidden\"" $iconHeight)) -}}
     {{- if not $hideLabel }}<span class="hx:group-data-[theme=dark]:hidden">{{ $dark }}</span>{{ end -}}
   </div>
 </button>

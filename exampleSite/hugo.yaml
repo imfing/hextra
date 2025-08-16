@@ -94,6 +94,11 @@ menu:
       url: "https://github.com/imfing/hextra"
       params:
         icon: github
+    - name: Toggle Mode
+      weight: 8
+      params:
+        type: theme-toggle
+        hideLabel: true
     - identifier: development
       name: Development ↗
       url: https://imfing.github.io/hextra/versions/latest/
