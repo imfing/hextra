@@ -94,6 +94,10 @@ menu:
       url: "https://github.com/imfing/hextra"
       params:
         icon: github
+    - name: Language switch
+      weight: 9
+      params:
+        type: language-switch
     - identifier: development
       name: Development ↗
       url: https://imfing.github.io/hextra/versions/latest/
