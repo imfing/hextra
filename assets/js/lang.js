@@ -10,16 +10,21 @@
       // Calculate position of language options element
       const switcherRect = switcher.getBoundingClientRect();
 
+      // Stuck on the left side of the switcher.
       let translateX = switcherRect.left;
+      // Stuck on the top of the switcher.
       let translateY = switcherRect.top - window.innerHeight - 15;
 
       if (switcher.dataset.location === 'top') {
         if (document.body.dir !== 'rtl') {
+          // Stuck on the right side of the switcher.
           translateX = switcherRect.right - optionsElement.clientWidth;
         }
 
+        // Stuck on the bottom of the switcher.
         translateY = switcherRect.top - window.innerHeight + 180;
       } else if (document.body.dir === 'rtl') {
+        // Stuck on the right side of the switcher.
         translateX = switcherRect.right - optionsElement.clientWidth;
       }
 
