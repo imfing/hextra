@@ -70,6 +70,12 @@ menu:
       params:
         type: theme-toggle
    ```
+6. 语言切换器
+   ```yaml
+    - name: 语言切换器
+      params:
+        type: language-switch
+   ```
 
 通过设置 `weight` 参数可以调整菜单项的排序。
 

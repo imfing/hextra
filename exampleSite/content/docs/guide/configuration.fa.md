@@ -70,6 +70,12 @@ menu:
       params:
         type: theme-toggle
    ```
+6. مُبدِّل اللغة
+   ```yaml
+    - name: مُبدِّل اللغة
+      params:
+        type: language-switch
+   ```
 
 این آیتم‌های منو را می‌توان با تنظیم پارامتر `weight` مرتب کرد.
 

@@ -70,6 +70,12 @@ menu:
       params:
         type: theme-toggle
    ```
+6. 言語スイッチャー
+   ```yaml
+    - name: 言語スイッチャー
+      params:
+        type: language-switch
+   ```
 
 これらのメニュー項目は `weight` パラメータを設定することで並べ替えられます。
 

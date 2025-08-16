@@ -70,6 +70,12 @@ There are different types of menu items:
       params:
         type: theme-toggle
    ```
+6. Language Switcher
+   ```yaml
+    - name: Language Switcher
+      params:
+        type: language-switch
+   ```
 
 These menu items can be sorted by setting the `weight` parameter.
 
