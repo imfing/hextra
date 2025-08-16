@@ -7,25 +7,26 @@
       const optionsElement = switcher.nextElementSibling;
       optionsElement.classList.toggle('hx:hidden');
 
-      // Calculate position of language options element
+      // Calculate the position of a language options element.
       const switcherRect = switcher.getBoundingClientRect();
+
+      const isOnTop = switcher.dataset.location === 'top';
+      const isRTL = document.body.dir === 'rtl'
 
       // Stuck on the left side of the switcher.
       let translateX = switcherRect.left;
+
+      if (isOnTop && !isRTL || !isOnTop && isRTL) {
+        // Stuck on the right side of the switcher.
+        translateX = switcherRect.right - optionsElement.clientWidth;
+      }
+
       // Stuck on the top of the switcher.
       let translateY = switcherRect.top - window.innerHeight - 15;
 
-      if (switcher.dataset.location === 'top') {
-        if (document.body.dir !== 'rtl') {
-          // Stuck on the right side of the switcher.
-          translateX = switcherRect.right - optionsElement.clientWidth;
-        }
-
+      if (isOnTop) {
         // Stuck on the bottom of the switcher.
         translateY = switcherRect.top - window.innerHeight + 180;
-      } else if (document.body.dir === 'rtl') {
-        // Stuck on the right side of the switcher.
-        translateX = switcherRect.right - optionsElement.clientWidth;
       }
 
       optionsElement.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
