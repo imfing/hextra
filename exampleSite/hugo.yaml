@@ -98,7 +98,6 @@ menu:
       weight: 8
       params:
         type: theme-toggle
-        hideLabel: true
     - identifier: development
       name: Development ↗
       url: https://imfing.github.io/hextra/versions/latest/
