@@ -13,7 +13,7 @@
       let translateX = switcherRect.left;
       let translateY = switcherRect.top - window.innerHeight - 15;
 
-      if (switcher.dataset.location === 'navbar') {
+      if (switcher.dataset.location === 'top') {
         if (document.body.dir !== 'rtl') {
           translateX = switcherRect.right - optionsElement.clientWidth;
         }
