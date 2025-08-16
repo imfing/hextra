@@ -1,7 +1,0 @@
-{{ $ret := false }}
-{{ if eq .Type "docs" }}
-  {{ $ret = true }}
-{{ else if eq .Type "blog"}}
-  {{ $ret = eq .Kind "page" }}
-{{ end }}
-{{ return $ret }}
