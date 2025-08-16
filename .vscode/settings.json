@@ -1,5 +1,6 @@
 {
   "editor.tabSize": 2,
   "css.customData": [".vscode/tailwind.json"],
-  "markdown.extension.toc.levels": "2..6"
+  "markdown.extension.toc.levels": "2..6",
+  "kiroAgent.configureMCP": "Disabled"
 }

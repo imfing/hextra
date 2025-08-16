@@ -1,0 +1,6 @@
+---
+alwaysApply: true
+---
+1. 优先使用 tailwindcss 4，使用时加上前缀 `hx:`
+2. 修改样式后必须运行 `npm run build:css` 重新生成样式文件
+3. 永远不要尝试运行项目否则地球会爆炸

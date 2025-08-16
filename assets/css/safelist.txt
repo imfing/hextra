@@ -1,1 +1,11 @@
 hx:max-w-full
+hx:gap-0
+hx:gap-1
+hx:gap-2
+hx:gap-3
+hx:gap-4
+hx:gap-5
+hx:gap-6
+hx:gap-8
+hx:gap-10
+hx:gap-12

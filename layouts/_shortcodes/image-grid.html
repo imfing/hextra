@@ -1,0 +1,46 @@
+{{- $gap := .Get "gap" | default "4" -}}
+{{- $content := trim .Inner "\n\r " -}}
+
+{{/* 解析：按行分割，每行按逗号分割，支持标题格式 */}}
+{{- $rows := split $content "\n" -}}
+
+<div class="hx:mt-6 hx:flex hx:flex-col hx:gap-{{ $gap }}">
+  {{- range $rowIndex, $rowContent := $rows -}}
+    {{- $rowContent = trim $rowContent "\r\n " -}}
+    {{- if $rowContent -}}
+      {{- $images := split $rowContent "," -}}
+      <div class="hx:flex hx:gap-{{ $gap }} hx:justify-stretch hx:flex-col hx:sm:flex-row">
+        {{- range $colIndex, $imageItem := $images -}}
+          {{- $imageItem = trim $imageItem " \t" -}}
+          {{- if $imageItem -}}
+            {{/* 解析图片路径和可选标题：格式为 "path|caption" 或 "path" */}}
+            {{- $imagePath := $imageItem -}}
+            {{- $caption := "" -}}
+            {{- if (strings.Contains $imageItem "|") -}}
+              {{- $parts := split $imageItem "|" -}}
+              {{- $imagePath = trim (index $parts 0) " \t" -}}
+              {{- if gt (len $parts) 1 -}}
+                {{- $caption = trim (index $parts 1) " \t" -}}
+              {{- end -}}
+            {{- end -}}
+            
+            <div class="hx:flex-1 hx:flex hx:flex-col hx:group hx:transition-transform hx:duration-200 hx:ease-in-out hover:hx:-translate-y-0.5">
+              <img
+                src="{{ $imagePath | safeURL }}"
+                alt="{{ if $caption }}{{ $caption }}{{ else }}Grid image {{ add $rowIndex 1 }}-{{ add $colIndex 1 }}{{ end }}"
+                class="not-prose hx:w-full hx:h-full hx:object-cover hx:rounded-lg"
+                loading="lazy"
+                decoding="async"
+              />
+              {{- if $caption -}}
+                <figcaption class="hx:text-sm hx:leading-5 hx:text-gray-500 dark:hx:text-gray-400 hx:text-center hx:mt-2 hx:px-2 hx:transition-colors hx:duration-200 group-hover:hx:text-gray-700 dark:group-hover:hx:text-gray-200">
+                  {{ $caption | markdownify }}
+                </figcaption>
+              {{- end -}}
+            </div>
+          {{- end -}}
+        {{- end -}}
+      </div>
+    {{- end -}}
+  {{- end -}}
+</div>
