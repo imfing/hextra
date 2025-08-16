@@ -64,7 +64,7 @@ menu:
      params:
        icon: github
    ```
-5. Theme Toggle
+5. تبديل السمة
    ```yaml
     - name: Theme Toggle
       params:
