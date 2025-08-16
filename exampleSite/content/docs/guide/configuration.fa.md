@@ -64,6 +64,12 @@ menu:
      params:
        icon: github
    ```
+5. تبديل السمة
+   ```yaml
+    - name: Theme Toggle
+      params:
+        type: theme-toggle
+   ```
 
 این آیتم‌های منو را می‌توان با تنظیم پارامتر `weight` مرتب کرد.
 

@@ -64,6 +64,12 @@ menu:
      params:
        icon: github
    ```
+5. 主题切换
+   ```yaml
+    - name: Theme Toggle
+      params:
+        type: theme-toggle
+   ```
 
 通过设置 `weight` 参数可以调整菜单项的排序。
 
