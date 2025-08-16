@@ -64,6 +64,12 @@ There are different types of menu items:
      params:
        icon: github
    ```
+5. Theme Toggle
+   ```yaml
+    - name: Theme Toggle
+      params:
+        type: theme-toggle
+   ```
 
 These menu items can be sorted by setting the `weight` parameter.
 
