@@ -19,6 +19,8 @@
         }
 
         translateY = switcherRect.top - window.innerHeight + 180;
+      } else if (document.body.dir === 'rtl') {
+        translateX = switcherRect.right - optionsElement.clientWidth;
       }
 
       optionsElement.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
