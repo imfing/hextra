@@ -1,16 +1,10 @@
 {{- $hideLabel := .hideLabel | default false -}}
+{{- $iconHeight := .iconHeight | default 12 -}}
+{{- $textHeight := .textHeight | default "hx:text-xs" -}}
 
 {{- $changeTheme := (T "changeTheme") | default "Change theme" -}}
 {{- $light := (T "light") | default "Light" -}}
 {{- $dark := (T "dark") | default "Dark" -}}
-
-{{- $navbar := .navbar | default false -}}
-{{- $iconHeight := 12 -}}
-{{- $textHeight := "hx:text-xs" -}}
-{{- if $navbar -}}
-  {{- $iconHeight = 24 -}}
-  {{- $textHeight = "hx:text-sm" -}}
-{{- end -}}
 
 <button
   title="{{ $changeTheme }}"
