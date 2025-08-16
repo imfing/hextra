@@ -38,7 +38,7 @@
             <span class="hx:sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- else if eq .Params.type "theme-toggle" -}}
-          {{- partial "theme-toggle.html" (dict "iconHeight" $iconHeight "textHeight" "hx:text-sm" "hideLabel" .Params.hideLabel) -}}
+          {{- partial "theme-toggle.html" (dict "iconHeight" $iconHeight "class" "hx:text-sm hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200" "hideLabel" .Params.hideLabel) -}}
         {{- else -}}
           {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
           {{- $activeClass := cond $active "hx:font-medium" "hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200" -}}
