@@ -69,12 +69,15 @@ menu:
     - name: Theme Toggle
       params:
         type: theme-toggle
+        label: true # optional, default is false
    ```
 6. مُبدِّل اللغة
    ```yaml
     - name: مُبدِّل اللغة
       params:
         type: language-switch
+        label: true # optional, default is false
+        icon: "globe-alt" # optional, default is "translate"
    ```
 
 این آیتم‌های منو را می‌توان با تنظیم پارامتر `weight` مرتب کرد.

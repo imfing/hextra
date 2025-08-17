@@ -69,12 +69,15 @@ menu:
     - name: Theme Toggle
       params:
         type: theme-toggle
+        label: true # optional, default is false
    ```
 6. 语言切换器
    ```yaml
     - name: 语言切换器
       params:
         type: language-switch
+        label: true # optional, default is false
+        icon: "globe-alt" # optional, default is "translate"
    ```
 
 通过设置 `weight` 参数可以调整菜单项的排序。

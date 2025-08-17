@@ -69,12 +69,15 @@ menu:
     - name: Theme Toggle
       params:
         type: theme-toggle
+        label: true # optional, default is false
    ```
 6. 言語スイッチャー
    ```yaml
     - name: 言語スイッチャー
       params:
         type: language-switch
+        label: true # optional, default is false
+        icon: "globe-alt" # optional, default is "translate"
    ```
 
 これらのメニュー項目は `weight` パラメータを設定することで並べ替えられます。

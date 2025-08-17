@@ -69,12 +69,15 @@ There are different types of menu items:
     - name: Theme Toggle
       params:
         type: theme-toggle
+        label: true # optional, default is false
    ```
 6. Language Switcher
    ```yaml
     - name: Language Switcher
       params:
         type: language-switch
+        label: true # optional, default is false
+        icon: "globe-alt" # optional, default is "translate"
    ```
 
 These menu items can be sorted by setting the `weight` parameter.
