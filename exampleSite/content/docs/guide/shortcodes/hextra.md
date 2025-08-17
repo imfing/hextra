@@ -8,7 +8,7 @@ next: /docs/guide/deploy-site
 
 The main usage of these shortcodes are within the layout `hextra-home`.
 
-## `feature-card`
+## `hextra/feature-card`
 
 A shortcode for displaying a feature card.
 
@@ -31,7 +31,7 @@ A shortcode for displaying a feature card.
 | `icon`       | The icon of the card.     |
 | `link`       | The link of the card.     |
 
-## `feature-grid`
+## `hextra/feature-grid`
 
 A shortcode for displaying a feature grid.
 
@@ -52,7 +52,7 @@ A shortcode for displaying a feature grid.
 | `cols`    | The number of columns. |
 | `style`   | The style of the grid. |
 
-## `hero-badge`
+## `hextra/hero-badge`
 
 A shortcode for rendering a badge with a link.
 
@@ -74,7 +74,7 @@ A shortcode for rendering a badge with a link.
 | `class`   | The class of the badge. |
 | `style`   | The style of the badge. |
 
-## `hero-button`
+## `hextra/hero-button`
 
 A shortcode for rendering a button with a link.
 
@@ -92,7 +92,7 @@ A shortcode for rendering a button with a link.
 | `text`    | The text of the button.  |
 | `style`   | The style of the button. |
 
-## `hero-container`
+## `hextra/hero-container`
 
 A simple hero container with an image on the left side.
 
@@ -120,7 +120,7 @@ A simple hero container with an image on the left side.
 | `imageHeight` | The height of the image (default: `350`).                  |
 | `style`       | The style of the container.                                |
 
-## `hero-headline`
+## `hextra/hero-headline`
 
 A shortcode for displaying a hero headline.
 
@@ -138,7 +138,7 @@ A shortcode for displaying a hero headline.
 |-----------|----------------------------|
 | `style`   | The style of the headline. |
 
-## `hero-section`
+## `hextra/hero-section`
 
 A simple hero section with a heading and optional style.
 
@@ -156,7 +156,7 @@ A simple hero section with a heading and optional style.
 | `style`   | The style of the heading.          |
 | `content` | The content of the heading.        |
 
-## `hero-subtitle`
+## `hextra/hero-subtitle`
 
 A shortcode for displaying a hero subtitle.
 

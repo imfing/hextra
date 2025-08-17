@@ -8,7 +8,7 @@ next: /docs/guide/deploy-site
 
 这些短代码的主要用途是在布局`hextra-home`内。
 
-## `feature-card`
+## `hextra/feature-card`
 
 显示功能卡的短代码。
 
@@ -31,7 +31,7 @@ next: /docs/guide/deploy-site
 | `icon`       | 卡片的图标。      |
 | `link`       | 卡片的链接。      |
 
-## `feature-grid`
+## `hextra/feature-grid`
 
 用于显示特征网格的短代码。
 
@@ -52,7 +52,7 @@ next: /docs/guide/deploy-site
 | `cols`    | 列数。         |
 | `style`   | 网格的样式。      |
 
-## `hero-badge`
+## `hextra/hero-badge`
 
 用于呈现带有链接的徽章的短代码。
 
@@ -74,7 +74,7 @@ next: /docs/guide/deploy-site
 | `class`   | 徽章的类别。      |
 | `style`   | 徽章的样式。      |
 
-## `hero-button`
+## `hextra/hero-button`
 
 用于呈现带有链接的按钮的短代码。
 
@@ -92,7 +92,7 @@ next: /docs/guide/deploy-site
 | `text`    | 按钮的文本。      |
 | `style`   | 按钮的样式。      |
 
-## `hero-container`
+## `hextra/hero-container`
 
 一个简单的英雄容器，左侧有一个图像。
 
@@ -120,7 +120,7 @@ next: /docs/guide/deploy-site
 | `imageHeight` | 图片的高度（默认值：`350`）。        |
 | `style`       | 容器的样式。                   |
 
-## `hero-headline`
+## `hextra/hero-headline`
 
 显示英雄标题的短代码。
 
@@ -138,7 +138,7 @@ next: /docs/guide/deploy-site
 |-----------|-------------|
 | `style`   | 标题的样式。      |
 
-## `hero-section`
+## `hextra/hero-section`
 
 带有标题和可选样式的简单英雄部分。
 
@@ -156,7 +156,7 @@ next: /docs/guide/deploy-site
 | `style`   | 标题的样式。          |
 | `content` | 标题的内容。          |
 
-## `hero-subtitle`
+## `hextra/hero-subtitle`
 
 显示英雄字幕的短代码。
 

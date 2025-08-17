@@ -8,7 +8,7 @@ next: /docs/guide/deploy-site
 
 الاستخدام الرئيسي لهذه الرموز المختصرة هو داخل التخطيط `hextra-home`.
 
-## `feature-card`
+## `hextra/feature-card`
 
 رمز مختصر لعرض بطاقة مميزة.
 
@@ -31,7 +31,7 @@ next: /docs/guide/deploy-site
 | `icon`       | أيقونة البطاقة.         |
 | `link`       | رابط البطاقة.           |
 
-## `feature-grid`
+## `hextra/feature-grid`
 
 رمز مختصر لعرض شبكة الميزات.
 
@@ -52,7 +52,7 @@ next: /docs/guide/deploy-site
 | `cols`    | عدد الأعمدة. |
 | `style`   | نمط الشبكة.  |
 
-## `hero-badge`
+## `hextra/hero-badge`
 
 رمز مختصر لعرض شارة تحتوي على رابط.
 
@@ -74,7 +74,7 @@ next: /docs/guide/deploy-site
 | `class`   | فئة الشارة.  |
 | `style`   | شكل الشارة.  |
 
-## `hero-button`
+## `hextra/hero-button`
 
 رمز مختصر لعرض زر يحتوي على رابط.
 
@@ -92,7 +92,7 @@ next: /docs/guide/deploy-site
 | `text`    | نص الزر.    |
 | `style`   | شكل الزر.   |
 
-## `hero-container`
+## `hextra/hero-container`
 
 حاوية بطل بسيطة مع صورة على الجانب الأيسر.
 
@@ -120,7 +120,7 @@ next: /docs/guide/deploy-site
 | `imageHeight` | ارتفاع الصورة (الافتراضي: `350`).       |
 | `style`       | شكل الحاوية.                            |
 
-## `hero-headline`
+## `hextra/hero-headline`
 
 رمز مختصر لعرض عنوان رئيسي.
 
@@ -138,7 +138,7 @@ next: /docs/guide/deploy-site
 |-----------|----------------|
 | `style`   | أسلوب العنوان. |
 
-## `hero-section`
+## `hextra/hero-section`
 
 قسم بطل بسيط مع عنوان ونمط اختياري.
 
@@ -156,7 +156,7 @@ next: /docs/guide/deploy-site
 | `style`   | نمط العنوان.                   |
 | `content` | محتوى العنوان.                 |
 
-## `hero-subtitle`
+## `hextra/hero-subtitle`
 
 رمز مختصر لعرض عنوان فرعي للبطل.
 

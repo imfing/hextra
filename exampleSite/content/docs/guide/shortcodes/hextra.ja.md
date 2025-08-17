@@ -8,7 +8,7 @@ next: /docs/guide/deploy-site
 
 これらのショートコードの主な使用場所は、レイアウト `hextra-home` 内です。
 
-## `feature-card`
+## `hextra/feature-card`
 
 機能カードを表示するためのショートコード。
 
@@ -31,7 +31,7 @@ next: /docs/guide/deploy-site
 | `icon`       | カードのアイコン。   |
 | `link`       | カードのリンク。    |
 
-## `feature-grid`
+## `hextra/feature-grid`
 
 機能グリッドを表示するためのショートコード。
 
@@ -52,7 +52,7 @@ next: /docs/guide/deploy-site
 | `cols`    | 列の数。        |
 | `style`   | グリッドのスタイル。  |
 
-## `hero-badge`
+## `hextra/hero-badge`
 
 リンク付きのバッジをレンダリングするためのショートコード。
 
@@ -74,7 +74,7 @@ next: /docs/guide/deploy-site
 | `class`   | バッジのクラス。    |
 | `style`   | バッジのスタイル。   |
 
-## `hero-button`
+## `hextra/hero-button`
 
 リンク付きのボタンをレンダリングするためのショートコード。
 
@@ -92,7 +92,7 @@ next: /docs/guide/deploy-site
 | `text`    | ボタンのテキスト。   |
 | `style`   | ボタンのスタイル。   |
 
-## `hero-container`
+## `hextra/hero-container`
 
 左側に画像があるシンプルなヒーロー コンテナー。
 
@@ -120,7 +120,7 @@ next: /docs/guide/deploy-site
 | `imageHeight` | 画像の高さ（デフォルト：`350`）。               |
 | `style`       | コンテナのスタイル。                        |
 
-## `hero-headline`
+## `hextra/hero-headline`
 
 ヒーローの見出しを表示するためのショートコード。
 
@@ -138,7 +138,7 @@ next: /docs/guide/deploy-site
 |-----------|-------------|
 | `style`   | 見出しのスタイル。   |
 
-## `hero-section`
+## `hextra/hero-section`
 
 見出しとオプションのスタイルを備えたシンプルなヒーロー セクション。
 
@@ -156,7 +156,7 @@ next: /docs/guide/deploy-site
 | `style`   | 見出しのスタイル。            |
 | `content` | 見出しの内容。              |
 
-## `hero-subtitle`
+## `hextra/hero-subtitle`
 
 ヒーローのサブタイトルを表示するためのショートコード。
 
