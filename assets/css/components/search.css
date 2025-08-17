@@ -15,7 +15,7 @@
   }
 
   .hextra-search-input:focus {
-    @apply hx:focus-visible:outline-none hx:ring-2 hx:ring-primary-200 hx:ring-offset-1 hx:ring-offset-primary-300 hx:dark:ring-primary-800 hx:dark:ring-offset-primary-700;
+    @apply hx:hextra-focus
   }
 
   .hextra-search-no-result {
