@@ -45,6 +45,16 @@ next: /docs/guide/deploy-site
 
 {{< badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" >}}
 
+### オプション
+
+| パラメータ     | 説明                                      |
+|-----------|-----------------------------------------|
+| `content` | バッジのテキスト。                               |
+| `link`    | バッジのリンク。                                |
+| `icon`    | バッジのアイコン。                               |
+| `type`    | バッジの種類。(デフォルト、`info`、`warning`、`error`) |
+| `class`   | バッジのクラス。                                |
+
 ## YouTube
 
 YouTube 動画を埋め込みます。
