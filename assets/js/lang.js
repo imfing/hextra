@@ -10,6 +10,9 @@
       // Calculate the position of a language options element.
       const switcherRect = switcher.getBoundingClientRect();
 
+      // Must be called before optionsElement.clientWidth.
+      optionsElement.style.minWidth = `${Math.max(switcherRect.width, 50)}px`;
+
       const isOnTop = switcher.dataset.location === 'top';
       const isRTL = document.body.dir === 'rtl'
 
@@ -30,7 +33,6 @@
       }
 
       optionsElement.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
-      optionsElement.style.minWidth = `${Math.max(switcherRect.width, 50)}px`;
     });
   });
 
