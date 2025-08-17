@@ -45,6 +45,16 @@ Result:
 
 {{< badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" >}}
 
+### Options
+
+| Name      | Description                                                  |
+|-----------|--------------------------------------------------------------|
+| `content` | The text of the badge.                                       |
+| `link`    | The link of the badge.                                       |
+| `icon`    | The icon of the badge.                                       |
+| `type`    | The type of the badge. (default, `info`, `warning`, `error`) |
+| `class`   | The class of the badge.                                      |
+
 ## YouTube
 
 Embed a YouTube video.

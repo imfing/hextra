@@ -45,3 +45,10 @@ your-icon: <svg>您的图标 SVG 内容</svg>
 ```
 
 提示：[Iconify Design](https://iconify.design/) 是寻找网站 SVG 图标的优质资源平台。
+
+## 选项
+
+| 范围           | 描述     |
+|--------------|--------|
+| `name`       | 图标名称   |
+| `attributes` | 图标的属性。 |

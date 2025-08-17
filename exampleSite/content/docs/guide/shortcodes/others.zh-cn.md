@@ -45,6 +45,16 @@ next: /docs/guide/deploy-site
 
 {{< badge content="版本发布" link="https://github.com/imfing/hextra/releases" icon="github" >}}
 
+## 选项
+
+| 范围        | 描述                                  |
+|-----------|-------------------------------------|
+| `content` | 徽章的文字。                              |
+| `link`    | 徽章的链接。                              |
+| `icon`    | 徽章的图标。                              |
+| `type`    | 徽章的类型。（默认，`info`，`warning`，`error`） |
+| `class`   | 徽章的等级。                              |
+
 ## YouTube
 
 嵌入YouTube视频。

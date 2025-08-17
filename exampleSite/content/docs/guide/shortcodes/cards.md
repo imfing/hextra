@@ -38,23 +38,24 @@ linkTitle: Cards
 ## Card Parameters
 
 | Parameter  | Description                                                     |
-|----------- |-----------------------------------------------------------------|
+|------------|-----------------------------------------------------------------|
 | `link`     | URL (internal or external).                                     |
 | `title`    | Title heading for the card.                                     |
 | `subtitle` | Subtitle heading (supports Markdown).                           |
 | `icon`     | Name of the icon.                                               |
 | `tag`      | Text in tag.                                                    |
-| `tagColor` | Color of the tag: `gray` (default), `yellow`, `red` and `blue`. |
+| `tagType`  | Type of the tag: default (gray), `info`, `warning` and `error`. |
   
 ## Image Card
 
 Additionally, the card supports adding image and processing through these parameters:
 
-| Parameter  | Description                                 |
-|----------- |---------------------------------------------|
-| `image`    | Specifies the image URL for the card.       |
-| `method`   | Sets Hugo's image processing method.        |
-| `options`  | Configures Hugo's image processing options. |
+| Parameter    | Description                                        |
+|--------------|----------------------------------------------------|
+| `image`      | Specifies the image URL for the card.              |
+| `method`     | Sets Hugo's image processing method.               |
+| `options`    | Configures Hugo's image processing options.        |
+| `imageStyle` | Used to fill the style attribute of the image tag. |
 
 Card supports three kinds of images:
 

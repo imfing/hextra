@@ -45,6 +45,16 @@ next: /docs/guide/deploy-site
 
 {{< badge content="انتشارها" link="https://github.com/imfing/hextra/releases" icon="github" >}}
 
+### خيارات
+
+| المعلمة   | وصف                                               |
+|-----------|---------------------------------------------------|
+| `content` | نص الشارة.                                        |
+| `link`    | رابط الشارة.                                      |
+| `icon`    | رمز الشارة.                                       |
+| `type`    | نوع الشارة. (افتراضي، `info`، `warning`، `error`) |
+| `class`   | فئة الشارة.                                       |
+
 ## یوتیوب
 
 تعبیه یک ویدیوی یوتیوب.

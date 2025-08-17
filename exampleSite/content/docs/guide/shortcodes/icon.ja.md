@@ -45,3 +45,10 @@ your-icon: <svg>your icon svg content</svg>
 ```
 
 ヒント: [Iconify Design](https://iconify.design/) はサイト用の SVG アイコンを見つけるのに最適な場所です。
+
+## オプション
+
+| パラメータ        | 説明       |
+|--------------|----------|
+| `name`       | アイコン名    |
+| `attributes` | アイコンの属性。 |
