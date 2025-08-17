@@ -32,3 +32,18 @@ linkTitle: 文件树
   {{</* filetree/file name="hugo.toml" */>}}
 {{</* /filetree/container */>}}
 ```
+
+## 选项
+
+### `filetree/file`
+
+| 范围     | 描述     |
+|--------|--------|
+| `name` | 文件的名称。 |
+
+### `filetree/folder`
+
+| 范围      | 描述                                  |
+|---------|-------------------------------------|
+| `name`  | 文件的名称。                              |
+| `state` | 文件的状态。可以是`open`或`closed`。默认为`open`。 |
