@@ -45,3 +45,10 @@ It then can be used in the shortcode like this:
 ```
 
 Tip: [Iconify Design](https://iconify.design/) is a great place to find SVG icons for your site.
+
+## Options
+
+| Name         | Description                 |
+|--------------|-----------------------------|
+| `name`       | Icon name                   |
+| `attributes` | The attributes of the icon. |
