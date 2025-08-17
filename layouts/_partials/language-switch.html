@@ -1,4 +1,5 @@
 {{- $page := .context -}}
+{{- $iconName := .iconName | default "globe-alt" -}}
 {{- $iconHeight := .iconHeight | default 12 -}}
 {{- $location := .location -}}
 
@@ -20,7 +21,7 @@
       aria-label="{{ $changeLanguage }}"
     >
       <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
-        {{- partial "utils/icon" (dict "name" "translate" "attributes" (printf "height=%d" $iconHeight)) -}}
+        {{- partial "utils/icon" (dict "name" $iconName "attributes" (printf "height=%d" $iconHeight)) -}}
         {{- if not $hideLabel }}<span>{{ site.Language.LanguageName }}</span>{{ end -}}
       </div>
     </button>
