@@ -334,6 +334,7 @@
       "hx:flex-col",
       "hx:flex-wrap",
       "hx:focus:bg-white",
+      "hx:focus:hextra-focus",
       "hx:focus:outline-hidden",
       "hx:focus:ring-4",
       "hx:focus:ring-primary-300",

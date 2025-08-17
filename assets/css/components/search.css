@@ -14,10 +14,6 @@
     }
   }
 
-  .hextra-search-input:focus {
-    @apply hx:hextra-focus
-  }
-
   .hextra-search-no-result {
     @apply hx:block hx:select-none hx:p-8 hx:text-center hx:text-sm hx:text-gray-400;
   }
