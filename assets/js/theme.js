@@ -4,48 +4,84 @@
 
   const themeToggleButtons = document.querySelectorAll(".hextra-theme-toggle");
 
-  // Change the icons of the buttons based on previous settings or system theme
-  if (
-    localStorage.getItem("color-theme") === "dark" ||
-    (!("color-theme" in localStorage) &&
-      ((window.matchMedia("(prefers-color-scheme: dark)").matches && defaultTheme === "system") || defaultTheme === "dark"))
-  ) {
-    themeToggleButtons.forEach((el) => el.dataset.theme = "dark");
-  } else {
+  function getRootClassTheme() {
+    if (document.documentElement.classList.contains("light")) {
+      return "light";
+    }
+
+    if (document.documentElement.classList.contains("dark")) {
+      return "dark";
+    }
+
+    return "";
+  }
+
+  function switchToLightTheme() {
+    setLightTheme();
     themeToggleButtons.forEach((el) => el.dataset.theme = "light");
+    localStorage.setItem("color-theme", "light");
+  }
+
+  function switchToDarkTheme() {
+    setDarkTheme();
+    themeToggleButtons.forEach((el) => el.dataset.theme = "dark");
+    localStorage.setItem("color-theme", "dark");
+  }
+
+  function switchToSystemTheme() {
+    setSystemTheme();
+    themeToggleButtons.forEach((el) => el.dataset.theme = "system");
+    localStorage.setItem("color-theme", "system");
+  }
+
+  const colorTheme = "color-theme" in localStorage ? localStorage.getItem("color-theme") : defaultTheme;
+
+  switch (colorTheme) {
+    case "light":
+      themeToggleButtons.forEach((el) => el.dataset.theme = "light");
+      localStorage.setItem("color-theme", "light");
+      break;
+    case "dark":
+      themeToggleButtons.forEach((el) => el.dataset.theme = "dark");
+      localStorage.setItem("color-theme", "dark");
+      break;
+    default:
+      themeToggleButtons.forEach((el) => el.dataset.theme = "system");
+      localStorage.setItem("color-theme", "system");
+      break;
   }
 
   // Add click event handler to the buttons
   themeToggleButtons.forEach((el) => {
     el.addEventListener("click", function () {
-      if (localStorage.getItem("color-theme")) {
-        if (localStorage.getItem("color-theme") === "light") {
-          setDarkTheme();
-          localStorage.setItem("color-theme", "dark");
-        } else {
-          setLightTheme();
-          localStorage.setItem("color-theme", "light");
-        }
+      const prefersColorScheme = detectPrefersColorScheme();
+      const localStorageColorTheme = localStorage.getItem("color-theme");
+      const rootClassTheme = getRootClassTheme();
+
+      // prefersColorScheme (light): system -> dark -> light -> system
+      // prefersColorScheme (dark): system -> light -> dark -> system
+
+      if ((prefersColorScheme === "light" || prefersColorScheme === "dark") && localStorageColorTheme === prefersColorScheme) {
+        switchToSystemTheme();
+      } else if (prefersColorScheme === "light" && rootClassTheme === prefersColorScheme) {
+        switchToDarkTheme();
+      } else if (prefersColorScheme === "dark" && rootClassTheme === prefersColorScheme) {
+        switchToLightTheme();
+      } else if (prefersColorScheme === "light") {
+        switchToLightTheme();
+      } else if (prefersColorScheme === "dark") {
+        switchToDarkTheme();
       } else {
-        if (document.documentElement.classList.contains("dark")) {
-          setLightTheme();
-          localStorage.setItem("color-theme", "light");
-        } else {
-          setDarkTheme();
-          localStorage.setItem("color-theme", "dark");
-        }
+        // Default to light theme if the system theme is not detected.
+        switchToLightTheme();
       }
-      el.dataset.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
     });
   });
 
   // Listen for system theme changes
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    if (defaultTheme === "system" && !("color-theme" in localStorage)) {
-      e.matches ? setDarkTheme() : setLightTheme();
-      themeToggleButtons.forEach((el) =>
-        el.dataset.theme = document.documentElement.classList.contains("dark") ? "dark" : "light"
-      );
+    if (localStorage.getItem("color-theme") === "system") {
+      setSystemTheme();
     }
   });
 })();

@@ -5,6 +5,7 @@
 {{- $changeTheme := (T "changeTheme") | default "Change theme" -}}
 {{- $light := (T "light") | default "Light" -}}
 {{- $dark := (T "dark") | default "Dark" -}}
+{{- $system := (T "system") | default "System" -}}
 
 <button
   title="{{ $changeTheme }}"
@@ -14,9 +15,11 @@
   aria-label="{{ $changeTheme }}"
 >
   <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
-    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" (printf "height=%d class=\"hx:group-data-[theme=light]:hidden\"" $iconHeight)) -}}
-    {{- if not $hideLabel }}<span class="hx:group-data-[theme=light]:hidden">{{ $light }}</span>{{ end -}}
-    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" (printf "height=%d class=\"hx:group-data-[theme=dark]:hidden\"" $iconHeight)) -}}
-    {{- if not $hideLabel }}<span class="hx:group-data-[theme=dark]:hidden">{{ $dark }}</span>{{ end -}}
+    {{- partial "utils/icon.html" (dict "name" "sun" "attributes" (printf `height=%d class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden"` $iconHeight)) -}}
+    {{- if not $hideLabel }}<span class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden">{{ $light }}</span>{{ end -}}
+    {{- partial "utils/icon.html" (dict "name" "moon" "attributes" (printf `height=%d class="hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden"` $iconHeight)) -}}
+    {{- if not $hideLabel }}<span class="hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden">{{ $dark }}</span>{{ end -}}
+    {{- partial "utils/icon.html" (dict "name" "contrast" "attributes" (printf `height=%d class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden"` $iconHeight)) -}}
+    {{- if not $hideLabel }}<span class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden">{{ $system }}</span>{{ end -}}
   </div>
 </button>

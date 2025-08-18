@@ -63,22 +63,47 @@
     /* Initialize light/dark mode */
     const defaultTheme = '{{ site.Params.theme.default | default `system`}}';
 
+    function detectPrefersColorScheme() {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        return "light";
+      } else {
+        return "light";
+      }
+    }
+
     const setDarkTheme = () => {
+      document.documentElement.classList.remove("light");
       document.documentElement.classList.add("dark");
       document.documentElement.style.colorScheme = "dark";
     }
+
     const setLightTheme = () => {
       document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
       document.documentElement.style.colorScheme = "light";
     }
 
-    if ("color-theme" in localStorage) {
-      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
-    } else {
-      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
-      if (defaultTheme === "system") {
-        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
-      }
+    const setSystemTheme = () => {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("light");
+
+      const prefersColorScheme = detectPrefersColorScheme();
+      document.documentElement.classList.add(prefersColorScheme);
+      document.documentElement.style.colorScheme = prefersColorScheme;
+    }
+
+    switch ("color-theme" in localStorage ? localStorage.getItem("color-theme") : defaultTheme) {
+      case "dark":
+        setDarkTheme();
+        break;
+      case "light":
+        setLightTheme();
+        break;
+      default:
+        setSystemTheme();
+        break;
     }
   </script>
 
