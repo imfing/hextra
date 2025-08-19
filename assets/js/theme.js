@@ -21,14 +21,18 @@
   }
 
   function switchTheme(theme) {
-    switch (theme) {
+     switch (theme) {
       case "light":
-      case "dark":
-        if (document.documentElement.style.colorScheme === theme) {
-          break;
-        }
+        document.documentElement.classList.remove("dark");
+        document.documentElement.classList.add(theme);
+        document.documentElement.style.colorScheme = theme;
 
-        document.documentElement.classList.replace(theme === "light" ? "dark" : "light", theme);
+        applyTheme(theme);
+
+        break;
+      case "dark":
+        document.documentElement.classList.remove("light");
+        document.documentElement.classList.add(theme);
         document.documentElement.style.colorScheme = theme;
 
         applyTheme(theme);
