@@ -62,8 +62,6 @@
   <script>
     // The section must not be in the theme.js file because it can create a quick flash (switch between light and dark).
 
-    const defaultTheme = '{{ site.Params.theme.default | default `system`}}'
-
     function setLightTheme() {
       document.documentElement.classList.remove("dark");
       document.documentElement.classList.add("light");
@@ -85,7 +83,7 @@
       document.documentElement.style.colorScheme = prefersColorScheme;
     }
 
-    switch ("color-theme" in localStorage ? localStorage.getItem("color-theme") : defaultTheme) {
+    switch ("color-theme" in localStorage ? localStorage.getItem("color-theme") : '{{ site.Params.theme.default | default `system`}}') {
       case "light":
         setLightTheme();
 
