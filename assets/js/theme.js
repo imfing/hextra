@@ -4,6 +4,37 @@
 
   const themeToggleButtons = document.querySelectorAll(".hextra-theme-toggle");
 
+  function detectPrefersColorScheme() {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+      return "light";
+    } else {
+      return "light";
+    }
+  }
+
+  function setDarkTheme() {
+    document.documentElement.classList.remove("light");
+    document.documentElement.classList.add("dark");
+    document.documentElement.style.colorScheme = "dark";
+  }
+
+  function setLightTheme() {
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
+    document.documentElement.style.colorScheme = "light";
+  }
+
+  function setSystemTheme() {
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.remove("light");
+
+    const prefersColorScheme = detectPrefersColorScheme();
+    document.documentElement.classList.add(prefersColorScheme);
+    document.documentElement.style.colorScheme = prefersColorScheme;
+  }
+
   function getRootClassTheme() {
     if (document.documentElement.classList.contains("light")) {
       return "light";
@@ -38,14 +69,17 @@
 
   switch (colorTheme) {
     case "light":
+      setLightTheme();
       themeToggleButtons.forEach((el) => el.dataset.theme = "light");
       localStorage.setItem("color-theme", "light");
       break;
     case "dark":
+      setDarkTheme();
       themeToggleButtons.forEach((el) => el.dataset.theme = "dark");
       localStorage.setItem("color-theme", "dark");
       break;
     default:
+      setSystemTheme();
       themeToggleButtons.forEach((el) => el.dataset.theme = "system");
       localStorage.setItem("color-theme", "system");
       break;
