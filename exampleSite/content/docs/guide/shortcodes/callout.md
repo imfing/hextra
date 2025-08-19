@@ -16,15 +16,55 @@ A built-in component to show important information to the reader.
 
 ## Examples
 
+{{< callout >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+{{< callout type="info" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+{{< callout type="warning" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+{{< callout type="error" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+{{< callout type="important" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
 ### Default
 
-{{< callout emoji="🌐">}}
+{{< callout >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+{{< callout icon="sparkles" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout icon="sparkles" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+{{< callout emoji="🌐" >}}
   A **callout** is a short piece of text intended to attract attention.
 {{< /callout >}}
 
 ```markdown
 {{</* callout emoji="🌐" */>}}
-    A **callout** is a short piece of text intended to attract attention.
+  A **callout** is a short piece of text intended to attract attention.
 {{</* /callout */>}}
 ```
 
@@ -36,6 +76,26 @@ A built-in component to show important information to the reader.
 
 ```markdown
 {{</* callout type="info" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+{{< callout type="info" icon="sparkles" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="info" icon="sparkles" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+{{< callout type="info" emoji="ℹ️" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="info" emoji="ℹ️" */>}}
   A **callout** is a short piece of text intended to attract attention.
 {{</* /callout */>}}
 ```
@@ -52,6 +112,26 @@ A built-in component to show important information to the reader.
 {{</* /callout */>}}
 ```
 
+{{< callout type="warning" icon="sparkles" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="warning" icon="sparkles" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+{{< callout type="warning" emoji="⚠️" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="warning" emoji="⚠️" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
 ### Error
 
 {{< callout type="error" >}}
@@ -64,10 +144,62 @@ A built-in component to show important information to the reader.
 {{</* /callout */>}}
 ```
 
+{{< callout type="error" icon="sparkles" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="error" icon="sparkles" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+{{< callout type="error" emoji="🚫" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="error" emoji="🚫" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+### Important
+
+{{< callout type="important" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="important" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+{{< callout type="important" icon="sparkles" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="important" icon="sparkles" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
+{{< callout type="important" emoji="🌐" >}}
+  A **callout** is a short piece of text intended to attract attention.
+{{< /callout >}}
+
+```markdown
+{{</* callout type="important" emoji="🌐" */>}}
+  A **callout** is a short piece of text intended to attract attention.
+{{</* /callout */>}}
+```
+
 ## Options
 
-| Parameter | Description                                                          |
-|-----------|----------------------------------------------------------------------|
-| `type`    | The type of callout. (default, `info`, `warning`, `error`)           |
-| `emoji`   | The emoji to show before the callout.                                |
-| `icon`    | The emoji of the callout (related to type or can be a custom emoji). |
+| Parameter | Description                                                             |
+|-----------|-------------------------------------------------------------------------|
+| `type`    | The type of callout. (default, `info`, `warning`, `error`, `important`) |
+| `emoji`   | The emoji to show before the callout.                                   |
+| `icon`    | The emoji of the callout (related to type or can be a custom emoji).    |
