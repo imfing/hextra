@@ -3,8 +3,11 @@
   languageSwitchers.forEach((switcher) => {
     switcher.addEventListener('click', (e) => {
       e.preventDefault();
+
       switcher.dataset.state = switcher.dataset.state === 'open' ? 'closed' : 'open';
+
       const optionsElement = switcher.nextElementSibling;
+
       optionsElement.classList.toggle('hx:hidden');
 
       // Calculate the position of a language options element.
