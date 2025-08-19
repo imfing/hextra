@@ -5,15 +5,6 @@
   const themeToggleButtons = document.querySelectorAll(".hextra-theme-toggle");
   const themeToggleOptions = document.querySelectorAll(".hextra-theme-toggle-options p");
 
-  function setSystemTheme() {
-    const prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-
-    document.documentElement.classList.remove("dark", "light");
-    document.documentElement.classList.add(prefersColorScheme);
-
-    document.documentElement.style.colorScheme = prefersColorScheme;
-  }
-
   function applyTheme(theme) {
     themeToggleButtons.forEach((btn) => btn.parentElement.dataset.theme = theme );
 
@@ -23,18 +14,12 @@
   function switchTheme(theme) {
      switch (theme) {
       case "light":
-        document.documentElement.classList.remove("dark");
-        document.documentElement.classList.add(theme);
-        document.documentElement.style.colorScheme = theme;
-
+        setLightTheme()
         applyTheme(theme);
 
         break;
       case "dark":
-        document.documentElement.classList.remove("light");
-        document.documentElement.classList.add(theme);
-        document.documentElement.style.colorScheme = theme;
-
+        setDarkTheme()
         applyTheme(theme);
 
         break;

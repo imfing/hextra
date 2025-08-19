@@ -59,6 +59,49 @@
     {{ partial "google-analytics.html" . -}}
   {{- end }}
 
+  <script>
+    // The section must not be in the theme.js file because it can create a quick flash (switch between light and dark).
+
+    const defaultTheme = '{{ site.Params.theme.default | default `system`}}'
+
+    function setLightTheme() {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      document.documentElement.style.colorScheme = "light";
+    }
+
+    function setDarkTheme() {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+      document.documentElement.style.colorScheme = "dark";
+    }
+
+    function setSystemTheme() {
+      const prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+      document.documentElement.classList.remove("dark", "light");
+      document.documentElement.classList.add(prefersColorScheme);
+
+      document.documentElement.style.colorScheme = prefersColorScheme;
+    }
+
+    switch ("color-theme" in localStorage ? localStorage.getItem("color-theme") : defaultTheme) {
+      case "light":
+        setLightTheme();
+
+        break;
+      case "dark":
+        setDarkTheme()
+
+        break;
+      default:
+        setSystemTheme();
+
+        break;
+    }
+
+  </script>
+
   <!-- Math engine -->
   {{ $noop := .WordCount -}}
   {{- $engine := site.Params.math.engine | default "katex" -}}
