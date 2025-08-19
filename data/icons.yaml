@@ -5,7 +5,7 @@
 # {{ partial "utils/icon.html" (dict "name" "github" "attributes" "height=24") }}
 
 contrast: >
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24"  fill="currentColor">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="currentColor">
     <path d="M 11.996094,2 C 6.4986225,2.0192368 2.03125,6.5024993 2.03125,12 c 0,5.497501 4.4673725,9.980763 9.964844,10 H 12 12.0039 c 5.497471,-0.01924 9.964844,-4.502499 9.964844,-10 0,-5.4975007 -4.467373,-9.9807632 -9.964844,-10 H 12 Z M 12,4 c 4.417218,0.017598 7.96875,3.5822356 7.96875,8 0,4.417764 -3.551532,7.982402 -7.96875,8 z" />
   </svg>
 

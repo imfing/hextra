@@ -24,6 +24,10 @@
     switch (theme) {
       case "light":
       case "dark":
+        if (document.documentElement.style.colorScheme === theme) {
+          break;
+        }
+
         document.documentElement.classList.replace(theme === "light" ? "dark" : "light", theme);
         document.documentElement.style.colorScheme = theme;
 
