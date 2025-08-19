@@ -62,41 +62,32 @@
   <script>
     // The section must not be in the theme.js file because it can create a quick flash (switch between light and dark).
 
-    function setLightTheme() {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-      document.documentElement.style.colorScheme = "light";
+    function setTheme(theme) {
+      switch (theme) {
+        case "light":
+          document.documentElement.classList.remove("dark");
+          document.documentElement.classList.add(theme);
+          document.documentElement.style.colorScheme = theme;
+
+          break;
+        case "dark":
+          document.documentElement.classList.remove("light");
+          document.documentElement.classList.add(theme);
+          document.documentElement.style.colorScheme = theme;
+
+          break;
+        default:
+          const prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+          document.documentElement.classList.remove("light", "dark");
+          document.documentElement.classList.add(prefersColorScheme);
+          document.documentElement.style.colorScheme = prefersColorScheme;
+
+          break;
+      }
     }
 
-    function setDarkTheme() {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-      document.documentElement.style.colorScheme = "dark";
-    }
-
-    function setSystemTheme() {
-      const prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-
-      document.documentElement.classList.remove("dark", "light");
-      document.documentElement.classList.add(prefersColorScheme);
-
-      document.documentElement.style.colorScheme = prefersColorScheme;
-    }
-
-    switch ("color-theme" in localStorage ? localStorage.getItem("color-theme") : '{{ site.Params.theme.default | default `system`}}') {
-      case "light":
-        setLightTheme();
-
-        break;
-      case "dark":
-        setDarkTheme()
-
-        break;
-      default:
-        setSystemTheme();
-
-        break;
-    }
+    setTheme("color-theme" in localStorage ? localStorage.getItem("color-theme") : '{{ site.Params.theme.default | default `system`}}')
 
   </script>
 

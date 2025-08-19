@@ -1,34 +1,22 @@
 // Light / Dark theme toggle
 (function () {
   const defaultTheme = '{{ site.Params.theme.default | default `system`}}'
+  const themes = ["light", "dark"];
 
   const themeToggleButtons = document.querySelectorAll(".hextra-theme-toggle");
   const themeToggleOptions = document.querySelectorAll(".hextra-theme-toggle-options p");
 
   function applyTheme(theme) {
+    theme = themes.includes(theme) ? theme : "system";
+
     themeToggleButtons.forEach((btn) => btn.parentElement.dataset.theme = theme );
 
     localStorage.setItem("color-theme", theme);
   }
 
   function switchTheme(theme) {
-     switch (theme) {
-      case "light":
-        setLightTheme()
-        applyTheme(theme);
-
-        break;
-      case "dark":
-        setDarkTheme()
-        applyTheme(theme);
-
-        break;
-      default:
-        setSystemTheme();
-        applyTheme("system");
-
-        break;
-    }
+    setTheme(theme);
+    applyTheme(theme);
   }
 
   const colorTheme = "color-theme" in localStorage ? localStorage.getItem("color-theme") : defaultTheme;
@@ -97,7 +85,7 @@
   // Listen for system theme changes
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
     if (localStorage.getItem("color-theme") === "system") {
-      setSystemTheme();
+      setTheme("system");
     }
   });
 })();
