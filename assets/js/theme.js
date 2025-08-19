@@ -5,91 +5,48 @@
   const themeToggleButtons = document.querySelectorAll(".hextra-theme-toggle");
   const themeToggleOptions = document.querySelectorAll(".hextra-theme-toggle-options p");
 
-  function detectPrefersColorScheme() {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
-    } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-      return "light";
-    } else {
-      return "light";
-    }
-  }
-
-  function setDarkTheme() {
-    document.documentElement.classList.remove("light");
-    document.documentElement.classList.add("dark");
-    document.documentElement.style.colorScheme = "dark";
-  }
-
-  function setLightTheme() {
-    document.documentElement.classList.remove("dark");
-    document.documentElement.classList.add("light");
-    document.documentElement.style.colorScheme = "light";
-  }
-
   function setSystemTheme() {
-    document.documentElement.classList.remove("dark");
-    document.documentElement.classList.remove("light");
+    const prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
-    const prefersColorScheme = detectPrefersColorScheme();
+    document.documentElement.classList.remove("dark", "light");
     document.documentElement.classList.add(prefersColorScheme);
+
     document.documentElement.style.colorScheme = prefersColorScheme;
   }
 
   function applyTheme(theme) {
-    themeToggleButtons.forEach((btn) => {
-      btn.dataset.theme = theme;
-      btn.nextElementSibling.dataset.theme = theme;
-    });
+    themeToggleButtons.forEach((btn) => btn.parentElement.dataset.theme = theme );
 
     localStorage.setItem("color-theme", theme);
   }
 
-  function switchToLightTheme() {
-    setLightTheme();
-    applyTheme("light");
-  }
+  function switchTheme(theme) {
+    switch (theme) {
+      case "light":
+      case "dark":
+        document.documentElement.classList.replace(theme === "light" ? "dark" : "light", theme);
+        document.documentElement.style.colorScheme = theme;
 
-  function switchToDarkTheme() {
-    setDarkTheme();
-    applyTheme("dark");
-  }
+        applyTheme(theme);
 
-  function switchToSystemTheme() {
-    setSystemTheme();
-    applyTheme("system");
+        break;
+      default:
+        setSystemTheme();
+        applyTheme("system");
+
+        break;
+    }
   }
 
   const colorTheme = "color-theme" in localStorage ? localStorage.getItem("color-theme") : defaultTheme;
-
-  switch (colorTheme) {
-    case "light":
-      switchToLightTheme();
-      break;
-    case "dark":
-      switchToDarkTheme("dark");
-      break;
-    default:
-      switchToSystemTheme();
-      break;
-  }
+  switchTheme(colorTheme);
 
   // Add click event handler to the menu items.
   themeToggleOptions.forEach((option) => {
     option.addEventListener("click", function (e) {
       e.preventDefault();
 
-      switch (option.dataset.item) {
-        case "light":
-          switchToLightTheme();
-          break;
-        case "dark":
-          switchToDarkTheme();
-          break;
-        case "system":
-          switchToSystemTheme();
-          break;
-      }
+      switchTheme(option.dataset.item);
     })
   })
 
@@ -110,13 +67,13 @@
 
       const isOnTop = toggler.dataset.location === 'top';
       const isOnBottom = toggler.dataset.location === 'bottom';
-      const isOnBottomLeft = toggler.dataset.location === 'bottom-left';
+      const isOnBottomRight = toggler.dataset.location === 'bottom-right';
       const isRTL = document.body.dir === 'rtl'
 
       // Stuck on the left side of the switcher.
       let translateX = switcherRect.left;
 
-      if (isOnTop && !isRTL || isOnBottom && isRTL || isOnBottomLeft && !isRTL) {
+      if (isOnTop && !isRTL || isOnBottom && isRTL || isOnBottomRight && !isRTL) {
         // Stuck on the right side of the switcher.
         translateX = switcherRect.right - optionsElement.clientWidth;
       }
@@ -139,14 +96,13 @@
     if (e.target.closest('.hextra-theme-toggle') === null) {
       themeToggleButtons.forEach((toggler) => {
         toggler.dataset.state = 'closed';
-        const optionsElement = toggler.nextElementSibling;
-        optionsElement.classList.add('hx:hidden');
+        toggler.nextElementSibling.classList.add('hx:hidden');
       });
     }
   });
 
   // Listen for system theme changes
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
     if (localStorage.getItem("color-theme") === "system") {
       setSystemTheme();
     }

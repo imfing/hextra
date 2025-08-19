@@ -8,13 +8,12 @@
 {{- $dark := (T "dark") | default "Dark" -}}
 {{- $system := (T "system") | default "System" -}}
 
-<div class="hx:flex hx:justify-items-start">
+<div class="hx:flex hx:justify-items-start hx:group" data-theme="light">
   <button
     title="{{ $changeTheme }}"
-    data-theme="light"
     data-state="closed"
     data-location="{{ $location }}"
-    class="hextra-theme-toggle hx:cursor-pointer hx:group hx:rounded-md hx:text-left hx:font-medium {{ $class }} hx:grow"
+    class="hextra-theme-toggle hx:cursor-pointer hx:rounded-md hx:text-left hx:font-medium {{ $class }} hx:grow"
     type="button"
     aria-label="{{ $changeTheme }}"
   >
@@ -28,7 +27,7 @@
     </div>
   </button>
   <ul
-    class="hextra-theme-toggle-options hx:group hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-md hx:ring-1 hx:ring-black/5 hx:bg-white hx:py-1 hx:text-sm hx:shadow-lg hx:dark:ring-white/20 hx:dark:bg-neutral-800"
+    class="hextra-theme-toggle-options hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-md hx:ring-1 hx:ring-black/5 hx:bg-white hx:py-1 hx:text-sm hx:shadow-lg hx:dark:ring-white/20 hx:dark:bg-neutral-800"
     style="position: fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
     data-theme="light"
   >
