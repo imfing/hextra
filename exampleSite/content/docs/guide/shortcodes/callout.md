@@ -198,8 +198,8 @@ A built-in component to show important information to the reader.
 
 ## Options
 
-| Parameter | Description                                                             |
-|-----------|-------------------------------------------------------------------------|
-| `type`    | The type of callout. (default, `info`, `warning`, `error`, `important`) |
-| `emoji`   | The emoji to show before the callout.                                   |
-| `icon`    | The emoji of the callout (related to type or can be a custom emoji).    |
+| Parameter | Description                                                                     |
+|-----------|---------------------------------------------------------------------------------|
+| `type`    | The type of callout. (default, `info`, `warning`, `error`, `important`)         |
+| `emoji`   | The emoji to show before the callout.                                           |
+| `icon`    | The icon to show before the callout. (related to type or can be a custom icon). |
