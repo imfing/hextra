@@ -1,8 +1,6 @@
 ---
 title: سایر شورتکدها
 linkTitle: سایر
-sidebar:
-  exclude: true
 next: /docs/guide/deploy-site
 ---
 

@@ -1,8 +1,6 @@
 ---
 title: Other Shortcodes
 linkTitle: Others
-sidebar:
-  exclude: true
 next: /docs/guide/deploy-site
 ---
 

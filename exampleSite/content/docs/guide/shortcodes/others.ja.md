@@ -1,8 +1,6 @@
 ---
 title: その他のショートコード
 linkTitle: その他
-sidebar:
-  exclude: true
 next: /docs/guide/deploy-site
 ---
 

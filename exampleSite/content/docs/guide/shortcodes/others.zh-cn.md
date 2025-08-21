@@ -1,8 +1,6 @@
 ---
 title: 其他短代码
 linkTitle: 其他
-sidebar:
-  exclude: true
 next: /docs/guide/deploy-site
 ---
 
