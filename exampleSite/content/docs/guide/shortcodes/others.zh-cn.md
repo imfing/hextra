@@ -6,7 +6,7 @@ sidebar:
 next: /docs/guide/deploy-site
 ---
 
-{{< callout emoji="ℹ️" >}}
+{{< callout type="warning" >}}
   其中部分为Hugo内置短代码。
   这些短代码稳定性较低，可能随时变更。
 {{< /callout >}}

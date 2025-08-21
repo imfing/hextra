@@ -78,7 +78,7 @@ weight: 2
 ---
 ```
 
-{{< callout emoji="ℹ️">}}
+{{< callout type="info" >}}
   It is recommended to keep the sidebar not too deep. If you have a lot of content, consider **splitting them into multiple sections**.
 {{< /callout >}}
 

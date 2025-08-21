@@ -25,7 +25,7 @@ title: 步骤
 
 ## 使用方法
 
-{{< callout emoji="ℹ️" >}}
+{{< callout type="warning" >}}
   请注意，此短代码**仅适用于Markdown内容**。
   如果在步骤内容中放入HTML或其他短代码，可能无法按预期渲染。
 {{< /callout >}}

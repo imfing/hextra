@@ -101,7 +101,7 @@ jobs:
 {{% /details %}}
 
 
-{{< callout >}}
+{{< callout type="warning" >}}
   リポジトリ設定で、**Pages** > **Build and deployment** > **Source** を **GitHub Actions** に設定してください:
   ![](https://user-images.githubusercontent.com/5097752/266784808-99676430-884e-42ab-b901-f6534a0d6eee.png)
 {{< /callout >}}

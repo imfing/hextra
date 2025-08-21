@@ -6,7 +6,7 @@ sidebar:
 next: /docs/guide/deploy-site
 ---
 
-{{< callout emoji="ℹ️" >}}
+{{< callout type="warning" >}}
   برخی از این‌ها شورتکدهای داخلی Hugo هستند.
   این شورتکدها کمتر پایدار در نظر گرفته می‌شوند و ممکن است هر زمان تغییر کنند.
 {{< /callout >}}

@@ -6,7 +6,7 @@ sidebar:
   exclude: true
 ---
 
-{{< callout >}}Experimental feature to include Jupyter Notebooks via a shortcode. Note that not all cell types are supported.{{< /callout >}}
+{{< callout type="warning" >}}Experimental feature to include Jupyter Notebooks via a shortcode. Note that not all cell types are supported.{{< /callout >}}
 
 [Jupyter Notebook](https://jupyter.org/) is a language-agnostic HTML notebook application for [Project Jupyter](https://jupyter.org/). It allows you to create and share documents that contain live code, equations, visualizations, and narrative text.
 

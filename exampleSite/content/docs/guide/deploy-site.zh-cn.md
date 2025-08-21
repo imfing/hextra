@@ -102,7 +102,7 @@ jobs:
 {{% /details %}}
 
 
-{{< callout >}}
+{{< callout type="warning" >}}
   在仓库设置中，将 **Pages** > **构建与部署** > **源** 设为 **GitHub Actions**：
   ![](https://user-images.githubusercontent.com/5097752/266784808-99676430-884e-42ab-b901-f6534a0d6eee.png)
 {{< /callout >}}
