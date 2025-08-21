@@ -37,15 +37,15 @@ linkTitle: Cards
 
 ## Card Parameters
 
-| Parameter  | Description                                                     |
-|------------|-----------------------------------------------------------------|
-| `link`     | URL (internal or external).                                     |
-| `title`    | Title heading for the card.                                     |
-| `subtitle` | Subtitle heading (supports Markdown).                           |
-| `icon`     | Name of the icon.                                               |
-| `tag`      | Text in tag.                                                    |
-| `tagType`  | Type of the tag: default (gray), `info`, `warning` and `error`. |
-  
+| Parameter  | Description                                                                          |
+|------------|--------------------------------------------------------------------------------------|
+| `link`     | URL (internal or external).                                                          |
+| `title`    | Title heading for the card.                                                          |
+| `subtitle` | Subtitle heading (supports Markdown).                                                |
+| `icon`     | Name of the icon. See [icons]({{% relRef "icon" %}}) for more information.           |
+| `tag`      | Text in tag.                                                                         |
+| `tagType`  | Type of the tag. See [badges]({{% relRef "others/#badges" %}}) for more information. |
+
 ## Image Card
 
 Additionally, the card supports adding image and processing through these parameters:

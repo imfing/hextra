@@ -13,37 +13,61 @@ next: /docs/guide/deploy-site
 
 ## Badge
 
+### Examples
+
+{{< badge "default" >}}&nbsp;
+{{< badge content="tip" type="tip" >}} &nbsp;
+{{< badge content="info" type="info" >}} &nbsp;
+{{< badge content="warning" type="warning" >}} &nbsp;
+{{< badge content="error" type="error" >}}&nbsp;
+{{< badge content="important" type="important" >}}&nbsp;
+{{< badge content="icon" icon="sparkles" >}}&nbsp;
+{{< badge content="link" link="https://github.com/imfing/hextra/releases" >}}&nbsp;
+
+{{< badge content="default" border=false >}} &nbsp;
+{{< badge content="tip" type="tip" border=false >}} &nbsp;
+{{< badge content="info" type="info" border=false >}} &nbsp;
+{{< badge content="warning" type="warning" border=false >}} &nbsp;
+{{< badge content="error" type="error" border=false >}}&nbsp;
+{{< badge content="important" type="important" border=false >}}&nbsp;
+{{< badge content="icon" icon="sparkles" border=false >}}&nbsp;
+{{< badge content="link" link="https://github.com/imfing/hextra/releases" border=false >}}&nbsp;
+
+### Usage
+
+#### Default
+
+{{< badge "Badge" >}}&nbsp;
+
 ```
 {{</* badge "Badge" */>}}
 ```
 
-Result:
+#### Variants
 
-{{< badge "Badge" >}}
-
-Variants:
+{{< badge content="Badge" type="tip" >}} &nbsp;
+{{< badge content="Badge" type="info" >}} &nbsp;
+{{< badge content="Badge" type="warning" >}} &nbsp;
+{{< badge content="Badge" type="error" >}} &nbsp;
+{{< badge content="Badge" type="important" >}}&nbsp;
+{{< badge content="Badge" border=false >}}&nbsp;
 
 ```
-{{</* badge content="info" type="info" */>}}
-{{</* badge content="warning" type="warning" */>}}
-{{</* badge content="error" type="error" */>}}
+{{</* badge content="Badge" type="tip" */>}}
+{{</* badge content="Badge" type="info" */>}}
+{{</* badge content="Badge" type="warning" */>}}
+{{</* badge content="Badge" type="error" */>}}
+{{</* badge content="Badge" type="important" */>}}
+{{</* badge content="Badge" border=false */>}}
 ```
 
-Result:
+#### Link and Icon
 
-{{< badge content="info" type="info" >}} &nbsp;
-{{< badge content="warning" type="warning" >}} &nbsp;
-{{< badge content="error" type="error" >}}
-
-With link and icon:
+{{< badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" >}}&nbsp;
 
 ```
 {{</* badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" */>}}
 ```
-
-Result:
-
-{{< badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" >}}
 
 ### Options
 
@@ -54,6 +78,7 @@ Result:
 | `icon`    | The icon of the badge.                                       |
 | `type`    | The type of the badge. (default, `info`, `warning`, `error`) |
 | `class`   | The class of the badge.                                      |
+| `border`  | Adds or removes the border (default: true).                  |
 
 ## YouTube
 
