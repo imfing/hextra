@@ -102,15 +102,6 @@ menu:
       name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
       parent: versions
-    - name: Theme Toggle
-      params:
-        type: theme-toggle
-      weight: 8
-    - name: Language Switcher
-      params:
-        type: language-switch
-        icon: "globe-alt"
-        weight: 9
 
   sidebar:
     - identifier: more
