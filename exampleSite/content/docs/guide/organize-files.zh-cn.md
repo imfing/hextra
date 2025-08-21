@@ -78,7 +78,7 @@ weight: 2
 ---
 ```
 
-{{< callout emoji="ℹ️">}}
+{{< callout type="info" >}}
   建议不要让侧边栏过深。如果有大量内容，可以考虑**将其拆分为多个部分**。
 {{< /callout >}}
 

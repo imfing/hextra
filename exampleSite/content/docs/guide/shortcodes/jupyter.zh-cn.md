@@ -6,7 +6,7 @@ sidebar:
   exclude: true
 ---
 
-{{< callout >}}实验性功能：通过短代码嵌入 Jupyter Notebook。注意并非所有单元格类型都受支持。{{< /callout >}}
+{{< callout type="warning" >}}实验性功能：通过短代码嵌入 Jupyter Notebook。注意并非所有单元格类型都受支持。{{< /callout >}}
 
 [Jupyter Notebook](https://jupyter.org/) 是 [Project Jupyter](https://jupyter.org/) 推出的语言无关的 HTML 笔记本应用。它允许你创建和分享包含动态代码、数学公式、可视化图表和叙述性文本的文档。
 

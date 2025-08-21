@@ -6,7 +6,7 @@ sidebar:
 next: /docs/guide/deploy-site
 ---
 
-{{< callout emoji="ℹ️" >}}
+{{< callout type="warning" >}}
   これらの一部は Hugo 組み込みのショートコードです。
   これらのショートコードは安定性が低く、いつでも変更される可能性があります。
 {{< /callout >}}

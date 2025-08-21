@@ -6,7 +6,7 @@ sidebar:
   exclude: true
 ---
 
-{{< callout >}}Jupyter Notebook をショートコード経由で組み込む実験的機能です。すべてのセルタイプがサポートされているわけではありません。{{< /callout >}}
+{{< callout type="warning" >}}Jupyter Notebook をショートコード経由で組み込む実験的機能です。すべてのセルタイプがサポートされているわけではありません。{{< /callout >}}
 
 [Jupyter Notebook](https://jupyter.org/) は [Project Jupyter](https://jupyter.org/) の言語非依存な HTML ノートブックアプリケーションです。ライブコード、数式、可視化、説明文を含むドキュメントを作成・共有できます。
 

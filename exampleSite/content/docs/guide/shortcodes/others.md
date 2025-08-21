@@ -6,7 +6,7 @@ sidebar:
 next: /docs/guide/deploy-site
 ---
 
-{{< callout emoji="ℹ️" >}}
+{{< callout type="warning" >}}
   Some of these are Hugo built-in shortcodes.
   These shortcodes are considered less stable and may be changed anytime.
 {{< /callout >}}
