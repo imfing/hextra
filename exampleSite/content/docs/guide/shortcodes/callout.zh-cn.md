@@ -16,22 +16,42 @@ prev: /docs/guide/shortcodes
 
 ## 示例
 
+{{< callout >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+{{< callout type="info" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+{{< callout type="warning" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+{{< callout type="error" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+{{< callout type="important" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
 ### 默认
 
-{{< callout emoji="🌐">}}
-  **标注** 是一小段旨在吸引注意力的文字。
+{{< callout >}}
+**标注** 是一小段旨在吸引注意力的文字。
 {{< /callout >}}
 
 ```markdown
-{{</* callout emoji="🌐" */>}}
-    **标注** 是一小段旨在吸引注意力的文字。
+{{</* callout */>}}
+  **标注** 是一小段旨在吸引注意力的文字。
 {{</* /callout */>}}
 ```
 
-### 信息
+### Info
 
 {{< callout type="info" >}}
-  **标注** 是一小段旨在吸引注意力的文字。
+**标注** 是一小段旨在吸引注意力的文字。
 {{< /callout >}}
 
 ```markdown
@@ -40,10 +60,10 @@ prev: /docs/guide/shortcodes
 {{</* /callout */>}}
 ```
 
-### 警告
+### Warning
 
 {{< callout type="warning" >}}
-  **标注** 是一小段旨在吸引注意力的文字。
+**标注** 是一小段旨在吸引注意力的文字。
 {{< /callout >}}
 
 ```markdown
@@ -52,14 +72,70 @@ prev: /docs/guide/shortcodes
 {{</* /callout */>}}
 ```
 
-### 错误
+### Error
 
 {{< callout type="error" >}}
-  **标注** 是一小段旨在吸引注意力的文字。
+**标注** 是一小段旨在吸引注意力的文字。
 {{< /callout >}}
 
 ```markdown
 {{</* callout type="error" */>}}
+  **标注** 是一小段旨在吸引注意力的文字。
+{{</* /callout */>}}
+```
+
+### Important
+
+{{< callout type="important" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+```markdown
+{{</* callout type="important" */>}} 
+  **标注** 是一小段旨在吸引注意力的文字。
+{{</* /callout */>}}
+```
+
+### 自定义图标
+
+{{< callout icon="sparkles" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+```markdown
+{{</* callout icon="sparkles" */>}}
+  **标注** 是一小段旨在吸引注意力的文字。
+{{</* /callout */>}}
+```
+
+{{< callout type="important" icon="sparkles" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+```markdown
+{{</* callout type="important" icon="sparkles" */>}}
+  **标注** 是一小段旨在吸引注意力的文字。
+{{</* /callout */>}}
+```
+
+### 表情符号
+
+{{< callout emoji="🌐" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+```markdown
+{{</* callout emoji="🌐" */>}}
+  **标注** 是一小段旨在吸引注意力的文字。
+{{</* /callout */>}}
+```
+
+{{< callout type="info" emoji="ℹ️" >}}
+**标注** 是一小段旨在吸引注意力的文字。
+{{< /callout >}}
+
+```markdown
+{{</* callout type="info" emoji="ℹ️" */>}}
   **标注** 是一小段旨在吸引注意力的文字。
 {{</* /callout */>}}
 ```
