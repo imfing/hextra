@@ -157,6 +157,21 @@ menu:
       weight: 3
 ```
 
+### Disabling
+
+Disabling the sidebar can be done using front matter:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+sidebar:
+  disableAll: true
+---
+```
+
+This will remove the main sidebar from the page, freeing up space for the main content of the page.
+
+
 ## Right Sidebar
 
 ### Table of Contents
