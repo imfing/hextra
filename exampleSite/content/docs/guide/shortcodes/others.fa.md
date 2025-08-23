@@ -1,8 +1,6 @@
 ---
 title: سایر شورتکدها
 linkTitle: سایر
-sidebar:
-  exclude: true
 next: /docs/guide/deploy-site
 ---
 
@@ -11,49 +9,90 @@ next: /docs/guide/deploy-site
   این شورتکدها کمتر پایدار در نظر گرفته می‌شوند و ممکن است هر زمان تغییر کنند.
 {{< /callout >}}
 
-## نشان
+### أمثلة
+
+{{< badge "default" >}}&nbsp;
+{{< badge content="border" border=false >}}&nbsp;
+{{< badge content="color" color="green" >}}&nbsp;
+{{< badge content="link" link="https://github.com/imfing/hextra/releases" >}}&nbsp;
+{{< badge content="icon" icon="sparkles" >}}&nbsp;
+
+### الاستخدام
+
+#### تقصير
+
+{{< badge "Badge" >}}&nbsp;
 
 ```
-{{</* badge "نشان" */>}}
+{{</* badge "Badge" */>}}
 ```
 
-نتیجه:
+#### الألوان
 
-{{< badge "نشان" >}}
-
-انواع مختلف:
-
-```
-{{</* badge content="اطلاعات" type="info" */>}}
-{{</* badge content="هشدار" type="warning" */>}}
-{{</* badge content="خطا" type="error" */>}}
-```
-
-نتیجه:
-
-{{< badge content="اطلاعات" type="info" >}} &nbsp;
-{{< badge content="هشدار" type="warning" >}} &nbsp;
-{{< badge content="خطا" type="error" >}}
-
-با لینک و آیکون:
+{{< badge content="Badge" >}}&nbsp;
+{{< badge content="Badge" color="purple" >}}&nbsp;
+{{< badge content="Badge" color="indigo" >}}&nbsp;
+{{< badge content="Badge" color="blue" >}} &nbsp;
+{{< badge content="Badge" color="green" >}} &nbsp;
+{{< badge content="Badge" color="yellow" >}} &nbsp;
+{{< badge content="Badge" color="amber" >}} &nbsp;
+{{< badge content="Badge" color="orange" >}} &nbsp;
+{{< badge content="Badge" color="red" >}}&nbsp;
 
 ```
-{{</* badge content="انتشارها" link="https://github.com/imfing/hextra/releases" icon="github" */>}}
+{{</* badge content="Badge" */>}}
+{{</* badge content="Badge" color="purple" */>}}
+{{</* badge content="Badge" color="indigo" */>}}
+{{</* badge content="Badge" color="blue" */>}}
+{{</* badge content="Badge" color="green" */>}}
+{{</* badge content="Badge" color="yellow" */>}}
+{{</* badge content="Badge" color="amber" */>}}
+{{</* badge content="Badge" color="orange" */>}}
+{{</* badge content="Badge" color="red" */>}}
 ```
 
-نتیجه:
+{{< badge content="Badge" border=false >}} &nbsp;
+{{< badge content="Badge" color="purple" border=false >}} &nbsp;
+{{< badge content="Badge" color="indigo" border=false >}} &nbsp;
+{{< badge content="Badge" color="blue" border=false >}} &nbsp;
+{{< badge content="Badge" color="green" border=false >}} &nbsp;
+{{< badge content="Badge" color="yellow" border=false >}} &nbsp;
+{{< badge content="Badge" color="amber" border=false >}} &nbsp;
+{{< badge content="Badge" color="orange" border=false >}}&nbsp;
+{{< badge content="Badge" color="red" border=false >}}&nbsp;
 
-{{< badge content="انتشارها" link="https://github.com/imfing/hextra/releases" icon="github" >}}
+```
+{{</* badge content="Badge" border=false */>}}
+{{</* badge content="Badge" color="purple" border=false */>}}
+{{</* badge content="Badge" color="indigo" border=false */>}}
+{{</* badge content="Badge" color="blue" border=false */>}}
+{{</* badge content="Badge" color="green" border=false */>}}
+{{</* badge content="Badge" color="yellow" border=false */>}}
+{{</* badge content="Badge" color="amber" border=false */>}}
+{{</* badge content="Badge" color="orange" border=false */>}}
+{{</* badge content="Badge" color="red" border=false */>}}
+```
+
+#### المتغيرات
+
+{{< badge content="Badge" icon="sparkles" >}}&nbsp;
+{{< badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" >}}&nbsp;
+
+```
+{{</* badge content="Badge" icon="sparkles" */>}}
+{{</* badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" */>}}
+```
 
 ### خيارات
 
-| المعلمة   | وصف                                               |
-|-----------|---------------------------------------------------|
-| `content` | نص الشارة.                                        |
-| `link`    | رابط الشارة.                                      |
-| `icon`    | رمز الشارة.                                       |
-| `type`    | نوع الشارة. (افتراضي، `info`، `warning`، `error`) |
-| `class`   | فئة الشارة.                                       |
+| المعلمة   | وصف                                                                                                       |
+|-----------|-----------------------------------------------------------------------------------------------------------|
+| `content` | نص الشارة.                                                                                                |
+| `link`    | رابط الشارة.                                                                                              |
+| `icon`    | رمز الشارة.                                                                                               |
+| `color`   | `gray` (تقصير), `purple`, `indigo`, `blue`, `green`, `yellow`, `amber`, `orange`, `red`.<br/> لون الشارة. |
+| `class`   | فئة الشارة.                                                                                               |
+| `border`  | إضافة أو إزالة الحدود (افتراضي: true                                                                      |
 
 ## یوتیوب
 

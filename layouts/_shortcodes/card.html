@@ -6,7 +6,7 @@ A shortcode to create a card.
 @param {string} icon The icon of the card.
 @param {string} subtitle The subtitle of the card.
 @param {string} tag The tag of the card.
-@param {string} tagType The type of the tag.
+@param {string} tagColor The color of the tag.
 @param {string} image The image of the card.
 @param {string} method The method to process the image.
 @param {string} options The options to process the image.
@@ -24,7 +24,7 @@ A shortcode to create a card.
 {{- $height := 0 -}}
 {{- $imageStyle := .Get "imageStyle" -}}
 {{- $tag := .Get "tag" -}}
-{{- $tagType := .Get "tagType" -}}
+{{- $tagColor := .Get "tagColor" | default (.Get "tagType") | default "" -}}{{- /* Compatibility with previous parameter. */ -}}
 
 {{/* Image processing options */}}
 {{- $method := .Get "method" | default "Resize" | humanize -}}
@@ -60,6 +60,6 @@ A shortcode to create a card.
   "height"      $height
   "imageStyle"  $imageStyle
   "tag"         $tag
-  "tagType"     $tagType
+  "tagType"     $tagColor
   )
 -}}

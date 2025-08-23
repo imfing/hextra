@@ -1,8 +1,6 @@
 ---
 title: その他のショートコード
 linkTitle: その他
-sidebar:
-  exclude: true
 next: /docs/guide/deploy-site
 ---
 
@@ -11,49 +9,90 @@ next: /docs/guide/deploy-site
   これらのショートコードは安定性が低く、いつでも変更される可能性があります。
 {{< /callout >}}
 
-## バッジ
+### 例
+
+{{< badge "default" >}}&nbsp;
+{{< badge content="border" border=false >}}&nbsp;
+{{< badge content="color" color="green" >}}&nbsp;
+{{< badge content="link" link="https://github.com/imfing/hextra/releases" >}}&nbsp;
+{{< badge content="icon" icon="sparkles" >}}&nbsp;
+
+### 使用法
+
+#### デフォルト
+
+{{< badge "Badge" >}}&nbsp;
 
 ```
 {{</* badge "Badge" */>}}
 ```
 
-結果:
+#### 色
 
-{{< badge "Badge" >}}
-
-バリエーション:
-
-```
-{{</* badge content="info" type="info" */>}}
-{{</* badge content="warning" type="warning" */>}}
-{{</* badge content="error" type="error" */>}}
-```
-
-結果:
-
-{{< badge content="info" type="info" >}} &nbsp;
-{{< badge content="warning" type="warning" >}} &nbsp;
-{{< badge content="error" type="error" >}}
-
-リンクとアイコン付き:
+{{< badge content="Badge" >}}&nbsp;
+{{< badge content="Badge" color="purple" >}}&nbsp;
+{{< badge content="Badge" color="indigo" >}}&nbsp;
+{{< badge content="Badge" color="blue" >}} &nbsp;
+{{< badge content="Badge" color="green" >}} &nbsp;
+{{< badge content="Badge" color="yellow" >}} &nbsp;
+{{< badge content="Badge" color="amber" >}} &nbsp;
+{{< badge content="Badge" color="orange" >}} &nbsp;
+{{< badge content="Badge" color="red" >}}&nbsp;
 
 ```
+{{</* badge content="Badge" */>}}
+{{</* badge content="Badge" color="purple" */>}}
+{{</* badge content="Badge" color="indigo" */>}}
+{{</* badge content="Badge" color="blue" */>}}
+{{</* badge content="Badge" color="green" */>}}
+{{</* badge content="Badge" color="yellow" */>}}
+{{</* badge content="Badge" color="amber" */>}}
+{{</* badge content="Badge" color="orange" */>}}
+{{</* badge content="Badge" color="red" */>}}
+```
+
+{{< badge content="Badge" border=false >}} &nbsp;
+{{< badge content="Badge" color="purple" border=false >}} &nbsp;
+{{< badge content="Badge" color="indigo" border=false >}} &nbsp;
+{{< badge content="Badge" color="blue" border=false >}} &nbsp;
+{{< badge content="Badge" color="green" border=false >}} &nbsp;
+{{< badge content="Badge" color="yellow" border=false >}} &nbsp;
+{{< badge content="Badge" color="amber" border=false >}} &nbsp;
+{{< badge content="Badge" color="orange" border=false >}}&nbsp;
+{{< badge content="Badge" color="red" border=false >}}&nbsp;
+
+```
+{{</* badge content="Badge" border=false */>}}
+{{</* badge content="Badge" color="purple" border=false */>}}
+{{</* badge content="Badge" color="indigo" border=false */>}}
+{{</* badge content="Badge" color="blue" border=false */>}}
+{{</* badge content="Badge" color="green" border=false */>}}
+{{</* badge content="Badge" color="yellow" border=false */>}}
+{{</* badge content="Badge" color="amber" border=false */>}}
+{{</* badge content="Badge" color="orange" border=false */>}}
+{{</* badge content="Badge" color="red" border=false */>}}
+```
+
+#### 変種
+
+{{< badge content="Badge" icon="sparkles" >}}&nbsp;
+{{< badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" >}}&nbsp;
+
+```
+{{</* badge content="Badge" icon="sparkles" */>}}
 {{</* badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" */>}}
 ```
 
-結果:
-
-{{< badge content="Releases" link="https://github.com/imfing/hextra/releases" icon="github" >}}
-
 ### オプション
 
-| パラメータ     | 説明                                      |
-|-----------|-----------------------------------------|
-| `content` | バッジのテキスト。                               |
-| `link`    | バッジのリンク。                                |
-| `icon`    | バッジのアイコン。                               |
-| `type`    | バッジの種類。(デフォルト、`info`、`warning`、`error`) |
-| `class`   | バッジのクラス。                                |
+| パラメータ     | 説明                                                                                                                       |
+|-----------|--------------------------------------------------------------------------------------------------------------------------|
+| `content` | バッジのテキスト。                                                                                                                |
+| `link`    | バッジのリンク。                                                                                                                 |
+| `icon`    | バッジのアイコン。                                                                                                                |
+| `color`   | The color of the badge. <br/> `gray` (default), `purple`, `indigo`, `blue`, `green`, `yellow`, `amber`, `orange`, `red`. |
+| `class`   | バッジのクラス。                                                                                                                 |
+| `border`  | 境界線を追加または削除します (デフォルト: true)。                                                                                            |
 
 ## YouTube
 
