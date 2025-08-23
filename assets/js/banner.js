@@ -1,6 +1,9 @@
 // {{- if site.Params.banner }}
 (function () {
-  const closeBtn = document.querySelector(".hextra-banner .hextra-banner-close-button");
+  const banner = document.querySelector(".hextra-banner")
+  document.documentElement.style.setProperty("--hextra-banner-height", banner.clientHeight+"px");
+
+  const closeBtn = banner.querySelector(".hextra-banner-close-button");
 
   closeBtn.addEventListener("click", () => {
     document.documentElement.classList.add("hextra-banner-hidden");
