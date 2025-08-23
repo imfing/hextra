@@ -1,0 +1,44 @@
+{{- /* 获取参数 */ -}}
+{{- $castFile := .Get "file" | default (.Get 0) -}}
+{{- if not (hasPrefix $castFile "/") -}}
+  {{- $castFile = printf "/casts/%s" $castFile -}}
+{{- end -}}
+{{- $theme := .Get "theme" | default "asciinema" -}}
+{{- $speed := .Get "speed" | default 1 -}}
+{{- $autoplay := .Get "autoplay" | default false -}}
+{{- $loop := .Get "loop" | default false -}}
+{{- $poster := .Get "poster" | default "" -}}
+{{- $markers := .Get "markers" | default "" -}}
+
+{{- /* 构建marker配置 */ -}}
+{{- $markerConfig := "" -}}
+{{- if $markers -}}
+  {{- $markerParts := slice -}}
+  {{- range (split $markers ",") -}}
+    {{- $item := trim . " " -}}
+    {{- $colonIndex := findRE ":" $item -}}
+    {{- if $colonIndex -}}
+      {{- /* 带标签的marker */ -}}
+      {{- $pair := split $item ":" -}}
+      {{- if ge (len $pair) 2 -}}
+        {{- $time := printf "%.1f" (float (trim (index $pair 0) " ")) -}}
+        {{- $label := trim (index $pair 1) " " -}}
+        {{- $markerParts = $markerParts | append (printf "[%s,\"%s\"]" $time $label) -}}
+      {{- end -}}
+    {{- else -}}
+      {{- /* 普通marker */ -}}
+      {{- $markerParts = $markerParts | append (printf "%.1f" (float $item)) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $markerConfig = printf "[%s]" (delimit $markerParts ",") -}}
+{{- end -}}
+
+<div class="asciinema-player" 
+     data-cast-file="{{ $castFile }}"
+     data-theme="{{ $theme }}"
+     data-speed="{{ $speed }}"
+     data-autoplay="{{ $autoplay }}"
+     data-loop="{{ $loop }}"
+     {{- if ne $poster "" -}}data-poster="{{ $poster | safeURL }}"{{- end -}}
+     {{- if $markerConfig -}}data-markers="{{ $markerConfig | safeJS }}"{{- end -}}>
+</div>
