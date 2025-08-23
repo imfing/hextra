@@ -1,8 +1,8 @@
-.hextra-top-banner-hidden .hextra-top-banner {
+.hextra-banner-hidden .hextra-banner {
   display: none;
 }
 
-.hextra-top-banner {
+.hextra-banner {
   :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx:underline hx:decoration-from-font;
   }
