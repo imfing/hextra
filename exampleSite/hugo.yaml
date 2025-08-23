@@ -121,6 +121,9 @@ menu:
 params:
   description: Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.
 
+  banner:
+    key: 'announcement-v0_10'
+
   navbar:
     displayTitle: true
     displayLogo: true
