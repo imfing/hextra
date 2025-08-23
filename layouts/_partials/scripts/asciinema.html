@@ -24,7 +24,7 @@
 
 {{- /* Set default CDN base if needed */ -}}
 {{- if $useDefaultCdn -}}
-  {{- $asciinemaBase = "https://cdn.jsdelivr.net/npm/asciinema-player@latest/dist" -}}
+  {{- $asciinemaBase = "https://cdn.jsdelivr.net/npm/asciinema-player@latest/dist/bundle" -}}
 {{- end -}}
 
 {{- $isRemoteBase := or (strings.HasPrefix $asciinemaBase "http://") (strings.HasPrefix $asciinemaBase "https://") -}}
@@ -32,13 +32,13 @@
 
 {{- /* CSS retrieval: get raw CSS from either local asset or remote, then process */ -}}
 {{- if $isRemoteBase -}}
-  {{- $cssPath := cond (ne $asciinemaCssAsset "") $asciinemaCssAsset (printf "asciinema-player%s.css" $minSuffix) -}}
+  {{- $cssPath := cond (ne $asciinemaCssAsset "") $asciinemaCssAsset "asciinema-player.css" -}}
   {{- $asciinemaCssUrl := printf "%s/%s" $asciinemaBase $cssPath -}}
   {{- with try (resources.GetRemote $asciinemaCssUrl) -}}
     {{- with .Err -}}
       {{- errorf "Could not retrieve Asciinema css file from %s. Reason: %s." $asciinemaCssUrl . -}}
     {{- else with .Value -}}
-      {{- with resources.Copy (printf "css/asciinema-player%s.css" $minSuffix) . -}}
+      {{- with resources.Copy "css/asciinema-player.css" . -}}
         {{- $asciinemaCss := . | fingerprint -}}
         <link rel="stylesheet" href="{{ $asciinemaCss.RelPermalink }}" integrity="{{ $asciinemaCss.Data.Integrity }}" crossorigin="anonymous" />
       {{- end -}}
