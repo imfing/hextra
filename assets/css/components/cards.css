@@ -35,7 +35,12 @@
 
 .hextra-card-tag {
   position: absolute;
-  top: 5px;
-  right: 5px;
   z-index: 10;
+  top: 5px;
+  &:where(:dir(ltr)) {
+    right: 5px;
+  }
+  &:where(:dir(rtl)) {
+    left: 5px;
+  }
 }
