@@ -32,6 +32,16 @@
   {{- $customCss := resources.Get "css/custom.css" -}}
   {{- $variablesCss := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" . -}}
 
+  {{/* load asciinema player resource */}}
+  {{ $asciinemaCSS := resources.Get "css/asciinema-player.css" }}
+  {{ $asciinemaJS := resources.Get "js/asciinema-player.min.js" }}
+  {{ $asciinemaInitJS := resources.Get "js/asciinema-init.js" }}
+
+  {{ if $asciinemaCSS }}<link rel="stylesheet" href="{{ $asciinemaCSS.RelPermalink }}" />{{ end }}
+  {{ if $asciinemaJS }}<script src="{{ $asciinemaJS.RelPermalink }}"></script>{{ end }}
+  {{ if $asciinemaInitJS }}<script src="{{ $asciinemaInitJS.RelPermalink }}"></script>{{ end }}
+
+
   {{- /* Production build */ -}}
   {{- if hugo.IsProduction }}
     {{- $styles := slice $variablesCss $mainCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
