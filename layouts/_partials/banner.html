@@ -1,0 +1,16 @@
+{{- if site.Params.banner }}
+<div class="hextra-top-banner hx:bg-primary-800 hx:text-white hx:text-center hx:py-2 ">
+  <div class="hx:relative hx:flex hx:items-center hx:justify-center hx:py-1">
+    {{- with partial "custom/banner.html" . -}}
+      {{- . -}}
+    {{- else -}}
+      <div style="white-space: pre-wrap">
+        {{- site.Params.banner.message | default "🎉 Welcome! This is a banner message." | .RenderString -}}
+      </div>
+    {{- end -}}
+    <button class="hextra-close-banner hx:absolute hx:right-4 hx:text-white hx:text-xl hx:font-bold hx:leading-none hx:hover:opacity-75 hx:transition">
+      ✕
+    </button>
+  </div>
+</div>
+{{- end -}}

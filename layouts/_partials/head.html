@@ -77,6 +77,16 @@
 
   </script>
 
+  {{- with site.Params.banner }}
+  <script>
+    // The section must not be in the banner.js file because it can create a quick flash.
+
+    if (localStorage.getItem('{{ .key | default `banner-closed` }}')) {
+      document.documentElement.classList.add("hextra-top-banner-hidden");
+    }
+  </script>
+  {{- end -}}
+
   <!-- Math engine -->
   {{ $noop := .WordCount -}}
   {{- $engine := site.Params.math.engine | default "katex" -}}
