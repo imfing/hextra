@@ -33,6 +33,9 @@
   {{- $markerConfig = printf "[%s]" (delimit $markerParts ",") -}}
 {{- end -}}
 
+{{- /* 标记页面使用了 asciinema */ -}}
+{{- .Page.Store.Set "hasAsciinema" true -}}
+
 <div class="asciinema-player" 
      data-cast-file="{{ $castFile }}"
      data-theme="{{ $theme }}"
