@@ -17,11 +17,11 @@ asciinema shortcode 允许你在 Hugo 站点中嵌入使用 [asciinema](https://
 你也可以使用来自任何 URL 的远程 cast 文件：
 
 ```markdown
-{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" */>}}
+{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" */>}}
 {{</* asciinema file="https://example.com/demo.cast" */>}}
 ```
 
-{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" >}}
+{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
 
 {{< asciinema file="demo.cast" >}}
 

@@ -17,11 +17,11 @@ shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ت
 همچنین می‌توانید از فایل‌های cast راه دور از هر URL استفاده کنید:
 
 ```markdown
-{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" */>}}
+{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" */>}}
 {{</* asciinema file="https://example.com/demo.cast" */>}}
 ```
 
-{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" >}}
+{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
 
 {{< asciinema file="demo.cast" >}}
 

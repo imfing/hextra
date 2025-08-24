@@ -17,11 +17,11 @@ asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で
 任意の URL からのリモート cast ファイルも使用できます：
 
 ```markdown
-{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" */>}}
+{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" */>}}
 {{</* asciinema file="https://example.com/demo.cast" */>}}
 ```
 
-{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" >}}
+{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
 
 {{< asciinema file="demo.cast" >}}
 

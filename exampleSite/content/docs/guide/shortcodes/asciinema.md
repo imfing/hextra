@@ -19,11 +19,11 @@ You can use local `.cast` files or remote URLs. For local files, place them in t
 You can also use remote cast files from any URL:
 
 ```markdown
-{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" */>}}
+{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" */>}}
 {{</* asciinema file="https://example.com/demo.cast" */>}}
 ```
 
-{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" >}}
+{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
 
 {{< asciinema file="demo.cast" >}}
 
