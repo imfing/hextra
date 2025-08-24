@@ -1,4 +1,4 @@
-{{- /* 获取参数 */ -}}
+{{- /* Get parameters */ -}}
 {{- $castFile := .Get "file" | default (.Get 0) -}}
 {{- if not (hasPrefix $castFile "/") -}}
   {{- $castFile = printf "/casts/%s" $castFile -}}
@@ -10,7 +10,7 @@
 {{- $poster := .Get "poster" | default "" -}}
 {{- $markers := .Get "markers" | default "" -}}
 
-{{- /* 构建marker配置 */ -}}
+{{- /* Build marker configuration */ -}}
 {{- $markerConfig := "" -}}
 {{- if $markers -}}
   {{- $markerParts := slice -}}
@@ -18,7 +18,7 @@
     {{- $item := trim . " " -}}
     {{- $colonIndex := findRE ":" $item -}}
     {{- if $colonIndex -}}
-      {{- /* 带标签的marker */ -}}
+      {{- /* Marker with label */ -}}
       {{- $pair := split $item ":" -}}
       {{- if ge (len $pair) 2 -}}
         {{- $time := printf "%.1f" (float (trim (index $pair 0) " ")) -}}
@@ -26,14 +26,14 @@
         {{- $markerParts = $markerParts | append (printf "[%s,\"%s\"]" $time $label) -}}
       {{- end -}}
     {{- else -}}
-      {{- /* 普通marker */ -}}
+      {{- /* Simple marker */ -}}
       {{- $markerParts = $markerParts | append (printf "%.1f" (float $item)) -}}
     {{- end -}}
   {{- end -}}
   {{- $markerConfig = printf "[%s]" (delimit $markerParts ",") -}}
 {{- end -}}
 
-{{- /* 标记页面使用了 asciinema */ -}}
+{{- /* Mark page as using asciinema */ -}}
 {{- .Page.Store.Set "hasAsciinema" true -}}
 
 <div class="asciinema-player" 

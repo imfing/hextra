@@ -18,7 +18,6 @@ Explore the following sections to learn how to use Hextra:
   {{< card link="syntax-highlighting" title="Syntax Highlighting" icon="sparkles" >}}
   {{< card link="latex" title="LaTeX" icon="variable" >}}
   {{< card link="diagrams" title="Diagrams" icon="chart-square-bar" >}}
-  {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
   {{< card link="shortcodes" title="Shortcodes" icon="template" >}}
   {{< card link="deploy-site" title="Deploy Site" icon="server" >}}
 {{< /cards >}}
