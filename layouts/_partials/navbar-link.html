@@ -18,8 +18,8 @@
     aria-label="{{ or (T $item.Identifier) $item.Name | safeHTML }}"
   >
     {{- if $icon -}}
-    <span class="hx:float-left">
-      {{- partial "utils/icon" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block  hx:mb-1 "`) -}}
+    <span class="hx:inline-flex hx:items-center">
+      {{- partial "utils/icon" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block"`) -}}
     </span>
     {{- end -}}
     <span class="hx:text-center">
@@ -43,11 +43,11 @@
       <a
         href="{{ $link }}"
         {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
-        class="hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9"
+        class="hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:flex hx:items-center hx:gap-1"
       >
         {{- if and (eq .Params.type "link") .Params.icon -}}
-        <span  class="hx:float-left">
-          {{- partial "utils/icon" (dict "name" .Params.icon "attributes" `height="1em" class="hx:inline-block hx:mb-1 hx:mr-1"`) -}}
+        <span class="hx:inline-flex hx:items-center">
+          {{- partial "utils/icon" (dict "name" .Params.icon "attributes" `height="1em" class="hx:inline-block"`) -}}
         </span>
         {{- end -}}
         {{- or (T .Identifier) .Name | safeHTML -}}
@@ -62,11 +62,11 @@
   title="{{ or (T .Identifier) .Name | safeHTML }}"
   href="{{ $link }}"
   {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
-  class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-block {{ $activeClass }}"
+  class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 {{ $activeClass }}"
 >
   {{- if $icon -}}
-  <span>
-    {{- partial "utils/icon" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block hx:mb-1 hx:mr-1"`) -}}
+  <span class="hx:inline-flex hx:items-center">
+    {{- partial "utils/icon" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block"`) -}}
   </span>
   {{- end -}}
   <span class="hx:text-center">
