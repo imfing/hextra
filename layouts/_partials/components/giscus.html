@@ -1,4 +1,8 @@
-{{- $lang := site.Language.LanguageCode | default `en` -}}
+{{- $lang := site.Language.Lang | default `en` -}}
+{{- if hasPrefix $lang "zh" -}}
+  {{- /* See: https://github.com/giscus/giscus/tree/main/locales */}}
+  {{- $lang = site.Language.LanguageCode | default `zh-CN` -}}
+{{- end -}}
 
 {{- with site.Params.comments.giscus -}}
 <script>
