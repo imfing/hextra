@@ -58,20 +58,27 @@ There are different types of menu items:
      params:
        type: search
    ```
-4. Icon
+4. Icon Only
    ```yaml
    - name: GitHub
      params:
        icon: github
    ```
-5. Theme Toggle
+5. Link with Icon
+   ```yaml
+   - name: Blog
+     params:
+       type: link
+       icon: rss
+   ```
+6. Theme Toggle
    ```yaml
     - name: Theme Toggle
       params:
         type: theme-toggle
         label: true # optional, default is false
    ```
-6. Language Switcher
+7. Language Switcher
    ```yaml
     - name: Language Switcher
       params:
