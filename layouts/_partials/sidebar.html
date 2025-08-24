@@ -3,20 +3,16 @@
 {{- $disableSidebar := .disableSidebar | default false -}}
 {{- $displayPlaceholder := .displayPlaceholder | default false -}}
 
-{{- $disableAll := .context.Params.sidebar.disableAll | default false -}}
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
 {{- $pageURL := $context.RelPermalink -}}
 
-{{/* EXPERIMENTAL */}}
 {{- if .context.Params.sidebar.hide -}}
   {{- $disableSidebar = true -}}
-  {{- $displayPlaceholder = true -}}
+  {{- $displayPlaceholder = false -}}
 {{- end -}}
 
 {{- $sidebarClass := "hx:md:sticky" -}}
-{{- if $disableAll -}}
-  {{- $sidebarClass = "hx:hidden" -}}
-{{- else if $disableSidebar -}}
+{{- if $disableSidebar -}}
   {{- if $displayPlaceholder -}}
     {{- $sidebarClass = "hx:md:hidden hx:xl:block" -}}
   {{- else -}}

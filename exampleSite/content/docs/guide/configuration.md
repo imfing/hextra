@@ -165,7 +165,7 @@ Disabling the sidebar can be done using front matter:
 ---
 title: Configuration
 sidebar:
-  disableAll: true
+  hide: true
 ---
 ```
 
