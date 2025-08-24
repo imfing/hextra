@@ -14,6 +14,8 @@ You can use local `.cast` files or remote URLs. For local files, place them in t
 {{</* asciinema file="demo.cast" */>}}
 ```
 
+{{< asciinema file="demo.cast" >}}
+
 ### Remote Files
 
 You can also use remote cast files from any URL:
@@ -24,8 +26,6 @@ You can also use remote cast files from any URL:
 ```
 
 {{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
-
-{{< asciinema file="demo.cast" >}}
 
 ## Advanced Demo
 

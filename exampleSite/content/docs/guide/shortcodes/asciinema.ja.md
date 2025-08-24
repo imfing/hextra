@@ -12,6 +12,8 @@ asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で
 {{</* asciinema file="demo.cast" */>}}
 ```
 
+{{< asciinema file="demo.cast" >}}
+
 ### リモートファイル
 
 任意の URL からのリモート cast ファイルも使用できます：
@@ -22,8 +24,6 @@ asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で
 ```
 
 {{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
-
-{{< asciinema file="demo.cast" >}}
 
 ## 高度なデモ
 

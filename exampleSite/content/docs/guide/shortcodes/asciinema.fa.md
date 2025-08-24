@@ -12,6 +12,8 @@ shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ت
 {{</* asciinema file="demo.cast" */>}}
 ```
 
+{{< asciinema file="demo.cast" >}}
+
 ### فایل‌های راه دور
 
 همچنین می‌توانید از فایل‌های cast راه دور از هر URL استفاده کنید:
@@ -23,7 +25,6 @@ shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ت
 
 {{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
 
-{{< asciinema file="demo.cast" >}}
 
 ## نمایش پیشرفته
 

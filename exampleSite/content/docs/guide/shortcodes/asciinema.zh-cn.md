@@ -12,6 +12,8 @@ asciinema shortcode 允许你在 Hugo 站点中嵌入使用 [asciinema](https://
 {{</* asciinema file="demo.cast" */>}}
 ```
 
+{{< asciinema file="demo.cast" >}}
+
 ### 远程文件
 
 你也可以使用来自任何 URL 的远程 cast 文件：
@@ -22,8 +24,6 @@ asciinema shortcode 允许你在 Hugo 站点中嵌入使用 [asciinema](https://
 ```
 
 {{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
-
-{{< asciinema file="demo.cast" >}}
 
 ## 高级演示
 
