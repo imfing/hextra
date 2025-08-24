@@ -483,6 +483,7 @@
       "hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]",
       "hx:md:hidden",
       "hx:md:inline-block",
+      "hx:md:inline-flex",
       "hx:md:justify-start",
       "hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)]",
       "hx:md:mr-0",
