@@ -442,3 +442,12 @@ The field `message` supports Markdown syntax.
 
 If you want to use template syntax, you can define the partial in `layouts/_partials/custom/banner.html`.
 In this case, the field `message` will be ignored.
+
+### External Link Decoration
+
+Adds an arrow icon to external links (default: false) when rendering links from Markdown.
+
+```yaml
+params:
+  externalLinkDecoration: true
+```

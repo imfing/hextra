@@ -10,7 +10,16 @@
     {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
   {{- end -}}
 {{- end -}}
-    
+
 {{- with . -}}
-  <a href="{{ $dest | safeURL }}" {{ with .Title }}title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }}target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- $isExternal := strings.HasPrefix .Destination "http" -}}
+<a href="{{ $dest | safeURL }}"
+   {{- with .Title -}}title="{{ . }}"{{- end -}}
+   {{- if $isExternal -}}target="_blank" rel="noopener"{{- end -}}
+>
+  {{- .Text | safeHTML -}}
+  {{- if and .Page.Site.Params.externalLinkDecoration $isExternal -}}
+    {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em"`) -}}
+  {{- end -}}
+</a>
 {{- end -}}
