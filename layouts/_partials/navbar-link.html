@@ -1,8 +1,8 @@
 {{- $currentPage := .currentPage -}}
 {{- $link := .link -}}
 {{- $item := .item -}}
+{{- $icon := .icon -}}
 {{- $external := .external -}}
-
 
 {{- $active := or ($currentPage.HasMenuCurrent "main" $item) ($currentPage.IsMenuCurrent "main" $item) -}}
 {{- $activeClass := cond $active "hx:font-medium" "hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200" -}}
@@ -17,7 +17,14 @@
     type="button"
     aria-label="{{ or (T $item.Identifier) $item.Name | safeHTML }}"
   >
-    <span class="hx:text-center">{{ or (T $item.Identifier) $item.Name | safeHTML }}</span>
+    {{- if $icon -}}
+    <span class="hx:float-left">
+      {{- partial "utils/icon" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block  hx:mb-1 "`) -}}
+    </span>
+    {{- end -}}
+    <span class="hx:text-center">
+      {{- or (T $item.Identifier) $item.Name | safeHTML -}}
+    </span>
     {{- partial "utils/icon.html" (dict "name" "chevron-down" "attributes" "height=12 class=\"hx:transition-transform hx:duration-200 hx:ease-in-out\"") -}}
   </button>
   <ul
@@ -38,6 +45,11 @@
         {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
         class="hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9"
       >
+        {{- if and (eq .Params.type "link") .Params.icon -}}
+        <span  class="hx:float-left">
+          {{- partial "utils/icon" (dict "name" .Params.icon "attributes" `height="1em" class="hx:inline-block hx:mb-1 hx:mr-1"`) -}}
+        </span>
+        {{- end -}}
         {{- or (T .Identifier) .Name | safeHTML -}}
       </a>
     </li>
@@ -52,6 +64,13 @@
   {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
   class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-block {{ $activeClass }}"
 >
-  <span class="hx:text-center">{{ or (T $item.Identifier) $item.Name | safeHTML }}</span>
+  {{- if $icon -}}
+  <span>
+    {{- partial "utils/icon" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block hx:mb-1 hx:mr-1"`) -}}
+  </span>
+  {{- end -}}
+  <span class="hx:text-center">
+    {{- or (T $item.Identifier) $item.Name | safeHTML -}}
+  </span>
 </a>
 {{- end -}}
