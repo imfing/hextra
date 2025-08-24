@@ -31,7 +31,7 @@ languages:
     title: هگزترا
   ja:
     languageName: 日本語
-    languageCode: ja
+    languageCode: ja-JP
     weight: 3
     title: Hextra
   zh-cn:
