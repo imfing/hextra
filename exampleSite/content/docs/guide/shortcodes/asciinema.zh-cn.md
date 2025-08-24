@@ -6,11 +6,22 @@ asciinema shortcode 允许你在 Hugo 站点中嵌入使用 [asciinema](https://
 
 ## 基本用法
 
-将你的 `.cast` 文件放在 `static/casts/` 目录中，然后使用 shortcode：
+你可以使用本地 `.cast` 文件或远程 URL。对于本地文件，请将它们放在 `static/casts/` 目录中：
 
 ```markdown
 {{</* asciinema file="demo.cast" */>}}
 ```
+
+### 远程文件
+
+你也可以使用来自任何 URL 的远程 cast 文件：
+
+```markdown
+{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" */>}}
+{{</* asciinema file="https://example.com/demo.cast" */>}}
+```
+
+{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" >}}
 
 {{< asciinema file="demo.cast" >}}
 
@@ -42,7 +53,7 @@ asciinema shortcode 允许你在 Hugo 站点中嵌入使用 [asciinema](https://
 
 | 参数 | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `file` | string | - | .cast 文件路径（必需） |
+| `file` | string | - | .cast 文件路径（必需）。支持本地文件、绝对路径和远程 URL |
 | `theme` | string | `"asciinema"` | 播放器主题 |
 | `speed` | number | `1` | 播放速度倍数 |
 | `autoplay` | boolean | `false` | 自动开始播放 |

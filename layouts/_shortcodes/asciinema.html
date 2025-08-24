@@ -1,6 +1,7 @@
 {{- /* Get parameters */ -}}
 {{- $castFile := .Get "file" | default (.Get 0) -}}
-{{- if not (hasPrefix $castFile "/") -}}
+{{- /* Handle file path: if not absolute path or URL, prepend /casts/ */ -}}
+{{- if and (not (hasPrefix $castFile "/")) (not (hasPrefix $castFile "http://")) (not (hasPrefix $castFile "https://")) -}}
   {{- $castFile = printf "/casts/%s" $castFile -}}
 {{- end -}}
 {{- $theme := .Get "theme" | default "asciinema" -}}

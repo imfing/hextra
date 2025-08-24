@@ -8,11 +8,22 @@ The asciinema shortcode allows you to embed terminal recordings created with [as
 
 ## Basic Usage
 
-Place your `.cast` files in the `static/casts/` directory and use the shortcode:
+You can use local `.cast` files or remote URLs. For local files, place them in the `static/casts/` directory:
 
 ```markdown
 {{</* asciinema file="demo.cast" */>}}
 ```
+
+### Remote Files
+
+You can also use remote cast files from any URL:
+
+```markdown
+{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" */>}}
+{{</* asciinema file="https://example.com/demo.cast" */>}}
+```
+
+{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" >}}
 
 {{< asciinema file="demo.cast" >}}
 
@@ -44,7 +55,7 @@ Here's a more advanced example showcasing all available parameters:
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `file` | string | - | Path to the .cast file (required) |
+| `file` | string | - | Path to the .cast file (required). Supports local files, absolute paths, and remote URLs |
 | `theme` | string | `"asciinema"` | Player theme |
 | `speed` | number | `1` | Playback speed multiplier |
 | `autoplay` | boolean | `false` | Start playing automatically |

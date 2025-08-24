@@ -6,11 +6,22 @@ shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ت
 
 ## استفاده پایه
 
-فایل‌های `.cast` خود را در دایرکتوری `static/casts/` قرار دهید و از shortcode استفاده کنید:
+می‌توانید از فایل‌های `.cast` محلی یا URL های راه دور استفاده کنید. برای فایل‌های محلی، آن‌ها را در دایرکتوری `static/casts/` قرار دهید:
 
 ```markdown
 {{</* asciinema file="demo.cast" */>}}
 ```
+
+### فایل‌های راه دور
+
+همچنین می‌توانید از فایل‌های cast راه دور از هر URL استفاده کنید:
+
+```markdown
+{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" */>}}
+{{</* asciinema file="https://example.com/demo.cast" */>}}
+```
+
+{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" >}}
 
 {{< asciinema file="demo.cast" >}}
 
@@ -42,7 +53,7 @@ shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ت
 
 | پارامتر | نوع | پیش‌فرض | توضیحات |
 |---------|-----|---------|---------|
-| `file` | string | - | مسیر فایل .cast (ضروری) |
+| `file` | string | - | مسیر فایل .cast (ضروری). از فایل‌های محلی، مسیرهای مطلق و URL های راه دور پشتیبانی می‌کند |
 | `theme` | string | `"asciinema"` | تم پخش‌کننده |
 | `speed` | number | `1` | ضریب سرعت پخش |
 | `autoplay` | boolean | `false` | شروع خودکار پخش |

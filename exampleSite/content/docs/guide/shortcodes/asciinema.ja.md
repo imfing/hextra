@@ -6,11 +6,22 @@ asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で
 
 ## 基本的な使用方法
 
-`.cast` ファイルを `static/casts/` ディレクトリに配置し、shortcode を使用します：
+ローカル `.cast` ファイルまたはリモート URL を使用できます。ローカルファイルの場合は、`static/casts/` ディレクトリに配置してください：
 
 ```markdown
 {{</* asciinema file="demo.cast" */>}}
 ```
+
+### リモートファイル
+
+任意の URL からのリモート cast ファイルも使用できます：
+
+```markdown
+{{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" */>}}
+{{</* asciinema file="https://example.com/demo.cast" */>}}
+```
+
+{{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH" >}}
 
 {{< asciinema file="demo.cast" >}}
 
@@ -42,7 +53,7 @@ asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で
 
 | パラメータ | 型 | デフォルト | 説明 |
 |-----------|----|-----------|------|
-| `file` | string | - | .cast ファイルパス（必須） |
+| `file` | string | - | .cast ファイルパス（必須）。ローカルファイル、絶対パス、リモート URL をサポート |
 | `theme` | string | `"asciinema"` | プレイヤーテーマ |
 | `speed` | number | `1` | 再生速度倍率 |
 | `autoplay` | boolean | `false` | 自動再生 |
