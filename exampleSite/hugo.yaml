@@ -73,6 +73,9 @@ menu:
     - identifier: versions
       name: Versions
       weight: 2
+      params:
+        type: link
+        icon: collection
     - identifier: blog
       name: Blog
       pageRef: /blog
@@ -98,6 +101,9 @@ menu:
       name: Development ↗
       url: https://imfing.github.io/hextra/versions/latest/
       parent: versions
+      params:
+        type: link
+        icon: beaker
     - identifier: v0.9
       name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
