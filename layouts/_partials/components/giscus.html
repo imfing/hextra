@@ -45,6 +45,7 @@
       if (!iframe) return;
       iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
     }
+
     sendMessage({
       setConfig: {
         theme: getGiscusTheme(),
@@ -75,10 +76,13 @@
     Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
     document.getElementById('giscus').appendChild(giscusScript);
 
+    // Listen for system theme changes
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", setGiscusTheme);
+
     // Update giscus theme when theme switcher is clicked
-    const toggles = document.querySelectorAll(".hextra-theme-toggle");
-    if (toggles) {
-      toggles.forEach(toggle => toggle.addEventListener('click', setGiscusTheme));
+    const themeToggleOptions = document.querySelectorAll(".hextra-theme-toggle-options p");
+    if (themeToggleOptions) {
+      themeToggleOptions.forEach(toggle => toggle.addEventListener('click', setGiscusTheme));
     }
   });
 </script>
