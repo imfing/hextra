@@ -64,7 +64,7 @@
     // Dynamically create script tag
     const giscusScript = document.createElement("script");
     Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
-    document.getElementById('giscus').appendChild(giscusScript);
+    document.getElementById('giscus-hextra-bb112b9f807c37c1752e5da6a1652a29').appendChild(giscusScript);
 
     // Listen for system theme changes
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", setGiscusTheme);
@@ -77,7 +77,7 @@
   });
 </script>
 
-<div id="giscus"></div>
+<div id="giscus-hextra-bb112b9f807c37c1752e5da6a1652a29"></div>
 {{- else -}}
   {{ warnf "giscus is not configured" }}
 {{- end -}}
