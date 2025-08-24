@@ -73,9 +73,6 @@ menu:
     - identifier: versions
       name: Versions
       weight: 2
-      params:
-        type: link
-        icon: collection
     - identifier: blog
       name: Blog
       pageRef: /blog
@@ -88,6 +85,9 @@ menu:
       name: Showcase
       pageRef: /showcase
       weight: 5
+      params:
+        type: link
+        icon: collection
     - name: Search
       weight: 6
       params:
