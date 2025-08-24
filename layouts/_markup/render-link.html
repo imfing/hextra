@@ -18,9 +18,8 @@
    {{- if $isExternal -}}target="_blank" rel="noopener"{{- end -}}
 >
   {{- .Text | safeHTML -}}
-  {{- if and .Page.Site.Params.flagOutboundLinks $isExternal -}}
-    {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:hidden hx:align-baseline" height="1em"`) -}}
-    {{- partial "utils/icon.html" (dict "name" "arrow-up-left" "attributes" `class="hx:inline hx:ltr:hidden hx:align-baseline" height="1em"`) -}}
+  {{- if and .Page.Site.Params.externalLinkDecoration $isExternal -}}
+    {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em"`) -}}
   {{- end -}}
 </a>
 {{- end -}}
