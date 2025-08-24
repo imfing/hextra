@@ -13,15 +13,26 @@
   }
   
   function getGiscusTheme() {
-    let giscusTheme = "{{ (string .theme) | default `light` }}";
-    let hugoTheme = getHugoTheme();
-    if(hugoTheme == 'light') {
-      return giscusTheme.replace('dark', 'light');
+    const giscussTheme = '{{ .theme }}';
+    if (giscussTheme === 'light' || giscussTheme === 'dark') {
+      return giscussTheme;
     }
-    if(hugoTheme == 'dark') {
-      return giscusTheme.replace('light', 'dark');
+
+    const hugoTheme = getHugoTheme();
+    if (hugoTheme === 'light' || hugoTheme === 'dark') {
+      return hugoTheme;
     }
-    return giscusTheme;
+
+    if (hugoTheme === 'system') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    const defaultTheme = '{{ site.Params.theme.default }}';
+    if (defaultTheme === 'light' || defaultTheme === 'dark') {
+      return defaultTheme;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
   function setGiscusTheme() {
