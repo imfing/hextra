@@ -1,0 +1,76 @@
+{{- $currentPage := .currentPage -}}
+{{- $link := .link -}}
+{{- $item := .item -}}
+{{- $icon := .icon -}}
+{{- $external := .external -}}
+
+{{- $active := or ($currentPage.HasMenuCurrent "main" $item) ($currentPage.IsMenuCurrent "main" $item) -}}
+{{- $activeClass := cond $active "hx:font-medium" "hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200" -}}
+
+{{- if $item.HasChildren -}}
+{{- /* Dropdown menu for items with children */ -}}
+<div class="hx:relative hx:hidden hx:md:inline-block">
+  <button
+    title="{{ or (T $item.Identifier) $item.Name | safeHTML }}"
+    data-state="closed"
+    class="hextra-nav-menu-toggle hx:cursor-pointer hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:whitespace-nowrap hx:p-2 hx:flex hx:items-center hx:gap-1 {{ $activeClass }}"
+    type="button"
+    aria-label="{{ or (T $item.Identifier) $item.Name | safeHTML }}"
+  >
+    {{- if $icon -}}
+    <span class="hx:inline-flex hx:items-center">
+      {{- partial "utils/icon" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block"`) -}}
+    </span>
+    {{- end -}}
+    <span class="hx:text-center">
+      {{- or (T $item.Identifier) $item.Name | safeHTML -}}
+    </span>
+    {{- partial "utils/icon.html" (dict "name" "chevron-down" "attributes" "height=12 class=\"hx:transition-transform hx:duration-200 hx:ease-in-out\"") -}}
+  </button>
+  <ul
+    class="hextra-nav-menu-items hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-md hx:ring-1 hx:ring-black/5 hx:bg-white hx:py-1 hx:text-sm hx:shadow-lg hx:dark:ring-white/20 hx:dark:bg-neutral-800"
+    style="min-width: 100px;"
+  >
+    {{ range $item.Children }}
+    {{- $link := .URL -}}
+    {{- $external := strings.HasPrefix $link "http" -}}
+    {{- with .PageRef -}}
+    {{- if hasPrefix . "/" -}}
+    {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+    {{- end -}}
+    {{- end -}}
+    <li class="hextra-nav-menu-item hx:flex hx:flex-col">
+      <a
+        href="{{ $link }}"
+        {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
+        class="hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:flex hx:items-center hx:gap-1"
+      >
+        {{- if and (eq .Params.type "link") .Params.icon -}}
+        <span class="hx:inline-flex hx:items-center">
+          {{- partial "utils/icon" (dict "name" .Params.icon "attributes" `height="1em" class="hx:inline-block"`) -}}
+        </span>
+        {{- end -}}
+        {{- or (T .Identifier) .Name | safeHTML -}}
+      </a>
+    </li>
+    {{- end -}}
+  </ul>
+</div>
+{{- else -}}
+{{- /* Regular menu item without children */ -}}
+<a
+  title="{{ or (T .Identifier) .Name | safeHTML }}"
+  href="{{ $link }}"
+  {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
+  class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 {{ $activeClass }}"
+>
+  {{- if $icon -}}
+  <span class="hx:inline-flex hx:items-center">
+    {{- partial "utils/icon" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block"`) -}}
+  </span>
+  {{- end -}}
+  <span class="hx:text-center">
+    {{- or (T $item.Identifier) $item.Name | safeHTML -}}
+  </span>
+</a>
+{{- end -}}
