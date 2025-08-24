@@ -97,6 +97,8 @@
           loop: loop,
           poster: poster || undefined,
           markers: markers.length > 0 ? markers : undefined,
+          controls: true,  // Always show user controls (bottom control bar)
+          idleTimeLimit: 2,  // Limit terminal inactivity to 2 seconds (compress pauses longer than 2s)
         });
       }
     });
