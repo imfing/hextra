@@ -65,6 +65,7 @@
     // Dynamically create script tag
     const giscusScript = document.createElement("script");
     Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+    // Random hash id to avoid conflicts with titles inside pages.
     document.getElementById('giscus-hextra-bb112b9f807c37c1752e5da6a1652a29').appendChild(giscusScript);
 
     // Listen for system theme changes
