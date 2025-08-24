@@ -7,9 +7,9 @@
 {{- with site.Params.comments.giscus -}}
 <script>
   function getGiscusTheme() {
-    const giscussTheme = '{{ .theme }}';
-    if (giscussTheme === 'light' || giscussTheme === 'dark') {
-      return giscussTheme;
+    const giscusTheme = '{{ .theme }}';
+    if (giscusTheme === 'light' || giscusTheme === 'dark') {
+      return giscusTheme;
     }
 
     const hugoTheme = localStorage.getItem("color-theme");
