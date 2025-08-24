@@ -1,5 +1,8 @@
 ---
-title: "Asciinema プレイヤー"
+title: "Asciinema Player コンポーネント"
+linktitle: "Asciinema Player"
+sidebar:
+  exclude: true
 ---
 
 asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で作成されたターミナル録画を Hugo サイトに埋め込むことができます。再生制御、速度調整、テーマカスタマイズなどの機能を備えたリッチなターミナルプレイヤーを提供します。

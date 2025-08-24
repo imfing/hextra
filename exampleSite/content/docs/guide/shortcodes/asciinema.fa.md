@@ -1,5 +1,8 @@
 ---
-title: "پخش‌کننده Asciinema"
+title: "Asciinema Player کامپوننت"
+linktitle: "Asciinema Player"
+sidebar:
+  exclude: true
 ---
 
 shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ترمینال ایجاد شده با [asciinema](https://asciinema.org/) را در سایت Hugo خود جاسازی کنید. این یک پخش‌کننده ترمینال غنی با ویژگی‌هایی مانند کنترل پخش، تنظیم سرعت و سفارشی‌سازی تم ارائه می‌دهد.

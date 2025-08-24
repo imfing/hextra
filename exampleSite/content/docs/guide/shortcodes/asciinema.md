@@ -1,5 +1,8 @@
 ---
-title: "Asciinema Player"
+title: "Asciinema Player Component"
+linktitle: "Asciinema Player"
+sidebar:
+  exclude: true
 ---
 
 ## Overview

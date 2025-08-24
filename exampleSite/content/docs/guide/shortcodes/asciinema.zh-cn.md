@@ -1,5 +1,8 @@
 ---
-title: "Asciinema 播放器"
+title: "Asciinema Player 组件"
+linktitle: "Asciinema Player"
+sidebar:
+  exclude: true
 ---
 
 asciinema shortcode 允许你在 Hugo 站点中嵌入使用 [asciinema](https://asciinema.org/) 创建的终端录制。它提供了一个功能丰富的终端播放器，具有播放控制、速度调整和主题自定义等功能。

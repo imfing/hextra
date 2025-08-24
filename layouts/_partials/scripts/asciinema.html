@@ -78,6 +78,14 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // Fix play button position issue
+    const style = document.createElement("style");
+    style.textContent = `
+      .ap-player .ap-overlay-start .ap-play-button span > svg {
+        display: inline;
+      }
+    `;
+    document.head.appendChild(style);
     // Initialize asciinema players
     document.querySelectorAll(".asciinema-player").forEach((el) => {
       const castFile = el.dataset.castFile;
