@@ -6,7 +6,7 @@
 
 {{- with site.Params.comments.giscus -}}
 <script>
-   function getGiscusTheme() {
+  function getGiscusTheme() {
     const giscussTheme = '{{ .theme }}';
     if (giscussTheme === 'light' || giscussTheme === 'dark') {
       return giscussTheme;
@@ -30,17 +30,18 @@
   }
 
   function setGiscusTheme() {
-    function sendMessage(message) {
-      const iframe = document.querySelector('iframe.giscus-frame');
-      if (!iframe) return;
-      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+
+    const msg = {
+      giscus: {
+        setConfig: {
+          theme: getGiscusTheme(),
+        },
+      },
     }
 
-    sendMessage({
-      setConfig: {
-        theme: getGiscusTheme(),
-      },
-    });
+    iframe.contentWindow.postMessage(msg, 'https://giscus.app');
   }
 
   document.addEventListener('DOMContentLoaded', function () {
