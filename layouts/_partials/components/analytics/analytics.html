@@ -8,3 +8,8 @@
 {{- if and hugo.IsProduction .Site.Params.analytics.umami -}}
   {{ partial "components/analytics/umami.html" . }}
 {{- end }}
+
+<!-- Matomo -->
+{{- if and hugo.IsProduction .Site.Params.analytics.matomo -}}
+  {{ partial "components/analytics/matomo.html" . }}
+{{- end }}

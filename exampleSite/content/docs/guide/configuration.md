@@ -421,6 +421,18 @@ params:
       # doNotTrack: "true" # optional
 ```
 
+### Matomo Analytics
+
+To enable [Matomo](https://matomo.org/), set `params.analytics.matomo.URL` and `params.analytics.matomo.ID` flag in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  analytics:
+    matomo:
+      serverURL: "https://example.com"
+      websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
+```
+
 ### LLMS.txt Support
 
 To enable [llms.txt](https://llmstxt.org/) output format for your site, which provides a structured text outline for [large language models](https://en.wikipedia.org/wiki/Large_language_model) and AI agents, add the `llms` output format to your site's `hugo.yaml`:
