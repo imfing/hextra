@@ -1,0 +1,86 @@
+{{- /* Get parameters */ -}}
+{{- $castFile := .Get "file" | default (.Get 0) -}}
+{{- $theme := .Get "theme" | default "asciinema" -}}
+{{- $speed := .Get "speed" | default 1 -}}
+{{- $autoplay := .Get "autoplay" | default false -}}
+{{- $loop := .Get "loop" | default false -}}
+{{- $poster := .Get "poster" | default "" -}}
+{{- $markers := .Get "markers" | default "" -}}
+
+{{- /* Handle file path: support local files, absolute paths, and remote URLs */ -}}
+{{- $isLocal := not (urls.Parse $castFile).Scheme -}}
+{{- $isPage := and (eq .Page.Kind "page") (not .Page.BundleType) -}}
+
+{{- if $isLocal -}}
+  {{- /* Local file handling */ -}}
+  {{- $found := false -}}
+  
+  {{- /* Try page resources first */ -}}
+  {{- if not $isPage -}}
+    {{- with .Page.Resources.Get $castFile -}}
+      {{- $castFile = .RelPermalink -}}
+      {{- $found = true -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{- /* Try global resources if not found in page resources */ -}}
+  {{- if not $found -}}
+    {{- with resources.Get $castFile -}}
+      {{- $castFile = .RelPermalink -}}
+      {{- $found = true -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{- /* Try static files if not found in resources */ -}}
+  {{- if not $found -}}
+    {{- if hasPrefix $castFile "/" -}}
+      {{- $castFile = relURL (strings.TrimPrefix "/" $castFile) -}}
+      {{- $found = true -}}
+    {{- else -}}
+      {{- /* For relative paths, assume they're in static directory */ -}}
+      {{- $castFile = relURL $castFile -}}
+      {{- $found = true -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{- /* If still not found, raise an error */ -}}
+  {{- if not $found -}}
+    {{- errorf "Asciinema cast file not found: %s. Please ensure the file exists in your assets, static/, or provide a valid remote URL." $castFile -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Build marker configuration */ -}}
+{{- $markerConfig := "" -}}
+{{- if $markers -}}
+  {{- $markerParts := slice -}}
+  {{- range (split $markers ",") -}}
+    {{- $item := trim . " " -}}
+    {{- $colonIndex := findRE ":" $item -}}
+    {{- if $colonIndex -}}
+      {{- /* Marker with label */ -}}
+      {{- $pair := split $item ":" -}}
+      {{- if ge (len $pair) 2 -}}
+        {{- $time := printf "%.1f" (float (trim (index $pair 0) " ")) -}}
+        {{- $label := trim (index $pair 1) " " -}}
+        {{- $markerParts = $markerParts | append (printf "[%s,\"%s\"]" $time $label) -}}
+      {{- end -}}
+    {{- else -}}
+      {{- /* Simple marker */ -}}
+      {{- $markerParts = $markerParts | append (printf "%.1f" (float $item)) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $markerConfig = printf "[%s]" (delimit $markerParts ",") -}}
+{{- end -}}
+
+{{- /* Mark page as using asciinema */ -}}
+{{- .Page.Store.Set "hasAsciinema" true -}}
+
+<div class="asciinema-player" 
+     data-cast-file="{{ $castFile }}"
+     data-theme="{{ $theme }}"
+     data-speed="{{ $speed }}"
+     data-autoplay="{{ $autoplay }}"
+     data-loop="{{ $loop }}"
+     {{- if ne $poster "" -}}data-poster="{{ $poster | safeURL }}"{{- end -}}
+     {{- if $markerConfig -}}data-markers="{{ $markerConfig | safeJS }}"{{- end -}}>
+</div>

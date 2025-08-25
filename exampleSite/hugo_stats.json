@@ -83,6 +83,7 @@
       "[counter-reset:step]",
       "[hyphens:auto]",
       "[word-break:break-word]",
+      "asciinema-player",
       "base",
       "chroma",
       "col-align-l",

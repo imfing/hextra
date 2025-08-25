@@ -26,4 +26,5 @@ Hextra مجموعه‌ای از شورت‌کدهای زیبا را برای ب�
 {{< cards >}}
   {{< card link="jupyter" title="نوت‌بوک Jupyter" icon="jupyter" tag="alpha" >}}
   {{< card link="others" title="سایر" icon="view-grid" >}}
+  {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
 {{< /cards >}}
