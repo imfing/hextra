@@ -102,7 +102,7 @@ jobs:
 {{% /details %}}
 
 
-{{< callout >}}
+{{< callout type="warning" >}}
   In your repository settings, set the **Pages** > **Build and deployment** > **Source** to **GitHub Actions**:
   ![](https://user-images.githubusercontent.com/5097752/266784808-99676430-884e-42ab-b901-f6534a0d6eee.png)
 {{< /callout >}}

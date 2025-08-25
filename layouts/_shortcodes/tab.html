@@ -1,3 +1,9 @@
+{{- /*
+Create a tab.
+
+@example {{< tab >}}content{{< /tab >}}
+*/ -}}
+
 {{- $defaultIndex := int ((.Parent.Get "defaultIndex") | default "0") -}}
 
 <div

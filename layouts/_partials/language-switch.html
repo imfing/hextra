@@ -1,4 +1,9 @@
 {{- $page := .context -}}
+{{- $iconName := .iconName | default "globe-alt" -}}
+{{- $iconHeight := .iconHeight | default 12 -}}
+{{- $location := .location -}}
+
+{{- $class := .class | default "hx:h-7 hx:px-2 hx:text-xs hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50" -}}
 
 {{- $grow := .grow -}}
 {{- $hideLabel := .hideLabel | default false -}}
@@ -10,17 +15,18 @@
     <button
       title="{{ $changeLanguage }}"
       data-state="closed"
-      class="language-switcher hx:cursor-pointer hx:h-7 hx:rounded-md hx:px-2 hx:text-left hx:text-xs hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:grow"
+      data-location="{{ $location }}"
+      class="hextra-language-switcher hx:cursor-pointer hx:rounded-md hx:text-left hx:font-medium {{ $class }} hx:grow"
       type="button"
       aria-label="{{ $changeLanguage }}"
     >
       <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
-        {{- partial "utils/icon" (dict "name" "globe-alt" "attributes" "height=12") -}}
+        {{- partial "utils/icon" (dict "name" $iconName "attributes" (printf "height=%d" $iconHeight)) -}}
         {{- if not $hideLabel }}<span>{{ site.Language.LanguageName }}</span>{{ end -}}
       </div>
     </button>
     <ul
-      class="language-options hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-md hx:ring-1 hx:ring-black/5 hx:bg-white hx:py-1 hx:text-sm hx:shadow-lg hx:dark:ring-white/20 hx:dark:bg-neutral-800"
+      class="hextra-language-options hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-md hx:ring-1 hx:ring-black/5 hx:bg-white hx:py-1 hx:text-sm hx:shadow-lg hx:dark:ring-white/20 hx:dark:bg-neutral-800"
       style="position: fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
     >
       {{ range site.Languages }}

@@ -11,13 +11,13 @@ Hugo supports [Markdown](https://en.wikipedia.org/wiki/Markdown) syntax for form
 
 ### Styling Text
 
-| Style   | Syntax     | Example   | Output   |
-| --------  | -------- | ------ | ------ |
-| Bold | `**bold text**` | `**bold text**` | **bold text** |
-| Italic | `*italicized text*` | `*italicized text*` | *italicized text* |
-| Strikethrough | `~~strikethrough text~~` | `~~strikethrough text~~` | ~~strikethrough text~~ |
-| Subscript | `<sub></sub>` | `This is a <sub>subscript</sub> text` | This is a <sub>subscript</sub> text |
-| Superscript | `<sup></sup>` | `This is a <sup>superscript</sup> text` | This is a <sup>superscript</sup> text |
+| Style         | Syntax                   | Example                                 | Output                                |
+| :------------ | :----------------------- | :-------------------------------------- | :------------------------------------ |
+| Bold          | `**bold text**`          | `**bold text**`                         | **bold text**                         |
+| Italic        | `*italicized text*`      | `*italicized text*`                     | _italicized text_                     |
+| Strikethrough | `~~strikethrough text~~` | `~~strikethrough text~~`                | ~~strikethrough text~~                |
+| Subscript     | `<sub></sub>`            | `This is a <sub>subscript</sub> text`   | This is a <sub>subscript</sub> text   |
+| Superscript   | `<sup></sup>`            | `This is a <sup>superscript</sup> text` | This is a <sup>superscript</sup> text |
 
 ### Blockquotes
 
@@ -79,28 +79,28 @@ Please make sure you are using the latest version of Hextra and [Hugo v0.146.0](
 
 Tables aren't part of the core Markdown spec, but Hugo supports them out-of-the-box.
 
-|   Name | Age  |
-|--------|------|
-|    Bob | 27   |
-|  Alice | 23   |
+| Name  | Age |
+| :---- | :-- |
+| Bob   | 27  |
+| Alice | 23  |
 
 ```markdown {filename=Markdown}
-|   Name | Age  |
-|--------|------|
-|    Bob | 27   |
-|  Alice | 23   |
+| Name  | Age |
+| :---- | :-- |
+| Bob   | 27  |
+| Alice | 23  |
 ```
 
 #### Inline Markdown within tables
 
 | Italics   | Bold     | Code   |
-| --------  | -------- | ------ |
-| *italics* | **bold** | `code` |
+| :-------- | :------- | :----- |
+| _italics_ | **bold** | `code` |
 
 ```markdown {filename=Markdown}
 | Italics   | Bold     | Code   |
-| --------  | -------- | ------ |
-| *italics* | **bold** | `code` |
+| :-------- | :------- | :----- |
+| _italics_ | **bold** | `code` |
 ```
 
 ### Code Blocks
@@ -137,22 +137,22 @@ Tables aren't part of the core Markdown spec, but Hugo supports them out-of-the-
 
 #### Nested list
 
-* Fruit
-  * Apple
-  * Orange
-  * Banana
-* Dairy
-  * Milk
-  * Cheese
+- Fruit
+  - Apple
+  - Orange
+  - Banana
+- Dairy
+  - Milk
+  - Cheese
 
 ```markdown {filename=Markdown}
-* Fruit
-  * Apple
-  * Orange
-  * Banana
-* Dairy
-  * Milk
-  * Cheese
+- Fruit
+  - Apple
+  - Orange
+  - Banana
+- Dairy
+  - Milk
+  - Cheese
 ```
 
 ### Images
@@ -165,10 +165,10 @@ Tables aren't part of the core Markdown spec, but Hugo supports them out-of-the-
 
 With caption:
 
-![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
+![landscape](https://picsum.photos/800/600 "Lorem Picsum")
 
 ```markdown {filename=Markdown}
-![landscape](https://picsum.photos/800/600 "Unsplash Landscape")
+![landscape](https://picsum.photos/800/600 "Lorem Picsum")
 ```
 
 For more advanced functionality, use Hugo's built-in [Figure shortcode](https://gohugo.io/shortcodes/figure/).
@@ -192,7 +192,7 @@ For more configuration options, see Hugo documentation on [Configure Markup](htt
 
 ## Learning Resources
 
-* [Markdown Guide](https://www.markdownguide.org/)
-* [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-* [Markdown Tutorial](https://www.markdowntutorial.com/)
-* [Markdown Reference](https://commonmark.org/help/)
+- [Markdown Guide](https://www.markdownguide.org/)
+- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- [Markdown Tutorial](https://www.markdowntutorial.com/)
+- [Markdown Reference](https://commonmark.org/help/)

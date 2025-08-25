@@ -26,4 +26,6 @@ Additional shortcodes provided by Hugo and Hextra:
 {{< cards >}}
   {{< card link="jupyter" title="Jupyter Notebook" icon="jupyter" tag="alpha" >}}
   {{< card link="others" title="Others" icon="view-grid" >}}
+  {{< card link="hextra" title="Hextra" icon="view-grid" >}}
+  {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
 {{< /cards >}}

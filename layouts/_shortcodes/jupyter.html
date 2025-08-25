@@ -1,4 +1,11 @@
-{{/* Render Jupyter Notebook */}}
+{{- /*
+Render Jupyter Notebook
+
+@param {string} 0 The path of the Jupyter Notebook.
+
+@example {{% jupyter "notebook.ipynb" %}}
+*/ -}}
+
 {{- $path := .Get 0 -}}
 {{- $data := "" -}}
 {{- $page := .Page -}}

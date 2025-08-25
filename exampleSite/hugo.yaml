@@ -31,7 +31,7 @@ languages:
     title: هگزترا
   ja:
     languageName: 日本語
-    languageCode: ja
+    languageCode: ja-JP
     weight: 3
     title: Hextra
   zh-cn:
@@ -85,6 +85,9 @@ menu:
       name: Showcase
       pageRef: /showcase
       weight: 5
+      params:
+        type: link
+        icon: collection
     - name: Search
       weight: 6
       params:
@@ -98,6 +101,9 @@ menu:
       name: Development ↗
       url: https://imfing.github.io/hextra/versions/latest/
       parent: versions
+      params:
+        type: link
+        icon: beaker
     - identifier: v0.9
       name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
@@ -120,6 +126,11 @@ menu:
 
 params:
   description: Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.
+
+  externalLinkDecoration: true
+
+  banner:
+    key: 'announcement-v0_10'
 
   navbar:
     displayTitle: true

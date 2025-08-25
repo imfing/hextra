@@ -2,8 +2,12 @@
 title: Markdown 语法指南
 date: 2020-01-01
 authors:
-  - name: John Doe
-    link: https://example.com/johndoe
+  - name: imfing
+    link: https://github.com/imfing
+    image: https://github.com/imfing.png
+  - name: Octocat
+    link: https://github.com/octocat
+    image: https://github.com/octocat.png
 tags:
   - Markdown
   - 示例
@@ -11,8 +15,7 @@ tags:
 excludeSearch: true
 ---
 
-这篇文章提供了一些基础的 Markdown 语法样例，这些可以在 Hugo 的内容文件中使用。
-
+本文展示了 Hugo 内容文件中可用的基础 Markdown 语法示例。
 <!--more-->
 
 ## 基础语法
@@ -34,40 +37,53 @@ excludeSearch: true
 ##### 五级标题
 ###### 六级标题
 
+### 强调
+
 ```text
-*这段文字将是斜体*
-_这也将是斜体_
+*这段文字会显示为斜体*
+_这段文字也会显示为斜体_
 
-**这段文字将是粗体**
-__这也将是粗体__
+**这段文字会显示为粗体**
+__这段文字也会显示为粗体__
 
-_你 **可以** 组合它们_
+_你可以**组合**使用_
 ```
 
-*这段文字将是斜体*
-_这也将是斜体_
+*这段文字会显示为斜体*
 
-**这段文字将是粗体**
-__这也将是粗体__
+_这段文字也会显示为斜体_
 
-_你 **可以** 组合它们_
+**这段文字会显示为粗体**
+
+__这段文字也会显示为粗体__
+
+_你可以**组合**使用_
 
 ### 列表
 
 #### 无序列表
 
-* 项目 1
-* 项目 2
-  * 项目 2a
-  * 项目 2b
+```
+* 项目1
+* 项目2
+  * 子项目2a
+  * 子项目2b
+```
+
+* 项目1
+* 项目2
+  * 子项目2a
+  * 子项目2b
 
 #### 有序列表
 
-1. 项目 1
-2. 项目 2
-3. 项目 3
-   1. 项目 3a
-   2. 项目 3b
+```
+1. 项目1
+2. 项目2
+3. 项目3
+   1. 子项目3a
+   2. 子项目3b
+```
 
 ### 图片
 
@@ -85,23 +101,23 @@ _你 **可以** 组合它们_
 
 [Hugo](https://gohugo.io)
 
-### 块引用
+### 引用块
 
 ```markdown
-牛顿曾说：
+正如牛顿所说：
 
-> 如果我看得更远，那是因为我站在巨人的肩膀上。
+> 如果说我看得比别人更远些，那是因为我站在巨人的肩膀上。
 ```
 
-> 如果我看得更远，那是因为我站在巨人的肩膀上。
+> 如果说我看得比别人更远些，那是因为我站在巨人的肩膀上。
 
 ### 行内代码
 
 ```markdown
-行内 `代码` 有 `反引号` 包围。
+行内`代码`会用`反引号包裹`起来。
 ```
 
-行内 `代码` 有 `反引号` 包围。
+行内`代码`会用`反引号包裹`起来。
 
 ### 代码块
 
@@ -124,18 +140,18 @@ func main() {
 ### 表格
 
 ```markdown
-| Syntax    | Description |
+| 语法      | 描述         |
 | --------- | ----------- |
-| Header    | Title       |
-| Paragraph | Text        |
+| 标题      | 标题文本     |
+| 段落      | 正文内容     |
 ```
 
-| Syntax    | Description |
+| 语法      | 描述         |
 | --------- | ----------- |
-| Header    | Title       |
-| Paragraph | Text        |
+| 标题      | 标题文本     |
+| 段落      | 正文内容     |
 
-## 参考
+## 参考资料
 
-- [Markdown Syntax](https://www.markdownguide.org/basic-syntax/)
+- [Markdown 语法](https://www.markdownguide.org/basic-syntax/)
 - [Hugo Markdown](https://gohugo.io/content-management/formats/#markdown)

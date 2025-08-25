@@ -23,14 +23,14 @@ title: 步骤
 {{% /steps %}}
 
 
-## 用法
+## 使用方法
 
-{{< callout emoji="ℹ️" >}}
-  请注意，此短代码**仅适用于 Markdown 内容**。
-  如果将 HTML 内容或其他短代码作为步骤内容，可能无法按预期渲染。
+{{< callout type="warning" >}}
+  请注意，此短代码**仅适用于Markdown内容**。
+  如果在步骤内容中放入HTML或其他短代码，可能无法按预期渲染。
 {{< /callout >}}
 
-在 `steps` 短代码中放置 Markdown 的 h3 标题。
+在`steps`短代码内放置Markdown的三级标题。
 
 ```
 {{%/* steps */%}}

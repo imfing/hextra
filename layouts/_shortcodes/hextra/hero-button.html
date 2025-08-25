@@ -1,3 +1,13 @@
+{{- /*
+A shortcode for rendering a button with a link.
+
+@param {string} link The link of the button.
+@param {string} text The text of the button.
+@param {string} style The style of the button.
+
+@example {{< hextra/hero-button text="Get Started" link="docs" >}}
+*/ -}}
+
 {{- $link := .Get "link" -}}
 {{- $text := .Get "text" -}}
 {{- $style := .Get "style" -}}

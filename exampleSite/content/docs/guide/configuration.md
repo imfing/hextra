@@ -43,29 +43,72 @@ menu:
 There are different types of menu items:
 
 1. Link to a page in the site with `pageRef`
-    ```yaml
-    - name: Documentation
-      pageRef: /docs
-    ```
+   ```yaml
+   - name: Documentation
+     pageRef: /docs
+   ```
 2. Link to an external URL with `url`
-    ```yaml
-    - name: GitHub
-      url: "https://github.com"
-    ```
+   ```yaml
+   - name: GitHub
+     url: "https://github.com"
+   ```
 3. Search bar with `type: search`
-    ```yaml
-    - name: Search
+   ```yaml
+   - name: Search
+     params:
+       type: search
+   ```
+4. Icon Only
+   ```yaml
+   - name: GitHub
+     params:
+       icon: github
+   ```
+5. Link with Icon
+   ```yaml
+   - name: Blog
+     params:
+       type: link
+       icon: rss
+   ```
+6. Theme Toggle
+   ```yaml
+    - name: Theme Toggle
       params:
-        type: search
-    ```
-4. Icon
-    ```yaml
-    - name: GitHub
+        type: theme-toggle
+        label: true # optional, default is false
+   ```
+7. Language Switcher
+   ```yaml
+    - name: Language Switcher
       params:
-        icon: github
-    ```
+        type: language-switch
+        label: true # optional, default is false
+        icon: "globe-alt" # optional, default is "translate"
+   ```
 
 These menu items can be sorted by setting the `weight` parameter.
+
+### Nested Menus
+
+You can create dropdown menus by defining child menu items. Child menus appear when clicking on the parent menu item.
+
+```yaml {filename="hugo.yaml"}
+menu:
+  main:
+    - identifier: sdk
+      name: SDK
+    - identifier: python
+      name: Python ↗
+      url: https://python.org
+      parent: sdk
+    - identifier: go
+      name: Go
+      url: https://go.dev
+      parent: sdk
+```
+
+Child menu items need to specify the `parent` parameter with the parent's `identifier` value.
 
 ### Logo and Title
 
@@ -302,9 +345,10 @@ To customize the search tokenize, set the `params.search.flexsearch.tokenize` pa
 
 ```yaml {filename="hugo.yaml"}
 params:
+  search:
     # ...
     flexsearch:
-      # full | forward | reverse | strict 
+      # full | forward | reverse | strict
       tokenize: forward
 ```
 
@@ -350,6 +394,45 @@ To exclude an entire directory, use the [`cascade`](https://gohugo.io/configurat
 > To block search crawlers, you can make a [`robots.txt` template](https://gohugo.io/templates/robots/).
 > However, `robots.txt` instructions do not necessarily keep a page out of Google search results.
 
+### Umami Analytics
+
+To enable [Umami](https://umami.is/docs/), set `params.analytics.umami.serverURL` and `params.analytics.umami.websiteID` flag in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  analytics:
+    umami:
+      serverURL: "https://example.com"
+      websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
+      # scriptName: "umami.js" # optional (default: umami.js)
+      # https://umami.is/docs/tracker-configuration#data-host-url
+      # hostURL: "http://stats.example.org" # optional
+      # https://umami.is/docs/tracker-configuration#data-auto-track
+      # autoTrack: "false" # optional
+      # https://umami.is/docs/tracker-configuration#data-tag
+      # domains: "example.net,example.org" # optional
+      # https://umami.is/docs/tracker-configuration#data-exclude-search
+      # tag: "umami-eu" # optional
+      # https://umami.is/docs/tracker-configuration#data-exclude-hash
+      # excludeSearch: "true" # optional
+      # https://umami.is/docs/tracker-configuration#data-do-not-track
+      # excludeHash: "true" # optional
+      # https://umami.is/docs/tracker-configuration#data-domains
+      # doNotTrack: "true" # optional
+```
+
+### Matomo Analytics
+
+To enable [Matomo](https://matomo.org/), set `params.analytics.matomo.URL` and `params.analytics.matomo.ID` flag in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  analytics:
+    matomo:
+      serverURL: "https://example.com"
+      websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
+```
+
 ### LLMS.txt Support
 
 To enable [llms.txt](https://llmstxt.org/) output format for your site, which provides a structured text outline for [large language models](https://en.wikipedia.org/wiki/Large_language_model) and AI agents, add the `llms` output format to your site's `hugo.yaml`:
@@ -363,6 +446,7 @@ outputs:
 ```
 
 This will generate an `llms.txt` file at your site's root containing:
+
 - Site title and description
 - Hierarchical listing of all sections and pages
 - Page summaries and publication dates
@@ -384,4 +468,32 @@ params:
   images:
     - "/img/config-image.jpg"
   audio: "config-talk.mp3"
+```
+
+### Banner
+
+To add a banner to your site, add the following to your `hugo.yaml`:
+
+```yaml
+params:
+  banner:
+    key: 'announcement-xxx'
+    message: |
+      🎉 Welcome! [Hextra](https://github.com/hextra/hextra) is a static site generator that helps you build modern websites.
+```
+
+The banner will be displayed on all pages.
+
+The field `message` supports Markdown syntax.
+
+If you want to use template syntax, you can define the partial in `layouts/_partials/custom/banner.html`.
+In this case, the field `message` will be ignored.
+
+### External Link Decoration
+
+Adds an arrow icon to external links (default: false) when rendering links from Markdown.
+
+```yaml
+params:
+  externalLinkDecoration: true
 ```

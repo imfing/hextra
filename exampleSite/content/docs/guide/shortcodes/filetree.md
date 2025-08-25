@@ -32,3 +32,18 @@ linkTitle: FileTree
   {{</* filetree/file name="hugo.toml" */>}}
 {{</* /filetree/container */>}}
 ```
+
+## Options
+
+### `filetree/file`
+
+| Parameter | Description                                                          |
+|-----------|----------------------------------------------------------------------|
+| `name`    | The name of the file.                                                |
+
+### `filetree/folder`
+
+| Parameter | Description                                                          |
+|-----------|----------------------------------------------------------------------|
+| `name`    | The name of the file.                                                |
+| `state`   | The state of the file. Can be `open` or `closed`. Default is `open`. |

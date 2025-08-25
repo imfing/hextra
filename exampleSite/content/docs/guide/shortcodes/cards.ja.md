@@ -13,8 +13,8 @@ linkTitle: カード
 
 {{< cards >}}
   {{< card link="/" title="画像カード" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" subtitle="インターネット画像" >}}
-  {{< card link="/" title="ローカル画像" image="/images/card-image-unprocessed.jpg" subtitle="staticディレクトリ下の未加工画像。" >}}
-  {{< card link="/" title="ローカル画像" image="images/space.jpg" subtitle="assetsディレクトリ下の画像、Hugoで処理済み。" method="Resize" options="600x q80 webp" >}}
+  {{< card link="/" title="ローカル画像" image="/images/card-image-unprocessed.jpg" subtitle="staticディレクトリ下の未加工画像" >}}
+  {{< card link="/" title="ローカル画像" image="images/space.jpg" subtitle="assetsディレクトリ下の画像、Hugoで処理済み" method="Resize" options="600x q80 webp" >}}
 {{< /cards >}}
 
 ## 使用方法
@@ -30,31 +30,32 @@ linkTitle: カード
 ```
 {{</* cards */>}}
   {{</* card link="/" title="画像カード" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplashの風景画像" */>}}
-  {{</* card link="/" title="ローカル画像" image="/images/card-image-unprocessed.jpg" subtitle="staticディレクトリ下の未加工画像。" */>}}
-  {{</* card link="/" title="ローカル画像" image="images/space.jpg" subtitle="assetsディレクトリ下の画像、Hugoで処理済み。" method="Resize" options="600x q80 webp" */>}}
+  {{</* card link="/" title="ローカル画像" image="/images/card-image-unprocessed.jpg" subtitle="staticディレクトリ下の未加工画像" */>}}
+  {{</* card link="/" title="ローカル画像" image="images/space.jpg" subtitle="assetsディレクトリ下の画像、Hugoで処理済み" method="Resize" options="600x q80 webp" */>}}
 {{</* /cards */>}}
 ```
 
 ## カードパラメータ
 
-| パラメータ  | 説明                                                     |
-|----------- |-----------------------------------------------------------------|
-| `link`     | URL（内部または外部）。                                     |
-| `title`    | カードのタイトル見出し。                                     |
-| `subtitle` | サブタイトル見出し（Markdown対応）。                           |
-| `icon`     | アイコンの名前。                                               |
-| `tag`      | タグ内のテキスト。                                                    |
-| `tagColor` | タグの色: `gray`（デフォルト）、`yellow`、`red`、`blue`。 |
+| パラメータ      | 説明                                            |
+|------------|-----------------------------------------------|
+| `link`     | URL（内部または外部）。                                 |
+| `title`    | カードのタイトル見出し。                                  |
+| `subtitle` | サブタイトル見出し（Markdown対応）。                        |
+| `icon`     | アイコン名。                                        |
+| `tag`      | タグのテキスト。                                      |
+| `tagType`  | タグのタイプ: デフォルト (グレー)、`info`、`warning`、`error`。 |
   
 ## 画像カード
 
-さらに、カードは画像の追加と以下のパラメータを通じた処理をサポートします:
+さらに、カードには画像の追加と以下のパラメータを通じた処理がサポートされています:
 
-| パラメータ  | 説明                                 |
-|----------- |---------------------------------------------|
-| `image`    | カードの画像URLを指定します。       |
-| `method`   | Hugoの画像処理メソッドを設定します。        |
-| `options`  | Hugoの画像処理オプションを設定します。 |
+| パラメータ        | 説明                         |
+|--------------|----------------------------|
+| `image`      | カードの画像URLを指定します。           |
+| `method`     | Hugoの画像処理方法を設定します。         |
+| `options`    | Hugoの画像処理オプションを設定します。      |
+| `imageStyle` | 画像タグのスタイル属性を入力するために使用されます。 |
 
 カードは3種類の画像をサポートします:
 
@@ -62,14 +63,14 @@ linkTitle: カード
 2. 静的画像: Hugoの`static/`ディレクトリ内の相対パスを使用。
 3. 処理済み画像: Hugoの`assets/`ディレクトリ内の相対パスを使用。
 
-Hextraはビルド時に画像処理が必要かどうかを自動検出し、`options`パラメータまたはデフォルト設定（Resize、800x、品質80、WebPフォーマット）を適用します。
-現在サポートされている`method`は`Resize`、`Fit`、`Fill`、`Crop`です。
+Hextraはビルド時に画像処理が必要か自動検出し、`options`パラメータまたはデフォルト設定（Resize、800x、品質80、WebP形式）を適用します。
+現在サポートされている`method`: `Resize`、`Fit`、`Fill`、`Crop`。
 
-Hugoの組み込み画像処理コマンド、メソッド、オプションの詳細については、[画像処理ドキュメント](https://gohugo.io/content-management/image-processing/)を参照してください。
+Hugoの組み込み画像処理コマンド、方法、オプションの詳細については、[画像処理ドキュメント](https://gohugo.io/content-management/image-processing/)を参照してください。
 
 ## タグ
 
-カードはタグの追加をサポートしており、追加のステータス情報を表示するのに役立ちます。
+カードはタグの追加をサポートしており、追加のステータス情報を表示するのに便利です。
 
 {{< cards >}}
   {{< card link="../callout" title="デフォルトタグ付きカード" tag="タグテキスト" >}}
@@ -81,10 +82,10 @@ Hugoの組み込み画像処理コマンド、メソッド、オプションの�
 
 ```
 {{</* cards */>}}
-  {{</* card link="../callout" title="デフォルトタグ色付きカード" tag="タグテキスト" */>}}
-  {{</* card link="../callout" title="デフォルト赤タグ付きカード" tag="タグテキスト" tagType="error" */>}}
+  {{</* card link="../callout" title="デフォルト色タグ付きカード" tag="タグテキスト" */>}}
+  {{</* card link="../callout" title="赤タグ付きカード" tag="タグテキスト" tagType="error" */>}}
   {{</* card link="../callout" title="青タグ付きカード" tag="タグテキスト" tagType="info" */>}}
-  {{</* card link="../callout" title="黄色タグ付きカード" tag="タグテキスト" tagType="warning" */>}}
+  {{</* card link="../callout" title="黄タグ付きカード" tag="タグテキスト" tagType="warning" */>}}
 {{</* /cards */>}}
 ```
 

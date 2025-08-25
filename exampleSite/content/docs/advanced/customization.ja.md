@@ -3,18 +3,18 @@ title: Hextraのカスタマイズ
 linkTitle: カスタマイズ
 ---
 
-Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトのカスタマイズオプションを提供し、テーマを設定できます。
-このページでは、利用可能なオプションと、テーマをさらにカスタマイズする方法について説明します。
+Hextraは、`hugo.yaml`設定ファイル内でテーマを設定するためのデフォルトのカスタマイズオプションを提供しています。
+このページでは、利用可能なオプションとテーマをさらにカスタマイズする方法について説明します。
 
 <!--more-->
 
 ## カスタムCSS
 
-カスタムCSSを追加するには、サイト内に`assets/css/custom.css`ファイルを作成する必要があります。Hextraはこのファイルを自動的に読み込みます。
+カスタムCSSを追加するには、サイト内に`assets/css/custom.css`ファイルを作成します。Hextraはこのファイルを自動的に読み込みます。
 
 ### フォントファミリー
 
-コンテンツのフォントファミリーは、以下のようにカスタマイズできます：
+コンテンツのフォントファミリーは以下のようにカスタマイズできます:
 
 ```css {filename="assets/css/custom.css"}
 .content {
@@ -24,7 +24,7 @@ Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトの
 
 ### インラインコード要素
 
-`other text`と混在するテキストの色は、以下のようにカスタマイズできます：
+`他のテキスト`と混在するテキストの色は以下のようにカスタマイズできます:
 
 ```css {filename="assets/css/custom.css"}
 .content code:not(.code-block code) {
@@ -34,7 +34,7 @@ Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトの
 
 ### プライマリカラー
 
-テーマのプライマリカラーは、`--primary-hue`、`--primary-saturation`、`--primary-lightness`変数を設定することでカスタマイズできます：
+テーマのプライマリカラーは、`--primary-hue`、`--primary-saturation`、`--primary-lightness`変数を設定することでカスタマイズできます:
 
 ```css {filename="assets/css/custom.css"}
 :root {
@@ -44,9 +44,42 @@ Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトの
 }
 ```
 
-### テーマのさらなるカスタマイズ
+### コンポーネントレイアウト変数
 
-テーマは、公開されているCSSクラスを介してデフォルトのスタイルをオーバーライドすることでさらにカスタマイズできます。フッター要素をカスタマイズする例：
+Hextraは、ページ、ナビゲーションバー、フッターの幅をカスタマイズするためのCSS変数を提供しています:
+
+```css {filename="assets/css/custom.css"}
+:root {
+  /* ページ幅 - hugo.yamlのparams.page.widthでも設定可能 */
+  --hextra-max-page-width: 80rem; /* デフォルト: 80rem (標準), 90rem (ワイド), 100% (フル) */
+
+  /* ナビゲーションバー幅 - hugo.yamlのparams.navbar.widthでも設定可能 */
+  --hextra-max-navbar-width: 90rem; /* 独立したナビゲーションバー幅 */
+
+  /* フッター幅 - hugo.yamlのparams.footer.widthでも設定可能 */
+  --hextra-max-footer-width: 80rem; /* 独立したフッター幅 */
+}
+```
+
+### Tailwindテーマ変数
+
+Tailwind CSS v4をベースにしたHextra v0.10.0以降では、`@layer theme`ブロック内でCSS変数をオーバーライドすることでテーマをカスタマイズできます。
+
+これにより、個々のクラスを変更することなく、グローバルな外観をカスタマイズできます。
+
+```css {filename="assets/css/custom.css"}
+@layer theme {
+  :root {
+    --hx-default-mono-font-family: "JetBrains Mono", monospace;
+  }
+}
+```
+
+詳細については、[Tailwindテーマ変数のドキュメント](https://tailwindcss.com/docs/theme#default-theme-variable-reference)を参照してください。
+
+### さらなるテーマカスタマイズ
+
+テーマは、公開されているCSSクラスをオーバーライドすることでさらにカスタマイズできます。フッター要素をカスタマイズする例:
 
 ```css {filename="assets/css/custom.css"}
 .hextra-footer {
@@ -94,7 +127,7 @@ Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトの
 
 ##### ステップ
 
-- `steps` - ステップコンテナ
+- `hextra-steps` - ステップコンテナ
 
 ##### タブ
 
@@ -111,9 +144,9 @@ Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトの
 
 #### ナビゲーションバー
 
-- `nav-container` - ナビゲーションバーコンテナ
-- `nav-container-blur` - ナビゲーションバーコンテナのぼかし要素
-- `hamburger-menu` - ハンバーガーメニューボタン
+- `hextra-nav-container` - ナビゲーションバーコンテナ
+- `hextra-nav-container-blur` - ブラー効果付きナビゲーションバーコンテナ
+- `hextra-hamburger-menu` - ハンバーガーメニューボタン
 
 #### フッター
 
@@ -122,9 +155,18 @@ Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトの
 
 #### 検索
 
-- `search-wrapper` - 検索ラッパーコンテナ
-- `search-input` - 検索入力要素
-- `search-results` - 検索結果リストコンテナ
+- `hextra-search-wrapper` - 検索ラッパーコンテナ
+- `hextra-search-input` - 検索入力要素
+- `hextra-search-results` - 検索結果リストコンテナ
+
+検索UI内で使用されるオプションのネストされたクラス:
+
+- `hextra-search-title` - 結果タイトル要素
+- `hextra-search-active` - アクティブな結果アンカー
+- `hextra-search-no-result` - 空の状態要素
+- `hextra-search-prefix` - グループ化された結果のパンくずリスト/プレフィックスラベル
+- `hextra-search-excerpt` - 結果スニペットテキスト
+- `hextra-search-match` - ハイライトされたクエリスパン
 
 #### 目次
 
@@ -132,27 +174,29 @@ Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトの
 
 #### サイドバー
 
-- `mobile-menu-overlay` - モバイルメニューのオーバーレイ要素
-- `sidebar-container` - サイドバーコンテナ
-- `sidebar-active-item` - サイドバーのアクティブアイテム
+- `hextra-sidebar-container` - サイドバーコンテナ
+- `hextra-sidebar-active-item` - サイドバーのアクティブアイテム
 
 #### 言語スイッチャー
 
-- `language-switcher` - 言語スイッチャーボタン
-- `language-options` - 言語オプションコンテナ
+- `hextra-language-switcher` - 言語スイッチャーボタン
+- `hextra-language-options` - 言語オプションコンテナ
 
 #### テーマトグル
 
-- `theme-toggle` - テーマトグルボタン
+- `hextra-theme-toggle` - テーマトグルボタン
 
 #### コードコピーボタン
 
 - `hextra-code-copy-btn-container` - コードコピーボタンコンテナ
 - `hextra-code-copy-btn` - コードコピーボタン
+- `hextra-copy-icon` - コピーアイコン要素
+- `hextra-success-icon` - 成功アイコン要素
 
 #### コードブロック
 
 - `hextra-code-block` - コードブロックコンテナ
+- `hextra-code-filename` - コードブロックのファイル名要素
 
 #### フィーチャーカード
 
@@ -162,13 +206,9 @@ Hextraは、`hugo.yaml`設定ファイル内でいくつかのデフォルトの
 
 - `hextra-feature-grid` - フィーチャーグリッドコンテナ
 
-#### パンくずリスト
-
-パンくずリスト用の特定のクラスはありません。
-
 ### シンタックスハイライト
 
-利用可能なシンタックスハイライトテーマのリストは、[Chroma Styles Gallery](https://xyproto.github.io/splash/docs/all.html)で確認できます。スタイルシートは以下のコマンドで生成できます：
+利用可能なシンタックスハイライトテーマの一覧は、[Chroma Styles Gallery](https://xyproto.github.io/splash/docs/all.html)で確認できます。スタイルシートは以下のコマンドで生成できます:
 
 ```shell
 hugo gen chromastyles --style=github
@@ -178,34 +218,34 @@ hugo gen chromastyles --style=github
 
 ## カスタムスクリプト
 
-すべてのページのheadの最後にカスタムスクリプトを追加するには、以下のファイルを追加します：
+すべてのページのheadの終わりにカスタムスクリプトを追加するには、以下のファイルを作成します:
 
 ```
 layouts/partials/custom/head-end.html
 ```
 
-## フッターのカスタムセクション
+## フッターへのカスタムセクション追加
 
-フッターに追加のセクションを追加するには、サイト内に`layouts/partials/custom/footer.html`ファイルを作成します。
+フッターに追加セクションを追加するには、サイト内に`layouts/partials/custom/footer.html`ファイルを作成します。
 
 ```html {filename="layouts/partials/custom/footer.html"}
 <!-- ここにフッター要素を追加 -->
 ```
 
 追加されたセクションは、フッターの著作権セクションの前に追加されます。
-[HTML](https://developer.mozilla.org/ja/docs/Web/HTML)と[Hugoテンプレート構文](https://gohugo.io/templates/)を使用して、独自のコンテンツを追加できます。
+[HTML](https://developer.mozilla.org/ja/docs/Web/HTML)と[Hugoテンプレート構文](https://gohugo.io/templates/)を使用して独自のコンテンツを追加できます。
 
-フッターセクションで利用可能なHugo変数は、`.switchesVisible`と`.copyrightVisible`です。
+フッターセクションで利用可能なHugo変数: `.switchesVisible`と`.displayCopyright`。
 
 ## カスタムレイアウト
 
-テーマのレイアウトは、サイトの`layouts`ディレクトリ内に同じ名前のファイルを作成することでオーバーライドできます。
-例えば、ドキュメント用の`single.html`レイアウトをオーバーライドするには、サイト内に`layouts/docs/single.html`ファイルを作成します。
+テーマのレイアウトは、サイトの`layouts`ディレクトリに同じ名前のファイルを作成することでオーバーライドできます。
+例えば、ドキュメントの`single.html`レイアウトをオーバーライドするには、サイト内に`layouts/docs/single.html`ファイルを作成します。
 
 詳細については、[Hugoテンプレート][hugo-template-docs]を参照してください。
 
 ## さらなるカスタマイズ
 
-探しているものが見つかりませんでしたか？[ディスカッションを開く](https://github.com/imfing/hextra/discussions)か、テーマに貢献してください！
+探しているものが見つかりませんでしたか？[ディスカッションを開く](https://github.com/imfing/hextra/discussions)か、テーマへの貢献をお願いします！
 
 [hugo-template-docs]: https://gohugo.io/templates/

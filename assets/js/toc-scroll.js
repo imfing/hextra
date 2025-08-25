@@ -16,14 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const headingIds = Array.from(tocLinks).map((link) => link.getAttribute("href").substring(1));
 
-  const headings = headingIds.map((id) => document.getElementById(id)).filter(Boolean);
+  const headings = headingIds.map((id) => document.getElementById(decodeURIComponent(id))).filter(Boolean);
   if (headings.length === 0) return;
 
   let currentActiveLink = null;
+  let isHashNavigation = false;
 
   // Create intersection observer
   const observer = new IntersectionObserver(
     (entries) => {
+      // Skip observer updates during hash navigation
+      if (isHashNavigation) return;
+
       const visibleHeadings = entries.filter((entry) => entry.isIntersecting).map((entry) => entry.target);
 
       if (visibleHeadings.length === 0) return;
@@ -35,7 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return Math.abs(headingTop) < Math.abs(closestTop) ? heading : closest;
       });
 
-      const targetId = topMostHeading.id;
+      // Encode the id and make it lowercase to match the TOC link
+      const targetId = encodeURIComponent(topMostHeading.id).toLowerCase();
       const targetLink = toc.querySelector(`a[href="#${targetId}"]`);
 
       if (targetLink && targetLink !== currentActiveLink) {
@@ -50,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     },
     {
-      rootMargin: "-20px 0px -80% 0px", // Adjust sensitivity
+      rootMargin: "-20px 0px -60% 0px", // Adjust sensitivity
       threshold: [0, 0.1, 0.5, 1],
     }
   );
@@ -58,11 +63,31 @@ document.addEventListener("DOMContentLoaded", function () {
   // Observe all headings
   headings.forEach((heading) => observer.observe(heading));
 
-  // Handle edge case: if no headings are visible on initial load
-  setTimeout(() => {
-    if (!currentActiveLink && tocLinks.length > 0) {
-      tocLinks[0].classList.add("hextra-toc-active");
-      currentActiveLink = tocLinks[0];
+  // Handle direct navigation to page with hash
+  function handleHashNavigation() {
+    const hash = window.location.hash; // already url encoded
+    if (hash) {
+      const targetLink = toc.querySelector(`a[href="${hash}"]`);
+      if (targetLink) {
+        // Disable observer temporarily during hash navigation
+        isHashNavigation = true;
+
+        if (currentActiveLink) {
+          currentActiveLink.classList.remove("hextra-toc-active");
+        }
+        targetLink.classList.add("hextra-toc-active");
+        currentActiveLink = targetLink;
+
+        // Re-enable observer after scroll settles
+        setTimeout(() => { isHashNavigation = false; }, 500);
+        return;
+      }
     }
-  }, 100);
+  }
+
+  // Handle hash changes navigation
+  window.addEventListener("hashchange", handleHashNavigation);
+
+  // Handle initial load
+  setTimeout(handleHashNavigation, 100);
 });
