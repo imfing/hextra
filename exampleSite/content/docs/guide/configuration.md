@@ -157,9 +157,9 @@ menu:
       weight: 3
 ```
 
-### Disabling
+### Hiding
 
-Disabling the sidebar can be done using front matter:
+Hiding the sidebar can be done using front matter:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
@@ -169,7 +169,7 @@ sidebar:
 ---
 ```
 
-This will remove the main sidebar from the page, freeing up space for the main content of the page.
+This will hide the main sidebar from the page, freeing up space for the main content of the page.
 
 
 ## Right Sidebar
