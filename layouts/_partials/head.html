@@ -53,11 +53,7 @@
     <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
   {{- end }}
 
-  <!-- Google Analytics -->
-  {{- if and hugo.IsProduction .Site.Config.Services.GoogleAnalytics.ID }}
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    {{ partial "google-analytics.html" . -}}
-  {{- end }}
+  {{ partial "components/analytics/analytics.html" . }}
 
   <script>
     // The section must not be in the theme.js file because it can create a quick flash (switch between light and dark).
