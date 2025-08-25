@@ -15,13 +15,8 @@ https://umami.is/docs/tracker-configuration
 
 {{- $attributes := newScratch -}}
 
-{{- /* https://umami.is/docs/tracker-configuration */ -}}
 {{- $attributes.SetInMap "umami" "src" (printf "%s/%s" .serverURL (.scriptName | default "umami.js")) -}}
-
-{{- if .websiteID -}}
-  {{- /* https://umami.is/docs/tracker-configuration */ -}}
-  {{- $attributes.SetInMap "umami" "data-website-id" .websiteID -}}
-{{- end -}}
+{{- $attributes.SetInMap "umami" "data-website-id" .websiteID -}}
 
 {{- if .hostURL -}}
   {{- /* https://umami.is/docs/tracker-configuration#data-host-url */ -}}

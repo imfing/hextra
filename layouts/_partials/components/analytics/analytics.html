@@ -1,0 +1,10 @@
+<!-- Google Analytics -->
+{{- if and hugo.IsProduction .Site.Config.Services.GoogleAnalytics.ID }}
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+  {{ partial "google-analytics.html" . -}}
+{{- end }}
+
+<!-- Umami -->
+{{- if and hugo.IsProduction .Site.Params.analytics.umami -}}
+  {{ partial "components/analytics/umami.html" . }}
+{{- end }}
