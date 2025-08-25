@@ -59,6 +59,11 @@
     {{ partial "google-analytics.html" . -}}
   {{- end }}
 
+  <!-- Umami -->
+  {{- if and hugo.IsProduction .Site.Params.analytics.umami -}}
+    {{ partial "components/analytics/umami.html" . }}
+  {{- end }}
+
   <script>
     // The section must not be in the theme.js file because it can create a quick flash (switch between light and dark).
 
