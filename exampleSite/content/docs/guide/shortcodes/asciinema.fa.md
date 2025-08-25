@@ -9,17 +9,63 @@ shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ت
 
 ## استفاده پایه
 
-می‌توانید از فایل‌های `.cast` محلی یا URL های راه دور استفاده کنید. برای فایل‌های محلی، آن‌ها را در دایرکتوری `static/casts/` قرار دهید:
+shortcode asciinema از فایل‌های `.cast` محلی و URL های راه دور پشتیبانی می‌کند. روش‌های مختلف استفاده از فایل‌های محلی به شرح زیر است:
 
+### فایل‌های محلی
+
+**روش 1: دایرکتوری Assets (توصیه شده)**
+فایل‌های cast را در دایرکتوری `assets/` سایت Hugo خود قرار دهید:
+
+```
+your-site/
+├── assets/
+│   └── demo.cast
+└── content/
+    └── my-page.md
+```
+
+در فایل markdown خود:
 ```markdown
 {{</* asciinema file="demo.cast" */>}}
 ```
 
-{{< asciinema file="demo.cast" >}}
+**روش 2: دایرکتوری Static**
+فایل‌های cast را در دایرکتوری `static/` قرار دهید:
+
+```
+your-site/
+├── static/
+│   └── demo.cast
+└── content/
+    └── my-page.md
+```
+
+در فایل markdown خود:
+```markdown
+{{</* asciinema file="demo.cast" */>}}
+```
+
+**روش 3: بسته صفحه**
+برای بسته‌های صفحه، فایل‌های cast را همراه با فایل markdown قرار دهید:
+
+```
+your-site/
+└── content/
+    └── my-page/
+        ├── index.md
+        └── demo.cast
+```
+
+در فایل markdown خود:
+```markdown
+{{</* asciinema file="demo.cast" */>}}
+```
+
+{{< asciinema file="casts/demo.cast" >}}
 
 ### فایل‌های راه دور
 
-همچنین می‌توانید از فایل‌های cast راه دور از هر URL استفاده کنید:
+همچنین می‌توانید از فایل‌های cast از هر URL راه دور استفاده کنید:
 
 ```markdown
 {{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" */>}}
@@ -28,6 +74,15 @@ shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ت
 
 {{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
 
+### نحوه کارکرد جستجوی فایل
+
+shortcode به ترتیب زیر فایل‌های cast شما را به طور خودکار پیدا می‌کند:
+1. **منابع بسته صفحه** (اگر از بسته صفحه استفاده می‌کنید)
+2. **دایرکتوری assets جهانی** (`assets/`)
+3. **دایرکتوری Static** (`static/`)
+4. **URL های راه دور** (اگر مسیر با `http://` یا `https://` شروع شود)
+
+اگر فایل پیدا نشود، Hugo پیام خطای مفیدی نمایش می‌دهد که به شما می‌گوید فایل را کجا قرار دهید.
 
 ## نمایش پیشرفته
 
@@ -45,7 +100,7 @@ shortcode asciinema به شما امکان می‌دهد تا ضبط‌های ت
 ```
 
 {{< asciinema 
-  file="demo.cast"
+  file="casts/demo.cast"
   theme="dracula"
   speed="2"
   autoplay="true"

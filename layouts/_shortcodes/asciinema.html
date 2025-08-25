@@ -1,15 +1,53 @@
 {{- /* Get parameters */ -}}
 {{- $castFile := .Get "file" | default (.Get 0) -}}
-{{- /* Handle file path: if not absolute path or URL, prepend /casts/ */ -}}
-{{- if and (not (hasPrefix $castFile "/")) (not (hasPrefix $castFile "http://")) (not (hasPrefix $castFile "https://")) -}}
-  {{- $castFile = printf "/casts/%s" $castFile -}}
-{{- end -}}
 {{- $theme := .Get "theme" | default "asciinema" -}}
 {{- $speed := .Get "speed" | default 1 -}}
 {{- $autoplay := .Get "autoplay" | default false -}}
 {{- $loop := .Get "loop" | default false -}}
 {{- $poster := .Get "poster" | default "" -}}
 {{- $markers := .Get "markers" | default "" -}}
+
+{{- /* Handle file path: support local files, absolute paths, and remote URLs */ -}}
+{{- $isLocal := not (urls.Parse $castFile).Scheme -}}
+{{- $isPage := and (eq .Page.Kind "page") (not .Page.BundleType) -}}
+
+{{- if $isLocal -}}
+  {{- /* Local file handling */ -}}
+  {{- $found := false -}}
+  
+  {{- /* Try page resources first */ -}}
+  {{- if not $isPage -}}
+    {{- with .Page.Resources.Get $castFile -}}
+      {{- $castFile = .RelPermalink -}}
+      {{- $found = true -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{- /* Try global resources if not found in page resources */ -}}
+  {{- if not $found -}}
+    {{- with resources.Get $castFile -}}
+      {{- $castFile = .RelPermalink -}}
+      {{- $found = true -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{- /* Try static files if not found in resources */ -}}
+  {{- if not $found -}}
+    {{- if hasPrefix $castFile "/" -}}
+      {{- $castFile = relURL (strings.TrimPrefix "/" $castFile) -}}
+      {{- $found = true -}}
+    {{- else -}}
+      {{- /* For relative paths, assume they're in static directory */ -}}
+      {{- $castFile = relURL $castFile -}}
+      {{- $found = true -}}
+    {{- end -}}
+  {{- end -}}
+  
+  {{- /* If still not found, raise an error */ -}}
+  {{- if not $found -}}
+    {{- errorf "Asciinema cast file not found: %s. Please ensure the file exists in your assets, static/, or provide a valid remote URL." $castFile -}}
+  {{- end -}}
+{{- end -}}
 
 {{- /* Build marker configuration */ -}}
 {{- $markerConfig := "" -}}

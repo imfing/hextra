@@ -9,17 +9,63 @@ asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で
 
 ## 基本的な使用方法
 
-ローカル `.cast` ファイルまたはリモート URL を使用できます。ローカルファイルの場合は、`static/casts/` ディレクトリに配置してください：
+asciinema shortcode はローカルの `.cast` ファイルとリモート URL の両方をサポートしています。ローカルファイルを使用する方法は以下の通りです：
 
+### ローカルファイル
+
+**方法 1：Assets ディレクトリ（推奨）**
+cast ファイルを Hugo サイトの `assets/` ディレクトリに配置：
+
+```
+your-site/
+├── assets/
+│   └── demo.cast
+└── content/
+    └── my-page.md
+```
+
+markdown ファイル内：
 ```markdown
 {{</* asciinema file="demo.cast" */>}}
 ```
 
-{{< asciinema file="demo.cast" >}}
+**方法 2：Static ディレクトリ**
+cast ファイルを `static/` ディレクトリに配置：
+
+```
+your-site/
+├── static/
+│   └── demo.cast
+└── content/
+    └── my-page.md
+```
+
+markdown ファイル内：
+```markdown
+{{</* asciinema file="demo.cast" */>}}
+```
+
+**方法 3：ページバンドル**
+ページバンドルの場合、cast ファイルを markdown ファイルと一緒に配置：
+
+```
+your-site/
+└── content/
+    └── my-page/
+        ├── index.md
+        └── demo.cast
+```
+
+markdown ファイル内：
+```markdown
+{{</* asciinema file="demo.cast" */>}}
+```
+
+{{< asciinema file="casts/demo.cast" >}}
 
 ### リモートファイル
 
-任意の URL からのリモート cast ファイルも使用できます：
+任意のリモート URL からの cast ファイルも使用できます：
 
 ```markdown
 {{</* asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" */>}}
@@ -27,6 +73,16 @@ asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で
 ```
 
 {{< asciinema file="https://asciinema.org/a/85R4jTtjKVRIYXTcKCNq0vzYH.cast" >}}
+
+### ファイル検索の仕組み
+
+shortcode は以下の順序で cast ファイルを自動的に検索します：
+1. **ページバンドルリソース**（ページバンドルを使用している場合）
+2. **グローバル assets ディレクトリ**（`assets/`）
+3. **Static ディレクトリ**（`static/`）
+4. **リモート URL**（パスが `http://` または `https://` で始まる場合）
+
+ファイルが見つからない場合、Hugo はファイルをどこに配置すべきかを示す有用なエラーメッセージを表示します。
 
 ## 高度なデモ
 
@@ -44,7 +100,7 @@ asciinema shortcode を使用すると、[asciinema](https://asciinema.org/) で
 ```
 
 {{< asciinema 
-  file="demo.cast"
+  file="casts/demo.cast"
   theme="dracula"
   speed="2"
   autoplay="true"
