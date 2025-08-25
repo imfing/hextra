@@ -1,11 +1,13 @@
 ---
 title: 配置
 weight: 2
+tags:
+  - 配置
 ---
 
-Hugo 从您 Hugo 站点根目录下的 `hugo.yaml` 文件中读取配置。
-配置文件是您可以配置站点所有方面的地方。
-查看此站点的配置文件 [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) 在 GitHub 上，以全面了解可用的设置和最佳实践。
+Hugo 从站点根目录的 `hugo.yaml` 读取配置。
+配置文件可用来调整站点的所有方面。
+查看本网站的示例配置文件 [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) 以全面了解可用设置和最佳实践。
 
 <!--more-->
 
@@ -13,7 +15,7 @@ Hugo 从您 Hugo 站点根目录下的 `hugo.yaml` 文件中读取配置。
 
 ### 菜单
 
-右上角的菜单在配置文件的 `menu.main` 部分中定义：
+右上角菜单在配置文件的 `menu.main` 部分定义：
 
 ```yaml {filename="hugo.yaml"}
 menu:
@@ -38,37 +40,73 @@ menu:
         icon: github
 ```
 
-有不同类型的菜单项：
+菜单项有以下几种类型：
 
-1. 使用 `pageRef` 链接到站点内的页面
-    ```yaml
-    - name: 文档
-      pageRef: /docs
-    ```
-2. 使用 `url` 链接到外部 URL
-    ```yaml
-    - name: GitHub
-      url: "https://github.com"
-    ```
-3. 使用 `type: search` 的搜索栏
-    ```yaml
-    - name: 搜索
-      params:
-        type: search
-    ```
+1. 通过 `pageRef` 链接到站内页面
+   ```yaml
+   - name: 文档
+     pageRef: /docs
+   ```
+2. 通过 `url` 链接到外部网址
+   ```yaml
+   - name: GitHub
+     url: "https://github.com"
+   ```
+3. 搜索栏，使用 `type: search`
+   ```yaml
+   - name: 搜索
+     params:
+       type: search
+   ```
 4. 图标
-    ```yaml
-    - name: GitHub
+   ```yaml
+   - name: GitHub
+     params:
+       icon: github
+   ```
+5. 主题切换
+   ```yaml
+    - name: Theme Toggle
       params:
-        icon: github
-    ```
+        type: theme-toggle
+        label: true # optional, default is false
+   ```
+6. 语言切换器
+   ```yaml
+    - name: 语言切换器
+      params:
+        type: language-switch
+        label: true # optional, default is false
+        icon: "globe-alt" # optional, default is "translate"
+   ```
 
-这些菜单项可以通过设置 `weight` 参数进行排序。
+通过设置 `weight` 参数可以调整菜单项的排序。
 
-### 徽标和标题
+### 嵌套菜单
 
-要修改默认徽标，编辑 `hugo.yaml` 并在 `static` 目录下添加徽标文件的路径。
-您还可以更改用户点击徽标时重定向的链接，以及设置徽标的宽度和高度（以像素为单位）。
+通过定义子菜单项可以创建下拉菜单。点击父菜单项时会显示子菜单。
+
+```yaml {filename="hugo.yaml"}
+menu:
+  main:
+    - identifier: sdk
+      name: SDK
+    - identifier: python
+      name: Python ↗
+      url: https://python.org
+      parent: sdk
+    - identifier: go
+      name: Go
+      url: https://go.dev
+      parent: sdk
+```
+
+子菜单项需要通过 `parent` 参数指定父菜单的 `identifier` 值。
+
+### 徽标与标题
+
+要修改默认徽标，编辑 `hugo.yaml` 并在 `static` 目录下添加徽标文件路径。
+可选地，可以更改点击徽标时的跳转链接，以及设置徽标的像素宽度和高度。
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -87,10 +125,10 @@ params:
 
 ### 主侧边栏
 
-主侧边栏是根据内容目录的结构自动生成的。
-有关更多详细信息，请参阅 [组织文件](/docs/guide/organize-files) 页面。
+主侧边栏会根据内容目录结构自动生成。
+详情参见[文件组织](/docs/guide/organize-files)页面。
 
-要从左侧边栏中排除单个页面，请在页面的 front matter 中设置 `sidebar.exclude` 参数：
+要从左侧边栏排除单个页面，在页面的 front matter 中设置 `sidebar.exclude` 参数：
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
@@ -102,7 +140,7 @@ sidebar:
 
 ### 额外链接
 
-侧边栏的额外链接在配置文件的 `menu.sidebar` 部分中定义：
+侧边栏额外链接在配置文件的 `menu.sidebar` 部分定义：
 
 ```yaml {filename="hugo.yaml"}
 menu:
@@ -123,7 +161,7 @@ menu:
 
 ### 目录
 
-目录是根据内容文件中的标题自动生成的。可以通过在页面的 front matter 中设置 `toc: false` 来禁用它。
+目录会根据内容文件中的标题自动生成。可以通过在页面的 front matter 中设置 `toc: false` 来禁用。
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
@@ -134,7 +172,7 @@ toc: false
 
 ### 页面编辑链接
 
-要配置页面编辑链接，我们可以在配置文件中设置 `params.editURL.base` 参数：
+要配置页面编辑链接，可以在配置文件中设置 `params.editURL.base` 参数：
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -143,8 +181,8 @@ params:
     base: "https://github.com/your-username/your-repo/edit/main"
 ```
 
-编辑链接将根据提供的 URL 作为根目录自动为每个页面生成。
-如果要为特定页面设置编辑链接，可以在页面的 front matter 中设置 `editURL` 参数：
+编辑链接将基于提供的 URL 作为根目录自动为每个页面生成。
+如果想为特定页面设置编辑链接，可以在页面的 front matter 中设置 `editURL` 参数：
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
@@ -155,22 +193,22 @@ editURL: "https://example.com/edit/this/page"
 
 ## 页脚
 
-### 版权
+### 版权信息
 
-要修改网站页脚中显示的版权文本，您需要创建一个名为 `i18n/en.yaml` 的文件。
-在此文件中，指定您的新版权文本，如下所示：
+要修改网站页脚显示的版权文本，需要创建一个名为 `i18n/en.yaml` 的文件。
+在该文件中指定新的版权文本，如下所示：
 
 ```yaml {filename="i18n/en.yaml"}
-copyright: "© 2024 您的文本"
+copyright: "© 2024 你的文本内容"
 ```
 
-作为参考，可以在 GitHub 仓库中找到示例 [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) 文件。此外，您可以在版权文本中使用 Markdown 格式。
+可以参考 GitHub 仓库中的示例 [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) 文件。此外，可以在版权文本中使用 Markdown 格式。
 
 ## 其他
 
 ### 网站图标
 
-要为您的站点自定义 [网站图标](https://en.wikipedia.org/wiki/Favicon)，请将图标文件放在 `static` 文件夹下，以覆盖 [主题的默认网站图标](https://github.com/imfing/hextra/tree/main/static)：
+要自定义网站的 [favicon](https://en.wikipedia.org/wiki/Favicon)，将图标文件放在 `static` 文件夹下以覆盖[主题默认的网站图标](https://github.com/imfing/hextra/tree/main/static)：
 
 {{< filetree/container >}}
   {{< filetree/folder name="static" >}}
@@ -186,14 +224,30 @@ copyright: "© 2024 您的文本"
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-在您的项目中包含 `favicon.ico`、`favicon.svg` 和 `favicon-dark.svg` 文件，以确保您的站点图标正确显示。
+#### 基本设置
 
-虽然 `favicon.ico` 通常用于旧版浏览器，但 `favicon.svg` 和 `favicon-dark.svg` 受现代浏览器支持。
-使用 [favicon.io](https://favicon.io/) 或 [favycon](https://github.com/ruisaraiva19/favycon) 等工具生成此类图标。
+至少需要在 `static` 文件夹中包含 `favicon.svg`。这将作为网站的默认图标。
+
+可以通过在 SVG 文件中使用 CSS 媒体查询来创建自适应图标，响应系统主题偏好，具体方法参考[构建自适应网站图标](https://web.dev/articles/building/an-adaptive-favicon)。
+
+#### 暗色模式支持
+
+为了增强暗色模式支持，在 `static` 文件夹中添加 `favicon-dark.svg` 与 `favicon.svg` 一起。当两个文件都存在时，Hextra 会自动：
+
+- 在亮色模式或未检测到主题偏好时使用 `favicon.svg`
+- 当用户系统设置为暗色模式时切换到 `favicon-dark.svg`
+- 尊重系统的 `prefers-color-scheme` 设置实现自动切换
+
+暗色模式图标切换在所有现代浏览器中都有效，包括 Firefox，提供与网站主题一致的无缝体验。
+
+#### 其他格式
+
+虽然 `favicon.ico` 通常用于旧版浏览器，现代浏览器支持 SVG 图标，因其可缩放性和小文件大小而更受青睐。
+如果需要，可以使用 [favicon.io](https://favicon.io/) 或 [favycon](https://github.com/ruisaraiva19/favycon) 等工具生成其他格式的图标。
 
 ### 主题配置
 
-使用 `theme` 设置来配置默认主题模式和切换按钮，允许访问者在浅色或深色模式之间切换。
+使用 `theme` 设置来配置默认主题模式和切换按钮，允许访问者在亮色或暗色模式之间切换。
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -205,16 +259,32 @@ params:
 
 `theme.default` 的选项：
 
-- `light` - 始终使用浅色模式
-- `dark` - 始终使用深色模式
+- `light` - 始终使用亮色模式
+- `dark` - 始终使用暗色模式
 - `system` - 与操作系统设置同步（默认）
 
-`theme.displayToggle` 参数允许您显示一个切换按钮以更改主题。
-当设置为 `true` 时，访问者可以在浅色或深色模式之间切换，覆盖默认设置。
+`theme.displayToggle` 参数允许显示主题切换按钮。
+当设置为 `true` 时，访问者可以切换亮色或暗色模式，覆盖默认设置。
+
+### 页面最后修改时间
+
+可以通过启用 `params.displayUpdatedDate` 标志来显示页面的最后修改日期。要使用 Git 提交日期作为来源，还需启用 `enableGitInfo` 标志。
+
+要自定义日期格式，设置 `params.dateFormat` 参数。其布局与 Hugo 的 [`time.Format`](https://gohugo.io/functions/time/format/) 匹配。
+
+```yaml {filename="hugo.yaml"}
+# 解析 Git 提交
+enableGitInfo: true
+
+params:
+  # 显示最后修改日期
+  displayUpdatedDate: true
+  dateFormat: "2006年1月2日"
+```
 
 ### 标签
 
-要显示页面标签，请在配置文件中设置以下标志：
+要显示页面标签，在配置文件中设置以下标志：
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -227,7 +297,7 @@ params:
 
 ### 页面宽度
 
-页面的宽度可以通过配置文件中的 `params.page.width` 参数进行自定义：
+页面宽度可以通过配置文件中的 `params.page.width` 参数自定义：
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -236,14 +306,14 @@ params:
     width: wide
 ```
 
-有三个可用选项：`full`、`wide` 和 `normal`。默认情况下，页面宽度设置为 `normal`。
+有三个可用选项：`full`、`wide` 和 `normal`。默认页面宽度为 `normal`。
 
-同样，导航栏和页脚的宽度可以通过 `params.navbar.width` 和 `params.footer.width` 参数进行自定义。
+类似地，导航栏和页脚的宽度可以通过 `params.navbar.width` 和 `params.footer.width` 参数自定义。
 
-### 搜索索引
+### FlexSearch 索引
 
 默认启用由 [FlexSearch](https://github.com/nextapps-de/flexsearch) 提供的全文搜索。
-要自定义搜索索引，请在配置文件中设置 `params.search.flexsearch.index` 参数：
+要自定义搜索索引，在配置文件中设置 `params.search.flexsearch.index` 参数：
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -253,35 +323,36 @@ params:
     type: flexsearch
 
     flexsearch:
-      # 按以下内容索引页面：content | summary | heading | title
+      # 索引页面方式: content | summary | heading | title
       index: content
 ```
 
 `flexsearch.index` 的选项：
 
 - `content` - 页面的完整内容（默认）
-- `summary` - 页面的摘要，请参阅 [Hugo 内容摘要](https://gohugo.io/content-management/summaries/) 了解更多详细信息
+- `summary` - 页面摘要，详见 [Hugo 内容摘要](https://gohugo.io/content-management/summaries/)
 - `heading` - 一级和二级标题
-- `title` - 仅包括页面标题
+- `title` - 仅包含页面标题
 
-要自定义搜索分词，请在配置文件中设置 `params.search.flexsearch.tokenize` 参数：
+要自定义搜索分词方式，在配置文件中设置 `params.search.flexsearch.tokenize` 参数：
 
 ```yaml {filename="hugo.yaml"}
 params:
+  search:
     # ...
     flexsearch:
-      # full | forward | reverse | strict 
+      # full | forward | reverse | strict
       tokenize: forward
 ```
 
 [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search) 的选项：
 
-- `strict` - 索引整个单词
-- `forward` - 向前方向逐步索引单词
+- `strict` - 索引完整单词
+- `forward` - 正向逐步索引单词
 - `reverse` - 双向逐步索引单词
 - `full` - 索引所有可能的组合
 
-要从搜索索引中排除页面，请在页面的 front matter 中设置 `excludeSearch: true`：
+要从 FlexSearch 搜索索引中排除页面，在页面的 front matter 中设置 `excludeSearch: true`：
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
@@ -290,12 +361,65 @@ excludeSearch: true
 ---
 ```
 
-### Google Analytics
+### Google 分析
 
-要启用 [Google Analytics](https://marketingplatform.google.com/about/analytics/)，请在 `hugo.yaml` 中设置 `services.googleAnalytics.ID` 标志：
+要启用 [Google Analytics](https://marketingplatform.google.com/about/analytics/)，在 `hugo.yaml` 中设置 `services.googleAnalytics.ID` 标志：
 
 ```yaml {filename="hugo.yaml"}
 services:
   googleAnalytics:
     ID: G-MEASUREMENT_ID
+```
+
+### Google 搜索索引
+
+要[阻止 Google 搜索](https://developers.google.com/search/docs/crawling-indexing/block-indexing)索引页面，在页面的 frontmatter 中设置 `noindex` 为 true：
+
+```yaml
+title: 配置（存档版本）
+params:
+  noindex: true
+```
+
+要排除整个目录，在父级 `_index.md` 文件中使用 [`cascade`](https://gohugo.io/configuration/cascade/) 键。
+
+> [!注意]
+> 要阻止搜索引擎爬虫，可以制作 [`robots.txt` 模板](https://gohugo.io/templates/robots/)。
+> 但是，`robots.txt` 指令不一定能阻止页面出现在 Google 搜索结果中。
+
+### LLMS.txt 支持
+
+要为网站启用 [llms.txt](https://llmstxt.org/) 输出格式，为[大型语言模型](https://en.wikipedia.org/wiki/Large_language_model)和 AI 代理提供结构化文本大纲，在站点的 `hugo.yaml` 中添加 `llms` 输出格式：
+
+```diff {filename="hugo.yaml"}
+outputs:
+- home: [html]
++ home: [html, llms]
+  page: [html]
+  section: [html, rss]
+```
+
+这将在站点根目录生成一个 `llms.txt` 文件，包含：
+
+- 站点标题和描述
+- 所有章节和页面的层次结构列表
+- 页面摘要和发布日期
+- 所有内容的直接链接
+
+llms.txt 文件根据内容结构自动生成，使 AI 工具和语言模型更容易获取上下文和参考。
+
+### Open Graph
+
+要在页面中添加 [Open Graph](https://ogp.me/) 元数据，在 frontmatter 的 params 中添加值。
+
+由于一个页面可以有多个 `image` 和 `video` 标签，将它们的值放在数组中。
+其他 Open Graph 属性只能有一个值。
+例如，此页面有一个 `og:image` 标签（配置社交分享时的预览图片）和一个 `og:audio` 标签。
+
+```yaml {filename="content/docs/guide/configuration.md"}
+title: "配置"
+params:
+  images:
+    - "/img/config-image.jpg"
+  audio: "config-talk.mp3"
 ```

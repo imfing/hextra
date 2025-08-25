@@ -1,17 +1,35 @@
+{{- /*
+A shortcode to create a badge.
+
+@param {string} content The content of the badge.
+@param {string} color The color of the badge.
+@param {string} class The class of the badge.
+@param {string} link The link of the badge.
+@param {string} icon The icon of the badge.
+
+or
+
+@param {string} 0 The content of the badge.
+
+@example {{< badge content="Badge" color="blue" >}}
+@example {{< badge "Badge" >}}
+*/ -}}
+
 {{- if .IsNamedParams -}}
   {{- $content := .Get "content" -}}
-  {{- $type := .Get "type" | default "" -}}
+  {{- $color := .Get "color" | default (.Get "type") | default "" -}}{{- /* Compatibility with previous parameter. */ -}}
   {{- $class := .Get "class" | default "" -}}
   {{- $link := .Get "link" | default "" -}}
   {{- $icon := .Get "icon" | default "" -}}
+  {{- $border := not (eq (.Get "border") false) | default true }}
 
   {{- if $link -}}
     <a href="{{ $link }}" title="{{ $content | plainify }}" target="_blank">
       {{- partial "shortcodes/badge.html" (dict
         "content" $content 
-        "type" $type
+        "color" $color
         "class" $class
-        "border" true
+        "border" $border
         "icon" $icon
         )
       -}}
@@ -19,9 +37,9 @@
   {{- else -}}
     {{- partial "shortcodes/badge.html" (dict
       "content" $content 
-      "type" $type
+      "color" $color
       "class" $class
-      "border" true
+      "border" $border
       "icon" $icon
       )
     -}}

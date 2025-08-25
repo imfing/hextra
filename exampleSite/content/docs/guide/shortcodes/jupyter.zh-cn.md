@@ -6,9 +6,9 @@ sidebar:
   exclude: true
 ---
 
-{{< callout >}}实验性功能：通过短代码嵌入 Jupyter Notebook。请注意，并非所有单元格类型都受支持。{{< /callout >}}
+{{< callout type="warning" >}}实验性功能：通过短代码嵌入 Jupyter Notebook。注意并非所有单元格类型都受支持。{{< /callout >}}
 
-[Jupyter Notebook](https://jupyter.org/) 是 [Project Jupyter](https://jupyter.org/) 的一个语言无关的 HTML 笔记本应用程序。它允许你创建和共享包含实时代码、方程、可视化和叙述性文本的文档。
+[Jupyter Notebook](https://jupyter.org/) 是 [Project Jupyter](https://jupyter.org/) 推出的语言无关的 HTML 笔记本应用。它允许你创建和分享包含动态代码、数学公式、可视化图表和叙述性文本的文档。
 
 <!--more-->
 
@@ -16,7 +16,7 @@ sidebar:
 
 ### 使用本地笔记本
 
-要使用 Jupyter Notebook 短代码，你需要在项目中有一个 Jupyter Notebook 文件。类似于如何[添加图片](../../organize-files#add-images)到项目中，你可以将 Jupyter Notebooks 添加到 `assets` 文件夹。
+要使用 Jupyter Notebook 短代码，你需要在项目中放置一个 Jupyter Notebook 文件。与[添加图片](../../organize-files#add-images)到项目类似，你可以将 Jupyter Notebook 放入 `assets` 文件夹。
 
 {{< filetree/container >}}
   {{< filetree/folder name="assets" >}}
@@ -29,7 +29,7 @@ sidebar:
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-使用 `jupyter` 短代码将 Jupyter Notebook 包含在页面中：
+使用 `jupyter` 短代码将笔记本嵌入页面：
 
 ```markdown {filename="content/docs/my-page.md"}
 ---
@@ -40,7 +40,7 @@ math: true
 {{%/* jupyter "notebook.ipynb" */%}}
 ```
 
-或者，你可以利用 Hugo 的[页面包][page-bundles]功能将 Jupyter Notebooks 与 Markdown 文件一起组织。
+或者，你可以利用 Hugo 的[页面包][page-bundles]功能，将 Jupyter Notebook 与 Markdown 文件组织在一起。
 
 {{< filetree/container >}}
   {{< filetree/folder name="content" >}}
@@ -64,7 +64,7 @@ math: true
 
 ### 使用远程笔记本
 
-你也可以通过提供笔记本文件的 URL 来使用远程笔记本。例如，要在页面中包含 [What is the Jupyter Notebook](https://github.com/jupyter/notebook/blob/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb) 笔记本，你可以使用以下短代码：
+你也可以通过提供笔记本文件的 URL 来使用远程笔记本。例如，要在页面中嵌入 [什么是 Jupyter Notebook](https://github.com/jupyter/notebook/blob/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb) 笔记本，可以使用以下短代码：
 
 ```
 {{%/* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */%}}
@@ -72,7 +72,7 @@ math: true
 
 ## 示例笔记本
 
-{{< callout type="info" >}}以下是包含在项目 assets 文件夹中的笔记本文件示例。{{< /callout >}}
+{{< callout type="info" >}}以下示例展示的是项目 assets 文件夹中包含的笔记本文件。{{< /callout >}}
 
 {{% jupyter "example.ipynb" %}}
 

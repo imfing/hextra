@@ -2,6 +2,7 @@
 <html lang="{{ .Site.Language.Lang }}">
   {{- partial "head.html" . -}}
   <body dir="{{ .Site.Language.LanguageDirection | default `ltr` }}">
+    {{- partial "banner.html" . -}}
     {{- partial "navbar.html" . -}}
     {{- block "main" . }}{{ end -}}
     {{- if or (eq .Site.Params.footer.enable nil) (.Site.Params.footer.enable) }}

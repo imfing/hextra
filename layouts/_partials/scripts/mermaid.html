@@ -1,17 +1,52 @@
-{{/* Mermaid */}}
+{{- /* Mermaid */ -}}
 
-{{ $mermaidJsUrl := printf "https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid%s.js" (cond hugo.IsProduction ".min" "") -}}
-{{ with try (resources.GetRemote $mermaidJsUrl) -}}
-  {{ with .Err -}}
-    {{ errorf "Could not retrieve Mermaid js file from %s. Reason: %s." $mermaidJsUrl . -}}
-  {{ else with.Value -}}
-    {{ with resources.Copy (printf "js/mermaid.min.js") . -}}
-      {{ $mermaidJs := . | fingerprint -}}
-      <script defer src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous"></script>
-    {{ end -}}
-  {{ end -}}
-{{ end -}}
+{{- $mermaidBase := "" -}}
+{{- $useDefaultCdn := true -}}
+{{- with site.Params.mermaid.base -}}
+  {{- $mermaidBase = . -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
 
+{{- $mermaidJsAsset := "" -}}
+{{- with site.Params.mermaid.js -}}
+  {{- $mermaidJsAsset = . -}}
+{{- end -}}
+
+{{- /* If only js is set without base, use local asset loading */ -}}
+{{- if and $useDefaultCdn (ne $mermaidJsAsset "") -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- /* Set default CDN base if needed */ -}}
+{{- if $useDefaultCdn -}}
+  {{- $mermaidBase = "https://cdn.jsdelivr.net/npm/mermaid@latest/dist" -}}
+{{- end -}}
+
+{{- $isRemoteBase := or (strings.HasPrefix $mermaidBase "http://") (strings.HasPrefix $mermaidBase "https://") -}}
+{{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
+
+{{- /* JS retrieval: get raw JS from either local asset or remote, then process */ -}}
+{{- if $isRemoteBase -}}
+  {{- $jsPath := cond (ne $mermaidJsAsset "") $mermaidJsAsset (printf "mermaid%s.js" $minSuffix) -}}
+  {{- $mermaidJsUrl := printf "%s/%s" $mermaidBase $jsPath -}}
+  {{- with try (resources.GetRemote $mermaidJsUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Mermaid js file from %s. Reason: %s." $mermaidJsUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy (printf "js/mermaid%s.js" $minSuffix) . -}}
+        {{- $mermaidJs := . | fingerprint -}}
+        <script defer src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $mermaidJsAsset -}}
+  {{- with resources.Get $mermaidJsAsset -}}
+    {{- $mermaidJs := . | fingerprint -}}
+    <script defer src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- else -}}
+    {{- errorf "Mermaid js asset not found at %q" $mermaidJsAsset -}}
+  {{- end -}}
+{{- end -}}
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {

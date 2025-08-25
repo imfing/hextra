@@ -1,0 +1,92 @@
+{{- /* KaTeX CSS loader
+
+  Behavior (driven by site.params.math.katex):
+  - base (remote URL) + optional css:
+    - Construct remote CSS URL: "{{ base }}/{{ css | default "katex[.min].css" }}".
+    - Fetch via resources.GetRemote, rewrite font URLs to "{{ base }}/fonts/...".
+    - Build and fingerprint; emit <link rel="stylesheet" integrity>.
+  - base (local path or not set) + css (asset path):
+    - Read CSS from Hugo assets via resources.Get; DO NOT rewrite font URLs.
+    - Build and fingerprint; emit <link rel="stylesheet" integrity>.
+  - base (local path) only (no css):
+    - Link directly to "{{ base }}/katex[.min].css" (no processing).
+  - Nothing set:
+    - Default to CDN latest base; same as remote path above.
+
+  Additional:
+  - assets: optional list to publish extra assets. CSS/JS get tags with integrity (JS loads async).
+*/ -}}
+{{- $noop := .WordCount -}}
+
+{{- $katexBase := "" -}}
+{{- with site.Params.math.katex.base -}}
+  {{- $katexBase = . -}}
+{{- else -}}
+  {{- if not site.Params.math.katex.css -}}
+    {{- $katexBase = "https://cdn.jsdelivr.net/npm/katex@latest/dist" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $katexCssAsset := "" -}}
+{{- with site.Params.math.katex.css -}}
+  {{- $katexCssAsset = . -}}
+{{- end -}}
+
+{{- $s := newScratch -}}
+{{- $isRemoteBase := or (strings.HasPrefix $katexBase "http://") (strings.HasPrefix $katexBase "https://") -}}
+
+{{- /* CSS retrieval consolidated: get raw CSS from either local asset or remote, then process once */ -}}
+{{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
+{{- if $isRemoteBase -}}
+  {{- $cssPath := cond (ne $katexCssAsset "") $katexCssAsset (printf "katex%s.css" $minSuffix) -}}
+  {{- $katexCssUrl := printf "%s/%s" $katexBase $cssPath -}}
+  {{- with try (resources.GetRemote $katexCssUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve KaTeX css file from %s. Reason: %s." $katexCssUrl . -}}
+    {{- else with .Value -}}
+      {{- $s.Set "katexCssValue" .Content -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $katexCssAsset -}}
+  {{- with resources.Get $katexCssAsset -}}
+    {{- $s.Set "katexCssValue" .Content -}}
+  {{- else -}}
+    {{- errorf "KaTeX css asset not found at %q" $katexCssAsset -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $s.Get "katexCssValue" -}}
+  {{- $cssContent := . -}}
+  {{- if $isRemoteBase -}}
+    {{- $fontPattern := "url(fonts/" -}}
+    {{- $fontSub := printf "url(%s/fonts/" $katexBase -}}
+    {{- $cssContent = strings.Replace $cssContent $fontPattern $fontSub -}}
+  {{- end -}}
+  {{- with resources.FromString (printf "css/katex%s.css" $minSuffix) $cssContent -}}
+    {{- $css := . | fingerprint "sha512" -}}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+  {{- end -}}
+{{- else -}}
+  {{- if not $isRemoteBase -}}
+    {{- $cssPath := cond (ne $katexCssAsset "") $katexCssAsset (printf "katex%s.css" $minSuffix) -}}
+    <link rel="stylesheet" href="{{ printf "%s/%s" $katexBase $cssPath }}" />
+  {{- end -}}
+{{- end -}}
+
+{{- /* Optionally publish files (fonts, css, js, etc.) from assets and emit tags for css/js with integrity and crossorigin */ -}}
+{{- with site.Params.math.katex.assets -}}
+  {{- range . -}}
+    {{- with resources.Get . -}}
+      {{- $name := .Name | lower -}}
+      {{- if strings.HasSuffix $name ".css" -}}
+        {{- $built := . | fingerprint "sha512" -}}
+        <link rel="stylesheet" href="{{ $built.RelPermalink }}" integrity="{{ $built.Data.Integrity }}" crossorigin="anonymous" />
+      {{- else if or (strings.HasSuffix $name ".js") (strings.HasSuffix $name ".mjs") -}}
+        {{- $built := . | fingerprint "sha512" -}}
+        <script src="{{ $built.RelPermalink }}" async integrity="{{ $built.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- else -}}
+        {{- .Publish -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

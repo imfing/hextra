@@ -1,5 +1,12 @@
-{{- $style := .Get "style" -}}
+{{- /*
+A shortcode for displaying a hero headline.
 
+@param {string} style The style of the headline.
+
+@example {{< hextra/hero-headline >}}{{< /hextra/hero-headline >}}
+*/ -}}
+
+{{- $style := .Get "style" -}}
 
 <h1
   class="not-prose hx:text-4xl hx:font-bold hx:leading-none hx:tracking-tighter hx:md:text-5xl hx:py-2 hx:bg-clip-text hx:text-transparent hx:bg-gradient-to-r hx:from-gray-900 hx:to-gray-600 hx:dark:from-gray-100 hx:dark:to-gray-400"

@@ -2,33 +2,44 @@
 {{- $alertType := .alertType -}}
 {{- $alertTitle := .alertTitle -}}
 
-{{- $icons := dict
-  "note" "information-circle"
-  "tip" "light-bulb"
-  "important" "information-circle"
-  "warning" "exclamation"
-  "caution" "exclamation-circle"
+{{- $styles := newScratch -}}
+{{- $styles.Set "default" (dict
+  "icon" "light-bulb"
+  "style" "hx:border-green-200 hx:bg-green-100 hx:text-green-900 hx:dark:border-green-200/30 hx:dark:bg-green-900/30 hx:dark:text-green-200"
+  )
+-}}
+{{- $styles.Set "note" (dict
+  "icon" "information-circle"
+  "style" "hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200"
+  )
+-}}
+{{- $styles.Set "tip" (dict
+  "icon" "light-bulb"
+  "style" "hx:border-green-200 hx:bg-green-100 hx:text-green-900 hx:dark:border-green-200/30 hx:dark:bg-green-900/30 hx:dark:text-green-200"
+  )
+-}}
+{{- $styles.Set "important" (dict
+  "icon" "information-circle"
+  "style" "hx:border-purple-200 hx:bg-purple-100 hx:text-purple-900 hx:dark:border-purple-200/30 hx:dark:bg-purple-900/30 hx:dark:text-purple-200"
+  )
+-}}
+{{- $styles.Set "warning" (dict
+  "icon" "exclamation"
+  "style" "hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200"
+  )
+-}}
+{{- $styles.Set "caution" (dict
+  "icon" "exclamation-circle"
+  "style" "hx:border-red-200 hx:bg-red-100 hx:text-red-900 hx:dark:border-red-200/30 hx:dark:bg-red-900/30 hx:dark:text-red-200"
+  )
 -}}
 
-{{- $icon := index $icons $alertType -}}
+{{- $style := or ($styles.Get $alertType) ($styles.Get "default") -}}
 {{- $title := or $alertTitle (or (i18n $alertType) (title $alertType)) -}}
 
-{{- $defaultClass := "hx:border-orange-100 hx:bg-orange-50 hx:text-orange-800 hx:dark:border-orange-400/30 hx:dark:bg-orange-400/20 hx:dark:text-orange-300" }}
-
-{{- $alertClasses := dict
-  "note" "hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200"
-  "tip" "hx:border-green-200 hx:bg-green-100 hx:text-green-900 hx:dark:border-green-200/30 hx:dark:bg-green-900/30 hx:dark:text-green-200"
-  "important" "hx:border-indigo-200 hx:bg-indigo-100 hx:text-indigo-900 hx:dark:border-indigo-200/30 hx:dark:bg-indigo-900/30 hx:dark:text-indigo-200"
-  "warning" "hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200"
-  "caution" "hx:border-red-200 hx:bg-red-100 hx:text-red-900 hx:dark:border-red-200/30 hx:dark:bg-red-900/30 hx:dark:text-red-200"
--}}
-
-{{- $class := index $alertClasses $alertType | default $defaultClass -}}
-
-
-<div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:border-gray-200 hx:contrast-more:border-current hx:contrast-more:dark:border-current {{ $class }}">
+<div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:border-gray-200 hx:contrast-more:border-current hx:contrast-more:dark:border-current {{ $style.style }}">
   <p class="hx:flex hx:items-center hx:font-medium">
-    {{- with $icon -}}
+    {{- with $style.icon -}}
       {{- partial "utils/icon.html" (dict "name" . "attributes" `height=16px class="hx:inline-block hx:align-middle hx:mr-2"`) -}}
     {{- end -}}
     {{- $title -}}

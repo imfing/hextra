@@ -5,7 +5,7 @@
 {{ $options := .options | default (dict) }}
 
 {{- if $filename -}}
-  <div class="filename not-prose" dir="auto">
+  <div class="hextra-code-filename not-prose" dir="auto">
     {{- if $base_url -}}
 
       {{- $base_url = strings.TrimSuffix "/" $base_url -}}

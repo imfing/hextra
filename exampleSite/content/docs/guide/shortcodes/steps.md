@@ -25,7 +25,7 @@ This is the third step.
 
 ## Usage
 
-{{< callout emoji="ℹ️" >}}
+{{< callout type="warning" >}}
   Please note that this shortcode is intended **only for Markdown content**.
   If you put HTML content or other shortcodes as step content, it may not render as expected.
 {{< /callout >}}
