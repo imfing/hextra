@@ -180,14 +180,34 @@ This would now generate the following breadcrumbs:
 Documentation > Guide > Foo Bar
 ```
 
-### Hiding Breadcrumbs
+### Enabling and Disabling Breadcrumbs
 
-You can hide breadcrumbs completely from a page by specifying `breadcrumbs: false` in its front matter:
+Whether breadcrumbs are enabled, or disabled, by default for a page, is determined by its [content type](https://gohugo.io/quick-reference/glossary/#content-type) and [page kind](https://gohugo.io/quick-reference/glossary/#page-kind):
+
+|  Content Type   | Section  | Page      |
+|:----------------|:--------:|:----------|
+| `docs`          | Enabled  | Enabled   |
+| `blog`          | Disabled | Enabled   |
+| Any other type  | Disabled | Disabled  |
+
+You can override these defaults on a page by setting `breadcrumbs` in its front matter:
 
 ```yaml {filename="content/docs/guide/organize-files.md"}
 ---
 breadcrumbs: false
 title: Organize Files
+---
+```
+
+Similarly you can use [cascade](https://gohugo.io/content-management/front-matter/#cascade-1) to override the defaults on a page and its decendents:
+
+```yaml {filename="content/portfolio/_index.md"}
+---
+title: "Portfolio"
+
+cascade:
+  params:
+    breadcrumbs: true
 ---
 ```
 
