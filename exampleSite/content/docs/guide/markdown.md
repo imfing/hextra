@@ -155,6 +155,18 @@ Tables aren't part of the core Markdown spec, but Hugo supports them out-of-the-
   - Cheese
 ```
 
+#### Task list
+
+- [x] Write documentation
+- [ ] Review code
+- [ ] Deploy changes
+
+```markdown {filename=Markdown}
+- [x] Write documentation
+- [ ] Review code
+- [ ] Deploy changes
+```
+
 ### Images
 
 ![landscape](https://picsum.photos/800/600)
