@@ -1,6 +1,17 @@
+{{- $gridColsVarName := .gridColsVarName | default "--hextra-grid-cols" -}}
 {{- $cols := .cols | default 3 -}}
+
+{{- $class := .class | default "" -}}
+{{- $style := .style | default "" -}}
+
 {{- $content := .content -}}
 
-<div class="hextra-cards hx:mt-4 hx:gap-4 hx:grid not-prose" style="--hextra-cards-grid-cols: {{ $cols }};">
+{{- $attributes := (dict
+  "class" $class
+  "style" (printf "%s: %v; %s" $gridColsVarName $cols $style)
+  )
+-}}
+
+<div {{ range $k, $v := $attributes }} {{ (printf `%s=%q` $k $v) | safeHTMLAttr }}{{- end -}}>
   {{- $content -}}
 </div>
