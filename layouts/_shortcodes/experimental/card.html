@@ -16,54 +16,38 @@ A shortcode to create a card.
 */ -}}
 
 {{- $link := .Get "link" -}}
-{{- $title := .Get "title" -}}
 {{- $icon := .Get "icon" -}}
+{{- $title := .Get "title" -}}
 {{- $subtitle := .Get "subtitle" -}}
-{{- $image := .Get "image" -}}
-{{- $width := 0 -}}
-{{- $height := 0 -}}
-{{- $imageStyle := .Get "imageStyle" -}}
-{{- $tag := .Get "tag" -}}
+
+{{- $tagContent := .Get "tag" -}}
 {{- $tagColor := .Get "tagColor" | default (.Get "tagType") | default "" -}}{{- /* Compatibility with previous parameter. */ -}}
 {{- $tagBorder := not (eq (.Get "tagBorder") false) | default true }}
 {{- $tagIcon := .Get "tagIcon" | default "" -}}
 
-{{/* Image processing options */}}
-{{- $method := .Get "method" | default "Resize" | humanize -}}
-{{- $options := .Get "options" | default "800x webp q80" -}}
-{{- $process := .Get "process" | default (printf "%s %s" $method $options) -}}
-
-{{- if and $image (not (urls.Parse $image).Scheme) -}}
-  {{- with or (.Page.Resources.Get $image) (resources.Get $image) -}}
-    {{/* .Process does not work on svgs */}}
-    {{- if (not (eq .MediaType.SubType "svg")) -}}
-      {{/* Retrieve the $image resource from local or global resources */}}
-      {{- $processed := .Process $process -}}
-      {{- $width = $processed.Width -}}
-      {{- $height = $processed.Height -}}
-      {{- $image = $processed.RelPermalink -}}
-    {{- end -}}
-  {{ else }}
-    {{/* Otherwise, use relative link of the image */}}
-    {{- if hasPrefix $image "/" -}}
-      {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
-    {{- end -}}
-  {{- end -}}
+{{- $image := .Get "image" -}}
+{{- $img := dict -}}
+{{- if $image -}}
+  {{- $img = (dict
+    "image"   $image
+    "style"   (.Get "imageStyle")
+    "method"  (.Get "method")
+    "options" (.Get "options")
+    "process" (.Get "process")
+    )
+  -}}
 {{- end -}}
 
 {{- partial "shortcodes/experimental/card" (dict
-  "page"        .Page
-  "link"        $link
-  "title"       $title
-  "icon"        $icon
-  "subtitle"    $subtitle
-  "image"       $image
-  "width"       $width
-  "height"      $height
-  "imageStyle"  $imageStyle
-  "tag"         $tag
-  "tagType"     $tagColor
-  "tagBorder"   $tagBorder
-  "tagIcon"     $tagIcon
+  "page"              .Page
+  "link"              $link
+  "title"             $title
+  "icon"              $icon
+  "subtitle"          $subtitle
+  "image"             $img
+  "tag"               $tagContent
+  "tagType"           $tagColor
+  "tagBorder"         $tagBorder
+  "tagIcon"           $tagIcon
   )
 -}}
