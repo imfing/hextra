@@ -3,6 +3,8 @@
 {{- $title := .title -}}
 {{- $subtitle := .subtitle -}}
 
+{{- $content := .content -}}
+
 {{- $imageStyle := .image.style -}}
 {{- $img := partial "shortcodes/experimental/card-img-processing" (merge .image (dict "page" .Page)) -}}
 
@@ -23,19 +25,7 @@
     {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
   {{- end -}}
 >
-  {{- if $img.image -}}
-    <img
-      alt="{{ $title }}"
-      class="hextra-card-image"
-      loading="lazy"
-      decoding="async"
-      src="{{ $img.image | safeURL }}"
-      {{ with $img.width }}width="{{ . }}"{{ end }}
-      {{ with $img.height }}height="{{ . }}"{{ end }}
-      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
-    />
-  {{- end -}}
-
+  {{- partial "shortcodes/experimental/card-img" (merge $img (dict "style" $imageStyle "title" $title)) -}}
   {{- partial "shortcodes/experimental/card-title" (dict "title" $title "icon" $icon "subtitle" $subtitle) -}}
 
   {{- if $tag }}

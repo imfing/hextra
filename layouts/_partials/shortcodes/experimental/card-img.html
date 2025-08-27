@@ -1,0 +1,12 @@
+{{- if .image -}}
+<img
+  alt="{{ .title }}"
+  class="hextra-card-image"
+  loading="lazy"
+  decoding="async"
+  src="{{ .image | safeURL }}"
+  {{ with .width }}width="{{ . }}"{{ end }}
+  {{ with .height }}height="{{ . }}"{{ end }}
+  {{ with .style }}style="{{ . | safeCSS }}"{{ end }}
+/>
+{{- end -}}
