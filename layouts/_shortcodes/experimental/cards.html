@@ -6,6 +6,12 @@ A shortcode for creating cards.
 @example {{< cards cols="3" >}}{{< /cards >}}
 */ -}}
 
-{{- $cols := .Get "cols" | default 3 -}}
+{{- $cols := .Get "cols" -}}
 
-{{- partial "shortcodes/experimental/grid" (dict "cols" $cols "content" .Inner) -}}
+{{- partial "shortcodes/experimental/grid" (dict
+  "gridColsVarName" "--hextra-cards-grid-cols"
+  "cols"    $cols
+  "class"   "hextra-cards hx:grid hx:mt-4 hx:gap-4 not-prose"
+  "content" .Inner
+  )
+-}}
