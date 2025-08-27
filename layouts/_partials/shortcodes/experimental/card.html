@@ -10,26 +10,39 @@
 
 {{- $tag := .tag -}}
 
-{{ $linkClass := "hx:hover:border-gray-300 hx:bg-transparent hx:shadow-xs hx:dark:border-neutral-800 hx:hover:bg-slate-50 hx:hover:shadow-md hx:dark:hover:border-neutral-700 hx:dark:hover:bg-neutral-900" }}
-{{- if $img.image -}}
+{{- if $link -}}
+  {{ $linkClass := "hx:hover:border-gray-300 hx:bg-transparent hx:shadow-xs hx:dark:border-neutral-800 hx:hover:bg-slate-50 hx:hover:shadow-md hx:dark:hover:border-neutral-700 hx:dark:hover:bg-neutral-900" }}
+  {{- if $img.image -}}
   {{ $linkClass = "hx:hover:border-gray-300 hx:bg-gray-100 hx:shadow-sm hx:dark:border-neutral-700 hx:dark:bg-neutral-800 hx:dark:text-gray-50 hx:hover:shadow-lg hx:dark:hover:border-neutral-500 hx:dark:hover:bg-neutral-700" }}
-{{- end -}}
+  {{- end -}}
 
-{{- $external := strings.HasPrefix $link "http" -}}
-{{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
-
+  {{- $external := strings.HasPrefix $link "http" -}}
+  {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
 <a
   class="hextra-card hx:group hx:flex hx:flex-col hx:justify-start hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:text-current hx:no-underline hx:dark:shadow-none hx:hover:shadow-gray-100 hx:dark:hover:shadow-none hx:shadow-gray-100 hx:active:shadow-sm hx:active:shadow-gray-200 hx:transition-all hx:duration-200 {{ $linkClass }}"
-  {{- if $link -}}
-    href="{{ $href }}"
-    {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
-  {{- end -}}
+  href="{{ $href }}"
+  {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
 >
+{{- else -}}
+  {{ $linkClass := "hx:bg-transparent hx:shadow-xs hx:dark:border-neutral-800" }}
+  {{- if $img.image -}}
+    {{ $linkClass = "hx:bg-gray-100 hx:shadow-sm hx:dark:border-neutral-700 hx:dark:bg-neutral-800 hx:dark:text-gray-50" }}
+  {{- end -}}
+<div
+  class="hextra-card hx:group hx:flex hx:flex-col hx:justify-start hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:text-current hx:no-underline hx:dark:shadow-none hx:hover:shadow-gray-100 hx:dark:hover:shadow-none hx:shadow-gray-100 hx:active:shadow-sm hx:active:shadow-gray-200 hx:transition-all hx:duration-200 {{ $linkClass }}"
+>
+{{- end -}}
+
   {{- partial "shortcodes/experimental/card-img" (merge $img (dict "style" $imageStyle "title" $title)) -}}
   {{- partial "shortcodes/experimental/card-title" (dict "title" $title "icon" $icon "subtitle" $subtitle) -}}
 
   {{- if $tag }}
     {{- partial "shortcodes/badge.html" (merge $tag (dict "class" "hextra-card-tag")) -}}
   {{- end -}}
+
+{{- if $link -}}
 </a>
+{{- else -}}
+</div>
+{{- end -}}
 {{- /* Strip trailing newline. */ -}}
