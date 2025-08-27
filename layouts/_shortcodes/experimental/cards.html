@@ -8,4 +8,4 @@ A shortcode for creating cards.
 
 {{- $cols := .Get "cols" | default 3 -}}
 
-{{- partial "shortcodes/experimental/cards" (dict "cols" $cols "content" .Inner) -}}
+{{- partial "shortcodes/experimental/grid" (dict "cols" $cols "content" .Inner) -}}
