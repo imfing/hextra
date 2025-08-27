@@ -11,12 +11,14 @@ sidebar:
   {{< experimental/card link="../callout" title="Callout" icon="warning" >}}
   {{< experimental/card link="../callout" title="Card with tag" icon="tag" tag="custom tag">}}
   {{< experimental/card link="/" title="No Icon" >}}
+{{< experimental/card title="No Link" >}}
 {{< /experimental/cards >}}
 
 {{< experimental/cards >}}
   {{< experimental/card link="/" title="Image Card" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" subtitle="Internet Image" >}}
   {{< experimental/card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." >}}
   {{< experimental/card link="/" title="Local Image" image="images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card title="Local Image" image="images/space.jpg" subtitle="No link" method="Resize" options="600x q80 webp" >}}
 {{< /experimental/cards >}}
 
 ## Usage
