@@ -1,7 +1,7 @@
 {{- $content := .content -}}
 {{- $color := .color | default .type | default "" -}}{{- /* Compatibility with previous parameter. */ -}}
 {{- $class := .class | default "" -}}
-{{- $border := .border | default false -}}
+{{- $border := not (eq .border false) | default true }}
 {{- $icon := .icon | default "" -}}
 
 {{- /* Compatibility with previous names. */ -}}

@@ -21,9 +21,16 @@ A shortcode to create a card.
 {{- $subtitle := .Get "subtitle" -}}
 
 {{- $tagContent := .Get "tag" -}}
-{{- $tagColor := .Get "tagColor" | default (.Get "tagType") | default "" -}}{{- /* Compatibility with previous parameter. */ -}}
-{{- $tagBorder := not (eq (.Get "tagBorder") false) | default true }}
-{{- $tagIcon := .Get "tagIcon" | default "" -}}
+{{- $tag := dict -}}
+{{- if $tagContent -}}
+  {{- $tag = (dict
+    "content" $tagContent
+    "color"   (.Get "tagColor" | default (.Get "tagType"))
+    "border"  (.Get "tagBorder")
+    "icon"    (.Get "tagIcon")
+    )
+  -}}
+{{- end -}}
 
 {{- $image := .Get "image" -}}
 {{- $img := dict -}}
@@ -45,9 +52,6 @@ A shortcode to create a card.
   "icon"              $icon
   "subtitle"          $subtitle
   "image"             $img
-  "tag"               $tagContent
-  "tagType"           $tagColor
-  "tagBorder"         $tagBorder
-  "tagIcon"           $tagIcon
+  "tag"               $tag
   )
 -}}
