@@ -41,9 +41,8 @@
     {{- $padding = "hx:pt-4 hx:px-4" -}}
   {{- end -}}
 
-
-  <span class="hextra-card-icon hx:flex hx:font-semibold hx:items-start hx:gap-2 {{ $padding }} hx:text-gray-700 hx:hover:text-gray-900 hx:dark:text-neutral-200 hx:dark:hover:text-neutral-50">
-    {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon) -}}{{- end -}}
+  <span class="hextra-card-title hx:flex hx:font-semibold hx:items-start hx:gap-2 {{ $padding }} hx:text-gray-700 hx:hover:text-gray-900 hx:dark:text-neutral-200 hx:dark:hover:text-neutral-50">
+    {{- with $icon }}{{ partial "utils/icon.html" (dict "name" $icon "attributes" `class="hextra-card-title-icon"`) -}}{{- end -}}
     {{- $title -}}
   </span>
   {{- with $subtitle -}}

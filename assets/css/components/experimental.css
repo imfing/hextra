@@ -1,0 +1,17 @@
+.hextra-card:hover .hextra-card-title .hextra-card-title-icon {
+  color: currentColor;
+}
+
+.hextra-card .hextra-card-title .hextra-card-title-icon {
+  width: 1.5rem;
+  color: #00000033;
+  transition: color 0.3s ease;
+}
+
+.dark .hextra-card .hextra-card-title .hextra-card-title-icon {
+  color: #ffffff66;
+}
+
+.dark .hextra-card:hover .hextra-card-title .hextra-card-title-icon {
+  color: currentColor;
+}
