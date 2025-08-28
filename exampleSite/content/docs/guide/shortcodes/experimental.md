@@ -8,18 +8,30 @@ sidebar:
 ## Example
 
 {{< experimental/cards >}}
-  {{< experimental/card link="../callout" title="Callout" icon="warning" />}}
-  {{< experimental/card link="../callout" title="Card with tag" icon="tag" tag="custom tag" />}}
-  {{< experimental/card link="/" title="No Icon" />}}
-  {{< experimental/card title="Without link" />}}
-  {{< experimental/card title="With Buttons" >}}
+  {{< experimental/card link="../callout" >}}
+    {{< experimental/card/title title="Callout" icon="warning" >}}
+    {{< youtube id=dQw4w9WgXcQ loading=lazy >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="../callout" >}}
+    {{< experimental/card/title title="Card with tag" icon="tag" tag="custom tag" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="/" >}}
+    {{< experimental/card/title "No Icon" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card >}}
+    {{< experimental/card/title "Without link" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card >}}
+    {{< experimental/card/title "With Buttons" >}}
     {{< experimental/card/buttons >}}
         {{< experimental/card/button label="Button 1" link="#tags" >}}
         {{< experimental/card/button label="Button 2" icon="globe-alt" link="#image-card" >}}
         {{< experimental/card/button icon="sparkles" >}}
     {{< /experimental/card/buttons >}}
   {{< /experimental/card >}}
-  {{< experimental/card title="With subtitle" subtitle="Subtitle"  >}}
+  {{< experimental/card >}}
+    {{< youtube id=dQw4w9WgXcQ loading=lazy >}}
+    {{< experimental/card/title title="With subtitle" subtitle="Subtitle" >}}
     {{< experimental/card/buttons >}}
         {{< experimental/card/button label="Button 1" link="#tags" >}}
         {{< experimental/card/button label="Button 2" icon="globe-alt" link="#image-card" >}}
@@ -29,9 +41,17 @@ sidebar:
 {{< /experimental/cards >}}
 
 {{< experimental/cards >}}
-  {{< experimental/card link="/" title="Image Card" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" subtitle="Internet Image" />}}
-  {{< experimental/card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." />}}
-  {{< experimental/card subtitle="Without title" image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card link="/" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" >}}
+    {{< experimental/card/title title="Image Card" subtitle="Internet Image" >}}
+    {{< experimental/card/image src="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" alt="Internet Image" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="/" image="/images/card-image-unprocessed.jpg" >}}
+    {{< experimental/card/image src="/images/card-image-unprocessed.jpg" >}}
+    {{< experimental/card/title title="Local Image" subtitle="Raw image under static directory." >}}
+  {{< /experimental/card >}}
+  {{< experimental/card image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card/image src="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card/title subtitle="Without title" >}}
     {{< experimental/card/buttons >}}
       {{< experimental/card/button icon="github" image="fake" >}}
       {{< experimental/card/button icon="globe-alt" image="fake" >}}
@@ -41,7 +61,9 @@ sidebar:
       {{< experimental/card/button icon="beaker" image="fake" >}}
     {{< /experimental/card/buttons >}}
   {{< /experimental/card >}}
-  {{< experimental/card title="Without subtitle" image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+    {{< experimental/card/image src="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+    {{< experimental/card/title title="Without subtitle" >}}
     {{< experimental/card/buttons >}}
       {{< experimental/card/button icon="github" image="fake" >}}
       {{< experimental/card/button icon="globe-alt" image="fake" >}}
@@ -51,7 +73,9 @@ sidebar:
       {{< experimental/card/button icon="beaker" image="fake" >}}
     {{< /experimental/card/buttons >}}
   {{< /experimental/card >}}
-  {{< experimental/card title="Local Image" image="images/space.jpg" subtitle="Without link" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+    {{< experimental/card/image alt="Local Image" src="images/space.jpg"  method="Resize" options="600x q80 webp" >}}
+    {{< experimental/card/title title="Local Image" subtitle="Without link" >}}
     {{< experimental/card/buttons >}}
         {{< experimental/card/button icon="github" image="fake" >}}
         {{< experimental/card/button icon="globe-alt" image="fake" >}}
@@ -124,12 +148,32 @@ Card supports adding tags which could be useful to show extra status information
 | `tagBorder` | Border of the tag. See [badges]({{% relRef "others/#badges" %}}) for more information. |
 
 {{< experimental/cards >}}
-    {{< experimental/card link="../callout" title="Card with default tag" tag="tag text" />}}
-    {{< experimental/card link="../callout" title="Card with red tag" tag="tag text" tagColor="red" />}}
-    {{< experimental/card link="../callout" title="Card with blue tag" tag="tag text" tagColor="blue" />}}
-    {{< experimental/card link="../callout" title="Card with yellow tag" tag="tag text" tagColor="yellow" tagIcon="sparkles" tagBorder=false />}}
-    {{< experimental/card link="/" title="Image Card" image="/images/card-image-unprocessed.jpg" subtitle="Image" tag="tag text" tagColor="green" />}}
-    {{< experimental/card link="/" title="Image Card" image="images/space.jpg" subtitle="Image" tag="tag text" tagColor="purple" tagIcon="sparkles" tagBorder=false />}}
+  {{< experimental/card link="../callout" >}}
+    {{< experimental/card/title "Card with default tag" >}}
+    {{< experimental/card/badge content="tag text" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="../callout">}}
+    {{< experimental/card/title "Card with red tag" >}}
+    {{< experimental/card/badge content="tag text" color="red" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="../callout" >}}
+    {{< experimental/card/title "Card with blue tag" >}}
+    {{< experimental/card/badge content="tag text" color="blue" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="../callout" >}}
+    {{< experimental/card/title "Card with yellow tag" >}}
+    {{< experimental/card/badge content="tag text" color="yellow" icon="sparkles" border=false >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="/" >}}
+    {{< experimental/card/image src="/images/card-image-unprocessed.jpg" >}}
+    {{< experimental/card/title title="Image Card" subtitle="Image" >}}
+    {{< experimental/card/badge content="tag text" color="green" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="/" >}}
+    {{< experimental/card/image src="images/space.jpg" >}}
+    {{< experimental/card/title title="Image Card" subtitle="Image" >}}
+    {{< experimental/card/badge content="tag text" color="purple" icon="sparkles" border=false  >}}
+  {{< /experimental/card >}}
 {{< /experimental/cards >}}
 
 ```
@@ -148,13 +192,21 @@ Card supports adding tags which could be useful to show extra status information
 You can specify the maximum number of columns for cards to span by passing the `cols` parameter to the `cards` shortcode. Note that columns will still be collapsed on smaller screens.
 
 {{< experimental/cards cols="1" >}}
-  {{< experimental/card link="/" title="Top Card" />}}
-  {{< experimental/card link="/" title="Bottom Card" />}}
+  {{< experimental/card link="/" >}}
+    {{< experimental/card/title "Top Card" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="/" >}}
+    {{< experimental/card/title title="Bottom Card" >}}
+  {{< /experimental/card >}}
 {{< /experimental/cards >}}
 
 {{< experimental/cards cols="2" >}}
-  {{< experimental/card link="/" title="Left Card" />}}
-  {{< experimental/card link="/" title="Right Card" />}}
+  {{< experimental/card link="/" >}}
+    {{< experimental/card/title title="Left Card" >}}
+  {{< /experimental/card >}}
+  {{< experimental/card link="/" >}}
+    {{< experimental/card/title title="Right Card" >}}
+  {{< /experimental/card >}}
 {{< /experimental/cards >}}
 
 ```
