@@ -33,16 +33,7 @@
 >
 {{- end -}}
 
-  {{- partial "shortcodes/experimental/card/img" (merge $img (dict "style" $imageStyle "title" $title)) -}}
-  {{- partial "shortcodes/experimental/card/title" (dict "title" $title "icon" $icon "subtitle" $subtitle) -}}
-
-  {{- if and (not $link) $content -}}
-    {{- $content -}}
-  {{- end -}}
-
-  {{- if $tag }}
-    {{- partial "shortcodes/badge.html" (merge $tag (dict "class" "hextra-card-tag")) -}}
-  {{- end -}}
+{{- $content -}}
 
 {{- if $link -}}
 </a>
