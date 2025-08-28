@@ -6,7 +6,7 @@
 {{- $content := .content -}}
 
 {{- $imageStyle := .image.style -}}
-{{- $img := partial "shortcodes/experimental/card-img-processing" (merge .image (dict "page" .Page)) -}}
+{{- $img := partial "shortcodes/experimental/card/img-processing" (merge .image (dict "page" .Page)) -}}
 
 {{- $tag := .tag -}}
 
@@ -33,8 +33,8 @@
 >
 {{- end -}}
 
-  {{- partial "shortcodes/experimental/card-img" (merge $img (dict "style" $imageStyle "title" $title)) -}}
-  {{- partial "shortcodes/experimental/card-title" (dict "title" $title "icon" $icon "subtitle" $subtitle) -}}
+  {{- partial "shortcodes/experimental/card/img" (merge $img (dict "style" $imageStyle "title" $title)) -}}
+  {{- partial "shortcodes/experimental/card/title" (dict "title" $title "icon" $icon "subtitle" $subtitle) -}}
 
   {{- if $tag }}
     {{- partial "shortcodes/badge.html" (merge $tag (dict "class" "hextra-card-tag")) -}}
