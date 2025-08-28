@@ -8,17 +8,59 @@ sidebar:
 ## Example
 
 {{< experimental/cards >}}
-  {{< experimental/card link="../callout" title="Callout" icon="warning" >}}
-  {{< experimental/card link="../callout" title="Card with tag" icon="tag" tag="custom tag">}}
-  {{< experimental/card link="/" title="No Icon" >}}
-{{< experimental/card title="No Link" >}}
+  {{< experimental/card link="../callout" title="Callout" icon="warning" />}}
+  {{< experimental/card link="../callout" title="Card with tag" icon="tag" tag="custom tag" />}}
+  {{< experimental/card link="/" title="No Icon" />}}
+  {{< experimental/card title="Without link" />}}
+  {{< experimental/card title="With Buttons" >}}
+    {{< experimental/card/buttons >}}
+        {{< experimental/card/button label="Button 1" link="#tags" >}}
+        {{< experimental/card/button label="Button 2" icon="globe-alt" link="#image-card" >}}
+        {{< experimental/card/button icon="sparkles" >}}
+    {{< /experimental/card/buttons >}}
+  {{< /experimental/card >}}
+  {{< experimental/card title="With subtitle" subtitle="Subtitle"  >}}
+    {{< experimental/card/buttons >}}
+        {{< experimental/card/button label="Button 1" link="#tags" >}}
+        {{< experimental/card/button label="Button 2" icon="globe-alt" link="#image-card" >}}
+        {{< experimental/card/button icon="sparkles" >}}
+    {{< /experimental/card/buttons >}}
+  {{< /experimental/card >}}
 {{< /experimental/cards >}}
 
 {{< experimental/cards >}}
-  {{< experimental/card link="/" title="Image Card" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" subtitle="Internet Image" >}}
-  {{< experimental/card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." >}}
-  {{< experimental/card link="/" title="Local Image" image="images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" >}}
-  {{< experimental/card title="Local Image" image="images/space.jpg" subtitle="No link" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card link="/" title="Image Card" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" subtitle="Internet Image" />}}
+  {{< experimental/card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." />}}
+  {{< experimental/card subtitle="Without title" image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+    {{< experimental/card/buttons >}}
+      {{< experimental/card/button icon="github" image="fake" >}}
+      {{< experimental/card/button icon="globe-alt" image="fake" >}}
+      {{< experimental/card/button icon="sparkles" image="fake" >}}
+      {{< experimental/card/button icon="at-symbol" image="fake" >}}
+      {{< experimental/card/button icon="bell" image="fake" >}}
+      {{< experimental/card/button icon="beaker" image="fake" >}}
+    {{< /experimental/card/buttons >}}
+  {{< /experimental/card >}}
+  {{< experimental/card title="Without subtitle" image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+    {{< experimental/card/buttons >}}
+      {{< experimental/card/button icon="github" image="fake" >}}
+      {{< experimental/card/button icon="globe-alt" image="fake" >}}
+      {{< experimental/card/button icon="sparkles" image="fake" >}}
+      {{< experimental/card/button icon="at-symbol" image="fake" >}}
+      {{< experimental/card/button icon="bell" image="fake" >}}
+      {{< experimental/card/button icon="beaker" image="fake" >}}
+    {{< /experimental/card/buttons >}}
+  {{< /experimental/card >}}
+  {{< experimental/card title="Local Image" image="images/space.jpg" subtitle="Without link" method="Resize" options="600x q80 webp" >}}
+    {{< experimental/card/buttons >}}
+        {{< experimental/card/button icon="github" image="fake" >}}
+        {{< experimental/card/button icon="globe-alt" image="fake" >}}
+        {{< experimental/card/button icon="sparkles" image="fake" >}}
+        {{< experimental/card/button icon="at-symbol" image="fake" >}}
+        {{< experimental/card/button icon="bell" image="fake" >}}
+        {{< experimental/card/button icon="beaker" image="fake" >}}
+    {{< /experimental/card/buttons >}}
+  {{< /experimental/card >}}
 {{< /experimental/cards >}}
 
 ## Usage
@@ -82,12 +124,12 @@ Card supports adding tags which could be useful to show extra status information
 | `tagBorder` | Border of the tag. See [badges]({{% relRef "others/#badges" %}}) for more information. |
 
 {{< experimental/cards >}}
-  {{< experimental/card link="../callout" title="Card with default tag" tag="tag text" >}}
-  {{< experimental/card link="../callout" title="Card with red tag" tag="tag text" tagColor="red" >}}
-  {{< experimental/card link="../callout" title="Card with blue tag" tag="tag text" tagColor="blue" >}}
-  {{< experimental/card link="../callout" title="Card with yellow tag" tag="tag text" tagColor="yellow" tagIcon="sparkles" tagBorder=false >}}
-  {{< experimental/card link="/" title="Image Card" image="/images/card-image-unprocessed.jpg" subtitle="Image" tag="tag text" tagColor="green" >}}
-  {{< experimental/card link="/" title="Image Card" image="images/space.jpg" subtitle="Image" tag="tag text" tagColor="purple" tagIcon="sparkles" tagBorder=false >}}
+    {{< experimental/card link="../callout" title="Card with default tag" tag="tag text" />}}
+    {{< experimental/card link="../callout" title="Card with red tag" tag="tag text" tagColor="red" />}}
+    {{< experimental/card link="../callout" title="Card with blue tag" tag="tag text" tagColor="blue" />}}
+    {{< experimental/card link="../callout" title="Card with yellow tag" tag="tag text" tagColor="yellow" tagIcon="sparkles" tagBorder=false />}}
+    {{< experimental/card link="/" title="Image Card" image="/images/card-image-unprocessed.jpg" subtitle="Image" tag="tag text" tagColor="green" />}}
+    {{< experimental/card link="/" title="Image Card" image="images/space.jpg" subtitle="Image" tag="tag text" tagColor="purple" tagIcon="sparkles" tagBorder=false />}}
 {{< /experimental/cards >}}
 
 ```
@@ -106,13 +148,13 @@ Card supports adding tags which could be useful to show extra status information
 You can specify the maximum number of columns for cards to span by passing the `cols` parameter to the `cards` shortcode. Note that columns will still be collapsed on smaller screens.
 
 {{< experimental/cards cols="1" >}}
-  {{< experimental/card link="/" title="Top Card" >}}
-  {{< experimental/card link="/" title="Bottom Card" >}}
+  {{< experimental/card link="/" title="Top Card" />}}
+  {{< experimental/card link="/" title="Bottom Card" />}}
 {{< /experimental/cards >}}
 
 {{< experimental/cards cols="2" >}}
-  {{< experimental/card link="/" title="Left Card" >}}
-  {{< experimental/card link="/" title="Right Card" >}}
+  {{< experimental/card link="/" title="Left Card" />}}
+  {{< experimental/card link="/" title="Right Card" />}}
 {{< /experimental/cards >}}
 
 ```
