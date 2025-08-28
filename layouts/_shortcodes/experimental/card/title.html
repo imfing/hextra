@@ -1,0 +1,17 @@
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card" -}}
+{{- end -}}
+
+{{- if .IsNamedParams -}}
+  {{- $title := .Get "title" -}}
+  {{- $icon := .Get "icon" -}}
+  {{- $subtitle := .Get "subtitle" -}}
+
+  {{- partial "shortcodes/experimental/card/title" (dict "title" $title "icon" $icon "subtitle" $subtitle) -}}
+{{- else -}}
+  {{- $content := .Get 0 -}}
+
+  {{- partial "shortcodes/experimental/card/title" (dict "title" $content) -}}
+{{- end -}}
+
+
