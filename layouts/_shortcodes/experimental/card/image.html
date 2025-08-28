@@ -1,0 +1,20 @@
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card" -}}
+{{- end -}}
+
+{{- $image := .Get "src" -}}
+{{- $title := .Get "alt" -}}
+{{- $style := .Get "style" -}}
+
+{{- $options := (dict
+  "image"   (.Get "src")
+  "style"   (.Get "style")
+  "method"  (.Get "method")
+  "options" (.Get "options")
+  "process" (.Get "process")
+  )
+-}}
+
+{{- $img := partial "shortcodes/experimental/card/img-processing" (merge $options (dict "page" .Page)) -}}
+
+{{- partial "shortcodes/experimental/card/img" (merge $img (dict "style" $style "title" $title)) -}}
