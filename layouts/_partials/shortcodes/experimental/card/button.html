@@ -1,0 +1,25 @@
+{{- $icon := .icon -}}
+{{- $label := .label -}}
+{{- $link := .link -}}
+
+{{- $buttonColors :=  "hx:text-gray-700 hx:hover:text-gray-900 hx:dark:text-neutral-200 hx:dark:hover:text-neutral-100 hx:hover:bg-slate-50 hx:dark:hover:bg-neutral-800 hx:border-gray-200 hx:dark:border-neutral-800" -}}
+{{- if .image -}}
+  {{- $buttonColors = "hx:text-gray-700 hx:hover:text-gray-900 hx:dark:text-neutral-200 hx:dark:hover:text-neutral-100 hx:hover:bg-slate-50 hx:dark:hover:bg-neutral-900 hx:border-gray-200 hx:dark:border-neutral-700" -}}
+{{- end -}}
+
+{{- $external := strings.HasPrefix $link "http" -}}
+{{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
+
+<a
+  class="hx:flex hx:flex-grow {{ $buttonColors }} hx:focus:outline-none hx:border-t hx:border-r hx:justify-center hx:gap-2 hx:px-4 hx:py-2 hx:font-medium hx:shadow-sm hx:transition-colors hx:duration-200 hx:text-sm"
+  href="{{ $href }}"
+  {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
+>
+  {{- if $icon -}}
+    <span class="hx:inline-flex hx:items-center">{{- partial "utils/icon.html" (dict "name" $icon "attributes" `height="1em" class="hx:inline-block"`) -}}</span>
+  {{- end -}}
+  {{- if $label -}}
+    <span class="hx:text-center">{{- $label -}}</span>
+  {{- end -}}
+</a>
+{{- /* Strip trailing newline. */ -}}

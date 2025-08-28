@@ -1,0 +1,11 @@
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card/buttons") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card/buttons" -}}
+{{- end -}}
+
+{{- partial "shortcodes/experimental/card/button" (dict
+  "icon" (.Get "icon")
+  "label" (.Get "label")
+  "image" (.Get "image")
+  "link" (.Get "link")
+  )
+-}}
