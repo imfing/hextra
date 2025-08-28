@@ -1,0 +1,22 @@
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card" -}}
+{{- end -}}
+
+{{- if .IsNamedParams -}}
+  {{- partial "shortcodes/badge.html"  (dict
+    "class"   "hextra-card-tag"
+    "content" (.Get "content")
+    "color"   ((.Get "color") | default (.Get "type"))
+    "icon"    (.Get "icon")
+    "border"  (.Get "border")
+    )
+  -}}
+{{- else -}}
+  {{- $content := .Get 0 -}}
+
+  {{- partial "shortcodes/badge.html" (dict
+    "content" $content
+    "border" true
+    )
+  -}}
+{{- end -}}
