@@ -23,7 +23,7 @@ function computeMenuTranslation(switcher, optionsElement) {
 
   if (isOnTop) {
     // Stuck on the bottom of the switcher.
-    y = switcherRect.top - window.innerHeight + optionsElement.clientHeight + switcher.clientHeight + 10;
+    y = switcherRect.top - window.innerHeight + optionsElement.clientHeight + switcher.clientHeight + 4;
   }
 
   return { x: x, y: y };
