@@ -41,15 +41,15 @@ sidebar:
 {{< /experimental/cards >}}
 
 {{< experimental/cards >}}
-  {{< experimental/card link="/" image="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" >}}
+  {{< experimental/card link="/" >}}
     {{< experimental/card/title title="Image Card" subtitle="Internet Image" >}}
     {{< experimental/card/image src="https://github.com/user-attachments/assets/71b7e3ec-1a8d-4582-b600-5425c6cc0407" alt="Internet Image" >}}
   {{< /experimental/card >}}
-  {{< experimental/card link="/" image="/images/card-image-unprocessed.jpg" >}}
+  {{< experimental/card link="/" >}}
     {{< experimental/card/image src="/images/card-image-unprocessed.jpg" >}}
     {{< experimental/card/title title="Local Image" subtitle="Raw image under static directory." >}}
   {{< /experimental/card >}}
-  {{< experimental/card image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card >}}
   {{< experimental/card/image src="images/space.jpg" method="Resize" options="600x q80 webp" >}}
   {{< experimental/card/title subtitle="Without title" >}}
     {{< experimental/card/buttons >}}
@@ -61,7 +61,7 @@ sidebar:
       {{< experimental/card/button icon="beaker" image="fake" >}}
     {{< /experimental/card/buttons >}}
   {{< /experimental/card >}}
-  {{< experimental/card image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card >}}
     {{< experimental/card/image src="images/space.jpg" method="Resize" options="600x q80 webp" >}}
     {{< experimental/card/title title="Without subtitle" >}}
     {{< experimental/card/buttons >}}
@@ -73,7 +73,7 @@ sidebar:
       {{< experimental/card/button icon="beaker" image="fake" >}}
     {{< /experimental/card/buttons >}}
   {{< /experimental/card >}}
-  {{< experimental/card image="images/space.jpg" method="Resize" options="600x q80 webp" >}}
+  {{< experimental/card >}}
     {{< experimental/card/image alt="Local Image" src="images/space.jpg"  method="Resize" options="600x q80 webp" >}}
     {{< experimental/card/title title="Local Image" subtitle="Without link" >}}
     {{< experimental/card/buttons >}}
