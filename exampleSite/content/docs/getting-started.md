@@ -102,9 +102,16 @@ To update Hextra to the [latest released version](https://github.com/imfing/hext
 hugo mod get -u github.com/imfing/hextra
 ```
 
+If you want to try the most recent changes before the next release, update the module to the development branch directly (⚠️ may contain unstable/breaking changes):
+
+```shell
+hugo mod get -u github.com/imfing/hextra@main
+```
+
 See [Hugo Modules](https://gohugo.io/hugo-modules/use-modules/#update-all-modules) for more details.
 
 {{% /details %}}
+
 
 ### Setup Hextra as Git submodule
 
