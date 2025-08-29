@@ -32,7 +32,7 @@
 
       if (isOnTop) {
         // Stuck on the bottom of the switcher.
-        translateY = switcherRect.top - window.innerHeight + 180;
+        translateY = switcherRect.top - window.innerHeight + optionsElement.clientHeight + switcher.clientHeight + 10;
       }
 
       optionsElement.style.transform = `translate3d(${translateX}px, ${translateY}px, 0)`;
