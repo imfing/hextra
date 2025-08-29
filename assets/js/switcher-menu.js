@@ -19,7 +19,7 @@ function computeMenuTranslation(switcher, optionsElement) {
   }
 
   // Stuck on the top of the switcher.
-  let y = switcherRect.top - window.innerHeight - 15;
+  let y = switcherRect.top - window.innerHeight - 10;
 
   if (isOnTop) {
     // Stuck on the bottom of the switcher.
