@@ -8,3 +8,8 @@
 {{- if (.Store.Get "hasMermaid") -}}
   {{- partial "scripts/mermaid.html" . -}}
 {{- end -}}
+
+{{/* Asciinema */}}
+{{- if (.Store.Get "hasAsciinema") -}}
+  {{- partial "scripts/asciinema.html" . -}}
+{{- end -}}

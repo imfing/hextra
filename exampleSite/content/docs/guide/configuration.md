@@ -58,20 +58,27 @@ There are different types of menu items:
      params:
        type: search
    ```
-4. Icon
+4. Icon Only
    ```yaml
    - name: GitHub
      params:
        icon: github
    ```
-5. Theme Toggle
+5. Link with Icon
+   ```yaml
+   - name: Blog
+     params:
+       type: link
+       icon: rss
+   ```
+6. Theme Toggle
    ```yaml
     - name: Theme Toggle
       params:
         type: theme-toggle
         label: true # optional, default is false
    ```
-6. Language Switcher
+7. Language Switcher
    ```yaml
     - name: Language Switcher
       params:
@@ -402,6 +409,45 @@ To exclude an entire directory, use the [`cascade`](https://gohugo.io/configurat
 > To block search crawlers, you can make a [`robots.txt` template](https://gohugo.io/templates/robots/).
 > However, `robots.txt` instructions do not necessarily keep a page out of Google search results.
 
+### Umami Analytics
+
+To enable [Umami](https://umami.is/docs/), set `params.analytics.umami.serverURL` and `params.analytics.umami.websiteID` flag in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  analytics:
+    umami:
+      serverURL: "https://example.com"
+      websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
+      # scriptName: "umami.js" # optional (default: umami.js)
+      # https://umami.is/docs/tracker-configuration#data-host-url
+      # hostURL: "http://stats.example.org" # optional
+      # https://umami.is/docs/tracker-configuration#data-auto-track
+      # autoTrack: "false" # optional
+      # https://umami.is/docs/tracker-configuration#data-tag
+      # domains: "example.net,example.org" # optional
+      # https://umami.is/docs/tracker-configuration#data-exclude-search
+      # tag: "umami-eu" # optional
+      # https://umami.is/docs/tracker-configuration#data-exclude-hash
+      # excludeSearch: "true" # optional
+      # https://umami.is/docs/tracker-configuration#data-do-not-track
+      # excludeHash: "true" # optional
+      # https://umami.is/docs/tracker-configuration#data-domains
+      # doNotTrack: "true" # optional
+```
+
+### Matomo Analytics
+
+To enable [Matomo](https://matomo.org/), set `params.analytics.matomo.URL` and `params.analytics.matomo.ID` flag in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  analytics:
+    matomo:
+      serverURL: "https://example.com"
+      websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
+```
+
 ### LLMS.txt Support
 
 To enable [llms.txt](https://llmstxt.org/) output format for your site, which provides a structured text outline for [large language models](https://en.wikipedia.org/wiki/Large_language_model) and AI agents, add the `llms` output format to your site's `hugo.yaml`:
@@ -437,4 +483,32 @@ params:
   images:
     - "/img/config-image.jpg"
   audio: "config-talk.mp3"
+```
+
+### Banner
+
+To add a banner to your site, add the following to your `hugo.yaml`:
+
+```yaml
+params:
+  banner:
+    key: 'announcement-xxx'
+    message: |
+      🎉 Welcome! [Hextra](https://github.com/hextra/hextra) is a static site generator that helps you build modern websites.
+```
+
+The banner will be displayed on all pages.
+
+The field `message` supports Markdown syntax.
+
+If you want to use template syntax, you can define the partial in `layouts/_partials/custom/banner.html`.
+In this case, the field `message` will be ignored.
+
+### External Link Decoration
+
+Adds an arrow icon to external links (default: false) when rendering links from Markdown.
+
+```yaml
+params:
+  externalLinkDecoration: true
 ```

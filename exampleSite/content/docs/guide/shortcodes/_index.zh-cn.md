@@ -26,4 +26,5 @@ Hugo 和 Hextra 提供的其他短代码：
 {{< cards >}}
   {{< card link="jupyter" title="Jupyter 笔记本" icon="jupyter" tag="alpha" >}}
   {{< card link="others" title="其他" icon="view-grid" >}}
+  {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
 {{< /cards >}}

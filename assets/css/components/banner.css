@@ -1,0 +1,12 @@
+.hextra-banner-hidden .hextra-banner {
+  display: none;
+}
+
+.hextra-banner {
+  :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply hx:underline hx:decoration-from-font;
+  }
+  :where(p):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply hx:leading-7 hx:first:mt-0;
+  }
+}

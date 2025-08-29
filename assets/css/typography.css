@@ -60,6 +60,10 @@
       @apply hx:my-2;
     }
   }
+  /* Task lists - hide list markers for lists containing checkboxes */
+  :where(ul):not(:where([class~=not-prose],[class~=not-prose] *)):has(li input[type="checkbox"]) {
+    @apply hx:list-none;
+  }
   /* This CSS rule targets the first nested unordered (ul) or ordered (ol) list
      inside the list item (li) of any parent ul or ol.
      The rule sets the top margin of the selected list to zero. */
