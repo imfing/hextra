@@ -53,36 +53,36 @@ sidebar:
   {{< experimental/card/image src="images/space.jpg" method="Resize" options="600x q80 webp" >}}
   {{< experimental/card/title subtitle="Without title" >}}
     {{< experimental/card/buttons >}}
-      {{< experimental/card/button icon="github" image="fake" >}}
-      {{< experimental/card/button icon="globe-alt" image="fake" >}}
-      {{< experimental/card/button icon="sparkles" image="fake" >}}
-      {{< experimental/card/button icon="at-symbol" image="fake" >}}
-      {{< experimental/card/button icon="bell" image="fake" >}}
-      {{< experimental/card/button icon="beaker" image="fake" >}}
+      {{< experimental/card/button icon="github" >}}
+      {{< experimental/card/button icon="globe-alt" >}}
+      {{< experimental/card/button icon="sparkles" >}}
+      {{< experimental/card/button icon="at-symbol" >}}
+      {{< experimental/card/button icon="bell" >}}
+      {{< experimental/card/button icon="beaker" >}}
     {{< /experimental/card/buttons >}}
   {{< /experimental/card >}}
   {{< experimental/card >}}
     {{< experimental/card/image src="images/space.jpg" method="Resize" options="600x q80 webp" >}}
     {{< experimental/card/title title="Without subtitle" >}}
     {{< experimental/card/buttons >}}
-      {{< experimental/card/button icon="github" image="fake" >}}
-      {{< experimental/card/button icon="globe-alt" image="fake" >}}
-      {{< experimental/card/button icon="sparkles" image="fake" >}}
-      {{< experimental/card/button icon="at-symbol" image="fake" >}}
-      {{< experimental/card/button icon="bell" image="fake" >}}
-      {{< experimental/card/button icon="beaker" image="fake" >}}
+      {{< experimental/card/button icon="github" >}}
+      {{< experimental/card/button icon="globe-alt" >}}
+      {{< experimental/card/button icon="sparkles" >}}
+      {{< experimental/card/button icon="at-symbol" >}}
+      {{< experimental/card/button icon="bell" >}}
+      {{< experimental/card/button icon="beaker" >}}
     {{< /experimental/card/buttons >}}
   {{< /experimental/card >}}
   {{< experimental/card >}}
     {{< experimental/card/image alt="Local Image" src="images/space.jpg"  method="Resize" options="600x q80 webp" >}}
     {{< experimental/card/title title="Local Image" subtitle="Without link" >}}
     {{< experimental/card/buttons >}}
-        {{< experimental/card/button icon="github" image="fake" >}}
-        {{< experimental/card/button icon="globe-alt" image="fake" >}}
-        {{< experimental/card/button icon="sparkles" image="fake" >}}
-        {{< experimental/card/button icon="at-symbol" image="fake" >}}
-        {{< experimental/card/button icon="bell" image="fake" >}}
-        {{< experimental/card/button icon="beaker" image="fake" >}}
+        {{< experimental/card/button icon="github" >}}
+        {{< experimental/card/button icon="globe-alt" >}}
+        {{< experimental/card/button icon="sparkles" >}}
+        {{< experimental/card/button icon="at-symbol" >}}
+        {{< experimental/card/button icon="bell" >}}
+        {{< experimental/card/button icon="beaker" >}}
     {{< /experimental/card/buttons >}}
   {{< /experimental/card >}}
 {{< /experimental/cards >}}
