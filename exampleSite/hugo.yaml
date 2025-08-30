@@ -29,16 +29,28 @@ languages:
     languageDirection: rtl
     weight: 2
     title: هگزترا
+    params:
+      banner:
+        message: |
+          هگزترا **v0.11** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% relref `blog/v0.11` %}})
   ja:
     languageName: 日本語
     languageCode: ja-JP
     weight: 3
     title: Hextra
+    params:
+      banner:
+        message: |
+          Hextra **v0.11** がリリースされました！🎉 [新着情報はこちら]({{% relref `blog/v0.11` %}})
   zh-cn:
     languageName: 简体中文
     languageCode: zh-CN
     weight: 4
     title: Hextra
+    params:
+      banner:
+        message: |
+          Hextra **v0.11** 发布啦！🎉 查看[更新内容]({{% relref `blog/v0.11` %}})
 
 module:
   hugoVersion:
@@ -132,7 +144,7 @@ params:
   banner:
     key: 'announcement-v0.11'
     message: |
-      Hextra **v0.11** is here! 🎉 Discover [what's new]({{< relref `blog/v0.11` >}})
+      Hextra **v0.11** is here! 🎉 Discover [what's new]({{% relref `blog/v0.11` %}})
 
   navbar:
     displayTitle: true
