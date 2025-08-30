@@ -2,57 +2,16 @@
 A shortcode to create a card.
 
 @param {string} link The link to the card.
-@param {string} title The title of the card.
-@param {string} icon The icon of the card.
-@param {string} subtitle The subtitle of the card.
-@param {string} tag The tag of the card.
-@param {string} tagColor The color of the tag.
-@param {string} image The image of the card.
-@param {string} method The method to process the image.
-@param {string} options The options to process the image.
-@param {string} imageStyle The style of the image.
 
-@example {{< card link="/" title="Image Card" }}
+@example {{< experimental/card link="/" >}}...{{< /experimental/card >}}
+
 */ -}}
 
 {{- $link := .Get "link" -}}
-{{- $icon := .Get "icon" -}}
-{{- $title := .Get "title" -}}
-{{- $subtitle := .Get "subtitle" -}}
-
-{{- $tagContent := .Get "tag" -}}
-{{- $tag := dict -}}
-{{- if $tagContent -}}
-  {{- $tag = (dict
-    "content" $tagContent
-    "color"   (.Get "tagColor" | default (.Get "tagType"))
-    "border"  (.Get "tagBorder")
-    "icon"    (.Get "tagIcon")
-    )
-  -}}
-{{- end -}}
-
-{{- $image := .Get "image" -}}
-{{- $img := dict -}}
-{{- if $image -}}
-  {{- $img = (dict
-    "image"   $image
-    "style"   (.Get "imageStyle")
-    "method"  (.Get "method")
-    "options" (.Get "options")
-    "process" (.Get "process")
-    )
-  -}}
-{{- end -}}
 
 {{- partial "shortcodes/experimental/card" (dict
-  "page"              .Page
-  "content"           .Inner
-  "link"              $link
-  "title"             $title
-  "icon"              $icon
-  "subtitle"          $subtitle
-  "image"             $img
-  "tag"               $tag
+  "page"      .Page
+  "content"   .Inner
+  "link"      $link
   )
 -}}
