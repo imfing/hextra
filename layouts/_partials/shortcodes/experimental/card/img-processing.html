@@ -1,0 +1,32 @@
+{{- /* Image processing for cards */ -}}
+
+{{- $page := .page -}}
+{{- $image := .image -}}
+
+{{- $method := .method | default "Resize" | humanize -}}
+{{- $options := .options | default "800x webp q80" -}}
+{{- $process := .process | default (printf "%s %s" $method $options) -}}
+
+{{- $width := 0 }}
+{{- $height := 0 }}
+
+{{- if and $image (not (urls.Parse $image).Scheme) -}}
+  {{- with or ($page.Resources.Get $image) (resources.Get $image) -}}
+    {{/* .Process does not work on svgs */}}
+    {{- if (not (eq .MediaType.SubType "svg")) -}}
+      {{/* Retrieve the $image resource from local or global resources */}}
+      {{- $processed := .Process $process -}}
+
+      {{- $width = $processed.Width -}}
+      {{- $height = $processed.Height -}}
+      {{- $image = $processed.RelPermalink -}}
+    {{- end -}}
+  {{ else }}
+    {{/* Otherwise, use relative link of the image */}}
+    {{- if hasPrefix $image "/" -}}
+      {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (dict "width" $width "height" $height "image" $image) -}}

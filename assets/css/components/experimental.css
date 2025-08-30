@@ -1,0 +1,121 @@
+.hextra-card:hover .hextra-card-title .hextra-card-title-icon {
+  color: currentColor;
+}
+
+.hextra-card .hextra-card-title .hextra-card-title-icon {
+  width: 1.5rem;
+  color: #00000033;
+  transition: color 0.3s ease;
+}
+
+.dark .hextra-card .hextra-card-title .hextra-card-title-icon {
+  color: #ffffff66;
+}
+
+.dark .hextra-card:hover .hextra-card-title .hextra-card-title-icon {
+  color: currentColor;
+}
+
+@layer components {
+  .hextra-card {
+    @apply
+      hx:flex
+      hx:flex-col
+      hx:justify-start
+      hx:overflow-hidden
+      hx:text-current
+      hx:no-underline
+      hx:bg-transparent
+      hx:rounded-lg
+      hx:border
+      hx:border-gray-200
+      hx:shadow-xs
+      hx:shadow-gray-100
+      hx:transition-all
+      hx:duration-200
+    ;
+
+    &:has(.hextra-card-image) {
+      @apply
+        hx:bg-gray-100
+        hx:shadow-sm
+      ;
+
+      .hextra-card-button {
+        @apply
+          hx:text-gray-700
+          hx:hover:text-gray-900
+          hx:dark:text-neutral-200
+          hx:dark:hover:text-neutral-100
+          hx:hover:bg-slate-50
+          hx:dark:hover:bg-neutral-900
+          hx:border-gray-200
+          hx:dark:border-neutral-700
+        ;
+      }
+    }
+
+    .hextra-card-button {
+      @apply
+        hx:text-gray-700
+        hx:hover:text-gray-900
+        hx:dark:text-neutral-200
+        hx:dark:hover:text-neutral-100
+        hx:hover:bg-slate-50
+        hx:dark:hover:bg-neutral-800
+        hx:border-gray-200
+        hx:dark:border-neutral-800
+      ;
+    }
+
+    @variant dark {
+      @apply
+        hx:shadow-none
+        hx:border-neutral-800
+      ;
+
+      &:has(.hextra-card-image) {
+        @apply
+          hx:shadow-none
+          hx:border-neutral-700
+          hx:bg-neutral-800
+          hx:text-gray-50
+        ;
+      }
+    }
+
+    &.hextra-card-link {
+      @variant hover {
+        @apply
+          hx:bg-slate-50
+          hx:border-gray-300
+          hx:shadow-md
+          hx:shadow-gray-100
+
+          hx:dark:shadow-none
+          hx:dark:border-neutral-700
+          hx:dark:bg-neutral-900
+        ;
+
+        &:has(.hextra-card-image) {
+          @apply
+            hx:border-gray-300
+            hx:shadow-lg
+
+            hx:dark:shadow-none
+            hx:dark:border-neutral-500
+            hx:dark:bg-neutral-700
+          ;
+        }
+      }
+
+      @variant active {
+        @apply
+          hx:shadow-sm
+          hx:shadow-gray-200
+        ;
+      }
+    }
+
+  }
+}
