@@ -40,6 +40,32 @@
         hx:bg-gray-100
         hx:shadow-sm
       ;
+
+      .hextra-card-button {
+        @apply
+          hx:text-gray-700
+          hx:hover:text-gray-900
+          hx:dark:text-neutral-200
+          hx:dark:hover:text-neutral-100
+          hx:hover:bg-slate-50
+          hx:dark:hover:bg-neutral-900
+          hx:border-gray-200
+          hx:dark:border-neutral-700
+        ;
+      }
+    }
+
+    .hextra-card-button {
+      @apply
+        hx:text-gray-700
+        hx:hover:text-gray-900
+        hx:dark:text-neutral-200
+        hx:dark:hover:text-neutral-100
+        hx:hover:bg-slate-50
+        hx:dark:hover:bg-neutral-800
+        hx:border-gray-200
+        hx:dark:border-neutral-800
+      ;
     }
 
     @variant dark {
