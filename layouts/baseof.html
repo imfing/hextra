@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
+<html lang="{{ .Site.Language.Lang }}" dir="{{ .Site.Language.LanguageDirection | default `ltr` }}">
   {{- partial "head.html" . -}}
-  <body dir="{{ .Site.Language.LanguageDirection | default `ltr` }}">
+  <body>
     {{- partial "banner.html" . -}}
     {{- partial "navbar.html" . -}}
     {{- block "main" . }}{{ end -}}

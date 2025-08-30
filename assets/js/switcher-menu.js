@@ -8,7 +8,7 @@ function computeMenuTranslation(switcher, optionsElement) {
   const isOnTop = switcher.dataset.location === 'top';
   const isOnBottom = switcher.dataset.location === 'bottom';
   const isOnBottomRight = switcher.dataset.location === 'bottom-right';
-  const isRTL = document.body.dir === 'rtl'
+  const isRTL = document.documentElement.dir === 'rtl'
 
   // Stuck on the left side of the switcher.
   let x = switcherRect.left;
