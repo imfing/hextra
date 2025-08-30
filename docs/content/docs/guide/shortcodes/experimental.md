@@ -90,19 +90,11 @@ sidebar:
 ## Usage
 
 ```
-{{</* cards */>}}
-  {{</* card link="../callout" title="Callout" icon="warning" */>}}
-  {{</* card link="../callout" title="Card with tag" icon="tag" tag= "A custom tag" */>}}
-  {{</* card link="/" title="No Icon" */>}}
-{{</* /cards */>}}
+TODO
 ```
 
 ```
-{{</* cards */>}}
-  {{</* card link="/" title="Image Card" image="https://source.unsplash.com/featured/800x600?landscape" subtitle="Unsplash Landscape" */>}}
-  {{</* card link="/" title="Local Image" image="/images/card-image-unprocessed.jpg" subtitle="Raw image under static directory." */>}}
-  {{</* card link="/" title="Local Image" image="images/space.jpg" subtitle="Image under assets directory, processed by Hugo." method="Resize" options="600x q80 webp" */>}}
-{{</* /cards */>}}
+TODO
 ```
 
 ## Card Parameters
@@ -177,14 +169,7 @@ Card supports adding tags which could be useful to show extra status information
 {{< /experimental/cards >}}
 
 ```
-{{</* cards */>}}
-  {{</* card link="../callout" title="Card with default tag color" tag="tag text" */>}}
-  {{</* card link="../callout" title="Card with red tag" tag="tag text" tagColor="red" */>}}
-  {{</* card link="../callout" title="Card with blue tag" tag="tag text" tagColor="blue" */>}}
-  {{</* card link="../callout" title="Card with yellow tag" tag="tag text" tagColor="yellow" tagIcon="sparkles" tagBorder=false */>}}
-  {{</* card link="/" title="Image Card" image="/images/card-image-unprocessed.jpg" subtitle="Image" tag="tag text" tagColor="green" */>}}
-  {{</* card link="/" title="Image Card" image="images/space.jpg" subtitle="Image" tag="tag text" tagColor="purple" tagIcon="sparkles" tagBorder=false */>}}
-{{</* /cards */>}}
+TODO
 ```
 
 ## Columns
@@ -210,14 +195,6 @@ You can specify the maximum number of columns for cards to span by passing the `
 {{< /experimental/cards >}}
 
 ```
-{{</* cards cols="1" */>}}
-  {{</* card link="/" title="Top Card" */>}}
-  {{</* card link="/" title="Bottom Card" */>}}
-{{</* /cards */>}}
-
-{{</* cards cols="2" */>}}
-  {{</* card link="/" title="Left Card" */>}}
-  {{</* card link="/" title="Right Card" */>}}
-{{</* /cards */>}}
+TODO
 ```
 
