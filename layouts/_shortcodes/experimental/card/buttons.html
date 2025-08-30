@@ -1,3 +1,10 @@
+{{- /*
+Card buttons.
+
+@example {{< experimental/card/buttons >}}...{{< /experimental/card/buttons >}}
+
+*/ -}}
+
 {{- if or (not .Parent) (ne .Parent.Name "experimental/card") -}}
   {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card" -}}
 {{- end -}}
