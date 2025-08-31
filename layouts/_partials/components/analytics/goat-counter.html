@@ -1,0 +1,17 @@
+{{- with .Site.Params.analytics.goatCounter -}}
+    {{- if .code -}}
+        <script 
+            data-goatcounter="https://{{- .code -}}.goatcounter.com/count"
+            data-goatcounter-settings='
+            {
+                "no_onload": {{- if .noOnload }}true{{- else }}false{{- end -}},
+                "no_events": {{- if .noEvents }}true{{- else }}false{{- end -}},
+                "allow_local": {{- if .allowLocal }}true{{- else }}false{{- end -}},
+                "allow_frame": {{- if .allowFrame }}true{{- else }}false{{- end -}}
+            }
+            '
+            async src="//gc.zgo.at/count.js"></script>
+    {{- else -}}
+        {{- errorf "Missing GoatCounter 'code' configuration. See https://www.goatcounter.com/help/start" -}}
+    {{- end -}}
+{{- end -}}
