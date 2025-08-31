@@ -10,11 +10,10 @@
     href="{{ $href }}"
     {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
   >
+    {{- $content -}}
+  </a>
 {{- else -}}
   <div class="hextra-card hextra-card-neutral hx:group" >
+    {{- $content -}}
+  </div>
 {{- end -}}
-
-{{- $content -}}
-
-{{- if $link -}}</a>{{- else -}}</div>{{- end -}}
-{{- /* Strip trailing newline. */ -}}
