@@ -7,7 +7,7 @@ tags:
 
 Hugo reads its configuration from `hugo.yaml` in the root of your Hugo site.
 The config file is where you can configure all aspects of your site.
-Check out the config file for this site [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) on GitHub to get a comprehensive idea of available settings and best practices.
+Check out the config file for this site [`docs/hugo.yaml`](https://github.com/imfing/hextra/blob/main/docs/hugo.yaml) on GitHub to get a comprehensive idea of available settings and best practices.
 
 <!--more-->
 

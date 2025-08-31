@@ -1,4 +1,4 @@
-# Theme development config for exampleSite
+# Theme development config for documentation site
 # https://gohugo.io/configuration/build/#cache-busters
 [build]
   [build.buildStats]
