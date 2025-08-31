@@ -2,6 +2,6 @@
 
 {{- range $tag := $context.Params.tags -}}
   {{- with $context.Site.GetPage (printf "/tags/%s" $tag) -}}
-    <a class="hx:inline-block hx:whitespace-nowrap hx:mr-2 hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50" href="{{ .RelPermalink }}">#{{ .Title }}</a>
+    <a class="hx:inline-block hx:whitespace-nowrap hx:mr-2 hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50" href="{{ .RelPermalink }}">#{{ $tag }}</a>
   {{- end -}}
 {{- end -}}
