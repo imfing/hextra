@@ -17,6 +17,8 @@
 {{- end }}
 
 <!-- GoatCounter -->
-{{ partial "components/analytics/goat-counter.html" . }}
+{{- if .Site.Params.analytics.goatCounter -}}
+  {{ partial "components/analytics/goat-counter.html" . }}
+{{- end -}}
 
 {{- end }}

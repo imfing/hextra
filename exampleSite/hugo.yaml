@@ -138,10 +138,6 @@ menu:
 
 params:
 
-  #analytics:
-  #  goatCounter:
-  #    code: ABCDEF
-
   description: Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.
 
   externalLinkDecoration: true

@@ -386,7 +386,7 @@ To exclude an entire directory, use the [`cascade`](https://gohugo.io/configurat
 
 ### Analytics
 
-Hextra has support for a number of different analytics solutions. By default, these are only enabled in production builds to prevent analytics from being tracked during development. If you do want to test analytics locally you can run a production server using:
+Hextra has support for several different analytics solutions. Hextra only supports analytics in production environments. This is to ensure that you do not accidentally send analytic events when working locally. If, however, you do want to test analytics locally, you can run a production server using:
 
 `hugo server --environment production`
 
