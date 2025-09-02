@@ -1,7 +1,10 @@
 {{- /*
 Create a tab.
 
-@example {{< tab >}}content{{< /tab >}}
+@param {string} name The name of the tab.
+@param {string} selected Whether the tab is selected.
+
+@example {{< tab name="Foo" selected=true >}}content{{< /tab >}}
 */ -}}
 
 {{- $name := .Get "name" | default (printf "Tab %d" .Ordinal) -}}
