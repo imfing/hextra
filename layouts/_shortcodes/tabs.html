@@ -4,26 +4,27 @@ Create a tabbed interface with the given items.
 @param {string} items The items to display in the tabs.
 @param {string} defaultIndex The index of the default tab.
 
-@example {{< tabs items="JSON,YAML,TOML" >}}{{< /tabs >}}
+@example {{< tabs >}}...{{< /tabs >}}
 */ -}}
 
-{{- $items := split (.Get "items") "," -}}
 {{- $defaultIndex := int ((.Get "defaultIndex") | default "0") -}}
 
-{{- $enableSync := site.Params.page.tabs.sync | default false -}}
+{{- $enableSync := false -}}
+{{- if or (eq .Page.Params.tabs.sync false) (eq .Page.Params.tabs.sync true) -}}
+  {{- $enableSync = .Page.Params.tabs.sync -}}
+{{- else -}}
+  {{- $enableSync = site.Params.page.tabs.sync | default false -}}
+{{- end -}}
 
-{{- if not (.Get "items") -}}
-  {{ errorf "tabs shortcode: 'items' parameter is required" }}
+{{- $items := split (.Get "items") "," -}}
+
+{{- $tags := $.Store.Get "tabs" -}}
+{{- if $tags -}}
+  {{- $items = $tags -}}
 {{- end -}}
 
 {{- if not $items -}}
-  {{ errorf "tabs shortcode: 'items' parameter cannot be empty" }}
-{{- end -}}
-
-{{- range $items -}}
-  {{- if eq (trim . " ") "" -}}
-    {{ errorf "tabs shortcode: empty item found in 'items' parameter" }}
-  {{- end -}}
+  {{ errorf "tabs shortcode: mising tab names" }}
 {{- end -}}
 
 <div class="hextra-scrollbar hx:overflow-x-auto hx:overflow-y-hidden hx:overscroll-x-contain">

@@ -6,6 +6,13 @@ Create a tab.
 
 {{- $defaultIndex := int ((.Parent.Get "defaultIndex") | default "0") -}}
 
+{{- $name := .Get "name" -}}
+
+{{- if $name -}}
+  {{- $tabs := .Parent.Store.Get "tabs" | default slice -}}
+  {{ .Parent.Store.Set "tabs" ($tabs | append $name) -}}
+{{- end -}}
+
 <div
   class="hextra-tabs-panel hx:rounded-sm hx:pt-6 hx:hidden hx:data-[state=selected]:block"
   id="tabs-panel-{{ .Ordinal }}"
@@ -15,4 +22,4 @@ Create a tab.
 >
   {{- .InnerDeindent | markdownify -}}
 </div>
-{{- /* Drop trailing newlines */ -}}
+{{- /* Strip trailing newline. */ -}}
