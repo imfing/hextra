@@ -35,9 +35,11 @@ Create a tabbed interface with the given items.
         role="tab"
         type="button"
         aria-controls="tabs-panel-{{ $i }}"
-        {{- if eq $i $defaultIndex }} aria-selected="true" {{ end -}}
-        {{- if eq $i $defaultIndex }} tabindex="0" {{ end -}}
-        {{- if eq $i $defaultIndex }} data-state="selected"{{ end -}}
+        {{- if eq $i $defaultIndex }}
+        aria-selected="true"
+        tabindex="0"
+        data-state="selected"
+        {{- end }}
       >
         {{- $item -}}
       </button>

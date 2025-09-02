@@ -17,8 +17,10 @@ Create a tab.
   class="hextra-tabs-panel hx:rounded-sm hx:pt-6 hx:hidden hx:data-[state=selected]:block"
   id="tabs-panel-{{ .Ordinal }}"
   role="tabpanel"
-  {{- if eq .Ordinal $defaultIndex }} tabindex="0" {{ end -}}
-  {{- if eq .Ordinal $defaultIndex }} data-state="selected" {{ end -}}
+  {{- if eq .Ordinal $defaultIndex }}
+  tabindex="0"
+  data-state="selected"
+  {{ end -}}
 >
   {{- .InnerDeindent | markdownify -}}
 </div>
