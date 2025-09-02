@@ -21,7 +21,13 @@ Create a tabbed interface with the given items.
 {{- $tabs := ($.Store.Get "tabs") | default slice -}}
 
 {{- /* Compatibility with previous parameter "items". */ -}}
+{{- if .Get "defaultIndex" -}}
+  {{- warnf "The 'defaultIndex' parameter of the 'tabs' shortcode is deprecated. Please use 'selected' on 'tab' instead." -}}
+{{- end -}}
+
 {{- if .Get "items" -}}
+  {{- warnf "The 'items' parameter of the 'tabs' shortcode is deprecated. Please use 'name' on 'tab' instead." -}}
+
   {{- $items := split (.Get "items") "," -}}
 
   {{- $temp := slice -}}
