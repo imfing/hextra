@@ -4,24 +4,18 @@ Create a tab.
 @example {{< tab >}}content{{< /tab >}}
 */ -}}
 
-{{- $defaultIndex := int ((.Parent.Get "defaultIndex") | default "0") -}}
+{{- $name := .Get "name" | default (printf "Tab %d" .Ordinal) -}}
 
-{{- $name := .Get "name" -}}
-
-{{- if $name -}}
-  {{- $tabs := .Parent.Store.Get "tabs" | default slice -}}
-  {{ .Parent.Store.Set "tabs" ($tabs | append $name) -}}
+{{- $selected := .Get "selected" -}}
+{{- if .Parent.Get "defaultIndex" -}}
+  {{- $selected = eq .Ordinal (int (.Parent.Get "defaultIndex")) -}}
 {{- end -}}
 
-<div
-  class="hextra-tabs-panel hx:rounded-sm hx:pt-6 hx:hidden hx:data-[state=selected]:block"
-  id="tabs-panel-{{ .Ordinal }}"
-  role="tabpanel"
-  {{- if eq .Ordinal $defaultIndex }}
-  tabindex="0"
-  data-state="selected"
-  {{ end -}}
->
-  {{- .InnerDeindent | markdownify -}}
-</div>
-{{- /* Strip trailing newline. */ -}}
+{{- $tabs := .Parent.Store.Get "tabs" | default slice -}}
+{{ .Parent.Store.Set "tabs" ($tabs | append (dict
+    "id" .Ordinal
+    "name" $name
+    "content" .InnerDeindent
+    "selected" $selected
+  ))
+-}}

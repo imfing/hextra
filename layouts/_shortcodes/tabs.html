@@ -7,8 +7,10 @@ Create a tabbed interface with the given items.
 @example {{< tabs >}}...{{< /tabs >}}
 */ -}}
 
-{{- $defaultIndex := int ((.Get "defaultIndex") | default "0") -}}
+{{- /* $blackhole is unused, but required for the shortcode to work. */ -}}
+{{- $blackhole := .Inner -}}
 
+{{- /* Enable syncing of tabs across the page. */ -}}
 {{- $enableSync := false -}}
 {{- if or (eq .Page.Params.tabs.sync false) (eq .Page.Params.tabs.sync true) -}}
   {{- $enableSync = .Page.Params.tabs.sync -}}
@@ -16,37 +18,71 @@ Create a tabbed interface with the given items.
   {{- $enableSync = site.Params.page.tabs.sync | default false -}}
 {{- end -}}
 
-{{- $items := split (.Get "items") "," -}}
+{{- $tabs := ($.Store.Get "tabs") | default slice -}}
 
-{{- $tags := $.Store.Get "tabs" -}}
-{{- if $tags -}}
-  {{- $items = $tags -}}
+{{- /* Compatibility with previous parameter "items". */ -}}
+{{- if .Get "items" -}}
+  {{- $items := split (.Get "items") "," -}}
+
+  {{- $temp := slice -}}
+  {{- range $i, $item := $items -}}
+    {{- $tab := index $tabs $i -}}
+    {{- $temp = $temp | append (merge $tab (dict "name" $item)) -}}
+  {{- end -}}
+
+  {{- $tabs = $temp -}}
 {{- end -}}
 
-{{- if not $items -}}
-  {{ errorf "tabs shortcode: mising tab names" }}
+{{- /* Create group data for syncing and select the first tab if none is selected. */ -}}
+{{- $selectFirst := true -}}
+{{  $dataTabGroup := slice -}}
+
+{{- range $i, $item := $tabs -}}
+  {{- $dataTabGroup = $dataTabGroup | append ($item.name) -}}
+
+  {{- if $item.selected -}}
+    {{- $selectFirst = false -}}
+  {{- end -}}
 {{- end -}}
+
+{{- /* Generate a unique ID for each tab group. */ -}}
+{{- $globalID := printf "tabs-%02d" .Ordinal -}}
 
 <div class="hextra-scrollbar hx:overflow-x-auto hx:overflow-y-hidden hx:overscroll-x-contain">
-  <div class="hx:mt-4 hx:flex hx:w-max hx:min-w-full hx:border-b hx:border-gray-200 hx:pb-px hx:dark:border-neutral-800"{{ if $enableSync }} data-tab-group="{{ delimit $items `,` }}"{{ end }}>
-    {{- range $i, $item := $items -}}
+  <div
+    class="hx:mt-4 hx:flex hx:w-max hx:min-w-full hx:border-b hx:border-gray-200 hx:pb-px hx:dark:border-neutral-800"
+    {{ if $enableSync }} data-tab-group="{{ delimit $dataTabGroup `,` }}"{{ end }}
+  >
+    {{- range $i, $item := $tabs -}}
       <button
         class="hextra-tabs-toggle hx:cursor-pointer hx:data-[state=selected]:border-primary-500 hx:data-[state=selected]:text-primary-600 hx:data-[state=selected]:dark:border-primary-500 hx:data-[state=selected]:dark:text-primary-600 hx:mr-2 hx:rounded-t hx:p-2 hx:font-medium hx:leading-5 hx:transition-colors hx:-mb-0.5 hx:select-none hx:border-b-2 hx:border-transparent hx:text-gray-600 hx:hover:border-gray-200 hx:hover:text-black hx:dark:text-gray-200 hx:dark:hover:border-neutral-800 hx:dark:hover:text-white"
         role="tab"
         type="button"
-        aria-controls="tabs-panel-{{ $i }}"
-        {{- if eq $i $defaultIndex }}
+        aria-controls="tabs-panel-{{ $globalID }}-{{ $item.id }}"
+        {{- if or $item.selected (and $selectFirst (eq $i 0)) -}}
         aria-selected="true"
         tabindex="0"
         data-state="selected"
         {{- end }}
       >
-        {{- $item -}}
+        {{- $item.name -}}
       </button>
     {{- end -}}
   </div>
 </div>
 <div>
-  {{- .Inner -}}
+    {{- range $i, $item := $tabs -}}
+      <div
+        class="hextra-tabs-panel hx:rounded-sm hx:pt-6 hx:hidden hx:data-[state=selected]:block"
+        id="tabs-panel-{{ $globalID }}-{{ $item.id }}"
+        role="tabpanel"
+        {{- if or $item.selected (and $selectFirst (eq $i 0)) -}}
+        tabindex="0"
+        data-state="selected"
+        {{ end -}}
+      >
+        {{- $item.content  | markdownify -}}
+      </div>
+    {{- end -}}
 </div>
 {{- /* Drop trailing newlines */ -}}

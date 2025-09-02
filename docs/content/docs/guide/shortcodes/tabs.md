@@ -25,15 +25,15 @@ next: /docs/guide/deploy-site
 {{</* /tabs */>}}
 ```
 
-### Specify Selected Index
+### Specify Selected Tab
 
-Use `defaultIndex` property to specify the selected tab. The index starts from 0.
+Use `selected` property to specify the selected tab.
 
 ```
-{{</* tabs defaultIndex="1" */>}}
+{{</* tabs */>}}
 
   {{</* tab name="JSON" */>}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{</* /tab */>}}
-  {{</* tab name="YAML" */>}}**YAML**: YAML is a human-readable data serialization language.{{</* /tab */>}}
+  {{</* tab name="YAML" selected=true */>}}**YAML**: YAML is a human-readable data serialization language.{{</* /tab */>}}
   {{</* tab name="TOML" */>}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{</* /tab */>}}
 
 {{</* /tabs */>}}
@@ -41,9 +41,9 @@ Use `defaultIndex` property to specify the selected tab. The index starts from 0
 
 The `YAML` tab will be selected by default.
 
-{{< tabs defaultIndex="1" >}}
+{{< tabs >}}
   {{< tab name="JSON" >}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{< /tab >}}
-  {{< tab name="YAML" >}}**YAML**: YAML is a human-readable data serialization language.{{< /tab >}}
+  {{< tab name="YAML" selected=true >}}**YAML**: YAML is a human-readable data serialization language.{{< /tab >}}
   {{< tab name="TOML" >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
 {{< /tabs >}}
 
