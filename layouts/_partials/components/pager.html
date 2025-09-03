@@ -1,6 +1,6 @@
 {{/* Article navigation on the footer of the article */}}
 
-{{- $reversePagination := .Scratch.Get "reversePagination" | default false -}}
+{{- $reversePagination := .Store.Get "reversePagination" | default false -}}
 
 {{- $prev := cond $reversePagination .PrevInSection .NextInSection -}}
 {{- $next := cond $reversePagination .NextInSection .PrevInSection -}}
