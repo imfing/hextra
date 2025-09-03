@@ -3,8 +3,6 @@ Umami Analytics
 https://umami.is/docs/tracker-configuration
 */ -}}
 
-{{- with .Site.Params.analytics.umami -}}
-
 {{- if not .serverURL }}
   {{- errorf "Missing Umami 'serverURL' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#umami-analytics" -}}
 {{- end -}}
@@ -54,4 +52,3 @@ https://umami.is/docs/tracker-configuration
 {{- end -}}
 
 <script async defer {{ range $k, $v := ($attributes.Get "umami" ) }} {{ (printf `%s=%q` $k $v) | safeHTMLAttr }}{{- end -}}></script>
-{{- end -}}

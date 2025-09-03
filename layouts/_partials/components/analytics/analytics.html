@@ -7,12 +7,12 @@
 {{- end }}
 
 <!-- Umami -->
-{{- if .Site.Params.analytics.umami -}}
+{{- with .Site.Params.analytics.umami -}}
   {{ partial "components/analytics/umami.html" . }}
 {{- end }}
 
 <!-- Matomo -->
-{{- if .Site.Params.analytics.matomo -}}
+{{- with .Site.Params.analytics.matomo -}}
   {{ partial "components/analytics/matomo.html" . }}
 {{- end }}
 
