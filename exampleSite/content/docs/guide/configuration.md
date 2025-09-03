@@ -456,19 +456,41 @@ The llms.txt file is automatically generated from your content structure and mak
 
 ### Open Graph
 
-To add [Open Graph](https://ogp.me/) metadata to a page, add values in the frontmatter params.
+To add [Open Graph](https://ogp.me/) metadata, you can:
+- add values in the front-matter params of a page
+- or add values in the Hugo configuration file
 
 As a page can have multiple `image` and `video` tags, place their values in an array.
 Other Open Graph properties can have only one value.
-For example, this page has an `og:image` tag (which configures an image to preview on social shares) and an `og:audio` tag.
 
-```yaml {filename="content/docs/guide/configuration.md"}
-title: "Configuration"
+{{< tabs items="Page Level, Global Level" >}}
+{{< tab >}}
+
+```md {filename="mypage.md"}
+---
+title: "My Page"
 params:
   images:
-    - "/img/config-image.jpg"
-  audio: "config-talk.mp3"
+    - "/images/image01.jpg"
+  audio: "podcast02.mp3"
+  videos:
+    - "video01.mp4"
+---
+
+Page content.
 ```
+{{< /tab >}}
+{{< tab >}}
+```yaml {filename="hugo.yaml"}
+params:
+  images:
+    - "/images/image01.jpg"
+  audio: "podcast02.mp3"
+  videos:
+    - "video01.mp4"
+```
+{{< /tab >}}
+{{< /tabs >}}
 
 ### Banner
 
