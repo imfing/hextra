@@ -14,15 +14,15 @@
     {{ end }}
     {{ if not $.Section }}
       {{ $sections := .Site.Params.rss.sections | default (slice "blog") }}
-      {{ .Scratch.Set "rssPages" (first 50 (where $.Site.RegularPages "Type" "in" $sections )) }}
+      {{ .Store.Set "rssPages" (first 50 (where $.Site.RegularPages "Type" "in" $sections )) }}
     {{ else }}
       {{ if $.Parent.IsHome }}
-        {{ .Scratch.Set "rssPages" (first 50 (where $.Site.RegularPages "Type" $.Section )) }}
+        {{ .Store.Set "rssPages" (first 50 (where $.Site.RegularPages "Type" $.Section )) }}
       {{ else }}
-        {{ .Scratch.Set "rssPages" (first 50 $.Pages) }}
+        {{ .Store.Set "rssPages" (first 50 $.Pages) }}
       {{ end }}
     {{ end }}
-    {{ range (.Scratch.Get "rssPages")  }}
+    {{ range (.Store.Get "rssPages")  }}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
