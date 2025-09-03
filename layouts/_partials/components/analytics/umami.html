@@ -6,11 +6,11 @@ https://umami.is/docs/tracker-configuration
 {{- with .Site.Params.analytics.umami -}}
 
 {{- if not .serverURL }}
-  {{- errorf "Missing Umami 'serverURL' configuration. See TODO" -}}
+  {{- errorf "Missing Umami 'serverURL' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#umami-analytics" -}}
 {{- end -}}
 
 {{- if not .websiteID }}
-  {{- errorf "Missing Umami 'websiteID' configuration. See TODO" -}}
+  {{- errorf "Missing Umami 'websiteID' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#umami-analytics" -}}
 {{- end -}}
 
 {{- $attributes := newScratch -}}

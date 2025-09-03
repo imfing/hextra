@@ -3,6 +3,16 @@ Matomo Analytics.
 https://developer.matomo.org/guides/tracking-javascript-guide
 */ -}}
 
+{{- with .Site.Params.analytics.matomo -}}
+
+{{- if not .serverURL }}
+  {{- errorf "Missing Matomo 'serverURL' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#matomo-analytics" -}}
+{{- end -}}
+
+{{- if not .websiteID }}
+  {{- errorf "Missing Matomo 'websiteID' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#matomo-analytics" -}}
+{{- end -}}
+
 <!-- Matomo -->
 <script type="text/javascript">
   var _paq = window._paq = window._paq || [];
@@ -17,3 +27,5 @@ https://developer.matomo.org/guides/tracking-javascript-guide
   })();
 </script>
 <!-- End Matomo Code -->
+
+{{- end -}}
