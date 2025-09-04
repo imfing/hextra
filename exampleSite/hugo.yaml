@@ -137,6 +137,7 @@ menu:
       weight: 3
 
 params:
+
   description: Modern, responsive, batteries-included Hugo theme for creating beautiful static websites.
 
   externalLinkDecoration: true
