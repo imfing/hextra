@@ -5,12 +5,10 @@ next: /docs/guide/deploy-site
 
 ## Example
 
-{{< tabs items="macOS,Linux,Windows" >}}
-
-  {{< tab >}}**macOS**: A desktop operating system by Apple.{{< /tab >}}
-  {{< tab >}}**Linux**: An open-source operating system.{{< /tab >}}
-  {{< tab >}}**Windows**: A desktop operating system by Microsoft.{{< /tab >}}
-
+{{< tabs >}}
+  {{< tab name="JSON" >}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{< /tab >}}
+  {{< tab name="YAML" >}}**YAML**: YAML is a human-readable data serialization language.{{< /tab >}}
+  {{< tab name="TOML" >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
 {{< /tabs >}}
 
 ## Usage
@@ -18,37 +16,35 @@ next: /docs/guide/deploy-site
 ### Default
 
 ```
-{{</* tabs items="JSON,YAML,TOML" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{</* /tab */>}}
-  {{</* tab */>}}**YAML**: YAML is a human-readable data serialization language.{{</* /tab */>}}
-  {{</* tab */>}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{</* /tab */>}}
+  {{</* tab name="JSON" */>}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{</* /tab */>}}
+  {{</* tab name="YAML" */>}}**YAML**: YAML is a human-readable data serialization language.{{</* /tab */>}}
+  {{</* tab name="TOML" */>}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{</* /tab */>}}
 
 {{</* /tabs */>}}
 ```
 
-### Specify Selected Index
+### Specify Selected Tab
 
-Use `defaultIndex` property to specify the selected tab. The index starts from 0.
+Use `selected` property to specify the selected tab.
 
 ```
-{{</* tabs items="JSON,YAML,TOML" defaultIndex="1" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{</* /tab */>}}
-  {{</* tab */>}}**YAML**: YAML is a human-readable data serialization language.{{</* /tab */>}}
-  {{</* tab */>}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{</* /tab */>}}
+  {{</* tab name="JSON" */>}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{</* /tab */>}}
+  {{</* tab name="YAML" selected=true */>}}**YAML**: YAML is a human-readable data serialization language.{{</* /tab */>}}
+  {{</* tab name="TOML" */>}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{</* /tab */>}}
 
 {{</* /tabs */>}}
 ```
 
 The `YAML` tab will be selected by default.
 
-{{< tabs items="JSON,YAML,TOML" defaultIndex="1" >}}
-
-{{< tab >}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{< /tab >}}
-{{< tab >}}**YAML**: YAML is a human-readable data serialization language.{{< /tab >}}
-{{< tab >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
-
+{{< tabs >}}
+  {{< tab name="JSON" >}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{< /tab >}}
+  {{< tab name="YAML" selected=true >}}**YAML**: YAML is a human-readable data serialization language.{{< /tab >}}
+  {{< tab name="TOML" >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
 {{< /tabs >}}
 
 
@@ -57,9 +53,9 @@ The `YAML` tab will be selected by default.
 Markdown syntax including code block is also supported:
 
 ````
-{{</* tabs items="JSON,YAML,TOML" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}
+  {{</* tab name="JSON" */>}}
   ```json
   { "hello": "world" }
   ```
@@ -70,21 +66,21 @@ Markdown syntax including code block is also supported:
 {{</* /tabs */>}}
 ````
 
-{{< tabs items="JSON,YAML,TOML" >}}
+{{< tabs >}}
 
-  {{< tab >}}
+  {{< tab name="JSON" >}}
   ```json
   { "hello": "world" }
   ```
   {{< /tab >}}
 
-  {{< tab >}}
+  {{< tab name="YAML" >}}
   ```yaml
   hello: world
   ```
   {{< /tab >}}
 
-  {{< tab >}}
+  {{< tab name="TOML" >}}
   ```toml
   hello = "world"
   ```
@@ -97,7 +93,7 @@ Markdown syntax including code block is also supported:
 
 Tabs with the same list of `items` can be synchronized. When enabled, selecting a tab updates all other tabs with the same `items` and remembers the selection across pages.
 
-Enable globally in your `hugo.yaml` under the `page` section:
+Enable/disable globally in your `hugo.yaml` under the `page` section:
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -106,20 +102,33 @@ params:
       sync: true
 ```
 
-With this enabled the following two tab blocks will always display the same selected item:
+Enable/disable per page inside the front matter:
+
+```yaml {filename="my_page.md"}
+---
+title: My page
+params:
+  tabs:
+    sync: true
+---
+
+Example content.
+```
+
+With this enabled, the following two tab blocks will always display the same selected item:
 
 ```markdown
-{{</* tabs items="A,B" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}A content{{</* /tab */>}}
-  {{</* tab */>}}B content{{</* /tab */>}}
+  {{</* tab name="A" */>}}A content{{</* /tab */>}}
+  {{</* tab name="B" */>}}B content{{</* /tab */>}}
 
 {{</* /tabs */>}}
 
-{{</* tabs items="A,B" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}Second A content{{</* /tab */>}}
-  {{</* tab */>}}Second B content{{</* /tab */>}}
+  {{</* tab name="A" */>}}Second A content{{</* /tab */>}}
+  {{</* tab name="B" */>}}Second B content{{</* /tab */>}}
 
 {{</* /tabs */>}}
 ```

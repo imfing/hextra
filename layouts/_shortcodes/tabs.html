@@ -1,49 +1,39 @@
 {{- /*
 Create a tabbed interface with the given items.
 
-@param {string} items The items to display in the tabs.
-@param {string} defaultIndex The index of the default tab.
-
-@example {{< tabs items="JSON,YAML,TOML" >}}{{< /tabs >}}
+@example {{< tabs >}}...{{< /tabs >}}
 */ -}}
 
-{{- $items := split (.Get "items") "," -}}
-{{- $defaultIndex := int ((.Get "defaultIndex") | default "0") -}}
+{{- /* Unused, but required for the shortcode to work. */ -}}
+{{- .Inner -}}
 
-{{- $enableSync := site.Params.page.tabs.sync | default false -}}
-
-{{- if not (.Get "items") -}}
-  {{ errorf "tabs shortcode: 'items' parameter is required" }}
+{{- /* Enable syncing of tabs across the page. */ -}}
+{{- $enableSync := false -}}
+{{- if or (eq .Page.Params.tabs.sync false) (eq .Page.Params.tabs.sync true) -}}
+  {{- $enableSync = .Page.Params.tabs.sync -}}
+{{- else -}}
+  {{- $enableSync = site.Params.page.tabs.sync | default false -}}
 {{- end -}}
 
-{{- if not $items -}}
-  {{ errorf "tabs shortcode: 'items' parameter cannot be empty" }}
+{{- $tabs := ($.Store.Get "tabs") | default slice -}}
+
+{{- /* Compatibility with previous parameter "items". */ -}}
+{{- if .Get "defaultIndex" -}}
+  {{- warnf "The 'defaultIndex' parameter of the 'tabs' shortcode is deprecated. Please use 'selected' on 'tab' instead." -}}
 {{- end -}}
 
-{{- range $items -}}
-  {{- if eq (trim . " ") "" -}}
-    {{ errorf "tabs shortcode: empty item found in 'items' parameter" }}
+{{- if .Get "items" -}}
+  {{- warnf "The 'items' parameter of the 'tabs' shortcode is deprecated. Please use 'name' on 'tab' instead." -}}
+
+  {{- $items := split (.Get "items") "," -}}
+
+  {{- $temp := slice -}}
+  {{- range $i, $item := $items -}}
+    {{- $tab := index $tabs $i -}}
+    {{- $temp = $temp | append (merge $tab (dict "name" $item)) -}}
   {{- end -}}
+
+  {{- $tabs = $temp -}}
 {{- end -}}
 
-<div class="hextra-scrollbar hx:overflow-x-auto hx:overflow-y-hidden hx:overscroll-x-contain">
-  <div class="hx:mt-4 hx:flex hx:w-max hx:min-w-full hx:border-b hx:border-gray-200 hx:pb-px hx:dark:border-neutral-800"{{ if $enableSync }} data-tab-group="{{ delimit $items `,` }}"{{ end }}>
-    {{- range $i, $item := $items -}}
-      <button
-        class="hextra-tabs-toggle hx:cursor-pointer hx:data-[state=selected]:border-primary-500 hx:data-[state=selected]:text-primary-600 hx:data-[state=selected]:dark:border-primary-500 hx:data-[state=selected]:dark:text-primary-600 hx:mr-2 hx:rounded-t hx:p-2 hx:font-medium hx:leading-5 hx:transition-colors hx:-mb-0.5 hx:select-none hx:border-b-2 hx:border-transparent hx:text-gray-600 hx:hover:border-gray-200 hx:hover:text-black hx:dark:text-gray-200 hx:dark:hover:border-neutral-800 hx:dark:hover:text-white"
-        role="tab"
-        type="button"
-        aria-controls="tabs-panel-{{ $i }}"
-        {{- if eq $i $defaultIndex }} aria-selected="true" {{ end -}}
-        {{- if eq $i $defaultIndex }} tabindex="0" {{ end -}}
-        {{- if eq $i $defaultIndex }} data-state="selected"{{ end -}}
-      >
-        {{- $item -}}
-      </button>
-    {{- end -}}
-  </div>
-</div>
-<div>
-  {{- .Inner -}}
-</div>
-{{- /* Drop trailing newlines */ -}}
+{{- partial "shortcodes/tabs" (dict "tabs" $tabs "enableSync" $enableSync "id" .Ordinal) -}}
