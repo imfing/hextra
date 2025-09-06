@@ -46,12 +46,12 @@ def say_hello():
 通过 `base_url` 属性可设置基础 URL，该 URL 会与文件名组合生成可点击的链接。文件名可包含相对路径以指定文件在基础路径中的位置。
 
 ````markdown {filename="Markdown"}
-```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
+```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="docs/hugo.work"}
 go 1.20
 ```
 ````
 
-```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
+```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="docs/hugo.work"}
 go 1.20
 ```
 

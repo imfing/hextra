@@ -49,12 +49,12 @@ def say_hello():
 نام فایل می‌تواند شامل یک مسیر نسبی باشد اگر محل فایل را در مسیر پایه مشخص کند.
 
 ````markdown {filename="Markdown"}
-```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
+```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="docs/hugo.work"}
 go 1.20
 ```
 ````
 
-```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
+```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="docs/hugo.work"}
 go 1.20
 ```
 

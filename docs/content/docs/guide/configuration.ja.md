@@ -7,7 +7,7 @@ tags:
 
 Hugo はサイトのルートにある `hugo.yaml` から設定を読み込みます。
 この設定ファイルであなたのサイトのあらゆる側面を設定できます。
-利用可能な設定項目とベストプラクティスを網羅的に理解するには、GitHub 上のこのサイトの設定ファイル [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) を参照してください。
+利用可能な設定項目とベストプラクティスを網羅的に理解するには、GitHub 上のこのサイトの設定ファイル [`docs/hugo.yaml`](https://github.com/imfing/hextra/blob/main/docs/hugo.yaml) を参照してください。
 
 <!--more-->
 

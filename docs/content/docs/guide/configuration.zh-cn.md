@@ -7,7 +7,7 @@ tags:
 
 Hugo 从站点根目录的 `hugo.yaml` 读取配置。
 配置文件可用来调整站点的所有方面。
-查看本网站的示例配置文件 [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) 以全面了解可用设置和最佳实践。
+查看本网站的示例配置文件 [`docs/hugo.yaml`](https://github.com/imfing/hextra/blob/main/docs/hugo.yaml) 以全面了解可用设置和最佳实践。
 
 <!--more-->
 

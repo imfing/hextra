@@ -7,7 +7,7 @@ tags:
 
 Hugo تنظیمات خود را از فایل `hugo.yaml` در ریشه سایت شما می‌خواند.
 فایل پیکربندی جایی است که می‌توانید تمام جنبه‌های سایت خود را تنظیم کنید.
-برای آشنایی جامع با تنظیمات موجود و بهترین روش‌ها، فایل پیکربندی این سایت [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) را در GitHub بررسی کنید.
+برای آشنایی جامع با تنظیمات موجود و بهترین روش‌ها، فایل پیکربندی این سایت [`docs/hugo.yaml`](https://github.com/imfing/hextra/blob/main/docs/hugo.yaml) را در GitHub بررسی کنید.
 
 <!--more-->
 
