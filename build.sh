@@ -7,17 +7,17 @@ BASE_URL=${1:-"http://localhost:1313"}
 echo "Using base URL: $BASE_URL"
 
 # Version configuration - modify these arrays to specify versions to build
-# MAIN_VERSION format: "ref:display_name"
+# MAIN_VERSION format: "ref:display_name:source_dir"
 # VERSIONS format: "ref:display_name:source_dir" where source_dir is either "docs" or "exampleSite"
-MAIN_VERSION="v0.11.0:latest"
+MAIN_VERSION="v0.11.0:latest:exampleSite"
 VERSIONS=(
   "main:latest:docs" # latest version always builds from main
-  "v0.10.2:v0.10:docs"
+  "v0.10.2:v0.10:exampleSite"
   "v0.9.6:v0.9:exampleSite"
 )
 
 # Parse main version
-IFS=':' read -r MAIN_REF MAIN_NAME <<< "$MAIN_VERSION"
+IFS=':' read -r MAIN_REF MAIN_NAME MAIN_DIR <<< "$MAIN_VERSION"
 
 # Ensure clean public directory
 rm -rf public
@@ -30,7 +30,7 @@ GIT_HASH=$(git rev-parse --short HEAD)
 echo "Building main site from $MAIN_REF (commit: $GIT_HASH)"
 hugo \
   --minify \
-  --themesDir=../.. --source=docs \
+  --themesDir=../.. --source=$MAIN_DIR \
   --baseURL "$BASE_URL/" \
   --destination=../public
 
