@@ -49,12 +49,12 @@ def say_hello():
 ファイル名には、ベースパス内のファイルの場所を指定する相対パスを含めることができます。
 
 ````markdown {filename="Markdown"}
-```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
+```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="docs/hugo.work"}
 go 1.20
 ```
 ````
 
-```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="exampleSite/hugo.work"}
+```go {base_url="https://github.com/imfing/hextra/blob/main/",filename="docs/hugo.work"}
 go 1.20
 ```
 

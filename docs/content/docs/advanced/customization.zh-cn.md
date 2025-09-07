@@ -221,14 +221,14 @@ hugo gen chromastyles --style=github
 您可以通过添加以下文件在每个页面的 head 末尾添加自定义脚本：
 
 ```
-layouts/partials/custom/head-end.html
+layouts/_partials/custom/head-end.html
 ```
 
 ## 自定义页脚额外部分
 
-您可以通过在站点中创建 `layouts/partials/custom/footer.html` 文件来添加页脚的额外部分。
+您可以通过在站点中创建 `layouts/_partials/custom/footer.html` 文件来添加页脚的额外部分。
 
-```html {filename="layouts/partials/custom/footer.html"}
+```html {filename="layouts/_partials/custom/footer.html"}
 <!-- 您的页脚元素放在这里 -->
 ```
 

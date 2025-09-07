@@ -221,14 +221,14 @@ To override the default syntax highlighting theme, we can add the generated styl
 You may add custom scripts to the end of the head for every page by adding the following file:
 
 ```
-layouts/partials/custom/head-end.html
+layouts/_partials/custom/head-end.html
 ```
 
 ## Custom Extra Section in Footer
 
-You can add extra section in the footer by creating a file `layouts/partials/custom/footer.html` in your site.
+You can add extra section in the footer by creating a file `layouts/_partials/custom/footer.html` in your site.
 
-```html {filename="layouts/partials/custom/footer.html"}
+```html {filename="layouts/_partials/custom/footer.html"}
 <!-- Your footer element here -->
 ```
 
