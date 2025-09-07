@@ -35,7 +35,7 @@
     <!-- Sidebar on large screen -->
     {{- if $disableSidebar -}}
       {{- if $displayPlaceholder }}<div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div>{{ end -}}
-      {{ .context.Scratch.Set "enableFooterSwitches" true }}
+      {{ .context.Store.Set "enableFooterSwitches" true }}
     {{- else -}}
       <ul class="hx:flex hx:flex-col hx:gap-1 hx:max-md:hidden">
         {{ template "sidebar-main" (dict "context" $navRoot "page" $context  "pageURL" $pageURL) }}

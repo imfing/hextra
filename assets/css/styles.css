@@ -29,6 +29,7 @@ body {
   --primary-saturation: 100%;
   --primary-lightness: 50%;
   --navbar-height: 4rem;
+  --hextra-banner-height: 2rem;
   --menu-height: 3.75rem; /* 60px */
 }
 
@@ -48,6 +49,7 @@ body {
 @import "./components/steps.css";
 @import "./components/search.css";
 @import "./components/sidebar.css";
+@import "./components/banner.css";
 @import "./components/navbar.css";
 @import "./components/scrollbar.css";
 @import "./components/code-copy.css";

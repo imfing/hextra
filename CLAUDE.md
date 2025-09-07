@@ -84,12 +84,12 @@ assets/
 
 ### Example Site Development
 
-The `exampleSite/` directory serves as both documentation and testing ground:
+The `docs/` directory serves as both documentation and testing ground:
 
 - Test new features here before releasing
-- Configuration examples in `exampleSite/hugo.yaml` showing multi-language setup
+- Configuration examples in `docs/hugo.yaml` showing multi-language setup
 - Content examples demonstrate all theme capabilities
-- Run from exampleSite with: `hugo server --themesDir=../..`
+- Run from docs with: `hugo server --themesDir=../..`
 
 ### CSS Development Workflow
 
@@ -115,7 +115,7 @@ The `exampleSite/` directory serves as both documentation and testing ground:
 
 ### Key Configuration Files
 
-- `exampleSite/hugo.yaml` - Example Hugo configuration with multi-language setup
+- `docs/hugo.yaml` - Example Hugo configuration with multi-language setup
 - `postcss.config.mjs` - PostCSS configuration for CSS processing
 - `package.json` - Node.js dependencies and build scripts
 - `taskfile.yaml` - Task runner configuration
@@ -155,7 +155,7 @@ The `exampleSite/` directory serves as both documentation and testing ground:
 
 ### Testing & Quality Assurance
 
-- Test all changes in `exampleSite/` before releasing
+- Test all changes in `docs/` before releasing
 - Use `npm run dev:theme` for theme development with hot reloading
 - Format code with `npx prettier --write .` before committing
 - Verify multi-language functionality across supported languages

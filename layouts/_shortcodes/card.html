@@ -25,6 +25,8 @@ A shortcode to create a card.
 {{- $imageStyle := .Get "imageStyle" -}}
 {{- $tag := .Get "tag" -}}
 {{- $tagColor := .Get "tagColor" | default (.Get "tagType") | default "" -}}{{- /* Compatibility with previous parameter. */ -}}
+{{- $tagBorder := not (eq (.Get "tagBorder") false) | default true }}
+{{- $tagIcon := .Get "tagIcon" | default "" -}}
 
 {{/* Image processing options */}}
 {{- $method := .Get "method" | default "Resize" | humanize -}}
@@ -61,5 +63,7 @@ A shortcode to create a card.
   "imageStyle"  $imageStyle
   "tag"         $tag
   "tagType"     $tagColor
+  "tagBorder"   $tagBorder
+  "tagIcon"     $tagIcon
   )
 -}}
