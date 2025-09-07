@@ -1,3 +1,21 @@
+{{- /*
+A simple hero container with an image on the left side.
+
+@param {string} class The class of the container.
+@param {string} cols The number of columns (default: 2).
+@param {string} image The image of the container.
+@param {bool} imageCard Whether to display the image as a card (default: false).
+@param {string} imageClass The class of the image.
+@param {string} imageLink The link of the image.
+@param {string} imageStyle The style of the image.
+@param {string} imageTitle The title of the image.
+@param {int} imageWidth The width of the image (default: 350).
+@param {int} imageHeight The height of the image (default: 350).
+@param {string} style The style of the container.
+
+@example {{< hextra/hero-container image="image.png" imageLink="https://example.com" imageTitle="Example Image" >}}
+*/ -}}
+
 {{- $class := .Get "class" -}}
 {{- $cols := .Get "cols" | default 2 -}}
 {{- $image := .Get "image" -}}

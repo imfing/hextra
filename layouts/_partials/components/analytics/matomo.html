@@ -1,0 +1,31 @@
+{{- /*
+Matomo Analytics.
+https://developer.matomo.org/guides/tracking-javascript-guide
+*/ -}}
+
+{{- with .Site.Params.analytics.matomo -}}
+
+{{- if not .serverURL }}
+  {{- errorf "Missing Matomo 'serverURL' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#matomo-analytics" -}}
+{{- end -}}
+
+{{- if not .websiteID }}
+  {{- errorf "Missing Matomo 'websiteID' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#matomo-analytics" -}}
+{{- end -}}
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq = window._paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//{{ .serverURL }}/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', {{ .websiteID }}]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+{{- end -}}

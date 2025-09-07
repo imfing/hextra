@@ -7,10 +7,12 @@
   {{ end -}}
 {{- end -}}
 
+{{- $page := . -}}
+{{- $iconHeight := 24 -}}
 
-<div class="nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden">
+<div class="hextra-nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden">
   <div
-    class="nav-container-blur hx:pointer-events-none hx:absolute hx:z-[-1] hx:h-full hx:w-full hx:bg-white hx:dark:bg-dark hx:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] hx:contrast-more:shadow-[0_0_0_1px_#000] hx:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] hx:contrast-more:dark:shadow-[0_0_0_1px_#fff]"
+    class="hextra-nav-container-blur hx:pointer-events-none hx:absolute hx:z-[-1] hx:h-full hx:w-full hx:bg-white hx:dark:bg-dark hx:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] hx:contrast-more:shadow-[0_0_0_1px_#000] hx:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] hx:contrast-more:dark:shadow-[0_0_0_1px_#fff]"
   ></div>
 
   <nav class="hextra-max-navbar-width hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6">
@@ -29,72 +31,29 @@
           {{- end -}}
         {{- end -}}
 
-        {{/* Display icon menu item */}}
-        {{- if .Params.icon -}}
+        {{- if eq .Params.type "link" -}}
+          {{- partial "navbar-link.html" (dict "currentPage" $currentPage "link" $link "external" $external "item" . "icon" .Params.icon) -}}
+        {{- else if eq .Params.type "theme-toggle" -}}
+          {{- partial "theme-toggle.html" (dict "iconHeight" $iconHeight "hideLabel" (not .Params.label) "iconHeight" $iconHeight "location" "top" "class" "hx:p-2") -}}
+        {{- else if eq .Params.type "language-switch" -}}
+          {{- partial "language-switch" (dict "context" $page "grow" false "hideLabel" (not .Params.label) "iconName" (.Params.icon | default "translate") "iconHeight" $iconHeight "location" "top" "class" "hx:p-2") -}}
+        {{- else if .Params.icon -}}
+          {{- /* Display icon menu item */ -}}
+          {{- if not $link -}}{{ warnf "Icon menu item '%s' has no URL" .Name }}{{- end -}}
           {{- $rel := cond (eq .Params.icon "mastodon") "noreferrer me" "noreferrer" }}
           <a class="hx:p-2 hx:text-current" {{ if $external }}target="_blank" rel="{{ $rel }}"{{ end }} href="{{ $link }}" title="{{ or (T .Identifier) .Name | safeHTML }}">
-            {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" "height=24") -}}
+            {{- partial "utils/icon.html" (dict "name" .Params.icon "attributes" (printf "height=%d" $iconHeight)) -}}
             <span class="hx:sr-only">{{ or (T .Identifier) .Name | safeHTML }}</span>
           </a>
         {{- else -}}
-          {{- $active := or ($currentPage.HasMenuCurrent "main" .) ($currentPage.IsMenuCurrent "main" .) -}}
-          {{- $activeClass := cond $active "hx:font-medium" "hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200" -}}
-
-          {{- if .HasChildren -}}
-            {{/* Dropdown menu for items with children */}}
-            <div class="hx:relative hx:hidden hx:md:inline-block">
-              <button
-                title="{{ or (T .Identifier) .Name | safeHTML }}"
-                data-state="closed"
-                class="hextra-nav-menu-toggle hx:cursor-pointer hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:whitespace-nowrap hx:p-2 hx:flex hx:items-center hx:gap-1 {{ $activeClass }}"
-                type="button"
-                aria-label="{{ or (T .Identifier) .Name | safeHTML }}"
-              >
-                <span class="hx:text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
-                {{- partial "utils/icon.html" (dict "name" "chevron-down" "attributes" "height=12 class=\"hx:transition-transform hx:duration-200 hx:ease-in-out\"") -}}
-              </button>
-              <ul
-                class="hextra-nav-menu-items hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-md hx:ring-1 hx:ring-black/5 hx:bg-white hx:py-1 hx:text-sm hx:shadow-lg hx:dark:ring-white/20 hx:dark:bg-neutral-800"
-                style="min-width: 100px;"
-              >
-                {{ range .Children }}
-                  {{- $link := .URL -}}
-                  {{- $external := strings.HasPrefix $link "http" -}}
-                  {{- with .PageRef -}}
-                    {{- if hasPrefix . "/" -}}
-                      {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
-                    {{- end -}}
-                  {{- end -}}
-                  <li class="hextra-nav-menu-item hx:flex hx:flex-col">
-                    <a
-                      href="{{ $link }}"
-                      {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
-                      class="hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9"
-                    >
-                      {{- or (T .Identifier) .Name | safeHTML -}}
-                    </a>
-                  </li>
-                {{- end -}}
-              </ul>
-            </div>
-          {{- else -}}
-            {{/* Regular menu item without children */}}
-            <a
-              title="{{ or (T .Identifier) .Name | safeHTML }}"
-              href="{{ $link }}"
-              {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
-              class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-block {{ $activeClass }}"
-            >
-              <span class="hx:text-center">{{ or (T .Identifier) .Name | safeHTML }}</span>
-            </a>
-          {{- end -}}
+          {{- partial "navbar-link.html" (dict "currentPage" $currentPage "link" $link "external" $external "item" .) -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
 
 
-    <button type="button" aria-label="Menu" class="hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden">
-      {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" "height=24") -}}
+    <button type="button" aria-label="Menu" class="hextra-hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden">
+      {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" (printf "height=%d" $iconHeight)) -}}
     </button>
   </nav>
 </div>

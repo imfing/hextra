@@ -1,19 +1,57 @@
-{{- $calloutEmojiDict := dict "info" "ℹ️" "warning" "⚠️" "error" "🚫" -}}
+{{- /*
+A shortcode to create a callout.
+
+@param {string} type The type of the callout (default, info, warning, error, important).
+@param {string} content The content of the callout.
+@param {string} emoji The emoji of the callout.
+@param {string} icon The icon of the callout (related to type or can be a custom icon).
+
+@example {{< callout type="info" >}}Content{{< /callout >}}
+*/ -}}
+
 {{- $type := .Get "type" | default "default" -}}
-{{/* If emoji is not set, use the emoji from dict */}}
 {{- $emoji := .Get "emoji" -}}
-{{- if eq $emoji "" -}}
-  {{- $emoji = index $calloutEmojiDict $type -}}
-{{- end -}}
-{{/* Also allow using "icon" */}}
 {{- $icon := .Get "icon" -}}
+
+{{- $styles := newScratch -}}
+{{- $styles.Set "default" (dict
+  "icon" "light-bulb"
+  "style" "hx:border-green-200 hx:bg-green-100 hx:text-green-900 hx:dark:border-green-200/30 hx:dark:bg-green-900/30 hx:dark:text-green-200"
+  )
+-}}
+{{- $styles.Set "info" (dict
+  "icon" "information-circle"
+  "style" "hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200"
+  )
+-}}
+{{- $styles.Set "warning" (dict
+  "icon" "exclamation"
+  "style" "hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200"
+  )
+-}}
+{{- $styles.Set "error" (dict
+  "icon" "ban"
+  "style" "hx:border-red-200 hx:bg-red-100 hx:text-red-900 hx:dark:border-red-200/30 hx:dark:bg-red-900/30 hx:dark:text-red-200"
+  )
+-}}
+{{- $styles.Set "important" (dict
+  "icon" "exclamation-circle"
+  "style" "hx:border-purple-200 hx:bg-purple-100 hx:text-purple-900 hx:dark:border-purple-200/30 hx:dark:bg-purple-900/30 hx:dark:text-purple-200"
+  )
+-}}
+
+{{- $style := or ($styles.Get $type) ($styles.Get "default") -}}
+
+{{- if and (not $emoji) (not $icon) -}}
+  {{- $icon = $style.icon -}}
+{{- end -}}
+
 {{- $content := .InnerDeindent | markdownify -}}
 
-{{- $defaultClass := "hx:border-orange-100 hx:bg-orange-50 hx:text-orange-800 hx:dark:border-orange-400/30 hx:dark:bg-orange-400/20 hx:dark:text-orange-300" -}}
-{{- $infoClass := "hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200" -}}
-{{- $warningClass := "hx:border-yellow-100 hx:bg-yellow-50 hx:text-yellow-900 hx:dark:border-yellow-200/30 hx:dark:bg-yellow-700/30 hx:dark:text-yellow-200" -}}
-{{- $errorClass := "hx:border-red-200 hx:bg-red-100 hx:text-red-900 hx:dark:border-red-200/30 hx:dark:bg-red-900/30 hx:dark:text-red-200" -}}
-
-{{- $class := cond (eq $type "info") $infoClass (cond (eq $type "warning") $warningClass (cond (eq $type "error") $errorClass $defaultClass)) -}}
-
-{{- partial "shortcodes/callout.html" (dict "content" $content "emoji" $emoji "icon" $icon "class" $class) -}}
+{{- partial "shortcodes/callout.html" (dict
+  "content" $content
+  "emoji" $emoji
+  "icon" $icon
+  "class" $style.style
+  )
+-}}

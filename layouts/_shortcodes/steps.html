@@ -1,3 +1,9 @@
-<div class="steps hx:ml-4 hx:mb-12 hx:ltr:border-l hx:rtl:border-r hx:border-gray-200 hx:ltr:pl-6 hx:rtl:pr-6 hx:dark:border-neutral-800 [counter-reset:step]">
+{{- /*
+A shortcode for creating a step list.
+
+@example {{% steps %}}{{% /steps %}}
+*/ -}}
+
+<div class="hextra-steps hx:ml-4 hx:mb-12 hx:ltr:border-l hx:rtl:border-r hx:border-gray-200 hx:ltr:pl-6 hx:rtl:pr-6 hx:dark:border-neutral-800 [counter-reset:step]">
   {{- .Inner -}}
 </div>

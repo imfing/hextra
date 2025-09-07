@@ -1,4 +1,10 @@
-{{/* Shortcode to include a PDF file in a page. */}}
+{{- /*
+Shortcode to include a PDF file in a page.
+
+@param {string} 0 The path to the PDF file.
+
+@example {{< pdf "path/to/file.pdf" >}}
+*/ -}}
 
 {{- $path := .Get 0 -}}
 {{- $url := partial "utils/file-path" (dict "page" .Page "path" $path) -}}
