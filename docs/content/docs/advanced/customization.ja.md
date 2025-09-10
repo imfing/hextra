@@ -221,14 +221,14 @@ hugo gen chromastyles --style=github
 すべてのページのheadの終わりにカスタムスクリプトを追加するには、以下のファイルを作成します:
 
 ```
-layouts/partials/custom/head-end.html
+layouts/_partials/custom/head-end.html
 ```
 
 ## フッターへのカスタムセクション追加
 
-フッターに追加セクションを追加するには、サイト内に`layouts/partials/custom/footer.html`ファイルを作成します。
+フッターに追加セクションを追加するには、サイト内に`layouts/_partials/custom/footer.html`ファイルを作成します。
 
-```html {filename="layouts/partials/custom/footer.html"}
+```html {filename="layouts/_partials/custom/footer.html"}
 <!-- ここにフッター要素を追加 -->
 ```
 

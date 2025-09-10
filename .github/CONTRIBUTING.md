@@ -31,7 +31,7 @@ Use [Conventional Commits][conventional commits] message to make it easier to un
 
 Similar to contributing code, you can also contribute to the documentation by submitting a pull request.
 
-The documentation site is located in the [`exampleSite`](../exampleSite/) folder.
+The documentation site is located in the [`docs`](../docs/) folder.
 You can make changes to the documentation and create a pull request. A preview of the new documentation will be automatically generated and displayed in the pull request comment via [Netlify][netlify deploy preview].
 
 ### 💬 GitHub Discussions
@@ -71,7 +71,7 @@ npm i
 
 - [`assets`](../assets/): CSS styles and JavaScript files.
 - [`data`](../data/): The theme data files. Now only contains the `icons.yaml` file.
-- [`exampleSite`](../exampleSite/): The documentation site for the theme.
+- [`docs`](../docs/): The documentation site for the theme.
 - [`i18n`](../i18n/): The theme translation files.
 - [`layouts`](../layouts/): The theme layouts.
 - [`static`](../static/): The static files for the theme. For example, the favicon and the site logo.
@@ -84,7 +84,7 @@ Please refer to the [Hugo documentation][hugo] for more information.
 npm run dev:theme
 ```
 
-It will start the Hugo server on `http://localhost:1313/` for the `exampleSite` content.
+It starts the Hugo server on `http://localhost:1313/` for the `docs` content.
 
 ### Compile the styles
 

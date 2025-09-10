@@ -116,6 +116,11 @@ menu:
       params:
         type: link
         icon: beaker
+      parent: versions
+    - identifier: v0.10
+      name: v0.10 ↗
+      url: https://imfing.github.io/hextra/versions/v0.10/
+      parent: versions
     - identifier: v0.9
       name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
@@ -187,7 +192,7 @@ params:
 
   editURL:
     enable: true
-    base: "https://github.com/imfing/hextra/edit/main/exampleSite/content"
+    base: "https://github.com/imfing/hextra/edit/main/docs/content"
 
   blog:
     list:

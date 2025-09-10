@@ -2,9 +2,9 @@ version: "3"
 
 tasks:
   build:
-    desc: Build Hextra documentation site under `exampleSite`
+    desc: Build Hextra documentation site under `docs`
     cmds:
-      - hugo --gc --minify --themesDir=../.. --source=exampleSite
+      - hugo --gc --minify --themesDir=../.. --source=docs
 
   css:
     depends: [build]

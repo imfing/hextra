@@ -221,14 +221,14 @@ hugo gen chromastyles --style=github
 می‌توانید اسکریپت‌های سفارشی را به انتهای head برای هر صفحه با افزودن فایل زیر اضافه کنید:
 
 ```
-layouts/partials/custom/head-end.html
+layouts/_partials/custom/head-end.html
 ```
 
 ## بخش اضافی سفارشی در پاورقی
 
-می‌توانید بخش اضافی در پاورقی با ایجاد یک فایل `layouts/partials/custom/footer.html` در سایت خود اضافه کنید.
+می‌توانید بخش اضافی در پاورقی با ایجاد یک فایل `layouts/_partials/custom/footer.html` در سایت خود اضافه کنید.
 
-```html {filename="layouts/partials/custom/footer.html"}
+```html {filename="layouts/_partials/custom/footer.html"}
 <!-- عنصر پاورقی شما اینجا -->
 ```
 

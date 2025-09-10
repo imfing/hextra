@@ -7,7 +7,7 @@ tags:
 
 Hugo reads its configuration from `hugo.yaml` in the root of your Hugo site.
 The config file is where you can configure all aspects of your site.
-Check out the config file for this site [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) on GitHub to get a comprehensive idea of available settings and best practices.
+Check out the config file for this site [`docs/hugo.yaml`](https://github.com/imfing/hextra/blob/main/docs/hugo.yaml) on GitHub to get a comprehensive idea of available settings and best practices.
 
 <!--more-->
 
@@ -163,6 +163,21 @@ menu:
       url: "https://gohugo.io/documentation/"
       weight: 3
 ```
+
+### Hiding
+
+Hiding the sidebar can be done using front matter:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+sidebar:
+  hide: true
+---
+```
+
+This will hide the main sidebar from the page, freeing up space for the main content of the page.
+
 
 ## Right Sidebar
 
