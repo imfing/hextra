@@ -9,17 +9,21 @@ The `tabs` parameter is a list of dict with the following keys:
 */ -}}
 {{- $tabs := .tabs }}
 
+{{- if eq (len $tabs) 0 -}}
+  {{ errorf "tabs must have at least one tab" }}
+{{- end -}}
+
 {{- $enableSync := .enableSync }}
 
 {{- /* Create group data for syncing and select the first tab if none is selected. */ -}}
-{{- $selectFirst := true -}}
+{{- $selectedIndex := 0 -}}
 {{  $dataTabGroup := slice -}}
 
 {{- range $i, $item := $tabs -}}
   {{- $dataTabGroup = $dataTabGroup | append ($item.name) -}}
 
   {{- if $item.selected -}}
-    {{- $selectFirst = false -}}
+    {{- $selectedIndex = $i -}}
   {{- end -}}
 {{- end -}}
 
@@ -37,7 +41,7 @@ The `tabs` parameter is a list of dict with the following keys:
         role="tab"
         type="button"
         aria-controls="tabs-panel-{{ $globalID }}-{{ $item.id }}"
-        {{- if or $item.selected (and $selectFirst (eq $i 0)) -}}
+        {{- if eq $i $selectedIndex -}}
         aria-selected="true"
         tabindex="0"
         data-state="selected"
@@ -54,7 +58,7 @@ The `tabs` parameter is a list of dict with the following keys:
         class="hextra-tabs-panel hx:rounded-sm hx:pt-6 hx:hidden hx:data-[state=selected]:block"
         id="tabs-panel-{{ $globalID }}-{{ $item.id }}"
         role="tabpanel"
-        {{- if or $item.selected (and $selectFirst (eq $i 0)) -}}
+        {{- if eq $i $selectedIndex -}}
         tabindex="0"
         data-state="selected"
         {{ end -}}
