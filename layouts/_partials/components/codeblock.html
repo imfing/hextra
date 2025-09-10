@@ -13,8 +13,8 @@
 
       {{- $file_url := $filename -}} <!-- default to just filename -->
 
-      {{- with .full_url -}}
-        {{- $file_url = . -}}
+      {{- if .full_url -}}
+        {{- $file_url = .full_url -}}
       {{- else if $base_url -}}
         {{- $file_url = urls.JoinPath $base_url $filename -}}
       {{- end -}}
