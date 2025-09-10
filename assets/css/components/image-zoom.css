@@ -1,0 +1,42 @@
+/* Minimal styles for Hextra image zoom overlay */
+.hextra-zoom-image-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--hextra-image-zoom-backdrop, rgba(0, 0, 0, 0.9));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+  cursor: zoom-out;
+}
+
+.hextra-zoom-image-overlay.show {
+  opacity: 1;
+}
+
+.hextra-zoom-image {
+  max-width: min(95vw, 1200px);
+  max-height: 95vh;
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease-out;
+  transform: scale(0.98);
+}
+
+.hextra-zoom-image-overlay.show .hextra-zoom-image {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hextra-zoom-image-overlay,
+  .hextra-zoom-image {
+    transition: none !important;
+  }
+}
+
+/* Show magnifier cursor over zoomable images in content */
+.content img:not([data-no-zoom]) {
+  cursor: zoom-in;
+}

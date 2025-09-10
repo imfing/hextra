@@ -238,3 +238,6 @@ params:
       # inputPosition: top
       # lang: en
       # theme: noborder_dark
+
+  imageZoom:
+    enable: true

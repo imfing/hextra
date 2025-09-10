@@ -1,0 +1,13 @@
+{{/* Optional minimal image zoom assets */}}
+{{- $js := resources.Get "js/image-zoom.js" -}}
+{{- $css := resources.Get "css/components/image-zoom.css" -}}
+
+{{- if hugo.IsProduction -}}
+  {{- $js = $js | minify | fingerprint -}}
+  {{- $css = $css | minify | fingerprint -}}
+{{- end -}}
+
+
+<link rel="preload" href="{{ $css.RelPermalink }}" as="style" integrity="{{ $css.Data.Integrity }}" />
+<link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.Integrity }}" />
+<script defer src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
