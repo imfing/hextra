@@ -10,6 +10,8 @@
   opacity: 0;
   transition: opacity 0.25s ease-out;
   cursor: zoom-out;
+  overscroll-behavior: contain;
+  touch-action: none;
 }
 
 .hextra-zoom-image-overlay.show {
@@ -39,4 +41,10 @@
 /* Show magnifier cursor over zoomable images in content */
 .content img:not([data-no-zoom]) {
   cursor: zoom-in;
+}
+
+html:has(.hextra-zoom-image-overlay.show),
+body:has(.hextra-zoom-image-overlay.show) {
+  overflow: hidden;
+  height: 100%;
 }
