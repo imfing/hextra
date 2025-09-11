@@ -1,16 +1,14 @@
-// Minimal, dependency-free image zoom for Hextra
-// - Activates on images inside `.content`
-// - Close on overlay click or Escape
-// - Opt-out with `data-no-zoom` on <img>
+/*!
+ * Hextra Image Zoom
+ * - Zooms images inside `.content` into a dark, blurred overlay.
+ * - Dismiss: overlay click, Esc, wheel/scroll (non-ctrl).
+ * - Pinch/trackpad pinch (wheel+ctrl) will NOT dismiss.
+ * - Opt out per image via `data-no-zoom`.
+ * - Customize via CSS vars: --hextra-image-zoom-backdrop, --hextra-image-zoom-blur.
+ */
 
 (function () {
-  function ready(fn) {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", fn, { once: true });
-    } else {
-      fn();
-    }
-  }
+  'use strict';
 
   function createOverlay(src, alt) {
     const overlay = document.createElement("div");
@@ -25,33 +23,41 @@
 
     overlay.appendChild(img);
 
-    function close() {
-      overlay.classList.remove("show");
-      document.documentElement.style.removeProperty("overflow");
+    function close(immediate = false) {
+      // trigger dedicated closing transitions for smoother zoom-out
+      overlay.classList.add("closing");
       window.removeEventListener("keydown", onKeyDown, true);
-      overlay.addEventListener(
-        "transitionend",
-        () => overlay.remove(),
-        { once: true }
-      );
+      window.removeEventListener("scroll", onScroll, true);
+      overlay.removeEventListener("wheel", onWheel);
+
+      if (immediate) {
+        overlay.remove();
+        return;
+      }
+      overlay.addEventListener("transitionend", () => overlay.remove(), { once: true });
     }
 
     function onKeyDown(e) {
       if (e.key === "Escape") close();
     }
 
-    overlay.addEventListener("click", close, { once: true });
+    overlay.addEventListener("click", () => close(false), { once: true });
     window.addEventListener("keydown", onKeyDown, true);
 
+    function onWheel(e) { if (e && e.ctrlKey) return; close(true); }
+    function onScroll() { close(true); }
+
+    overlay.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("scroll", onScroll, true);
+
     document.body.appendChild(overlay);
-    // lock scroll
-    document.documentElement.style.overflow = "hidden";
 
     // trigger fade-in
     requestAnimationFrame(() => overlay.classList.add("show"));
   }
 
-  ready(function () {
+  // Initialize after DOM is parsed; defer script ensures this usually fires immediately
+  document.addEventListener('DOMContentLoaded', function () {
     const container = document.querySelector(".content");
     if (!container) return;
 
@@ -72,5 +78,5 @@
       },
       true
     );
-  });
+  }, { once: true });
 })();

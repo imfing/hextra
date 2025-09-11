@@ -1,4 +1,3 @@
-/* Minimal styles for Hextra image zoom overlay */
 .hextra-zoom-image-overlay {
   position: fixed;
   inset: 0;
@@ -8,14 +7,21 @@
   justify-content: center;
   z-index: 9999;
   opacity: 0;
-  transition: opacity 0.25s ease-out;
+  transition: opacity 260ms cubic-bezier(0.2, 0, 0, 1);
   cursor: zoom-out;
-  overscroll-behavior: contain;
-  touch-action: none;
+  overscroll-behavior: auto;
+  touch-action: auto;
+  backdrop-filter: blur(var(--hextra-image-zoom-blur, 4px));
+  -webkit-backdrop-filter: blur(var(--hextra-image-zoom-blur, 4px));
 }
 
 .hextra-zoom-image-overlay.show {
   opacity: 1;
+}
+
+.hextra-zoom-image-overlay.closing {
+  opacity: 0;
+  transition: opacity 360ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .hextra-zoom-image {
@@ -23,12 +29,18 @@
   max-height: 95vh;
   border-radius: 8px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
-  transition: transform 0.3s ease-out;
+  will-change: transform;
   transform: scale(0.98);
 }
 
 .hextra-zoom-image-overlay.show .hextra-zoom-image {
   transform: scale(1);
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hextra-zoom-image-overlay.closing .hextra-zoom-image {
+  transform: scale(0.98);
+  transition: transform 340ms cubic-bezier(0.3, 0, 0.2, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -41,10 +53,4 @@
 /* Show magnifier cursor over zoomable images in content */
 .content img:not([data-no-zoom]) {
   cursor: zoom-in;
-}
-
-html:has(.hextra-zoom-image-overlay.show),
-body:has(.hextra-zoom-image-overlay.show) {
-  overflow: hidden;
-  height: 100%;
 }
