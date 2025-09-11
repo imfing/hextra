@@ -1,0 +1,177 @@
+{{- $size := .size | default "md" -}}
+{{- $color := .color | default "primary" -}}
+{{- $link := .link -}}
+{{- $border := .border -}}
+{{- $attributes := .attributes -}}
+{{- $content := .content -}}
+
+{{- /* Sizes */ -}}
+{{- $sizes := newScratch -}}
+{{- $sizes.Set "sm" "hx:text-sm hx:px-4 hx:py-2" -}}
+{{- $sizes.Set "md" "hx:text-base hx:px-5 hx:py-3" -}}
+{{- $sizes.Set "lg" "hx:text-lg hx:px-6 hx:py-3" -}}
+{{- $sizes.Set "xl" "hx:text-xl hx:px-7 hx:py-4" -}}
+
+{{- $borders := newScratch -}}
+{{- if $border -}}
+  {{- $borders.Set "sm" "hx:border" -}}
+  {{- $borders.Set "md" "hx:border-2" -}}
+  {{- $borders.Set "lg" "hx:border-3" -}}
+  {{- $borders.Set "xl" "hx:border-4" -}}
+  {{- $borders.Set "auto" ($borders.Get $size) -}}
+{{- end -}}
+
+{{- /* Colors */ -}}
+{{- $colors := newScratch -}}
+{{- $colors.Set "primary"
+  (delimit (slice
+      "hx:text-white"
+      "hx:bg-primary-600"
+      "hx:hover:bg-primary-700"
+      "hx:focus:ring-primary-300"
+      "hx:dark:bg-primary-600"
+      "hx:dark:hover:bg-primary-700"
+      "hx:dark:focus:ring-primary-800"
+    )
+  " ")
+-}}
+{{- $colors.Set "secondary"
+  (delimit (slice
+    "hx:bg-secondary-600"
+    "hx:hover:bg-secondary-700"
+    "hx:focus:ring-secondary-300"
+    "hx:dark:bg-secondary-600"
+    "hx:dark:hover:bg-secondary-700"
+    "hx:dark:focus:ring-secondary-800"
+    )
+  " ")
+-}}
+{{- $colors.Set "gray"
+  (delimit (slice
+    "hx:text-gray-600"
+    "hx:bg-gray-100"
+    "hx:border-gray-200"
+    "hx:dark:text-neutral-200"
+    "hx:dark:bg-neutral-800"
+    "hx:dark:border-neutral-700"
+    )
+  " ")
+-}}
+{{- $colors.Set "purple"
+  (delimit (slice
+    "hx:text-purple-900"
+    "hx:bg-purple-100"
+    "hx:border-purple-200"
+    "hx:dark:text-purple-200"
+    "hx:dark:bg-purple-900/30"
+    "hx:dark:border-purple-200/30"
+    )
+  " ")
+-}}
+{{- $colors.Set "indigo"
+  (delimit (slice
+    "hx:text-indigo-900"
+    "hx:bg-indigo-100"
+    "hx:border-indigo-200"
+    "hx:dark:text-indigo-200"
+    "hx:dark:bg-indigo-900/30"
+    "hx:dark:border-indigo-200/30"
+    )
+  " ")
+-}}
+{{- $colors.Set "blue"
+  (delimit (slice
+    "hx:text-blue-900"
+    "hx:bg-blue-100"
+    "hx:border-blue-200"
+    "hx:dark:text-blue-200"
+    "hx:dark:bg-blue-900/30"
+    "hx:dark:border-blue-200/30"
+    )
+  " ")
+-}}
+{{- $colors.Set "green"
+  (delimit (slice
+    "hx:text-green-900"
+    "hx:bg-green-100"
+    "hx:border-green-200"
+    "hx:dark:text-green-200"
+    "hx:dark:bg-green-900/30"
+    "hx:dark:border-green-200/30"
+    )
+  " ")
+-}}
+{{- $colors.Set "yellow"
+  (delimit (slice
+    "hx:text-yellow-900"
+    "hx:bg-yellow-50"
+    "hx:border-yellow-100"
+    "hx:dark:text-yellow-200"
+    "hx:dark:bg-yellow-700/30"
+    "hx:dark:border-yellow-200/30"
+    )
+  " ")
+-}}
+{{- $colors.Set "orange"
+  (delimit (slice
+    "hx:text-orange-800"
+    "hx:bg-orange-50"
+    "hx:border-orange-100"
+    "hx:dark:text-orange-300"
+    "hx:dark:bg-orange-400/20"
+    "hx:dark:border-orange-400/30"
+    )
+  " ")
+-}}
+{{- $colors.Set "amber"
+  (delimit (slice
+    "hx:text-amber-900"
+    "hx:bg-amber-100"
+    "hx:border-amber-200"
+    "hx:dark:text-amber-200"
+    "hx:dark:bg-amber-900/30"
+    "hx:dark:border-amber-200/30"
+    )
+  " ")
+-}}
+{{- $colors.Set "red"
+  (delimit (slice
+    "hx:text-red-900"
+    "hx:bg-red-100"
+    "hx:border-red-200"
+    "hx:dark:text-red-200"
+    "hx:dark:bg-red-900/30"
+    "hx:dark:border-red-200/30"
+    )
+  " ")
+-}}
+
+{{- $class := print (delimit (slice
+    (($sizes.Get $size) | default ($sizes.Get "md"))
+    (($borders.Get $border) | default ($borders.Get "auto"))
+    (($colors.Get $color) | default ($colors.Get "primary"))
+  ) " ")
+-}}
+
+{{- if $link }}
+
+{{- $external := hasPrefix $link "http" -}}
+{{- $href := cond (hasPrefix $link "/") ($link | relURL) $link -}}
+
+<a
+  href="{{ $href }}"
+  class="hextra-button not-prose {{ $class }} hx:font-medium hx:cursor-pointer hx:rounded-full hx:text-center hx:inline-block hx:focus:outline-hidden hx:focus:ring-4 hx:transition-all hx:ease-in hx:duration-200"
+  {{ if $external }}target="_blank" rel="noreferrer"{{ end -}}
+>
+  {{- $content -}}
+</a>
+
+{{- else -}}
+
+<button
+  class="hextra-button not-prose {{ $class }} hx:font-medium hx:cursor-pointer hx:rounded-full hx:text-center hx:inline-block hx:focus:outline-hidden hx:focus:ring-4 hx:transition-all hx:ease-in hx:duration-200"
+>
+  {{- $content -}}
+</button>
+
+{{- end -}}
