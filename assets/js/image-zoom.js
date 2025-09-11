@@ -99,8 +99,7 @@
       });
 
       if (pointers.size === 1) {
-        // Single touch - start drag
-        isDragging = true;
+        isDragging = false;
         setInteracting(true);
         gestureState.lastPanX = gestureState.panX;
         gestureState.lastPanY = gestureState.panY;
@@ -166,21 +165,12 @@
         // Any multi-touch movement cancels tap
         tapCandidate = false;
         applyTransform();
-      } else if (isDragging && pointers.size === 1) {
-        // Handle drag/pan
-        const deltaX = pointer.x - pointer.startX;
-        const deltaY = pointer.y - pointer.startY;
-
-        gestureState.panX = gestureState.lastPanX + deltaX;
-        gestureState.panY = gestureState.lastPanY + deltaY;
-
-        // Significant movement cancels tap
+      } else if (pointers.size === 1) {
+        // Single pointer: no drag; only cancel tap if large move
         const moveThreshold = 10;
         if (Math.abs(pointer.x - tapStartX) > moveThreshold || Math.abs(pointer.y - tapStartY) > moveThreshold) {
           tapCandidate = false;
         }
-
-        applyTransform();
       }
     }
 
@@ -204,9 +194,9 @@
           }, 300);
         }
       } else if (pointers.size === 1) {
-        // Going from pinch to single touch
+        // Going from pinch to single touch — keep dragging disabled
         isPinching = false;
-        isDragging = true;
+        isDragging = false;
         const remaining = Array.from(pointers.values())[0];
         gestureState.lastPanX = gestureState.panX;
         gestureState.lastPanY = gestureState.panY;
