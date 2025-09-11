@@ -26,17 +26,12 @@ WIP
 {{< button size="md" color="primary">}}This is a button{{< /button >}}
 <br/>
 
-{{< button size="md" color="secondary">}}This is a button{{< /button >}}
+{{< button size="md" color="gray">}}This is a button{{< /button >}}
 <br/>
 
 {{< button size="md" color="purple">}}This is a button{{< /button >}}
 <br/>
 
-{{< button size="md" color="indigo">}}This is a button{{< /button >}}
-<br/>
-
-{{< button size="md" color="blue">}}This is a button{{< /button >}}
-<br/>
 
 {{< button size="md" color="green">}}This is a button{{< /button >}}
 <br/>
@@ -44,13 +39,32 @@ WIP
 {{< button size="md" color="yellow">}}This is a button{{< /button >}}
 <br/>
 
-{{< button size="md" color="amber">}}This is a button{{< /button >}}
-<br/>
-
-{{< button size="md" color="orange">}}This is a button{{< /button >}}
-<br/>
-
 {{< button size="md" color="red">}}This is a button{{< /button >}}
+<br/>
+
+### Border
+
+{{< button border="auto">}}This is a button{{< /button >}}
+<br/>
+
+{{< button border="sm">}}This is a button{{< /button >}}
+<br/>
+
+{{< button border="md">}}This is a button{{< /button >}}
+<br/>
+
+{{< button border="lg">}}This is a button{{< /button >}}
+<br/>
+
+{{< button border="xl">}}This is a button{{< /button >}}
+<br/>
+
+### Style
+
+{{< button style="default">}}This is a button{{< /button >}}
+<br/>
+
+{{< button style="pills">}}This is a button{{< /button >}}
 <br/>
 
 ### WIP
