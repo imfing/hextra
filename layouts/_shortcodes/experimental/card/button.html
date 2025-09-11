@@ -1,0 +1,21 @@
+{{- /*
+Card button.
+
+@param {string} icon The icon of the button.
+@param {string} label The label of the button.
+@param {string} link The link of the button.
+
+@example {{< experimental/card/button icon="github" label="GitHub" link="https://github.com/hextra/hextra" >}}
+
+*/ -}}
+
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card/buttons") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card/buttons" -}}
+{{- end -}}
+
+{{- partial "shortcodes/experimental/card/button" (dict
+  "icon"  (.Get "icon")
+  "label" (.Get "label")
+  "link"  (.Get "link")
+  )
+-}}

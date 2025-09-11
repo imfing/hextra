@@ -1,0 +1,30 @@
+{{- /*
+Card title.
+
+@param {string} title The title of the card.
+@param {string} icon The icon of the card.
+@param {string} subtitle The subtitle of the card.
+
+@example {{< experimental/card/title icon="github" title="Title"subtitle="Subtitle" >}}
+@example {{< experimental/card/title "Title" >}}
+
+*/ -}}
+
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card" -}}
+{{- end -}}
+
+{{- if .IsNamedParams -}}
+  {{- partial "shortcodes/experimental/card/title" (dict
+    "title" (.Get "title")
+    "icon" (.Get "icon")
+    "subtitle" (.Get "subtitle")
+  )
+-}}
+{{- else -}}
+  {{- $content := .Get 0 -}}
+
+  {{- partial "shortcodes/experimental/card/title" (dict "title" $content) -}}
+{{- end -}}
+
+
