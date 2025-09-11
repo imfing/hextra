@@ -2,6 +2,7 @@
 {{- $color := .Get "color" | default "primary" -}}
 {{- $link := .Get "link" -}}
 {{- $border := .Get "border" -}}
+{{- $style := .Get "style" -}}
 {{- $attributes := .Get "attributes" -}}
 
 {{- partial "shortcodes/button" (dict
@@ -9,6 +10,7 @@
   "color" $color
   "link" $link
   "border" $border
+  "style" $style
   "attributes" $attributes
   "content" .Inner
   )
