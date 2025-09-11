@@ -16,6 +16,7 @@
   /* Prevent iOS bounce */
   position: fixed;
   overflow: hidden;
+  will-change: transform;
 }
 
 .hextra-zoom-image-overlay.show {
@@ -68,7 +69,7 @@
   }
 }
 
-.content img:not([data-no-zoom]) {
+.content img:not([data-no-zoom]):not(.not-prose img) {
   cursor: zoom-in;
 }
 

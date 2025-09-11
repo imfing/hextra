@@ -30,6 +30,8 @@
     img.style.transformOrigin = "center center";
     img.style.transform = "translate3d(-50%, -50%, 0) scale(1)";
 
+    // Ensure overlay scales from center when zooming the whole overlay
+    overlay.style.transformOrigin = "center center";
     overlay.appendChild(img);
 
     // Image loaded handler
@@ -81,6 +83,11 @@
     }
 
     // Pointer event handlers
+    let tapCandidate = false;
+    let tapStartX = 0;
+    let tapStartY = 0;
+    let tapStartTime = 0;
+
     function onPointerDown(e) {
       e.preventDefault();
 
@@ -97,6 +104,12 @@
         setInteracting(true);
         gestureState.lastPanX = gestureState.panX;
         gestureState.lastPanY = gestureState.panY;
+
+        // Tap detection setup
+        tapCandidate = true;
+        tapStartX = e.clientX;
+        tapStartY = e.clientY;
+        tapStartTime = (typeof performance !== 'undefined' ? performance.now() : Date.now());
       } else if (pointers.size === 2) {
         // Two touches - start pinch
         isDragging = false;
@@ -150,6 +163,8 @@
           gestureState.panY = gestureState.lastPanY + panDeltaY;
         }
 
+        // Any multi-touch movement cancels tap
+        tapCandidate = false;
         applyTransform();
       } else if (isDragging && pointers.size === 1) {
         // Handle drag/pan
@@ -158,6 +173,12 @@
 
         gestureState.panX = gestureState.lastPanX + deltaX;
         gestureState.panY = gestureState.lastPanY + deltaY;
+
+        // Significant movement cancels tap
+        const moveThreshold = 10;
+        if (Math.abs(pointer.x - tapStartX) > moveThreshold || Math.abs(pointer.y - tapStartY) > moveThreshold) {
+          tapCandidate = false;
+        }
 
         applyTransform();
       }
@@ -170,19 +191,13 @@
         // All pointers released
         isDragging = false;
         setInteracting(false);
-
-        // Check if it was a tap (no significant movement)
-        const pointer = e;
-        const moveThreshold = 10;
-        const timeSinceDown = e.timeStamp;
-
-        // If minimal movement and not pinching, treat as tap to close
-        if (!isPinching && Math.abs(pointer.clientX - e.clientX) < moveThreshold &&
-          Math.abs(pointer.clientY - e.clientY) < moveThreshold) {
-          // Click on image or overlay should close
+        // Tap-to-close when there was minimal movement and short duration
+        const now = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+        const duration = now - tapStartTime;
+        if (tapCandidate && !isPinching && duration < 300) {
           close();
         }
-
+        tapCandidate = false;
         if (isPinching) {
           pinchEndTimer = setTimeout(() => {
             isPinching = false;
@@ -220,20 +235,26 @@
       const scaleFactor = 0.01;
       const zoomSpeed = Math.exp(-delta * scaleFactor);
 
-      // Minimum scale is 1 (original zoom level), don't allow zooming out smaller
-      gestureState.scale = Math.max(1, Math.min(5, gestureState.scale * zoomSpeed));
+      const prevScale = gestureState.scale;
+      const unclamped = prevScale * zoomSpeed;
+      const nextScale = Math.max(1, Math.min(5, unclamped));
 
-      // Zoom towards mouse position
-      const rect = img.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const offsetX = e.clientX - centerX;
-      const offsetY = e.clientY - centerY;
+      // Effective scale ratio (applied), use it to anchor zoom around cursor
+      const f = prevScale === 0 ? 1 : (nextScale / prevScale);
+      if (f !== 1) {
+        // Zoom towards mouse position
+        const rect = img.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const offsetX = e.clientX - centerX;
+        const offsetY = e.clientY - centerY;
 
-      // Adjust pan to zoom towards cursor
-      const scaleDiff = gestureState.scale - (gestureState.scale / zoomSpeed);
-      gestureState.panX -= offsetX * scaleDiff * 0.1;
-      gestureState.panY -= offsetY * scaleDiff * 0.1;
+        // Adjust pan to keep cursor's point stable
+        gestureState.panX -= offsetX * (f - 1);
+        gestureState.panY -= offsetY * (f - 1);
+      }
+
+      gestureState.scale = nextScale;
 
       setInteracting(true);
       applyTransform();
@@ -283,7 +304,11 @@
     function applyTransform() {
       img.style.left = final.cx + "px";
       img.style.top = final.cy + "px";
-      const totalScale = baseScale * gestureState.scale;
+
+      const overlayScale = Math.max(1, gestureState.scale);
+      overlay.style.transform = overlayScale > 1 ? `scale(${overlayScale})` : "none";
+
+      const totalScale = baseScale;
       const transform = `translate3d(-50%, -50%, 0) translate3d(${gestureState.panX}px, ${gestureState.panY}px, 0) scale(${totalScale})`;
       img.style.transform = transform;
     }
@@ -342,11 +367,6 @@
       applyTransform();
     }
 
-    // Prevent click propagation on image
-    img.addEventListener("click", function (e) {
-      e.stopPropagation();
-    });
-
     // Setup event listeners
     overlay.addEventListener("wheel", onWheel, { passive: false });
     overlay.addEventListener("pointermove", onPointerMove);
@@ -360,13 +380,6 @@
       window.visualViewport.addEventListener("resize", onResize, { passive: true });
       window.visualViewport.addEventListener("scroll", onResize, { passive: true });
     }
-
-    // Click outside to close (on overlay background)
-    overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) {
-        close();
-      }
-    });
 
     // Add to DOM
     document.body.appendChild(overlay);
@@ -386,6 +399,8 @@
     container.addEventListener("click", function (e) {
       const target = e.target;
       if (!(target instanceof HTMLImageElement)) return;
+      // Only allow images inside `.content` that are NOT within a `.not-prose` block
+      if (target.closest('.not-prose')) return;
       if (target.dataset.noZoom === "" || target.dataset.noZoom === "true") return;
 
       e.preventDefault();
