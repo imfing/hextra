@@ -9,10 +9,13 @@
   opacity: 0;
   transition: opacity 260ms cubic-bezier(0.2, 0, 0, 1);
   cursor: zoom-out;
-  overscroll-behavior: auto;
-  touch-action: auto;
+  overscroll-behavior: contain;
+  touch-action: none;
   backdrop-filter: blur(var(--hextra-image-zoom-blur, 4px));
   -webkit-backdrop-filter: blur(var(--hextra-image-zoom-blur, 4px));
+  /* Prevent iOS bounce */
+  position: fixed;
+  overflow: hidden;
 }
 
 .hextra-zoom-image-overlay.show {
@@ -25,22 +28,37 @@
 }
 
 .hextra-zoom-image {
-  max-width: min(95vw, 1200px);
-  max-height: 95vh;
   border-radius: 8px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 18px 80px rgba(0, 0, 0, 0.5);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
   will-change: transform;
-  transform: scale(0.98);
+  /* Prevent image selection on mobile */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  /* Hardware acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .hextra-zoom-image-overlay.show .hextra-zoom-image {
-  transform: scale(1);
-  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition:
+    transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    left 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    top 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .hextra-zoom-image-overlay.closing .hextra-zoom-image {
-  transform: scale(0.98);
-  transition: transform 340ms cubic-bezier(0.3, 0, 0.2, 1);
+  transition:
+    transform 340ms cubic-bezier(0.3, 0, 0.2, 1),
+    left 340ms cubic-bezier(0.3, 0, 0.2, 1),
+    top 340ms cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+/* Disable transitions during interaction */
+.hextra-zoom-image-overlay.interacting .hextra-zoom-image {
+  transition: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -50,7 +68,16 @@
   }
 }
 
-/* Show magnifier cursor over zoomable images in content */
 .content img:not([data-no-zoom]) {
   cursor: zoom-in;
+}
+
+/* Loading indicator */
+.hextra-zoom-image.loading {
+  opacity: 0;
+}
+
+.hextra-zoom-image.loaded {
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
 }
