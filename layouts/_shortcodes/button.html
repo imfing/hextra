@@ -1,0 +1,15 @@
+{{- $size := .Get "size" | default "md" -}}
+{{- $color := .Get "color" | default "primary" -}}
+{{- $link := .Get "link" -}}
+{{- $border := .Get "border" -}}
+{{- $attributes := .Get "attributes" -}}
+
+{{- partial "shortcodes/button" (dict
+  "size" $size
+  "color" $color
+  "link" $link
+  "border" $border
+  "attributes" $attributes
+  "content" .Inner
+  )
+-}}
