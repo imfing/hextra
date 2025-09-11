@@ -1,18 +1,9 @@
-{{- $jsSwitcherMenu := resources.Get "js/switcher-menu.js" -}}
-{{- $jsTheme := resources.Get "js/theme.js" | resources.ExecuteAsTemplate "theme.js" . -}}
-{{- $jsBanner := resources.Get "js/banner.js" | resources.ExecuteAsTemplate "banner.js" . -}}
-{{- $jsMenu := resources.Get "js/menu.js" -}}
-{{- $jsTabs := resources.Get "js/tabs.js" -}}
-{{- $jsLang := resources.Get "js/lang.js" -}}
-{{- $jsNavMenu := resources.Get "js/nav-menu.js" -}}
-{{- $jsCodeCopy := resources.Get "js/code-copy.js" -}}
-{{- $jsFileTree := resources.Get "js/filetree.js" -}}
-{{- $jsSidebar := resources.Get "js/sidebar.js" -}}
-{{- $jsBackToTop := resources.Get "js/back-to-top.js" -}}
-{{- $jsTocScroll := resources.Get "js/toc-scroll.js" -}}
-{{- $jsFavicon := resources.Get "js/favicon.js" | resources.ExecuteAsTemplate "favicon.js" . -}}
+{{- $scriptsBody := slice }}
+{{- range resources.Match "js/core/*.js" -}}
+  {{ $scriptsBody = $scriptsBody | append (resources.ExecuteAsTemplate .Name $ .) }}
+{{- end -}}
 
-{{- $scripts := slice $jsSwitcherMenu $jsTheme $jsBanner $jsMenu $jsCodeCopy $jsTabs $jsLang $jsNavMenu $jsFileTree $jsSidebar $jsBackToTop $jsTocScroll $jsFavicon | resources.Concat "js/main.js" -}}
+{{- $scripts := $scriptsBody | resources.Concat "js/main.js" -}}
 {{- if hugo.IsProduction -}}
   {{- $scripts = $scripts | minify | fingerprint -}}
 {{- end -}}
