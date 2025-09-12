@@ -1,0 +1,221 @@
+{{- $colors := newScratch -}}
+
+{{- /* Primary */ -}}
+
+{{- $primary := slice
+  "hx:focus:ring-primary-300"
+  "hx:dark:focus:ring-primary-800"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $primary = $primary | append
+    "hx:text-primary-600"
+    "hx:hover:text-primary-700"
+    "hx:dark:hover:text-primary-400"
+  -}}
+{{- else -}}
+  {{- $primary = $primary | append
+    "hx:text-white"
+    "hx:bg-primary-600"
+    "hx:hover:bg-primary-700"
+    "hx:dark:bg-primary-600"
+  -}}
+{{- end -}}
+
+{{- /* Gray */ -}}
+
+{{- $gray := slice
+  "hx:focus:ring-gray-300"
+  "hx:dark:focus:ring-gray-900"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $gray = $gray | append
+    "hx:text-gray-700"
+    "hx:hover:text-gray-800"
+    "hx:dark:text-gray-600"
+    "hx:dark:hover:text-gray-500"
+  -}}
+{{- else -}}
+  {{- $gray = $gray | append
+    "hx:text-white"
+    "hx:bg-gray-700"
+    "hx:hover:bg-gray-800"
+    "hx:dark:bg-gray-600"
+    "hx:dark:hover:bg-gray-700"
+  -}}
+{{- end -}}
+
+{{- /* Purple */ -}}
+
+{{- $purple := slice
+  "hx:focus:ring-purple-300"
+  "hx:dark:focus:ring-purple-900"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $purple = $purple | append
+    "hx:text-purple-600"
+    "hx:hover:text-purple-700"
+    "hx:dark:hover:text-purple-500"
+  -}}
+{{- else -}}
+  {{- $purple = $purple | append
+    "hx:text-white"
+    "hx:bg-purple-700"
+    "hx:hover:bg-purple-800"
+    "hx:dark:bg-purple-600"
+    "hx:dark:hover:bg-purple-700"
+  -}}
+{{- end -}}
+
+{{- /* Indigo */ -}}
+
+{{- $indigo := slice
+  "hx:focus:ring-indigo-300"
+  "hx:dark:focus:ring-indigo-900"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $indigo = $indigo | append
+    "hx:text-indigo-700"
+    "hx:hover:text-indigo-800"
+    "hx:dark:text-indigo-600"
+    "hx:dark:hover:text-indigo-500"
+  -}}
+{{- else -}}
+  {{- $indigo = $indigo | append
+    "hx:text-white"
+    "hx:bg-indigo-700"
+    "hx:hover:bg-indigo-800"
+    "hx:dark:bg-indigo-600"
+    "hx:dark:hover:bg-indigo-700"
+  -}}
+{{- end -}}
+
+{{- /* Green */ -}}
+
+{{- $green := slice
+  "hx:focus:ring-green-300"
+  "hx:dark:focus:ring-green-800"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $green = $green | append
+    "hx:text-green-600"
+    "hx:hover:text-green-700"
+    "hx:dark:hover:text-green-500"
+  -}}
+{{- else -}}
+  {{- $green = $green | append
+    "hx:text-white"
+    "hx:bg-green-700"
+    "hx:hover:bg-green-800"
+    "hx:dark:bg-green-600"
+    "hx:dark:hover:bg-green-700"
+  -}}
+{{- end -}}
+
+{{- /* Yellow */ -}}
+
+{{- $yellow := slice
+  "hx:focus:ring-yellow-300"
+  "hx:dark:focus:ring-yellow-500"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $yellow = $yellow | append
+    "hx:text-yellow-400"
+    "hx:hover:text-yellow-500"
+    "hx:dark:hover:text-yellow-300"
+  -}}
+{{- else -}}
+  {{- $yellow = $yellow | append
+    "hx:text-white"
+    "hx:bg-yellow-400"
+    "hx:hover:bg-yellow-500"
+  -}}
+{{- end -}}
+
+{{- /* Orange */ -}}
+
+{{- $orange := slice
+  "hx:focus:ring-orange-300"
+  "hx:dark:focus:ring-orange-900"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $orange = $orange | append
+    "hx:text-orange-500"
+    "hx:hover:text-orange-600"
+    "hx:dark:hover:text-orange-400"
+  -}}
+{{- else -}}
+  {{- $orange = $orange | append
+    "hx:text-white"
+    "hx:bg-orange-400"
+    "hx:hover:bg-orange-800"
+    "hx:dark:bg-orange-600"
+    "hx:dark:hover:bg-orange-700"
+  -}}
+{{- end -}}
+
+{{- /* Amber */ -}}
+
+{{- $amber := slice
+  "hx:focus:ring-amber-300"
+  "hx:dark:focus:ring-amber-900"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $amber = $amber | append
+    "hx:text-amber-600"
+    "hx:hover:text-amber-700"
+    "hx:dark:hover:text-amber-500"
+  -}}
+{{- else -}}
+  {{- $amber = $amber | append
+    "hx:text-white"
+    "hx:bg-amber-700"
+    "hx:dark:bg-amber-600"
+    "hx:hover:bg-amber-800"
+    "hx:dark:hover:bg-amber-700"
+  -}}
+{{- end -}}
+
+{{- /* Red */ -}}
+
+{{- $red := slice
+  "hx:focus:ring-red-300"
+  "hx:dark:focus:ring-red-900"
+-}}
+
+{{- if eq .mode "clear" -}}
+  {{- $red = $red | append
+    "hx:text-red-600"
+    "hx:hover:text-red-700"
+    "hx:dark:hover:text-red-500"
+  -}}
+{{- else -}}
+  {{- $red = $red | append
+    "hx:text-white"
+    "hx:bg-red-700"
+    "hx:hover:bg-red-800"
+    "hx:dark:bg-red-600"
+    "hx:dark:hover:bg-red-700"
+  -}}
+{{- end -}}
+
+{{- /* Store */ -}}
+
+{{- $colors.Set "primary" (delimit $primary " ") -}}
+{{- $colors.Set "gray" (delimit $gray " ") -}}
+{{- $colors.Set "purple" (delimit $purple " ") -}}
+{{- $colors.Set "indigo" (delimit $indigo " ") -}}
+{{- $colors.Set "green" (delimit $green " ") -}}
+{{- $colors.Set "yellow" (delimit $yellow " ") -}}
+{{- $colors.Set "orange" (delimit $orange " ") -}}
+{{- $colors.Set "amber" (delimit $amber " ") -}}
+{{- $colors.Set "red" (delimit $red " ") -}}
+
+{{- return $colors -}}
