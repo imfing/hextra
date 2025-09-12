@@ -38,14 +38,14 @@
     thead {
       @apply hx:text-gray-900 hx:bg-gray-50 hx:dark:text-gray-200 hx:dark:bg-gray-700;
     }
-    tbody tr {
-      @apply hx:m-0 hx:bg-white hx:dark:text-gray-400 hx:dark:bg-gray-800;
+    tr {
+      @apply hx:m-0 hx:border-t hx:border-gray-300 hx:p-0 hx:dark:border-gray-600;
     }
     th {
-      @apply hx:m-0 hx:p-2 hx:font-semibold hx:border hx:border-gray-300 hx:text-left hx:dark:border-gray-600;
+      @apply hx:m-0 hx:border hx:border-gray-300 hx:px-4 hx:py-2 hx:font-semibold hx:dark:border-gray-600;
     }
     td {
-      @apply hx:m-0 hx:p-2 hx:border hx:border-gray-300 hx:dark:border-gray-700;
+      @apply hx:m-0 hx:border hx:border-gray-300 hx:px-4 hx:py-2 hx:dark:border-gray-600;
     }
   }
   :where(ol):not(:where([class~=not-prose],[class~=not-prose] *)) {
