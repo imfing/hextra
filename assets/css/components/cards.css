@@ -44,3 +44,98 @@
     left: 5px;
   }
 }
+
+/* Easy Image Card Styles */
+.hextra-easy-image-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.hextra-easy-image-card img {
+  @apply hx:select-none hx:transition-transform hx:duration-200 hx:ease-in-out;
+}
+
+.hextra-easy-image-card:hover img {
+  @apply hx:scale-105;
+}
+
+.hextra-easy-image-card:hover .hextra-easy-image-copy-indicator {
+  @apply hx:opacity-100;
+}
+
+.hextra-easy-image-card.copied .hextra-easy-image-copy-indicator {
+  @apply hx:opacity-100;
+}
+
+.hextra-easy-image-card.copied .copy-text {
+  content: "已复制!";
+}
+
+.hextra-easy-image-card.copied .copy-text::before {
+  content: "已复制!";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Toast Notification Styles */
+.hextra-toast-container {
+  @apply hx:fixed hx:top-5 hx:right-5 hx:z-[9999] hx:pointer-events-none hx:flex hx:flex-col hx:gap-2.5;
+}
+
+.hextra-toast {
+  @apply hx:bg-green-500 hx:text-white hx:px-4 hx:py-3 hx:rounded-lg hx:shadow-lg hx:flex hx:items-center hx:gap-2 hx:text-sm hx:font-medium hx:min-w-[200px] hx:max-w-[350px] hx:translate-x-full hx:opacity-0 hx:transition-all hx:duration-300 hx:pointer-events-auto;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hextra-toast.show {
+  @apply hx:translate-x-0 hx:opacity-100;
+}
+
+.hextra-toast.hide {
+  @apply hx:translate-x-full hx:opacity-0;
+}
+
+.hextra-toast-icon {
+  @apply hx:w-5 hx:h-5 hx:flex-shrink-0;
+}
+
+.hextra-toast-message {
+  @apply hx:flex-1;
+}
+
+.hextra-toast.error {
+  @apply hx:bg-red-500;
+}
+
+.hextra-toast.warning {
+  @apply hx:bg-yellow-500;
+}
+
+.hextra-toast.info {
+  @apply hx:bg-blue-500;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .hextra-toast-container {
+    @apply hx:top-2.5 hx:right-2.5 hx:left-2.5 hx:items-stretch;
+  }
+  
+  .hextra-toast {
+    @apply hx:max-w-none hx:-translate-y-full hx:translate-x-0;
+  }
+  
+  .hextra-toast.show {
+    @apply hx:translate-y-0;
+  }
+  
+  .hextra-toast.hide {
+    @apply hx:-translate-y-full;
+  }
+}

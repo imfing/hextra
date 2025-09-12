@@ -1,0 +1,145 @@
+{{- $image := .image -}}
+{{- $alt := .alt -}}
+{{- $width := .width -}}
+{{- $height := .height -}}
+{{- $imageStyle := .imageStyle -}}
+
+<!-- Toast container (will be created by JS if not exists) -->
+<style>
+.hextra-toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hextra-toast {
+  background: #10b981;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 200px;
+  max-width: 350px;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: auto;
+}
+.hextra-toast.show { transform: translateX(0); opacity: 1; }
+.hextra-toast.hide { transform: translateX(100%); opacity: 0; }
+.hextra-toast-icon { width: 20px; height: 20px; flex-shrink: 0; }
+.hextra-toast-message { flex: 1; }
+.hextra-toast.error { background: #ef4444; }
+.hextra-toast.warning { background: #f59e0b; }
+.hextra-toast.info { background: #3b82f6; }
+@media (max-width: 640px) {
+  .hextra-toast-container { top: 10px; right: 10px; left: 10px; align-items: stretch; }
+  .hextra-toast { max-width: none; transform: translateY(-100%); }
+  .hextra-toast.show { transform: translateY(0); }
+  .hextra-toast.hide { transform: translateY(-100%); }
+}
+
+/* Card-centered Toast Styles */
+.hextra-card-toast {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+}
+
+.hextra-card-toast.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.hextra-card-toast.hide {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+.hextra-card-toast-content {
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 120px;
+  max-width: 250px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.hextra-card-toast-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.hextra-card-toast-message {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hextra-card-toast-success .hextra-card-toast-content {
+  background: rgba(16, 185, 129, 0.95);
+}
+
+.hextra-card-toast-error .hextra-card-toast-content {
+  background: rgba(239, 68, 68, 0.95);
+}
+
+.hextra-card-toast-warning .hextra-card-toast-content {
+  background: rgba(245, 158, 11, 0.95);
+}
+
+.hextra-card-toast-info .hextra-card-toast-content {
+  background: rgba(59, 130, 246, 0.95);
+}
+</style>
+
+<div class="hextra-easy-image-card hx:group hx:relative hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:bg-gray-100 hx:shadow-sm hx:dark:border-neutral-700 hx:dark:bg-neutral-800 hx:hover:shadow-lg hx:dark:hover:border-neutral-500 hx:dark:hover:bg-neutral-700 hx:transition-all hx:duration-200 hx:cursor-pointer"
+     onclick="copyImageToClipboard('{{ $image | safeURL }}', this)">
+  {{- with $image -}}
+    <img
+      alt="{{ $alt }}"
+      class="hextra-easy-image-card-image hx:w-full hx:h-auto hx:object-cover"
+      loading="lazy"
+      decoding="async"
+      src="{{ $image | safeURL }}"
+      {{ with $width }}width="{{ . }}"{{ end }}
+      {{ with $height }}height="{{ . }}"{{ end }}
+      {{ with $imageStyle }}style="{{ . | safeCSS }}"{{ end }}
+    />
+  {{- end -}}
+  
+  <!-- Copy indicator -->
+  <div class="hextra-easy-image-copy-indicator hx:absolute hx:inset-0 hx:bg-black hx:bg-opacity-50 hx:flex hx:items-center hx:justify-center hx:opacity-0 hx:transition-opacity hx:duration-200">
+    <div class="hx:text-white hx:text-sm hx:font-medium hx:flex hx:items-center hx:gap-2">
+      <svg class="hx:w-5 hx:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      </svg>
+      <span class="copy-text">点击复制</span>
+    </div>
+  </div>
+</div>
+

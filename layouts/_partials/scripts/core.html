@@ -6,13 +6,14 @@
 {{- $jsLang := resources.Get "js/lang.js" -}}
 {{- $jsNavMenu := resources.Get "js/nav-menu.js" -}}
 {{- $jsCodeCopy := resources.Get "js/code-copy.js" -}}
+{{- $jsEasyImageCopy := resources.Get "js/easy-image-copy.js" -}}
 {{- $jsFileTree := resources.Get "js/filetree.js" -}}
 {{- $jsSidebar := resources.Get "js/sidebar.js" -}}
 {{- $jsBackToTop := resources.Get "js/back-to-top.js" -}}
 {{- $jsTocScroll := resources.Get "js/toc-scroll.js" -}}
 {{- $jsFavicon := resources.Get "js/favicon.js" | resources.ExecuteAsTemplate "favicon.js" . -}}
 
-{{- $scripts := slice $jsSwitcherMenu $jsTheme $jsBanner $jsMenu $jsCodeCopy $jsTabs $jsLang $jsNavMenu $jsFileTree $jsSidebar $jsBackToTop $jsTocScroll $jsFavicon | resources.Concat "js/main.js" -}}
+{{- $scripts := slice $jsSwitcherMenu $jsTheme $jsBanner $jsMenu $jsCodeCopy $jsEasyImageCopy $jsTabs $jsLang $jsNavMenu $jsFileTree $jsSidebar $jsBackToTop $jsTocScroll $jsFavicon | resources.Concat "js/main.js" -}}
 {{- if hugo.IsProduction -}}
   {{- $scripts = $scripts | minify | fingerprint -}}
 {{- end -}}

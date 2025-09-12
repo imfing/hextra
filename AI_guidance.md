@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AI_rules.md
 
-This file provides guidance to [Claude Code](claude.ai/code) when working with code in this repository.
+This file provides guidance to [Cursor] when working with code in this repository.
 
 ## Project Overview
 

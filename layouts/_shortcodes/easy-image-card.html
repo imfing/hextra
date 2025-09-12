@@ -1,0 +1,42 @@
+{{- /*
+A shortcode to create an easy-image card without text description, with click-to-copy functionality.
+
+@param {string} image The image URL of the card.
+@param {string} alt The alt text for the image.
+@param {string} width The width of the image.
+@param {string} height The height of the image.
+@param {string} imageStyle The style of the image.
+@param {string} method The method to process the image.
+@param {string} options The options to process the image.
+
+@example {{< easy-image-card image="/images/example.jpg" alt="Example Image" >}}
+*/ -}}
+
+{{- $image := .Get "image" -}}
+{{- $alt := .Get "alt" | default "Image" -}}
+{{- $width := 0 -}}
+{{- $height := 0 -}}
+{{- $imageStyle := .Get "imageStyle" -}}
+
+{{/* Image processing options */}}
+{{- $method := .Get "method" | default "Resize" | humanize -}}
+{{- $options := .Get "options" | default "800x webp q80" -}}
+{{- $process := .Get "process" | default (printf "%s %s" $method $options) -}}
+
+{{- if and $image (not (urls.Parse $image).Scheme) -}}
+  {{- with resources.Get $image -}}
+    {{- $processed := .Process $process -}}
+    {{- $image = $processed.RelPermalink -}}
+    {{- $width = $processed.Width -}}
+    {{- $height = $processed.Height -}}
+  {{- end -}}
+{{- end -}}
+
+{{- partial "shortcodes/easy-image-card.html" (dict
+  "image" $image
+  "alt" $alt
+  "width" $width
+  "height" $height
+  "imageStyle" $imageStyle
+) -}}
+
