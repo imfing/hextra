@@ -2,18 +2,50 @@
 {{- $color := .color | default "primary" -}}
 {{- $link := .link -}}
 {{- $border := .border -}}
-{{- $style := .style -}}
+{{- $shape := .shape -}}
 {{- $attributes := .attributes -}}
 {{- $content := .content -}}
+{{- $icon := .icon -}}
+{{- $iconPosition := .iconPosition | default "start" -}}
 
 {{- /* Sizes */ -}}
+
 {{- $sizes := newScratch -}}
-{{- $sizes.Set "sm" "hx:text-sm hx:px-4 hx:py-2" -}}
-{{- $sizes.Set "md" "hx:text-base hx:px-5 hx:py-3" -}}
-{{- $sizes.Set "lg" "hx:text-lg hx:px-6 hx:py-3" -}}
-{{- $sizes.Set "xl" "hx:text-xl hx:px-7 hx:py-4" -}}
+{{- if $content -}}
+  {{- $sizes.Set "sm" "hx:text-sm hx:px-4 hx:py-2" -}}
+  {{- $sizes.Set "md" "hx:text-base hx:px-5 hx:py-3" -}}
+  {{- $sizes.Set "lg" "hx:text-lg hx:px-5 hx:py-3" -}}
+  {{- $sizes.Set "xl" "hx:text-xl hx:px-6 hx:py-3" -}}
+{{- else -}}
+  {{- $sizes.Set "sm" "hx:text-sm hx:px-1" -}}
+  {{- $sizes.Set "md" "hx:text-base hx:px-1 hx:py-1" -}}
+  {{- $sizes.Set "lg" "hx:text-lg hx:px-1 hx:py-1" -}}
+  {{- $sizes.Set "xl" "hx:text-xl hx:px-1 hx:py-1" -}}
+{{- end -}}
+
+{{- /* Icon */ -}}
+
+{{- $iconSizes := newScratch -}}
+{{- if $content -}}
+  {{- $iconSizes.Set "sm" "height=1em" -}}
+  {{- $iconSizes.Set "md" "height=1.2em" -}}
+  {{- $iconSizes.Set "lg" "height=1.4em" -}}
+  {{- $iconSizes.Set "xl" "height=2em" -}}
+{{- else -}}
+  {{- $iconSizes.Set "sm" "height=1em" -}}
+  {{- $iconSizes.Set "md" "height=2em" -}}
+  {{- $iconSizes.Set "lg" "height=3em" -}}
+  {{- $iconSizes.Set "xl" "height=4em" -}}
+{{- end -}}
+
+{{- $iconSize := $iconSizes.Get $size | default ($iconSizes.Get "md") -}}
+
+{{- if not $content -}}
+  {{- $iconPosition = "start" -}}
+{{- end -}}
 
 {{- /* Borders */ -}}
+
 {{- $borders := newScratch -}}
 {{- if $border -}}
   {{- $borders.Set "sm" "hx:border" -}}
@@ -23,12 +55,14 @@
   {{- $borders.Set "auto" ($borders.Get $size) -}}
 {{- end -}}
 
-{{- /* Styles */ -}}
-{{- $styles := newScratch -}}
-{{- $styles.Set "default" "hx:rounded-lg" -}}
-{{- $styles.Set "pills" "hx:rounded-full" -}}
+{{- /* Shape */ -}}
+
+{{- $shapes := newScratch -}}
+{{- $shapes.Set "default" "hx:rounded-lg" -}}
+{{- $shapes.Set "pills" "hx:rounded-full" -}}
 
 {{- /* Colors */ -}}
+
 {{- $colors := newScratch -}}
 {{- $colors.Set "primary"
   (delimit (slice
@@ -70,6 +104,20 @@
     )
   " ")
 -}}
+{{- $colors.Set "indigo"
+  (delimit (slice
+    "hx:text-white"
+    "hx:bg-indigo-700"
+    "hx:hover:bg-indigo-800"
+    "hx:focus:ring-indigo-300"
+    "hx:dark:bg-indigo-600"
+    "hx:dark:hover:bg-indigo-700"
+    "hx:dark:focus:ring-indigo-900"
+    "hx:border-indigo-700"
+    "hx:dark:border-indigo-900"
+    )
+  " ")
+-}}
 {{- $colors.Set "green"
   (delimit (slice
     "hx:text-white"
@@ -96,6 +144,34 @@
     )
   " ")
 -}}
+{{- $colors.Set "orange"
+  (delimit (slice
+    "hx:text-white"
+    "hx:bg-orange-400"
+    "hx:hover:bg-orange-800"
+    "hx:dark:bg-orange-600"
+    "hx:dark:hover:bg-orange-700"
+    "hx:focus:ring-orange-300"
+    "hx:dark:focus:ring-orange-900"
+    "hx:border-orange-300"
+    "hx:dark:border-orange-900"
+    )
+  " ")
+-}}
+{{- $colors.Set "amber"
+  (delimit (slice
+    "hx:text-white"
+    "hx:bg-amber-700"
+    "hx:hover:bg-amber-800"
+    "hx:dark:bg-amber-600"
+    "hx:dark:hover:bg-amber-700"
+    "hx:focus:ring-amber-300"
+    "hx:dark:focus:ring-amber-900"
+    "hx:border-amber-300"
+    "hx:dark:border-amber-900"
+    )
+  " ")
+-}}
 {{- $colors.Set "red"
   (delimit (slice
     "hx:text-white"
@@ -115,7 +191,7 @@
     (($sizes.Get $size) | default ($sizes.Get "md"))
     (($borders.Get $border) | default ($borders.Get "auto"))
     (($colors.Get $color) | default ($colors.Get "primary"))
-    (($styles.Get $style) | default ($styles.Get "default"))
+    (($shapes.Get $shape) | default ($shapes.Get "default"))
   ) " ")
 -}}
 
@@ -129,7 +205,7 @@
   class="hextra-button not-prose {{ $class }} hx:font-medium hx:cursor-pointer hx:text-center hx:inline-block hx:focus:outline-none hx:focus:ring-4 hx:transition-all hx:ease-in hx:duration-200"
   {{ if $external }}target="_blank" rel="noreferrer"{{ end -}}
 >
-  {{- $content -}}
+  <span>{{- $content -}}</span>
 </a>
 
 {{- else -}}
@@ -137,7 +213,13 @@
 <button
   class="hextra-button not-prose {{ $class }} hx:font-medium hx:cursor-pointer hx:text-center hx:inline-block hx:focus:outline-none hx:focus:ring-4 hx:transition-all hx:ease-in hx:duration-200"
 >
-  {{- $content -}}
+  {{- if and $icon (eq $iconPosition "start") -}}
+  <span class="hx:inline-block hextra-icon"> {{ partial "utils/icon.html" (dict "name" .icon "attributes" $iconSize) }}</span>
+  {{- end -}}
+  <span>{{- $content -}}</span>
+  {{- if and $icon (eq $iconPosition "end") -}}
+  <span class="hx:inline-block hextra-icon"> {{ partial "utils/icon.html" (dict "name" .icon "attributes" $iconSize) }}</span>
+  {{- end -}}
 </button>
 
 {{- end -}}
