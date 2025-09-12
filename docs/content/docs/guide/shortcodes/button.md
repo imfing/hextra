@@ -212,8 +212,85 @@ Test
 
 ---
 
-{{< button size="md" color="green" border="auto" icon="arrow-circle-right">}} This is a button{{< /button >}}
+{{< button size="md" border="auto" mode="clear" color="primary" icon="arrow-circle-right" >}} This is a button{{< /button >}}
 <br/>
 
-{{< button size="xl" color="green" shape="pills" border="md" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" mode="clear" color="gray" icon="arrow-circle-right" >}} This is a button{{< /button >}}
+<br/>
+
+{{< button size="md" border="auto" mode="clear" color="purple" icon="arrow-circle-right" >}} This is a button{{< /button >}}
+<br/>
+
+{{< button size="md" border="auto" mode="clear" color="indigo" icon="arrow-circle-right" >}} This is a button{{< /button >}}
+<br/>
+
+{{< button size="md" border="auto" mode="clear" color="green" icon="arrow-circle-right" >}} This is a button{{< /button >}}
+<br/>
+
+{{< button size="md" border="auto" mode="clear" color="yellow" icon="arrow-circle-right" >}} This is a button{{< /button >}}
+<br/>
+
+{{< button size="md" border="auto" mode="clear" color="amber" icon="arrow-circle-right" >}} This is a button{{< /button >}}
+<br/>
+
+{{< button size="md" border="auto" mode="clear" color="orange" icon="arrow-circle-right" >}} This is a button{{< /button >}}
+<br/>
+
+{{< button size="md" border="auto" mode="clear" color="red" icon="arrow-circle-right" >}} This is a button{{< /button >}}
+<br/>
+
+---
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="primary" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="primary" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="primary" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="primary" icon="arrow-circle-right" />}}
+<br/>
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="gray" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="gray" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="gray" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="gray" icon="arrow-circle-right" />}}
+<br/>
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="purple" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="purple" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="purple" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="purple" icon="arrow-circle-right" />}}
+<br/>
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="indigo" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="indigo" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="indigo" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="indigo" icon="arrow-circle-right" />}}
+<br/>
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="green" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="green" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="green" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="green" icon="arrow-circle-right" />}}
+<br/>
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="yellow" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="yellow" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="yellow" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="yellow" icon="arrow-circle-right" />}}
+<br/>
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="amber" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="amber" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="amber" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="amber" icon="arrow-circle-right" />}}
+<br/>
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="orange" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="orange" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="orange" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="orange" icon="arrow-circle-right" />}}
+<br/>
+
+{{< button size="sm" border="auto" shape="pills" mode="clear" color="red" icon="arrow-circle-right" />}}
+{{< button size="md" border="auto" shape="pills" mode="clear" color="red" icon="arrow-circle-right" />}}
+{{< button size="lg" border="auto" shape="pills" mode="clear" color="red" icon="arrow-circle-right" />}}
+{{< button size="xl" border="auto" shape="pills" mode="clear" color="red" icon="arrow-circle-right" />}}
 <br/>
