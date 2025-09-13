@@ -394,9 +394,11 @@ params:
 ```diff {filename="hugo.yaml"}
 outputs:
 - home: [html]
+- page: [html]
+- section: [html, rss]
 + home: [html, llms]
-  page: [html]
-  section: [html, rss]
++ page: [html, markdown]
++ section: [html, markdown, rss]
 ```
 
 این کار یک فایل `llms.txt` در ریشه سایت شما ایجاد می‌کند که شامل:

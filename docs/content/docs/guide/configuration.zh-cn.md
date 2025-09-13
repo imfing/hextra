@@ -394,9 +394,11 @@ params:
 ```diff {filename="hugo.yaml"}
 outputs:
 - home: [html]
+- page: [html]
+- section: [html, rss]
 + home: [html, llms]
-  page: [html]
-  section: [html, rss]
++ page: [html, markdown]
++ section: [html, markdown, rss]
 ```
 
 这将在站点根目录生成一个 `llms.txt` 文件，包含：
@@ -404,7 +406,7 @@ outputs:
 - 站点标题和描述
 - 所有章节和页面的层次结构列表
 - 页面摘要和发布日期
-- 所有内容的直接链接
+- 所有内容的直接链接（Markdown格式）
 
 llms.txt 文件根据内容结构自动生成，使 AI 工具和语言模型更容易获取上下文和参考。
 
