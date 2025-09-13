@@ -14,8 +14,8 @@ hasCJKLanguage: true
 
 outputs:
   home: [html, llms]
-  page: [html]
-  section: [html, rss]
+  page: [html, markdown]
+  section: [html, markdown, rss]
 
 defaultContentLanguage: en
 languages:
