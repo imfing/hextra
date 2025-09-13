@@ -8,3 +8,6 @@
     baseName = 'llms'
     mediaType = 'text/plain'
     isPlainText = true
+  [outputFormats.markdown]
+    name = 'Markdown'
+    baseName = 'index.html'
