@@ -128,6 +128,16 @@ params:
       height: 20
 ```
 
+### Pagination
+
+Hextra can render previous/next navigation at the bottom of content pages (for example, in docs and blog articles) to help readers move between pages in the same section. You can disable this site-wide with a single setting:
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    displayPagination: false
+```
+
 ## Sidebar
 
 ### Main Sidebar
