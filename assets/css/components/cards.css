@@ -2,6 +2,40 @@
   grid-template-columns: repeat(auto-fill, minmax(max(250px, calc((100% - 1rem * 2) / var(--hextra-cards-grid-cols))), 1fr));
 }
 
+/* Easy Image Cards 专用的自适应容器 */
+.hextra-easy-image-cards {
+  /* 使用 flexbox 布局来实现自适应高度 */
+  @apply hx:flex hx:flex-wrap hx:gap-4 hx:mt-4;
+  /* 确保每行的卡片可以有不同的高度 */
+  align-items: flex-start;
+}
+
+/* 基础样式 */
+.hextra-easy-image-cards .hextra-easy-image-card {
+  /* 移除 flex 容器样式，让图片决定高度 */
+  @apply hx:flex-none hx:flex-1;
+}
+
+/* 默认尺寸 (medium) - 当没有指定尺寸时使用 */
+.hextra-easy-image-cards:not(.hextra-easy-image-cards-small):not(.hextra-easy-image-cards-large) .hextra-easy-image-card {
+  @apply hx:min-w-[120px] hx:max-w-[200px];
+}
+
+/* 小尺寸 - 使用更高的优先级 */
+.hextra-easy-image-cards.hextra-easy-image-cards-small .hextra-easy-image-card {
+  @apply hx:min-w-[100px] hx:max-w-[150px] !important;
+}
+
+/* 中等尺寸 */
+.hextra-easy-image-cards.hextra-easy-image-cards-medium .hextra-easy-image-card {
+  @apply hx:min-w-[120px] hx:max-w-[200px] !important;
+}
+
+/* 大尺寸 */
+.hextra-easy-image-cards.hextra-easy-image-cards-large .hextra-easy-image-card {
+  @apply hx:min-w-[200px] hx:max-w-[300px] !important;
+}
+
 .hextra-card {
   position: relative;
 }
@@ -45,14 +79,35 @@
   }
 }
 
-/* Easy Image Card Styles */
+/* Easy Image Card Styles - 自适应高度版本 */
 .hextra-easy-image-card {
   position: relative;
   overflow: hidden;
+  /* 基本样式 */
+  @apply hx:rounded-lg hx:border hx:border-gray-200 hx:bg-gray-100 hx:shadow-sm;
+  @apply hx:dark:border-neutral-700 hx:dark:bg-neutral-800;
+  @apply hx:hover:shadow-lg hx:dark:hover:border-neutral-500 hx:dark:hover:bg-neutral-700;
+  @apply hx:transition-all hx:duration-200 hx:cursor-pointer;
+  /* 让容器适应图片内容 */
+  @apply hx:flex hx:flex-col;
 }
 
 .hextra-easy-image-card img {
   @apply hx:select-none hx:transition-transform hx:duration-200 hx:ease-in-out;
+  /* 让图片决定容器高度，保持原始比例 */
+  @apply hx:w-full hx:h-auto;
+  /* 为不同尺寸的图片提供更好的显示效果 */
+  @apply hx:rounded-md;
+  /* 移除 object-fit 约束，让图片自然显示 */
+  display: block;
+}
+
+/* 在自适应容器中的特殊样式 */
+.hextra-easy-image-cards .hextra-easy-image-card {
+  /* 移除最小高度限制 */
+  min-height: auto;
+  /* 确保卡片宽度灵活 */
+  @apply hx:flex-shrink-0 hx:flex-grow;
 }
 
 .hextra-easy-image-card:hover img {

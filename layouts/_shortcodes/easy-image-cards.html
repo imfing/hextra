@@ -1,0 +1,61 @@
+{{- /*
+A shortcode to create a container for easy-image-cards with adaptive sizing.
+Unlike the regular cards container, this allows each card to have its own height based on image aspect ratio.
+
+@param {int} cols The number of columns (optional, affects minimum width calculation)
+@param {string} size Card size: "small" (150px), "medium" (200px, default), "large" (300px)
+
+@example 
+{{< easy-image-cards size="small" >}}
+  {{< easy-image-card image="/images/example1.jpg" alt="Example 1" >}}
+  {{< easy-image-card image="/images/example2.jpg" alt="Example 2" >}}
+{{< /easy-image-cards >}}
+*/ -}}
+
+{{- $cols := .Get "cols" | default 3 -}}
+{{- $size := .Get "size" | default "medium" -}}
+{{- $content := .Inner -}}
+
+<style>
+/* Easy Image Cards 自适应容器样式 */
+.hextra-easy-image-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: flex-start;
+}
+
+.hextra-easy-image-cards .hextra-easy-image-card {
+  flex: 1;
+  flex-shrink: 0;
+}
+
+/* 小尺寸 */
+.hextra-easy-image-cards-small .hextra-easy-image-card {
+  min-width: 100px;
+  max-width: 150px;
+}
+
+/* 中等尺寸 */
+.hextra-easy-image-cards-medium .hextra-easy-image-card {
+  min-width: 120px;
+  max-width: 200px;
+}
+
+/* 大尺寸 */
+.hextra-easy-image-cards-large .hextra-easy-image-card {
+  min-width: 200px;
+  max-width: 300px;
+}
+
+/* 默认尺寸（没有指定时） */
+.hextra-easy-image-cards:not(.hextra-easy-image-cards-small):not(.hextra-easy-image-cards-medium):not(.hextra-easy-image-cards-large) .hextra-easy-image-card {
+  min-width: 120px;
+  max-width: 200px;
+}
+</style>
+
+<div class="hextra-easy-image-cards not-prose hextra-easy-image-cards-{{ $size }}" style="--hextra-cards-grid-cols: {{ $cols }};">
+  {{- $content -}}
+</div>

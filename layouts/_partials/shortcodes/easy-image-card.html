@@ -3,6 +3,19 @@
 {{- $width := .width -}}
 {{- $height := .height -}}
 {{- $imageStyle := .imageStyle -}}
+{{- $fit := .fit | default "contain" -}}
+
+{{/* 根据 fit 参数确定 object-fit 类 */}}
+{{- $objectFitClass := "hx:object-contain" -}}
+{{- if eq $fit "cover" -}}
+  {{- $objectFitClass = "hx:object-cover" -}}
+{{- else if eq $fit "fill" -}}
+  {{- $objectFitClass = "hx:object-fill" -}}
+{{- else if eq $fit "none" -}}
+  {{- $objectFitClass = "hx:object-none" -}}
+{{- else if eq $fit "scale-down" -}}
+  {{- $objectFitClass = "hx:object-scale-down" -}}
+{{- end -}}
 
 <!-- Toast container (will be created by JS if not exists) -->
 <style>
@@ -117,12 +130,12 @@
 }
 </style>
 
-<div class="hextra-easy-image-card hx:group hx:relative hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:bg-gray-100 hx:shadow-sm hx:dark:border-neutral-700 hx:dark:bg-neutral-800 hx:hover:shadow-lg hx:dark:hover:border-neutral-500 hx:dark:hover:bg-neutral-700 hx:transition-all hx:duration-200 hx:cursor-pointer"
+<div class="hextra-easy-image-card hx:group hx:relative"
      onclick="copyImageToClipboard('{{ $image | safeURL }}', this)">
   {{- with $image -}}
     <img
       alt="{{ $alt }}"
-      class="hextra-easy-image-card-image hx:w-full hx:h-auto hx:object-cover"
+      class="hextra-easy-image-card-image hx:w-full hx:h-auto {{ $objectFitClass }}"
       loading="lazy"
       decoding="async"
       src="{{ $image | safeURL }}"

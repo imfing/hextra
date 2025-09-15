@@ -36,6 +36,129 @@
 
 转至[文档](https://imfing.github.io/hextra/zh-cn/docs)
 
+## 本地运行测试
+
+### 环境要求
+
+#### 基本要求 (必须)
+- **Hugo** (版本 ≥ 0.146.0，需要 Extended 版本)
+- **Git**
+
+#### 完整开发环境 (可选)
+- **Go** (版本 ≥ 1.20) - 用于 Task 运行器
+- **Node.js** - 用于 CSS 编译和高级开发功能
+
+### 安装步骤
+
+1. **克隆仓库**
+   ```bash
+   git clone https://github.com/imfing/hextra.git
+   cd hextra
+   ```
+
+2. **安装 Node.js 依赖** (可选，用于完整开发功能)
+   ```bash
+   npm install
+   ```
+   
+   > **注意**：如果只是简单测试主题，可以跳过此步骤，直接使用 Hugo 命令。
+
+### 开发命令
+
+#### 启动开发服务器
+
+**快速启动 (仅需 Hugo)**：
+```bash
+# 直接使用 Hugo 命令启动开发服务器
+hugo server --source=exampleSite --themesDir=../.. --disableFastRender -D --port 1313
+```
+
+**完整开发环境 (需要 Node.js)**：
+```bash
+# 启动主题开发服务器，包含热重载和调试日志
+npm run dev:theme
+
+# 或标准开发服务器
+npm run dev
+```
+
+**使用 Task 运行器**：
+```bash
+# 安装 Task (如果尚未安装)
+go install github.com/go-task/task/v3/cmd/task@latest
+
+# 启动开发服务器
+task dev
+```
+
+#### 构建项目
+
+**构建示例网站**：
+```bash
+npm run build
+# 或使用 Task
+task build
+```
+
+**仅编译 CSS**：
+```bash
+npm run build:css
+# 或使用 Task
+task css
+```
+
+### 测试流程
+
+1. **启动开发服务器**
+   ```bash
+   npm run dev:theme
+   ```
+
+2. **访问本地网站**
+   
+   打开浏览器访问：`http://localhost:1313`
+
+3. **实时预览**
+   
+   修改 `exampleSite/` 目录下的内容文件，浏览器会自动刷新显示更改。
+
+4. **测试多语言功能**
+   
+   访问不同语言版本：
+   - 英文：`http://localhost:1313/en/`
+   - 中文：`http://localhost:1313/zh-cn/`
+   - 波斯语：`http://localhost:1313/fa/`
+   - 日语：`http://localhost:1313/ja/`
+
+### 开发提示
+
+- **主题开发**：使用 `npm run dev:theme` 获得更详细的调试信息
+- **内容测试**：在 `exampleSite/content/` 目录下添加或修改内容进行测试
+- **样式修改**：修改 `assets/css/` 目录下的样式文件
+- **配置测试**：编辑 `exampleSite/hugo.yaml` 来测试不同的配置选项
+
+### 故障排除
+
+如果遇到问题，请尝试：
+
+1. **清理缓存**：
+   ```bash
+   hugo mod clean
+   npm run build:css
+   ```
+
+2. **重新安装依赖**：
+   ```bash
+   rm -rf node_modules package-lock.json
+   npm install
+   ```
+
+3. **检查 Hugo 版本**：
+   ```bash
+   hugo version
+   ```
+   确保使用的是 Extended 版本 ≥ 0.146.0
+
 ## 贡献
 
 该项目正在积极开发中. 欢迎贡献!

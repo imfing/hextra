@@ -8,8 +8,9 @@ A shortcode to create an easy-image card without text description, with click-to
 @param {string} imageStyle The style of the image.
 @param {string} method The method to process the image.
 @param {string} options The options to process the image.
+@param {string} fit The object-fit mode: "contain" (default, preserves aspect ratio), "cover" (fills container, may crop), "fill" (stretches to fit)
 
-@example {{< easy-image-card image="/images/example.jpg" alt="Example Image" >}}
+@example {{< easy-image-card image="/images/example.jpg" alt="Example Image" fit="contain" >}}
 */ -}}
 
 {{- $image := .Get "image" -}}
@@ -17,6 +18,7 @@ A shortcode to create an easy-image card without text description, with click-to
 {{- $width := 0 -}}
 {{- $height := 0 -}}
 {{- $imageStyle := .Get "imageStyle" -}}
+{{- $fit := .Get "fit" | default "contain" -}}
 
 {{/* Image processing options */}}
 {{- $method := .Get "method" | default "Resize" | humanize -}}
@@ -38,5 +40,6 @@ A shortcode to create an easy-image card without text description, with click-to
   "width" $width
   "height" $height
   "imageStyle" $imageStyle
+  "fit" $fit
 ) -}}
 
