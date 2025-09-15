@@ -7,15 +7,14 @@ A shortcode for displaying a feature grid.
 @example {{< hextra/feature-grid cols="3" >}}{{< /hextra/feature-grid >}}
 */ -}}
 
-{{- $cols := .Get "cols" | default 3 -}}
-{{- $style := .Get "style" | default "" -}}
+{{- $cols := .Get "cols" -}}
+{{- $style := .Get "style" -}}
 
-{{- $css := printf "--hextra-feature-grid-cols: %v; %s" $cols $style -}}
-
-
-<div
-  class="hextra-feature-grid hx:grid hx:sm:max-lg:grid-cols-2 hx:max-sm:grid-cols-1 hx:gap-4 hx:w-full not-prose"
-  {{ with $css }}style="{{ . | safeCSS }}"{{ end }}
->
-  {{ .Inner }}
-</div>
+{{- partial "shortcodes/experimental/grid" (dict
+  "gridColsVarName" "--hextra-feature-grid-cols"
+  "cols"    $cols
+  "class"   "hextra-feature-grid hx:grid hx:sm:max-lg:grid-cols-2 hx:max-sm:grid-cols-1 hx:gap-4 hx:w-full not-prose"
+  "style"   $style
+  "content" .Inner
+  )
+-}}
