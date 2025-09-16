@@ -16,4 +16,9 @@
   {{ partial "components/analytics/matomo.html" . }}
 {{- end }}
 
+<!-- GoatCounter -->
+{{- if .Site.Params.analytics.goatCounter -}}
+  {{ partial "components/analytics/goat-counter.html" . }}
+{{- end -}}
+
 {{- end }}
