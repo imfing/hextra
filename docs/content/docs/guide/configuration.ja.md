@@ -394,9 +394,11 @@ params:
 ```diff {filename="hugo.yaml"}
 outputs:
 - home: [html]
+- page: [html]
+- section: [html, rss]
 + home: [html, llms]
-  page: [html]
-  section: [html, rss]
++ page: [html, markdown]
++ section: [html, markdown, rss]
 ```
 
 これにより、サイトのルートに `llms.txt` ファイルが生成され、以下が含まれます：
@@ -404,7 +406,7 @@ outputs:
 - サイトタイトルと説明
 - すべてのセクションとページの階層リスト
 - ページの要約と公開日
-- すべてのコンテンツへの直接リンク
+- すべてのコンテンツへの直接リンク（Markdown形式）
 
 llms.txt ファイルはコンテンツ構造から自動生成され、AI ツールや言語モデルがコンテキストや参照のためにあなたのサイトにアクセスしやすくします。
 
