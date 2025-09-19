@@ -1,6 +1,5 @@
 {{/* Article navigation on the footer of the article */}}
 
-{{- if (site.Params.page.displayPagination | default true) -}}
 {{- $reversePagination := .Store.Get "reversePagination" | default false -}}
 
 {{- $prev := cond $reversePagination .PrevInSection .NextInSection -}}
@@ -51,5 +50,4 @@
       </a>
     {{- end -}}
   </div>
-{{- end -}}
 {{- end -}}
