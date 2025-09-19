@@ -429,7 +429,7 @@ params:
     umami:
       serverURL: "https://example.com"
       websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
-      # scriptName: "umami.js" # optional (default: umami.js)
+      # scriptName: "script.js" # optional (default: script.js)
       # https://umami.is/docs/tracker-configuration#data-host-url
       # hostURL: "http://stats.example.org" # optional
       # https://umami.is/docs/tracker-configuration#data-auto-track
