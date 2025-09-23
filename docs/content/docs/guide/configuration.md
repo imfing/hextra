@@ -164,6 +164,21 @@ menu:
       weight: 3
 ```
 
+### Hiding
+
+Hiding the sidebar can be done using front matter:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+sidebar:
+  hide: true
+---
+```
+
+This will hide the main sidebar from the page, freeing up space for the main content of the page.
+
+
 ## Right Sidebar
 
 ### Table of Contents
@@ -412,7 +427,7 @@ params:
     umami:
       serverURL: "https://example.com"
       websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
-      # scriptName: "umami.js" # optional (default: umami.js)
+      # scriptName: "script.js" # optional (default: script.js)
       # https://umami.is/docs/tracker-configuration#data-host-url
       # hostURL: "http://stats.example.org" # optional
       # https://umami.is/docs/tracker-configuration#data-auto-track
