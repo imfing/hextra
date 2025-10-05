@@ -47,16 +47,23 @@
     let pinchEndTimer = null;
 
     const pointers = new Map(); // pointerId -> {x, y, startX, startY}
+    const SCALE_MIN = 1;
+    const SCALE_MAX = 5;
+
     let gestureState = {
       scale: 1,
       panX: 0,
       panY: 0,
-      lastScale: 1,
-      lastPanX: 0,
-      lastPanY: 0,
+      startScale: 1,
+      startPanX: 0,
+      startPanY: 0,
       initialDistance: 0,
-      midpointX: 0,
-      midpointY: 0
+      initialMidpointX: 0,
+      initialMidpointY: 0,
+      dragStartX: 0,
+      dragStartY: 0,
+      dragPanX: 0,
+      dragPanY: 0
     };
 
     // Utility functions
@@ -91,37 +98,54 @@
     function onPointerDown(e) {
       e.preventDefault();
 
-      pointers.set(e.pointerId, {
+      if (typeof overlay.setPointerCapture === 'function') {
+        try {
+          overlay.setPointerCapture(e.pointerId);
+        } catch (err) {
+          // ignore pointer capture failures (e.g. Safari)
+        }
+      }
+
+      const pointerData = {
         x: e.clientX,
         y: e.clientY,
         startX: e.clientX,
         startY: e.clientY
-      });
+      };
+
+      pointers.set(e.pointerId, pointerData);
 
       if (pointers.size === 1) {
         isDragging = false;
-        setInteracting(true);
-        gestureState.lastPanX = gestureState.panX;
-        gestureState.lastPanY = gestureState.panY;
+        if (gestureState.scale > SCALE_MIN) {
+          setInteracting(true);
+        }
 
-        // Tap detection setup
+        // Set drag baseline so a single finger can pan when zoomed
+        gestureState.dragStartX = e.clientX;
+        gestureState.dragStartY = e.clientY;
+        gestureState.dragPanX = gestureState.panX;
+        gestureState.dragPanY = gestureState.panY;
+
         tapCandidate = true;
         tapStartX = e.clientX;
         tapStartY = e.clientY;
         tapStartTime = (typeof performance !== 'undefined' ? performance.now() : Date.now());
       } else if (pointers.size === 2) {
-        // Two touches - start pinch
-        isDragging = false;
         isPinching = true;
+        isDragging = false;
         setInteracting(true);
+        tapCandidate = false;
 
         const pts = Array.from(pointers.values());
-        gestureState.initialDistance = getDistance(pts[0], pts[1]);
-        gestureState.lastScale = gestureState.scale;
+        gestureState.initialDistance = getDistance(pts[0], pts[1]) || 1;
+        gestureState.startScale = gestureState.scale;
+        gestureState.startPanX = gestureState.panX;
+        gestureState.startPanY = gestureState.panY;
 
         const midpoint = getMidpoint(pts[0], pts[1]);
-        gestureState.midpointX = midpoint.x;
-        gestureState.midpointY = midpoint.y;
+        gestureState.initialMidpointX = midpoint.x;
+        gestureState.initialMidpointY = midpoint.y;
 
         if (pinchEndTimer) {
           clearTimeout(pinchEndTimer);
@@ -131,77 +155,132 @@
     }
 
     function onPointerMove(e) {
-      if (!pointers.has(e.pointerId)) return;
+      const pointer = pointers.get(e.pointerId);
+      if (!pointer) return;
 
       e.preventDefault();
 
-      const pointer = pointers.get(e.pointerId);
       pointer.x = e.clientX;
       pointer.y = e.clientY;
 
-      if (isPinching && pointers.size === 2) {
-        // Handle pinch zoom
+      if (pointers.size === 2) {
         const pts = Array.from(pointers.values());
         const currentDistance = getDistance(pts[0], pts[1]);
-        const scaleDelta = currentDistance / gestureState.initialDistance;
+        if (!currentDistance) return;
 
-        // Calculate new scale with limits - minimum is 1 (original zoom level)
-        const newScale = Math.max(1, Math.min(5, gestureState.lastScale * scaleDelta));
+        const currentMidpoint = getMidpoint(pts[0], pts[1]);
 
-        // Only update pan if scale is actually changing
-        // This prevents drift when pinching at minimum scale
-        if (Math.abs(newScale - gestureState.scale) > 0.001) {
-          gestureState.scale = newScale;
+        const distanceRatio = currentDistance / (gestureState.initialDistance || currentDistance);
+        let nextScale = gestureState.startScale * distanceRatio;
+        nextScale = Math.max(SCALE_MIN, Math.min(SCALE_MAX, nextScale));
 
-          // Calculate pan based on pinch center movement
-          const currentMidpoint = getMidpoint(pts[0], pts[1]);
-          const panDeltaX = currentMidpoint.x - gestureState.midpointX;
-          const panDeltaY = currentMidpoint.y - gestureState.midpointY;
+        const totalStart = baseScale * gestureState.startScale;
+        const totalNext = baseScale * nextScale;
 
-          gestureState.panX = gestureState.lastPanX + panDeltaX;
-          gestureState.panY = gestureState.lastPanY + panDeltaY;
+        let nextPanX = gestureState.panX;
+        let nextPanY = gestureState.panY;
+
+        if (totalStart > 0) {
+          const startOffsetX = gestureState.initialMidpointX - final.cx - gestureState.startPanX;
+          const startOffsetY = gestureState.initialMidpointY - final.cy - gestureState.startPanY;
+          const currentOffsetX = currentMidpoint.x - final.cx;
+          const currentOffsetY = currentMidpoint.y - final.cy;
+          const ratio = totalNext / totalStart;
+
+          nextPanX = currentOffsetX - ratio * startOffsetX;
+          nextPanY = currentOffsetY - ratio * startOffsetY;
         }
 
-        // Any multi-touch movement cancels tap
+        gestureState.scale = nextScale;
+        gestureState.panX = nextPanX;
+        gestureState.panY = nextPanY;
+
         tapCandidate = false;
         applyTransform();
       } else if (pointers.size === 1) {
-        // Single pointer: no drag; only cancel tap if large move
-        const moveThreshold = 10;
-        if (Math.abs(pointer.x - tapStartX) > moveThreshold || Math.abs(pointer.y - tapStartY) > moveThreshold) {
-          tapCandidate = false;
+        const moveX = pointer.x - gestureState.dragStartX;
+        const moveY = pointer.y - gestureState.dragStartY;
+        const dragThreshold = 6;
+
+        if (!isDragging) {
+          const distanceSq = moveX * moveX + moveY * moveY;
+          if (gestureState.scale > SCALE_MIN && distanceSq > dragThreshold * dragThreshold) {
+            isDragging = true;
+            tapCandidate = false;
+            setInteracting(true);
+            gestureState.dragPanX = gestureState.panX;
+            gestureState.dragPanY = gestureState.panY;
+          }
+        }
+
+        if (isDragging) {
+          gestureState.panX = gestureState.dragPanX + moveX;
+          gestureState.panY = gestureState.dragPanY + moveY;
+          applyTransform();
+        } else {
+          const cancelTapThreshold = 10;
+          if (
+            Math.abs(pointer.x - tapStartX) > cancelTapThreshold ||
+            Math.abs(pointer.y - tapStartY) > cancelTapThreshold
+          ) {
+            tapCandidate = false;
+          }
         }
       }
     }
 
     function onPointerUp(e) {
+      if (typeof overlay.releasePointerCapture === 'function') {
+        try {
+          overlay.releasePointerCapture(e.pointerId);
+        } catch (err) {
+          // ignore release failures
+        }
+      }
+
       pointers.delete(e.pointerId);
 
       if (pointers.size === 0) {
-        // All pointers released
-        isDragging = false;
-        setInteracting(false);
-        // Tap-to-close when there was minimal movement and short duration
         const now = (typeof performance !== 'undefined' ? performance.now() : Date.now());
         const duration = now - tapStartTime;
-        if (tapCandidate && !isPinching && duration < 300) {
+        const shouldClose = tapCandidate && !isPinching && !isDragging && duration < 300;
+
+        if (shouldClose) {
           close();
         }
+
         tapCandidate = false;
+        isDragging = false;
+
         if (isPinching) {
           pinchEndTimer = setTimeout(() => {
             isPinching = false;
-          }, 300);
+          }, 180);
+        } else {
+          isPinching = false;
         }
+
+        gestureState.startScale = gestureState.scale;
+        gestureState.startPanX = gestureState.panX;
+        gestureState.startPanY = gestureState.panY;
+
+        setTimeout(() => setInteracting(false), 120);
       } else if (pointers.size === 1) {
-        // Going from pinch to single touch — keep dragging disabled
         isPinching = false;
         isDragging = false;
+
         const remaining = Array.from(pointers.values())[0];
-        gestureState.lastPanX = gestureState.panX;
-        gestureState.lastPanY = gestureState.panY;
         remaining.startX = remaining.x;
         remaining.startY = remaining.y;
+
+        gestureState.dragStartX = remaining.x;
+        gestureState.dragStartY = remaining.y;
+        gestureState.dragPanX = gestureState.panX;
+        gestureState.dragPanY = gestureState.panY;
+
+        if (gestureState.scale <= SCALE_MIN) {
+          setTimeout(() => setInteracting(false), 120);
+        }
       }
     }
 
@@ -227,24 +306,26 @@
 
       const prevScale = gestureState.scale;
       const unclamped = prevScale * zoomSpeed;
-      const nextScale = Math.max(1, Math.min(5, unclamped));
+      const nextScale = Math.max(SCALE_MIN, Math.min(SCALE_MAX, unclamped));
 
-      // Effective scale ratio (applied), use it to anchor zoom around cursor
-      const f = prevScale === 0 ? 1 : (nextScale / prevScale);
-      if (f !== 1) {
-        // Zoom towards mouse position
-        const rect = img.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const offsetX = e.clientX - centerX;
-        const offsetY = e.clientY - centerY;
+      if (Math.abs(nextScale - prevScale) > 0.0001) {
+        const totalPrev = baseScale * prevScale;
+        const totalNext = baseScale * nextScale;
 
-        // Adjust pan to keep cursor's point stable
-        gestureState.panX -= offsetX * (f - 1);
-        gestureState.panY -= offsetY * (f - 1);
+        if (totalPrev > 0) {
+          const anchorOffsetX = e.clientX - final.cx;
+          const anchorOffsetY = e.clientY - final.cy;
+          const ratio = totalNext / totalPrev;
+
+          gestureState.panX = anchorOffsetX + (gestureState.panX - anchorOffsetX) * ratio;
+          gestureState.panY = anchorOffsetY + (gestureState.panY - anchorOffsetY) * ratio;
+        }
       }
 
       gestureState.scale = nextScale;
+      gestureState.startScale = nextScale;
+      gestureState.startPanX = gestureState.panX;
+      gestureState.startPanY = gestureState.panY;
 
       setInteracting(true);
       applyTransform();
@@ -256,15 +337,24 @@
       if (e.key === "Escape") {
         close();
       } else if (e.key === "+" || e.key === "=") {
-        gestureState.scale = Math.min(5, gestureState.scale * 1.2);
+        gestureState.scale = Math.min(SCALE_MAX, gestureState.scale * 1.2);
+        gestureState.startScale = gestureState.scale;
+        gestureState.startPanX = gestureState.panX;
+        gestureState.startPanY = gestureState.panY;
         applyTransform();
       } else if (e.key === "-") {
-        gestureState.scale = Math.max(1, gestureState.scale / 1.2);
+        gestureState.scale = Math.max(SCALE_MIN, gestureState.scale / 1.2);
+        gestureState.startScale = gestureState.scale;
+        gestureState.startPanX = gestureState.panX;
+        gestureState.startPanY = gestureState.panY;
         applyTransform();
       } else if (e.key === "0") {
         gestureState.scale = 1;
         gestureState.panX = 0;
         gestureState.panY = 0;
+        gestureState.startScale = gestureState.scale;
+        gestureState.startPanX = 0;
+        gestureState.startPanY = 0;
         applyTransform();
       }
     }
@@ -295,10 +385,9 @@
       img.style.left = final.cx + "px";
       img.style.top = final.cy + "px";
 
-      const overlayScale = Math.max(1, gestureState.scale);
-      overlay.style.transform = overlayScale > 1 ? `scale(${overlayScale})` : "none";
+      overlay.style.transform = "none";
 
-      const totalScale = baseScale;
+      const totalScale = baseScale * gestureState.scale;
       const transform = `translate3d(-50%, -50%, 0) translate3d(${gestureState.panX}px, ${gestureState.panY}px, 0) scale(${totalScale})`;
       img.style.transform = transform;
     }
@@ -354,6 +443,9 @@
     function onResize() {
       final = computeFinal();
       baseScale = final.scale;
+      gestureState.startScale = gestureState.scale;
+      gestureState.startPanX = gestureState.panX;
+      gestureState.startPanY = gestureState.panY;
       applyTransform();
     }
 
@@ -391,10 +483,18 @@
       if (!(target instanceof HTMLImageElement)) return;
       // Only allow images inside `.content` that are NOT within a `.not-prose` block
       if (target.closest('.not-prose')) return;
-      if (target.dataset.noZoom === "" || target.dataset.noZoom === "true") return;
+      if (target.hasAttribute('data-no-zoom')) return;
+
+      if (e.defaultPrevented) return;
+      if (typeof e.button === 'number' && e.button !== 0) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      const interactiveParent = target.closest('a[href], button, [role="button"], summary, label');
+      if (interactiveParent && interactiveParent !== target) {
+        return;
+      }
 
       e.preventDefault();
-      e.stopPropagation();
 
       createOverlayFromTarget(target);
     }, true);
