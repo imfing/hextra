@@ -715,6 +715,7 @@
       "msupsub",
       "mtable",
       "mtight",
+      "no-step-marker",
       "not-prose",
       "nulldelimiter",
       "op-symbol",

@@ -1,4 +1,4 @@
-<h{{ .Level }}>
+<h{{ .Level }} {{- with .Attributes.class }} class="{{ . }}" {{- end }}>
   {{- .Text | safeHTML -}}
   {{- if gt .Level 1 -}}
     <span class="hx:absolute hx:-mt-20" id="{{ .Anchor | safeURL }}"></span>
