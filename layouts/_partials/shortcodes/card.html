@@ -1,4 +1,3 @@
-{{- $page := .page -}}
 {{- $link := .link -}}
 {{- $title := .title -}}
 {{- $icon := .icon -}}
@@ -8,7 +7,9 @@
 {{- $height := .height -}}
 {{- $imageStyle := .imageStyle -}}
 {{- $tag := .tag -}}
-{{- $tagType := .tagType -}}
+{{- $tagColor := .tagColor | default .tagType | default "" -}}{{- /* Compatibility with previous parameter. */ -}}
+{{- $tagBorder := not (eq .tagBorder false) | default true }}
+{{- $tagIcon := .tagIcon -}}
 
 {{ $linkClass := "hx:hover:border-gray-300 hx:bg-transparent hx:shadow-xs hx:dark:border-neutral-800 hx:hover:bg-slate-50 hx:hover:shadow-md hx:dark:hover:border-neutral-700 hx:dark:hover:bg-neutral-900" }}
 {{- with $image -}}
@@ -56,9 +57,10 @@
   {{- if $tag }}
     {{- partial "shortcodes/badge.html" (dict
       "content" $tag
-      "type" $tagType
+      "color" $tagColor
       "class" "hextra-card-tag"
-      "border" true
+      "border" $tagBorder
+      "icon" $tagIcon
       )
     -}}
   {{- end -}}

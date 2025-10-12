@@ -1,3 +1,18 @@
+{{- /*
+A shortcode for displaying a feature card.
+
+@param {string} title The title of the card.
+@param {string} subtitle The subtitle of the card.
+@param {string} class The class of the card.
+@param {string} image The image of the card.
+@param {string} imageClass The class of the image.
+@param {string} style The style of the card.
+@param {string} icon The icon of the card.
+@param {string} link The link of the card.
+
+@example {{< hextra/feature-card title="Feature Card" subtitle="This is a feature card." >}}
+*/ -}}
+
 {{- $title := .Get "title" -}}
 {{- $subtitle := .Get "subtitle" -}}
 {{- $class := .Get "class" -}}

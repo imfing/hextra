@@ -1,0 +1,69 @@
+{{- $tabsID := .id }}
+
+{{- /*
+The `tabs` parameter is a list of dict with the following keys:
+  - `id`: (int) the ID of the tab (the Ordinal of the tab shortcode).
+  - `name`: (string) the name of the tab (the title).
+  - `content`: (string) the content of the tab.
+  - `selected`: (bool) whether the tab is selected.
+*/ -}}
+{{- $tabs := .tabs }}
+
+{{- if eq (len $tabs) 0 -}}
+  {{ errorf "tabs must have at least one tab" }}
+{{- end -}}
+
+{{- $enableSync := .enableSync }}
+
+{{- /* Create group data for syncing and select the first tab if none is selected. */ -}}
+{{- $selectedIndex := 0 -}}
+{{  $dataTabGroup := slice -}}
+
+{{- range $i, $item := $tabs -}}
+  {{- $dataTabGroup = $dataTabGroup | append ($item.name) -}}
+
+  {{- if $item.selected -}}
+    {{- $selectedIndex = $i -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Generate a unique ID for each tab group. */ -}}
+{{- $globalID := printf "tabs-%02v" $tabsID -}}
+
+<div class="hextra-scrollbar hx:overflow-x-auto hx:overflow-y-hidden hx:overscroll-x-contain">
+  <div
+    class="hx:mt-4 hx:flex hx:w-max hx:min-w-full hx:border-b hx:border-gray-200 hx:pb-px hx:dark:border-neutral-800"
+    {{ if $enableSync }} data-tab-group="{{ delimit $dataTabGroup `,` }}"{{ end }}
+  >
+    {{- range $i, $item := $tabs -}}
+      <button
+        class="hextra-tabs-toggle hx:cursor-pointer hx:data-[state=selected]:border-primary-500 hx:data-[state=selected]:text-primary-600 hx:data-[state=selected]:dark:border-primary-500 hx:data-[state=selected]:dark:text-primary-600 hx:mr-2 hx:rounded-t hx:p-2 hx:font-medium hx:leading-5 hx:transition-colors hx:-mb-0.5 hx:select-none hx:border-b-2 hx:border-transparent hx:text-gray-600 hx:hover:border-gray-200 hx:hover:text-black hx:dark:text-gray-200 hx:dark:hover:border-neutral-800 hx:dark:hover:text-white"
+        role="tab"
+        type="button"
+        aria-controls="tabs-panel-{{ $globalID }}-{{ $item.id }}"
+        {{- if eq $i $selectedIndex -}}
+        aria-selected="true"
+        tabindex="0"
+        data-state="selected"
+        {{- end }}
+      >
+        {{- $item.name -}}
+      </button>
+    {{- end -}}
+  </div>
+</div>
+<div>
+    {{- range $i, $item := $tabs -}}
+      <div
+        class="hextra-tabs-panel hx:rounded-sm hx:pt-6 hx:hidden hx:data-[state=selected]:block"
+        id="tabs-panel-{{ $globalID }}-{{ $item.id }}"
+        role="tabpanel"
+        {{- if eq $i $selectedIndex -}}
+        tabindex="0"
+        data-state="selected"
+        {{ end -}}
+      >
+        {{- $item.content  | markdownify -}}
+      </div>
+    {{- end -}}
+</div>

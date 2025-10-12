@@ -1,0 +1,114 @@
+{{- /* Asciinema */ -}}
+
+{{- $asciinemaBase := "" -}}
+{{- $useDefaultCdn := true -}}
+{{- with site.Params.asciinema.base -}}
+  {{- $asciinemaBase = . -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- $asciinemaJsAsset := "" -}}
+{{- with site.Params.asciinema.js -}}
+  {{- $asciinemaJsAsset = . -}}
+{{- end -}}
+
+{{- $asciinemaCssAsset := "" -}}
+{{- with site.Params.asciinema.css -}}
+  {{- $asciinemaCssAsset = . -}}
+{{- end -}}
+
+{{- /* If only js/css is set without base, use local asset loading */ -}}
+{{- if and $useDefaultCdn (or (ne $asciinemaJsAsset "") (ne $asciinemaCssAsset "")) -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- /* Set default CDN base if needed */ -}}
+{{- if $useDefaultCdn -}}
+  {{- $asciinemaBase = "https://cdn.jsdelivr.net/npm/asciinema-player@latest/dist/bundle" -}}
+{{- end -}}
+
+{{- $isRemoteBase := or (strings.HasPrefix $asciinemaBase "http://") (strings.HasPrefix $asciinemaBase "https://") -}}
+{{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
+
+{{- /* CSS retrieval: get raw CSS from either local asset or remote, then process */ -}}
+{{- if $isRemoteBase -}}
+  {{- $cssPath := cond (ne $asciinemaCssAsset "") $asciinemaCssAsset "asciinema-player.css" -}}
+  {{- $asciinemaCssUrl := printf "%s/%s" $asciinemaBase $cssPath -}}
+  {{- with try (resources.GetRemote $asciinemaCssUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Asciinema css file from %s. Reason: %s." $asciinemaCssUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy "css/asciinema-player.css" . -}}
+        {{- $asciinemaCss := . | fingerprint -}}
+        <link rel="stylesheet" href="{{ $asciinemaCss.RelPermalink }}" integrity="{{ $asciinemaCss.Data.Integrity }}" crossorigin="anonymous" />
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $asciinemaCssAsset -}}
+  {{- with resources.Get $asciinemaCssAsset -}}
+    {{- $asciinemaCss := . | fingerprint -}}
+    <link rel="stylesheet" href="{{ $asciinemaCss.RelPermalink }}" integrity="{{ $asciinemaCss.Data.Integrity }}" crossorigin="anonymous" />
+  {{- else -}}
+    {{- errorf "Asciinema css asset not found at %q" $asciinemaCssAsset -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* JS retrieval: get raw JS from either local asset or remote, then process */ -}}
+{{- if $isRemoteBase -}}
+  {{- $jsPath := cond (ne $asciinemaJsAsset "") $asciinemaJsAsset (printf "asciinema-player%s.js" $minSuffix) -}}
+  {{- $asciinemaJsUrl := printf "%s/%s" $asciinemaBase $jsPath -}}
+  {{- with try (resources.GetRemote $asciinemaJsUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Asciinema js file from %s. Reason: %s." $asciinemaJsUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy (printf "js/asciinema-player%s.js" $minSuffix) . -}}
+        {{- $asciinemaJs := . | fingerprint -}}
+        <script defer src="{{ $asciinemaJs.RelPermalink }}" integrity="{{ $asciinemaJs.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $asciinemaJsAsset -}}
+  {{- with resources.Get $asciinemaJsAsset -}}
+    {{- $asciinemaJs := . | fingerprint -}}
+    <script defer src="{{ $asciinemaJs.RelPermalink }}" integrity="{{ $asciinemaJs.Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- else -}}
+    {{- errorf "Asciinema js asset not found at %q" $asciinemaJsAsset -}}
+  {{- end -}}
+{{- end -}}
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Fix play button position issue
+    const style = document.createElement("style");
+    style.textContent = `
+      .ap-player .ap-overlay-start .ap-play-button span > svg {
+        display: inline;
+      }
+    `;
+    document.head.appendChild(style);
+    // Initialize asciinema players
+    document.querySelectorAll(".asciinema-player").forEach((el) => {
+      const castFile = el.dataset.castFile;
+      const theme = el.dataset.theme || "asciinema";
+      const speed = parseFloat(el.dataset.speed) || 1;
+      const autoplay = el.dataset.autoplay === "true";
+      const loop = el.dataset.loop === "true";
+      const poster = el.dataset.poster || "";
+      const markers = el.dataset.markers ? JSON.parse(el.dataset.markers) : [];
+
+      // Create asciinema player
+      if (window.AsciinemaPlayer) {
+        window.AsciinemaPlayer.create(castFile, el, {
+          theme: theme,
+          speed: speed,
+          autoplay: autoplay,
+          loop: loop,
+          poster: poster || undefined,
+          markers: markers.length > 0 ? markers : undefined,
+          controls: true,  // Always show user controls (bottom control bar)
+          idleTimeLimit: 2,  // Limit terminal inactivity to 2 seconds (compress pauses longer than 2s)
+        });
+      }
+    });
+  });
+</script>

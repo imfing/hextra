@@ -1,0 +1,57 @@
+{{- /*
+Umami Analytics
+https://umami.is/docs/tracker-configuration
+*/ -}}
+
+{{- with .Site.Params.analytics.umami -}}
+
+{{- if not .serverURL }}
+  {{- errorf "Missing Umami 'serverURL' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#umami-analytics" -}}
+{{- end -}}
+
+{{- if not .websiteID }}
+  {{- errorf "Missing Umami 'websiteID' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#umami-analytics" -}}
+{{- end -}}
+
+{{- $attributes := newScratch -}}
+
+{{- $attributes.SetInMap "umami" "src" (printf "%s/%s" .serverURL (.scriptName | default "script.js")) -}}
+{{- $attributes.SetInMap "umami" "data-website-id" .websiteID -}}
+
+{{- if .hostURL -}}
+  {{- /* https://umami.is/docs/tracker-configuration#data-host-url */ -}}
+  {{- $attributes.SetInMap "umami" "data-host-url" .hostURL -}}
+{{- end -}}
+
+{{- if .autoTrack -}}
+  {{- /* https://umami.is/docs/tracker-configuration#data-auto-track */ -}}
+  {{- $attributes.SetInMap "umami" "data-auto-track" .autoTrack -}}
+{{- end -}}
+
+{{- if .tag -}}
+  {{- /* https://umami.is/docs/tracker-configuration#data-tag */ -}}
+  {{- $attributes.SetInMap "umami" "data-tag" .tag -}}
+{{- end -}}
+
+{{- if .excludeSearch -}}
+  {{- /* https://umami.is/docs/tracker-configuration#data-exclude-search */ -}}
+  {{- $attributes.SetInMap "umami" "data-exclude-search" .excludeSearch -}}
+{{- end -}}
+
+{{- if .excludeHash -}}
+  {{- /* https://umami.is/docs/tracker-configuration#data-exclude-hash */ -}}
+  {{- $attributes.SetInMap "umami" "data-exclude-hash" .excludeHash -}}
+{{- end -}}
+
+{{- if .doNotTrack -}}
+  {{- /* https://umami.is/docs/tracker-configuration#data-do-not-track */ -}}
+  {{- $attributes.SetInMap "umami" "data-do-not-track" .doNotTrack -}}
+{{- end -}}
+
+{{- if .domains -}}
+  {{- /* https://umami.is/docs/tracker-configuration#data-domains */ -}}
+  {{- $attributes.SetInMap "umami" "data-domains" .domains -}}
+{{- end -}}
+
+<script async defer {{ range $k, $v := ($attributes.Get "umami" ) }} {{ (printf `%s=%q` $k $v) | safeHTMLAttr }}{{- end -}}></script>
+{{- end -}}

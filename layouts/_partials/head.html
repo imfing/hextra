@@ -53,60 +53,29 @@
     <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
   {{- end }}
 
+  {{ partial "components/analytics/analytics.html" . }}
 
-  <!-- Google Analytics -->
-  {{- if and hugo.IsProduction .Site.Config.Services.GoogleAnalytics.ID }}
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    {{ partial "google-analytics.html" . -}}
-  {{- end }}
+  {{- $scriptsHead := slice -}}
+  {{- range resources.Match "js/head/*.js" -}}
+    {{ $scriptsHead = $scriptsHead | append (resources.ExecuteAsTemplate .Name $ .) }}
+  {{- end -}}
 
-  <script>
-    /* Initialize light/dark mode */
-    const defaultTheme = '{{ site.Params.theme.default | default `system`}}';
+  {{- $scripts := $scriptsHead | resources.Concat "js/main-head.js" -}}
 
-    const setDarkTheme = () => {
-      document.documentElement.classList.add("dark");
-      document.documentElement.style.colorScheme = "dark";
-    }
-    const setLightTheme = () => {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.style.colorScheme = "light";
-    }
+  {{- if hugo.IsProduction -}}
+  {{- $scripts = $scripts | minify | fingerprint -}}
+  {{- end -}}
+  <script src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
 
-    if ("color-theme" in localStorage) {
-      localStorage.getItem("color-theme") === "dark" ? setDarkTheme() : setLightTheme();
-    } else {
-      defaultTheme === "dark" ? setDarkTheme() : setLightTheme();
-      if (defaultTheme === "system") {
-        window.matchMedia("(prefers-color-scheme: dark)").matches ? setDarkTheme() : setLightTheme();
-      }
-    }
-  </script>
-
-  <!-- KaTeX-->
+  <!-- Math engine -->
   {{ $noop := .WordCount -}}
   {{- $engine := site.Params.math.engine | default "katex" -}}
   {{ if and (.Page.Store.Get "hasMath") (eq $engine "katex") -}}
-    <!-- TODO: make url configurable -->
-    {{ $katexBaseUrl := "https://cdn.jsdelivr.net/npm/katex@latest/dist" }}
-    {{ $katexCssUrl := printf "%s/katex%s.css" $katexBaseUrl (cond hugo.IsProduction ".min" "") -}}
-    {{ $katexFontPattern := "url(fonts/" }}
-    {{ $katexFontSubstituted := printf "url(%s/fonts/" $katexBaseUrl }}
-
-    {{ with try (resources.GetRemote $katexCssUrl) -}}
-      {{ with .Err -}}
-        {{ errorf "Could not retrieve KaTeX css file from %s. Reason: %s." $katexCssUrl . -}}
-      {{ else with .Value -}}
-        {{ $katexCssContent := strings.Replace .Content $katexFontPattern $katexFontSubstituted }}
-        {{ with resources.FromString (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) $katexCssContent -}}
-          {{ $cssHash := . | fingerprint "sha512" -}}
-          <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $cssHash.Data.Integrity -}}" crossorigin="anonymous" />
-        {{ end -}}
-      {{ end -}}
-    {{ end -}}
+    {{ partialCached "scripts/katex.html" . -}}
   {{ else if and (.Page.Store.Get "hasMath") (eq $engine "mathjax") -}}
     {{ partialCached "scripts/mathjax.html" . -}}
   {{ end -}}
 
+  {{ partial "utils/page-width-override.html" . }}
   {{ partial "custom/head-end.html" . -}}
 </head>

@@ -1,9 +1,18 @@
+{{- /*
+A shortcode for rendering a badge with a link.
+
+@param {string} link The link of the badge.
+@param {string} class The class of the badge.
+@param {string} style The style of the badge.
+
+@example {{< hextra/hero-badge >}}{{< /hextra/hero-badge >}}
+*/ -}}
+
 {{- $link := .Get "link" -}}
 {{- $external := hasPrefix $link "http" -}}
 {{- $href := cond (hasPrefix $link "/") ($link | relURL) $link -}}
 {{- $class := .Get "class" }}
 {{- $style := .Get "style" -}}
-
 
 <a
   {{ if $link }}href="{{ $href }}"{{ end }}

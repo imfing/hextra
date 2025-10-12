@@ -1,15 +1,15 @@
 {
   "scripts": {
-    "dev:theme": "hugo server --logLevel=debug --config=hugo.yaml,../dev.toml --environment=theme --source=exampleSite --themesDir=../.. -D --port 1313",
-    "dev": "hugo server --source=exampleSite --themesDir=../.. --disableFastRender -D --port 1313",
+    "dev:theme": "hugo server --logLevel=debug --config=hugo.yaml,../dev.toml --environment=theme --source=docs --themesDir=../.. -D -F --port 1313",
+    "dev": "hugo server --source=docs --themesDir=../.. --disableFastRender -D --port 1313",
     "build:css": "npx postcss --config postcss.config.mjs --env production assets/css/styles.css -o assets/css/compiled/main.css",
-    "build": "hugo --gc --minify --themesDir=../.. --source=exampleSite"
+    "build": "hugo --gc --minify --themesDir=../.. --source=docs"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.8",
+    "@tailwindcss/postcss": "^4.1.11",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.5.3",
     "prettier-plugin-go-template": "^0.0.15",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.11"
   }
 }

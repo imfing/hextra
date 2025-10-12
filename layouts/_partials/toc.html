@@ -20,19 +20,20 @@
 
       {{- $borderClass := "hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111]" -}}
 
-      {{- if and site.Params.toc.displayTags .Params.tags -}}
-        <div class="{{ $borderClass }} hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400">
-          <p class="hx:mb-1 hx:font-semibold hx:tracking-tight">{{ $tags }}</p>
-          {{ partial "tags.html" . }}
-        </div>
-      {{- end -}}
-
       {{- if not .Fragments.Headings -}}
         {{- $borderClass = "" -}}
       {{- end -}}
 
       {{/* TOC bottom part */}}
       <div class="{{ $borderClass }} hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400">
+        {{- if and site.Params.toc.displayTags .Params.tags -}}
+          <div class="hx:flex hx:items-start hx:gap-x-2 hx:font-medium hx:text-xs">
+            <div class="hx:text-gray-500 hx:dark:text-gray-400 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">{{ $tags }}</div>
+            <div class="hx:flex hx:flex-wrap hx:gap-y-1">
+              {{ partial "tags.html" (dict "context" .) }}
+            </div>
+          </div>
+        {{- end -}}
         {{- if site.Params.editURL.enable -}}
           {{- $editURL := site.Params.editURL.base | default "" -}}
           {{- with .Params.editURL -}}
@@ -72,7 +73,7 @@
   {{- end -}}
 
   {{- $padding := (mul $level 4) -}}
-  {{- $class := cond (eq $level 0) "hx:font-semibold" (printf "hx:ltr:pl-%d hx:rtl:pr-%d" $padding $padding) -}}
+  {{- $class := cond (eq $level 0) "hx:font-medium" (printf "hx:ltr:pl-%d hx:rtl:pr-%d" $padding $padding) -}}
 
   {{- range $headings }}
     {{- if .Title }}

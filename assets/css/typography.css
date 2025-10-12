@@ -33,16 +33,19 @@
     @apply hx:border-black/4 hx:bg-black/3 hx:break-words hx:rounded-md hx:border hx:py-0.5 hx:px-[.25em] hx:text-[.9em] hx:dark:border-white/10 hx:dark:bg-white/10;
   }
   :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) {
-    @apply hx:block hx:overflow-x-auto hx:mt-6 hx:p-0 hx:first:mt-0;
+    @apply hx:block hx:overflow-x-auto hx:my-6 hx:p-0 hx:first:mt-0 hx:w-full hx:text-sm hx:leading-5 hx:border-collapse;
 
+    thead {
+      @apply hx:bg-gray-50 hx:dark:bg-gray-600/20;
+    }
     tr {
-      @apply hx:m-0 hx:border-t hx:border-gray-300 hx:p-0 hx:dark:border-gray-600 hx:even:bg-gray-100 hx:even:dark:bg-gray-600/20;
+      @apply hx:m-0 hx:border-t hx:border-gray-300 hx:p-0 hx:dark:border-gray-600;
     }
     th {
-      @apply hx:m-0 hx:border hx:border-gray-300 hx:px-4 hx:py-2 hx:font-semibold hx:dark:border-gray-600;
+      @apply hx:m-0 hx:border hx:border-gray-300 hx:p-2 hx:font-semibold hx:dark:border-gray-600;
     }
     td {
-      @apply hx:m-0 hx:border hx:border-gray-300 hx:px-4 hx:py-2 hx:dark:border-gray-600;
+      @apply hx:m-0 hx:border hx:border-gray-300 hx:p-2 hx:dark:border-gray-600;
     }
   }
   :where(ol):not(:where([class~=not-prose],[class~=not-prose] *)) {
@@ -56,6 +59,10 @@
     li {
       @apply hx:my-2;
     }
+  }
+  /* Task lists - hide list markers for lists containing checkboxes */
+  :where(ul):not(:where([class~=not-prose],[class~=not-prose] *)):has(li input[type="checkbox"]) {
+    @apply hx:list-none;
   }
   /* This CSS rule targets the first nested unordered (ul) or ordered (ol) list
      inside the list item (li) of any parent ul or ol.
@@ -86,6 +93,10 @@
       @apply hx:my-2 hx:ps-6;
     }
   }
+  /* Horizontal line */
+  :where(hr):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply hx:my-10 hx:first:mt-0 hx:last:mb-0 hx:border-gray-200 hx:dark:border-neutral-800;
+  }
   .footnotes {
     @apply hx:mt-12 hx:text-sm;
 
@@ -93,28 +104,27 @@
       @apply hx:border-gray-200 hx:dark:border-neutral-800;
     }
   }
-}
-
-.subheading-anchor {
-  @apply hx:opacity-0 hx:transition-opacity hx:ltr:ml-1 hx:rtl:mr-1;
-
-  span:target + &,
-  :hover > &,
-  &:focus {
-    @apply hx:opacity-100;
-  }
-
-  span + &,
-  :hover > & {
-    @apply hx:no-underline!;
-  }
-
-  @apply hx:after:text-gray-300 hx:dark:after:text-neutral-700;
-  &:after {
-    @apply hx:content-['#'] hx:px-1;
-    span:target + & {
-      @apply hx:text-gray-400;
-      @apply hx:dark:text-neutral-500;
+  .subheading-anchor {
+    @apply hx:opacity-0 hx:transition-opacity hx:ltr:ml-1 hx:rtl:mr-1;
+  
+    span:target + &,
+    :hover > &,
+    &:focus {
+      @apply hx:opacity-100;
+    }
+  
+    span + &,
+    :hover > & {
+      @apply hx:no-underline!;
+    }
+  
+    @apply hx:after:text-gray-300 hx:dark:after:text-neutral-700;
+    &:after {
+      @apply hx:content-['#'] hx:px-1;
+      span:target + & {
+        @apply hx:text-gray-400;
+        @apply hx:dark:text-neutral-500;
+      }
     }
   }
 }

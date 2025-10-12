@@ -29,6 +29,7 @@ body {
   --primary-saturation: 100%;
   --primary-lightness: 50%;
   --navbar-height: 4rem;
+  --hextra-banner-height: 2rem;
   --menu-height: 3.75rem; /* 60px */
 }
 
@@ -38,15 +39,21 @@ body {
   --primary-lightness: 50%;
 }
 
+@utility hextra-focus {
+  @apply hx:outline-none hx:ring-2 hx:ring-primary-200 hx:ring-offset-1 hx:ring-offset-primary-300 hx:dark:ring-primary-800 hx:dark:ring-offset-primary-700;
+}
+
 @import "./typography.css";
 @import "./highlight.css";
 @import "./components/cards.css";
 @import "./components/steps.css";
 @import "./components/search.css";
 @import "./components/sidebar.css";
+@import "./components/banner.css";
 @import "./components/navbar.css";
 @import "./components/scrollbar.css";
 @import "./components/code-copy.css";
 @import "./components/hextra/feature-grid.css";
 @import "./components/jupyter.css";
 @import "./components/badge.css";
+@import "./components/toc.css";

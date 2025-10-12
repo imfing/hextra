@@ -1,3 +1,12 @@
+{{- /*
+A built-in component to display a collapsible content.
+
+@param {string} title The title of the details.
+@param {string} closed Whether the details are closed or not (default: false).
+
+@example {{% details title="Details" %}}Content{{% /details %}}
+*/ -}}
+
 {{- $title := .Get "title" | default "" -}}
 {{- $closed := eq (.Get "closed") "true" | default false -}}
 

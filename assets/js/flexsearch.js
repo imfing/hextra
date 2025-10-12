@@ -3,8 +3,8 @@
 // Change shortcut key to cmd+k on Mac, iPad or iPhone.
 document.addEventListener("DOMContentLoaded", function () {
   if (/iPad|iPhone|Macintosh/.test(navigator.userAgent)) {
-    // select the kbd element under the .search-wrapper class
-    const keys = document.querySelectorAll(".search-wrapper kbd");
+    // select the kbd element under the .hextra-search-wrapper class
+    const keys = document.querySelectorAll(".hextra-search-wrapper kbd");
     keys.forEach(key => {
       key.innerHTML = '<span class="hx:text-xs">⌘</span>K';
     });
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 (function () {
   const searchDataURL = '{{ $searchData.RelPermalink }}';
 
-  const inputElements = document.querySelectorAll('.search-input');
+  const inputElements = document.querySelectorAll('.hextra-search-input');
   for (const el of inputElements) {
     el.addEventListener('focus', init);
     el.addEventListener('keyup', search);
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     el.addEventListener('input', handleInputChange);
   }
 
-  const shortcutElements = document.querySelectorAll('.search-wrapper kbd');
+  const shortcutElements = document.querySelectorAll('.hextra-search-wrapper kbd');
 
   function setShortcutElementsOpacity(opacity) {
     shortcutElements.forEach(el => {
@@ -45,12 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Get the search wrapper, input, and results elements.
   function getActiveSearchElement() {
-    const inputs = Array.from(document.querySelectorAll('.search-wrapper')).filter(el => el.clientHeight > 0);
+    const inputs = Array.from(document.querySelectorAll('.hextra-search-wrapper')).filter(el => el.clientHeight > 0);
     if (inputs.length === 1) {
       return {
         wrapper: inputs[0],
-        inputElement: inputs[0].querySelector('.search-input'),
-        resultsElement: inputs[0].querySelector('.search-results')
+        inputElement: inputs[0].querySelector('.hextra-search-input'),
+        resultsElement: inputs[0].querySelector('.hextra-search-results')
       };
     }
     return undefined;
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const { resultsElement } = getActiveSearchElement();
     if (!resultsElement) return { result: undefined, index: -1 };
 
-    const result = resultsElement.querySelector('.active');
+    const result = resultsElement.querySelector('.hextra-search-active');
     if (!result) return { result: undefined, index: -1 };
 
     const index = parseInt(result.dataset.index, 10);
@@ -116,10 +116,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!resultsElement) return;
 
     const { result: activeResult } = getActiveResult();
-    activeResult && activeResult.classList.remove('active');
+    activeResult && activeResult.classList.remove('hextra-search-active');
     const result = resultsElement.querySelector(`[data-index="${index}"]`);
     if (result) {
-      result.classList.add('active');
+      result.classList.add('hextra-search-active');
       result.focus();
     }
   }
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!resultsElement) return;
 
     if (!results.length) {
-      resultsElement.innerHTML = `<span class="no-result">{{ $noResultsFound | safeHTML }}</span>`;
+      resultsElement.innerHTML = `<span class="hextra-search-no-result">{{ $noResultsFound | safeHTML }}</span>`;
       return;
     }
 
@@ -392,7 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function highlightMatches(text, query) {
       const escapedQuery = query.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
       const regex = new RegExp(escapedQuery, 'gi');
-      return text.replace(regex, (match) => `<span class="match">${match}</span>`);
+      return text.replace(regex, (match) => `<span class="hextra-search-match">${match}</span>`);
     }
 
     // Create a DOM element from the HTML string.
@@ -405,11 +405,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function handleMouseMove(e) {
       const target = e.target.closest('a');
       if (target) {
-        const active = resultsElement.querySelector('a.active');
+        const active = resultsElement.querySelector('a.hextra-search-active');
         if (active) {
-          active.classList.remove('active');
+          active.classList.remove('hextra-search-active');
         }
-        target.classList.add('active');
+        target.classList.add('hextra-search-active');
       }
     }
 
@@ -418,14 +418,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = results[i];
       if (result.prefix) {
         fragment.appendChild(createElement(`
-          <div class="prefix">${result.prefix}</div>`));
+          <div class="hextra-search-prefix">${result.prefix}</div>`));
       }
-      let li = createElement(`
+        let li = createElement(`
         <li>
-          <a data-index="${i}" href="${result.route}" class=${i === 0 ? "active" : ""}>
-            <div class="title">`+ highlightMatches(result.children.title, query) + `</div>` +
+          <a data-index="${i}" href="${result.route}" class=${i === 0 ? "hextra-search-active" : ""}>
+            <div class="hextra-search-title">`+ highlightMatches(result.children.title, query) + `</div>` +
         (result.children.content ?
-          `<div class="excerpt">` + highlightMatches(result.children.content, query) + `</div>` : '') + `
+            `<div class="hextra-search-excerpt">` + highlightMatches(result.children.content, query) + `</div>` : '') + `
           </a>
         </li>`);
       li.addEventListener('mousemove', handleMouseMove);
