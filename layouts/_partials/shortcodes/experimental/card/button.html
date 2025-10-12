@@ -6,7 +6,7 @@
 {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
 
 <a
-  class="hextra-card-button hx:flex hx:flex-grow hx:focus:outline-none hx:border-t hx:border-r hx:last:border-r-0 hx:justify-center hx:gap-2 hx:px-4 hx:py-2 hx:font-medium hx:shadow-sm hx:transition-colors hx:duration-200 hx:text-sm"
+  class="hextra-card-button hx:flex hx:flex-grow hx:focus:outline-none hx:border-t hx:border-r hx:last:border-r-0 hx:justify-center hx:gap-2 hx:px-4 hx:py-2 hx:font-medium hx:transition-colors hx:duration-200 hx:text-sm"
   href="{{ $href }}"
   {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
 >
