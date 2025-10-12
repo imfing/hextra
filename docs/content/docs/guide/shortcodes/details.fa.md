@@ -8,36 +8,36 @@ title: جزئیات
 
 ## مثال
 
-{{% details title="جزئیات" %}}
+{{< details title="جزئیات" >}}
 
 این محتوای جزئیات است.
 
 مارک‌داون **پشتیبانی می‌شود**.
 
-{{% /details %}}
+{{< /details >}}
 
-{{% details title="برای نمایش کلیک کنید" closed="true" %}}
+{{< details title="برای نمایش کلیک کنید" closed="true" >}}
 
 این به‌صورت پیش‌فرض مخفی خواهد بود.
 
-{{% /details %}}
+{{< /details >}}
 
 ## نحوه استفاده
 
 ````markdown
-{{%/* details title="جزئیات" */%}}
+{{</* details title="جزئیات" */>}}
 
 این محتوای جزئیات است.
 
 مارک‌داون **پشتیبانی می‌شود**.
 
-{{%/* /details */%}}
+{{</* /details */>}}
 ````
 
 ````markdown
-{{%/* details title="برای نمایش کلیک کنید" closed="true" */%}}
+{{</* details title="برای نمایش کلیک کنید" closed="true" */>}}
 
 این به‌صورت پیش‌فرض مخفی خواهد بود.
 
-{{%/* /details */%}}
+{{</* /details */>}}
 ````

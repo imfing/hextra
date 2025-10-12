@@ -8,36 +8,36 @@ title: 詳細
 
 ## 例
 
-{{% details title="詳細" %}}
+{{< details title="詳細" >}}
 
 これは詳細のコンテンツです。
 
 Markdown は **サポートされています**。
 
-{{% /details %}}
+{{< /details >}}
 
-{{% details title="クリックして表示" closed="true" %}}
+{{< details title="クリックして表示" closed="true" >}}
 
 これはデフォルトで非表示になります。
 
-{{% /details %}}
+{{< /details >}}
 
 ## 使用方法
 
 ````markdown
-{{%/* details title="詳細" */%}}
+{{</* details title="詳細" */>}}
 
 これは詳細のコンテンツです。
 
 Markdown は **サポートされています**。
 
-{{%/* /details */%}}
+{{</* /details */>}}
 ````
 
 ````markdown
-{{%/* details title="クリックして表示" closed="true" */%}}
+{{</* details title="クリックして表示" closed="true" */>}}
 
 これはデフォルトで非表示になります。
 
-{{%/* /details */%}}
+{{</* /details */>}}
 ````
