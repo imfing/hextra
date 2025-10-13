@@ -383,16 +383,6 @@ excludeSearch: true
 ---
 ```
 
-### Google Analytics
-
-To enable [Google Analytics](https://marketingplatform.google.com/about/analytics/), set `services.googleAnalytics.ID` flag in `hugo.yaml`:
-
-```yaml {filename="hugo.yaml"}
-services:
-  googleAnalytics:
-    ID: G-MEASUREMENT_ID
-```
-
 ### Google Search Index
 
 To [block Google Search](https://developers.google.com/search/docs/crawling-indexing/block-indexing) from indexing a page, set `noindex` to true in your page frontmatter:
@@ -409,7 +399,25 @@ To exclude an entire directory, use the [`cascade`](https://gohugo.io/configurat
 > To block search crawlers, you can make a [`robots.txt` template](https://gohugo.io/templates/robots/).
 > However, `robots.txt` instructions do not necessarily keep a page out of Google search results.
 
-### Umami Analytics
+### Analytics
+
+Hextra has support for several different analytics solutions. Hextra only supports analytics in production environments. This is to ensure that you do not accidentally send analytic events when working locally. If, however, you do want to test analytics locally, you can run a production server using:
+
+```
+hugo server --environment production
+```
+
+#### Google Analytics
+
+To enable [Google Analytics](https://marketingplatform.google.com/about/analytics/), set `services.googleAnalytics.ID` flag in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+services:
+  googleAnalytics:
+    ID: G-MEASUREMENT_ID
+```
+
+#### Umami Analytics
 
 To enable [Umami](https://umami.is/docs/), set `params.analytics.umami.serverURL` and `params.analytics.umami.websiteID` flag in `hugo.yaml`:
 
@@ -436,7 +444,7 @@ params:
       # doNotTrack: "true" # optional
 ```
 
-### Matomo Analytics
+#### Matomo Analytics
 
 To enable [Matomo](https://matomo.org/), set `params.analytics.matomo.URL` and `params.analytics.matomo.ID` flag in `hugo.yaml`:
 
@@ -446,6 +454,32 @@ params:
     matomo:
       serverURL: "https://example.com"
       websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
+```
+
+#### GoatCounter Analytics
+
+To enable [GoatCounter](https://www.goatcounter.com/), set `params.analytics.goatCounter.code` in `hugo.yaml`
+All settings available here are mirrors of the settings described in GoatCounter [settings](https://www.goatcounter.com/help/js#settings-44186)
+
+```yaml {filename="hugo.yaml"}
+params:
+  analytics:
+    goatCounter:
+      code: "ABCDE"
+
+      # Optional Settings
+      #------------------
+      # disables automatic collection of data
+      # noOnload: true
+      
+      # disables event binding. See more here https://www.goatcounter.com/help/events
+      # noEvents: true
+
+      # allows data collection from local addresses. Use this with a production environment to test locally
+      # allowLocal: true
+
+      # Allow data collection when a page is loaded in a frame or iframe
+      # allowFrame: true
 ```
 
 ### LLMS.txt Support
