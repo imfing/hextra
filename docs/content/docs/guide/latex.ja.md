@@ -3,7 +3,7 @@ title: "LaTeX"
 weight: 4
 ---
 
-LaTeX の数式表現はデフォルトで \(\KaTeX\) を使用してレンダリングされます。特別な設定なしで、Markdown コンテンツ内に直接記述できます。
+LaTeX の数式表現はデフォルトで \(\KaTeX\) ([katex.org](https://katex.org/)) を使用してレンダリングされます。特別な設定なしで、Markdown コンテンツ内に直接記述できます。
 
 ## 使用方法
 
