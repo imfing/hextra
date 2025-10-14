@@ -1,0 +1,17 @@
+{{- with .Site.Params.analytics.goatCounter -}}
+    {{- if not .code -}}
+        {{- errorf "Missing GoatCounter 'code' configuration. See https://imfing.github.io/hextra/versions/latest/docs/guide/configuration/#goatcounter-analytics" -}}
+    {{- end -}}
+
+    <script 
+        data-goatcounter="https://{{ .code }}.goatcounter.com/count"
+        data-goatcounter-settings='
+        {
+            "no_onload":{{ .noOnload | default false }},
+            "no_events":{{ .noEvents | default false }},
+            "allow_local":{{ .allowLocal | default false }},
+            "allow_frame":{{ .allowFrame | default false }}
+        }
+        '
+        async src="//gc.zgo.at/count.js"></script>
+{{- end -}}
