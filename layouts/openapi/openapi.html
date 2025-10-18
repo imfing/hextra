@@ -1,0 +1,37 @@
+{{ define "main" }}
+<div class='hx:mx-auto hextra-max-page-width'>
+  <div id="swagger-ui"></div>
+</div>
+
+<!-- Swagger UI JavaScript -->
+<script src="https://unpkg.com/swagger-ui-dist@5.27.1/swagger-ui-bundle.js" crossorigin></script>
+<script src="https://unpkg.com/swagger-ui-dist@5.27.1/swagger-ui-standalone-preset.js" crossorigin></script>
+<script>
+    window.onload = () => {
+      const config = {
+        dom_id: '#swagger-ui'
+      };
+      {{ if .Params.swagger.presets }}config.presets = {{ .Params.swagger.presets | jsonify | safeJS }};{{ else }}config.presets = [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset];{{ end }}
+      {{ if .Params.swagger.layout }}config.layout = {{ .Params.swagger.layout | jsonify | safeJS }};{{ end }}
+      {{ if .Params.swagger.url }}config.url = {{ .Params.swagger.url | jsonify | safeJS }};{{ end }}
+      {{ if .Params.swagger.urls }}config.urls = {{ .Params.swagger.urls | jsonify | safeJS }};{{ end }}
+      {{ if .Params.swagger.operationsSorter }}config.operationsSorter = {{ .Params.swagger.operationsSorter | jsonify | safeJS }};{{ end }}
+      {{ if .Params.swagger.tagsSorter }}config.tagsSorter = {{ .Params.swagger.tagsSorter | jsonify | safeJS }};{{ end }}
+      {{ if .Params.swagger.tryItOutEnabled }}config.tryItOutEnabled = {{ .Params.swagger.tryItOutEnabled }};{{ end }}
+      {{ if .Params.swagger.filter }}config.filter = {{ .Params.swagger.filter }};{{ end }}
+      {{ if .Params.swagger.supportedSubmitMethods }}config.supportedSubmitMethods = {{ .Params.swagger.supportedSubmitMethods | jsonify | safeJS }};{{ end }}
+      {{ if .Params.swagger.syntaxTheme }}config.syntaxHighlight = { theme: {{ .Params.swagger.syntaxTheme | jsonify | safeJS }} };{{ end }}
+      {{ if .Params.swagger.deepLinking }}config.deepLinking = {{ .Params.swagger.deepLinking }};{{ end }}
+      {{ if .Params.swagger.displayOperationId }}config.displayOperationId = {{ .Params.swagger.displayOperationId }};{{ end }}
+      {{ if .Params.swagger.displayRequestDuration }}config.displayRequestDuration = {{ .Params.swagger.displayRequestDuration }};{{ end }}
+      {{ if .Params.swagger.docExpansion }}config.docExpansion = {{ .Params.swagger.docExpansion | jsonify | safeJS }};{{ end }}
+      {{ if .Params.swagger.maxDisplayedTags }}config.maxDisplayedTags = {{ .Params.swagger.maxDisplayedTags }};{{ end }}
+      {{ if .Params.swagger.showExtensions }}config.showExtensions = {{ .Params.swagger.showExtensions }};{{ end }}
+      {{ if .Params.swagger.showCommonExtensions }}config.showCommonExtensions = {{ .Params.swagger.showCommonExtensions }};{{ end }}
+      {{ if .Params.swagger.defaultModelRendering }}config.defaultModelRendering = {{ .Params.swagger.defaultModelRendering | jsonify | safeJS }};{{ end }}
+      {{ if .Params.swagger.url }}config.url = {{ .Params.swagger.url | jsonify | safeJS }};{{ end }}
+
+      window.ui = SwaggerUIBundle(config);
+  };
+</script>
+{{ end }}
