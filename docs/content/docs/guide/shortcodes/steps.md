@@ -4,6 +4,8 @@ title: Steps
 
 A built-in component to display a series of steps.
 
+You can use the Markdown attribute `{class="no-step-marker"}` to prevent a heading from being counted as a step.
+
 ## Example
 
 {{% steps %}}
@@ -15,6 +17,10 @@ This is the first step.
 ### Step 2
 
 This is the second step.
+
+#### Step subheading {class="no-step-marker"}
+
+This will not be counted as a step.
 
 ### Step 3
 
@@ -42,6 +48,10 @@ This is the first step.
 ### Step 2
 
 This is the second step.
+
+#### Step subheading {class="no-step-marker"}
+
+This will not be counted as a step.
 
 {{%/* /steps */%}}
 ```
