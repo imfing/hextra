@@ -1,5 +1,4 @@
 {{- $lastUpdated := (T "lastUpdated") | default "Last updated on" -}}
-{{- $by := (T "by") | default "by" -}}
 {{- $page := . -}}
 
 {{- if site.Params.displayUpdatedDate -}}
@@ -9,7 +8,7 @@
       {{ $lastUpdated }} <time datetime="{{ $datetime }}">{{ partial "utils/format-date" . }}</time>
       {{- if site.Params.displayUpdatedAuthor -}}
         {{- with $page.GitInfo -}}
-          {{ print " " $by " " .AuthorName | safeHTML }}
+          {{ print " • " .AuthorName | safeHTML }}
         {{- end -}}
       {{- end -}}
     </div>
