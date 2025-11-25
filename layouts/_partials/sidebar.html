@@ -76,7 +76,27 @@
   {{- $level := .level -}}
   {{- $toc := .toc | default false -}}
 
-  {{- with $items := union .context.RegularPages .context.Sections -}}
+  {{- $items := slice -}}
+  {{- $itemsCandidates := union .context.RegularPages .context.Sections -}}
+
+  {{- if .context.IsHome -}}
+    {{- $allowedPaths := slice -}}
+    {{- range site.Menus.main -}}
+      {{- with .Page -}}
+        {{- $allowedPaths = $allowedPaths | append .Path -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- range $itemsCandidates -}}
+      {{- if in $allowedPaths .Path -}}
+        {{- $items = $items | append . -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- else -}}
+      {{- $items = $itemsCandidates -}}
+    {{- end -}}
+
     {{- $items = where $items "Params.sidebar.exclude" "!=" true -}}
     {{- if eq $level 0 -}}
       {{- range $items.ByWeight }}
@@ -115,7 +135,6 @@
         </ul>
       </div>
     {{- end -}}
-  {{- end }}
 {{- end -}}
 
 {{- define "sidebar-toc" -}}
