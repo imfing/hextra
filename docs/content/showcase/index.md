@@ -13,9 +13,16 @@ Open source projects powered by Hextra
 
 {{< cards >}}
   {{< card
+        link="https://printn.dev"
+        title="PrintN"
+        image="https://raw.githubusercontent.com/printn/printn.github.io/refs/heads/main/static/images/screenshot.png"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
         link="https://beginnerprivacy.com"
         title="Beginner Privacy"
-        image="https://github.com/user-attachments/assets/a72582a8-7c54-40cd-b8e3-8fd77164687c"
+        image="https://raw.githubusercontent.com/beginnerprivacy/beginnerprivacy.com/refs/heads/main/static/images/screenshot.png"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 
