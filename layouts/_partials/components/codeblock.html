@@ -1,10 +1,11 @@
 {{ $filename := .filename | default "" -}}
 {{ $base_url := .base_url | default "" -}}
+{{ $name_override := .name_override | default $filename -}}
 {{ $lang := .lang | default "" }}
 {{ $content := .content }}
 {{ $options := .options | default (dict) }}
 
-{{- if $filename -}}
+{{- if $name_override -}}
   <div class="hextra-code-filename not-prose" dir="auto">
     {{- if $base_url -}}
 
@@ -13,11 +14,11 @@
       {{- $file_url := urls.JoinPath $base_url $filename -}}
 
       <a class="hx:no-underline hx:inline-flex hx:items-center hx:gap-1" href="{{ $file_url }}" target="_blank" rel="noopener noreferrer">
-          <span>{{- $filename -}}</span>
+          <span>{{- $name_override -}}</span>
           {{- partial "utils/icon" (dict "name" "external-link" "attributes" "height=1em") -}}
       </a>
     {{- else -}}
-      {{- $filename -}}
+      {{- $name_override -}}
     {{- end -}}
   </div>
 {{- end -}}
