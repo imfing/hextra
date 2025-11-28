@@ -176,6 +176,9 @@ params:
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
 
+  # Display the author name of the last modified date
+  displayUpdatedAuthor: true
+
   # Search
   # flexsearch is enabled by default
   search:
