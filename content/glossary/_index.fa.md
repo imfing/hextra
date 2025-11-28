@@ -1,0 +1,4 @@
+---
+title: واژه‌نامه
+layout: glossary
+---
