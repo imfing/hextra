@@ -489,9 +489,11 @@ To enable [llms.txt](https://llmstxt.org/) output format for your site, which pr
 ```diff {filename="hugo.yaml"}
 outputs:
 - home: [html]
+- page: [html]
+- section: [html, rss]
 + home: [html, llms]
-  page: [html]
-  section: [html, rss]
++ page: [html, markdown]
++ section: [html, markdown, rss]
 ```
 
 This will generate an `llms.txt` file at your site's root containing:
@@ -499,7 +501,7 @@ This will generate an `llms.txt` file at your site's root containing:
 - Site title and description
 - Hierarchical listing of all sections and pages
 - Page summaries and publication dates
-- Direct links to all content
+- Direct links to all content in markdown format
 
 The llms.txt file is automatically generated from your content structure and makes your site more accessible to AI tools and language models for context and reference.
 
