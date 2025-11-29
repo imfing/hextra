@@ -1,0 +1,106 @@
+{{- $size := .size | default "md" -}}
+{{- $color := .color | default "primary" -}}
+{{- $link := .link -}}
+{{- $border := .border -}}
+{{- $shape := .shape -}}
+{{- $mode := .mode -}}
+{{- $attributes := .attributes -}}
+{{- $content := .content -}}
+{{- $icon := .icon -}}
+{{- $iconPosition := .iconPosition | default "start" -}}
+
+{{- /* Sizes */ -}}
+
+{{- $sizes := newScratch -}}
+{{- if $content -}}
+  {{- $sizes.Set "sm" "hx:text-sm hx:px-4 hx:py-2" -}}
+  {{- $sizes.Set "md" "hx:text-base hx:px-5 hx:py-3" -}}
+  {{- $sizes.Set "lg" "hx:text-lg hx:px-5 hx:py-3" -}}
+  {{- $sizes.Set "xl" "hx:text-xl hx:px-6 hx:py-3" -}}
+{{- else -}}
+  {{- $sizes.Set "sm" "hx:text-sm hx:px-1" -}}
+  {{- $sizes.Set "md" "hx:text-base hx:px-1 hx:py-1" -}}
+  {{- $sizes.Set "lg" "hx:text-lg hx:px-1 hx:py-1" -}}
+  {{- $sizes.Set "xl" "hx:text-xl hx:px-1 hx:py-1" -}}
+{{- end -}}
+
+{{- /* Icon */ -}}
+
+{{- $iconSizes := newScratch -}}
+{{- if $content -}}
+  {{- $iconSizes.Set "sm" "height=1em" -}}
+  {{- $iconSizes.Set "md" "height=1.2em" -}}
+  {{- $iconSizes.Set "lg" "height=1.4em" -}}
+  {{- $iconSizes.Set "xl" "height=2em" -}}
+{{- else -}}
+  {{- $iconSizes.Set "sm" "height=1em" -}}
+  {{- $iconSizes.Set "md" "height=2em" -}}
+  {{- $iconSizes.Set "lg" "height=3em" -}}
+  {{- $iconSizes.Set "xl" "height=4em" -}}
+{{- end -}}
+
+{{- $iconSize := $iconSizes.Get $size | default ($iconSizes.Get "md") -}}
+
+{{- if not $content -}}
+  {{- $iconPosition = "start" -}}
+{{- end -}}
+
+{{- /* Borders */ -}}
+
+{{- $borders := newScratch -}}
+{{- if $border -}}
+  {{- $borders.Set "sm" "hx:border" -}}
+  {{- $borders.Set "md" "hx:border-2" -}}
+  {{- $borders.Set "lg" "hx:border-3" -}}
+  {{- $borders.Set "xl" "hx:border-4" -}}
+  {{- $borders.Set "auto" ($borders.Get $size) -}}
+{{- end -}}
+
+{{- /* Shape */ -}}
+
+{{- $shapes := newScratch -}}
+{{- $shapes.Set "default" "hx:rounded-lg" -}}
+{{- $shapes.Set "pills" "hx:rounded-full" -}}
+
+{{- /* Colors */ -}}
+
+{{- $colors := partial "shortcodes/button/colors" . -}}
+
+{{- /* Class */ -}}
+
+{{- $class := print (delimit (slice
+    (($sizes.Get $size) | default ($sizes.Get "md"))
+    (($borders.Get $border) | default ($borders.Get "auto"))
+    (($colors.Get $color) | default ($colors.Get "primary"))
+    (($shapes.Get $shape) | default ($shapes.Get "default"))
+  ) " ")
+-}}
+
+{{- if $link }}
+
+{{- $external := hasPrefix $link "http" -}}
+{{- $href := cond (hasPrefix $link "/") ($link | relURL) $link -}}
+
+<a
+  href="{{ $href }}"
+  class="hextra-button not-prose {{ $class }} hx:font-medium hx:cursor-pointer hx:text-center hx:inline-block hx:focus:outline-none hx:focus:ring-4 hx:transition-all hx:ease-in hx:duration-200"
+  {{ if $external }}target="_blank" rel="noreferrer"{{ end -}}
+>
+  <span>{{- $content -}}</span>
+</a>
+
+{{- else -}}
+
+<button
+  class="hextra-button not-prose {{ $class }} hx:font-medium hx:cursor-pointer hx:text-center hx:inline-block hx:focus:outline-none hx:focus:ring-4 hx:transition-all hx:ease-in hx:duration-200"
+>
+  {{- if and $icon (eq $iconPosition "start") -}}
+  <span class="hx:inline-block hextra-icon"> {{ partial "utils/icon.html" (dict "name" .icon "attributes" $iconSize) }}</span>
+  {{- end -}}
+  <span>{{- $content -}}</span>
+  {{- if and $icon (eq $iconPosition "end") -}}
+  <span class="hx:inline-block hextra-icon"> {{ partial "utils/icon.html" (dict "name" .icon "attributes" $iconSize) }}</span>
+  {{- end -}}
+</button>
+
+{{- end -}}
