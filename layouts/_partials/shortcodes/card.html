@@ -3,6 +3,7 @@
 {{- $icon := .icon -}}
 {{- $subtitle := .subtitle -}}
 {{- $image := .image -}}
+{{- $alt := .alt | default $title -}}
 {{- $width := .width -}}
 {{- $height := .height -}}
 {{- $imageStyle := .imageStyle -}}
@@ -29,7 +30,7 @@
 >
   {{- with $image -}}
     <img
-      alt="{{ $title }}"
+      alt="{{ $alt }}"
       class="hextra-card-image"
       loading="lazy"
       decoding="async"
