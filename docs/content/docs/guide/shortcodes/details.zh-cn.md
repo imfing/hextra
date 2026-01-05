@@ -8,36 +8,36 @@ title: 详情
 
 ## 示例
 
-{{% details title="详情" %}}
+{{< details title="详情" >}}
 
 这是详情的内容。
 
 支持 **Markdown** 格式。
 
-{{% /details %}}
+{{< /details >}}
 
-{{% details title="点击我展开" closed="true" %}}
+{{< details title="点击我展开" closed="true" >}}
 
 默认情况下，这部分内容会被隐藏。
 
-{{% /details %}}
+{{< /details >}}
 
 ## 使用方法
 
 ````markdown
-{{%/* details title="详情" */%}}
+{{</* details title="详情" */>}}
 
 这是详情的内容。
 
 支持 **Markdown** 格式。
 
-{{%/* /details */%}}
+{{</* /details */>}}
 ````
 
 ````markdown
-{{%/* details title="点击我展开" closed="true" */%}}
+{{</* details title="点击我展开" closed="true" */>}}
 
 默认情况下，这部分内容会被隐藏。
 
-{{%/* /details */%}}
+{{</* /details */>}}
 ````
