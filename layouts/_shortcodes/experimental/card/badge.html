@@ -1,0 +1,35 @@
+{{- /*
+Card badge.
+
+@param {string} content The content of the badge.
+@param {string} color The color of the badge.
+@param {string} icon The icon of the badge.
+@param {string} border Whether to display a border around the badge.
+
+@example {{< experimental/card/badge content="Badge" color="blue" >}}
+@example {{< experimental/card/badge "Badge" >}}
+
+*/ -}}
+
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card" -}}
+{{- end -}}
+
+{{- if .IsNamedParams -}}
+  {{- partial "shortcodes/badge.html"  (dict
+    "class"   "hextra-card-tag"
+    "content" (.Get "content")
+    "color"   ((.Get "color") | default (.Get "type"))
+    "icon"    (.Get "icon")
+    "border"  (.Get "border")
+    )
+  -}}
+{{- else -}}
+  {{- $content := .Get 0 -}}
+
+  {{- partial "shortcodes/badge.html" (dict
+    "content" $content
+    "border" true
+    )
+  -}}
+{{- end -}}

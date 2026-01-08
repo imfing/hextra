@@ -1,0 +1,17 @@
+{{- $gridColsVarName := .gridColsVarName | default "--hextra-grid-cols" -}}
+{{- $cols := .cols | default 3 -}}
+
+{{- $class := .class | default "" -}}
+{{- $style := .style | default "" -}}
+
+{{- $content := .content -}}
+
+{{- $attributes := (dict
+  "class" $class
+  "style" (printf "%s: %v; %s" $gridColsVarName $cols $style)
+  )
+-}}
+
+<div {{ range $k, $v := $attributes }} {{ (printf `%s=%q` $k $v) | safeHTMLAttr }}{{- end -}}>
+  {{- $content -}}
+</div>

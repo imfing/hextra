@@ -1,0 +1,32 @@
+{{- /*
+Card image.
+
+@param {string} src The source of the image.
+@param {string} alt The alt text of the image.
+@param {string} style The style of the image.
+@param {string} method The method of the image.
+@param {string} options The options of the image.
+@param {string} process The process of the image.
+
+@example {{< experimental/card/image src="image.jpg" alt="Image" >}}
+
+*/ -}}
+
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card" -}}
+{{- end -}}
+
+{{- $title := .Get "alt" -}}
+{{- $style := .Get "style" -}}
+
+{{- $options := (dict
+  "image"   (.Get "src")
+  "method"  (.Get "method")
+  "options" (.Get "options")
+  "process" (.Get "process")
+  )
+-}}
+
+{{- $img := partial "shortcodes/experimental/card/img-processing" (merge $options (dict "page" .Page)) -}}
+
+{{- partial "shortcodes/experimental/card/img" (merge $img (dict "style" $style "title" $title)) -}}

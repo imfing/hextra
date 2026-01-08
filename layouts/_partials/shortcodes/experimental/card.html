@@ -1,0 +1,19 @@
+{{- $link := .link -}}
+
+{{- $content := .content -}}
+
+{{- if $link -}}
+  {{- $external := strings.HasPrefix $link "http" -}}
+  {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
+  <a
+    class="hextra-card hextra-card-link hx:group"
+    href="{{ $href }}"
+    {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
+  >
+    {{- $content -}}
+  </a>
+{{- else -}}
+  <div class="hextra-card hextra-card-neutral hx:group" >
+    {{- $content -}}
+  </div>
+{{- end -}}

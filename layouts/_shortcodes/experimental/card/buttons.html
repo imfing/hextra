@@ -1,0 +1,16 @@
+{{- /*
+Card buttons.
+
+@example {{< experimental/card/buttons >}}...{{< /experimental/card/buttons >}}
+
+*/ -}}
+
+{{- if or (not .Parent) (ne .Parent.Name "experimental/card") -}}
+  {{- errorf "The %s shortcode must be used inside an %s shortcode" .Name "experimental/card" -}}
+{{- end -}}
+
+{{- if and .Parent.Params .Parent.Params.link -}}
+  {{- errorf "The %s shortcode cannot be used inside a %s shortcode with a 'link' parameter" .Name .Parent.Name -}}
+{{- end -}}
+
+{{- partial "shortcodes/experimental/card/buttons" (dict "content" .Inner) -}}
