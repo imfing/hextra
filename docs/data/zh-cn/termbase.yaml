@@ -1,0 +1,12 @@
+---
+# 术语词汇表
+#
+# term.html shortcode 的使用示例：
+#
+# {{< term "SEO" >}}
+
+- term: seo
+  abbr: SEO
+  definition: "搜索引擎优化——提高网页在搜索引擎中的可见度"
+- term: "静态网站生成器"
+  definition: "将文本输入处理为静态网页的生成引擎"

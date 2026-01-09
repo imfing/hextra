@@ -18,4 +18,20 @@
   {{- $output = $output | merge (dict $pageLink (dict "title" $pageTitle "data" $data)) -}}
 {{- end -}}
 
+{{/* Extract glossary data entries */}}
+{{- $glossaryEntries := dict -}}
+{{- with (index .Site.Data .Site.Language.Lang "termbase") -}}
+  {{- range . -}}
+    {{- $entry := cond (.abbr) (printf "%s %s %s" .abbr .term .definition) (printf "%s %s" .term .definition) -}}
+    {{- $glossaryEntries = $glossaryEntries | merge (dict .term $entry) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $glossary := dict
+  "title" "Glossary"
+  "data" $glossaryEntries
+-}}
+
+{{- $output = $output | merge (dict (relLangURL "glossary") $glossary )}}
+
 {{- $output | jsonify -}}

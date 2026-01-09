@@ -1,0 +1,12 @@
+---
+# Terminology glossary
+#
+# Example usage of term.html shortcode:
+#
+# {{< term "SEO" >}}
+
+- term: seo
+  abbr: SEO
+  definition: "Search engine optimization – improving the visibility of a web page in search engines"
+- term: static site generator
+  definition: "Software engines processing text input to generate static web pages"

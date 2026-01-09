@@ -1,6 +1,6 @@
 ---
 title: Tabs
-next: /docs/guide/deploy-site
+next: /docs/guide/term
 ---
 
 ## Example
