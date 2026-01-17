@@ -28,12 +28,20 @@
       <meta property="og:image" content="{{ .Permalink }}">
     {{- else }}
       <!-- Otherwise treat it as a site/global path -->
-      <meta property="og:image" content="{{ . | absURL }}">
+      {{- $image := . -}}
+      {{- if hasPrefix $image "/" -}}
+        {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+      {{- end -}}
+      <meta property="og:image" content="{{ $image | absURL }}">
     {{- end }}
   {{- end }}
 {{- else -}}
   {{- with $.Site.Params.images }}
-    <meta property="og:image" content="{{ index . 0 | absURL }}">
+    {{- $image := index . 0 -}}
+    {{- if hasPrefix $image "/" -}}
+      {{- $image = relURL (strings.TrimPrefix "/" $image) -}}
+    {{- end -}}
+    <meta property="og:image" content="{{ $image | absURL }}">
   {{- end }}
 {{- end -}}
 
