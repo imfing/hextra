@@ -46,5 +46,5 @@ Each YAML data file contains a list of glossary entries. Every entry includes:
 
 ## Glossary Page
 
-An example glossary page is available at [Glossary](../../glossary/), displaying all
+An example glossary page is available at [Glossary]({{% relref "/glossary" %}}), displaying all
 defined terms with their descriptions and abbreviations.
