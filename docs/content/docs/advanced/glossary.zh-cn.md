@@ -8,6 +8,10 @@ Hextra 支持构建全站范围的术语词汇表。
 
 <!--more-->
 
+{{< callout type="info" >}}
+  有关 Hugo 内置术语表支持的更多信息，请参阅 [Hugo 术语表快速参考](https://gohugo.io/quick-reference/glossary/)。
+{{< /callout >}}
+
 ## 数据源文件
 
 术语定义集中存储在每种[支持语言](../multi-language/)的 `termbase.yaml` 数据文件中。
@@ -42,4 +46,4 @@ Hextra 支持构建全站范围的术语词汇表。
 
 ## 术语页面
 
-完整的术语列表可在 [/glossary](/glossary/) 查看，显示所有定义的术语及其描述和缩写。
+术语表示例页面可在 [术语表](../../glossary/) 查看，显示所有定义的术语及其描述和缩写。

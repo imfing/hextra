@@ -93,23 +93,19 @@ menu:
       name: About
       pageRef: /about
       weight: 4
-    - identifier: glossary
-      name: Glossary
-      pageRef: /glossary
-      weight: 5
     - identifier: showcase
       name: Showcase
       pageRef: /showcase
-      weight: 6
+      weight: 5
       params:
         type: link
         icon: collection
     - name: Search
-      weight: 7
+      weight: 6
       params:
         type: search
     - name: GitHub
-      weight: 8
+      weight: 7
       url: "https://github.com/imfing/hextra"
       params:
         icon: github

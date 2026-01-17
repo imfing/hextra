@@ -8,6 +8,10 @@ Hextra supports building a site-wide terminology glossary.
 
 <!--more-->
 
+{{< callout type="info" >}}
+  For more information about Hugo's built-in glossary support, see the [Hugo Glossary Quick Reference](https://gohugo.io/quick-reference/glossary/).
+{{< /callout >}}
+
 ## Source Data File
 
 Term definitions are centrally stored in a `termbase.yaml` data file for each [supported language](../multi-language/).
@@ -42,5 +46,5 @@ Each YAML data file contains a list of glossary entries. Every entry includes:
 
 ## Glossary Page
 
-A full listing of glossary terms is available at [/glossary](/glossary/), displaying all
+An example glossary page is available at [Glossary](../../glossary/), displaying all
 defined terms with their descriptions and abbreviations.
