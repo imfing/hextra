@@ -420,6 +420,6 @@ llms.txt ファイルはコンテンツ構造から自動生成され、AI ツ�
 title: "設定"
 params:
   images:
-    - "/img/config-image.jpg"
+    - "img/config-image.jpg"
   audio: "config-talk.mp3"
 ```
