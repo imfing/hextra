@@ -1,25 +1,27 @@
 {{- /*
-A shortcode to create a card.
+  A shortcode to create a card.
 
-@param {string} link The link to the card.
-@param {string} title The title of the card.
-@param {string} icon The icon of the card.
-@param {string} subtitle The subtitle of the card.
-@param {string} tag The tag of the card.
-@param {string} tagColor The color of the tag.
-@param {string} image The image of the card.
-@param {string} method The method to process the image.
-@param {string} options The options to process the image.
-@param {string} imageStyle The style of the image.
+  @param {string} link The link to the card.
+  @param {string} title The title of the card.
+  @param {string} icon The icon of the card.
+  @param {string} subtitle The subtitle of the card.
+  @param {string} tag The tag of the card.
+  @param {string} tagColor The color of the tag.
+  @param {string} image The image of the card.
+  @param {string} alt The alt text for the image (defaults to title if not provided).
+  @param {string} method The method to process the image.
+  @param {string} options The options to process the image.
+  @param {string} imageStyle The style of the image.
 
-@example {{< card link="/" title="Image Card" }}
+  @example {{< card link="/" title="Image Card"
+}}
 */ -}}
-
 {{- $link := .Get "link" -}}
 {{- $title := .Get "title" -}}
 {{- $icon := .Get "icon" -}}
 {{- $subtitle := .Get "subtitle" -}}
 {{- $image := .Get "image" -}}
+{{- $alt := .Get "alt" | default $title -}}
 {{- $width := 0 -}}
 {{- $height := 0 -}}
 {{- $imageStyle := .Get "imageStyle" -}}
@@ -58,6 +60,7 @@ A shortcode to create a card.
   "icon"        $icon
   "subtitle"    $subtitle
   "image"       $image
+  "alt"         $alt
   "width"       $width
   "height"      $height
   "imageStyle"  $imageStyle
