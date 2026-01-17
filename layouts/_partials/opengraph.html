@@ -22,19 +22,21 @@
 <meta property="og:url" content="{{ .Permalink }}">
 
 {{- with $.Params.images -}}
-{{- range first 6 . }}
-<meta property="og:image" content="{{ . | absURL }}">
-{{ end -}}
+  {{- range first 6 . }}
+    {{- with $.Resources.GetMatch . }}
+      <!-- If the string matches a page resource, use that -->
+      <meta property="og:image" content="{{ .Permalink }}">
+    {{- else }}
+      <!-- Otherwise treat it as a site/global path -->
+      <meta property="og:image" content="{{ . | absURL }}">
+    {{- end }}
+  {{- end }}
 {{- else -}}
-{{- $featured := "" }}
-{{- with $featured -}}
-<meta property="og:image" content="{{ $featured.Permalink }}">
-{{- else -}}
-{{- with $.Site.Params.images }}
-<meta property="og:image" content="{{ index . 0 | absURL }}">
-{{ end -}}
+  {{- with $.Site.Params.images }}
+    <meta property="og:image" content="{{ index . 0 | absURL }}">
+  {{- end }}
 {{- end -}}
-{{- end -}}
+
 
 {{- if .IsPage }}
 {{- $iso8601 := "2006-01-02T15:04:05-07:00" -}}
