@@ -21,10 +21,12 @@
 {{- end -}}
 
 <aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
-  <!-- Search bar on small screen -->
-  <div class="hx:px-4 hx:pt-4 hx:md:hidden">
-    {{ partial "search.html" }}
-  </div>
+  {{- if (site.Params.search.enable | default true) -}}
+    <!-- Search bar on small screen -->
+    <div class="hx:px-4 hx:pt-4 hx:md:hidden">
+      {{ partial "search.html" }}
+    </div>
+  {{- end -}}
   <div class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
     <ul class="hx:flex hx:flex-col hx:gap-1 hx:md:hidden">
       <!-- Nav -->
@@ -110,7 +112,7 @@
           <li class="{{ if $shouldOpen }}open{{ end }}">
             {{- $linkTitle := partial "utils/title" . -}}
             {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
-            {{- if and $toc $active -}}
+            {{- if and $toc $active (ne .Params.toc false) -}}
               {{- template "sidebar-toc" dict "page" . -}}
             {{- end -}}
             {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
@@ -126,7 +128,7 @@
             {{- $linkTitle := partial "utils/title" . -}}
             <li class="hx:flex hx:flex-col {{ if $shouldOpen }}open{{ end }}">
               {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
-              {{- if and $toc $active -}}
+              {{- if and $toc $active (ne .Params.toc false) -}}
                 {{ template "sidebar-toc" dict "page" . }}
               {{- end }}
               {{ template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc }}

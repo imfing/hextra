@@ -420,6 +420,6 @@ llms.txt 文件根据内容结构自动生成，使 AI 工具和语言模型更�
 title: "配置"
 params:
   images:
-    - "/img/config-image.jpg"
+    - "img/config-image.jpg"
   audio: "config-talk.mp3"
 ```
