@@ -30,7 +30,7 @@
     @apply hx:bg-primary-700/5 hx:mb-4 hx:overflow-x-auto hx:rounded-xl hx:font-medium hx:subpixel-antialiased hx:dark:bg-primary-300/10 hx:text-[.9em] hx:contrast-more:border hx:contrast-more:border-primary-900/20 hx:contrast-more:contrast-150 hx:contrast-more:dark:border-primary-100/40 hx:py-4;
   }
   :where(code):not(:where(.hextra-code-block code, [class~=not-prose],[class~=not-prose] *)) {
-    @apply hx:border-black/4 hx:bg-black/3 hx:break-words hx:rounded-md hx:border hx:py-0.5 hx:px-[.25em] hx:text-[.9em] hx:dark:border-white/10 hx:dark:bg-white/10;
+    @apply hx:border-black/4 hx:bg-black/3 hx:wrap-break-word hx:rounded-md hx:border hx:py-0.5 hx:px-[.25em] hx:text-[.9em] hx:dark:border-white/10 hx:dark:bg-white/10;
   }
   :where(table):not(:where(.hextra-code-block table, [class~=not-prose],[class~=not-prose] *)) {
     @apply hx:block hx:overflow-x-auto hx:my-6 hx:p-0 hx:first:mt-0 hx:w-full hx:text-sm hx:leading-5 hx:border-collapse;
@@ -71,7 +71,7 @@
     @apply hx:mt-0;
   }
   :where(kbd):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    @apply hx:border-black/4 hx:bg-black/3 hx:break-words hx:rounded-md hx:border hx:py-0.5 hx:px-[.25em] hx:text-[.9em] hx:dark:border-white/10 hx:dark:bg-white/10;
+    @apply hx:border-black/4 hx:bg-black/3 hx:wrap-break-word hx:rounded-md hx:border hx:py-0.5 hx:px-[.25em] hx:text-[.9em] hx:dark:border-white/10 hx:dark:bg-white/10;
   }
   :where(pre.mermaid):not(:where(.hextra-code-block pre, [class~=not-prose],[class~=not-prose] *)) {
     @apply hx:bg-transparent hx:rounded-none hx:dark:bg-transparent;

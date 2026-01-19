@@ -78,7 +78,7 @@
   {{- range $headings }}
     {{- if .Title }}
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="{{ $class }} hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#{{ anchorize .ID }}">
+        <a class="{{ $class }} hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word" href="#{{ anchorize .ID }}">
           {{- .Title | safeHTML | plainify | htmlUnescape }}
         </a>
       </li>

@@ -512,8 +512,8 @@ To add [Open Graph](https://ogp.me/) metadata, you can:
 As a page can have multiple `image` and `video` tags, place their values in an array.
 Other Open Graph properties can have only one value.
 
-{{< tabs items="Page Level, Global Level" >}}
-{{< tab >}}
+{{< tabs >}}
+{{< tab name="Page Level" >}}
 
 ```md {filename="mypage.md"}
 ---
@@ -529,7 +529,7 @@ params:
 Page content.
 ```
 {{< /tab >}}
-{{< tab >}}
+{{< tab name="Global Level" >}}
 ```yaml {filename="hugo.yaml"}
 params:
   images:
