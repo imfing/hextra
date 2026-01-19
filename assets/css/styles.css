@@ -43,6 +43,12 @@ body {
   @apply hx:outline-none hx:ring-2 hx:ring-primary-200 hx:ring-offset-1 hx:ring-offset-primary-300 hx:dark:ring-primary-800 hx:dark:ring-offset-primary-700;
 }
 
+@layer base {
+  abbr:where([title]) {
+    cursor: help;
+  }
+}
+
 @import "./typography.css";
 @import "./highlight.css";
 @import "./components/cards.css";
