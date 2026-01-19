@@ -520,7 +520,7 @@ Other Open Graph properties can have only one value.
 title: "My Page"
 params:
   images:
-    - "/images/image01.jpg"
+    - "images/image01.jpg"
   audio: "podcast02.mp3"
   videos:
     - "video01.mp4"
@@ -533,7 +533,7 @@ Page content.
 ```yaml {filename="hugo.yaml"}
 params:
   images:
-    - "/images/image01.jpg"
+    - "images/image01.jpg"
   audio: "podcast02.mp3"
   videos:
     - "video01.mp4"

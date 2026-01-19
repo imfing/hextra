@@ -318,7 +318,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     resultsElement.classList.remove('hx:hidden');
 
-    const pageResults = window.pageIndex.search(query, 5, { enrich: true, suggest: true })[0]?.result || [];
+    // Configurable search limits with sensible defaults
+    const maxPageResults = parseInt('{{- site.Params.search.flexsearch.maxPageResults | default 20 -}}', 10);
+    const maxSectionResults = parseInt('{{- site.Params.search.flexsearch.maxSectionResults | default 10 -}}', 10);
+    const pageResults = window.pageIndex.search(query, maxPageResults, { enrich: true, suggest: true })[0]?.result || [];
 
     const results = [];
     const pageTitleMatches = {};
@@ -327,12 +330,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = pageResults[i];
       pageTitleMatches[i] = 0;
 
-      // Show the top 5 results for each page
-      const sectionResults = window.sectionIndex.search(query, 5, { enrich: true, suggest: true, tag: { 'pageId': `page_${result.id}` } })[0]?.result || [];
+      const sectionResults = window.sectionIndex.search(query,
+        { enrich: true, suggest: true, tag: { 'pageId': `page_${result.id}` } })[0]?.result || [];
       let isFirstItemOfPage = true
       const occurred = {}
 
-      for (let j = 0; j < sectionResults.length; j++) {
+      const nResults = Math.min(sectionResults.length, maxSectionResults);
+      for (let j = 0; j < nResults; j++) {
         const { doc } = sectionResults[j]
         const isMatchingTitle = doc.display !== undefined
         if (isMatchingTitle) {
@@ -388,18 +392,36 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Highlight the query in the result text.
-    function highlightMatches(text, query) {
-      const escapedQuery = query.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-      const regex = new RegExp(escapedQuery, 'gi');
-      return text.replace(regex, (match) => `<span class="hextra-search-match">${match}</span>`);
-    }
+    // Append text with highlighted matches using safe text nodes.
+    function appendHighlightedText(container, text, query) {
+      if (!text) return;
+      if (!query) {
+        container.textContent = text;
+        return;
+      }
 
-    // Create a DOM element from the HTML string.
-    function createElement(str) {
-      const div = document.createElement('div');
-      div.innerHTML = str.trim();
-      return div.firstChild;
+      const escapedQuery = query.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+      if (!escapedQuery) {
+        container.textContent = text;
+        return;
+      }
+
+      const regex = new RegExp(escapedQuery, 'gi');
+      let lastIndex = 0;
+      let match;
+      while ((match = regex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          container.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+        }
+        const span = document.createElement('span');
+        span.className = 'hextra-search-match';
+        span.textContent = match[0];
+        container.appendChild(span);
+        lastIndex = match.index + match[0].length;
+      }
+      if (lastIndex < text.length) {
+        container.appendChild(document.createTextNode(text.slice(lastIndex)));
+      }
     }
 
     function handleMouseMove(e) {
@@ -417,20 +439,35 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < results.length; i++) {
       const result = results[i];
       if (result.prefix) {
-        fragment.appendChild(createElement(`
-          <div class="hextra-search-prefix">${result.prefix}</div>`));
+        const prefix = document.createElement('div');
+        prefix.className = 'hextra-search-prefix';
+        prefix.textContent = result.prefix;
+        fragment.appendChild(prefix);
       }
-        let li = createElement(`
-        <li>
-          <a data-index="${i}" href="${result.route}" class=${i === 0 ? "hextra-search-active" : ""}>
-            <div class="hextra-search-title">`+ highlightMatches(result.children.title, query) + `</div>` +
-        (result.children.content ?
-            `<div class="hextra-search-excerpt">` + highlightMatches(result.children.content, query) + `</div>` : '') + `
-          </a>
-        </li>`);
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.dataset.index = i;
+      link.href = result.route;
+      if (i === 0) {
+        link.classList.add('hextra-search-active');
+      }
+
+      const title = document.createElement('div');
+      title.className = 'hextra-search-title';
+      appendHighlightedText(title, result.children.title, query);
+      link.appendChild(title);
+
+      if (result.children.content) {
+        const excerpt = document.createElement('div');
+        excerpt.className = 'hextra-search-excerpt';
+        appendHighlightedText(excerpt, result.children.content, query);
+        link.appendChild(excerpt);
+      }
+
+      li.appendChild(link);
       li.addEventListener('mousemove', handleMouseMove);
       li.addEventListener('keydown', handleKeyDown);
-      li.querySelector('a').addEventListener('click', finishSearch);
+      link.addEventListener('click', finishSearch);
       fragment.appendChild(li);
     }
     resultsElement.appendChild(fragment);
