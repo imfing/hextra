@@ -5,11 +5,11 @@ next: /docs/guide/deploy-site
 
 ## 例
 
-{{< tabs items="macOS,Linux,Windows" >}}
+{{< tabs >}}
 
-  {{< tab >}}**macOS**: Apple が提供するデスクトップオペレーティングシステム。{{< /tab >}}
-  {{< tab >}}**Linux**: オープンソースのオペレーティングシステム。{{< /tab >}}
-  {{< tab >}}**Windows**: Microsoft が提供するデスクトップオペレーティングシステム。{{< /tab >}}
+  {{< tab name="macOS" >}}**macOS**: Apple が提供するデスクトップオペレーティングシステム。{{< /tab >}}
+  {{< tab name="Linux" >}}**Linux**: オープンソースのオペレーティングシステム。{{< /tab >}}
+  {{< tab name="Windows" >}}**Windows**: Microsoft が提供するデスクトップオペレーティングシステム。{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -18,36 +18,36 @@ next: /docs/guide/deploy-site
 ### デフォルト
 
 ```
-{{</* tabs items="JSON,YAML,TOML" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{</* /tab */>}}
-  {{</* tab */>}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{</* /tab */>}}
-  {{</* tab */>}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{</* /tab */>}}
+  {{</* tab name="JSON" */>}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{</* /tab */>}}
+  {{</* tab name="YAML" */>}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{</* /tab */>}}
+  {{</* tab name="TOML" */>}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{</* /tab */>}}
 
 {{</* /tabs */>}}
 ```
 
 ### 選択インデックスの指定
 
-`defaultIndex` プロパティを使用して選択するタブを指定します。インデックスは 0 から始まります。
+`selected` プロパティを使用して選択するタブを指定します。
 
 ```
-{{</* tabs items="JSON,YAML,TOML" defaultIndex="1" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{</* /tab */>}}
-  {{</* tab */>}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{</* /tab */>}}
-  {{</* tab */>}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{</* /tab */>}}
+  {{</* tab name="JSON" */>}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{</* /tab */>}}
+  {{</* tab name="YAML" selected=true */>}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{</* /tab */>}}
+  {{</* tab name="TOML" */>}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{</* /tab */>}}
 
 {{</* /tabs */>}}
 ```
 
 `YAML` タブがデフォルトで選択されます。
 
-{{< tabs items="JSON,YAML,TOML" defaultIndex="1" >}}
+{{< tabs >}}
 
-{{< tab >}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{< /tab >}}
-{{< tab >}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{< /tab >}}
-{{< tab >}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{< /tab >}}
+{{< tab name="JSON" >}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{< /tab >}}
+{{< tab name="YAML" selected=true >}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{< /tab >}}
+{{< tab name="TOML" >}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{< /tab >}}
 
 {{< /tabs >}}
 
@@ -57,9 +57,9 @@ next: /docs/guide/deploy-site
 コードブロックを含む Markdown 構文もサポートされています:
 
 ````
-{{</* tabs items="JSON,YAML,TOML" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}
+  {{</* tab name="JSON" */>}}
   ```json
   { "hello": "world" }
   ```
@@ -70,21 +70,21 @@ next: /docs/guide/deploy-site
 {{</* /tabs */>}}
 ````
 
-{{< tabs items="JSON,YAML,TOML" >}}
+{{< tabs >}}
 
-  {{< tab >}}
+  {{< tab name="JSON" >}}
   ```json
   { "hello": "world" }
   ```
   {{< /tab >}}
 
-  {{< tab >}}
+  {{< tab name="YAML" >}}
   ```yaml
   hello: world
   ```
   {{< /tab >}}
 
-  {{< tab >}}
+  {{< tab name="TOML" >}}
   ```toml
   hello = "world"
   ```
@@ -95,7 +95,7 @@ next: /docs/guide/deploy-site
 
 ### タブの同期
 
-同じ `items` リストを持つタブは同期できます。有効にすると、タブを選択すると同じ `items` を持つ他のタブも更新され、ページ間で選択が記憶されます。
+同じ `name` リストを持つタブは同期できます。有効にすると、タブを選択すると同じ `name` を持つ他のタブも更新され、ページ間で選択が記憶されます。
 
 `hugo.yaml` の `page` セクションでグローバルに有効にします:
 
@@ -109,17 +109,17 @@ params:
 これを有効にすると、以下の 2 つのタブブロックは常に同じ選択項目を表示します:
 
 ```markdown
-{{</* tabs items="A,B" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}A の内容{{</* /tab */>}}
-  {{</* tab */>}}B の内容{{</* /tab */>}}
+  {{</* tab name="A" */>}}A の内容{{</* /tab */>}}
+  {{</* tab name="B" */>}}B の内容{{</* /tab */>}}
 
 {{</* /tabs */>}}
 
-{{</* tabs items="A,B" */>}}
+{{</* tabs */>}}
 
-  {{</* tab */>}}2 番目の A の内容{{</* /tab */>}}
-  {{</* tab */>}}2 番目の B の内容{{</* /tab */>}}
+  {{</* tab name="A" */>}}2 番目の A の内容{{</* /tab */>}}
+  {{</* tab name="B" */>}}2 番目の B の内容{{</* /tab */>}}
 
 {{</* /tabs */>}}
 ```
