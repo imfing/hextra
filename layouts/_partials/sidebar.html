@@ -90,7 +90,7 @@
           <li class="{{ if $shouldOpen }}open{{ end }}">
             {{- $linkTitle := partial "utils/title" . -}}
             {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
-            {{- if and $toc $active -}}
+            {{- if and $toc $active (ne .Params.toc false) -}}
               {{- template "sidebar-toc" dict "page" . -}}
             {{- end -}}
             {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
@@ -106,7 +106,7 @@
             {{- $linkTitle := partial "utils/title" . -}}
             <li class="hx:flex hx:flex-col {{ if $shouldOpen }}open{{ end }}">
               {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
-              {{- if and $toc $active -}}
+              {{- if and $toc $active (ne .Params.toc false) -}}
                 {{ template "sidebar-toc" dict "page" . }}
               {{- end }}
               {{ template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc }}
