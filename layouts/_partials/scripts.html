@@ -13,3 +13,8 @@
 {{- if (.Store.Get "hasAsciinema") -}}
   {{- partial "scripts/asciinema.html" . -}}
 {{- end -}}
+
+{{/* Medium Zoom */}}
+{{- if (.Store.Get "hasImageZoom") -}}
+  {{- partial "scripts/medium-zoom.html" . -}}
+{{- end -}}

@@ -220,6 +220,9 @@ params:
     # tabs:
     #   sync: true
 
+  imageZoom:
+    enable: true
+
   comments:
     enable: false
     type: giscus

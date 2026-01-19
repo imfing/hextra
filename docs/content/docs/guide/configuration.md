@@ -317,6 +317,34 @@ params:
     displayTags: true
 ```
 
+### Image Zoom
+
+Image zoom is disabled by default. When enabled, clicking a Markdown image opens a zoomed view.
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+```
+
+To disable zoom on a specific page, add this to the page front matter:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+imageZoom: false
+---
+```
+
+If you want to pin the Medium Zoom asset or load it from local assets:
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    base: "https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist"
+    # js: "js/medium-zoom.min.js" # optional, relative to the base or local assets
+```
+
 ### Page Width
 
 The width of the page can be customized by the `params.page.width` parameter in the config file:
