@@ -295,6 +295,34 @@ params:
     displayTags: true
 ```
 
+### 图片缩放
+
+图片缩放默认禁用。启用后，点击 Markdown 图片会打开放大视图。
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+```
+
+要在特定页面禁用缩放，在页面的 front matter 中添加：
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+imageZoom: false
+---
+```
+
+如果想固定 Medium Zoom 资源或从本地资源加载：
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    base: "https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist"
+    # js: "js/medium-zoom.min.js" # 可选，相对于 base 或本地资源
+```
+
 ### 页面宽度
 
 页面宽度可以通过配置文件中的 `params.page.width` 参数自定义：

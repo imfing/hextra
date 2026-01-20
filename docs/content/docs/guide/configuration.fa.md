@@ -295,6 +295,34 @@ params:
     displayTags: true
 ```
 
+### بزرگنمایی تصویر
+
+بزرگنمایی تصویر به طور پیش‌فرض غیرفعال است. وقتی فعال شود، کلیک روی تصویر Markdown یک نمای بزرگنمایی شده باز می‌کند.
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+```
+
+برای غیرفعال کردن بزرگنمایی در یک صفحه خاص، این را به front matter صفحه اضافه کنید:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+imageZoom: false
+---
+```
+
+اگر می‌خواهید asset Medium Zoom را پین کنید یا از asset‌های محلی بارگذاری کنید:
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    base: "https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist"
+    # js: "js/medium-zoom.min.js" # اختیاری، نسبت به base یا asset‌های محلی
+```
+
 ### عرض صفحه
 
 عرض صفحه را می‌توان با پارامتر `params.page.width` در فایل پیکربندی سفارشی کرد:
