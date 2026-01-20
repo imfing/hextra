@@ -183,22 +183,6 @@ With caption:
 ![landscape](https://picsum.photos/800/600 "Lorem Picsum")
 ```
 
-To enable click-to-zoom for Markdown images, turn on image zoom in your site config:
-
-```yaml {filename="hugo.yaml"}
-params:
-  imageZoom:
-    enable: true
-```
-
-You can disable it per page with front matter:
-
-```yaml {filename="content/docs/guide/markdown.md"}
----
-imageZoom: false
----
-```
-
 For more advanced functionality, use Hugo's built-in [Figure shortcode](https://gohugo.io/shortcodes/figure/).
 
 ## Configuration

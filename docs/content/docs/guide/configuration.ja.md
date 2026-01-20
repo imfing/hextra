@@ -295,6 +295,34 @@ params:
     displayTags: true
 ```
 
+### 画像ズーム
+
+画像ズームはデフォルトで無効です。有効にすると、Markdown 画像をクリックするとズームビューが開きます。
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+```
+
+特定のページでズームを無効にするには、ページのフロントマターに以下を追加します：
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+imageZoom: false
+---
+```
+
+Medium Zoom アセットを固定するか、ローカルアセットから読み込む場合：
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    base: "https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist"
+    # js: "js/medium-zoom.min.js" # オプション、base またはローカルアセットからの相対パス
+```
+
 ### ページ幅
 
 ページの幅は設定ファイルの `params.page.width` パラメータでカスタマイズできます：
