@@ -1,7 +1,7 @@
-{{- $enableGlobal := site.Params.pageContextMenu.enable | default false -}}
-{{- $enablePage := .Params.pageContextMenu -}}
+{{- $enableGlobal := site.Params.page.contextMenu.enable | default false -}}
+{{- $enablePage := .Params.contextMenu -}}
 {{- $enable := cond (ne $enablePage nil) $enablePage $enableGlobal -}}
-{{- $customLinks := site.Params.pageContextMenu.links | default slice -}}
+{{- $customLinks := site.Params.page.contextMenu.links | default slice -}}
 
 {{- if $enable -}}
   {{- with .OutputFormats.Get "markdown" -}}
