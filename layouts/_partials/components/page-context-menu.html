@@ -56,7 +56,6 @@
               {{- partial "utils/icon.html" (dict "name" "markdown" "attributes" "height=16 width=16") -}}
             </div>
             {{ i18n "viewAsMarkdown" }}
-            {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em"`) -}}
           </button>
         </li>
         {{- if $customLinks -}}
@@ -76,7 +75,6 @@
               </div>
               {{- end -}}
               {{ .name }}
-              {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em"`) -}}
             </a>
           </li>
         {{- end -}}
