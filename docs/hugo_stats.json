@@ -353,7 +353,6 @@
       "hx:first:mt-0",
       "hx:flex",
       "hx:flex-col",
-      "hx:flex-grow",
       "hx:flex-wrap",
       "hx:focus:bg-white",
       "hx:focus:hextra-focus",
