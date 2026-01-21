@@ -9,7 +9,7 @@
     {{- $pageURL := $.Permalink -}}
     {{- $pageTitle := $.Title -}}
     <div class="hextra-page-context-menu hx:relative hx:inline-flex hx:shrink-0">
-      <div class="hx:inline-flex hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:dark:border-neutral-800">
+      <div class="hx:inline-flex hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:transition-colors hx:hover:border-gray-300 hx:dark:border-neutral-800 hx:dark:hover:border-neutral-700">
         <button
           class="hextra-page-context-menu-copy hx:group/copybtn hx:inline-flex hx:cursor-pointer hx:items-center hx:gap-1.5 hx:bg-transparent hx:px-2.5 hx:py-1 hx:text-sm hx:font-medium hx:text-gray-700 hx:transition-colors hx:hover:bg-slate-50 hx:dark:text-gray-300 hx:dark:hover:bg-neutral-900"
           data-url="{{ $markdownURL }}"
