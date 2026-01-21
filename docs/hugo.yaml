@@ -14,8 +14,8 @@ hasCJKLanguage: true
 
 outputs:
   home: [html, llms]
-  page: [html]
-  section: [html, rss]
+  page: [html, markdown]
+  section: [html, rss, markdown]
 
 defaultContentLanguage: en
 languages:
@@ -221,6 +221,9 @@ params:
     #   sync: true
 
   imageZoom:
+    enable: true
+
+  pageContextMenu:
     enable: true
 
   comments:
