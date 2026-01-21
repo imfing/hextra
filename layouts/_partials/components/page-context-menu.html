@@ -1,10 +1,13 @@
 {{- $enableGlobal := site.Params.pageContextMenu.enable | default false -}}
 {{- $enablePage := .Params.pageContextMenu -}}
 {{- $enable := cond (ne $enablePage nil) $enablePage $enableGlobal -}}
+{{- $customLinks := site.Params.pageContextMenu.links | default slice -}}
 
 {{- if $enable -}}
   {{- with .OutputFormats.Get "markdown" -}}
     {{- $markdownURL := .Permalink -}}
+    {{- $pageURL := $.Permalink -}}
+    {{- $pageTitle := $.Title -}}
     <div class="hextra-page-context-menu hx:relative hx:inline-flex hx:shrink-0">
       <div class="hx:inline-flex hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:dark:border-neutral-800">
         <button
@@ -55,6 +58,27 @@
             {{ i18n "viewAsMarkdown" }}
           </button>
         </li>
+        {{- if $customLinks -}}
+        <li class="hx:my-1 hx:h-px hx:bg-gray-200 hx:dark:bg-neutral-700" role="separator"></li>
+        {{- range $customLinks -}}
+          {{- $linkURL := .url | replaceRE `\{url\}` ($pageURL | urlquery) | replaceRE `\{title\}` ($pageTitle | urlquery) | replaceRE `\{markdownUrl\}` ($markdownURL | urlquery) -}}
+          <li>
+            <a
+              href="{{ $linkURL }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hx:flex hx:w-full hx:cursor-default hx:select-none hx:items-center hx:gap-2 hx:whitespace-nowrap hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:text-gray-700 hx:outline-none hx:transition-colors hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-gray-300 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100"
+            >
+              {{- with .icon -}}
+              <div class="hx:size-4 hx:shrink-0 hx:text-gray-500 hx:dark:text-gray-400">
+                {{- partial "utils/icon.html" (dict "name" . "attributes" "height=16 width=16") -}}
+              </div>
+              {{- end -}}
+              {{ .name }}
+            </a>
+          </li>
+        {{- end -}}
+        {{- end -}}
       </ul>
     </div>
   {{- end -}}

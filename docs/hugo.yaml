@@ -225,6 +225,11 @@ params:
 
   pageContextMenu:
     enable: true
+    links:
+      - name: Open in ChatGPT
+        url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+      - name: Open in Claude
+        url: "https://claude.ai/new?q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
 
   comments:
     enable: false
