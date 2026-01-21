@@ -33,6 +33,14 @@ languages:
       banner:
         message: |
           هگزترا **v0.11** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% ref "blog/v0.11" %}})
+      pageContextMenu:
+        links:
+          - name: باز کردن در ChatGPT
+            icon: chatgpt
+            url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+          - name: باز کردن در Claude
+            icon: claude
+            url: "https://claude.ai/new?q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
   ja:
     languageName: 日本語
     languageCode: ja-JP
@@ -42,6 +50,14 @@ languages:
       banner:
         message: |
           Hextra **v0.11** がリリースされました！🎉 [新着情報はこちら]({{% ref "blog/v0.11" %}})
+      pageContextMenu:
+        links:
+          - name: ChatGPTで開く
+            icon: chatgpt
+            url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+          - name: Claudeで開く
+            icon: claude
+            url: "https://claude.ai/new?q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
   zh-cn:
     languageName: 简体中文
     languageCode: zh-CN
@@ -51,6 +67,14 @@ languages:
       banner:
         message: |
           Hextra **v0.11** 发布啦！🎉 查看[更新内容]({{% ref "blog/v0.11" %}})
+      pageContextMenu:
+        links:
+          - name: 在 ChatGPT 中打开
+            icon: chatgpt
+            url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+          - name: 在 Claude 中打开
+            icon: claude
+            url: "https://claude.ai/new?q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
 
 module:
   hugoVersion:
@@ -227,8 +251,10 @@ params:
     enable: true
     links:
       - name: Open in ChatGPT
+        icon: chatgpt
         url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
       - name: Open in Claude
+        icon: claude
         url: "https://claude.ai/new?q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
 
   comments:
