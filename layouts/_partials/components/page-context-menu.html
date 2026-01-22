@@ -61,7 +61,7 @@
         {{- if $customLinks -}}
         <li class="hx:my-1 hx:h-px hx:bg-gray-200 hx:dark:bg-neutral-700" role="separator"></li>
         {{- range $customLinks -}}
-          {{- $linkURL := .url | replaceRE `\{url\}` ($pageURL | urlquery) | replaceRE `\{title\}` ($pageTitle | urlquery) | replaceRE `\{markdownUrl\}` ($markdownURL | urlquery) -}}
+          {{- $linkURL := partial "utils/template-url.html" (dict "template" .url "values" (dict "url" $pageURL "title" $pageTitle "markdown_url" $markdownURL)) -}}
           <li>
             <a
               href="{{ $linkURL }}"
