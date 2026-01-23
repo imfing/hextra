@@ -39,9 +39,6 @@ languages:
             - name: باز کردن در ChatGPT
               icon: chatgpt
               url: "https://chatgpt.com/?hints=search&q=%D8%AF%D8%A7%D8%B1%D9%85+%D8%A7%DB%8C%D9%86+%D9%85%D8%B3%D8%AA%D9%86%D8%AF%D8%A7%D8%AA+%D8%B1%D8%A7+%D9%85%DB%8C%E2%80%8C%D8%AE%D9%88%D8%A7%D9%86%D9%85%3A+{url}%0A%DA%A9%D9%85%DA%A9%D9%85+%DA%A9%D9%86+%D8%A8%D9%81%D9%87%D9%85%D9%85+%DA%86%D8%B7%D9%88%D8%B1+%D8%A7%D8%B2+%D8%A2%D9%86+%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D9%87+%DA%A9%D9%86%D9%85."
-            - name: باز کردن در Claude
-              icon: claude
-              url: "https://claude.ai/new?q=%D8%AF%D8%A7%D8%B1%D9%85+%D8%A7%DB%8C%D9%86+%D9%85%D8%B3%D8%AA%D9%86%D8%AF%D8%A7%D8%AA+%D8%B1%D8%A7+%D9%85%DB%8C%E2%80%8C%D8%AE%D9%88%D8%A7%D9%86%D9%85%3A+{url}%0A%DA%A9%D9%85%DA%A9%D9%85+%DA%A9%D9%86+%D8%A8%D9%81%D9%87%D9%85%D9%85+%DA%86%D8%B7%D9%88%D8%B1+%D8%A7%D8%B2+%D8%A2%D9%86+%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D9%87+%DA%A9%D9%86%D9%85."
   ja:
     languageName: 日本語
     languageCode: ja-JP
@@ -57,9 +54,6 @@ languages:
             - name: ChatGPTで開く
               icon: chatgpt
               url: "https://chatgpt.com/?hints=search&q=%E3%81%93%E3%81%AE%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%84%E3%81%BE%E3%81%99%3A+{url}%0A%E4%BD%BF%E3%81%84%E6%96%B9%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E3%81%AE%E3%82%92%E6%89%8B%E4%BC%9D%E3%81%A3%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82"
-            - name: Claudeで開く
-              icon: claude
-              url: "https://claude.ai/new?q=%E3%81%93%E3%81%AE%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%84%E3%81%BE%E3%81%99%3A+{url}%0A%E4%BD%BF%E3%81%84%E6%96%B9%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E3%81%AE%E3%82%92%E6%89%8B%E4%BC%9D%E3%81%A3%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82"
   zh-cn:
     languageName: 简体中文
     languageCode: zh-CN
@@ -75,9 +69,6 @@ languages:
             - name: 在 ChatGPT 中打开
               icon: chatgpt
               url: "https://chatgpt.com/?hints=search&q=%E6%88%91%E6%AD%A3%E5%9C%A8%E9%98%85%E8%AF%BB%E8%BF%99%E4%B8%AA%E6%96%87%E6%A1%A3%3A+{url}%0A%E5%B8%AE%E6%88%91%E7%90%86%E8%A7%A3%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%AE%83%E3%80%82"
-            - name: 在 Claude 中打开
-              icon: claude
-              url: "https://claude.ai/new?q=%E6%88%91%E6%AD%A3%E5%9C%A8%E9%98%85%E8%AF%BB%E8%BF%99%E4%B8%AA%E6%96%87%E6%A1%A3%3A+{url}%0A%E5%B8%AE%E6%88%91%E7%90%86%E8%A7%A3%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%AE%83%E3%80%82"
 
 module:
   hugoVersion:
