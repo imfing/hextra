@@ -360,6 +360,64 @@ There are three available options: `full`, `wide`, and `normal`. By default, the
 
 Similarly, the width of the navbar and footer can be customized by the `params.navbar.width` and `params.footer.width` parameters.
 
+### Page Context Menu
+
+The page context menu provides a dropdown button that allows users to copy the page content as Markdown or view the raw Markdown source. This feature is useful for documentation sites where readers may want to share or reference the content in Markdown format.
+
+#### Enabling the Context Menu
+
+To enable the context menu globally, add the following to your config file:
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    contextMenu:
+      enable: true
+```
+
+You also need to enable the `markdown` output format for pages:
+
+```yaml {filename="hugo.yaml"}
+outputs:
+  page: [html, markdown]
+  section: [html, rss, markdown]
+```
+
+#### Per-Page Control
+
+To enable or disable the context menu for a specific page, use the `contextMenu` parameter in the front matter:
+
+```yaml {filename="content/docs/example.md"}
+---
+title: Example Page
+contextMenu: false
+---
+```
+
+#### Custom Links
+
+You can add custom links to the context menu dropdown. This is useful for integrating with external services. The links support the following placeholders:
+
+- `{url}` - The page URL (URL-encoded)
+- `{title}` - The page title (URL-encoded)
+- `{markdown_url}` - The URL to the raw Markdown content (URL-encoded)
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    contextMenu:
+      enable: true
+      links:
+        - name: Open in ChatGPT
+          icon: chatgpt
+          url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+```
+
+Each link can have:
+- `name` - The display text for the link
+- `icon` - An optional icon name (see [Icons]({{% relref "docs/guide/shortcodes/icon" %}}))
+- `url` - The URL with optional placeholders
+
 ### FlexSearch Index
 
 Full-text search powered by [FlexSearch](https://github.com/nextapps-de/flexsearch) is enabled by default.

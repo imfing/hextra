@@ -338,6 +338,64 @@ params:
 
 به طور مشابه، عرض نوار ناوبری و پاورقی را می‌توان با پارامترهای `params.navbar.width` و `params.footer.width` سفارشی کرد.
 
+### منوی زمینه صفحه
+
+منوی زمینه صفحه یک دکمه کشویی ارائه می‌دهد که به کاربران امکان می‌دهد محتوای صفحه را به صورت Markdown کپی کنند یا منبع Markdown خام را مشاهده کنند. این ویژگی برای سایت‌های مستندات که خوانندگان ممکن است بخواهند محتوا را در قالب Markdown به اشتراک بگذارند یا به آن ارجاع دهند، مفید است.
+
+#### فعال‌سازی منوی زمینه
+
+برای فعال‌سازی سراسری منوی زمینه، موارد زیر را به فایل پیکربندی خود اضافه کنید:
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    contextMenu:
+      enable: true
+```
+
+همچنین باید فرمت خروجی `markdown` را برای صفحات فعال کنید:
+
+```yaml {filename="hugo.yaml"}
+outputs:
+  page: [html, markdown]
+  section: [html, rss, markdown]
+```
+
+#### کنترل هر صفحه
+
+برای فعال یا غیرفعال کردن منوی زمینه برای یک صفحه خاص، از پارامتر `contextMenu` در front matter استفاده کنید:
+
+```yaml {filename="content/docs/example.md"}
+---
+title: صفحه نمونه
+contextMenu: false
+---
+```
+
+#### لینک‌های سفارشی
+
+می‌توانید لینک‌های سفارشی به منوی کشویی زمینه اضافه کنید. این برای یکپارچه‌سازی با سرویس‌های خارجی مفید است. لینک‌ها از جایگزین‌های زیر پشتیبانی می‌کنند:
+
+- `{url}` - آدرس صفحه (URL-encoded)
+- `{title}` - عنوان صفحه (URL-encoded)
+- `{markdown_url}` - آدرس محتوای Markdown خام (URL-encoded)
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    contextMenu:
+      enable: true
+      links:
+        - name: باز کردن در ChatGPT
+          icon: chatgpt
+          url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+```
+
+هر لینک می‌تواند شامل موارد زیر باشد:
+- `name` - متن نمایشی لینک
+- `icon` - نام آیکون اختیاری (به [آیکون‌ها]({{% relref "docs/guide/shortcodes/icon" %}}) مراجعه کنید)
+- `url` - آدرس با جایگزین‌های اختیاری
+
 ### نمایه FlexSearch
 
 جستجوی تمام متن با قدرت [FlexSearch](https://github.com/nextapps-de/flexsearch) به طور پیش‌فرض فعال است.

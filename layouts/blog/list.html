@@ -28,7 +28,7 @@
             <p class="hx:opacity-50 hx:text-sm hx:mt-4 hx:leading-7">{{ partial "utils/format-date" .Date }}</p>
           </div>
         {{ end -}}
-        
+
         {{- if gt $paginator.TotalPages 1 -}}
           {{ partial "components/blog-pager.html" $paginator }}
         {{- end -}}

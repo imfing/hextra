@@ -8,3 +8,9 @@
     baseName = 'llms'
     mediaType = 'text/plain'
     isPlainText = true
+  [outputFormats.markdown]
+    name = 'markdown'
+    baseName = 'index'
+    mediaType = 'text/markdown'
+    isPlainText = true
+    ugly = true
