@@ -30,6 +30,7 @@ The `tabs` parameter is a list of dict with the following keys:
 {{- /* Generate a unique ID for each tab group. */ -}}
 {{- $globalID := printf "tabs-%02v" $tabsID -}}
 
+{{- /* Keep HTML on single lines to avoid `>` being parsed as blockquote when nested in steps (#876) */ -}}
 <div class="hextra-scrollbar hx:overflow-x-auto hx:overflow-y-hidden hx:overscroll-x-contain">
   <div class="hx:mt-4 hx:flex hx:w-max hx:min-w-full hx:border-b hx:border-gray-200 hx:pb-px hx:dark:border-neutral-800"{{- if $enableSync }} data-tab-group="{{ delimit $dataTabGroup `,` }}"{{- end }}>
     {{- range $i, $item := $tabs -}}
