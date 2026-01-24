@@ -5,6 +5,14 @@
 {{- $external := .external -}}
 
 {{- $active := or ($currentPage.HasMenuCurrent "main" $item) ($currentPage.IsMenuCurrent "main" $item) -}}
+{{- /* Additional check for section landing pages in multilingual sites (normalize trailing slashes) */ -}}
+{{- if and (not $active) $link -}}
+  {{- $currentPath := strings.TrimSuffix "/" $currentPage.RelPermalink -}}
+  {{- $linkPath := strings.TrimSuffix "/" $link -}}
+  {{- if eq $currentPath $linkPath -}}
+    {{- $active = true -}}
+  {{- end -}}
+{{- end -}}
 {{- $activeClass := cond $active "hx:font-medium" "hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200" -}}
 
 {{- if $item.HasChildren -}}
