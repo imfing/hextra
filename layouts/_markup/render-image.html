@@ -1,5 +1,9 @@
 {{- $alt := .PlainText | safeHTML -}}
 {{- $lazyLoading := .Page.Site.Params.enableImageLazyLoading | default true -}}
+{{- $enableImageZoom := .Page.Site.Params.imageZoom.enable | default false -}}
+{{- if not (eq .Page.Params.imageZoom nil) -}}
+  {{- $enableImageZoom = .Page.Params.imageZoom -}}
+{{- end -}}
 {{- $dest := .Destination -}}
 {{- $url := urls.Parse $dest -}}
 
@@ -33,11 +37,15 @@
   {{- end -}}
 {{- end -}}
 
+{{- if $enableImageZoom -}}
+  {{- .Page.Store.Set "hasImageZoom" true -}}
+{{- end -}}
+
 {{- with .Title -}}
   <figure>
-    <img src="{{ $dest | safeURL }}" title="{{ . }}" alt="{{ $alt }}" {{ $attributes | safeHTMLAttr }} {{ if $lazyLoading }}loading="lazy"{{ end }} />
+    <img src="{{ $dest | safeURL }}" title="{{ . }}" alt="{{ $alt }}" {{ $attributes | safeHTMLAttr }}{{ if $enableImageZoom }} data-zoomable{{ end }}{{ if $lazyLoading }} loading="lazy"{{ end }} />
     <figcaption>{{ . }}</figcaption>
   </figure>
 {{- else -}}
-  <img src="{{ $dest | safeURL }}" alt="{{ $alt }}" {{ $attributes | safeHTMLAttr }} {{ if $lazyLoading }}loading="lazy"{{ end }} />
+  <img src="{{ $dest | safeURL }}" alt="{{ $alt }}" {{ $attributes | safeHTMLAttr }}{{ if $enableImageZoom }} data-zoomable{{ end }}{{ if $lazyLoading }} loading="lazy"{{ end }} />
 {{- end -}}

@@ -295,6 +295,34 @@ params:
     displayTags: true
 ```
 
+### 画像ズーム
+
+画像ズームはデフォルトで無効です。有効にすると、Markdown 画像をクリックするとズームビューが開きます。
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+```
+
+特定のページでズームを無効にするには、ページのフロントマターに以下を追加します：
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+imageZoom: false
+---
+```
+
+Medium Zoom アセットを固定するか、ローカルアセットから読み込む場合：
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    base: "https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist"
+    # js: "js/medium-zoom.min.js" # オプション、base またはローカルアセットからの相対パス
+```
+
 ### ページ幅
 
 ページの幅は設定ファイルの `params.page.width` パラメータでカスタマイズできます：
@@ -309,6 +337,64 @@ params:
 利用可能なオプションは `full`、`wide`、`normal` の3つです。デフォルトではページ幅は `normal` に設定されています。
 
 同様に、ナビゲーションバーとフッターの幅は `params.navbar.width` と `params.footer.width` パラメータでカスタマイズできます。
+
+### ページコンテキストメニュー
+
+ページコンテキストメニューは、ページの内容を Markdown としてコピーしたり、生の Markdown ソースを表示したりできるドロップダウンボタンを提供します。この機能は、読者が Markdown 形式でコンテンツを共有または参照したいドキュメントサイトに便利です。
+
+#### コンテキストメニューの有効化
+
+コンテキストメニューをグローバルに有効にするには、設定ファイルに以下を追加します：
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    contextMenu:
+      enable: true
+```
+
+また、ページの `markdown` 出力形式を有効にする必要があります：
+
+```yaml {filename="hugo.yaml"}
+outputs:
+  page: [html, markdown]
+  section: [html, rss, markdown]
+```
+
+#### ページごとの制御
+
+特定のページでコンテキストメニューを有効または無効にするには、フロントマターで `contextMenu` パラメータを使用します：
+
+```yaml {filename="content/docs/example.md"}
+---
+title: サンプルページ
+contextMenu: false
+---
+```
+
+#### カスタムリンク
+
+コンテキストメニューのドロップダウンにカスタムリンクを追加できます。これは外部サービスとの統合に便利です。リンクは以下のプレースホルダーをサポートしています：
+
+- `{url}` - ページの URL（URL エンコード済み）
+- `{title}` - ページのタイトル（URL エンコード済み）
+- `{markdown_url}` - 生の Markdown コンテンツの URL（URL エンコード済み）
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    contextMenu:
+      enable: true
+      links:
+        - name: ChatGPT で開く
+          icon: chatgpt
+          url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+```
+
+各リンクには以下を設定できます：
+- `name` - リンクの表示テキスト
+- `icon` - オプションのアイコン名（[アイコン]({{% relref "docs/guide/shortcodes/icon" %}})を参照）
+- `url` - オプションのプレースホルダーを含む URL
 
 ### FlexSearch インデックス
 
@@ -420,6 +506,6 @@ llms.txt ファイルはコンテンツ構造から自動生成され、AI ツ�
 title: "設定"
 params:
   images:
-    - "/img/config-image.jpg"
+    - "img/config-image.jpg"
   audio: "config-talk.mp3"
 ```

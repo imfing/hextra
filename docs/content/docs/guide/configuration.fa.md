@@ -295,6 +295,34 @@ params:
     displayTags: true
 ```
 
+### بزرگنمایی تصویر
+
+بزرگنمایی تصویر به طور پیش‌فرض غیرفعال است. وقتی فعال شود، کلیک روی تصویر Markdown یک نمای بزرگنمایی شده باز می‌کند.
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+```
+
+برای غیرفعال کردن بزرگنمایی در یک صفحه خاص، این را به front matter صفحه اضافه کنید:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+imageZoom: false
+---
+```
+
+اگر می‌خواهید asset Medium Zoom را پین کنید یا از asset‌های محلی بارگذاری کنید:
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    base: "https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist"
+    # js: "js/medium-zoom.min.js" # اختیاری، نسبت به base یا asset‌های محلی
+```
+
 ### عرض صفحه
 
 عرض صفحه را می‌توان با پارامتر `params.page.width` در فایل پیکربندی سفارشی کرد:
@@ -309,6 +337,64 @@ params:
 سه گزینه موجود است: `full`, `wide`, و `normal`. به طور پیش‌فرض، عرض صفحه روی `normal` تنظیم شده است.
 
 به طور مشابه، عرض نوار ناوبری و پاورقی را می‌توان با پارامترهای `params.navbar.width` و `params.footer.width` سفارشی کرد.
+
+### منوی زمینه صفحه
+
+منوی زمینه صفحه یک دکمه کشویی ارائه می‌دهد که به کاربران امکان می‌دهد محتوای صفحه را به صورت Markdown کپی کنند یا منبع Markdown خام را مشاهده کنند. این ویژگی برای سایت‌های مستندات که خوانندگان ممکن است بخواهند محتوا را در قالب Markdown به اشتراک بگذارند یا به آن ارجاع دهند، مفید است.
+
+#### فعال‌سازی منوی زمینه
+
+برای فعال‌سازی سراسری منوی زمینه، موارد زیر را به فایل پیکربندی خود اضافه کنید:
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    contextMenu:
+      enable: true
+```
+
+همچنین باید فرمت خروجی `markdown` را برای صفحات فعال کنید:
+
+```yaml {filename="hugo.yaml"}
+outputs:
+  page: [html, markdown]
+  section: [html, rss, markdown]
+```
+
+#### کنترل هر صفحه
+
+برای فعال یا غیرفعال کردن منوی زمینه برای یک صفحه خاص، از پارامتر `contextMenu` در front matter استفاده کنید:
+
+```yaml {filename="content/docs/example.md"}
+---
+title: صفحه نمونه
+contextMenu: false
+---
+```
+
+#### لینک‌های سفارشی
+
+می‌توانید لینک‌های سفارشی به منوی کشویی زمینه اضافه کنید. این برای یکپارچه‌سازی با سرویس‌های خارجی مفید است. لینک‌ها از جایگزین‌های زیر پشتیبانی می‌کنند:
+
+- `{url}` - آدرس صفحه (URL-encoded)
+- `{title}` - عنوان صفحه (URL-encoded)
+- `{markdown_url}` - آدرس محتوای Markdown خام (URL-encoded)
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    contextMenu:
+      enable: true
+      links:
+        - name: باز کردن در ChatGPT
+          icon: chatgpt
+          url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+```
+
+هر لینک می‌تواند شامل موارد زیر باشد:
+- `name` - متن نمایشی لینک
+- `icon` - نام آیکون اختیاری (به [آیکون‌ها]({{% relref "docs/guide/shortcodes/icon" %}}) مراجعه کنید)
+- `url` - آدرس با جایگزین‌های اختیاری
 
 ### نمایه FlexSearch
 
