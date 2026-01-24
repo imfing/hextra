@@ -128,6 +128,19 @@ params:
       height: 20
 ```
 
+### Pagination
+
+To disable the previous/next navigation at the bottom of docs pages or blog articles:
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    displayPagination: false  # for docs pages
+  blog:
+    article:
+      displayPagination: false  # for blog articles
+```
+
 ## Sidebar
 
 ### Main Sidebar

@@ -121,6 +121,19 @@ params:
       height: 20
 ```
 
+### ページネーション
+
+ドキュメントページやブログ記事の下部にある前へ/次へナビゲーションを無効にするには：
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    displayPagination: false  # ドキュメントページ用
+  blog:
+    article:
+      displayPagination: false  # ブログ記事用
+```
+
 ## サイドバー
 
 ### メインサイドバー

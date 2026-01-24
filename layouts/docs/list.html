@@ -15,7 +15,9 @@
           {{ .Content }}
         </div>
         {{ partial "components/last-updated.html" . }}
-        {{ partial "components/pager.html" . }}
+        {{- if (site.Params.page.displayPagination | default true) -}}
+          {{- partial "components/pager.html" . -}}
+        {{- end -}}
         {{ partial "components/comments.html" . }}
       </main>
     </article>

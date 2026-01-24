@@ -121,6 +121,19 @@ params:
       height: 20
 ```
 
+### 分页导航
+
+禁用文档页面或博客文章底部的上一篇/下一篇导航：
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    displayPagination: false  # 文档页面
+  blog:
+    article:
+      displayPagination: false  # 博客文章
+```
+
 ## 侧边栏
 
 ### 主侧边栏

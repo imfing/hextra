@@ -121,6 +121,19 @@ params:
       height: 20
 ```
 
+### صفحه‌بندی
+
+برای غیرفعال کردن ناوبری قبلی/بعدی در پایین صفحات مستندات یا مقالات وبلاگ:
+
+```yaml {filename="hugo.yaml"}
+params:
+  page:
+    displayPagination: false  # برای صفحات مستندات
+  blog:
+    article:
+      displayPagination: false  # برای مقالات وبلاگ
+```
+
 ## نوار کناری
 
 ### نوار کناری اصلی
