@@ -130,29 +130,15 @@ params:
 
 ### Pagination
 
-Hextra can render previous/next navigation at the bottom of content pages (docs and blog articles) to help readers move between pages in the same section. You can control this independently for docs pages and blog articles.
-
-Docs pages pagination:
+To disable the previous/next navigation at the bottom of docs pages or blog articles:
 
 ```yaml {filename="hugo.yaml"}
 params:
   page:
-    # Control prev/next navigation on docs pages
-    # true (default): show prev/next when neighbors exist
-    # false: hide prev/next on docs pages
-    displayPagination: false
-```
-
-Blog article pagination:
-
-```yaml {filename="hugo.yaml"}
-params:
+    displayPagination: false  # for docs pages
   blog:
     article:
-      # Control prev/next on blog articles only
-      # true (default): show prev/next when neighbors exist
-      # false: hide prev/next on blog pages
-      displayPagination: false
+      displayPagination: false  # for blog articles
 ```
 
 ## Sidebar

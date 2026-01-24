@@ -11,7 +11,7 @@
         </div>
         {{ partial "components/last-updated.html" . }}
         {{- if (site.Params.page.displayPagination | default true) -}}
-        {{ partial "components/pager.html" . }}
+          {{- partial "components/pager.html" . -}}
         {{- end -}}
         {{ partial "components/comments.html" . }}
       </main>
