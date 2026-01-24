@@ -3,6 +3,7 @@
 /* Do not remove the following comment. It is used by Hugo to render CSS variables.
 {{- $pageWidth := site.Params.page.width -}}
 {{- $maxPageWidth := cond (eq $pageWidth "wide") "90rem" (cond (eq $pageWidth "full") "100%" "80rem") -}}
+{{- $maxContentWidth := cond (eq $pageWidth "wide") "80rem" (cond (eq $pageWidth "full") "100%" "72rem") -}}
 
 {{- $navbarWidth := site.Params.navbar.width -}}
 {{- $maxNavbarWidth := cond (eq $navbarWidth "wide") "90rem" (cond (eq $navbarWidth "full") "100%" "80rem") -}}
@@ -13,12 +14,17 @@
 
 :root {
   --hextra-max-page-width: {{ $maxPageWidth }};
+  --hextra-max-content-width: {{ $maxContentWidth }};
   --hextra-max-navbar-width: {{ $maxNavbarWidth }};
   --hextra-max-footer-width: {{ $maxFooterWidth }};
 }
 
 .hextra-max-page-width {
   max-width: var(--hextra-max-page-width);
+}
+
+.hextra-max-content-width {
+  max-width: var(--hextra-max-content-width);
 }
 
 .hextra-max-navbar-width {
