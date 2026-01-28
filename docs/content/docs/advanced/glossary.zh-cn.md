@@ -46,4 +46,15 @@ Hextra 支持构建全站范围的术语词汇表。
 
 ## 术语页面
 
-术语表示例页面可在 [术语表]({{% relref "/glossary" %}}) 查看，显示所有定义的术语及其描述和缩写。
+要渲染词汇表索引页面（列出所有已定义的术语及其说明和缩写），
+必须为每种受支持的语言定义一个对应的语言专用词汇表内容文件。
+请在文件名中使用语言代码后缀，例如：`content/glossary/_index.zh-cn.md`。
+
+```markdown {filename="content/glossary/_index.zh-cn.md"}
+---
+title: 术语表
+layout: glossary
+---
+```
+
+示例词汇表页面可在 [术语表]({{% relref "/glossary" %}}) 查看。
