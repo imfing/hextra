@@ -600,6 +600,15 @@ This will generate an `llms.txt` file at your site's root containing:
 - Page summaries and publication dates
 - Direct links to all content
 
+You can exclude specific pages or sections by setting `llms: false` in their front matter:
+
+```yaml
+---
+title: "Internal Notes"
+llms: false
+---
+```
+
 The llms.txt file is automatically generated from your content structure and makes your site more accessible to AI tools and language models for context and reference.
 
 ### Open Graph

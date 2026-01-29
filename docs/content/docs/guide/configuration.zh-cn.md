@@ -505,6 +505,15 @@ outputs:
 - 页面摘要和发布日期
 - 所有内容的直接链接
 
+您可以通过在 front matter 中设置 `llms: false` 来排除特定页面或章节：
+
+```yaml
+---
+title: "内部笔记"
+llms: false
+---
+```
+
 llms.txt 文件根据内容结构自动生成，使 AI 工具和语言模型更容易获取上下文和参考。
 
 ### Open Graph
