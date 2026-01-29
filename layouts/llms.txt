@@ -2,11 +2,11 @@
 
 > {{ .Site.Params.description | default "" }}
 
-{{ range where ($section := site.Sections) ".Params.llms" "ne" "false" }}
+{{ range where site.Sections "Params.llms" "ne" false }}
 {{- template "llms-section-tree" dict "context" . "level" 2 }}
 {{ end }}
 
-{{- $rootPages := where (where site.RegularPages "Section" "") ".Params.llms" "ne" "false" }}
+{{- $rootPages := where (where site.RegularPages "Section" "") "Params.llms" "ne" false }}
 {{- if $rootPages }}
 ## Root Pages
 {{- range $rootPages }}
@@ -25,11 +25,11 @@ Site: {{ .Site.BaseURL }}
 {{- "\n" -}}
 {{ $headerHashes }} {{ $context.Title }}
 
-{{- range $context.RegularPages }}
+{{- range where $context.RegularPages "Params.llms" "ne" false }}
 - [{{ .Title }}]({{ .Permalink }}): {{ .Summary | plainify | truncate 100 | strings.TrimSpace }}{{ if .Date }} - Published {{ .Date.Format "2006-01-02" }}{{ end }}
 {{- end }}
 
-{{- range $context.Sections }}
+{{- range where $context.Sections "Params.llms" "ne" false }}
 {{ template "llms-section-tree" dict "context" . "level" (add $level 1) }}
 {{- end }}
 {{- end -}}
