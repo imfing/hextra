@@ -46,5 +46,15 @@ Each YAML data file contains a list of glossary entries. Every entry includes:
 
 ## Glossary Page
 
-An example glossary page is available at [Glossary]({{% relref "/glossary" %}}), displaying all
-defined terms with their descriptions and abbreviations.
+To render the glossary index page (listing all defined terms along with their descriptions and abbreviations),
+a language-specific glossary content file must be defined for each supported language. Use the language code suffix
+in the filename, for example `content/glossary/_index.en.md`.
+
+```markdown {filename="content/glossary/_index.en.md"}
+---
+title: Glossary
+layout: glossary
+---
+```
+
+An example glossary page is available at [Glossary]({{% relref "/glossary" %}}).
