@@ -272,6 +272,8 @@ params:
 
 برای سفارشی کردن فرمت تاریخ، پارامتر `params.dateFormat` را تنظیم کنید. چیدمان آن با [`time.Format`](https://gohugo.io/functions/time/format/) Hugo مطابقت دارد.
 
+علاوه بر این، می‌توانید با فعال کردن پرچم `params.displayUpdatedAuthor` نویسنده آخرین تغییر را نمایش دهید. این نیاز به تنظیم `enableGitInfo: true` دارد.
+
 ```yaml {filename="hugo.yaml"}
 # تجزیه commit Git
 enableGitInfo: true
@@ -280,6 +282,8 @@ params:
   # نمایش تاریخ آخرین تغییر
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
+  # نمایش نویسنده آخرین تغییر
+  displayUpdatedAuthor: true
 ```
 
 ### برچسب‌ها
