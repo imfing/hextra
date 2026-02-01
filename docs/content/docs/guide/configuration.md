@@ -307,6 +307,8 @@ The date of the page's last modification can be displayed by enabling the `param
 
 To customize the date format, set the `params.dateFormat` parameter. Its layout matches Hugo's [`time.Format`](https://gohugo.io/functions/time/format/).
 
+Additionally, the author of the last modification can be displayed by enabling the `params.displayUpdatedAuthor` flag. This requires `enableGitInfo: true` to be set.
+
 ```yaml {filename="hugo.yaml"}
 # Parse Git commit
 enableGitInfo: true
@@ -315,6 +317,8 @@ params:
   # Display the last modification date
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
+  # Display the author of the last modification
+  displayUpdatedAuthor: true
 ```
 
 ### Tags

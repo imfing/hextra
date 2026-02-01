@@ -285,6 +285,8 @@ params:
 
 要自定义日期格式，设置 `params.dateFormat` 参数。其布局与 Hugo 的 [`time.Format`](https://gohugo.io/functions/time/format/) 匹配。
 
+此外，可以通过启用 `params.displayUpdatedAuthor` 标志来显示最后修改的作者。这需要设置 `enableGitInfo: true`。
+
 ```yaml {filename="hugo.yaml"}
 # 解析 Git 提交
 enableGitInfo: true
@@ -293,6 +295,8 @@ params:
   # 显示最后修改日期
   displayUpdatedDate: true
   dateFormat: "2006年1月2日"
+  # 显示最后修改的作者
+  displayUpdatedAuthor: true
 ```
 
 ### 标签
