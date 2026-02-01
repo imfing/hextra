@@ -1,6 +1,6 @@
 @media (max-width: 48rem) {
   .hextra-sidebar-container {
-    @apply hx:fixed hx:pt-[calc(var(--navbar-height)+var(--hextra-banner-height))] hx:top-0 hx:w-full hx:bottom-0 hx:z-[15] hx:overscroll-contain hx:bg-white hx:dark:bg-dark;
+    @apply hx:fixed hx:pt-[calc(var(--navbar-height)+var(--hextra-banner-height))] hx:top-0 hx:w-full hx:bottom-0 hx:z-15 hx:overscroll-contain hx:bg-white hx:dark:bg-dark;
     transition: transform 0.4s cubic-bezier(0.52, 0.16, 0.04, 1);
     will-change: transform, opacity;
     contain: layout style;

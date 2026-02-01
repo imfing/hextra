@@ -1,6 +1,6 @@
 .hextra-search-wrapper {
   li {
-    @apply hx:mx-2.5 hx:break-words hx:rounded-md hx:contrast-more:border hx:text-gray-800 hx:contrast-more:border-transparent hx:dark:text-gray-300;
+    @apply hx:mx-2.5 hx:wrap-break-word hx:rounded-md hx:contrast-more:border hx:text-gray-800 hx:contrast-more:border-transparent hx:dark:text-gray-300;
     a {
       @apply hx:focus-visible:outline-none hx:focus:outline-none hx:block hx:scroll-m-12 hx:px-2.5 hx:py-2;
     }
