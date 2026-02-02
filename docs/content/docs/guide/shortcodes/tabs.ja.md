@@ -52,6 +52,29 @@ next: /docs/guide/deploy-site
 {{< /tabs >}}
 
 
+### アイコン付きタブ
+
+各タブに `icon` を指定すると、ラベルの前にアイコンを表示できます。
+
+```
+{{</* tabs */>}}
+
+  {{</* tab name="JSON" icon="document-text" */>}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{</* /tab */>}}
+  {{</* tab name="YAML" icon="code" */>}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{</* /tab */>}}
+  {{</* tab name="TOML" icon="cog" */>}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{</* /tab */>}}
+
+{{</* /tabs */>}}
+```
+
+{{< tabs >}}
+
+{{< tab name="JSON" icon="document-text" >}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{< /tab >}}
+{{< tab name="YAML" icon="code" >}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{< /tab >}}
+{{< tab name="TOML" icon="cog" >}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{< /tab >}}
+
+{{< /tabs >}}
+
+
 ### Markdown の使用
 
 コードブロックを含む Markdown 構文もサポートされています:
