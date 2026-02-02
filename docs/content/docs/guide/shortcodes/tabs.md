@@ -47,6 +47,26 @@ The `YAML` tab will be selected by default.
   {{< tab name="TOML" >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
 {{< /tabs >}}
 
+### Tabs With Icons
+
+Use the `icon` property on each `tab` to display an icon before the label.
+
+```
+{{</* tabs */>}}
+
+  {{</* tab name="JSON" icon="document-text" */>}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{</* /tab */>}}
+  {{</* tab name="YAML" icon="code" */>}}**YAML**: YAML is a human-readable data serialization language.{{</* /tab */>}}
+  {{</* tab name="TOML" icon="cog" */>}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{</* /tab */>}}
+
+{{</* /tabs */>}}
+```
+
+{{< tabs >}}
+  {{< tab name="JSON" icon="document-text" >}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{< /tab >}}
+  {{< tab name="YAML" icon="code" >}}**YAML**: YAML is a human-readable data serialization language.{{< /tab >}}
+  {{< tab name="TOML" icon="cog" >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
+{{< /tabs >}}
+
 
 ### Use Markdown
 
