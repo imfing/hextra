@@ -58,5 +58,3 @@ layout: glossary
 ```
 
 An example glossary page is available at [Glossary]({{% relref "/glossary" %}}).
-
-Inline relref test: [Glossary link]({{% relref "/glossary" %}})
