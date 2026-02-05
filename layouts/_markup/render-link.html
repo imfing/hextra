@@ -1,7 +1,7 @@
 {{- $dest := .Destination -}}
 {{- $url := urls.Parse $dest -}}
 
-{{- /* Get the base path from site.Home.RelPermalink (e.g., "/subdir/" -> "/subdir") */ -}}
+{{- /* Home rel permalink includes base path/language prefix, e.g. "/subdir/" or "/subdir/fa/". */ -}}
 {{- $homeRel := printf "%s" site.Home.RelPermalink -}}
 {{- if not $homeRel -}}
   {{- $homeRel = "/" -}}
@@ -12,13 +12,10 @@
 {{- end -}}
 
 {{- if and $dest (hasPrefix $dest "/") -}}
-  {{- /* Try to resolve the page directly */ -}}
   {{- $page := or (.PageInner.GetPage $url.Path) (.PageInner.Resources.Get $url.Path) (resources.Get $url.Path) -}}
-
-  {{- /* Check if URL already has the base path prefix */ -}}
   {{- $hasHomePrefix := and $homeRelTrim (ne $homeRelTrim "/") (or (eq $url.Path $homeRelTrim) (hasPrefix $url.Path (printf "%s/" $homeRelTrim))) -}}
 
-  {{- /* If page not found but URL has base prefix, strip prefix and retry */ -}}
+  {{- /* relref may already include base path; strip and retry lookup once. */ -}}
   {{- if and (not $page) $hasHomePrefix -}}
     {{- $trimmed := strings.TrimPrefix $homeRelTrim $url.Path -}}
     {{- $trimmed = printf "/%s" (strings.TrimPrefix "/" $trimmed) -}}
@@ -30,20 +27,19 @@
     {{- $fragment := cond $url.Fragment (printf "#%s" $url.Fragment) "" -}}
     {{- $dest = printf "%s%s%s" $page.RelPermalink $query $fragment -}}
   {{- else if not $hasHomePrefix -}}
-    {{- /* Only call relURL if URL doesn't already have the base path */ -}}
     {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
   {{- end -}}
 {{- end -}}
 
 {{- with . -}}
-  {{- $isExternal := strings.HasPrefix .Destination "http" -}}
-  <a href="{{ $dest | safeURL }}"
-    {{- with .Title -}}title="{{ . }}"{{- end -}}
-    {{- if $isExternal -}}target="_blank" rel="noopener"{{- end -}}
-  >
-    {{- .Text | safeHTML -}}
-    {{- if and .Page.Site.Params.externalLinkDecoration $isExternal -}}
-      {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em"`) -}}
-    {{- end -}}
-  </a>
+{{- $isExternal := strings.HasPrefix .Destination "http" -}}
+<a href="{{ $dest | safeURL }}"
+   {{- with .Title -}}title="{{ . }}"{{- end -}}
+   {{- if $isExternal -}}target="_blank" rel="noopener"{{- end -}}
+>
+  {{- .Text | safeHTML -}}
+  {{- if and .Page.Site.Params.externalLinkDecoration $isExternal -}}
+    {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em"`) -}}
+  {{- end -}}
+</a>
 {{- end -}}
