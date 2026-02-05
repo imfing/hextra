@@ -1,33 +1,16 @@
 {{- $dest := .Destination -}}
 {{- $url := urls.Parse $dest -}}
 
-{{- /* Home rel permalink includes base path/language prefix, e.g. "/subdir/" or "/subdir/fa/". */ -}}
-{{- $homeRel := printf "%s" site.Home.RelPermalink -}}
-{{- if not $homeRel -}}
-  {{- $homeRel = "/" -}}
-{{- end -}}
-{{- $homeRelTrim := replaceRE "/+$" "" $homeRel -}}
-{{- if not $homeRelTrim -}}
-  {{- $homeRelTrim = "/" -}}
-{{- end -}}
-
 {{- if and $dest (hasPrefix $dest "/") -}}
-  {{- $page := or (.PageInner.GetPage $url.Path) (.PageInner.Resources.Get $url.Path) (resources.Get $url.Path) -}}
-  {{- $hasHomePrefix := and $homeRelTrim (ne $homeRelTrim "/") (or (eq $url.Path $homeRelTrim) (hasPrefix $url.Path (printf "%s/" $homeRelTrim))) -}}
-
-  {{- /* relref may already include base path; strip and retry lookup once. */ -}}
-  {{- if and (not $page) $hasHomePrefix -}}
-    {{- $trimmed := strings.TrimPrefix $homeRelTrim $url.Path -}}
-    {{- $trimmed = printf "/%s" (strings.TrimPrefix "/" $trimmed) -}}
-    {{- $page = or (.PageInner.GetPage $trimmed) (.PageInner.Resources.Get $trimmed) (resources.Get $trimmed) -}}
-  {{- end -}}
-
-  {{- if $page -}}
+  {{- with or (.PageInner.GetPage $url.Path) (.PageInner.Resources.Get $url.Path) (resources.Get $url.Path) -}}
     {{- $query := cond $url.RawQuery (printf "?%s" $url.RawQuery) "" -}}
     {{- $fragment := cond $url.Fragment (printf "#%s" $url.Fragment) "" -}}
-    {{- $dest = printf "%s%s%s" $page.RelPermalink $query $fragment -}}
-  {{- else if not $hasHomePrefix -}}
-    {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
+    {{- $dest = printf "%s%s%s" .RelPermalink $query $fragment -}}
+  {{- else -}}
+    {{- $hasBasePrefix := and (ne site.Home.RelPermalink "/") (hasPrefix $dest site.Home.RelPermalink) -}}
+    {{- if not $hasBasePrefix -}}
+      {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
