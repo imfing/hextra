@@ -43,6 +43,18 @@ body {
   @apply hx:outline-none hx:ring-2 hx:ring-primary-200 hx:ring-offset-1 hx:ring-offset-primary-300 hx:dark:ring-primary-800 hx:dark:ring-offset-primary-700;
 }
 
+@utility hextra-focus-visible {
+  @apply hx:focus-visible:outline-none hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:focus-visible:ring-offset-1 hx:focus-visible:ring-offset-primary-300 hx:dark:focus-visible:ring-primary-800 hx:dark:focus-visible:ring-offset-primary-700;
+}
+
+@utility hextra-focus-visible-inset {
+  @apply hx:focus-visible:outline-none hx:focus-visible:ring-inset hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:dark:focus-visible:ring-primary-800 hx:focus-visible:ring-offset-0;
+}
+
+@utility hextra-focus-visible-none {
+  @apply hx:focus-visible:outline-none hx:focus-visible:ring-0 hx:focus-visible:ring-offset-0;
+}
+
 @layer base {
   abbr:where([title]) {
     cursor: help;

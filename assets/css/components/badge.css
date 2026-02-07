@@ -2,13 +2,6 @@
   @apply hx:inline-flex hx:items-center;
 }
 
-a:focus > .hextra-badge > :first-child,
 a:focus-visible > .hextra-badge > :first-child {
-  outline: 2px solid var(--hx-color-primary-200);
-  outline-offset: 2px;
-}
-
-:is(.dark, .dark *) a:focus > .hextra-badge > :first-child,
-:is(.dark, .dark *) a:focus-visible > .hextra-badge > :first-child {
-  outline-color: var(--hx-color-primary-800);
+  @apply hx:relative hx:z-1 hx:hextra-focus;
 }
