@@ -6,6 +6,7 @@
       e.preventDefault();
 
       switcher.dataset.state = switcher.dataset.state === 'open' ? 'closed' : 'open';
+      switcher.setAttribute('aria-expanded', switcher.dataset.state === 'open' ? 'true' : 'false');
 
       toggleMenu(switcher);
     });
@@ -18,6 +19,7 @@
     if (e.target.closest('.hextra-language-switcher') === null) {
       languageSwitchers.forEach((switcher) => {
         switcher.dataset.state = 'closed';
+        switcher.setAttribute('aria-expanded', 'false');
         const optionsElement = switcher.nextElementSibling;
         optionsElement.classList.add('hx:hidden');
       });

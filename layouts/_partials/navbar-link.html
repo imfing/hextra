@@ -24,6 +24,8 @@
     class="hextra-nav-menu-toggle hx:cursor-pointer hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:whitespace-nowrap hx:p-2 hx:flex hx:items-center hx:gap-1 {{ $activeClass }}"
     type="button"
     aria-label="{{ or (T $item.Identifier) $item.Name | safeHTML }}"
+    aria-expanded="false"
+    aria-haspopup="true"
   >
     {{- if $icon -}}
     <span class="hx:inline-flex hx:items-center">

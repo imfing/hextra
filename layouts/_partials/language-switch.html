@@ -19,6 +19,8 @@
       class="hextra-language-switcher hx:cursor-pointer hx:rounded-md hx:text-left hx:font-medium {{ $class }} hx:grow"
       type="button"
       aria-label="{{ $changeLanguage }}"
+      aria-expanded="false"
+      aria-haspopup="true"
     >
       <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
         {{- partial "utils/icon" (dict "name" $iconName "attributes" (printf "height=%d" $iconHeight)) -}}

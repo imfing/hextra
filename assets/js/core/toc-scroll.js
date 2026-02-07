@@ -47,10 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
         // Remove active class from previous link
         if (currentActiveLink) {
           currentActiveLink.classList.remove("hextra-toc-active");
+          currentActiveLink.removeAttribute("aria-current");
         }
 
         // Add active class to current link
         targetLink.classList.add("hextra-toc-active");
+        targetLink.setAttribute("aria-current", "true");
         currentActiveLink = targetLink;
       }
     },
@@ -74,8 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (currentActiveLink) {
           currentActiveLink.classList.remove("hextra-toc-active");
+          currentActiveLink.removeAttribute("aria-current");
         }
         targetLink.classList.add("hextra-toc-active");
+        targetLink.setAttribute("aria-current", "true");
         currentActiveLink = targetLink;
 
         // Re-enable observer after scroll settles

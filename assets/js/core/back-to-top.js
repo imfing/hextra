@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function scrollUp() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scroll({
     top: 0,
     left: 0,
-    behavior: "smooth",
+    behavior: prefersReducedMotion ? 'auto' : 'smooth',
   });
 }

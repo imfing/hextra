@@ -27,7 +27,9 @@
         <button
           class="hextra-page-context-menu-toggle hx:inline-flex hx:cursor-pointer hx:items-center hx:justify-center hx:bg-transparent hx:px-1.5 hx:py-1 hx:text-gray-500 hx:transition-colors hx:hover:bg-slate-50 hx:hover:text-gray-700 hx:dark:text-gray-400 hx:dark:hover:bg-neutral-900 hx:dark:hover:text-gray-300"
           data-state="closed"
-          aria-label="Toggle page context menu"
+          aria-label="{{ (T "togglePageContextMenu") | default "Toggle page context menu" }}"
+          aria-expanded="false"
+          aria-haspopup="true"
         >
           <div class="hx:size-4 hx:transition-transform hx:duration-200" data-chevron>
             {{- partial "utils/icon.html" (dict "name" "chevron-down" "attributes" "height=16 width=16") -}}

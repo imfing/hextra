@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', function () {
     return svg;
   }
 
+  // Make scrollable code blocks focusable for keyboard users
+  document.querySelectorAll('.hextra-code-block pre, .highlight pre').forEach(function (pre) {
+    if (pre.scrollWidth > pre.clientWidth) {
+      pre.setAttribute('tabindex', '0');
+    }
+  });
+
   document.querySelectorAll('.hextra-code-copy-btn').forEach(function (button) {
     // Add copy and success icons
     button.querySelector('.hextra-copy-icon')?.appendChild(getCopyIcon());
@@ -52,8 +59,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         navigator.clipboard.writeText(code).then(function () {
           button.classList.add('copied');
+          var originalLabel = button.getAttribute('aria-label');
+          var copiedLabel = button.dataset.copiedLabel || 'Copied!';
+          button.setAttribute('aria-label', copiedLabel);
           setTimeout(function () {
             button.classList.remove('copied');
+            button.setAttribute('aria-label', originalLabel);
           }, 1000);
         }).catch(function (err) {
           console.error('Failed to copy text: ', err);
