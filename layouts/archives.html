@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{- $section := site.Params.archive.section | default "blog" -}}
+  {{- $section := site.Params.archives.section | default "blog" -}}
   {{- $pages := where site.RegularPages "Section" $section -}}
   {{- $groups := $pages.GroupByDate "2006" "desc" -}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">

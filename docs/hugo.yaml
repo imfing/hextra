@@ -107,9 +107,9 @@ menu:
       name: Blog
       pageRef: /blog
       weight: 3
-    - identifier: archive
-      name: Archive
-      pageRef: /archive
+    - identifier: archives
+      name: Archives
+      pageRef: /archives
       weight: 4
     - identifier: about
       name: About
