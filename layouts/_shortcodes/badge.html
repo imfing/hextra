@@ -24,7 +24,7 @@ or
   {{- $border := not (eq (.Get "border") false) | default true }}
 
   {{- if $link -}}
-    <a href="{{ $link }}" title="{{ $content | plainify }}" target="_blank">
+    <a href="{{ $link }}" title="{{ $content | plainify }}" target="_blank" class="hx:inline-flex hx:align-middle hx:focus-visible:outline-none hx:focus-visible:ring-0 hx:focus-visible:ring-offset-0">
       {{- partial "shortcodes/badge.html" (dict
         "content" $content 
         "color" $color

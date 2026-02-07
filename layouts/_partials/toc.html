@@ -48,7 +48,7 @@
               {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
             {{- end -}}
           {{- end -}}
-          <a class="hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50" href="{{ $editURL }}" target="_blank" rel="noreferrer">{{ $editThisPage }}</a>
+          <a class="hx:inline-block hx:rounded-sm hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50 hx:focus-visible:outline-none hx:focus-visible:ring-inset hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:dark:focus-visible:ring-primary-800 hx:focus-visible:ring-offset-0" href="{{ $editURL }}" target="_blank" rel="noreferrer">{{ $editThisPage }}</a>
         {{- end -}}
         {{/* Scroll To Top */}}
         <button id="backToTop" onClick="scrollUp();" class="hx:cursor-pointer hx:transition-all hx:duration-75 hx:opacity-0 hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">
@@ -78,7 +78,7 @@
   {{- range $headings }}
     {{- if .Title }}
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="{{ $class }} hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word" href="#{{ anchorize .ID }}">
+        <a class="{{ $class }} hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:focus-visible:outline-none hx:focus-visible:ring-inset hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:dark:focus-visible:ring-primary-800 hx:focus-visible:ring-offset-0" href="#{{ anchorize .ID }}">
           {{- .Title | safeHTML | plainify | htmlUnescape }}
         </a>
       </li>

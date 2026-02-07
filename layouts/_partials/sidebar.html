@@ -100,7 +100,7 @@
         {{- end -}}
       {{- end -}}
     {{- else -}}
-      <div class="hextra-sidebar-children hx:ltr:pr-0 hx:overflow-hidden">
+      <div class="hextra-sidebar-children hx:ltr:pr-1 hx:rtl:pl-1 hx:overflow-hidden">
         <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'>
           {{- range $items.ByWeight }}
             {{- $active := eq $pageURL .RelPermalink -}}
@@ -170,6 +170,7 @@
     <a
       class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none]
       {{- if $hasChildren }} hx:ltr:pr-8 hx:rtl:pl-8{{- end }}
+      hx:focus-visible:outline-none hx:focus-visible:ring-inset hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:dark:focus-visible:ring-primary-800 hx:focus-visible:ring-offset-0
       {{- if .active }}
         hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500
       {{- else }}
@@ -181,7 +182,7 @@
       <span class="hx:min-w-0 [word-break:break-word]">{{- .title -}}</span>
     </a>
     {{- if $hasChildren }}
-      <button type="button" class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-inherit" aria-label="{{ (T "toggleSection") | default "Toggle section" }}" aria-expanded="{{ if $open }}true{{ else }}false{{ end }}">
+      <button type="button" class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-inherit hx:focus-visible:outline-none hx:focus-visible:ring-inset hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:dark:focus-visible:ring-primary-800 hx:focus-visible:ring-offset-0" aria-label="{{ (T "toggleSection") | default "Toggle section" }}" aria-expanded="{{ if $open }}true{{ else }}false{{ end }}">
         {{- template "sidebar-collapsible-button" -}}
       </button>
     {{- end }}
