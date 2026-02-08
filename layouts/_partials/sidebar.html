@@ -24,7 +24,7 @@
   {{- if (site.Params.search.enable | default true) -}}
     <!-- Search bar on small screen -->
     <div class="hx:px-4 hx:pt-4 hx:md:hidden">
-      {{ partial "search.html" }}
+      {{ partial "search.html" (dict "location" "sidebar") }}
     </div>
   {{- end -}}
   <div class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
@@ -190,5 +190,5 @@
 {{- end -}}
 
 {{- define "sidebar-collapsible-button" -}}
-  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg>
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg>
 {{- end -}}
