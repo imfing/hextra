@@ -11,6 +11,7 @@
       dropdownToggles.forEach((otherToggle) => {
         if (otherToggle !== toggle) {
           otherToggle.dataset.state = "closed";
+          otherToggle.setAttribute('aria-expanded', 'false');
           const otherMenuItems = otherToggle.nextElementSibling;
           otherMenuItems.classList.add(hiddenClass);
         }
@@ -19,6 +20,7 @@
       // Toggle current dropdown
       const isOpen = toggle.dataset.state === "open";
       toggle.dataset.state = isOpen ? "closed" : "open";
+      toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
       const menuItemsElement = toggle.nextElementSibling;
 
       if (!isOpen) {
@@ -43,6 +45,7 @@
     if (e.target.closest(".hextra-nav-menu-toggle") === null) {
       dropdownToggles.forEach((toggle) => {
         toggle.dataset.state = "closed";
+        toggle.setAttribute('aria-expanded', 'false');
         const menuItemsElement = toggle.nextElementSibling;
         menuItemsElement.classList.add(hiddenClass);
       });
@@ -53,9 +56,13 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       dropdownToggles.forEach((toggle) => {
-        toggle.dataset.state = "closed";
-        const menuItemsElement = toggle.nextElementSibling;
-        menuItemsElement.classList.add(hiddenClass);
+        if (toggle.dataset.state === "open") {
+          toggle.dataset.state = "closed";
+          toggle.setAttribute('aria-expanded', 'false');
+          const menuItemsElement = toggle.nextElementSibling;
+          menuItemsElement.classList.add(hiddenClass);
+          toggle.focus();
+        }
       });
     }
   });

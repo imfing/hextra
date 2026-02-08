@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // When the menu is open, we want to prevent the body from scrolling
     document.body.classList.toggle('hx:overflow-hidden');
     document.body.classList.toggle('hx:md:overflow-auto');
+
+    // Sync aria-expanded
+    const isOpen = menu.querySelector('svg').classList.contains('open');
+    menu.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   }
 
   menu.addEventListener('click', (e) => {

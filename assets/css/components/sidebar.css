@@ -9,13 +9,13 @@
 }
 
 .hextra-sidebar-container {
-  li > div {
+  li > .hextra-sidebar-children {
     @apply hx:h-0;
   }
-  li.open > div {
+  li.open > .hextra-sidebar-children {
     @apply hx:h-auto hx:pt-1;
   }
-  li.open > a > span > svg > path {
+  li.open > .hextra-sidebar-item > .hextra-sidebar-collapsible-button > svg > path {
     @apply hx:rotate-90;
   }
 }

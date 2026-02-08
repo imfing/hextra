@@ -75,7 +75,9 @@
 {{- /* Mark page as using asciinema */ -}}
 {{- .Page.Store.Set "hasAsciinema" true -}}
 
-<div class="asciinema-player" 
+<div class="asciinema-player"
+     role="region"
+     aria-label="{{ (T "terminalRecording") | default "Terminal recording" }}"
      data-cast-file="{{ $castFile }}"
      data-theme="{{ $theme }}"
      data-speed="{{ $speed }}"

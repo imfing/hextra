@@ -2,6 +2,9 @@
 <html lang="{{ .Site.Language.Lang }}" dir="{{ .Site.Language.LanguageDirection | default `ltr` }}">
   {{- partial "head.html" . -}}
   <body>
+    <a href="#content" class="hx:sr-only hx:focus:not-sr-only hx:focus:fixed hx:focus:z-50 hx:focus:top-2 hx:focus:left-2 hx:focus:bg-primary-500 hx:focus:text-white hx:focus:px-4 hx:focus:py-2 hx:focus:rounded-md hx:focus:text-sm hx:focus:font-medium">
+      {{- (T "skipToContent") | default "Skip to content" -}}
+    </a>
     {{- partial "banner.html" . -}}
     {{- partial "navbar.html" . -}}
     {{- block "main" . }}{{ end -}}

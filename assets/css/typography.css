@@ -109,7 +109,7 @@
   
     span:target + &,
     :hover > &,
-    &:focus {
+    &:focus-visible {
       @apply hx:opacity-100;
     }
   
