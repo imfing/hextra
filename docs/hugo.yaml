@@ -102,19 +102,18 @@ menu:
       weight: 1
     - identifier: versions
       name: Versions
-      weight: 2
+      weight: 5
     - identifier: blog
       name: Blog
       pageRef: /blog
-      weight: 3
-    - identifier: about
-      name: About
-      pageRef: /about
+      weight: 2
+    - identifier: more
+      name: More
       weight: 4
     - identifier: showcase
       name: Showcase
       pageRef: /showcase
-      weight: 5
+      weight: 3
       params:
         type: link
         icon: collection
@@ -142,6 +141,21 @@ menu:
       name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
       parent: versions
+    - identifier: about
+      name: About
+      pageRef: /about
+      parent: more
+      weight: 1
+    - identifier: archives
+      name: Archives
+      pageRef: /archives
+      parent: more
+      weight: 2
+    - identifier: glossary
+      name: Glossary
+      pageRef: /glossary
+      parent: more
+      weight: 3
 
   sidebar:
     - identifier: more
@@ -225,6 +239,12 @@ params:
 
     article:
       displayPagination: true
+
+  archives:
+    # Source section used for the archives page.
+    section: blog
+    # Date format for archive list items.
+    dateFormat: "Jan 02"
 
   toc:
     displayTags: true
