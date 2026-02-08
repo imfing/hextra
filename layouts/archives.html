@@ -1,5 +1,6 @@
 {{ define "main" }}
   {{- $section := site.Params.archives.section | default "blog" -}}
+  {{- $dateFormat := site.Params.archives.dateFormat | default "Jan 02" -}}
   {{- $pages := where site.RegularPages "Section" $section -}}
   {{- $groups := $pages.GroupByDate "2006" "desc" -}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
@@ -17,7 +18,7 @@
               {{- range .Pages }}
                 {{- $page := . -}}
                 <div class="hx:flex hx:items-baseline hx:gap-4 hx:py-2">
-                  <time class="hx:shrink-0 hx:text-sm hx:tabular-nums hx:text-gray-500 hx:dark:text-gray-400" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02" }}</time>
+                  <time class="hx:shrink-0 hx:text-sm hx:tabular-nums hx:text-gray-500 hx:dark:text-gray-400" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format $dateFormat }}</time>
                   <div>
                     <a href="{{ .RelPermalink }}" class="hx:font-medium hx:text-gray-700 hx:dark:text-gray-300 hx:transition-colors hx:duration-150 hx:hover:text-primary-600 hx:dark:hover:text-primary-400">{{ .Title }}</a>
                     {{- with .Params.tags }}

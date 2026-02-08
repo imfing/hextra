@@ -93,7 +93,13 @@ layout: glossary
      archives:
        section: blog
    ```
+5. (اختیاری) قالب نمایش تاریخ آیتم‌های آرشیو را تغییر دهید. مقدار پیش‌فرض `Jan 02` است.
+   ```yaml {filename="hugo.yaml"}
+   params:
+     archives:
+       dateFormat: "Jan 02"
+   ```
 
-نمایش تاریخ در آرشیو از `params.dateFormat` پیروی می‌کند و پیام حالت خالی از کلید ترجمه `noResultsFound` استفاده می‌کند.
+پیام حالت خالی از کلید ترجمه `noResultsFound` استفاده می‌کند.
 
 یک صفحهٔ نمونه از آرشیو در [آرشیو]({{% relref "/archives" %}}) در دسترس است.

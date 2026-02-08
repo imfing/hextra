@@ -93,7 +93,13 @@ You can create an archive timeline page (grouped by year) for posts in a section
      archives:
        section: blog
    ```
+5. (Optional) Change the archive item date format. The default is `Jan 02`.
+   ```yaml {filename="hugo.yaml"}
+   params:
+     archives:
+       dateFormat: "Jan 02"
+   ```
 
-Archive date rendering follows `params.dateFormat`, and the empty-state message uses the `noResultsFound` i18n key.
+The empty-state message uses the `noResultsFound` i18n key.
 
 An example archive page is available at [Archives]({{% relref "/archives" %}}).

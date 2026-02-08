@@ -240,6 +240,12 @@ params:
     article:
       displayPagination: true
 
+  archives:
+    # Source section used for the archives page.
+    section: blog
+    # Date format for archive list items.
+    dateFormat: "Jan 02"
+
   toc:
     displayTags: true
 

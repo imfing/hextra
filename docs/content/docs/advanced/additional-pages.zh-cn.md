@@ -93,7 +93,13 @@ layout: glossary
      archives:
        section: blog
    ```
+5. （可选）修改归档条目的日期显示格式。默认值是 `Jan 02`。
+   ```yaml {filename="hugo.yaml"}
+   params:
+     archives:
+       dateFormat: "Jan 02"
+   ```
 
-归档日期显示遵循 `params.dateFormat`，空状态文案使用 i18n 键 `noResultsFound`。
+空状态文案使用 i18n 键 `noResultsFound`。
 
 示例归档页面可在 [归档]({{% relref "/archives" %}}) 查看。

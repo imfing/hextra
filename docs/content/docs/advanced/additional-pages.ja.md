@@ -93,7 +93,13 @@ layout: glossary
      archives:
        section: blog
    ```
+5. （任意）アーカイブ項目の日付表示形式を変更します。デフォルトは `Jan 02` です。
+   ```yaml {filename="hugo.yaml"}
+   params:
+     archives:
+       dateFormat: "Jan 02"
+   ```
 
-アーカイブの日付表示は `params.dateFormat` に従い、空状態メッセージは i18n キー `noResultsFound` を使用します。
+空状態メッセージは i18n キー `noResultsFound` を使用します。
 
 アーカイブのサンプルページは [アーカイブ]({{% relref "/archives" %}}) で確認できます。
