@@ -102,32 +102,27 @@ menu:
       weight: 1
     - identifier: versions
       name: Versions
-      weight: 2
+      weight: 5
     - identifier: blog
       name: Blog
       pageRef: /blog
-      weight: 3
-    - identifier: archives
-      name: Archives
-      pageRef: /archives
+      weight: 2
+    - identifier: more
+      name: More
       weight: 4
-    - identifier: about
-      name: About
-      pageRef: /about
-      weight: 5
     - identifier: showcase
       name: Showcase
       pageRef: /showcase
-      weight: 6
+      weight: 3
       params:
         type: link
         icon: collection
     - name: Search
-      weight: 7
+      weight: 6
       params:
         type: search
     - name: GitHub
-      weight: 8
+      weight: 7
       url: "https://github.com/imfing/hextra"
       params:
         icon: github
@@ -146,6 +141,21 @@ menu:
       name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
       parent: versions
+    - identifier: about
+      name: About
+      pageRef: /about
+      parent: more
+      weight: 1
+    - identifier: archives
+      name: Archives
+      pageRef: /archives
+      parent: more
+      weight: 2
+    - identifier: glossary
+      name: Glossary
+      pageRef: /glossary
+      parent: more
+      weight: 3
 
   sidebar:
     - identifier: more
