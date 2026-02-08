@@ -13,4 +13,5 @@ next: /docs/advanced/multi-language
   {{< card link="multi-language" title="多语言支持" icon="translate" >}}
   {{< card link="customization" title="自定义配置" icon="pencil" >}}
   {{< card link="comments" title="评论系统" icon="chat-alt" >}}
+  {{< card link="additional-pages" title="附加页面" icon="library" >}}
 {{< /cards >}}
