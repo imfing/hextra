@@ -194,6 +194,27 @@ This will hide the main sidebar from the page, freeing up space for the main con
 
 ## Right Sidebar
 
+The right sidebar is enabled by default. To disable it on a page, set `rightSidebar` to `false` in the page's front matter:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+rightSidebar: false
+---
+```
+
+This can also be [cascaded](https://gohugo.io/content-management/front-matter/#cascade-1) to descendents:
+
+```yaml {filename="content/docs/guide/_index.md"}
+---
+title: Configuration
+cascade:
+    params:
+        rightSidebar: false
+---
+```
+
+
 ### Table of Contents
 
 Table of contents is automatically generated from the headings in the content file. It can be disabled by setting `toc: false` in the front matter of the page.
