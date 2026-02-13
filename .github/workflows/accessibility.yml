@@ -52,7 +52,7 @@ jobs:
 
       - name: Serve and test
         run: |
-          npx serve docs/public -l tcp://localhost:3000 --no-clipboard &
+          npx serve docs/public -l tcp://localhost:1313 --no-clipboard &
           sleep 2
           npm run test:a11y
 

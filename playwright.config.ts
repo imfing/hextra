@@ -6,6 +6,6 @@ export default defineConfig({
   retries: 0,
   reporter: [["list"], ["html"]],
   use: {
-    baseURL: process.env.BASE_URL || "http://localhost:3000",
+    baseURL: process.env.BASE_URL || "http://localhost:1313",
   },
 });

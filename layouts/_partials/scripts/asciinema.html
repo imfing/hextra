@@ -76,12 +76,14 @@
   {{- end -}}
 {{- end -}}
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
+<script data-playback-time="{{ (T "playbackTime") | default "Playback time" }}">
+  {
+    const playbackTimeLabel = document.currentScript.getAttribute("data-playback-time");
+    document.addEventListener("DOMContentLoaded", () => {
     const applyTimerA11y = (container) => {
       container.querySelectorAll(".ap-timer[role='textbox']").forEach((timer) => {
         if (!timer.getAttribute("aria-label")) {
-          timer.setAttribute("aria-label", "Playback time");
+          timer.setAttribute("aria-label", playbackTimeLabel);
         }
       });
     };
@@ -121,4 +123,5 @@
       }
     });
   });
+  }
 </script>
