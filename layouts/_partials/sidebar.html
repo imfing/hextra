@@ -166,7 +166,7 @@
   {{- $open := .open | default true -}}
   {{- $hasChildren := false -}}
   {{- with .context }}{{ if or .RegularPages .Sections }}{{ $hasChildren = true }}{{ end }}{{ end -}}
-  <div class="hextra-sidebar-item hx:relative hx:flex hx:items-center">
+  <div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active="{{ if .active }}true{{ else }}false{{ end }}">
     <a
       class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none]
       {{- if $hasChildren }} hx:ltr:pr-8 hx:rtl:pl-8{{- end }}
@@ -182,7 +182,7 @@
       <span class="hx:min-w-0 [word-break:break-word]">{{- .title -}}</span>
     </a>
     {{- if $hasChildren }}
-      <button type="button" class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-inherit hx:hextra-focus-visible-inset" aria-label="{{ (T "toggleSection") | default "Toggle section" }}" aria-expanded="{{ if $open }}true{{ else }}false{{ end }}">
+      <button type="button" class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400 hx:group-hover:text-gray-900 hx:dark:group-hover:text-gray-50 hx:group-data-[active=true]:text-primary-800 hx:group-data-[active=true]:dark:text-primary-600 hx:hextra-focus-visible-inset" aria-label="{{ (T "toggleSection") | default "Toggle section" }}" aria-expanded="{{ if $open }}true{{ else }}false{{ end }}">
         {{- template "sidebar-collapsible-button" -}}
       </button>
     {{- end }}

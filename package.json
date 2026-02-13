@@ -3,13 +3,19 @@
     "dev:theme": "hugo server --logLevel=debug --config=hugo.yaml,../dev.toml --environment=theme --source=docs --themesDir=../.. -D -F --port 1313",
     "dev": "hugo server --source=docs --themesDir=../.. --disableFastRender -D --port 1313",
     "build:css": "npx postcss --config postcss.config.mjs --env production assets/css/styles.css -o assets/css/compiled/main.css",
-    "build": "hugo --gc --minify --themesDir=../.. --source=docs"
+    "build": "hugo --gc --minify --themesDir=../.. --source=docs",
+    "test": "npx playwright test",
+    "test:a11y": "npx playwright test e2e/accessibility.spec.ts"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.49.1",
     "@tailwindcss/postcss": "^4.1.18",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.8.0",
     "prettier-plugin-go-template": "^0.0.15",
-    "tailwindcss": "^4.1.18"
+    "serve": "^14.2.4",
+    "tailwindcss": "^4.1.18",
+    "xml2js": "^0.6.2"
   }
 }
