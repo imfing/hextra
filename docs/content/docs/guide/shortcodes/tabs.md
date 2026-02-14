@@ -47,24 +47,25 @@ The `YAML` tab will be selected by default.
   {{< tab name="TOML" >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
 {{< /tabs >}}
 
-### Tabs With Icons
+### Add Icons
 
 Use the `icon` property on each `tab` to display an icon before the label.
+See the [Icon shortcode](../icon) page for the list of available icons.
 
 ```
 {{</* tabs */>}}
 
-  {{</* tab name="JSON" icon="document-text" */>}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{</* /tab */>}}
-  {{</* tab name="YAML" icon="code" */>}}**YAML**: YAML is a human-readable data serialization language.{{</* /tab */>}}
-  {{</* tab name="TOML" icon="cog" */>}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{</* /tab */>}}
+  {{</* tab name="Photos" icon="photograph" */>}}Manage and organize your photo library.{{</* /tab */>}}
+  {{</* tab name="Music" icon="music-note" */>}}Browse and play your favorite tracks.{{</* /tab */>}}
+  {{</* tab name="Videos" icon="film" */>}}Watch and stream video content.{{</* /tab */>}}
 
 {{</* /tabs */>}}
 ```
 
 {{< tabs >}}
-  {{< tab name="JSON" icon="document-text" >}}**JSON**: JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax.{{< /tab >}}
-  {{< tab name="YAML" icon="code" >}}**YAML**: YAML is a human-readable data serialization language.{{< /tab >}}
-  {{< tab name="TOML" icon="cog" >}}**TOML**: TOML aims to be a minimal configuration file format that's easy to read due to obvious semantics.{{< /tab >}}
+  {{< tab name="Photos" icon="photograph" >}}Manage and organize your photo library.{{< /tab >}}
+  {{< tab name="Music" icon="music-note" >}}Browse and play your favorite tracks.{{< /tab >}}
+  {{< tab name="Videos" icon="film" >}}Watch and stream video content.{{< /tab >}}
 {{< /tabs >}}
 
 

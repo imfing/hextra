@@ -52,25 +52,26 @@ next: /docs/guide/deploy-site
 {{< /tabs >}}
 
 
-### アイコン付きタブ
+### アイコンを追加する
 
 各タブに `icon` を指定すると、ラベルの前にアイコンを表示できます。
+利用可能なアイコンの一覧は [Icon ショートコード](../icon) ページを参照してください。
 
 ```
 {{</* tabs */>}}
 
-  {{</* tab name="JSON" icon="document-text" */>}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{</* /tab */>}}
-  {{</* tab name="YAML" icon="code" */>}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{</* /tab */>}}
-  {{</* tab name="TOML" icon="cog" */>}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{</* /tab */>}}
+  {{</* tab name="Photos" icon="photograph" */>}}写真ライブラリを管理・整理します。{{</* /tab */>}}
+  {{</* tab name="Music" icon="music-note" */>}}お気に入りの曲を閲覧・再生します。{{</* /tab */>}}
+  {{</* tab name="Videos" icon="film" */>}}動画コンテンツを視聴・ストリーミングします。{{</* /tab */>}}
 
 {{</* /tabs */>}}
 ```
 
 {{< tabs >}}
 
-{{< tab name="JSON" icon="document-text" >}}**JSON**: JavaScript Object Notation (JSON) は、JavaScript オブジェクト構文に基づいた構造化データを表現する標準のテキストベースフォーマットです。{{< /tab >}}
-{{< tab name="YAML" icon="code" >}}**YAML**: YAML は人間が読みやすいデータシリアライゼーション言語です。{{< /tab >}}
-{{< tab name="TOML" icon="cog" >}}**TOML**: TOML は、明確なセマンティクスにより読みやすい最小限の設定ファイルフォーマットを目指しています。{{< /tab >}}
+{{< tab name="Photos" icon="photograph" >}}写真ライブラリを管理・整理します。{{< /tab >}}
+{{< tab name="Music" icon="music-note" >}}お気に入りの曲を閲覧・再生します。{{< /tab >}}
+{{< tab name="Videos" icon="film" >}}動画コンテンツを視聴・ストリーミングします。{{< /tab >}}
 
 {{< /tabs >}}
 
