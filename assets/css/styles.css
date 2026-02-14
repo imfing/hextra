@@ -43,9 +43,34 @@ body {
   @apply hx:outline-none hx:ring-2 hx:ring-primary-200 hx:ring-offset-1 hx:ring-offset-primary-300 hx:dark:ring-primary-800 hx:dark:ring-offset-primary-700;
 }
 
+@utility hextra-focus-visible {
+  @apply hx:focus-visible:outline-none hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:focus-visible:ring-offset-1 hx:focus-visible:ring-offset-primary-300 hx:dark:focus-visible:ring-primary-800 hx:dark:focus-visible:ring-offset-primary-700;
+}
+
+@utility hextra-focus-visible-inset {
+  @apply hx:focus-visible:outline-none hx:focus-visible:ring-inset hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:dark:focus-visible:ring-primary-800 hx:focus-visible:ring-offset-0;
+}
+
 @layer base {
   abbr:where([title]) {
     cursor: help;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer base {
+  :where(a, button, [role="tab"], [role="menuitem"], [role="menuitemradio"], input, select, textarea, [tabindex="0"]):not(
+      [class*="hextra-focus-visible"]
+    ):focus-visible {
+    @apply hx:hextra-focus;
   }
 }
 
@@ -63,3 +88,4 @@ body {
 @import "./components/jupyter.css";
 @import "./components/badge.css";
 @import "./components/toc.css";
+@import "./components/archives.css";

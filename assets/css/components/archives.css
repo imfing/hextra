@@ -1,0 +1,3 @@
+.hextra-archive-timeline {
+  @apply hx:border-l-2 hx:border-black/15 hx:dark:border-white/15;
+}

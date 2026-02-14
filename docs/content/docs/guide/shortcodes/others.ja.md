@@ -9,6 +9,8 @@ next: /docs/guide/deploy-site
   これらのショートコードは安定性が低く、いつでも変更される可能性があります。
 {{< /callout >}}
 
+## バッジ
+
 ### 例
 
 {{< badge "default" >}}&nbsp;

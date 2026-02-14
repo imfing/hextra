@@ -14,7 +14,7 @@ prev: /docs
 
 您可以通过使用上述模板仓库快速开始。
 
-<img src="https://docs.github.com/assets/cb-77734/mw-1440/images/help/repository/use-this-template-button.webp" width="500">
+<img src="https://docs.github.com/assets/cb-77734/mw-1440/images/help/repository/use-this-template-button.webp" width="500" alt="显示“Use this template”按钮的 GitHub 仓库页面">
 
 我们提供了一个[GitHub Actions工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow)，可以帮助自动构建并将您的站点部署到GitHub Pages，并免费托管。
 更多选项，请查看[部署站点](../guide/deploy-site)。

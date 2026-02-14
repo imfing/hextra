@@ -1,15 +1,43 @@
-backToTop: 'Прокрутить к началу'
-changeLanguage: 'Изменить язык'
-changeTheme: 'Изменить тему'
-copyCode: 'Скопировать код'
-copyright: '2025 Проект Hextra.'
-dark: 'Темная'
-editThisPage: 'Отредактировать страницу на GitHub →'
-lastUpdated: 'Последнее обновление'
-light: 'Светлая'
-noResultsFound: 'Ничего не найдено.'
-onThisPage: 'На этой странице'
-tags: 'Теги'
-poweredBy: 'При поддержке Hextra'
-readMore: 'Читать далее →'
-searchPlaceholder: 'Поиск...'
+# Accessibility labels (screen reader only)
+closeBanner: "Закрыть баннер"
+menu: "Меню"
+mermaidDiagram: "Диаграмма"
+pdfViewer: "Просмотр PDF"
+permalinkLabel: "Постоянная ссылка на этот раздел"
+playbackTime: "Время воспроизведения"
+searchResults: "Результаты поиска"
+skipToContent: "Перейти к содержимому"
+tableOfContents: "Содержание"
+terminalRecording: "Запись терминала"
+togglePageContextMenu: "Переключить контекстное меню страницы"
+toggleSection: "Переключить раздел"
+
+# Accessibility live-region/status text
+resultsFound: "%d результатов найдено"
+
+# User-facing UI text
+archives: "Архив"
+backToTop: "Прокрутить к началу"
+changeLanguage: "Изменить язык"
+changeTheme: "Изменить тему"
+copy: "Копировать"
+copied: "Скопировано!"
+copyAsMarkdown: "Копировать как Markdown"
+copyPage: "Копировать страницу"
+copyCode: "Скопировать код"
+copyright: "2025 Проект Hextra."
+dark: "Темная"
+editThisPage: "Отредактировать страницу на GitHub →"
+lastUpdated: "Последнее обновление"
+light: "Светлая"
+next: "Далее"
+noResultsFound: "Ничего не найдено."
+onThisPage: "На этой странице"
+more: "Ещё"
+poweredBy: "При поддержке Hextra"
+previous: "Назад"
+readMore: "Читать далее →"
+searchPlaceholder: "Поиск..."
+system: "Система"
+tags: "Теги"
+viewAsMarkdown: "Просмотреть как Markdown"

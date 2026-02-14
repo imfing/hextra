@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
       Array.from(folder.children).forEach(function (el) {
         el.dataset.state = el.dataset.state === "open" ? "closed" : "open";
       });
-      folder.nextElementSibling.dataset.state = folder.nextElementSibling.dataset.state === "open" ? "closed" : "open";
+      var newState = folder.nextElementSibling.dataset.state === "open" ? "closed" : "open";
+      folder.nextElementSibling.dataset.state = newState;
+      folder.setAttribute('aria-expanded', newState === 'open' ? 'true' : 'false');
     });
   });
 });

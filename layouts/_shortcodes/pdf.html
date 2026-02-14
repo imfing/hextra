@@ -11,5 +11,5 @@ Shortcode to include a PDF file in a page.
 
 
 <div class="hextra-pdf">
-  <iframe src="{{ $url | safeURL }}" width="100%" style="min-height: 32rem;" frameborder="0"></iframe>
+  <iframe src="{{ $url | safeURL }}" width="100%" style="min-height: 32rem;" frameborder="0" title="{{ (T "pdfViewer") | default "PDF viewer" }}"></iframe>
 </div>

@@ -32,7 +32,7 @@ languages:
     params:
       banner:
         message: |
-          هگزترا **v0.11** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% ref "blog/v0.11" %}})
+          هگزترا **v0.11** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% relref "blog/v0.11" %}})
       page:
         contextMenu:
           links:
@@ -47,7 +47,7 @@ languages:
     params:
       banner:
         message: |
-          Hextra **v0.11** がリリースされました！🎉 [新着情報はこちら]({{% ref "blog/v0.11" %}})
+          Hextra **v0.11** がリリースされました！🎉 [新着情報はこちら]({{% relref "blog/v0.11" %}})
       page:
         contextMenu:
           links:
@@ -62,7 +62,7 @@ languages:
     params:
       banner:
         message: |
-          Hextra **v0.11** 发布啦！🎉 查看[更新内容]({{% ref "blog/v0.11" %}})
+          Hextra **v0.11** 发布啦！🎉 查看[更新内容]({{% relref "blog/v0.11" %}})
       page:
         contextMenu:
           links:
@@ -102,19 +102,18 @@ menu:
       weight: 1
     - identifier: versions
       name: Versions
-      weight: 2
+      weight: 5
     - identifier: blog
       name: Blog
       pageRef: /blog
-      weight: 3
-    - identifier: about
-      name: About
-      pageRef: /about
+      weight: 2
+    - identifier: more
+      name: More
       weight: 4
     - identifier: showcase
       name: Showcase
       pageRef: /showcase
-      weight: 5
+      weight: 3
       params:
         type: link
         icon: collection
@@ -142,6 +141,21 @@ menu:
       name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
       parent: versions
+    - identifier: about
+      name: About
+      pageRef: /about
+      parent: more
+      weight: 1
+    - identifier: archives
+      name: Archives
+      pageRef: /archives
+      parent: more
+      weight: 2
+    - identifier: glossary
+      name: Glossary
+      pageRef: /glossary
+      parent: more
+      weight: 3
 
   sidebar:
     - identifier: more
@@ -166,7 +180,7 @@ params:
   banner:
     key: 'announcement-v0.11'
     message: |
-      Hextra **v0.11** is here! 🎉 Discover [what's new]({{% ref "blog/v0.11" %}})
+      Hextra **v0.11** is here! 🎉 Discover [what's new]({{% relref "blog/v0.11" %}})
 
   navbar:
     displayTitle: true
@@ -225,6 +239,12 @@ params:
 
     article:
       displayPagination: true
+
+  archives:
+    # Source section used for the archives page.
+    section: blog
+    # Date format for archive list items.
+    dateFormat: "Jan 02"
 
   toc:
     displayTags: true
