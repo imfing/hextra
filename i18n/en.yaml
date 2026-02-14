@@ -1,3 +1,21 @@
+# Accessibility labels (screen reader only)
+closeBanner: "Close banner"
+menu: "Menu"
+mermaidDiagram: "Diagram"
+pdfViewer: "PDF viewer"
+permalinkLabel: "Permalink for this section"
+playbackTime: "Playback time"
+searchResults: "Search results"
+skipToContent: "Skip to content"
+tableOfContents: "Table of contents"
+terminalRecording: "Terminal recording"
+togglePageContextMenu: "Toggle page context menu"
+toggleSection: "Toggle section"
+
+# Accessibility live-region/status text
+resultsFound: "%d results found"
+
+# User-facing UI text
 archives: "Archives"
 backToTop: "Scroll to top"
 changeLanguage: "Change language"

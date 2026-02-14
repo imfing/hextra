@@ -94,6 +94,28 @@ The `docs/` directory serves as both documentation and testing ground:
 - Chroma syntax highlighting themes in `assets/css/chroma/`
 - CSS compilation requires Node.js dependencies (PostCSS, Tailwind CSS v4+)
 
+#### Rebuilding CSS after template changes
+
+Tailwind CSS relies on `docs/hugo_stats.json` to know which HTML tags, classes, and IDs are actually used in the built site, so it can tree-shake unused styles. When you modify layouts, partials, or shortcodes you must **regenerate `hugo_stats.json` first**, then rebuild the CSS:
+
+1. **Generate `docs/hugo_stats.json`** — Run Hugo with the `dev.toml` config (which sets `build.buildStats.enable = true`):
+
+   ```bash
+   # Using npm (starts a dev server that writes hugo_stats.json on every rebuild):
+   npm run dev:theme
+
+   # Or a one-shot build using the raw Hugo command:
+   hugo --config=hugo.yaml,../dev.toml --themesDir=../.. --source=docs
+   ```
+
+2. **Build the CSS** — With an up-to-date `hugo_stats.json` in place, compile the stylesheet:
+
+   ```bash
+   npm run build:css
+   ```
+
+> **Why two steps?** `dev.toml` mounts `docs/hugo_stats.json` into the Hugo asset pipeline (`assets/notwatching/hugo_stats.json`) and configures a cache-buster so that changes to the stats file trigger a CSS recompile during `dev:theme`. When running outside the dev server you need to perform these steps manually in order.
+
 ### Customization Points
 
 - Custom partials: `layouts/_partials/custom/`
@@ -146,6 +168,22 @@ The `docs/` directory serves as both documentation and testing ground:
 - Component-based CSS organization in `assets/css/components/`
 - Compiled output goes to `assets/css/compiled/main.css`
 - Prettier formatting for Go templates and code consistency
+
+### Accessibility (WCAG Compliance)
+
+All new features and UI changes must follow the [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/) at the **AA** conformance level. Key requirements:
+
+- **Semantic HTML**: Use appropriate elements (`<nav>`, `<main>`, `<aside>`, `<button>`, `<ul>`, etc.) instead of generic `<div>`/`<span>` where applicable.
+- **ARIA attributes**: Add `aria-label`, `aria-expanded`, `aria-controls`, `aria-current`, `role`, and other ARIA attributes to interactive components (menus, toggles, dropdowns, modals) so screen readers can interpret them.
+- **Keyboard navigation**: All interactive elements must be reachable and operable via keyboard (`Tab`, `Enter`, `Escape`, arrow keys). Manage focus appropriately when opening/closing menus, modals, and drawers.
+- **Focus indicators**: Never remove visible focus outlines. Use the existing `hextra-focus` utility or equivalent visible focus ring styles.
+- **Color contrast**: Text and interactive elements must meet WCAG AA contrast ratios (4.5:1 for normal text, 3:1 for large text). Verify in both light and dark modes.
+- **Images and icons**: Decorative SVGs/icons should have `aria-hidden="true"`. Meaningful images need descriptive `alt` text.
+- **Skip links and landmarks**: Preserve existing skip-navigation links and ARIA landmark roles (`role="navigation"`, `role="search"`, etc.).
+- **Live regions**: Use `aria-live` for dynamic content updates (e.g., search results, status messages) so assistive technology announces changes.
+- **Form controls**: Associate `<label>` elements with inputs. Provide accessible names for buttons that contain only icons.
+
+When introducing a new component or modifying an existing one, verify it works with keyboard-only navigation and review the rendered HTML for proper semantics and ARIA usage.
 
 ### Testing & Quality Assurance
 

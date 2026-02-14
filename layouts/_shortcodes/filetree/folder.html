@@ -11,7 +11,7 @@ A folder in a file tree.
 {{- $state := .Get "state" | default "open" }}
 
 <li class="hx:group hx:flex hx:list-none hx:flex-col">
-  <button class="hextra-filetree-folder hx:inline-flex hx:cursor-pointer hx:items-center hx:py-1 hx:hover:opacity-60">
+  <button class="hextra-filetree-folder hx:inline-flex hx:cursor-pointer hx:items-center hx:py-1 hx:hover:opacity-60" aria-expanded="{{ if eq $state "open" }}true{{ else }}false{{ end }}">
     <span data-state="{{ $state }}" class="hx:data-[state=open]:hidden">
       {{- partial "utils/icon" (dict "name" "folder" "attributes" "width=1em") -}}
     </span>

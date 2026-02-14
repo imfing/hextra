@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dropdownToggles.forEach(t => {
         if (t !== toggle) {
           t.dataset.state = 'closed';
+          t.setAttribute('aria-expanded', 'false');
           const otherContainer = t.closest('.hextra-page-context-menu');
           const otherMenu = otherContainer.querySelector('.hextra-page-context-menu-dropdown');
           const otherChevron = t.querySelector('[data-chevron]');
@@ -79,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Toggle current
       toggle.dataset.state = isOpen ? 'closed' : 'open';
+      toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
       menu.classList.toggle('hx:hidden', isOpen);
 
       // Rotate chevron icon
@@ -95,12 +97,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isOutside) {
       dropdownToggles.forEach(toggle => {
         toggle.dataset.state = 'closed';
+        toggle.setAttribute('aria-expanded', 'false');
         const container = toggle.closest('.hextra-page-context-menu');
         const menu = container.querySelector('.hextra-page-context-menu-dropdown');
         const chevron = toggle.querySelector('[data-chevron]');
         menu.classList.add('hx:hidden');
         if (chevron) {
           chevron.style.transform = '';
+        }
+      });
+    }
+  });
+
+  // Close dropdown on Escape key and return focus to toggle
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdownToggles.forEach(toggle => {
+        if (toggle.dataset.state === 'open') {
+          const container = toggle.closest('.hextra-page-context-menu');
+          closeDropdown(container);
+          toggle.focus();
         }
       });
     }
@@ -117,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const chevron = toggle.querySelector('[data-chevron]');
     toggle.dataset.state = 'closed';
+    toggle.setAttribute('aria-expanded', 'false');
     menu.classList.add('hx:hidden');
     if (chevron) {
       chevron.style.transform = '';

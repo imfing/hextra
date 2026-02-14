@@ -8,9 +8,10 @@ function enableCollapsibles() {
   buttons.forEach(function (button) {
     button.addEventListener("click", function (e) {
       e.preventDefault();
-      const list = button.parentElement.parentElement;
+      const list = button.closest('li');
       if (list) {
-        list.classList.toggle("open")
+        list.classList.toggle("open");
+        button.setAttribute('aria-expanded', list.classList.contains('open') ? 'true' : 'false');
       }
     });
   });
