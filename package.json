@@ -14,8 +14,7 @@
     "postcss-cli": "^11.0.1",
     "prettier": "^3.8.0",
     "prettier-plugin-go-template": "^0.0.15",
-    "serve": "^14.2.4",
-    "tailwindcss": "^4.1.18",
-    "xml2js": "^0.6.2"
+    "serve": "^14.2.5",
+    "tailwindcss": "^4.1.18"
   }
 }

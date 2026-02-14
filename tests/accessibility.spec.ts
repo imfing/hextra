@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { parseStringPromise } from "xml2js";
 
 const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag22aa"];
 // TODO: Re-enable once known baseline issues are resolved and tracked.
@@ -9,6 +8,27 @@ const DISABLED_RULES = ["color-contrast", "target-size"];
 type Violation = Awaited<
   ReturnType<InstanceType<typeof AxeBuilder>["analyze"]>
 >["violations"][number];
+
+function decodeXmlEntities(value: string): string {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+function parseLocUrlsFromSitemap(xml: string): string[] {
+  const locRegex = /<loc>\s*([^<]+?)\s*<\/loc>/gi;
+  const urls: string[] = [];
+  let match: RegExpExecArray | null;
+
+  while ((match = locRegex.exec(xml)) !== null) {
+    urls.push(decodeXmlEntities(match[1]));
+  }
+
+  return urls;
+}
 
 async function getEnglishPages(baseURL: string): Promise<string[]> {
   const sitemapUrl = `${baseURL}/en/sitemap.xml`;
@@ -20,13 +40,7 @@ async function getEnglishPages(baseURL: string): Promise<string[]> {
   }
 
   const xml = await response.text();
-  const sitemap = (await parseStringPromise(xml)) as {
-    urlset?: { url?: Array<{ loc?: string[] }> };
-  };
-
-  const pages = (sitemap.urlset?.url ?? [])
-    .map((entry) => entry.loc?.[0])
-    .filter((url): url is string => Boolean(url))
+  const pages = parseLocUrlsFromSitemap(xml)
     .map((url) => {
       try {
         return new URL(url).pathname;

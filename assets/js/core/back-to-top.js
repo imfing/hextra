@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("scroll", (e) => {
       if (window.scrollY > 300) {
         backToTop.classList.remove("hx:opacity-0");
+        backToTop.removeAttribute("tabindex");
       } else {
         backToTop.classList.add("hx:opacity-0");
+        backToTop.setAttribute("tabindex", "-1");
       }
     });
   }
