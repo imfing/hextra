@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Add active class to current link
         targetLink.classList.add("hextra-toc-active");
-        targetLink.setAttribute("aria-current", "true");
+        targetLink.setAttribute("aria-current", "location");
         currentActiveLink = targetLink;
       }
     },
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
           currentActiveLink.removeAttribute("aria-current");
         }
         targetLink.classList.add("hextra-toc-active");
-        targetLink.setAttribute("aria-current", "true");
+        targetLink.setAttribute("aria-current", "location");
         currentActiveLink = targetLink;
 
         // Re-enable observer after scroll settles

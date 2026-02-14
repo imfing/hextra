@@ -25,11 +25,25 @@ document.addEventListener('DOMContentLoaded', function () {
     return svg;
   }
 
-  // Make scrollable code blocks focusable for keyboard users
-  document.querySelectorAll('.hextra-code-block pre, .highlight pre').forEach(function (pre) {
-    if (pre.scrollWidth > pre.clientWidth) {
-      pre.setAttribute('tabindex', '0');
+  // Make scrollable code blocks focusable for keyboard users.
+  const updateScrollableCodeBlocks = () => {
+    document.querySelectorAll('.hextra-code-block pre, .highlight pre').forEach(function (pre) {
+      if (pre.scrollWidth > pre.clientWidth) {
+        pre.setAttribute('tabindex', '0');
+      } else {
+        pre.removeAttribute('tabindex');
+      }
+    });
+  };
+
+  updateScrollableCodeBlocks();
+
+  let resizeRaf;
+  window.addEventListener('resize', () => {
+    if (resizeRaf) {
+      cancelAnimationFrame(resizeRaf);
     }
+    resizeRaf = requestAnimationFrame(updateScrollableCodeBlocks);
   });
 
   document.querySelectorAll('.hextra-code-copy-btn').forEach(function (button) {

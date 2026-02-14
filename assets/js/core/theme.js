@@ -4,12 +4,15 @@
   const themes = ["light", "dark"];
 
   const themeToggleButtons = document.querySelectorAll(".hextra-theme-toggle");
-  const themeToggleOptions = document.querySelectorAll(".hextra-theme-toggle-options button[role=menuitem]");
+  const themeToggleOptions = document.querySelectorAll(".hextra-theme-toggle-options button[role=menuitemradio]");
 
   function applyTheme(theme) {
     theme = themes.includes(theme) ? theme : "system";
 
     themeToggleButtons.forEach((btn) => btn.parentElement.dataset.theme = theme );
+    themeToggleOptions.forEach((option) => {
+      option.setAttribute('aria-checked', option.dataset.item === theme ? 'true' : 'false');
+    });
 
     localStorage.setItem("color-theme", theme);
   }
@@ -43,7 +46,7 @@
 
       // Focus first menuitem when opening
       if (isOpen) {
-        const firstItem = toggler.nextElementSibling.querySelector('button[role=menuitem]');
+        const firstItem = toggler.nextElementSibling.querySelector('button[role=menuitemradio]');
         if (firstItem) firstItem.focus();
       }
     });
@@ -65,7 +68,7 @@
   // Keyboard navigation for the theme menu
   document.querySelectorAll('.hextra-theme-toggle-options[role=menu]').forEach(function (menu) {
     menu.addEventListener('keydown', function (e) {
-      const items = Array.from(menu.querySelectorAll('button[role=menuitem]'));
+      const items = Array.from(menu.querySelectorAll('button[role=menuitemradio]'));
       const currentIndex = items.indexOf(document.activeElement);
       let newIndex;
 

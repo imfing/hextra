@@ -1,7 +1,3 @@
 .hextra-badge {
   @apply hx:inline-flex hx:items-center;
 }
-
-a:focus-visible > .hextra-badge > :first-child {
-  @apply hx:relative hx:z-1 hx:hextra-focus;
-}

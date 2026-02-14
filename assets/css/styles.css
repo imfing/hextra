@@ -51,10 +51,6 @@ body {
   @apply hx:focus-visible:outline-none hx:focus-visible:ring-inset hx:focus-visible:ring-2 hx:focus-visible:ring-primary-200 hx:dark:focus-visible:ring-primary-800 hx:focus-visible:ring-offset-0;
 }
 
-@utility hextra-focus-visible-none {
-  @apply hx:focus-visible:outline-none hx:focus-visible:ring-0 hx:focus-visible:ring-offset-0;
-}
-
 @layer base {
   abbr:where([title]) {
     cursor: help;
@@ -71,14 +67,9 @@ body {
 }
 
 @layer base {
-  a:focus-visible,
-  button:focus-visible,
-  [role="tab"]:focus-visible,
-  [role="menuitem"]:focus-visible,
-  input:focus-visible,
-  select:focus-visible,
-  textarea:focus-visible,
-  [tabindex="0"]:focus-visible {
+  :where(a, button, [role="tab"], [role="menuitem"], [role="menuitemradio"], input, select, textarea, [tabindex="0"]):not(
+      [class*="hextra-focus-visible"]
+    ):focus-visible {
     @apply hx:hextra-focus;
   }
 }

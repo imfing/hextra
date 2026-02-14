@@ -17,7 +17,7 @@
     type="button"
     aria-label="{{ $changeTheme }}"
     aria-expanded="false"
-    aria-haspopup="true"
+    aria-haspopup="menu"
   >
     <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
       {{- partial "utils/icon.html" (dict "name" "sun" "attributes" (printf `height=%d class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden"` $iconHeight)) -}}
@@ -34,10 +34,11 @@
     data-theme="light"
     role="menu"
   >
-    <li class="hx:flex hx:flex-col">
+    <li role="none" class="hx:flex hx:flex-col">
       <button
         type="button"
-        role="menuitem"
+        role="menuitemradio"
+        aria-checked="true"
         tabindex="-1"
         data-item="light"
         class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0"
@@ -48,10 +49,11 @@
          </span>
       </button>
     </li>
-    <li class="hx:flex hx:flex-col">
+    <li role="none" class="hx:flex hx:flex-col">
       <button
         type="button"
-        role="menuitem"
+        role="menuitemradio"
+        aria-checked="false"
         tabindex="-1"
         data-item="dark"
         class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0"
@@ -62,10 +64,11 @@
          </span>
       </button>
     </li>
-    <li class="hx:flex hx:flex-col">
+    <li role="none" class="hx:flex hx:flex-col">
       <button
         type="button"
-        role="menuitem"
+        role="menuitemradio"
+        aria-checked="false"
         tabindex="-1"
         data-item="system"
         class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0"

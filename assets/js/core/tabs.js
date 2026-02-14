@@ -7,7 +7,7 @@
         tab.setAttribute('aria-selected', 'true');
         tab.tabIndex = 0;
       } else {
-        tab.removeAttribute('aria-selected');
+        tab.setAttribute('aria-selected', 'false');
         tab.tabIndex = -1;
       }
     });
@@ -15,6 +15,7 @@
     if (!panelsContainer) return;
     Array.from(panelsContainer.children).forEach((panel, i) => {
       panel.dataset.state = i === index ? 'selected' : '';
+      panel.setAttribute('aria-hidden', i === index ? 'false' : 'true');
       if (i === index) {
         panel.tabIndex = 0;
       } else {

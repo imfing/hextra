@@ -29,17 +29,18 @@
           data-state="closed"
           aria-label="{{ (T "togglePageContextMenu") | default "Toggle page context menu" }}"
           aria-expanded="false"
-          aria-haspopup="true"
+          aria-haspopup="menu"
         >
           <div class="hx:size-4 hx:transition-transform hx:duration-200" data-chevron>
             {{- partial "utils/icon.html" (dict "name" "chevron-down" "attributes" "height=16 width=16") -}}
           </div>
         </button>
       </div>
-      <ul class="hextra-page-context-menu-dropdown not-prose hx:hidden hx:absolute hx:top-full hx:left-0 hx:sm:left-auto hx:sm:right-0 hx:mt-1 hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-lg hx:border hx:border-gray-200 hx:bg-white hx:p-1 hx:text-sm hx:shadow-lg hx:dark:border-neutral-700 hx:dark:bg-neutral-900">
-        <li>
+      <ul class="hextra-page-context-menu-dropdown not-prose hx:hidden hx:absolute hx:top-full hx:left-0 hx:sm:left-auto hx:sm:right-0 hx:mt-1 hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-lg hx:border hx:border-gray-200 hx:bg-white hx:p-1 hx:text-sm hx:shadow-lg hx:dark:border-neutral-700 hx:dark:bg-neutral-900" role="menu">
+        <li role="none">
           <button
             data-action="copy"
+            role="menuitem"
             class="hx:flex hx:w-full hx:cursor-pointer hx:select-none hx:items-center hx:gap-2 hx:whitespace-nowrap hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:text-gray-700 hx:outline-none hx:transition-colors hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-gray-300 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100"
           >
             <div class="hx:size-4 hx:shrink-0 hx:text-gray-500 hx:dark:text-gray-400">
@@ -48,10 +49,11 @@
             {{ i18n "copyAsMarkdown" }}
           </button>
         </li>
-        <li>
+        <li role="none">
           <button
             data-action="view"
             data-url="{{ $markdownURL }}"
+            role="menuitem"
             class="hx:flex hx:w-full hx:cursor-pointer hx:select-none hx:items-center hx:gap-2 hx:whitespace-nowrap hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:text-gray-700 hx:outline-none hx:transition-colors hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-gray-300 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100"
           >
             <div class="hx:size-4 hx:shrink-0 hx:text-gray-500 hx:dark:text-gray-400">
@@ -64,11 +66,12 @@
         <li class="hx:my-1 hx:h-px hx:bg-gray-200 hx:dark:bg-neutral-700" role="separator"></li>
         {{- range $customLinks -}}
           {{- $linkURL := partial "utils/template-url.html" (dict "template" .url "values" (dict "url" $pageURL "title" $pageTitle "markdown_url" $markdownURL)) -}}
-          <li>
+          <li role="none">
             <a
               href="{{ $linkURL }}"
               target="_blank"
               rel="noopener noreferrer"
+              role="menuitem"
               class="hx:flex hx:w-full hx:cursor-pointer hx:select-none hx:items-center hx:gap-2 hx:whitespace-nowrap hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:text-gray-700 hx:outline-none hx:transition-colors hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-gray-300 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100"
             >
               {{- with .icon -}}
