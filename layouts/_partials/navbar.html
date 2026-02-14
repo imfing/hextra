@@ -52,7 +52,7 @@
     {{- end -}}
 
 
-    <button type="button" aria-label="{{ (T "menu") | default "Menu" }}" aria-expanded="false" class="hextra-hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden">
+    <button type="button" aria-label="{{ (T "menu") | default "Menu" }}" aria-expanded="false" class="hextra-hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden hx:hextra-focus-visible-inset">
       {{- partial "utils/icon.html" (dict "name" "hamburger-menu" "attributes" (printf "height=%d" $iconHeight)) -}}
     </button>
   </nav>

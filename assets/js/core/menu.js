@@ -53,9 +53,9 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleMenu();
   });
 
-  // Close menu on Escape key
+  // Close menu on Escape key (mobile only)
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isMenuOpen()) {
+    if (e.key === 'Escape' && mobileQuery.matches && isMenuOpen()) {
       toggleMenu();
     }
   });
