@@ -12,8 +12,8 @@ echo "Using base URL: $BASE_URL"
 MAIN_VERSION="v0.11.1:latest:docs"
 VERSIONS=(
   "main:latest:docs" # latest version always builds from main
+  "v0.11.1:v0.11:docs"
   "v0.10.2:v0.10:exampleSite"
-  "v0.9.6:v0.9:exampleSite"
 )
 
 # Parse main version
