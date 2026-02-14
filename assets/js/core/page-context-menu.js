@@ -109,6 +109,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Close dropdown on Escape key and return focus to toggle
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdownToggles.forEach(toggle => {
+        if (toggle.dataset.state === 'open') {
+          const container = toggle.closest('.hextra-page-context-menu');
+          closeDropdown(container);
+          toggle.focus();
+        }
+      });
+    }
+  });
+
   // Helper to close dropdown
   const closeDropdown = (container) => {
     if (!container) return;
