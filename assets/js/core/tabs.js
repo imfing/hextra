@@ -36,9 +36,10 @@
 
   document.querySelectorAll('.hextra-tabs-toggle').forEach((button) => {
     button.addEventListener('click', function (e) {
-      const container = e.target.parentElement;
+      const targetButton = e.currentTarget;
+      const container = targetButton.parentElement;
       const index = Array.from(container.querySelectorAll('.hextra-tabs-toggle')).indexOf(
-        e.target
+        targetButton
       );
 
       if (container.dataset.tabGroup) {
