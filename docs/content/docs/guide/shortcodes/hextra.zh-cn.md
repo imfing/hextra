@@ -1,8 +1,6 @@
 ---
 title: Hextra Shortcodes
 linkTitle: Hextra
-sidebar:
-  exclude: true
 next: /docs/guide/deploy-site
 ---
 
