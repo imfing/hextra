@@ -14,8 +14,8 @@ hasCJKLanguage: true
 
 outputs:
   home: [html, llms]
-  page: [html]
-  section: [html, rss]
+  page: [html, markdown]
+  section: [html, rss, markdown]
 
 defaultContentLanguage: en
 languages:
@@ -32,7 +32,13 @@ languages:
     params:
       banner:
         message: |
-          هگزترا **v0.11** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% ref "blog/v0.11" %}})
+          هگزترا **v0.11** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% relref "blog/v0.11" %}})
+      page:
+        contextMenu:
+          links:
+            - name: باز کردن در ChatGPT
+              icon: chatgpt
+              url: "https://chatgpt.com/?hints=search&q=%D8%AF%D8%A7%D8%B1%D9%85+%D8%A7%DB%8C%D9%86+%D9%85%D8%B3%D8%AA%D9%86%D8%AF%D8%A7%D8%AA+%D8%B1%D8%A7+%D9%85%DB%8C%E2%80%8C%D8%AE%D9%88%D8%A7%D9%86%D9%85%3A+{url}%0A%DA%A9%D9%85%DA%A9%D9%85+%DA%A9%D9%86+%D8%A8%D9%81%D9%87%D9%85%D9%85+%DA%86%D8%B7%D9%88%D8%B1+%D8%A7%D8%B2+%D8%A2%D9%86+%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D9%87+%DA%A9%D9%86%D9%85."
   ja:
     languageName: 日本語
     languageCode: ja-JP
@@ -41,7 +47,13 @@ languages:
     params:
       banner:
         message: |
-          Hextra **v0.11** がリリースされました！🎉 [新着情報はこちら]({{% ref "blog/v0.11" %}})
+          Hextra **v0.11** がリリースされました！🎉 [新着情報はこちら]({{% relref "blog/v0.11" %}})
+      page:
+        contextMenu:
+          links:
+            - name: ChatGPTで開く
+              icon: chatgpt
+              url: "https://chatgpt.com/?hints=search&q=%E3%81%93%E3%81%AE%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%84%E3%81%BE%E3%81%99%3A+{url}%0A%E4%BD%BF%E3%81%84%E6%96%B9%E3%82%92%E7%90%86%E8%A7%A3%E3%81%99%E3%82%8B%E3%81%AE%E3%82%92%E6%89%8B%E4%BC%9D%E3%81%A3%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82"
   zh-cn:
     languageName: 简体中文
     languageCode: zh-CN
@@ -50,7 +62,13 @@ languages:
     params:
       banner:
         message: |
-          Hextra **v0.11** 发布啦！🎉 查看[更新内容]({{% ref "blog/v0.11" %}})
+          Hextra **v0.11** 发布啦！🎉 查看[更新内容]({{% relref "blog/v0.11" %}})
+      page:
+        contextMenu:
+          links:
+            - name: 在 ChatGPT 中打开
+              icon: chatgpt
+              url: "https://chatgpt.com/?hints=search&q=%E6%88%91%E6%AD%A3%E5%9C%A8%E9%98%85%E8%AF%BB%E8%BF%99%E4%B8%AA%E6%96%87%E6%A1%A3%3A+{url}%0A%E5%B8%AE%E6%88%91%E7%90%86%E8%A7%A3%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%AE%83%E3%80%82"
 
 module:
   hugoVersion:
@@ -84,19 +102,18 @@ menu:
       weight: 1
     - identifier: versions
       name: Versions
-      weight: 2
+      weight: 5
     - identifier: blog
       name: Blog
       pageRef: /blog
-      weight: 3
-    - identifier: about
-      name: About
-      pageRef: /about
+      weight: 2
+    - identifier: more
+      name: More
       weight: 4
     - identifier: showcase
       name: Showcase
       pageRef: /showcase
-      weight: 5
+      weight: 3
       params:
         type: link
         icon: collection
@@ -124,6 +141,21 @@ menu:
       name: v0.9 ↗
       url: https://imfing.github.io/hextra/versions/v0.9/
       parent: versions
+    - identifier: about
+      name: About
+      pageRef: /about
+      parent: more
+      weight: 1
+    - identifier: archives
+      name: Archives
+      pageRef: /archives
+      parent: more
+      weight: 2
+    - identifier: glossary
+      name: Glossary
+      pageRef: /glossary
+      parent: more
+      weight: 3
 
   sidebar:
     - identifier: more
@@ -148,7 +180,7 @@ params:
   banner:
     key: 'announcement-v0.11'
     message: |
-      Hextra **v0.11** is here! 🎉 Discover [what's new]({{% ref "blog/v0.11" %}})
+      Hextra **v0.11** is here! 🎉 Discover [what's new]({{% relref "blog/v0.11" %}})
 
   navbar:
     displayTitle: true
@@ -175,6 +207,9 @@ params:
   # Display the last modification date
   displayUpdatedDate: true
   dateFormat: "January 2, 2006"
+
+  # Display the author name of the last modified date
+  displayUpdatedAuthor: false
 
   # Search
   # flexsearch is enabled by default
@@ -205,6 +240,12 @@ params:
     article:
       displayPagination: true
 
+  archives:
+    # Source section used for the archives page.
+    section: blog
+    # Date format for archive list items.
+    dateFormat: "Jan 02"
+
   toc:
     displayTags: true
 
@@ -219,6 +260,18 @@ params:
     width: normal
     # tabs:
     #   sync: true
+    contextMenu:
+      enable: true
+      links:
+        - name: Open in ChatGPT
+          icon: chatgpt
+          url: "https://chatgpt.com/?hints=search&q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+        - name: Open in Claude
+          icon: claude
+          url: "https://claude.ai/new?q=I%27m+looking+at+this+documentation%3A+{url}%0AHelp+me+understand+how+to+use+it."
+
+  imageZoom:
+    enable: true
 
   comments:
     enable: false

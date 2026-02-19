@@ -13,4 +13,5 @@ next: /docs/advanced/multi-language
   {{< card link="multi-language" title="多言語対応" icon="translate" >}}
   {{< card link="customization" title="カスタマイズ" icon="pencil" >}}
   {{< card link="comments" title="コメントシステム" icon="chat-alt" >}}
+  {{< card link="additional-pages" title="追加ページ" icon="library" >}}
 {{< /cards >}}

@@ -1,0 +1,85 @@
+{{- /* Medium Zoom */ -}}
+
+{{- $zoomBase := "" -}}
+{{- $useDefaultCdn := true -}}
+{{- with site.Params.imageZoom.base -}}
+  {{- $zoomBase = . -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- $zoomJsAsset := "" -}}
+{{- with site.Params.imageZoom.js -}}
+  {{- $zoomJsAsset = . -}}
+{{- end -}}
+
+{{- /* If only js is set without base, use local asset loading */ -}}
+{{- if and $useDefaultCdn (ne $zoomJsAsset "") -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- /* Set default CDN base if needed */ -}}
+{{- if $useDefaultCdn -}}
+  {{- $zoomBase = "https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist" -}}
+{{- end -}}
+
+{{- $isRemoteBase := or (strings.HasPrefix $zoomBase "http://") (strings.HasPrefix $zoomBase "https://") -}}
+{{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
+
+{{- /* JS retrieval: get raw JS from either local asset or remote, then process */ -}}
+{{- if $isRemoteBase -}}
+  {{- $jsPath := cond (ne $zoomJsAsset "") $zoomJsAsset (printf "medium-zoom%s.js" $minSuffix) -}}
+  {{- $zoomJsUrl := printf "%s/%s" $zoomBase $jsPath -}}
+  {{- with try (resources.GetRemote $zoomJsUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Medium Zoom js file from %s. Reason: %s." $zoomJsUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy (printf "js/medium-zoom%s.js" $minSuffix) . -}}
+        {{- $zoomJs := . | fingerprint -}}
+        <script defer src="{{ $zoomJs.RelPermalink }}" integrity="{{ $zoomJs.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $zoomJsAsset -}}
+  {{- with resources.Get $zoomJsAsset -}}
+    {{- $zoomJs := . | fingerprint -}}
+    <script defer src="{{ $zoomJs.RelPermalink }}" integrity="{{ $zoomJs.Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- else -}}
+    {{- errorf "Medium Zoom js asset not found at %q" $zoomJsAsset -}}
+  {{- end -}}
+{{- end -}}
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!window.mediumZoom) {
+      return;
+    }
+
+    const getOverlay = () => {
+      return document.documentElement.classList.contains("dark")
+        ? "rgba(17, 17, 17, 0.98)"
+        : "rgba(255, 255, 255, 0.98)";
+    };
+
+    const zoom = window.mediumZoom("[data-zoomable]", {
+      background: getOverlay(),
+    });
+
+    const style = document.createElement("style");
+    style.textContent = `
+      .medium-zoom-overlay {
+        z-index: 1000;
+      }
+      .medium-zoom-image--opened {
+        z-index: 1001;
+      }
+    `;
+    document.head.appendChild(style);
+
+    new MutationObserver(() => {
+      zoom.update({ background: getOverlay() });
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  });
+</script>

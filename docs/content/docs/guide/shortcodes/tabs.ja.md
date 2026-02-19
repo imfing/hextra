@@ -52,6 +52,30 @@ next: /docs/guide/deploy-site
 {{< /tabs >}}
 
 
+### アイコンを追加する
+
+各タブに `icon` を指定すると、ラベルの前にアイコンを表示できます。
+利用可能なアイコンの一覧は [Icon ショートコード](../icon) ページを参照してください。
+
+```
+{{</* tabs */>}}
+
+  {{</* tab name="Photos" icon="photograph" */>}}写真ライブラリを管理・整理します。{{</* /tab */>}}
+  {{</* tab name="Music" icon="music-note" */>}}お気に入りの曲を閲覧・再生します。{{</* /tab */>}}
+  {{</* tab name="Videos" icon="film" */>}}動画コンテンツを視聴・ストリーミングします。{{</* /tab */>}}
+
+{{</* /tabs */>}}
+```
+
+{{< tabs >}}
+
+{{< tab name="Photos" icon="photograph" >}}写真ライブラリを管理・整理します。{{< /tab >}}
+{{< tab name="Music" icon="music-note" >}}お気に入りの曲を閲覧・再生します。{{< /tab >}}
+{{< tab name="Videos" icon="film" >}}動画コンテンツを視聴・ストリーミングします。{{< /tab >}}
+
+{{< /tabs >}}
+
+
 ### Markdown の使用
 
 コードブロックを含む Markdown 構文もサポートされています:

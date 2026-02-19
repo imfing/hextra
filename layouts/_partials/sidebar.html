@@ -24,7 +24,7 @@
   {{- if (site.Params.search.enable | default true) -}}
     <!-- Search bar on small screen -->
     <div class="hx:px-4 hx:pt-4 hx:md:hidden">
-      {{ partial "search.html" }}
+      {{ partial "search.html" (dict "location" "sidebar") }}
     </div>
   {{- end -}}
   <div class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
@@ -110,7 +110,7 @@
               {{- $linkTitle = . -}}
             {{- end -}}
           {{- end -}}
-          {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
+          {{- template "sidebar-item-link" dict "context" . "active" $active "open" $shouldOpen "title" $linkTitle "link" .RelPermalink -}}
           {{- if and $toc $active (ne .Params.toc false) -}}
             {{- template "sidebar-toc" dict "page" . -}}
           {{- end -}}
@@ -119,14 +119,14 @@
       {{- end -}}
     {{- end -}}
   {{- else -}}
-    <div class="hx:ltr:pr-0 hx:overflow-hidden">
+    <div class="hextra-sidebar-children hx:ltr:pr-1 hx:rtl:pl-1 hx:overflow-hidden">
       <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'>
         {{- range $items.ByWeight }}
           {{- $active := eq $pageURL .RelPermalink -}}
           {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
           {{- $linkTitle := partial "utils/title" . -}}
           <li class="hx:flex hx:flex-col {{ if $shouldOpen }}open{{ end }}">
-            {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
+            {{- template "sidebar-item-link" dict "context" . "active" $active "open" $shouldOpen "title" $linkTitle "link" .RelPermalink -}}
             {{- if and $toc $active (ne .Params.toc false) -}}
               {{ template "sidebar-toc" dict "page" . }}
             {{- end }}
@@ -174,7 +174,7 @@
           {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
         {{- end -}}
       {{- end -}}
-      <li>{{ template "sidebar-item-link" dict "active" false "title" $name "link" $link }}</li>
+      <li>{{ template "sidebar-item-link" dict "active" false "open" false "title" $name "link" $link }}</li>
     {{ end }}
   {{- end -}}
 {{- end -}}
@@ -182,27 +182,31 @@
 {{- define "sidebar-item-link" -}}
   {{- $external := strings.HasPrefix .link "http" -}}
   {{- $open := .open | default true -}}
-  <a
-    class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-    {{- if .active }}
-      hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500
-    {{- else }}
-      hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50
-    {{- end -}}"
-    href="{{ .link }}"
-    {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
-  >
-    {{- .title -}}
-    {{- with .context }}
-      {{- if or .RegularPages .Sections }}
-        <span class="hextra-sidebar-collapsible-button">
-          {{- template "sidebar-collapsible-button" -}}
-        </span>
-      {{- end }}
-    {{ end -}}
-  </a>
+  {{- $hasChildren := false -}}
+  {{- with .context }}{{ if or .RegularPages .Sections }}{{ $hasChildren = true }}{{ end }}{{ end -}}
+  <div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active="{{ if .active }}true{{ else }}false{{ end }}">
+    <a
+      class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none]
+      {{- if $hasChildren }} hx:ltr:pr-8 hx:rtl:pl-8{{- end }}
+      hx:hextra-focus-visible-inset
+      {{- if .active }}
+        hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500
+      {{- else }}
+        hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50
+      {{- end -}}"
+      href="{{ .link }}"
+      {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
+    >
+      <span class="hx:min-w-0 [word-break:break-word]">{{- .title -}}</span>
+    </a>
+    {{- if $hasChildren }}
+      <button type="button" class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400 hx:group-hover:text-gray-900 hx:dark:group-hover:text-gray-50 hx:group-data-[active=true]:text-primary-800 hx:group-data-[active=true]:dark:text-primary-600 hx:hextra-focus-visible-inset" aria-label="{{ (T "toggleSection") | default "Toggle section" }}" aria-expanded="{{ if $open }}true{{ else }}false{{ end }}">
+        {{- template "sidebar-collapsible-button" -}}
+      </button>
+    {{- end }}
+  </div>
 {{- end -}}
 
 {{- define "sidebar-collapsible-button" -}}
-  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg>
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg>
 {{- end -}}
