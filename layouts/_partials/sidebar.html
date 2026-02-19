@@ -93,48 +93,50 @@
     {{- end -}}
   {{- end -}}
 
-  {{- if eq $level 0 -}}
-    {{- $topLevelItems := cond $useMainMenu $items $items.ByWeight -}}
-    {{- range $topLevelItems }}
-      {{- if .Params.sidebar.separator -}}
-        <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
-          <span class="hx:cursor-default">{{ partial "utils/title" . }}</span>
-        </li>
-      {{- else -}}
-        {{- $active := eq $pageURL .RelPermalink -}}
-        {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
-        <li class="{{ if $shouldOpen }}open{{ end }}">
-          {{- $linkTitle := partial "utils/title" . -}}
-          {{- if $useMainMenu -}}
-            {{- with index $menuNamesByPath .Path -}}
-              {{- $linkTitle = . -}}
-            {{- end -}}
-          {{- end -}}
-          {{- template "sidebar-item-link" dict "context" . "active" $active "open" $shouldOpen "title" $linkTitle "link" .RelPermalink -}}
-          {{- if and $toc $active (ne .Params.toc false) -}}
-            {{- template "sidebar-toc" dict "page" . -}}
-          {{- end -}}
-          {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
-        </li>
-      {{- end -}}
-    {{- end -}}
-  {{- else -}}
-    <div class="hextra-sidebar-children hx:ltr:pr-1 hx:rtl:pl-1 hx:overflow-hidden">
-      <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'>
-        {{- range $items.ByWeight }}
+  {{- if gt (len $items) 0 -}}
+    {{- if eq $level 0 -}}
+      {{- $topLevelItems := cond $useMainMenu $items $items.ByWeight -}}
+      {{- range $topLevelItems }}
+        {{- if .Params.sidebar.separator -}}
+          <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
+            <span class="hx:cursor-default">{{ partial "utils/title" . }}</span>
+          </li>
+        {{- else -}}
           {{- $active := eq $pageURL .RelPermalink -}}
           {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
-          {{- $linkTitle := partial "utils/title" . -}}
-          <li class="hx:flex hx:flex-col {{ if $shouldOpen }}open{{ end }}">
+          <li class="{{ if $shouldOpen }}open{{ end }}">
+            {{- $linkTitle := partial "utils/title" . -}}
+            {{- if $useMainMenu -}}
+              {{- with index $menuNamesByPath .Path -}}
+                {{- $linkTitle = . -}}
+              {{- end -}}
+            {{- end -}}
             {{- template "sidebar-item-link" dict "context" . "active" $active "open" $shouldOpen "title" $linkTitle "link" .RelPermalink -}}
             {{- if and $toc $active (ne .Params.toc false) -}}
-              {{ template "sidebar-toc" dict "page" . }}
-            {{- end }}
-            {{ template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc }}
+              {{- template "sidebar-toc" dict "page" . -}}
+            {{- end -}}
+            {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
           </li>
         {{- end -}}
-      </ul>
-    </div>
+      {{- end -}}
+    {{- else -}}
+      <div class="hextra-sidebar-children hx:ltr:pr-1 hx:rtl:pl-1 hx:overflow-hidden">
+        <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'>
+          {{- range $items.ByWeight }}
+            {{- $active := eq $pageURL .RelPermalink -}}
+            {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
+            {{- $linkTitle := partial "utils/title" . -}}
+            <li class="hx:flex hx:flex-col {{ if $shouldOpen }}open{{ end }}">
+              {{- template "sidebar-item-link" dict "context" . "active" $active "open" $shouldOpen "title" $linkTitle "link" .RelPermalink -}}
+              {{- if and $toc $active (ne .Params.toc false) -}}
+                {{ template "sidebar-toc" dict "page" . }}
+              {{- end }}
+              {{ template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc }}
+            </li>
+          {{- end -}}
+        </ul>
+      </div>
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
