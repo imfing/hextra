@@ -1,15 +1,16 @@
 /* Hugo template to derive CSS variables from site and page parameters */
 
 /* Do not remove the following comment. It is used by Hugo to render CSS variables.
-{{- $pageWidth := site.Params.page.width -}}
-{{- $maxPageWidth := cond (eq $pageWidth "wide") "90rem" (cond (eq $pageWidth "full") "100%" "80rem") -}}
-{{- $maxContentWidth := cond (eq $pageWidth "wide") "80rem" (cond (eq $pageWidth "full") "100%" "72rem") -}}
+{{- $layoutWidthValues := dict "normal" "80rem" "wide" "90rem" "full" "100%" -}}
+{{- $contentWidthValues := dict "normal" "72rem" "wide" "80rem" "full" "100%" -}}
+{{- $layoutWidthDefault := index $layoutWidthValues "normal" -}}
+{{- $contentWidthDefault := index $contentWidthValues "normal" -}}
 
-{{- $navbarWidth := site.Params.navbar.width -}}
-{{- $maxNavbarWidth := cond (eq $navbarWidth "wide") "90rem" (cond (eq $navbarWidth "full") "100%" "80rem") -}}
+{{- $maxPageWidth := (index $layoutWidthValues (site.Params.page.width | default "normal")) | default $layoutWidthDefault -}}
+{{- $maxNavbarWidth := (index $layoutWidthValues (site.Params.navbar.width | default "normal")) | default $layoutWidthDefault -}}
+{{- $maxFooterWidth := (index $layoutWidthValues (site.Params.footer.width | default "normal")) | default $layoutWidthDefault -}}
 
-{{- $footerWidth := site.Params.footer.width -}}
-{{- $maxFooterWidth := cond (eq $footerWidth "wide") "90rem" (cond (eq $footerWidth "full") "100%" "80rem") -}}
+{{- $maxContentWidth := (index $contentWidthValues (site.Params.page.content.width | default "normal")) | default $contentWidthDefault -}}
 */
 
 :root {

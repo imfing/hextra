@@ -364,16 +364,23 @@ params:
 
 ### Page Width
 
-The width of the page can be customized by the `params.page.width` parameter in the config file:
+The layout shell width can be customized by the `params.page.width` parameter in the config file, and the main reading content width can be customized separately with `params.page.content.width`:
 
 ```yaml {filename="hugo.yaml"}
 params:
   page:
     # full (100%), wide (90rem), normal (1280px)
     width: wide
+    content:
+      # normal (72rem), wide (80rem), full (100%)
+      width: normal
 ```
 
-There are three available options: `full`, `wide`, and `normal`. By default, the page width is set to `normal`.
+Available options for `params.page.width`: `full`, `wide`, `normal`.
+
+Available options for `params.page.content.width`: `normal`, `wide`, `full`.
+
+By default, both are set to `normal`.
 
 Similarly, the width of the navbar and footer can be customized by the `params.navbar.width` and `params.footer.width` parameters.
 

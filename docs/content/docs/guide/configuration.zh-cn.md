@@ -342,16 +342,23 @@ params:
 
 ### 页面宽度
 
-页面宽度可以通过配置文件中的 `params.page.width` 参数自定义：
+页面整体布局宽度可通过 `params.page.width` 配置，正文内容宽度可通过 `params.page.content.width` 单独配置：
 
 ```yaml {filename="hugo.yaml"}
 params:
   page:
     # full (100%), wide (90rem), normal (1280px)
     width: wide
+    content:
+      # normal (72rem), wide (80rem), full (100%)
+      width: normal
 ```
 
-有三个可用选项：`full`、`wide` 和 `normal`。默认页面宽度为 `normal`。
+`params.page.width` 可用选项：`full`、`wide`、`normal`。
+
+`params.page.content.width` 可用选项：`normal`、`wide`、`full`。
+
+默认情况下二者都为 `normal`。
 
 类似地，导航栏和页脚的宽度可以通过 `params.navbar.width` 和 `params.footer.width` 参数自定义。
 
