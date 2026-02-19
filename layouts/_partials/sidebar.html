@@ -80,8 +80,8 @@
   {{- $useMainMenu := and (eq $level 0) $toc -}}
   {{- $menuNamesByPath := dict -}}
 
-  {{- $items := union .context.RegularPages .context.Sections -}}
-  {{- if and $useMainMenu (eq $level 0) -}}
+  {{- $items := where (union .context.RegularPages .context.Sections) "Params.sidebar.exclude" "!=" true -}}
+  {{- if $useMainMenu -}}
     {{- $items = slice -}}
     {{- range $menuItem := site.Menus.main -}}
       {{- with $menuItem.Page -}}
@@ -91,15 +91,10 @@
         {{- end -}}
       {{- end -}}
     {{- end -}}
-  {{- else -}}
-    {{- $items = where $items "Params.sidebar.exclude" "!=" true -}}
   {{- end -}}
 
   {{- if eq $level 0 -}}
-    {{- $topLevelItems := $items -}}
-    {{- if not $useMainMenu -}}
-      {{- $topLevelItems = $items.ByWeight -}}
-    {{- end -}}
+    {{- $topLevelItems := cond $useMainMenu $items $items.ByWeight -}}
     {{- range $topLevelItems }}
       {{- if .Params.sidebar.separator -}}
         <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
