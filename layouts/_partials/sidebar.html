@@ -77,66 +77,70 @@
   {{- $pageURL := .page.RelPermalink -}}
   {{- $level := .level -}}
   {{- $toc := .toc | default false -}}
+  {{- $useMainMenu := and (eq $level 0) $toc -}}
+  {{- $menuNamesByPath := dict -}}
 
-  {{- $items := slice -}}
-  {{- $itemsCandidates := union .context.RegularPages .context.Sections -}}
-
-  {{- if .context.IsHome -}}
-    {{- $allowedPaths := slice -}}
-    {{- range site.Menus.main -}}
-      {{- with .Page -}}
-        {{- $allowedPaths = $allowedPaths | append .Path -}}
-      {{- end -}}
-    {{- end -}}
-
-    {{- range $itemsCandidates -}}
-      {{- if in $allowedPaths .Path -}}
-        {{- $items = $items | append . -}}
-      {{- end -}}
-    {{- end -}}
-
-    {{- else -}}
-      {{- $items = $itemsCandidates -}}
-    {{- end -}}
-
-    {{- $items = where $items "Params.sidebar.exclude" "!=" true -}}
-    {{- if eq $level 0 -}}
-      {{- range $items.ByWeight }}
-        {{- if .Params.sidebar.separator -}}
-          <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
-            <span class="hx:cursor-default">{{ partial "utils/title" . }}</span>
-          </li>
-        {{- else -}}
-          {{- $active := eq $pageURL .RelPermalink -}}
-          {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
-          <li class="{{ if $shouldOpen }}open{{ end }}">
-            {{- $linkTitle := partial "utils/title" . -}}
-            {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
-            {{- if and $toc $active (ne .Params.toc false) -}}
-              {{- template "sidebar-toc" dict "page" . -}}
-            {{- end -}}
-            {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
-          </li>
+  {{- $items := union .context.RegularPages .context.Sections -}}
+  {{- if and $useMainMenu (eq $level 0) -}}
+    {{- $items = slice -}}
+    {{- range $menuItem := site.Menus.main -}}
+      {{- with $menuItem.Page -}}
+        {{- if ne .Params.sidebar.exclude true -}}
+          {{- $items = $items | append . -}}
+          {{- $menuNamesByPath = merge $menuNamesByPath (dict .Path (or (T $menuItem.Identifier) $menuItem.Name)) -}}
         {{- end -}}
       {{- end -}}
-    {{- else -}}
-      <div class="hx:ltr:pr-0 hx:overflow-hidden">
-        <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'>
-          {{- range $items.ByWeight }}
-            {{- $active := eq $pageURL .RelPermalink -}}
-            {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
-            {{- $linkTitle := partial "utils/title" . -}}
-            <li class="hx:flex hx:flex-col {{ if $shouldOpen }}open{{ end }}">
-              {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
-              {{- if and $toc $active (ne .Params.toc false) -}}
-                {{ template "sidebar-toc" dict "page" . }}
-              {{- end }}
-              {{ template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc }}
-            </li>
-          {{- end -}}
-        </ul>
-      </div>
     {{- end -}}
+  {{- else -}}
+    {{- $items = where $items "Params.sidebar.exclude" "!=" true -}}
+  {{- end -}}
+
+  {{- if eq $level 0 -}}
+    {{- $topLevelItems := $items -}}
+    {{- if not $useMainMenu -}}
+      {{- $topLevelItems = $items.ByWeight -}}
+    {{- end -}}
+    {{- range $topLevelItems }}
+      {{- if .Params.sidebar.separator -}}
+        <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
+          <span class="hx:cursor-default">{{ partial "utils/title" . }}</span>
+        </li>
+      {{- else -}}
+        {{- $active := eq $pageURL .RelPermalink -}}
+        {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
+        <li class="{{ if $shouldOpen }}open{{ end }}">
+          {{- $linkTitle := partial "utils/title" . -}}
+          {{- if $useMainMenu -}}
+            {{- with index $menuNamesByPath .Path -}}
+              {{- $linkTitle = . -}}
+            {{- end -}}
+          {{- end -}}
+          {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
+          {{- if and $toc $active (ne .Params.toc false) -}}
+            {{- template "sidebar-toc" dict "page" . -}}
+          {{- end -}}
+          {{- template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
+        </li>
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    <div class="hx:ltr:pr-0 hx:overflow-hidden">
+      <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'>
+        {{- range $items.ByWeight }}
+          {{- $active := eq $pageURL .RelPermalink -}}
+          {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}
+          {{- $linkTitle := partial "utils/title" . -}}
+          <li class="hx:flex hx:flex-col {{ if $shouldOpen }}open{{ end }}">
+            {{- template "sidebar-item-link" dict "context" . "active" $active "title" $linkTitle "link" .RelPermalink -}}
+            {{- if and $toc $active (ne .Params.toc false) -}}
+              {{ template "sidebar-toc" dict "page" . }}
+            {{- end }}
+            {{ template "sidebar-tree" dict "context" . "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc }}
+          </li>
+        {{- end -}}
+      </ul>
+    </div>
+  {{- end -}}
 {{- end -}}
 
 {{- define "sidebar-toc" -}}
