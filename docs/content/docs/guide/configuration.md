@@ -364,23 +364,26 @@ params:
 
 ### Page Width
 
-The layout shell width can be customized by the `params.page.width` parameter in the config file, and the main reading content width can be customized separately with `params.page.content.width`:
+The layout shell width can be customized by the `params.page.width` parameter in the config file:
 
 ```yaml {filename="hugo.yaml"}
 params:
   page:
     # full (100%), wide (90rem), normal (1280px)
     width: wide
-    content:
-      # normal (72rem), wide (80rem), full (100%)
-      width: normal
 ```
 
 Available options for `params.page.width`: `full`, `wide`, `normal`.
 
-Available options for `params.page.content.width`: `normal`, `wide`, `full`.
+The main reading content width remains fixed at `72rem` by default.
 
-By default, both are set to `normal`.
+To customize content width, override the CSS variable in your custom stylesheet:
+
+```css {filename="assets/css/custom.css"}
+:root {
+  --hextra-max-content-width: 100%;
+}
+```
 
 Similarly, the width of the navbar and footer can be customized by the `params.navbar.width` and `params.footer.width` parameters.
 

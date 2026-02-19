@@ -258,9 +258,6 @@ params:
   page:
     # full (100%), wide (90rem), normal (80rem)
     width: normal
-    content:
-      # normal (72rem), wide (80rem), full (100%)
-      width: normal
     # tabs:
     #   sync: true
     contextMenu:

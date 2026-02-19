@@ -2,15 +2,13 @@
 
 /* Do not remove the following comment. It is used by Hugo to render CSS variables.
 {{- $layoutWidthValues := dict "normal" "80rem" "wide" "90rem" "full" "100%" -}}
-{{- $contentWidthValues := dict "normal" "72rem" "wide" "80rem" "full" "100%" -}}
 {{- $layoutWidthDefault := index $layoutWidthValues "normal" -}}
-{{- $contentWidthDefault := index $contentWidthValues "normal" -}}
 
 {{- $maxPageWidth := (index $layoutWidthValues (site.Params.page.width | default "normal")) | default $layoutWidthDefault -}}
 {{- $maxNavbarWidth := (index $layoutWidthValues (site.Params.navbar.width | default "normal")) | default $layoutWidthDefault -}}
 {{- $maxFooterWidth := (index $layoutWidthValues (site.Params.footer.width | default "normal")) | default $layoutWidthDefault -}}
 
-{{- $maxContentWidth := (index $contentWidthValues (site.Params.page.content.width | default "normal")) | default $contentWidthDefault -}}
+{{- $maxContentWidth := "72rem" -}}
 */
 
 :root {

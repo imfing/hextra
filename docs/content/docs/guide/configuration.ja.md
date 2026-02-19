@@ -342,23 +342,26 @@ params:
 
 ### ページ幅
 
-レイアウト全体の幅は `params.page.width` で、本文コンテンツ幅は `params.page.content.width` で個別に設定できます：
+レイアウト全体の幅は `params.page.width` で設定できます：
 
 ```yaml {filename="hugo.yaml"}
 params:
   page:
     # full (100%), wide (90rem), normal (1280px)
     width: wide
-    content:
-      # normal (72rem), wide (80rem), full (100%)
-      width: normal
 ```
 
 `params.page.width` の選択肢は `full`、`wide`、`normal` です。
 
-`params.page.content.width` の選択肢は `normal`、`wide`、`full` です。
+本文コンテンツ幅はデフォルトで `72rem` に固定されています。
 
-デフォルトはどちらも `normal` です。
+コンテンツ幅を変更したい場合は、カスタムスタイルシートで CSS 変数を上書きしてください：
+
+```css {filename="assets/css/custom.css"}
+:root {
+  --hextra-max-content-width: 100%;
+}
+```
 
 同様に、ナビゲーションバーとフッターの幅は `params.navbar.width` と `params.footer.width` パラメータでカスタマイズできます。
 
