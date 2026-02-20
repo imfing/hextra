@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: accessibility
     env:
-      HUGO_VERSION: 0.147.7
+      HUGO_VERSION: 0.156.0
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,12 +28,12 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.24"
+          go-version: "1.26"
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           cache: npm
 
       - name: Setup Hugo
