@@ -7,6 +7,6 @@ command = "cd docs && hugo --gc --minify --themesDir ../.. -b ${DEPLOY_PRIME_URL
 ignore = "false"
 
 [build.environment]
-HUGO_VERSION = "0.147.7"
-GO_VERSION = "1.24.3"
-NODE_VERSION = "22.16.0"
+HUGO_VERSION = "0.156.0"
+GO_VERSION = "1.26.0"
+NODE_VERSION = "24.13.1"
