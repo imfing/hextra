@@ -32,7 +32,7 @@ languages:
     params:
       banner:
         message: |
-          هگزترا **v0.11** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% relref "blog/v0.11" %}})
+          هگزترا **v0.12** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% relref "blog/v0.12" %}})
       page:
         contextMenu:
           links:
@@ -47,7 +47,7 @@ languages:
     params:
       banner:
         message: |
-          Hextra **v0.11** がリリースされました！🎉 [新着情報はこちら]({{% relref "blog/v0.11" %}})
+          Hextra **v0.12** がリリースされました！🎉 [新着情報はこちら]({{% relref "blog/v0.12" %}})
       page:
         contextMenu:
           links:
@@ -62,7 +62,7 @@ languages:
     params:
       banner:
         message: |
-          Hextra **v0.11** 发布啦！🎉 查看[更新内容]({{% relref "blog/v0.11" %}})
+          Hextra **v0.12** 发布啦！🎉 查看[更新内容]({{% relref "blog/v0.12" %}})
       page:
         contextMenu:
           links:
@@ -178,9 +178,9 @@ params:
   externalLinkDecoration: true
 
   banner:
-    key: 'announcement-v0.11'
+    key: 'announcement-v0.12'
     message: |
-      Hextra **v0.11** is here! 🎉 Discover [what's new]({{% relref "blog/v0.11" %}})
+      Hextra **v0.12** is here! 🎉 Discover [what's new]({{% relref "blog/v0.12" %}})
 
   navbar:
     displayTitle: true
