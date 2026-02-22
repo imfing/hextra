@@ -28,7 +28,7 @@
     {{- $matchPath := replace $url.Path "%20" " " -}}
     
     {{- /* Use wildcard block to safely match paths even if they start with './' */ -}}
-    {{- $resource := .Page.Resources.GetMatch (printf "*%s*" $matchPath) -}}
+    {{- $resource := .PageInner.Resources.GetMatch (printf "*%s*" $matchPath) -}}
     
     {{- if $resource -}}
       {{- $query := cond $url.RawQuery (printf "?%s" $url.RawQuery) "" -}}
