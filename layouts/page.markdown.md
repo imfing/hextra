@@ -1,3 +1,2 @@
-{{- .Title | replaceRE "\n" " " | printf "# %s" -}}
-
+{{- .Title | replaceRE "\n" " " | printf "# %s" }}
 {{ .RawContent }}
