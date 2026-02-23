@@ -5,7 +5,7 @@ next: /docs/guide/deploy-site
 
 A built-in component to display a terminology definition.
 
-Glossary definition is maintained in a structured YAML [data file](/docs/advanced/additional-pages),
+Glossary definition is maintained in a structured YAML [data file](/docs/advanced/additional-pages/#glossary),
 with one file defined per supported language.
 
 ## Example
