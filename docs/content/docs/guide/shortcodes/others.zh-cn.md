@@ -9,6 +9,8 @@ next: /docs/guide/deploy-site
   这些短代码稳定性较低，可能随时变更。
 {{< /callout >}}
 
+## 徽章
+
 ### 示例
 
 {{< badge "default" >}}&nbsp;

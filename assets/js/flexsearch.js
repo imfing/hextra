@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 (function () {
   const searchDataURL = '{{ $searchData.RelPermalink }}';
+  const resultsFoundTemplate = '{{ (T "resultsFound") | default "%d results found" }}';
 
   const inputElements = document.querySelectorAll('.hextra-search-input');
   for (const el of inputElements) {
@@ -389,6 +390,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!results.length) {
       resultsElement.innerHTML = `<span class="hextra-search-no-result">{{ $noResultsFound | safeHTML }}</span>`;
+      // Announce no results to screen readers
+      const wrapper = resultsElement.closest('.hextra-search-wrapper');
+      const statusEl = wrapper ? wrapper.querySelector('.hextra-search-status') : null;
+      if (statusEl) {
+        statusEl.textContent = '{{ $noResultsFound | safeHTML }}';
+      }
       return;
     }
 
@@ -472,5 +479,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     resultsElement.appendChild(fragment);
     resultsElement.dataset.count = results.length;
+
+    // Announce results count to screen readers
+    const wrapper = resultsElement.closest('.hextra-search-wrapper');
+    const statusEl = wrapper ? wrapper.querySelector('.hextra-search-status') : null;
+    if (statusEl) {
+      statusEl.textContent = results.length > 0
+        ? resultsFoundTemplate.replace('%d', results.length.toString())
+        : '{{ $noResultsFound | safeHTML }}';
+    }
   }
 })();

@@ -6,17 +6,20 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("scroll", (e) => {
       if (window.scrollY > 300) {
         backToTop.classList.remove("hx:opacity-0");
+        backToTop.removeAttribute("tabindex");
       } else {
         backToTop.classList.add("hx:opacity-0");
+        backToTop.setAttribute("tabindex", "-1");
       }
     });
   }
 });
 
 function scrollUp() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scroll({
     top: 0,
     left: 0,
-    behavior: "smooth",
+    behavior: prefersReducedMotion ? 'auto' : 'smooth',
   });
 }

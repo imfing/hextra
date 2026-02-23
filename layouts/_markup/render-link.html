@@ -7,7 +7,10 @@
     {{- $fragment := cond $url.Fragment (printf "#%s" $url.Fragment) "" -}}
     {{- $dest = printf "%s%s%s" .RelPermalink $query $fragment -}}
   {{- else -}}
-    {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
+    {{- $hasBasePrefix := and (ne site.Home.RelPermalink "/") (hasPrefix $dest site.Home.RelPermalink) -}}
+    {{- if not $hasBasePrefix -}}
+      {{- $dest = (relURL (strings.TrimPrefix "/" $dest)) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
@@ -19,7 +22,7 @@
 >
   {{- .Text | safeHTML -}}
   {{- if and .Page.Site.Params.externalLinkDecoration $isExternal -}}
-    {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em"`) -}}
+    {{- partial "utils/icon.html" (dict "name" "arrow-up-right" "attributes" `class="hx:inline hx:rtl:rotate-270 hx:align-baseline" height="1em" aria-hidden="true"`) -}}
   {{- end -}}
 </a>
 {{- end -}}

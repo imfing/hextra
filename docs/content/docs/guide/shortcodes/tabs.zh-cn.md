@@ -52,6 +52,30 @@ next: /docs/guide/deploy-site
 {{< /tabs >}}
 
 
+### 添加图标
+
+在每个 `tab` 上使用 `icon` 参数，可以在标签文本前显示图标。
+可用图标列表请参阅 [Icon 短代码](../icon) 页面。
+
+```
+{{</* tabs */>}}
+
+  {{</* tab name="Photos" icon="photograph" */>}}管理和整理您的照片库。{{</* /tab */>}}
+  {{</* tab name="Music" icon="music-note" */>}}浏览和播放您喜爱的曲目。{{</* /tab */>}}
+  {{</* tab name="Videos" icon="film" */>}}观看和串流视频内容。{{</* /tab */>}}
+
+{{</* /tabs */>}}
+```
+
+{{< tabs >}}
+
+{{< tab name="Photos" icon="photograph" >}}管理和整理您的照片库。{{< /tab >}}
+{{< tab name="Music" icon="music-note" >}}浏览和播放您喜爱的曲目。{{< /tab >}}
+{{< tab name="Videos" icon="film" >}}观看和串流视频内容。{{< /tab >}}
+
+{{< /tabs >}}
+
+
 ### 使用Markdown
 
 支持包括代码块在内的Markdown语法：

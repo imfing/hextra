@@ -13,4 +13,5 @@ next: /docs/advanced/multi-language
   {{< card link="multi-language" title="چندزبانه" icon="translate" >}}
   {{< card link="customization" title="سفارشی‌سازی" icon="pencil" >}}
   {{< card link="comments" title="سیستم نظرات" icon="chat-alt" >}}
+  {{< card link="additional-pages" title="صفحات اضافی" icon="library" >}}
 {{< /cards >}}

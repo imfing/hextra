@@ -71,10 +71,14 @@
     // Listen for system theme changes
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", setGiscusTheme);
 
-    // Update giscus theme when theme switcher is clicked
-    const themeToggleOptions = document.querySelectorAll(".hextra-theme-toggle-options p");
+    // Update giscus theme when theme switcher is clicked.
+    const themeToggleOptions = document.querySelectorAll(".hextra-theme-toggle-options [data-item]");
     if (themeToggleOptions) {
-      themeToggleOptions.forEach(toggle => toggle.addEventListener('click', setGiscusTheme));
+      themeToggleOptions.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          setTimeout(setGiscusTheme, 0);
+        });
+      });
     }
   });
 </script>

@@ -1,3 +1,3 @@
 module github.com/imfing/hextra
 
-go 1.20
+go 1.26

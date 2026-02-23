@@ -10,6 +10,7 @@
     {{- end -}}
     <button
       class="hextra-banner-close-button hx:cursor-pointer hx:absolute hx:right-0 hx:text-white hx:font-bold hx:leading-none hx:hover:opacity-75 hx:transition hx:w-10 hx:h-10 hx:-mr-2 hx:md:mr-0 hx:flex hx:items-center hx:justify-center"
+      aria-label="{{ (T "closeBanner") | default "Close banner" }}"
     >
       {{- partial "utils/icon.html" (dict "name" "x" "attributes" "height=16") -}}
     </button>

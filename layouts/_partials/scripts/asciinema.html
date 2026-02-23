@@ -76,8 +76,21 @@
   {{- end -}}
 {{- end -}}
 
-<script>
+<script data-playback-time="{{ (T "playbackTime") | default "Playback time" }}">
+  const playbackTimeLabel =
+    document.currentScript?.getAttribute("data-playback-time") || "Playback time";
+
   document.addEventListener("DOMContentLoaded", () => {
+    const observers = [];
+
+    const applyTimerA11y = (container) => {
+      container.querySelectorAll(".ap-timer[role='textbox']").forEach((timer) => {
+        if (!timer.getAttribute("aria-label")) {
+          timer.setAttribute("aria-label", playbackTimeLabel);
+        }
+      });
+    };
+
     // Fix play button position issue
     const style = document.createElement("style");
     style.textContent = `
@@ -108,7 +121,20 @@
           controls: true,  // Always show user controls (bottom control bar)
           idleTimeLimit: 2,  // Limit terminal inactivity to 2 seconds (compress pauses longer than 2s)
         });
+        applyTimerA11y(el);
+        const observer = new MutationObserver(() => applyTimerA11y(el));
+        observer.observe(el, { childList: true, subtree: true });
+        observers.push(observer);
       }
     });
+
+    // Prevent lingering observers when navigating away.
+    window.addEventListener(
+      "pagehide",
+      () => {
+        observers.forEach((observer) => observer.disconnect());
+      },
+      { once: true },
+    );
   });
 </script>

@@ -342,7 +342,7 @@ params:
 
 ### عرض صفحه
 
-عرض صفحه را می‌توان با پارامتر `params.page.width` در فایل پیکربندی سفارشی کرد:
+عرض پوستهٔ صفحه را می‌توان با پارامتر `params.page.width` تنظیم کرد:
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -351,7 +351,17 @@ params:
     width: wide
 ```
 
-سه گزینه موجود است: `full`, `wide`, و `normal`. به طور پیش‌فرض، عرض صفحه روی `normal` تنظیم شده است.
+گزینه‌های `params.page.width`: `full`، `wide`، و `normal`.
+
+عرض محتوای اصلی به صورت پیش‌فرض روی `72rem` ثابت است.
+
+برای سفارشی‌سازی عرض محتوا، متغیر CSS را در فایل استایل سفارشی خود بازنویسی کنید:
+
+```css {filename="assets/css/custom.css"}
+:root {
+  --hextra-max-content-width: 100%;
+}
+```
 
 به طور مشابه، عرض نوار ناوبری و پاورقی را می‌توان با پارامترهای `params.navbar.width` و `params.footer.width` سفارشی کرد.
 

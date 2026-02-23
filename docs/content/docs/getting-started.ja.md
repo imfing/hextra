@@ -14,7 +14,7 @@ prev: /docs
 
 上記のテンプレートリポジトリを使用して、すぐに始めることができます。
 
-<img src="https://docs.github.com/assets/cb-77734/mw-1440/images/help/repository/use-this-template-button.webp" width="500">
+<img src="https://docs.github.com/assets/cb-77734/mw-1440/images/help/repository/use-this-template-button.webp" width="500" alt="Use this template ボタンが表示された GitHub リポジトリページ">
 
 [GitHub Actions ワークフロー](https://docs.github.com/ja/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow)を提供しており、サイトを自動的にビルドして GitHub Pages にデプロイし、無料でホストすることができます。
 その他のオプションについては、[サイトのデプロイ](../guide/deploy-site)を確認してください。

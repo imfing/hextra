@@ -49,7 +49,7 @@ Render Jupyter Notebook
         {{- $outputs := index $cell "outputs" -}}
         {{- with $outputs -}}
           <div class="hextra-jupyter-code-cell-outputs-container">
-            <div class="hextra-jupyter-code-cell-outputs">
+            <div class="hextra-jupyter-code-cell-outputs" tabindex="0">
               {{- range $output := . -}}
                 {{- if eq (index $output "output_type") "display_data" -}}
                   {{- $data := index $output "data" -}}
