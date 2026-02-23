@@ -5,7 +5,7 @@ next: /docs/guide/deploy-site
 
 用語の定義を表示するための組み込みコンポーネントです。
 
-用語の定義は、構造化された YAML [データファイル](/docs/advanced/additional-pages)で管理されており、
+用語の定義は、構造化された YAML [データファイル](/docs/advanced/additional-pages/#glossary)で管理されており、
 対応する言語ごとに1つのファイルが定義されています。
 
 ## 例

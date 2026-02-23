@@ -5,7 +5,7 @@ next: /docs/guide/deploy-site
 
 一个用于显示术语定义的内置组件。
 
-术语定义保存在结构化的 YAML [数据文件](/docs/advanced/additional-pages)中，
+术语定义保存在结构化的 YAML [数据文件](/docs/advanced/additional-pages/#glossary)中，
 每种支持的语言对应一个文件。
 
 ## 示例
