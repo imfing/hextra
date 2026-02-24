@@ -7,9 +7,12 @@
   @param {string} [provider] The media provider: "youtube", "vimeo", or omit for HTML5.
   @param {string} [type=video] The media type: "video" or "audio".
   @param {bool} [autoplay=false] Whether to autoplay.
-  @param {bool} [muted=false] Whether to mute.
+  @param {bool} [controls=true] Whether to show player controls.
+  @param {string} [crossorigin] The CORS setting: "anonymous" or "use-credentials".
   @param {bool} [loop=false] Whether to loop.
-  @param {string} [poster] The poster image URL (HTML5 video only).
+  @param {bool} [muted=false] Whether to mute.
+  @param {bool} [playsinline=true] Whether to play inline on mobile.
+  @param {string} [preload=auto] The preload behavior: "none", "metadata", or "auto".
 
   @example {{< media src="media/example.mp4" >}}
   @example {{< media src="bTqVqk7FSmY" provider="youtube" >}}
@@ -20,10 +23,12 @@
 {{- $provider := .Get "provider" | default "" -}}
 {{- $type := .Get "type" | default "video" -}}
 {{- $autoplay := .Get "autoplay" | default false -}}
-{{- $muted := .Get "muted" | default false -}}
+{{- $controls := .Get "controls" | default true -}}
+{{- $crossorigin := .Get "crossorigin" | default "" -}}
 {{- $loop := .Get "loop" | default false -}}
-{{- $poster := .Get "poster" | default "" -}}
-
+{{- $muted := .Get "muted" | default false -}}
+{{- $playsinline := .Get "playsinline" | default true -}}
+{{- $preload := .Get "preload" | default "auto" -}}
 {{- if not $src -}}
   {{- errorf "Media 'src' must be supplied" -}}
 {{- end -}}
@@ -47,8 +52,11 @@
   "src"      $src
   "provider" $provider
   "type"     $type
-  "autoplay" $autoplay
-  "muted"    $muted
-  "loop"     $loop
-  "poster"   $poster
+  "autoplay"    $autoplay
+  "controls"    $controls
+  "crossorigin" $crossorigin
+  "loop"        $loop
+  "muted"       $muted
+  "playsinline" $playsinline
+  "preload"     $preload
 ) -}}

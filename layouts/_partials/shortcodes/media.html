@@ -1,10 +1,13 @@
 {{- /* Plyr partial: renders HTML5 audio, HTML5 video, Vimeo, or YouTube */ -}}
-<div>
+<div class="hx:mx-auto hx:my-6">
   {{- if eq .type "audio" -}}
-    <audio controls
+    <audio
       {{- if eq (printf "%v" .autoplay) "true" }} autoplay{{ end -}}
+      {{- if eq (printf "%v" .controls) "true" }} controls{{ end -}}
+      {{- with .crossorigin }} crossorigin="{{ . }}"{{ end -}}
+      {{- if eq (printf "%v" .loop) "true" }} loop{{ end -}}
       {{- if eq (printf "%v" .muted) "true" }} muted{{ end -}}
-      {{- if eq (printf "%v" .loop) "true" }} loop{{ end -}}>
+      {{- " " }}preload="{{ .preload }}">
       <source src="{{ .src }}" />
     </audio>
   {{- else if eq .provider "vimeo" -}}
@@ -12,11 +15,14 @@
   {{- else if eq .provider "youtube" -}}
     <div data-plyr-provider="youtube" data-plyr-embed-id="{{ .src }}"></div>
   {{- else -}}
-    <video playsinline controls
-      {{- with .poster }} data-poster="{{ . }}"{{ end -}}
+    <video
       {{- if eq (printf "%v" .autoplay) "true" }} autoplay{{ end -}}
+      {{- if eq (printf "%v" .controls) "true" }} controls{{ end -}}
+      {{- with .crossorigin }} crossorigin="{{ . }}"{{ end -}}
+      {{- if eq (printf "%v" .loop) "true" }} loop{{ end -}}
       {{- if eq (printf "%v" .muted) "true" }} muted{{ end -}}
-      {{- if eq (printf "%v" .loop) "true" }} loop{{ end -}}>
+      {{- if eq (printf "%v" .playsinline) "true" }} playsinline{{ end -}}
+      {{- " " }}preload="{{ .preload }}">
       <source src="{{ .src }}" type="video/mp4" />
     </video>
   {{- end -}}
