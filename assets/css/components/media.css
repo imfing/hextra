@@ -1,7 +1,3 @@
 .content .plyr {
   @apply hx:mx-auto hx:my-6 hx:rounded-md hx:overflow-hidden;
 }
-
-.content .plyr__video-wrapper {
-  @apply hx:bg-transparent;
-}
