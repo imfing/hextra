@@ -79,6 +79,12 @@
   :where(img):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx:mx-auto hx:my-4 hx:rounded-md;
   }
+  :where(audio):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply hx:mx-auto hx:my-4 hx:rounded-md;
+  }
+  :where(video):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply hx:mx-auto hx:my-4 hx:rounded-md;
+  }
   :where(figure):not(:where([class~=not-prose],[class~=not-prose] *)) {
     figcaption {
       @apply hx:text-sm hx:text-gray-500 hx:dark:text-gray-400 hx:mt-2 hx:block hx:text-center;
