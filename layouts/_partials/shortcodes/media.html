@@ -1,0 +1,23 @@
+{{- /* Plyr partial: renders HTML5 audio, HTML5 video, Vimeo, or YouTube */ -}}
+<div>
+  {{- if eq .type "audio" -}}
+    <audio controls
+      {{- if eq (printf "%v" .autoplay) "true" }} autoplay{{ end -}}
+      {{- if eq (printf "%v" .muted) "true" }} muted{{ end -}}
+      {{- if eq (printf "%v" .loop) "true" }} loop{{ end -}}>
+      <source src="{{ .src }}" />
+    </audio>
+  {{- else if eq .provider "vimeo" -}}
+    <div data-plyr-provider="vimeo" data-plyr-embed-id="{{ .src }}"></div>
+  {{- else if eq .provider "youtube" -}}
+    <div data-plyr-provider="youtube" data-plyr-embed-id="{{ .src }}"></div>
+  {{- else -}}
+    <video playsinline controls
+      {{- with .poster }} data-poster="{{ . }}"{{ end -}}
+      {{- if eq (printf "%v" .autoplay) "true" }} autoplay{{ end -}}
+      {{- if eq (printf "%v" .muted) "true" }} muted{{ end -}}
+      {{- if eq (printf "%v" .loop) "true" }} loop{{ end -}}>
+      <source src="{{ .src }}" type="video/mp4" />
+    </video>
+  {{- end -}}
+</div>

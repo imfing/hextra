@@ -1,0 +1,54 @@
+{{- /*
+  A shortcode to embed media using the Plyr player.
+
+  Supports HTML5 video, HTML5 audio, YouTube, and Vimeo.
+
+  @param {string} src The source URL, path, or embed ID.
+  @param {string} [provider] The media provider: "youtube", "vimeo", or omit for HTML5.
+  @param {string} [type=video] The media type: "video" or "audio".
+  @param {bool} [autoplay=false] Whether to autoplay.
+  @param {bool} [muted=false] Whether to mute.
+  @param {bool} [loop=false] Whether to loop.
+  @param {string} [poster] The poster image URL (HTML5 video only).
+
+  @example {{< media src="media/example.mp4" >}}
+  @example {{< media src="bTqVqk7FSmY" provider="youtube" >}}
+  @example {{< media src="76979871" provider="vimeo" >}}
+  @example {{< media src="media/example.mp3" type="audio" >}}
+*/ -}}
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- $provider := .Get "provider" | default "" -}}
+{{- $type := .Get "type" | default "video" -}}
+{{- $autoplay := .Get "autoplay" | default false -}}
+{{- $muted := .Get "muted" | default false -}}
+{{- $loop := .Get "loop" | default false -}}
+{{- $poster := .Get "poster" | default "" -}}
+
+{{- if not $src -}}
+  {{- errorf "Media 'src' must be supplied" -}}
+{{- end -}}
+
+{{/* Resolve local file path for HTML5 media */}}
+{{- if not $provider -}}
+  {{- $isLocal := not (urls.Parse $src).Scheme -}}
+  {{- if $isLocal -}}
+    {{- if hasPrefix $src "/" -}}
+      {{- $src = relURL (strings.TrimPrefix "/" $src) -}}
+    {{- else -}}
+      {{- $src = relURL $src -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Mark page as using Plyr */}}
+{{- .Page.Store.Set "hasPlyr" true -}}
+
+{{- partial "shortcodes/media" (dict
+  "src"      $src
+  "provider" $provider
+  "type"     $type
+  "autoplay" $autoplay
+  "muted"    $muted
+  "loop"     $loop
+  "poster"   $poster
+) -}}
