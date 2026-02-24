@@ -28,13 +28,13 @@ your-site/
 Video:
 
 ```markdown
-{{< media src="media/demo.mp4" >}}
+{{</* media src="media/demo.mp4" */>}}
 ```
 
 Audio:
 
 ```markdown
-{{< media src="media/podcast.mp3" type="audio" >}}
+{{</* media src="media/podcast.mp3" type="audio" */>}}
 ```
 
 ### YouTube
@@ -42,15 +42,19 @@ Audio:
 Embed a YouTube video using its video ID:
 
 ```markdown
-{{< media src="bTqVqk7FSmY" provider="youtube" >}}
+{{</* media src="dQw4w9WgXcQ" provider="youtube" */>}}
 ```
+
+Result:
+
+{{< media src="dQw4w9WgXcQ" provider="youtube" >}}
 
 ### Vimeo
 
 Embed a Vimeo video using its video ID:
 
 ```markdown
-{{< media src="76979871" provider="vimeo" >}}
+{{</* media src="76979871" provider="vimeo" */>}}
 ```
 
 ## Advanced Usage
@@ -58,26 +62,32 @@ Embed a Vimeo video using its video ID:
 Here's an example with all available parameters:
 
 ```markdown
-{{< media
+{{</* media
   src="media/demo.mp4"
-  poster="media/poster.jpg"
   autoplay="true"
-  muted="true"
+  controls="true"
+  crossorigin="anonymous"
   loop="true"
->}}
+  muted="true"
+  playsinline="true"
+  preload="auto"
+*/>}}
 ```
 
 ## Parameters
 
-| Parameter  | Type    | Default   | Description                                                   |
-| ---------- | ------- | --------- | ------------------------------------------------------------- |
-| `src`      | string  | -         | The source URL, path, or embed ID (required)                  |
-| `provider` | string  | `""`      | The media provider: `"youtube"`, `"vimeo"`, or omit for HTML5 |
-| `type`     | string  | `"video"` | The media type: `"video"` or `"audio"`                        |
-| `autoplay` | boolean | `false`   | Start playing automatically                                   |
-| `muted`    | boolean | `false`   | Mute the media                                                |
-| `loop`     | boolean | `false`   | Loop the media                                                |
-| `poster`   | string  | `""`      | The poster image URL (HTML5 video only)                       |
+| Parameter     | Type    | Default    | Description                                                   |
+| ------------- | ------- | ---------- | ------------------------------------------------------------- |
+| `src`         | string  | -          | The source URL, path, or embed ID (required)                  |
+| `autoplay`    | boolean | `false`    | Start playing automatically                                   |
+| `controls`    | boolean | `true`     | Show player controls                                          |
+| `crossorigin` | string  | `""`       | The CORS setting: `"anonymous"` or `"use-credentials"`        |
+| `loop`        | boolean | `false`    | Loop the media                                                |
+| `muted`       | boolean | `false`    | Mute the media                                                |
+| `playsinline` | boolean | `true`     | Play inline on mobile instead of fullscreen                   |
+| `preload`     | string  | `"auto"`   | The preload behavior: `"none"`, `"metadata"`, or `"auto"`     |
+| `provider`    | string  | `""`       | The media provider: `"youtube"`, `"vimeo"`, or omit for HTML5 |
+| `type`        | string  | `"video"`  | The media type: `"video"` or `"audio"`                        |
 
 ## Configuration
 
@@ -87,8 +97,8 @@ By default, Plyr assets are loaded from the official CDN. You can customize the 
 params:
   plyr:
     base: "https://cdn.jsdelivr.net/npm/plyr@latest/dist"  # Custom CDN base URL
-    css: "plyr.css"                    # Custom CSS file path
-    js: "plyr.polyfilled.js"           # Custom JS file path
+    css: "plyr.css"                                        # Custom CSS file path
+    js: "plyr.polyfilled.js"                               # Custom JS file path
 ```
 
 To use local assets, set `js` and/or `css` without `base`:
