@@ -1,8 +1,6 @@
 ---
 title: "Media Player Component"
 linktitle: "Media Player"
-sidebar:
-  exclude: true
 ---
 
 ## Overview
