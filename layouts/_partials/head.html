@@ -28,12 +28,6 @@
   {{- partial "schema.html" . -}}
   {{- partial "twitter_cards.html" . -}}
 
-  {{- $theme := resources.Get "js/head/theme.js" | resources.ExecuteAsTemplate "js/head/theme.js" $ -}}
-  {{- if hugo.IsProduction -}}
-  {{- $theme = $theme | minify | fingerprint -}}
-  {{- end -}}
-  <script src="{{ $theme.RelPermalink }}"{{ with $theme.Data.Integrity }} integrity="{{ . }}"{{ end }}></script>
-
   {{- $mainCss := resources.Get "css/compiled/main.css" -}}
   {{- $customCss := resources.Get "css/custom.css" -}}
   {{- $variablesCss := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" . -}}
@@ -59,13 +53,9 @@
     <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
   {{- end }}
 
-  {{ partial "components/analytics/analytics.html" . }}
-
   {{- $scriptsHead := slice -}}
   {{- range resources.Match "js/head/*.js" -}}
-    {{- if not (strings.HasSuffix .Name "theme.js") }}
     {{ $scriptsHead = $scriptsHead | append (resources.ExecuteAsTemplate .Name $ .) }}
-    {{- end -}}
   {{- end -}}
 
   {{- $scripts := $scriptsHead | resources.Concat "js/main-head.js" -}}
@@ -74,6 +64,8 @@
   {{- $scripts = $scripts | minify | fingerprint -}}
   {{- end -}}
   <script src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
+
+  {{ partial "components/analytics/analytics.html" . }}
 
   <!-- Math engine -->
   {{ $noop := .WordCount -}}
