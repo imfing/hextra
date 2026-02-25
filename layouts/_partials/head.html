@@ -63,9 +63,9 @@
   {{- if hugo.IsProduction -}}
   {{- $scripts = $scripts | minify | fingerprint -}}
   {{- end -}}
-  <script src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
-
   {{ partial "components/analytics/analytics.html" . }}
+
+  <script src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
 
   <!-- Math engine -->
   {{ $noop := .WordCount -}}
