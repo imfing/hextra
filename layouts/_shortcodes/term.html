@@ -16,7 +16,7 @@ or
 {{- $match := dict -}}
 
 <!-- Go over the term data file - data/<lang>/termbase.yaml -->
-{{- range (index .Site.Data .Site.Language.Lang "termbase") -}}
+{{- range (index hugo.Data .Site.Language.Lang "termbase") -}}
   {{- if or (eq (lower .abbr) $entryLower) (eq (lower .term) $entryLower) -}}
     {{- $match = . -}}
     {{- break -}}
