@@ -362,6 +362,70 @@ params:
     # js: "js/medium-zoom.min.js" # optional, relative to the base or local assets
 ```
 
+### Local and Mirrored Script Assets
+
+Hextra can load optional frontend dependencies from different sources:
+
+- Theme defaults (CDN)
+- Internal mirror URLs via `base`
+- Local Hugo assets via `js` / `css`
+
+For local assets, place vendor files under your site's `assets/` directory and point config values to those asset paths:
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    js: "js/vendor/medium-zoom.min.js"
+
+  mermaid:
+    js: "js/vendor/mermaid.min.js"
+
+  asciinema:
+    js: "js/vendor/asciinema-player.min.js"
+    css: "css/vendor/asciinema-player.css"
+
+  math:
+    engine: katex
+    katex:
+      css: "css/vendor/katex.min.css"
+      assets:
+        - "fonts/KaTeX_Main-Regular.woff2"
+        - "fonts/KaTeX_Math-Italic.woff2"
+
+  search:
+    type: flexsearch
+    flexsearch:
+      js: "js/vendor/flexsearch.bundle.min.js"
+```
+
+To use an internal mirror instead, set `base` (and optionally `js` / `css` when the filename differs):
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    base: "https://mirror.example.com/medium-zoom/dist"
+
+  mermaid:
+    base: "https://mirror.example.com/mermaid/dist"
+
+  asciinema:
+    base: "https://mirror.example.com/asciinema-player/dist/bundle"
+
+  math:
+    engine: katex
+    katex:
+      base: "https://mirror.example.com/katex/dist"
+
+  search:
+    flexsearch:
+      base: "https://mirror.example.com/flexsearch/dist"
+      # js: "flexsearch.bundle.min.js"
+```
+
+> [!NOTE]
+> To customize MathJax source loading, override `layouts/_partials/scripts/mathjax.html` in your site.
+
 ### Page Width
 
 The layout shell width can be customized by the `params.page.width` parameter in the config file:
@@ -460,6 +524,17 @@ params:
     flexsearch:
       # index page by: content | summary | heading | title
       index: content
+```
+
+You can also control where the FlexSearch runtime is loaded from:
+
+```yaml {filename="hugo.yaml"}
+params:
+  search:
+    flexsearch:
+      version: "0.8.143" # default CDN version
+      # base: "https://mirror.example.com/flexsearch/dist" # optional remote base URL
+      # js: "js/vendor/flexsearch.bundle.min.js" # local asset path, or custom file under remote base
 ```
 
 Options for `flexsearch.index`:

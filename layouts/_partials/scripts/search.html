@@ -7,18 +7,55 @@
     {{- if hugo.IsProduction -}}
       {{- $jsSearch = $jsSearch | minify | fingerprint -}}
     {{- end -}}
-    {{- $flexSearchVersion := site.Params.search.flexsearch.version | default "0.8.143" -}}
-    {{- $flexSearchJsUrl := printf "https://cdn.jsdelivr.net/npm/flexsearch@%s/dist/flexsearch.bundle%s.js" $flexSearchVersion (cond hugo.IsProduction ".min" ".debug") -}}
-    {{ with try (resources.GetRemote $flexSearchJsUrl) -}}
-      {{ with .Err -}}
-        {{ errorf "Could not retrieve FlexSearch js file from %s. Reason: %s." $flexSearchJsUrl . -}}
-      {{ else with.Value -}}
-        {{ with resources.Copy (printf "js/flexsearch.js") . -}}
-          {{ $flexSearchJs := . | fingerprint -}}
-          <script defer src="{{ $flexSearchJs.RelPermalink }}" integrity="{{ $flexSearchJs.Data.Integrity }}" crossorigin="anonymous"></script>
-        {{ end -}}
-      {{ end -}}
-    {{ end -}}
+
+    {{- $flexSearchBase := "" -}}
+    {{- $useDefaultCdn := true -}}
+    {{- with site.Params.search.flexsearch.base -}}
+      {{- $flexSearchBase = . -}}
+      {{- $useDefaultCdn = false -}}
+    {{- end -}}
+
+    {{- $flexSearchJsAsset := "" -}}
+    {{- with site.Params.search.flexsearch.js -}}
+      {{- $flexSearchJsAsset = . -}}
+    {{- end -}}
+
+    {{- /* If only js is set without base, use local asset loading. */ -}}
+    {{- if and $useDefaultCdn (ne $flexSearchJsAsset "") -}}
+      {{- $useDefaultCdn = false -}}
+    {{- end -}}
+
+    {{- $bundleSuffix := cond hugo.IsProduction ".min" ".debug" -}}
+    {{- if $useDefaultCdn -}}
+      {{- $flexSearchVersion := site.Params.search.flexsearch.version | default "0.8.143" -}}
+      {{- $flexSearchBase = printf "https://cdn.jsdelivr.net/npm/flexsearch@%s/dist" $flexSearchVersion -}}
+    {{- end -}}
+
+    {{- $isRemoteBase := or (strings.HasPrefix $flexSearchBase "http://") (strings.HasPrefix $flexSearchBase "https://") -}}
+    {{- if $isRemoteBase -}}
+      {{- $jsPath := cond (ne $flexSearchJsAsset "") $flexSearchJsAsset (printf "flexsearch.bundle%s.js" $bundleSuffix) -}}
+      {{- $flexSearchJsUrl := printf "%s/%s" $flexSearchBase $jsPath -}}
+      {{- with try (resources.GetRemote $flexSearchJsUrl) -}}
+        {{- with .Err -}}
+          {{- errorf "Could not retrieve FlexSearch js file from %s. Reason: %s." $flexSearchJsUrl . -}}
+        {{- else with .Value -}}
+          {{- with resources.Copy "js/flexsearch.js" . -}}
+            {{- $flexSearchJs := . | fingerprint -}}
+            <script defer src="{{ $flexSearchJs.RelPermalink }}" integrity="{{ $flexSearchJs.Data.Integrity }}" crossorigin="anonymous"></script>
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- else if $flexSearchJsAsset -}}
+      {{- with resources.Get $flexSearchJsAsset -}}
+        {{- $flexSearchJs := . | fingerprint -}}
+        <script defer src="{{ $flexSearchJs.RelPermalink }}" integrity="{{ $flexSearchJs.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- else -}}
+        {{- errorf "FlexSearch js asset not found at %q" $flexSearchJsAsset -}}
+      {{- end -}}
+    {{- else if not $useDefaultCdn -}}
+      {{- errorf "FlexSearch local loading requires params.search.flexsearch.js when using non-remote base %q" $flexSearchBase -}}
+    {{- end -}}
+
     <script defer src="{{ $jsSearch.RelPermalink }}" integrity="{{ $jsSearch.Data.Integrity }}"></script>
   {{- else -}}
     {{- warnf `search type "%s" is not supported` $searchType -}}
