@@ -28,7 +28,7 @@
 {{- /* JS retrieval: get raw JS from either local asset or remote, then process */ -}}
 {{- if $isRemoteBase -}}
   {{- $jsPath := cond (ne $zoomJsAsset "") $zoomJsAsset (printf "medium-zoom%s.js" $minSuffix) -}}
-  {{- $zoomJsUrl := printf "%s/%s" $zoomBase $jsPath -}}
+  {{- $zoomJsUrl := urls.JoinPath $zoomBase $jsPath -}}
   {{- with try (resources.GetRemote $zoomJsUrl) -}}
     {{- with .Err -}}
       {{- errorf "Could not retrieve Medium Zoom js file from %s. Reason: %s." $zoomJsUrl . -}}

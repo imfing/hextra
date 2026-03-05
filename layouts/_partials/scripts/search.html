@@ -34,7 +34,7 @@
     {{- $isRemoteBase := or (strings.HasPrefix $flexSearchBase "http://") (strings.HasPrefix $flexSearchBase "https://") -}}
     {{- if $isRemoteBase -}}
       {{- $jsPath := cond (ne $flexSearchJsAsset "") $flexSearchJsAsset (printf "flexsearch.bundle%s.js" $bundleSuffix) -}}
-      {{- $flexSearchJsUrl := printf "%s/%s" $flexSearchBase $jsPath -}}
+      {{- $flexSearchJsUrl := urls.JoinPath $flexSearchBase $jsPath -}}
       {{- with try (resources.GetRemote $flexSearchJsUrl) -}}
         {{- with .Err -}}
           {{- errorf "Could not retrieve FlexSearch js file from %s. Reason: %s." $flexSearchJsUrl . -}}
