@@ -399,6 +399,9 @@ params:
       js: "js/vendor/flexsearch.bundle.min.js"
 ```
 
+`imageZoom.enable: true` is only needed here because image zoom is disabled by default.
+For KaTeX, make sure to publish all font files referenced by your chosen CSS file, not just the two shown in this example.
+
 To use an internal mirror instead, set `base` (and optionally `js` / `css` when the filename differs):
 
 ```yaml {filename="hugo.yaml"}
