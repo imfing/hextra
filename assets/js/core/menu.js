@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function () {
   syncAriaHidden();
   mobileQuery.addEventListener('change', syncAriaHidden);
 
-  function toggleMenu() {
+  function toggleMenu(options = {}) {
+    const { focusOnOpen = true } = options;
+
     // Toggle the hamburger menu
     menu.querySelector('svg').classList.toggle('open');
 
@@ -41,8 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Move focus into sidebar when opening, restore when closing
     if (isOpen) {
-      const firstFocusable = sidebarContainer.querySelector('a, button, input, [tabindex="0"]');
-      if (firstFocusable) firstFocusable.focus();
+      if (focusOnOpen) {
+        const firstFocusable = sidebarContainer.querySelector('a, button, input, [tabindex="0"]');
+        if (firstFocusable) firstFocusable.focus();
+      }
     } else {
       menu.focus();
     }
@@ -50,7 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   menu.addEventListener('click', (e) => {
     e.preventDefault();
-    toggleMenu();
+    // Pointer-initiated clicks on mobile should not force focus into the search input,
+    // which opens the software keyboard immediately.
+    toggleMenu({ focusOnOpen: e.detail === 0 });
   });
 
   // Close menu on Escape key (mobile only)
