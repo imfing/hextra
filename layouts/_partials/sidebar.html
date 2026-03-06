@@ -80,16 +80,18 @@
   {{- $useMainMenu := and (eq $level 0) $toc -}}
   {{- $mainMenuEntries := slice -}}
 
-  {{- $items := where (union .context.RegularPages .context.Sections) "Params.sidebar.exclude" "!=" true -}}
+  {{- $items := slice -}}
   {{- if $useMainMenu -}}
     {{- range $menuItem := site.Menus.main -}}
       {{- $menuType := $menuItem.Params.type | default "" -}}
       {{- $isIconOnly := and $menuItem.Params.icon (ne $menuType "link") -}}
+      {{- /* Keep only navigation links in the mobile sidebar. */ -}}
       {{- if or (eq $menuType "search") (eq $menuType "theme-toggle") (eq $menuType "language-switch") $isIconOnly -}}
         {{- continue -}}
       {{- end -}}
 
       {{- $menuTitle := or (T $menuItem.Identifier) $menuItem.Name -}}
+      {{- /* Normalize page-backed entries so we keep nested tree behavior. */ -}}
       {{- with $menuItem.Page -}}
         {{- if ne .Params.sidebar.exclude true -}}
           {{- $mainMenuEntries = $mainMenuEntries | append (dict "type" "page" "item" . "title" $menuTitle) -}}
@@ -107,6 +109,8 @@
         {{- $mainMenuEntries = $mainMenuEntries | append (dict "type" "url" "link" $link "title" $menuTitle) -}}
       {{- end -}}
     {{- end -}}
+  {{- else -}}
+    {{- $items = where (union .context.RegularPages .context.Sections) "Params.sidebar.exclude" "!=" true -}}
   {{- end -}}
 
   {{- $hasItems := gt (len $items) 0 -}}
@@ -117,18 +121,25 @@
   {{- if $hasItems -}}
     {{- if eq $level 0 -}}
       {{- if $useMainMenu -}}
+        {{- /* Mixed list: page entries render trees; url entries render leaf links. */ -}}
         {{- range $entry := $mainMenuEntries -}}
           {{- if eq (index $entry "type") "page" -}}
             {{- $item := index $entry "item" -}}
-            {{- $active := eq $pageURL $item.RelPermalink -}}
-            {{- $shouldOpen := or ($item.Params.sidebar.open) ($item.IsAncestor $page) $active | default true }}
-            <li class="{{ if $shouldOpen }}open{{ end }}">
-              {{- template "sidebar-item-link" dict "context" $item "active" $active "open" $shouldOpen "title" (index $entry "title") "link" $item.RelPermalink -}}
-              {{- if and $toc $active (ne $item.Params.toc false) -}}
-                {{- template "sidebar-toc" dict "page" $item -}}
-              {{- end -}}
-              {{- template "sidebar-tree" dict "context" $item "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
-            </li>
+            {{- if $item.Params.sidebar.separator -}}
+              <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
+                <span class="hx:cursor-default">{{ index $entry "title" }}</span>
+              </li>
+            {{- else -}}
+              {{- $active := eq (strings.TrimSuffix "/" $pageURL) (strings.TrimSuffix "/" $item.RelPermalink) -}}
+              {{- $shouldOpen := or ($item.Params.sidebar.open) ($item.IsAncestor $page) $active | default true }}
+              <li class="{{ if $shouldOpen }}open{{ end }}">
+                {{- template "sidebar-item-link" dict "context" $item "active" $active "open" $shouldOpen "title" (index $entry "title") "link" $item.RelPermalink -}}
+                {{- if and $toc $active (ne $item.Params.toc false) -}}
+                  {{- template "sidebar-toc" dict "page" $item -}}
+                {{- end -}}
+                {{- template "sidebar-tree" dict "context" $item "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
+              </li>
+            {{- end -}}
           {{- else -}}
             {{- $link := index $entry "link" -}}
             {{- $active := eq (strings.TrimSuffix "/" $pageURL) (strings.TrimSuffix "/" $link) -}}
