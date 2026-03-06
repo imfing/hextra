@@ -340,6 +340,73 @@ params:
     # js: "js/medium-zoom.min.js" # 可选，相对于 base 或本地资源
 ```
 
+### 本地与镜像脚本资源
+
+Hextra 可以从多种来源加载可选的前端依赖：
+
+- 主题默认配置（CDN）
+- 通过 `base` 指定的内部镜像 URL
+- 通过 `js` / `css` 指定的 Hugo 本地资源
+
+对于本地资源，请将 vendor 文件放在站点的 `assets/` 目录下，并在配置中引用这些资源路径：
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    js: "js/vendor/medium-zoom.min.js"
+
+  mermaid:
+    js: "js/vendor/mermaid.min.js"
+
+  asciinema:
+    js: "js/vendor/asciinema-player.min.js"
+    css: "css/vendor/asciinema-player.css"
+
+  math:
+    engine: katex
+    katex:
+      css: "css/vendor/katex.min.css"
+      assets:
+        - "fonts/KaTeX_Main-Regular.woff2"
+        - "fonts/KaTeX_Math-Italic.woff2"
+
+  search:
+    type: flexsearch
+    flexsearch:
+      js: "js/vendor/flexsearch.bundle.min.js"
+```
+
+这里只有因为图片缩放默认关闭，才需要设置 `imageZoom.enable: true`。
+对于 KaTeX，请确保发布你所选 CSS 文件引用的全部字体文件，而不仅仅是此示例中的两个。
+
+如果要使用内部镜像，请设置 `base`；只有当文件名不同时，才需要额外设置 `js` / `css`：
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    base: "https://mirror.example.com/medium-zoom/dist"
+
+  mermaid:
+    base: "https://mirror.example.com/mermaid/dist"
+
+  asciinema:
+    base: "https://mirror.example.com/asciinema-player/dist/bundle"
+
+  math:
+    engine: katex
+    katex:
+      base: "https://mirror.example.com/katex/dist"
+
+  search:
+    flexsearch:
+      base: "https://mirror.example.com/flexsearch/dist"
+      # js: "flexsearch.bundle.min.js"
+```
+
+> [!NOTE]
+> 如需自定义 MathJax 的加载来源，请在项目中覆盖 `layouts/_partials/scripts/mathjax.html`。
+
 ### 页面宽度
 
 页面整体布局宽度可通过 `params.page.width` 配置：
@@ -438,6 +505,17 @@ params:
     flexsearch:
       # 索引页面方式: content | summary | heading | title
       index: content
+```
+
+你也可以控制 FlexSearch runtime 的加载来源：
+
+```yaml {filename="hugo.yaml"}
+params:
+  search:
+    flexsearch:
+      version: "0.8.143" # 默认 CDN 版本
+      # base: "https://mirror.example.com/flexsearch/dist" # 可选的远程 base URL
+      # js: "js/vendor/flexsearch.bundle.min.js" # 本地资源路径，或远程 base 下的自定义文件
 ```
 
 `flexsearch.index` 的选项：
