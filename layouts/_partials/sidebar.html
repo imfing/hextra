@@ -91,6 +91,41 @@
       {{- end -}}
 
       {{- $menuTitle := or (T $menuItem.Identifier) $menuItem.Name -}}
+      {{- /* Dropdown parents mirror navbar behavior: render a labeled group of child links. */ -}}
+      {{- if $menuItem.HasChildren -}}
+        {{- $childEntries := slice -}}
+        {{- range $childItem := $menuItem.Children -}}
+          {{- $childType := $childItem.Params.type | default "" -}}
+          {{- $childIsIconOnly := and $childItem.Params.icon (ne $childType "link") -}}
+          {{- if or (eq $childType "search") (eq $childType "theme-toggle") (eq $childType "language-switch") $childIsIconOnly -}}
+            {{- continue -}}
+          {{- end -}}
+
+          {{- $childTitle := or (T $childItem.Identifier) $childItem.Name -}}
+          {{- with $childItem.Page -}}
+            {{- if ne .Params.sidebar.exclude true -}}
+              {{- $childEntries = $childEntries | append (dict "title" $childTitle "link" .RelPermalink) -}}
+            {{- end -}}
+            {{- continue -}}
+          {{- end -}}
+
+          {{- $childLink := $childItem.URL -}}
+          {{- with $childItem.PageRef -}}
+            {{- if hasPrefix . "/" -}}
+              {{- $childLink = relLangURL (strings.TrimPrefix "/" .) -}}
+            {{- end -}}
+          {{- end -}}
+          {{- if $childLink -}}
+            {{- $childEntries = $childEntries | append (dict "title" $childTitle "link" $childLink) -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- if gt (len $childEntries) 0 -}}
+          {{- $mainMenuEntries = $mainMenuEntries | append (dict "type" "group" "title" $menuTitle "children" $childEntries) -}}
+        {{- end -}}
+        {{- continue -}}
+      {{- end -}}
+
       {{- /* Normalize page-backed entries so we keep nested tree behavior. */ -}}
       {{- with $menuItem.Page -}}
         {{- if ne .Params.sidebar.exclude true -}}
@@ -140,6 +175,25 @@
                 {{- template "sidebar-tree" dict "context" $item "page" $page "pageURL" $pageURL "level" (add $level 1) "toc" $toc -}}
               </li>
             {{- end -}}
+          {{- else if eq (index $entry "type") "group" -}}
+            <li class="open">
+              <div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center">
+                <span class="hx:flex hx:grow hx:cursor-default hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:dark:text-gray-100">
+                  {{- index $entry "title" -}}
+                </span>
+              </div>
+              <div class="hextra-sidebar-children hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden">
+                <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'>
+                  {{- range $child := index $entry "children" -}}
+                    {{- $link := index $child "link" -}}
+                    {{- $active := eq (strings.TrimSuffix "/" $pageURL) (strings.TrimSuffix "/" $link) -}}
+                    <li class="hx:flex hx:flex-col">
+                      {{- template "sidebar-item-link" dict "active" $active "open" false "title" (index $child "title") "link" $link -}}
+                    </li>
+                  {{- end -}}
+                </ul>
+              </div>
+            </li>
           {{- else -}}
             {{- $link := index $entry "link" -}}
             {{- $active := eq (strings.TrimSuffix "/" $pageURL) (strings.TrimSuffix "/" $link) -}}

@@ -90,3 +90,15 @@ test("all English pages pass axe-core WCAG AA", async ({ page, baseURL }) => {
     `Accessibility violations found:\n\n${failures.join("\n\n")}`,
   ).toHaveLength(0);
 });
+
+test("mobile sidebar exposes main menu dropdown children", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/", { waitUntil: "load" });
+
+  await page.getByRole("button", { name: "Menu" }).click();
+
+  const sidebar = page.locator("aside.hextra-sidebar-container");
+  await expect(sidebar.getByRole("link", { name: "Development ↗" })).toBeVisible();
+  await expect(sidebar.getByRole("link", { name: "v0.10 ↗" })).toBeVisible();
+  await expect(sidebar.getByRole("link", { name: "v0.11 ↗" })).toBeVisible();
+});
