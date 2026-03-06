@@ -39,7 +39,7 @@
 {{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
 {{- if $isRemoteBase -}}
   {{- $cssPath := cond (ne $katexCssAsset "") $katexCssAsset (printf "katex%s.css" $minSuffix) -}}
-  {{- $katexCssUrl := printf "%s/%s" $katexBase $cssPath -}}
+  {{- $katexCssUrl := urls.JoinPath $katexBase $cssPath -}}
   {{- with try (resources.GetRemote $katexCssUrl) -}}
     {{- with .Err -}}
       {{- errorf "Could not retrieve KaTeX css file from %s. Reason: %s." $katexCssUrl . -}}
@@ -59,7 +59,7 @@
   {{- $cssContent := . -}}
   {{- if $isRemoteBase -}}
     {{- $fontPattern := "url(fonts/" -}}
-    {{- $fontSub := printf "url(%s/fonts/" $katexBase -}}
+    {{- $fontSub := printf "url(%s/" (urls.JoinPath $katexBase "fonts") -}}
     {{- $cssContent = strings.Replace $cssContent $fontPattern $fontSub -}}
   {{- end -}}
   {{- with resources.FromString (printf "css/katex%s.css" $minSuffix) $cssContent -}}
@@ -69,7 +69,7 @@
 {{- else -}}
   {{- if not $isRemoteBase -}}
     {{- $cssPath := cond (ne $katexCssAsset "") $katexCssAsset (printf "katex%s.css" $minSuffix) -}}
-    <link rel="stylesheet" href="{{ printf "%s/%s" $katexBase $cssPath }}" />
+    <link rel="stylesheet" href="{{ urls.JoinPath $katexBase $cssPath }}" />
   {{- end -}}
 {{- end -}}
 

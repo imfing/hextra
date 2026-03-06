@@ -340,6 +340,73 @@ params:
     # js: "js/medium-zoom.min.js" # オプション、base またはローカルアセットからの相対パス
 ```
 
+### ローカルおよびミラー済みスクリプトアセット
+
+Hextra はオプションのフロントエンド依存ファイルを複数のソースから読み込めます:
+
+- テーマのデフォルト設定（CDN）
+- `base` を使った社内ミラー URL
+- `js` / `css` を使った Hugo のローカルアセット
+
+ローカルアセットを使う場合は、vendor ファイルをサイトの `assets/` ディレクトリに配置し、そのアセットパスを設定値に指定します:
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    js: "js/vendor/medium-zoom.min.js"
+
+  mermaid:
+    js: "js/vendor/mermaid.min.js"
+
+  asciinema:
+    js: "js/vendor/asciinema-player.min.js"
+    css: "css/vendor/asciinema-player.css"
+
+  math:
+    engine: katex
+    katex:
+      css: "css/vendor/katex.min.css"
+      assets:
+        - "fonts/KaTeX_Main-Regular.woff2"
+        - "fonts/KaTeX_Math-Italic.woff2"
+
+  search:
+    type: flexsearch
+    flexsearch:
+      js: "js/vendor/flexsearch.bundle.min.js"
+```
+
+`imageZoom.enable: true` が必要なのは、画像ズームがデフォルトで無効になっているためです。
+KaTeX については、この例の 2 つだけでなく、選択した CSS が参照するすべてのフォントファイルを公開してください。
+
+社内ミラーを使う場合は `base` を設定し、ファイル名が異なる場合のみ `js` / `css` を追加してください:
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    base: "https://mirror.example.com/medium-zoom/dist"
+
+  mermaid:
+    base: "https://mirror.example.com/mermaid/dist"
+
+  asciinema:
+    base: "https://mirror.example.com/asciinema-player/dist/bundle"
+
+  math:
+    engine: katex
+    katex:
+      base: "https://mirror.example.com/katex/dist"
+
+  search:
+    flexsearch:
+      base: "https://mirror.example.com/flexsearch/dist"
+      # js: "flexsearch.bundle.min.js"
+```
+
+> [!NOTE]
+> MathJax の読み込み元をカスタマイズするには、プロジェクト内で `layouts/_partials/scripts/mathjax.html` を上書きしてください。
+
 ### ページ幅
 
 レイアウト全体の幅は `params.page.width` で設定できます：
@@ -438,6 +505,17 @@ params:
     flexsearch:
       # インデックス対象: content | summary | heading | title
       index: content
+```
+
+FlexSearch ランタイムの読み込み元も制御できます:
+
+```yaml {filename="hugo.yaml"}
+params:
+  search:
+    flexsearch:
+      version: "0.8.143" # デフォルトの CDN バージョン
+      # base: "https://mirror.example.com/flexsearch/dist" # オプションのリモート base URL
+      # js: "js/vendor/flexsearch.bundle.min.js" # ローカルアセットのパス、またはリモート base 配下のカスタムファイル
 ```
 
 `flexsearch.index` のオプション：
