@@ -5,7 +5,8 @@
     "build:css": "npx postcss --config postcss.config.mjs --env production assets/css/styles.css -o assets/css/compiled/main.css",
     "build": "hugo --gc --minify --themesDir=../.. --source=docs",
     "test": "npx playwright test",
-    "test:a11y": "npx playwright test tests/accessibility.spec.ts"
+    "test:a11y": "npx playwright test tests/accessibility.spec.ts",
+    "test:mobile-menu": "npx playwright test tests/mobile-menu-focus.spec.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
