@@ -1,5 +1,5 @@
-{{/* Render raw svg icon from .Site.Data */}}
-{{- $icon := index site.Data.icons .name -}}
+{{/* Render raw svg icon from hugo.Data */}}
+{{- $icon := index hugo.Data.icons .name -}}
 
 {{- if not $icon -}}
   {{ errorf "icon %q not found" .name }}
