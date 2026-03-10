@@ -11,15 +11,15 @@
           {{ .Content }}
         </div>
         <div class="hx:grid hx:grid-cols-1 hx:md:grid-cols-2 hx:lg:grid-cols-3 hx:xl:grid-cols-4 hx:gap-4">
-          {{ range .Data.Terms }}
+          {{ range $term, $pages := .Data.Terms }}
             <div class="hx:w-full">
               <a
-                href="{{ .Page.RelPermalink }}"
-                title="{{ .Page.LinkTitle }}"
+                href="{{ $pages.Page.RelPermalink }}"
+                title="{{ if eq $.Data.Plural "tags" }}{{ $term }}{{ else }}{{ $pages.Page.LinkTitle }}{{ end }}"
                 class="hx:font-medium hx:hover:text-primary-600"
               >
-                {{- .Page.LinkTitle -}}
-                <span class="hx:text-sm hx:text-gray-500">&nbsp;{{ .Count }}</span>
+                {{- if eq $.Data.Plural "tags" }}{{ $term }}{{ else }}{{ $pages.Page.LinkTitle }}{{ end -}}
+                <span class="hx:text-sm hx:text-gray-500">&nbsp;{{ $pages.Count }}</span>
               </a>
             </div>
           {{ end }}
