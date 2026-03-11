@@ -18,3 +18,8 @@
 {{- if (.Store.Get "hasImageZoom") -}}
   {{- partial "scripts/medium-zoom.html" . -}}
 {{- end -}}
+
+{{/* Plyr */}}
+{{- if (.Store.Get "hasPlyr") -}}
+  {{- partial "scripts/plyr.html" . -}}
+{{- end -}}

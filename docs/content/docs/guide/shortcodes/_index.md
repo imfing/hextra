@@ -29,4 +29,5 @@ Additional shortcodes provided by Hugo and Hextra:
   {{< card link="others" title="Others" icon="view-grid" >}}
   {{< card link="hextra" title="Hextra" icon="view-grid" >}}
   {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
+  {{< card link="media" title="Media Player" icon="play" >}}
 {{< /cards >}}
