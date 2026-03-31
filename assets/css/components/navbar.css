@@ -4,12 +4,42 @@ nav {
   }
 }
 
-@supports (
-  (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
-) {
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .hextra-nav-container-blur {
     @apply hx:backdrop-blur-md hx:bg-white/[.85] hx:dark:bg-dark/80!;
   }
+}
+
+.hextra-nav-link {
+  @apply hx:relative hx:-ml-2 hx:flex hx:items-center hx:gap-1 hx:whitespace-nowrap hx:p-2 hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100;
+}
+
+.hextra-nav-link[data-active="true"] {
+  @apply hx:font-medium;
+}
+
+.hextra-nav-link[data-active="false"] {
+  @apply hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200;
+}
+
+.hextra-nav-menu-toggle {
+  @apply hx:cursor-pointer;
+}
+
+.hextra-nav-menu-items {
+  @apply hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-lg hx:border hx:border-gray-200 hx:bg-white hx:p-1 hx:text-sm hx:shadow-lg hx:dark:border-neutral-700 hx:dark:bg-neutral-900;
+}
+
+.hextra-nav-menu-items:not(.hx\:hidden) {
+  display: block;
+}
+
+.hextra-nav-menu-item {
+  @apply hx:flex hx:flex-col;
+}
+
+.hextra-nav-menu-link {
+  @apply hx:relative hx:flex hx:cursor-pointer hx:items-center hx:gap-1 hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-gray-600 hx:hover:bg-gray-100 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-200;
 }
 
 /* Hamburger Menu - Flattened Structure */

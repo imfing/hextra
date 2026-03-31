@@ -147,6 +147,11 @@ The following classes can be used to customize various parts of the theme.
 - `hextra-nav-container` - The navbar container
 - `hextra-nav-container-blur` - The navbar container in blur element
 - `hextra-hamburger-menu` - The hamburger menu button
+- `hextra-nav-link` - A top-level navbar link or dropdown toggle
+- `hextra-nav-menu-link` - A navbar dropdown menu link
+- `hextra-nav-menu-toggle` - The navbar dropdown toggle button
+- `hextra-nav-menu-items` - The navbar dropdown menu container
+- `hextra-nav-menu-item` - The navbar dropdown menu item container
 
 #### Footer
 
@@ -176,6 +181,15 @@ Optional nested classes used within the search UI:
 
 - `hextra-sidebar-container` - The sidebar container
 - `hextra-sidebar-active-item` - The active item in the sidebar
+- `hextra-sidebar-list` - A top-level sidebar list
+- `hextra-sidebar-tree` - A nested sidebar tree list
+- `hextra-sidebar-separator` - A sidebar section separator
+- `hextra-sidebar-group-label` - A non-link sidebar group label
+- `hextra-sidebar-link` - A sidebar navigation link
+- `hextra-sidebar-link-content` - The text container within a sidebar link
+- `hextra-sidebar-toc-link` - A table-of-contents link rendered in the sidebar
+
+Existing sidebar hooks such as `hextra-sidebar-item`, `hextra-sidebar-children`, and `hextra-sidebar-collapsible-button` remain available for customization and JavaScript integrations.
 
 #### Language Switcher
 
