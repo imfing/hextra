@@ -19,8 +19,6 @@
     {{- $sidebarClass = "hx:md:hidden" -}}
   {{- end -}}
 {{- end -}}
-
-
 <aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
   {{- if (site.Params.search.enable | default true) -}}
     <!-- Search bar on small screen -->
@@ -292,7 +290,7 @@
   {{- with .context }}{{ if or .RegularPages .Sections }}{{ $hasChildren = true }}{{ end }}{{ end -}}
   <div class="hextra-sidebar-item" data-active="{{ if .active }}true{{ else }}false{{ end }}">
     <a
-      class="hextra-sidebar-link{{ if .active }}hextra-sidebar-active-item{{ end }}{{ if $hasChildren }}hx:ltr:pr-8 hx:rtl:pl-8{{ end }}"
+      class="hextra-sidebar-link{{ if .active }} hextra-sidebar-active-item{{ end }}{{ if $hasChildren }} hx:ltr:pr-8 hx:rtl:pl-8{{ end }}"
       href="{{ .link }}"
       {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
     >
