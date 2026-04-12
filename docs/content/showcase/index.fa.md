@@ -31,4 +31,5 @@ layout: wide
   {{< card link="https://lutheranconfessions.org/" title="LutheranConfessions" image="https://github.com/imfing/hextra/assets/5097752/ad6625e4-88cd-4cad-b102-5399997d0359" imageStyle="object-fit:cover; aspect-ratio:16/9;" >}}
   {{< card link="https://github.com/imfing/hextra-starter-template/" title="Hextra Starter Template" image="https://user-images.githubusercontent.com/5097752/263551418-c403b9a9-a76c-47a6-8466-513d772ef0b7.jpg" imageStyle="object-fit:cover; aspect-ratio:16/9;" >}}
   {{< card link="https://developers.clever-cloud.com/" title="Clever Cloud Documentation" image="https://cellar-c2.services.clever-cloud.com/documentation/doc-screenshot.png" imageStyle="object-fit:cover; aspect-ratio:16/9;" >}}
+  {{< card link="https://docs.sortie-ai.com" title="Sortie" image="https://raw.githubusercontent.com/sortie-ai/docs/refs/heads/main/static/img/screenshot.png" imageStyle="object-fit:cover; aspect-ratio:16/9;" >}}
 {{< /cards >}}

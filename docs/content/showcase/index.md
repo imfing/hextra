@@ -136,4 +136,11 @@ Open source projects powered by Hextra
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 
+  {{< card
+        link="https://docs.sortie-ai.com"
+        title="Sortie"
+        image="https://raw.githubusercontent.com/sortie-ai/docs/refs/heads/main/static/img/screenshot.png"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
 {{< /cards >}}
