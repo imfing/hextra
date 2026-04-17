@@ -102,7 +102,13 @@
           {{- end -}}
 
           {{- $childTitle := or (T $childItem.Identifier) $childItem.Name -}}
-          {{- with $childItem.Page -}}
+          {{- $childPage := $childItem.Page -}}
+          {{- with $childItem.PageRef -}}
+            {{- with $page.Site.GetPage . -}}
+              {{- $childPage = . -}}
+            {{- end -}}
+          {{- end -}}
+          {{- with $childPage -}}
             {{- if ne .Params.sidebar.exclude true -}}
               {{- $childEntries = $childEntries | append (dict "title" $childTitle "link" .RelPermalink) -}}
             {{- end -}}
@@ -127,7 +133,13 @@
       {{- end -}}
 
       {{- /* Normalize page-backed entries so we keep nested tree behavior. */ -}}
-      {{- with $menuItem.Page -}}
+      {{- $menuPage := $menuItem.Page -}}
+      {{- with $menuItem.PageRef -}}
+        {{- with $page.Site.GetPage . -}}
+          {{- $menuPage = . -}}
+        {{- end -}}
+      {{- end -}}
+      {{- with $menuPage -}}
         {{- if ne .Params.sidebar.exclude true -}}
           {{- $mainMenuEntries = $mainMenuEntries | append (dict "type" "page" "item" . "title" $menuTitle) -}}
         {{- end -}}
@@ -286,17 +298,19 @@
   {{- $external := strings.HasPrefix .link "http" -}}
   {{- $open := .open | default true -}}
   {{- $hasChildren := false -}}
+  {{- $linkClass := "hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset" -}}
   {{- with .context }}{{ if or .RegularPages .Sections }}{{ $hasChildren = true }}{{ end }}{{ end -}}
+  {{- if $hasChildren -}}
+    {{- $linkClass = printf "%s hx:ltr:pr-8 hx:rtl:pl-8" $linkClass -}}
+  {{- end -}}
+  {{- if .active -}}
+    {{- $linkClass = printf "%s hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500" $linkClass -}}
+  {{- else -}}
+    {{- $linkClass = printf "%s hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" $linkClass -}}
+  {{- end -}}
   <div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active="{{ if .active }}true{{ else }}false{{ end }}">
     <a
-      class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none]
-      {{- if $hasChildren }} hx:ltr:pr-8 hx:rtl:pl-8{{- end }}
-      hx:hextra-focus-visible-inset
-      {{- if .active }}
-        hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500
-      {{- else }}
-        hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50
-      {{- end -}}"
+      class="{{ $linkClass }}"
       href="{{ .link }}"
       {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
     >
