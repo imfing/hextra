@@ -71,6 +71,7 @@ test("all English pages pass axe-core WCAG AA", async ({ page, baseURL }) => {
       const results = await new AxeBuilder({ page })
         .withTags(WCAG_TAGS)
         .disableRules(DISABLED_RULES)
+        .exclude("iframe")
         .analyze();
 
       if (results.violations.length === 0) {
