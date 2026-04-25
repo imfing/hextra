@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const backToTop = document.querySelector("#backToTop");
   if (backToTop) {
+    backToTop.addEventListener("click", scrollUp);
     document.addEventListener("scroll", (e) => {
       if (window.scrollY > 300) {
         backToTop.classList.remove("hx:opacity-0");
