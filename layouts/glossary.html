@@ -6,7 +6,8 @@
       <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
         {{ if .Title }}<h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">{{ .Title }}</h1>{{ end }}
         <div class="content">
-          {{- with (index .Site.Data .Site.Language.Lang "termbase") -}}
+          {{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
+          {{- with (index $siteData .Site.Language.Lang "termbase") -}}
           <dl>
             {{- range sort . "term" -}}
             <dt>

@@ -14,9 +14,10 @@ or
 {{- $entry := .Get "entry" | default (.Get 0) -}}
 {{- $entryLower := lower $entry -}}
 {{- $match := dict -}}
+{{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
 
 <!-- Go over the term data file - data/<lang>/termbase.yaml -->
-{{- range (index .Site.Data .Site.Language.Lang "termbase") -}}
+{{- range (index $siteData .Site.Language.Lang "termbase") -}}
   {{- if or (eq (lower .abbr) $entryLower) (eq (lower .term) $entryLower) -}}
     {{- $match = . -}}
     {{- break -}}

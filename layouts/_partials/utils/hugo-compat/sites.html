@@ -1,0 +1,14 @@
+{{/*
+Returns all sites using the supported Hugo API for the running version.
+
+Hugo v0.156.0 deprecated site.Sites / page.Sites in favor of hugo.Sites.
+Keep the fallback so Hextra can continue supporting Hugo >= 0.146.0.
+*/}}
+{{- $sites := slice -}}
+{{- if ge (hugo.Version) "0.156.0" -}}
+  {{- $sites = hugo.Sites -}}
+{{- else -}}
+  {{- $sites = site.Sites -}}
+{{- end -}}
+
+{{- return $sites -}}

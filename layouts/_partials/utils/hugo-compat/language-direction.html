@@ -1,0 +1,15 @@
+{{/*
+Returns the language direction using the supported Hugo API for the running version.
+
+Hugo v0.158.0 deprecated Language.LanguageDirection in favor of Language.Direction.
+Keep the fallback so Hextra can continue supporting Hugo >= 0.146.0.
+*/}}
+{{- $language := . -}}
+{{- $direction := "" -}}
+{{- if ge (hugo.Version) "0.158.0" -}}
+  {{- $direction = $language.Direction -}}
+{{- else -}}
+  {{- $direction = $language.LanguageDirection -}}
+{{- end -}}
+
+{{- return $direction -}}
