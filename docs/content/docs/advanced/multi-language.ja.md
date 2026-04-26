@@ -26,6 +26,11 @@ languages:
     weight: 3
 ```
 
+> [!NOTE]
+> Hugo v0.158.0 以降、`languageName`、`languageCode`、`languageDirection` は非推奨です。
+> 新しいサイトでは、それぞれ `label`、`locale`、`direction` を使用してください。
+> Hugo の [言語設定ドキュメント](https://gohugo.io/configuration/languages/#language-settings)を参照してください。
+
 ## ファイル名による翻訳管理
 
 Hugo はファイル名による翻訳管理をサポートしています。例えば、英語のファイル `content/docs/_index.md` がある場合、フランス語の翻訳用に `content/docs/_index.fr.md` というファイルを作成できます。

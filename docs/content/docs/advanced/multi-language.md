@@ -26,6 +26,11 @@ languages:
     weight: 3
 ```
 
+> [!NOTE]
+> Starting with Hugo v0.158.0, `languageName`, `languageCode`, and `languageDirection` are deprecated.
+> Use `label`, `locale`, and `direction` respectively for new sites.
+> See Hugo's [language settings documentation](https://gohugo.io/configuration/languages/#language-settings).
+
 ## Manage Translations by Filename
 
 Hugo supports managing translations by filename. For example, if we have a file `content/docs/_index.md` in English, we can create a file `content/docs/_index.fr.md` for French translation.

@@ -26,6 +26,11 @@ languages:
     weight: 3
 ```
 
+> [!NOTE]
+> 从 Hugo v0.158.0 开始，`languageName`、`languageCode` 和 `languageDirection` 已被弃用。
+> 新站点请分别使用 `label`、`locale` 和 `direction`。
+> 请参阅 Hugo 的[语言设置文档](https://gohugo.io/configuration/languages/#language-settings)。
+
 ## 通过文件名管理翻译
 
 Hugo 支持通过文件名管理翻译。例如，如果我们有一个英文文件 `content/docs/_index.md`，可以创建 `content/docs/_index.fr.md` 作为法语翻译。
