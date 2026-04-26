@@ -26,6 +26,11 @@ languages:
     weight: 3
 ```
 
+> [!NOTE]
+> از Hugo v0.158.0 به بعد، `languageName`، `languageCode` و `languageDirection` منسوخ شده‌اند.
+> برای سایت‌های جدید به‌ترتیب از `label`، `locale` و `direction` استفاده کنید.
+> مستندات [تنظیمات زبان‌های Hugo](https://gohugo.io/configuration/languages/#language-settings) را ببینید.
+
 ## مدیریت ترجمه‌ها بر اساس نام فایل
 
 هوگو از مدیریت ترجمه‌ها بر اساس نام فایل پشتیبانی می‌کند. به عنوان مثال، اگر فایلی به نام `content/docs/_index.md` به زبان انگلیسی داریم، می‌توانیم فایل `content/docs/_index.fr.md` را برای ترجمه فرانسوی ایجاد کنیم.

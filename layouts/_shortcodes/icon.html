@@ -13,7 +13,8 @@ or
 */ -}}
 
 {{- $name := .Get "name" | default (.Get 0) -}}
-{{- $icon := index site.Data.icons $name -}}
+{{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
+{{- $icon := index $siteData.icons $name -}}
 {{- $attributes := .Get "attributes" | default "height=1em"}}
 
 {{- if not $icon -}}
