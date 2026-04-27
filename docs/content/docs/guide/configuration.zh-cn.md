@@ -312,6 +312,16 @@ params:
     displayTags: true
 ```
 
+Hugo 默认会为 `tags` 和 `categories` 创建分类页面。如果你的网站不使用分类页面，并且想省略生成的 `public/tags/` 和 `public/categories/` 目录，请禁用 `taxonomy` 和 `term` 页面类型：
+
+```yaml {filename="hugo.yaml"}
+disableKinds:
+  - taxonomy
+  - term
+```
+
+只有在不依赖标签或分类归档页面时，才禁用这些类型。
+
 ### 图片缩放
 
 图片缩放默认禁用。启用后，点击 Markdown 图片会打开放大视图。

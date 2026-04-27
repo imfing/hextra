@@ -334,6 +334,16 @@ params:
     displayTags: true
 ```
 
+Hugo creates taxonomy pages for `tags` and `categories` by default. If your site does not use taxonomy pages and you want to omit the generated `public/tags/` and `public/categories/` directories, disable the `taxonomy` and `term` page kinds:
+
+```yaml {filename="hugo.yaml"}
+disableKinds:
+  - taxonomy
+  - term
+```
+
+Only disable these kinds when you are not relying on tag or category archive pages.
+
 ### Image Zoom
 
 Image zoom is disabled by default. When enabled, clicking a Markdown image opens a zoomed view.
