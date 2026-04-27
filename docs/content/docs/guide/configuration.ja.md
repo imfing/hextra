@@ -312,6 +312,16 @@ params:
     displayTags: true
 ```
 
+Hugo はデフォルトで `tags` と `categories` のタクソノミーページを作成します。サイトでタクソノミーページを使わず、生成される `public/tags/` と `public/categories/` ディレクトリを省略したい場合は、`taxonomy` と `term` のページ種別を無効にします：
+
+```yaml {filename="hugo.yaml"}
+disableKinds:
+  - taxonomy
+  - term
+```
+
+タグまたはカテゴリのアーカイブページに依存していない場合にのみ、これらの種別を無効にしてください。
+
 ### 画像ズーム
 
 画像ズームはデフォルトで無効です。有効にすると、Markdown 画像をクリックするとズームビューが開きます。
