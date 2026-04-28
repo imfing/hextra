@@ -94,6 +94,11 @@ markup:
 
 enableInlineShortcodes: true
 
+security:
+  http:
+    urls:
+      - '(?i)^https?://[a-z]'
+
 menu:
   main:
     - identifier: documentation
