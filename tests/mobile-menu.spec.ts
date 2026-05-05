@@ -5,10 +5,11 @@ import {
   mkdtempSync,
   readFileSync,
   rmSync,
+  symlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 
 test("clicking mobile hamburger does not focus the sidebar search input", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
@@ -59,13 +60,18 @@ test("mobile sidebar uses localized page titles for zh-cn docs navigation", asyn
   await expect(guide).not.toHaveText("Guide");
 });
 
-test("mobile sidebar falls back to content tree when main menu has no eligible entries", async () => {
+test("mobile sidebar falls back to content tree when main menu has no eligible entries", async ({
+  page,
+}) => {
   const siteDir = mkdtempSync(join(tmpdir(), "hextra-mobile-menu-"));
   const contentDir = join(siteDir, "content");
   const publishDir = join(siteDir, "public");
+  const themesDir = join(siteDir, "themes");
 
   mkdirSync(join(contentDir, "docs"), { recursive: true });
   mkdirSync(join(contentDir, "donate"), { recursive: true });
+  mkdirSync(themesDir);
+  symlinkSync(process.cwd(), join(themesDir, "hextra"), "dir");
   writeFileSync(
     join(siteDir, "hugo.yaml"),
     `title: Test
@@ -126,7 +132,7 @@ sidebar:
         "--source",
         siteDir,
         "--themesDir",
-        dirname(process.cwd()),
+        themesDir,
         "--destination",
         publishDir,
       ],
@@ -134,13 +140,17 @@ sidebar:
     );
 
     const html = readFileSync(join(publishDir, "index.html"), "utf8");
-    const mobileSidebar = html.match(
-      /<ul class="hx:flex hx:flex-col hx:gap-1 hx:md:hidden">([\s\S]*?)<\/ul>/,
-    )?.[1];
+    await page.setContent(html);
 
-    expect(mobileSidebar).toBeTruthy();
-    expect(mobileSidebar).toContain('href="/docs/"');
-    expect(mobileSidebar).toContain('href="/docs/getting-started/"');
+    const mobileSidebar = page
+      .locator("aside.hextra-sidebar-container ul")
+      .filter({ has: page.locator('a[href="/docs/"]') })
+      .first();
+
+    await expect(mobileSidebar.locator('a[href="/docs/"]')).toHaveText("Docs");
+    await expect(
+      mobileSidebar.locator('a[href="/docs/getting-started/"]'),
+    ).toHaveText("Getting Started");
   } finally {
     rmSync(siteDir, { recursive: true, force: true });
   }
