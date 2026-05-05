@@ -5,5 +5,6 @@
 {{- $content := .Text -}}
 {{- $alertType := .AlertType -}}
 {{- $alertTitle := .AlertTitle -}}
+{{- $alertSign := .AlertSign -}}
 
-{{- partial "components/github-style-alert.html" (dict "content" $content "alertType" $alertType "alertTitle" $alertTitle) -}}
+{{- partial "components/github-style-alert.html" (dict "content" $content "alertType" $alertType "alertTitle" $alertTitle "alertSign" $alertSign) -}}
