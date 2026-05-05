@@ -1,4 +1,15 @@
 import { test, expect } from "@playwright/test";
+import { execFileSync } from "node:child_process";
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
 test("clicking mobile hamburger does not focus the sidebar search input", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
@@ -47,4 +58,100 @@ test("mobile sidebar uses localized page titles for zh-cn docs navigation", asyn
   await expect(organizeFiles).toHaveText("文件组织");
   await expect(gettingStarted).not.toHaveText("Getting Started");
   await expect(guide).not.toHaveText("Guide");
+});
+
+test("mobile sidebar falls back to content tree when main menu has no eligible entries", async ({
+  page,
+}) => {
+  const siteDir = mkdtempSync(join(tmpdir(), "hextra-mobile-menu-"));
+  const contentDir = join(siteDir, "content");
+  const publishDir = join(siteDir, "public");
+  const themesDir = join(siteDir, "themes");
+
+  mkdirSync(join(contentDir, "docs"), { recursive: true });
+  mkdirSync(join(contentDir, "donate"), { recursive: true });
+  mkdirSync(themesDir);
+  symlinkSync(process.cwd(), join(themesDir, "hextra"), "dir");
+  writeFileSync(
+    join(siteDir, "hugo.yaml"),
+    `title: Test
+theme: hextra
+menu:
+  main:
+    - name: Donate
+      pageRef: /donate
+      weight: 1
+    - name: Search
+      weight: 2
+      params:
+        type: search
+    - name: GitHub
+      weight: 3
+      url: "https://github.com/imfing/hextra"
+      params:
+        icon: github
+`,
+  );
+  writeFileSync(
+    join(contentDir, "_index.md"),
+    `---
+title: Home
+cascade:
+  type: docs
+---
+`,
+  );
+  writeFileSync(
+    join(contentDir, "docs", "_index.md"),
+    `---
+title: Docs
+---
+`,
+  );
+  writeFileSync(
+    join(contentDir, "docs", "getting-started.md"),
+    `---
+title: Getting Started
+---
+`,
+  );
+  writeFileSync(
+    join(contentDir, "donate", "index.md"),
+    `---
+title: Donate
+sidebar:
+  exclude: true
+---
+`,
+  );
+
+  try {
+    execFileSync(
+      "hugo",
+      [
+        "--source",
+        siteDir,
+        "--themesDir",
+        themesDir,
+        "--destination",
+        publishDir,
+      ],
+      { cwd: process.cwd(), stdio: "pipe" },
+    );
+
+    const html = readFileSync(join(publishDir, "index.html"), "utf8");
+    await page.setContent(html);
+
+    const mobileSidebar = page
+      .locator("aside.hextra-sidebar-container ul")
+      .filter({ has: page.locator('a[href="/docs/"]') })
+      .first();
+
+    await expect(mobileSidebar.locator('a[href="/docs/"]')).toHaveText("Docs");
+    await expect(
+      mobileSidebar.locator('a[href="/docs/getting-started/"]'),
+    ).toHaveText("Getting Started");
+  } finally {
+    rmSync(siteDir, { recursive: true, force: true });
+  }
 });
