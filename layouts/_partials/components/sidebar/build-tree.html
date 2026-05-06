@@ -1,0 +1,23 @@
+{{- $context := .context -}}
+{{- $page := .page -}}
+{{- $pageURL := .pageURL -}}
+
+{{- $sidebarData := partial "components/sidebar/source-data.html" $page -}}
+{{- $matchFound := false -}}
+
+{{- range $sidebarData -}}
+  {{- $node := partial "components/sidebar/normalize-node.html" . -}}
+  {{- if $node.page -}}
+    {{- if or (eq $node.page.RelPermalink $pageURL) ($node.page.IsAncestor $page) -}}
+      {{- $matchFound = true -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $matchFound -}}
+  {{- $cacheKey := printf "sidebar:data:%s:%d" site.Language.Lang (len $sidebarData) -}}
+  {{- return (partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData "page" $page) $cacheKey) -}}
+{{- end -}}
+
+{{- $cacheKey := printf "sidebar:auto:%s:%s" site.Language.Lang $context.RelPermalink -}}
+{{- return (partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context "page" $page) $cacheKey) -}}

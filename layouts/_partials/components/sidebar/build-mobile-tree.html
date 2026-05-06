@@ -1,0 +1,124 @@
+{{- $page := .page -}}
+{{- $pageURL := .pageURL -}}
+{{- $nodes := slice -}}
+
+{{- range $menuItem := site.Menus.main -}}
+  {{- $menuType := $menuItem.Params.type | default "" -}}
+  {{- $isIconOnly := and $menuItem.Params.icon (ne $menuType "link") -}}
+  {{- if or (eq $menuType "search") (eq $menuType "theme-toggle") (eq $menuType "language-switch") $isIconOnly -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $menuTitle := or (T $menuItem.Identifier) $menuItem.Name -}}
+
+  {{- if $menuItem.HasChildren -}}
+    {{- $childNodes := slice -}}
+    {{- range $childItem := $menuItem.Children -}}
+      {{- $childType := $childItem.Params.type | default "" -}}
+      {{- $childIsIconOnly := and $childItem.Params.icon (ne $childType "link") -}}
+      {{- if or (eq $childType "search") (eq $childType "theme-toggle") (eq $childType "language-switch") $childIsIconOnly -}}
+        {{- continue -}}
+      {{- end -}}
+
+      {{- $childTitle := or (T $childItem.Identifier) $childItem.Name -}}
+      {{- $childPage := $childItem.Page -}}
+      {{- with $childItem.PageRef -}}
+        {{- with $page.Site.GetPage . -}}
+          {{- $childPage = . -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- $childLink := "" -}}
+      {{- with $childPage -}}
+        {{- if ne .Params.sidebar.exclude true -}}
+          {{- $childLink = .RelPermalink -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $childLink = $childItem.URL -}}
+        {{- with $childItem.PageRef -}}
+          {{- if hasPrefix . "/" -}}
+            {{- $childLink = relLangURL (strings.TrimPrefix "/" .) -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- if $childLink -}}
+        {{- $childNodes = $childNodes | append (dict
+          "link" $childLink
+          "title" $childTitle
+          "items" (slice)
+          "merge" "none"
+          "group" false
+          "separator" false
+          "external" (hasPrefix $childLink "http")
+          "page" $childPage
+        ) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if gt (len $childNodes) 0 -}}
+      {{- $nodes = $nodes | append (dict
+        "link" ""
+        "title" $menuTitle
+        "items" $childNodes
+        "merge" "none"
+        "open" true
+        "group" true
+        "separator" false
+        "external" false
+        "page" false
+      ) -}}
+    {{- end -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $menuPage := $menuItem.Page -}}
+  {{- with $menuItem.PageRef -}}
+    {{- with $page.Site.GetPage . -}}
+      {{- $menuPage = . -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- with $menuPage -}}
+    {{- if ne .Params.sidebar.exclude true -}}
+      {{- if .Params.sidebar.separator -}}
+        {{- $nodes = $nodes | append (dict "title" $menuTitle "separator" true "link" "" "items" (slice) "group" false "external" false "page" .) -}}
+      {{- else -}}
+        {{- $children := partial "components/sidebar/build-auto-nodes.html" (dict "context" . "page" $page) -}}
+        {{- $nodes = $nodes | append (dict
+          "link" .RelPermalink
+          "title" $menuTitle
+          "items" $children
+          "merge" "none"
+          "open" (.Params.sidebar.open)
+          "separator" false
+          "group" false
+          "external" false
+          "page" .
+        ) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $link := $menuItem.URL -}}
+  {{- with $menuItem.PageRef -}}
+    {{- if hasPrefix . "/" -}}
+      {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $link -}}
+    {{- $nodes = $nodes | append (dict
+      "link" $link
+      "title" $menuTitle
+      "items" (slice)
+      "merge" "none"
+      "separator" false
+      "group" false
+      "external" (hasPrefix $link "http")
+      "page" false
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $nodes -}}
