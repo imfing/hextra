@@ -1,0 +1,13 @@
+- link: /docs/sidebar-lab/
+  title: Sidebar Lab
+  merge: deep
+  items:
+    - link: /docs/sidebar-lab/manual-only/
+    - link: /docs/sidebar-lab/manual-parent/
+      merge: none
+      items:
+        - link: /docs/sidebar-lab/manual-parent/manual-node/
+    - link: /docs/sidebar-lab/deep-parent/
+      merge: deep
+      items:
+        - link: /docs/sidebar-lab/deep-parent/deep-manual-node/
