@@ -1,0 +1,37 @@
+{{- $node := . -}}
+{{- $link := $node.link | default "" -}}
+{{- $external := hasPrefix $link "http" -}}
+{{- $normalizedLink := $link -}}
+{{- $page := false -}}
+
+{{- if and $link (not $external) -}}
+  {{- $normalizedLink = relLangURL (strings.TrimPrefix "/" $link) -}}
+  {{- with site.GetPage $link -}}
+    {{- $page = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $title := $node.title -}}
+{{- if and (not $title) $page -}}
+  {{- $title = partial "utils/title" $page -}}
+{{- end -}}
+
+{{- $knownKeys := slice "link" "title" "items" "merge" "open" "weight" "separator" "exclude" -}}
+{{- range $key, $_ := $node -}}
+  {{- if not (in $knownKeys $key) -}}
+    {{- warnf "sidebar data: unknown key %q on node with link %q" $key ($node.link | default "<no link>") -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (dict
+  "link" $normalizedLink
+  "title" ($title | default "Untitled")
+  "items" ($node.items | default slice)
+  "merge" ($node.merge | default "none")
+  "open" $node.open
+  "weight" ($node.weight | default 0)
+  "separator" ($node.separator | default false)
+  "group" false
+  "external" $external
+  "page" $page
+) -}}

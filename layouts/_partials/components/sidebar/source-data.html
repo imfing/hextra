@@ -1,0 +1,9 @@
+{{- $lang := .Language.Lang -}}
+{{- $localized := index site.Data (printf "sidebar.%s" $lang) -}}
+
+{{- $base := slice -}}
+{{- if reflect.IsSlice site.Data.sidebar -}}
+  {{- $base = site.Data.sidebar -}}
+{{- end -}}
+
+{{- return (or $localized $base (slice)) -}}
