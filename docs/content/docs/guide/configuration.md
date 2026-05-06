@@ -191,6 +191,41 @@ sidebar:
 
 This will hide the main sidebar from the page, freeing up space for the main content of the page.
 
+### Data-Driven Sidebar
+
+You can define your sidebar structure explicitly using a YAML data file instead of relying on the auto-generated content tree.
+
+Create a file at `data/sidebar.<lang>.yaml` (e.g., `data/sidebar.en.yaml`) or `data/sidebar.yaml` for a language-independent definition:
+
+```yaml {filename="data/sidebar.en.yaml"}
+- link: /docs/guide/
+  title: Guide
+  merge: deep
+  items:
+    - link: /docs/guide/installation/
+    - link: /docs/guide/configuration/
+      title: Custom Title
+    - link: /docs/guide/advanced/
+      merge: none
+      items:
+        - link: /docs/guide/advanced/topic-a/
+        - link: /docs/guide/advanced/topic-b/
+```
+
+#### Node Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `link` | string | — | Page path (e.g., `/docs/guide/`). Required except for separators. |
+| `title` | string | page title | Display title. Falls back to the Hugo page title if omitted. |
+| `items` | list | `[]` | Child nodes. |
+| `merge` | string | `"none"` | `"none"`: only explicit items shown. `"deep"`: auto-generated children appended for unmatched pages. |
+| `open` | bool | `true` | Whether the section starts expanded. |
+| `weight` | int | `0` | Sort weight for ordering. |
+| `separator` | bool | `false` | Render as a section separator label. |
+
+When a page is under a section covered by the data file, the data-driven tree is used. For pages in other sections, the auto-generated tree is used as a fallback.
+
 
 ## Right Sidebar
 

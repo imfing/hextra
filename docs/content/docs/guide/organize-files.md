@@ -82,6 +82,27 @@ weight: 2
   It is recommended to keep the sidebar not too deep. If you have a lot of content, consider **splitting them into multiple sections**.
 {{< /callout >}}
 
+### Merge Modes
+
+When using a data-driven sidebar, the `merge` property controls how children are resolved:
+
+**`merge: none`** (default)
+Only the nodes explicitly listed in `items` appear. Auto-generated children from the content tree are ignored.
+
+**`merge: deep`**
+Explicit `items` are rendered first, then any auto-generated children not already listed are appended. This lets you pin important pages at the top while keeping the rest auto-generated.
+
+```yaml
+- link: /docs/guide/
+  merge: deep        # auto children are appended
+  items:
+    - link: /docs/guide/quickstart/   # pinned at top
+    - link: /docs/guide/installation/ # pinned second
+    # remaining pages under /docs/guide/ are appended automatically
+```
+
+Pages with `sidebar.exclude: true` in front matter are excluded from both merge modes.
+
 ## Section Navigation
 
 
