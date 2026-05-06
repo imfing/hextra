@@ -14,10 +14,26 @@
   {{- end -}}
 {{- end -}}
 
+{{- $nodes := slice -}}
+
 {{- if $matchFound -}}
-  {{- $cacheKey := printf "sidebar:data:%s:%d" site.Language.Lang (len $sidebarData) -}}
-  {{- return (partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData "page" $page) $cacheKey) -}}
+  {{- $nodes = partial "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) -}}
+{{- else -}}
+  {{- /* Auto path: return top-level nodes with page refs; render-tree discovers children inline */ -}}
+  {{- $items := where (union $context.RegularPages $context.Sections) "Params.sidebar.exclude" "!=" true -}}
+  {{- range $items.ByWeight -}}
+    {{- $nodes = $nodes | append (dict
+      "link" .RelPermalink
+      "title" (partial "utils/title" .)
+      "items" (slice)
+      "merge" "none"
+      "open" .Params.sidebar.open
+      "separator" (.Params.sidebar.separator | default false)
+      "group" false
+      "external" false
+      "page" .
+    ) -}}
+  {{- end -}}
 {{- end -}}
 
-{{- $cacheKey := printf "sidebar:auto:%s:%s" site.Language.Lang $context.RelPermalink -}}
-{{- return (partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context "page" $page) $cacheKey) -}}
+{{- return $nodes -}}
