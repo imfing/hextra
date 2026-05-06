@@ -1,0 +1,23 @@
+{{- range site.Menus.sidebar -}}
+  {{- $name := or (T .Identifier) .Name -}}
+  {{- if eq .Params.type "separator" -}}
+    <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
+      <span class="hx:cursor-default">{{ $name }}</span>
+    </li>
+  {{- else -}}
+    {{- $link := .URL -}}
+    {{- with .PageRef -}}
+      {{- if hasPrefix . "/" -}}
+        {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+      {{- end -}}
+    {{- end -}}
+    <li>
+      {{- partial "components/sidebar/render-item.html" (dict
+        "node" (dict "title" $name "link" $link "group" false "external" (hasPrefix $link "http"))
+        "active" false
+        "open" false
+        "hasChildren" false
+      ) -}}
+    </li>
+  {{- end -}}
+{{- end -}}
