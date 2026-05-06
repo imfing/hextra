@@ -1,0 +1,44 @@
+{{- $rawNodes := .nodes | default slice -}}
+{{- $page := .page -}}
+{{- $result := slice -}}
+
+{{- range $rawNodes -}}
+  {{- $node := partial "components/sidebar/normalize-node.html" . -}}
+
+  {{- $children := slice -}}
+  {{- with $node.items -}}
+    {{- $children = partial "components/sidebar/build-data-tree.html" (dict "nodes" . "page" $page) -}}
+  {{- end -}}
+
+  {{- if and (eq $node.merge "deep") $node.page -}}
+    {{- $existing := dict -}}
+    {{- range $children -}}
+      {{- if .link -}}
+        {{- $existing = merge $existing (dict .link true) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $autoItems := where (union $node.page.RegularPages $node.page.Sections) "Params.sidebar.exclude" "!=" true -}}
+    {{- range $autoItems.ByWeight -}}
+      {{- if not (index $existing .RelPermalink) -}}
+        {{- $autoChildren := partial "components/sidebar/build-auto-nodes.html" (dict "context" . "page" $page) -}}
+        {{- $children = $children | append (dict
+          "link" .RelPermalink
+          "title" (partial "utils/title" .)
+          "items" $autoChildren
+          "merge" "none"
+          "open" .Params.sidebar.open
+          "weight" .Weight
+          "separator" (.Params.sidebar.separator | default false)
+          "group" false
+          "external" false
+          "page" .
+        ) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $result = $result | append (merge $node (dict "items" $children)) -}}
+{{- end -}}
+
+{{- return $result -}}
