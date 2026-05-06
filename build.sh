@@ -9,7 +9,7 @@ echo "Using base URL: $BASE_URL"
 # Version configuration - modify these arrays to specify versions to build
 # MAIN_VERSION format: "ref:display_name:source_dir"
 # VERSIONS format: "ref:display_name:source_dir" where source_dir is either "docs" or "exampleSite"
-MAIN_VERSION="v0.12.2:latest:docs"
+MAIN_VERSION="$(git tag --list "v[0-9]*" --sort=-v:refname | head -n 1):latest:docs"
 VERSIONS=(
   "main:latest:docs" # latest version always builds from main
   "v0.11.3:v0.11:docs"
