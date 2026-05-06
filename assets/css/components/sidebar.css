@@ -8,6 +8,57 @@
   }
 }
 
+.hextra-sidebar-item {
+  @apply hx:relative hx:flex hx:items-center;
+}
+
+.hextra-sidebar-link {
+  @apply hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.hextra-sidebar-link-has-children {
+  @apply hx:ltr:pr-8 hx:rtl:pl-8;
+}
+
+.hextra-sidebar-link-active {
+  @apply hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500;
+}
+
+.hextra-sidebar-link-inactive {
+  @apply hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50;
+}
+
+.hextra-sidebar-link-text {
+  @apply hx:min-w-0;
+  word-break: break-word;
+}
+
+.hextra-sidebar-group-title {
+  @apply hx:flex hx:grow hx:cursor-default hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:dark:text-gray-100;
+}
+
+.hextra-sidebar-collapsible-button {
+  @apply hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400;
+}
+
+.hextra-sidebar-item:hover > .hextra-sidebar-collapsible-button {
+  @apply hx:text-gray-900 hx:dark:text-gray-50;
+}
+
+.hextra-sidebar-item[data-active="true"] > .hextra-sidebar-collapsible-button {
+  @apply hx:text-primary-800 hx:dark:text-primary-600;
+}
+
+.hextra-sidebar-collapsible-icon {
+  @apply hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5;
+}
+
+.hextra-sidebar-collapsible-icon-path {
+  @apply hx:origin-center hx:transition-transform hx:rtl:-rotate-180;
+}
+
 .hextra-sidebar-container {
   li > .hextra-sidebar-children {
     @apply hx:h-0;
@@ -15,6 +66,7 @@
   li.open > .hextra-sidebar-children {
     @apply hx:h-auto hx:pt-1;
   }
+  li.open > .hextra-sidebar-item > .hextra-sidebar-collapsible-button > .hextra-sidebar-collapsible-icon > .hextra-sidebar-collapsible-icon-path,
   li.open > .hextra-sidebar-item > .hextra-sidebar-collapsible-button > svg > path {
     @apply hx:rotate-90;
   }
