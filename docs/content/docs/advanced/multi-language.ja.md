@@ -16,19 +16,19 @@ Hextra は Hugo の [多言語モード](https://gohugo.io/content-management/mu
 defaultContentLanguage: en
 languages:
   en:
-    languageName: English
+    label: English
     weight: 1
   fr:
-    languageName: Français
+    label: Français
     weight: 2
   ja:
-    languageName: 日本語
+    label: 日本語
     weight: 3
 ```
 
 > [!NOTE]
-> Hugo v0.158.0 以降、`languageName`、`languageCode`、`languageDirection` は非推奨です。
-> 新しいサイトでは、それぞれ `label`、`locale`、`direction` を使用してください。
+> 古い Hugo 設定では、`languageName`、`languageCode`、`languageDirection` が使われている場合があります。
+> Hugo v0.158.0 以降は、それぞれ `label`、`locale`、`direction` を使用してください。
 > Hugo の [言語設定ドキュメント](https://gohugo.io/configuration/languages/#language-settings)を参照してください。
 
 ## ファイル名による翻訳管理
