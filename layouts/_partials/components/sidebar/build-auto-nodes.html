@@ -1,0 +1,27 @@
+{{- $context := .context -}}
+{{- $level := .level | default 0 -}}
+{{- $nodes := slice -}}
+
+{{- if lt $level 4 -}}
+  {{- $items := where (union $context.RegularPages $context.Sections) "Params.sidebar.exclude" "!=" true -}}
+  {{- range $items.ByWeight -}}
+    {{- $children := slice -}}
+    {{- if or .RegularPages .Sections -}}
+      {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}
+    {{- end -}}
+    {{- $nodes = $nodes | append (dict
+      "link" .RelPermalink
+      "title" (partial "utils/title" .)
+      "items" $children
+      "merge" "none"
+      "open" .Params.sidebar.open
+      "weight" .Weight
+      "separator" (.Params.sidebar.separator | default false)
+      "group" false
+      "external" false
+      "page" .
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $nodes -}}

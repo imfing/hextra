@@ -1,68 +1,35 @@
 {{- $rawNodes := .nodes | default slice -}}
+{{- $level := .level | default 0 -}}
 {{- $result := slice -}}
 
-{{- range $rawNodes -}}
-  {{- $node := partial "components/sidebar/normalize-node.html" . -}}
+{{- if lt $level 4 -}}
+  {{- range $rawNodes -}}
+    {{- $node := partial "components/sidebar/normalize-node.html" . -}}
 
-  {{- $children := slice -}}
-  {{- range ($node.items | default slice) -}}
-    {{- $child := partial "components/sidebar/normalize-node.html" . -}}
-
-    {{- $grandchildren := slice -}}
-    {{- range ($child.items | default slice) -}}
-      {{- $grandchild := partial "components/sidebar/normalize-node.html" . -}}
-      {{- $grandchildren = $grandchildren | append $grandchild -}}
+    {{- $children := slice -}}
+    {{- with $node.items -}}
+      {{- $children = partial "components/sidebar/build-data-tree.html" (dict "nodes" . "level" (add $level 1)) -}}
     {{- end -}}
 
-    {{- $children = $children | append (merge $child (dict "items" $grandchildren)) -}}
-  {{- end -}}
-
-  {{- if and (eq $node.merge "deep") $node.page -}}
-    {{- $existing := dict -}}
-    {{- range $children -}}
-      {{- if .link -}}
-        {{- $existing = merge $existing (dict .link true) -}}
-      {{- end -}}
-    {{- end -}}
-    {{- $autoItems := where (union $node.page.RegularPages $node.page.Sections) "Params.sidebar.exclude" "!=" true -}}
-    {{- range $autoItems.ByWeight -}}
-      {{- if not (index $existing .RelPermalink) -}}
-        {{- $children = $children | append (dict
-          "link" .RelPermalink
-          "title" (partial "utils/title" .)
-          "items" (slice)
-          "merge" "none"
-          "open" .Params.sidebar.open
-          "separator" (.Params.sidebar.separator | default false)
-          "group" false
-          "external" false
-          "page" .
-        ) -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- /* Handle merge: deep for children too */ -}}
-  {{- $mergedChildren := slice -}}
-  {{- range $children -}}
-    {{- $child := . -}}
-    {{- if and (eq .merge "deep") .page -}}
-      {{- $existingGC := dict -}}
-      {{- range (.items | default slice) -}}
+    {{- if and (eq $node.merge "deep") $node.page -}}
+      {{- $existing := dict -}}
+      {{- range $children -}}
         {{- if .link -}}
-          {{- $existingGC = merge $existingGC (dict .link true) -}}
+          {{- $existing = merge $existing (dict .link true) -}}
         {{- end -}}
       {{- end -}}
-      {{- $childItems := .items | default slice -}}
-      {{- $autoGC := where (union .page.RegularPages .page.Sections) "Params.sidebar.exclude" "!=" true -}}
-      {{- range $autoGC.ByWeight -}}
-        {{- if not (index $existingGC .RelPermalink) -}}
-          {{- $childItems = $childItems | append (dict
+
+      {{- $autoItems := where (union $node.page.RegularPages $node.page.Sections) "Params.sidebar.exclude" "!=" true -}}
+      {{- range $autoItems.ByWeight -}}
+        {{- if not (index $existing .RelPermalink) -}}
+          {{- $autoChildren := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}
+          {{- $children = $children | append (dict
             "link" .RelPermalink
             "title" (partial "utils/title" .)
-            "items" (slice)
+            "items" $autoChildren
             "merge" "none"
             "open" .Params.sidebar.open
+            "weight" .Weight
             "separator" (.Params.sidebar.separator | default false)
             "group" false
             "external" false
@@ -70,12 +37,10 @@
           ) -}}
         {{- end -}}
       {{- end -}}
-      {{- $child = merge $child (dict "items" $childItems) -}}
     {{- end -}}
-    {{- $mergedChildren = $mergedChildren | append $child -}}
-  {{- end -}}
 
-  {{- $result = $result | append (merge $node (dict "items" $mergedChildren)) -}}
+    {{- $result = $result | append (merge $node (dict "items" $children)) -}}
+  {{- end -}}
 {{- end -}}
 
 {{- return $result -}}

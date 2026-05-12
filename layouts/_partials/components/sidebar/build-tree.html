@@ -3,36 +3,24 @@
 {{- $pageURL := .pageURL -}}
 
 {{- $sidebarData := partial "components/sidebar/source-data.html" $page -}}
-{{- $matchFound := false -}}
+{{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context) $context.RelPermalink -}}
+{{- $nodes := $autoNodes -}}
 
-{{- range $sidebarData -}}
-  {{- $node := partial "components/sidebar/normalize-node.html" . -}}
-  {{- if $node.page -}}
-    {{- if or (eq $node.page.RelPermalink $pageURL) ($node.page.IsAncestor $page) -}}
-      {{- $matchFound = true -}}
+{{- if gt (len $sidebarData) 0 -}}
+  {{- $dataNodes := partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) $page.Language.Lang -}}
+
+  {{- $dataClaimed := dict -}}
+  {{- range $dataNodes -}}
+    {{- if .link -}}
+      {{- $dataClaimed = merge $dataClaimed (dict .link true) -}}
     {{- end -}}
   {{- end -}}
-{{- end -}}
 
-{{- $nodes := slice -}}
-
-{{- if $matchFound -}}
-  {{- $nodes = partial "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) -}}
-{{- else -}}
-  {{- /* Auto path: return top-level nodes with page refs; render-tree discovers children inline */ -}}
-  {{- $items := where (union $context.RegularPages $context.Sections) "Params.sidebar.exclude" "!=" true -}}
-  {{- range $items.ByWeight -}}
-    {{- $nodes = $nodes | append (dict
-      "link" .RelPermalink
-      "title" (partial "utils/title" .)
-      "items" (slice)
-      "merge" "none"
-      "open" .Params.sidebar.open
-      "separator" (.Params.sidebar.separator | default false)
-      "group" false
-      "external" false
-      "page" .
-    ) -}}
+  {{- $nodes = $dataNodes -}}
+  {{- range $autoNodes -}}
+    {{- if not (index $dataClaimed .link) -}}
+      {{- $nodes = $nodes | append . -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

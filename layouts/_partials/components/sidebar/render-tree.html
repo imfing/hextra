@@ -14,25 +14,6 @@
     </li>
   {{- else -}}
     {{- $children := .items | default slice -}}
-
-    {{- /* For auto nodes with a backing page but no pre-built children, discover from page tree */ -}}
-    {{- if and (eq (len $children) 0) .page -}}
-      {{- $autoItems := where (union .page.RegularPages .page.Sections) "Params.sidebar.exclude" "!=" true -}}
-      {{- range $autoItems.ByWeight -}}
-        {{- $children = $children | append (dict
-          "link" .RelPermalink
-          "title" (partial "utils/title" .)
-          "items" (slice)
-          "merge" "none"
-          "open" .Params.sidebar.open
-          "separator" (.Params.sidebar.separator | default false)
-          "group" false
-          "external" false
-          "page" .
-        ) -}}
-      {{- end -}}
-    {{- end -}}
-
     {{- $hasChildren := gt (len $children) 0 -}}
     {{- $active := and .link (eq $pageURL .link) -}}
     {{- $isAncestor := false -}}

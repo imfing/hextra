@@ -84,7 +84,7 @@
       {{- if .Params.sidebar.separator -}}
         {{- $nodes = $nodes | append (dict "title" $menuTitle "separator" true "link" "" "items" (slice) "group" false "external" false "page" .) -}}
       {{- else -}}
-        {{- $children := slice -}}
+        {{- $children := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" .) .RelPermalink -}}
         {{- $nodes = $nodes | append (dict
           "link" .RelPermalink
           "title" $menuTitle
