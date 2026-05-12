@@ -10,9 +10,9 @@
     </span>
   </div>
 {{- else -}}
-  <div class="hextra-sidebar-item hextra-sidebar-node hx:group" data-active="{{ if $active }}true{{ else }}false{{ end }}">
+  <div class="hextra-sidebar-item hextra-sidebar-node" data-active="{{ if $active }}true{{ else }}false{{ end }}">
     <a
-      class="hextra-sidebar-link {{ if $hasChildren }}hextra-sidebar-link-has-children{{ end }} hx:hextra-focus-visible-inset {{ if $active }}hextra-sidebar-link-active hextra-sidebar-active-item{{ else }}hextra-sidebar-link-inactive{{ end }}"
+      class="hextra-sidebar-link {{ if $hasChildren }}hextra-sidebar-link-has-children{{ end }} {{ if $active }}hextra-sidebar-link-active hextra-sidebar-active-item{{ else }}hextra-sidebar-link-inactive{{ end }}"
       href="{{ $node.link }}"
       {{ if $node.external }}target="_blank" rel="noreferrer"{{ end }}
     >
@@ -21,7 +21,7 @@
     {{- if $hasChildren -}}
       <button
         type="button"
-        class="hextra-sidebar-collapsible-button hx:hextra-focus-visible-inset"
+        class="hextra-sidebar-collapsible-button"
         aria-label="{{ (T "toggleSection") | default "Toggle section" }}"
         aria-expanded="{{ if $open }}true{{ else }}false{{ end }}"
       >

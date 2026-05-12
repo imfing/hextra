@@ -9,8 +9,8 @@
 
 {{- range (.nodes | default slice) -}}
   {{- if .separator -}}
-    <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
-      <span class="hx:cursor-default">{{ .title }}</span>
+    <li class="hextra-sidebar-separator">
+      <span>{{ .title }}</span>
     </li>
   {{- else -}}
     {{- $children := .items | default slice -}}
@@ -21,7 +21,7 @@
       {{- $isAncestor = and (not $active) (.IsAncestor $page) -}}
     {{- end -}}
     {{- $shouldOpen := or .open $isAncestor $active | default true -}}
-    <li class="{{ if gt $level 0 }}hx:flex hx:flex-col {{ end }}{{ if $shouldOpen }}open{{ end }}">
+    <li class="{{ if $shouldOpen }}open{{ end }}">
       {{- partial "components/sidebar/render-item.html" (dict "node" . "active" $active "open" $shouldOpen "hasChildren" $hasChildren) -}}
       {{- if and $toc $active (ne $page.Params.toc false) -}}
         {{- partial "components/sidebar/render-toc.html" (dict "page" $page) -}}

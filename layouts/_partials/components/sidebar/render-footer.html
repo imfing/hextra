@@ -1,8 +1,8 @@
 {{- range site.Menus.sidebar -}}
   {{- $name := or (T .Identifier) .Name -}}
   {{- if eq .Params.type "separator" -}}
-    <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">
-      <span class="hx:cursor-default">{{ $name }}</span>
+    <li class="hextra-sidebar-separator">
+      <span>{{ $name }}</span>
     </li>
   {{- else -}}
     {{- $link := .URL -}}
