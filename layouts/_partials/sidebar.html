@@ -27,7 +27,7 @@
   <div class="hextra-scrollbar hextra-sidebar-scroll">
     {{- /* Mobile sidebar: uses menu.main at top level, shows inline TOC */ -}}
     <ul class="hextra-sidebar-mobile-list">
-      {{- $mobileNodes := partial "components/sidebar/build-mobile-tree.html" (dict "page" $context "pageURL" $pageURL) -}}
+      {{- $mobileNodes := partialCached "components/sidebar/build-mobile-tree.html" (dict "page" $context "pageURL" $pageURL) $context.Language.Lang -}}
       {{- partial "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "page" $context "pageURL" $pageURL "toc" true "level" 0) -}}
       {{- partial "components/sidebar/render-footer.html" -}}
     </ul>
@@ -38,7 +38,7 @@
       {{ $context.Store.Set "enableFooterSwitches" true }}
     {{- else -}}
       <ul class="hextra-sidebar-desktop-list">
-        {{- $desktopNodes := partial "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "pageURL" $pageURL) -}}
+        {{- $desktopNodes := partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "pageURL" $pageURL) $navRoot.RelPermalink $context.Language.Lang -}}
         {{- partial "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "page" $context "pageURL" $pageURL "toc" false "level" 0) -}}
         {{- partial "components/sidebar/render-footer.html" -}}
       </ul>
