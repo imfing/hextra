@@ -18,15 +18,15 @@
   {{- end -}}
 {{- end -}}
 
-<aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
+<aside class="hextra-sidebar-container {{ $sidebarClass }}">
   {{- if (site.Params.search.enable | default true) -}}
-    <div class="hx:px-4 hx:pt-4 hx:md:hidden">
+    <div class="hextra-sidebar-search">
       {{ partial "search.html" (dict "location" "sidebar") }}
     </div>
   {{- end -}}
-  <div class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]">
+  <div class="hextra-scrollbar hextra-sidebar-scroll">
     {{- /* Mobile sidebar: uses menu.main at top level, shows inline TOC */ -}}
-    <ul class="hx:flex hx:flex-col hx:gap-1 hx:md:hidden">
+    <ul class="hextra-sidebar-mobile-list">
       {{- $mobileNodes := partial "components/sidebar/build-mobile-tree.html" (dict "page" $context "pageURL" $pageURL) -}}
       {{- partial "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "page" $context "pageURL" $pageURL "toc" true "level" 0) -}}
       {{- partial "components/sidebar/render-footer.html" -}}
@@ -34,10 +34,10 @@
 
     {{- /* Desktop sidebar */ -}}
     {{- if $disableSidebar -}}
-      {{- if $displayPlaceholder }}<div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div>{{ end -}}
+      {{- if $displayPlaceholder }}<div class="hextra-sidebar-placeholder"></div>{{ end -}}
       {{ $context.Store.Set "enableFooterSwitches" true }}
     {{- else -}}
-      <ul class="hx:flex hx:flex-col hx:gap-1 hx:max-md:hidden">
+      <ul class="hextra-sidebar-desktop-list">
         {{- $desktopNodes := partial "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "pageURL" $pageURL) -}}
         {{- partial "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "page" $context "pageURL" $pageURL "toc" false "level" 0) -}}
         {{- partial "components/sidebar/render-footer.html" -}}
@@ -47,13 +47,13 @@
   {{- $switchesClass := cond $disableSidebar "hx:md:hidden" "" -}}
   {{- $displayThemeToggle := (site.Params.theme.displayToggle | default true) -}}
   {{- if or hugo.IsMultilingual $displayThemeToggle -}}
-    <div class="{{ $switchesClass }} {{ with hugo.IsMultilingual }}hx:justify-end{{ end }} hx:sticky hx:bottom-0 hx:max-h-(--menu-height) hx:bg-white hx:dark:bg-dark hx:mx-4 hx:py-4 hx:shadow-[0_-12px_16px_#fff] hx:flex hx:items-center hx:gap-2 hx:border-gray-200 hx:dark:border-neutral-800 hx:dark:shadow-[0_-12px_16px_#111] hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:shadow-none hx:border-t" data-toggle-animation="show">
+    <div class="hextra-sidebar-switches {{ $switchesClass }} {{ with hugo.IsMultilingual }}hx:justify-end{{ end }}" data-toggle-animation="show">
       {{- with hugo.IsMultilingual -}}
         {{- partial "language-switch" (dict "context" $context "grow" true) -}}
         {{- with $displayThemeToggle }}{{ partial "theme-toggle" (dict "hideLabel" true "location" "bottom-right") }}{{ end -}}
       {{- else -}}
         {{- with $displayThemeToggle -}}
-          <div class="hx:flex hx:grow hx:flex-col">{{ partial "theme-toggle" }}</div>
+          <div class="hextra-sidebar-theme-toggle">{{ partial "theme-toggle" }}</div>
         {{- end -}}
       {{- end -}}
     </div>
