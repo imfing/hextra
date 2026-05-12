@@ -17,6 +17,11 @@
     source = 'assets/.*\.(.*)$'
     target = '$1'
 
+[security]
+  [security.node]
+    [security.node.permissions]
+      disable = true
+
 [module]
   [[module.mounts]]
     source = "assets"
