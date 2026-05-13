@@ -1,25 +1,41 @@
 {{- $context := .context -}}
 {{- $page := .page -}}
 {{- $pageURL := .pageURL -}}
+{{- $matched := .matched | default false -}}
 
-{{- $sidebarData := partial "components/sidebar/source-data.html" $page -}}
 {{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context) $context.RelPermalink -}}
 {{- $nodes := $autoNodes -}}
 
-{{- if gt (len $sidebarData) 0 -}}
-  {{- $dataNodes := partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) $page.Language.Lang -}}
+{{- if $matched -}}
+  {{- $sidebarData := partial "components/sidebar/source-data.html" $page -}}
+  {{- if gt (len $sidebarData) 0 -}}
+    {{- $dataNodes := partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) $page.Language.Lang -}}
 
-  {{- $dataClaimed := dict -}}
-  {{- range $dataNodes -}}
-    {{- if .link -}}
-      {{- $dataClaimed = merge $dataClaimed (dict .link true) -}}
+    {{- /* Keep only data roots that live under $context */ -}}
+    {{- $scopedData := slice -}}
+    {{- range $dataNodes -}}
+      {{- $node := . -}}
+      {{- with $node.page -}}
+        {{- if or (eq .RelPermalink $context.RelPermalink) (.IsDescendant $context) -}}
+          {{- $scopedData = $scopedData | append $node -}}
+        {{- end -}}
+      {{- end -}}
     {{- end -}}
-  {{- end -}}
 
-  {{- $nodes = $dataNodes -}}
-  {{- range $autoNodes -}}
-    {{- if not (index $dataClaimed .link) -}}
-      {{- $nodes = $nodes | append . -}}
+    {{- if gt (len $scopedData) 0 -}}
+      {{- $dataClaimed := dict -}}
+      {{- range $scopedData -}}
+        {{- if .link -}}
+          {{- $dataClaimed = merge $dataClaimed (dict .link true) -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- $nodes = $scopedData -}}
+      {{- range $autoNodes -}}
+        {{- if not (index $dataClaimed .link) -}}
+          {{- $nodes = $nodes | append . -}}
+        {{- end -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
