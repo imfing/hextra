@@ -23,6 +23,11 @@
   {{- end -}}
 {{- end -}}
 
+{{- $icon := $node.icon | default "" -}}
+{{- if and (not $icon) $page -}}
+  {{- $icon = $page.Params.sidebar.icon | default "" -}}
+{{- end -}}
+
 {{- return (dict
   "link" $normalizedLink
   "title" ($title | default "Untitled")
@@ -34,5 +39,5 @@
   "group" false
   "external" $external
   "page" $page
-  "icon" ($node.icon | default "")
+  "icon" $icon
 ) -}}

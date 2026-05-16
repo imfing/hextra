@@ -191,6 +191,20 @@ sidebar:
 
 This will hide the main sidebar from the page, freeing up space for the main content of the page.
 
+### Per-Page Icon
+
+Attach an icon to a page's sidebar entry via front matter. The icon name must exist in Hextra's icon set:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+sidebar:
+  icon: cog
+---
+```
+
+If the page is also listed in the [data-driven sidebar](#data-driven-sidebar) with its own `icon`, the data file's value wins.
+
 ### Data-Driven Sidebar
 
 You can define your sidebar structure explicitly using a YAML data file instead of relying on the auto-generated content tree.
@@ -219,7 +233,7 @@ Create a file at `data/<lang>/sidebar.yaml` (e.g., `data/en/sidebar.yaml`) for a
 |----------|------|---------|-------------|
 | `link` | string | — | Page path (e.g., `/docs/guide/`). Required except for separators. |
 | `title` | string | page title | Display title. Falls back to the Hugo page title if omitted. |
-| `icon` | string | — | Icon name from Hextra's icon set (e.g., `book-open`, `folder-tree`). Rendered before the title. |
+| `icon` | string | page `sidebar.icon` | Icon name from Hextra's icon set (e.g., `book-open`, `folder-tree`). Rendered before the title; falls back to the linked page's front-matter `sidebar.icon` when omitted. |
 | `items` | list | `[]` | Child nodes. |
 | `merge` | string | `"none"` | `"none"`: only explicit items shown. `"deep"`: auto-generated children appended for unmatched pages. |
 | `open` | bool | `true` | Whether the section starts expanded. |

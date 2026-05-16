@@ -44,6 +44,10 @@
       {{- end -}}
 
       {{- if $childLink -}}
+        {{- $childIcon := "" -}}
+        {{- with $childPage -}}
+          {{- $childIcon = .Params.sidebar.icon | default "" -}}
+        {{- end -}}
         {{- $childNodes = $childNodes | append (dict
           "link" $childLink
           "title" $childTitle
@@ -53,6 +57,7 @@
           "separator" false
           "external" (hasPrefix $childLink "http")
           "page" $childPage
+          "icon" $childIcon
         ) -}}
       {{- end -}}
     {{- end -}}
@@ -96,6 +101,7 @@
           "group" false
           "external" false
           "page" .
+          "icon" (.Params.sidebar.icon | default "")
         ) -}}
       {{- end -}}
     {{- end -}}
