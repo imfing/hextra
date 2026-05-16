@@ -23,16 +23,27 @@
     {{- end -}}
 
     {{- if gt (len $scopedData) 0 -}}
-      {{- $dataClaimed := dict -}}
+      {{- $dataByLink := dict -}}
+      {{- $autoClaimed := dict -}}
       {{- range $scopedData -}}
         {{- if .link -}}
-          {{- $dataClaimed = merge $dataClaimed (dict .link true) -}}
+          {{- $dataByLink = merge $dataByLink (dict .link .) -}}
         {{- end -}}
       {{- end -}}
 
-      {{- $nodes = $scopedData -}}
+      {{- $nodes = slice -}}
       {{- range $autoNodes -}}
-        {{- if not (index $dataClaimed .link) -}}
+        {{- $autoNode := . -}}
+        {{- with index $dataByLink $autoNode.link -}}
+          {{- $nodes = $nodes | append . -}}
+        {{- else -}}
+          {{- $nodes = $nodes | append $autoNode -}}
+        {{- end -}}
+        {{- $autoClaimed = merge $autoClaimed (dict $autoNode.link true) -}}
+      {{- end -}}
+
+      {{- range $scopedData -}}
+        {{- if and .link (not (index $autoClaimed .link)) -}}
           {{- $nodes = $nodes | append . -}}
         {{- end -}}
       {{- end -}}
