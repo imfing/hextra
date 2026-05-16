@@ -70,7 +70,8 @@
     {{- $attributes = printf `%s width=%s` $attributes $height -}}
   {{- end -}}
   {{- if $isRemoteIcon -}}
-    {{- $icon = replaceRE `\s(width|height)=("[^"]*"|'[^']*'|[^\s>]+)` "" $icon -}}
+    {{- $icon = replaceRE `(<svg[^>]*?)\swidth=("[^"]*"|'[^']*'|[^\s>]+)` `$1` $icon -}}
+    {{- $icon = replaceRE `(<svg[^>]*?)\sheight=("[^"]*"|'[^']*'|[^\s>]+)` `$1` $icon -}}
   {{- end -}}
   {{- $icon = replaceRE "<svg" (printf "<svg %s" $attributes) $icon -}}
 {{- end -}}
