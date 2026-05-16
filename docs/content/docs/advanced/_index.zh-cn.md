@@ -3,6 +3,8 @@ linkTitle: 高级
 title: 高级主题
 prev: /docs/guide/shortcodes/tabs
 next: /docs/advanced/multi-language
+sidebar:
+  icon: cog
 ---
 
 本节涵盖该主题的一些高级内容。
