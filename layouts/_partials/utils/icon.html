@@ -65,10 +65,6 @@
 
 {{- if .attributes -}}
   {{- $attributes := .attributes -}}
-  {{- if and $isRemoteIcon (findRE `(^|\s)height=` $attributes) (not (findRE `(^|\s)width=` $attributes)) -}}
-    {{- $height := replaceRE `(?s).*?(^|\s)height=("([^"]+)"|'([^']+)'|([^\s>]+)).*` `$2` $attributes -}}
-    {{- $attributes = printf `%s width=%s` $attributes $height -}}
-  {{- end -}}
   {{- if $isRemoteIcon -}}
     {{- $icon = replaceRE `(<svg[^>]*?)\swidth=("[^"]*"|'[^']*'|[^\s>]+)` `$1` $icon -}}
     {{- $icon = replaceRE `(<svg[^>]*?)\sheight=("[^"]*"|'[^']*'|[^\s>]+)` `$1` $icon -}}
