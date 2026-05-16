@@ -6,11 +6,14 @@
 {{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context) $context.RelPermalink -}}
 {{- $nodes := $autoNodes -}}
 
-{{- if $matched -}}
-  {{- $sidebarData := partial "components/sidebar/source-data.html" $page -}}
-  {{- if gt (len $sidebarData) 0 -}}
-    {{- $dataNodes := partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) $page.Language.Lang -}}
+{{- $sidebarData := partial "components/sidebar/source-data.html" $page -}}
+{{- $dataNodes := slice -}}
+{{- if gt (len $sidebarData) 0 -}}
+  {{- $dataNodes = partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) $page.Language.Lang -}}
+{{- end -}}
 
+{{- if $matched -}}
+  {{- if gt (len $dataNodes) 0 -}}
     {{- /* Keep only data roots that live under $context */ -}}
     {{- $scopedData := slice -}}
     {{- range $dataNodes -}}
@@ -48,6 +51,27 @@
         {{- end -}}
       {{- end -}}
     {{- end -}}
+  {{- end -}}
+{{- else if gt (len $dataNodes) 0 -}}
+  {{- /* Overlay cosmetic-only fields (icon) onto matching auto nodes so the */ -}}
+  {{- /* data file's icons remain visible from outside the covered section.  */ -}}
+  {{- $iconByLink := dict -}}
+  {{- range $dataNodes -}}
+    {{- if and .link .icon -}}
+      {{- $iconByLink = merge $iconByLink (dict .link .icon) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt (len $iconByLink) 0 -}}
+    {{- $patched := slice -}}
+    {{- range $autoNodes -}}
+      {{- $autoNode := . -}}
+      {{- with index $iconByLink $autoNode.link -}}
+        {{- $patched = $patched | append (merge $autoNode (dict "icon" .)) -}}
+      {{- else -}}
+        {{- $patched = $patched | append $autoNode -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $nodes = $patched -}}
   {{- end -}}
 {{- end -}}
 
