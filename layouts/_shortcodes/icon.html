@@ -16,5 +16,5 @@ or
 {{- $icon := partial "utils/icon.html" (dict "name" $name "attributes" $attributes) -}}
 
 <span class="hx:inline-block hx:align-text-bottom hextra-icon">
-  {{- $icon -}}
+  {{- $icon | safeHTML -}}
 </span>
