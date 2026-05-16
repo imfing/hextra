@@ -105,10 +105,29 @@
   /* Children */
   .hextra-sidebar-children {
     @apply hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden;
+    display: grid;
+    grid-template-rows: 0fr;
+  }
+
+  .hextra-sidebar-children > .hextra-sidebar-guide-list {
+    min-height: 0;
+    padding-top: 0.25rem;
   }
 
   .hextra-sidebar-children li {
     @apply hx:flex hx:flex-col;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hextra-sidebar-children {
+      transition: grid-template-rows 0.2s cubic-bezier(0.52, 0.16, 0.04, 1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hextra-sidebar-collapsible-icon-path {
+      transition: none;
+    }
   }
 
   /* TOC */
@@ -130,11 +149,8 @@
 
   /* Collapse/expand states */
   .hextra-sidebar-container {
-    li > .hextra-sidebar-children {
-      @apply hx:h-0;
-    }
     li.open > .hextra-sidebar-children {
-      @apply hx:h-auto hx:pt-1;
+      grid-template-rows: 1fr;
     }
     li.open > .hextra-sidebar-item > .hextra-sidebar-collapsible-button > .hextra-sidebar-collapsible-icon > .hextra-sidebar-collapsible-icon-path,
     li.open > .hextra-sidebar-item > .hextra-sidebar-collapsible-button > svg > path {
