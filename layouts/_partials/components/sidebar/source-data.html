@@ -1,6 +1,12 @@
 {{- $lang := .Language.Lang -}}
 {{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
-{{- $localized := index $siteData (printf "sidebar.%s" $lang) -}}
+
+{{- $localized := slice -}}
+{{- with index $siteData $lang -}}
+  {{- if reflect.IsSlice .sidebar -}}
+    {{- $localized = .sidebar -}}
+  {{- end -}}
+{{- end -}}
 
 {{- $base := slice -}}
 {{- if reflect.IsSlice $siteData.sidebar -}}

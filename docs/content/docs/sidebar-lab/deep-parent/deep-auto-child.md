@@ -3,4 +3,4 @@ title: Deep Auto Child
 weight: 2
 ---
 
-Not in sidebar.en.yaml, but should appear via merge: deep.
+Not in data/en/sidebar.yaml, but should appear via merge: deep.

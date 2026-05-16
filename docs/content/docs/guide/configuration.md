@@ -195,9 +195,9 @@ This will hide the main sidebar from the page, freeing up space for the main con
 
 You can define your sidebar structure explicitly using a YAML data file instead of relying on the auto-generated content tree.
 
-Create a file at `data/sidebar.<lang>.yaml` (e.g., `data/sidebar.en.yaml`) or `data/sidebar.yaml` for a language-independent definition:
+Create a file at `data/<lang>/sidebar.yaml` (e.g., `data/en/sidebar.yaml`) for a localized definition, or `data/sidebar.yaml` for a language-independent one:
 
-```yaml {filename="data/sidebar.en.yaml"}
+```yaml {filename="data/en/sidebar.yaml"}
 - link: /docs/guide/
   title: Guide
   merge: deep
