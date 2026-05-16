@@ -6,6 +6,11 @@
 {{- if $node.group -}}
   <div class="hextra-sidebar-item">
     <span class="hextra-sidebar-group-title">
+      {{- with $node.icon -}}
+        <span class="hextra-sidebar-link-icon hx:shrink-0 hx:inline-flex hx:items-center">
+          {{- partial "utils/icon.html" (dict "name" . "attributes" `height="1em" class="hx:inline-block"`) -}}
+        </span>
+      {{- end -}}
       {{- $node.title -}}
     </span>
   </div>
@@ -16,7 +21,14 @@
       href="{{ $node.link }}"
       {{ if $node.external }}target="_blank" rel="noreferrer"{{ end }}
     >
-      <span class="hextra-sidebar-link-text">{{- $node.title -}}</span>
+      <span class="hextra-sidebar-link-content hx:flex hx:items-center hx:gap-2 hx:min-w-0">
+        {{- with $node.icon -}}
+          <span class="hextra-sidebar-link-icon hx:shrink-0 hx:inline-flex hx:items-center">
+            {{- partial "utils/icon.html" (dict "name" . "attributes" `height="1em" class="hx:inline-block"`) -}}
+          </span>
+        {{- end -}}
+        <span class="hextra-sidebar-link-text">{{- $node.title -}}</span>
+      </span>
     </a>
     {{- if $hasChildren -}}
       <button

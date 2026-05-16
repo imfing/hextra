@@ -1,5 +1,6 @@
 - link: /docs/sidebar-lab/
   title: Sidebar Lab
+  icon: folder-tree
   merge: deep
   items:
     - link: /docs/sidebar-lab/manual-only/

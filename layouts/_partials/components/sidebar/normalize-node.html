@@ -16,7 +16,7 @@
   {{- $title = partial "utils/title" $page -}}
 {{- end -}}
 
-{{- $knownKeys := slice "link" "title" "items" "merge" "open" "weight" "separator" "exclude" -}}
+{{- $knownKeys := slice "link" "title" "items" "merge" "open" "weight" "separator" "exclude" "icon" -}}
 {{- range $key, $_ := $node -}}
   {{- if not (in $knownKeys $key) -}}
     {{- warnf "sidebar data: unknown key %q on node with link %q" $key ($node.link | default "<no link>") -}}
@@ -34,4 +34,5 @@
   "group" false
   "external" $external
   "page" $page
+  "icon" ($node.icon | default "")
 ) -}}

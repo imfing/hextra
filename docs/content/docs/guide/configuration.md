@@ -200,6 +200,7 @@ Create a file at `data/<lang>/sidebar.yaml` (e.g., `data/en/sidebar.yaml`) for a
 ```yaml {filename="data/en/sidebar.yaml"}
 - link: /docs/guide/
   title: Guide
+  icon: book-open
   merge: deep
   items:
     - link: /docs/guide/installation/
@@ -218,6 +219,7 @@ Create a file at `data/<lang>/sidebar.yaml` (e.g., `data/en/sidebar.yaml`) for a
 |----------|------|---------|-------------|
 | `link` | string | — | Page path (e.g., `/docs/guide/`). Required except for separators. |
 | `title` | string | page title | Display title. Falls back to the Hugo page title if omitted. |
+| `icon` | string | — | Icon name from Hextra's icon set (e.g., `book-open`, `folder-tree`). Rendered before the title. |
 | `items` | list | `[]` | Child nodes. |
 | `merge` | string | `"none"` | `"none"`: only explicit items shown. `"deep"`: auto-generated children appended for unmatched pages. |
 | `open` | bool | `true` | Whether the section starts expanded. |
