@@ -32,10 +32,10 @@
     {{- end -}}
 
     {{- if $remoteEnabled -}}
-      {{- if not (eq $remoteProvider (replaceRE "[^a-zA-Z0-9_-]" "" $remoteProvider)) -}}
+      {{- if not (findRE "^[A-Za-z0-9_-]+$" $remoteProvider) -}}
         {{- errorf "invalid remote icon provider %q" $remoteProvider -}}
       {{- end -}}
-      {{- if or (in $remoteName "..") (not (eq $remoteName (replaceRE "[^a-zA-Z0-9._/-]" "" $remoteName))) -}}
+      {{- if or (in $remoteName "..") (not (findRE "^[A-Za-z0-9._/-]+$" $remoteName)) -}}
         {{- errorf "invalid remote icon name %q" $remoteName -}}
       {{- end -}}
 
