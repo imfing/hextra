@@ -63,6 +63,10 @@
 
 {{- $icon = $icon | safeHTML -}}
 
+{{- if $isRemoteIcon -}}
+  {{- $icon = replaceRE `(<svg[^>]*?)\sclass=("[^"]*"|'[^']*'|[^\s>]+)` `$1` $icon -}}
+{{- end -}}
+
 {{- if .attributes -}}
   {{- $attributes := .attributes -}}
   {{- if $isRemoteIcon -}}
