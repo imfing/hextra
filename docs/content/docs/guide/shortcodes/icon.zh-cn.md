@@ -46,9 +46,29 @@ your-icon: <svg>您的图标 SVG 内容</svg>
 
 提示：[Iconify Design](https://iconify.design/) 是寻找网站 SVG 图标的优质资源平台。
 
+### 远程图标包
+
+远程图标可以通过提供商前缀按需加载。Hextra 支持以下提供商：
+
+| 提供商                                   | 示例                              | 图标                        |
+| ---------------------------------------- | --------------------------------- | --------------------------- |
+| [Lucide](https://lucide.dev/icons/)      | `{{</* icon "lucide:house" */>}}` | {{< icon "lucide:house" >}} |
+| [Tabler Icons](https://tabler.io/icons)  | `{{</* icon "tabler:user" */>}}`  | {{< icon "tabler:user" >}}  |
+| [Simple Icons](https://simpleicons.org/) | `{{</* icon "simple:hugo" */>}}`  | {{< icon "simple:hugo" >}}  |
+
+远程图标会在构建时获取。默认提供商固定到主版本，并从以下 CDN URL 加载：
+
+```yaml
+lucide: "https://unpkg.com/lucide-static@1/icons/%s.svg"
+tabler: "https://unpkg.com/@tabler/icons@3/icons/outline/%s.svg"
+simple: "https://cdn.jsdelivr.net/npm/simple-icons@16/icons/%s.svg"
+```
+
+远程图标名称可用于 Hextra 中任何接受图标名称的位置，包括卡片、标签页、徽章、提示框和导航栏菜单项。
+
 ## 选项
 
-| 范围           | 描述     |
-|--------------|--------|
-| `name`       | 图标名称   |
+| 范围         | 描述         |
+| ------------ | ------------ |
+| `name`       | 图标名称     |
 | `attributes` | 图标的属性。 |

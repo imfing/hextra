@@ -1,15 +1,79 @@
 {{/* Render raw svg icon from site data */}}
 {{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
-{{- $icon := index $siteData.icons .name -}}
+{{- $name := .name -}}
+{{- $icon := index $siteData.icons $name -}}
+{{- $isRemoteIcon := false -}}
 
 {{- if not $icon -}}
-  {{ errorf "icon %q not found" .name }}
+  {{- $remoteProvider := "" -}}
+  {{- $remoteName := "" -}}
+  {{- if strings.Contains $name ":" -}}
+    {{- $parts := split $name ":" -}}
+    {{- if eq (len $parts) 2 -}}
+      {{- $remoteProvider = index $parts 0 -}}
+      {{- $remoteName = index $parts 1 -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if and $remoteProvider $remoteName -}}
+    {{- $remoteEnabled := true -}}
+    {{- $remoteProviders := dict
+      "lucide" (dict "url" "https://unpkg.com/lucide-static@1/icons/%s.svg")
+      "tabler" (dict "url" "https://unpkg.com/@tabler/icons@3/icons/outline/%s.svg")
+      "simple" (dict "url" "https://cdn.jsdelivr.net/npm/simple-icons@16/icons/%s.svg")
+    -}}
+    {{- with site.Params.icons.remote -}}
+      {{- if isset . "enable" -}}
+        {{- $remoteEnabled = .enable -}}
+      {{- end -}}
+      {{- with .providers -}}
+        {{- $remoteProviders = merge $remoteProviders . -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if $remoteEnabled -}}
+      {{- if not (findRE "^[A-Za-z0-9_-]+$" $remoteProvider) -}}
+        {{- errorf "invalid remote icon provider %q" $remoteProvider -}}
+      {{- end -}}
+      {{- if or (in $remoteName "..") (not (findRE "^[A-Za-z0-9._/-]+$" $remoteName)) -}}
+        {{- errorf "invalid remote icon name %q" $remoteName -}}
+      {{- end -}}
+
+      {{- with index $remoteProviders $remoteProvider -}}
+        {{- $remoteUrl := printf .url $remoteName -}}
+        {{- with try (resources.GetRemote $remoteUrl) -}}
+          {{- with .Err -}}
+            {{- errorf "Could not retrieve remote icon %q from %s. Reason: %s." $name $remoteUrl . -}}
+          {{- else with .Value -}}
+            {{- $icon = .Content -}}
+            {{- $isRemoteIcon = true -}}
+            {{- if and (not (strings.Contains $icon "fill=")) (not (strings.Contains $icon "stroke=")) -}}
+              {{- $icon = replaceRE "<svg" `<svg fill="currentColor"` $icon -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $icon -}}
+  {{ errorf "icon %q not found" $name }}
 {{- end -}}
 
 {{- $icon = $icon | safeHTML -}}
 
+{{- if $isRemoteIcon -}}
+  {{- $icon = replaceRE `(<svg[^>]*?)\sclass=("[^"]*"|'[^']*'|[^\s>]+)` `$1` $icon -}}
+{{- end -}}
+
 {{- if .attributes -}}
-  {{- $icon = replaceRE "<svg" (printf "<svg %s" .attributes) $icon -}}
+  {{- $attributes := .attributes -}}
+  {{- if $isRemoteIcon -}}
+    {{- $icon = replaceRE `(<svg[^>]*?)\swidth=("[^"]*"|'[^']*'|[^\s>]+)` `$1` $icon -}}
+    {{- $icon = replaceRE `(<svg[^>]*?)\sheight=("[^"]*"|'[^']*'|[^\s>]+)` `$1` $icon -}}
+  {{- end -}}
+  {{- $icon = replaceRE "<svg" (printf "<svg %s" $attributes) $icon -}}
 {{- end -}}
 
 {{- return ($icon | safeHTML) -}}

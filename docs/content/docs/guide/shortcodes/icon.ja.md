@@ -46,9 +46,29 @@ your-icon: <svg>your icon svg content</svg>
 
 ヒント: [Iconify Design](https://iconify.design/) はサイト用の SVG アイコンを見つけるのに最適な場所です。
 
+### リモートアイコンパック
+
+リモートアイコンは、プロバイダープレフィックスを使って必要なものだけ読み込めます。Hextra は以下のプロバイダーをサポートしています:
+
+| プロバイダー                             | 例                                | アイコン                    |
+| ---------------------------------------- | --------------------------------- | --------------------------- |
+| [Lucide](https://lucide.dev/icons/)      | `{{</* icon "lucide:house" */>}}` | {{< icon "lucide:house" >}} |
+| [Tabler Icons](https://tabler.io/icons)  | `{{</* icon "tabler:user" */>}}`  | {{< icon "tabler:user" >}}  |
+| [Simple Icons](https://simpleicons.org/) | `{{</* icon "simple:hugo" */>}}`  | {{< icon "simple:hugo" >}}  |
+
+リモートアイコンはビルド時に取得されます。デフォルトのプロバイダーはメジャーバージョンに固定され、以下の CDN URL から読み込まれます:
+
+```yaml
+lucide: "https://unpkg.com/lucide-static@1/icons/%s.svg"
+tabler: "https://unpkg.com/@tabler/icons@3/icons/outline/%s.svg"
+simple: "https://cdn.jsdelivr.net/npm/simple-icons@16/icons/%s.svg"
+```
+
+リモートアイコン名は、カード、タブ、バッジ、コールアウト、ナビゲーションバーメニュー項目など、Hextra がアイコン名を受け付ける場所ならどこでも使用できます。
+
 ## オプション
 
-| パラメータ        | 説明       |
-|--------------|----------|
-| `name`       | アイコン名    |
+| パラメータ   | 説明             |
+| ------------ | ---------------- |
+| `name`       | アイコン名       |
 | `attributes` | アイコンの属性。 |
