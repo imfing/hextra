@@ -58,7 +58,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -67,9 +69,7 @@ body {
 }
 
 @layer base {
-  :where(a, button, [role="tab"], [role="menuitem"], [role="menuitemradio"], input, select, textarea, [tabindex="0"]):not(
-      [class*="hextra-focus-visible"]
-    ):focus-visible {
+  :where(a, button, [role="tab"], [role="menuitem"], [role="menuitemradio"], input, select, textarea, [tabindex="0"]):not([class*="hextra-focus-visible"]):focus-visible {
     @apply hx:hextra-focus;
   }
 }
@@ -89,3 +89,4 @@ body {
 @import "./components/badge.css";
 @import "./components/toc.css";
 @import "./components/archives.css";
+@import "./components/gallery.css";

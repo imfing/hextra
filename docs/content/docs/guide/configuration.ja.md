@@ -66,18 +66,18 @@ menu:
    ```
 5. テーマ切り替え
    ```yaml
-    - name: Theme Toggle
-      params:
-        type: theme-toggle
-        label: true # optional, default is false
+   - name: Theme Toggle
+     params:
+       type: theme-toggle
+       label: true # optional, default is false
    ```
 6. 言語スイッチャー
    ```yaml
-    - name: 言語スイッチャー
-      params:
-        type: language-switch
-        label: true # optional, default is false
-        icon: "globe-alt" # optional, default is "translate"
+   - name: 言語スイッチャー
+     params:
+       type: language-switch
+       label: true # optional, default is false
+       icon: "globe-alt" # optional, default is "translate"
    ```
 
 これらのメニュー項目は `weight` パラメータを設定することで並べ替えられます。
@@ -128,10 +128,10 @@ params:
 ```yaml {filename="hugo.yaml"}
 params:
   page:
-    displayPagination: false  # ドキュメントページ用
+    displayPagination: false # ドキュメントページ用
   blog:
     article:
-      displayPagination: false  # ブログ記事用
+      displayPagination: false # ブログ記事用
 ```
 
 ## サイドバー
@@ -224,17 +224,17 @@ copyright: "© 2024 ここにあなたのテキスト"
 サイトの [ファビコン](https://ja.wikipedia.org/wiki/Favicon) をカスタマイズするには、[テーマのデフォルトファビコン](https://github.com/imfing/hextra/tree/main/static) を上書きするために `static` フォルダの下にアイコンファイルを配置します：
 
 {{< filetree/container >}}
-  {{< filetree/folder name="static" >}}
-    {{< filetree/file name="android-chrome-192x192.png" >}}
-    {{< filetree/file name="android-chrome-512x512.png" >}}
-    {{< filetree/file name="apple-touch-icon.png" >}}
-    {{< filetree/file name="favicon-16x16.png" >}}
-    {{< filetree/file name="favicon-32x32.png" >}}
-    {{< filetree/file name="favicon-dark.svg" >}}
-    {{< filetree/file name="favicon.ico" >}}
-    {{< filetree/file name="favicon.svg" >}}
-    {{< filetree/file name="site.webmanifest" >}}
-  {{< /filetree/folder >}}
+{{< filetree/folder name="static" >}}
+{{< filetree/file name="android-chrome-192x192.png" >}}
+{{< filetree/file name="android-chrome-512x512.png" >}}
+{{< filetree/file name="apple-touch-icon.png" >}}
+{{< filetree/file name="favicon-16x16.png" >}}
+{{< filetree/file name="favicon-32x32.png" >}}
+{{< filetree/file name="favicon-dark.svg" >}}
+{{< filetree/file name="favicon.ico" >}}
+{{< filetree/file name="favicon.svg" >}}
+{{< filetree/file name="site.webmanifest" >}}
+{{< /filetree/folder >}}
 {{< /filetree/container >}}
 
 #### 基本設定
@@ -373,6 +373,11 @@ params:
     js: "js/vendor/asciinema-player.min.js"
     css: "css/vendor/asciinema-player.css"
 
+  gallery:
+    js: "js/vendor/photoswipe-lightbox.esm.min.js"
+    coreJs: "js/vendor/photoswipe.esm.min.js"
+    css: "css/vendor/photoswipe.css"
+
   math:
     engine: katex
     katex:
@@ -402,6 +407,9 @@ params:
 
   asciinema:
     base: "https://mirror.example.com/asciinema-player/dist/bundle"
+
+  gallery:
+    base: "https://mirror.example.com/photoswipe/dist"
 
   math:
     engine: katex
@@ -496,6 +504,7 @@ params:
 ```
 
 各リンクには以下を設定できます：
+
 - `name` - リンクの表示テキスト
 - `icon` - オプションのアイコン名（[アイコン]({{% relref "docs/guide/shortcodes/icon" %}})を参照）
 - `url` - オプションのプレースホルダーを含む URL

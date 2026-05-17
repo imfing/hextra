@@ -1,0 +1,158 @@
+{{- /*
+  A single item inside a gallery container.
+
+  @param {string} src     Image source. Page resource, global asset, static path, or remote URL. Required.
+  @param {string} alt     Alt text (defaults to caption, then empty).
+  @param {string} caption Caption shown under the image and in the lightbox.
+  @param {string} link    Optional link. When set, clicking opens this URL instead of the lightbox.
+  @param {number} width   Explicit width (required for remote URLs that can't be auto-detected).
+  @param {number} height  Explicit height (required for remote URLs that can't be auto-detected).
+  @param {string} thumb   Optional smaller image used in-page (defaults to a derived resize for local images).
+  @param {string} span    Mosaic span hint - "wide" (2 cols), "tall" (2 rows), or "large" (2x2).
+  */
+-}}
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- if not $src -}}
+  {{- errorf "gallery-item: %q is missing required 'src' parameter" .Position -}}
+{{- end -}}
+
+{{- $caption := .Get "caption" -}}
+{{- $alt := .Get "alt" | default $caption | default "" -}}
+{{- $link := .Get "link" -}}
+{{- $widthParam := .Get "width" -}}
+{{- $heightParam := .Get "height" -}}
+{{- $thumb := .Get "thumb" -}}
+{{- $span := .Get "span" -}}
+
+{{- $full := $src -}}
+{{- $width := 0 -}}
+{{- $height := 0 -}}
+{{- $thumbURL := "" -}}
+{{- $thumbWidth := 0 -}}
+{{- $thumbHeight := 0 -}}
+
+{{- $isRemote := (urls.Parse $src).Scheme -}}
+
+{{- if $isRemote -}}
+  {{- /* Remote URL: rely on author-provided dimensions. */ -}}
+  {{- $full = $src -}}
+  {{- if $widthParam }}{{ $width = int $widthParam }}{{ end -}}
+  {{- if $heightParam }}{{ $height = int $heightParam }}{{ end -}}
+  {{- with $thumb }}{{ $thumbURL = . }}{{ end -}}
+{{- else -}}
+  {{- /* Local image lookup: page resources -> global resources -> static. */ -}}
+  {{- $resource := or (.Page.Resources.Get $src) (resources.Get $src) -}}
+  {{- with $resource -}}
+    {{- $isSVG := eq .MediaType.SubType "svg" -}}
+    {{- $isGIF := eq .MediaType.SubType "gif" -}}
+    {{- if or $isSVG $isGIF -}}
+      {{- /* Don't process SVG / animated GIF; use original. */ -}}
+      {{- $full = .RelPermalink -}}
+      {{- if not $isSVG -}}
+        {{- $width = .Width -}}
+        {{- $height = .Height -}}
+      {{- end -}}
+      {{- $thumbURL = .RelPermalink -}}
+    {{- else -}}
+      {{- $width = .Width -}}
+      {{- $height = .Height -}}
+      {{- $full = .RelPermalink -}}
+      {{- /* Derive a smaller in-page thumbnail. */ -}}
+      {{- with $thumb -}}
+        {{- with or ($.Page.Resources.Get .) (resources.Get .) -}}
+          {{- $thumbURL = .RelPermalink -}}
+          {{- $thumbWidth = .Width -}}
+          {{- $thumbHeight = .Height -}}
+        {{- else -}}
+          {{- $thumbURL = . -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $maxThumb := 800 -}}
+        {{- if gt $width $maxThumb -}}
+          {{- $resized := .Resize (printf "%dx webp q80" $maxThumb) -}}
+          {{- $thumbURL = $resized.RelPermalink -}}
+          {{- $thumbWidth = $resized.Width -}}
+          {{- $thumbHeight = $resized.Height -}}
+        {{- else -}}
+          {{- $thumbURL = .RelPermalink -}}
+          {{- $thumbWidth = $width -}}
+          {{- $thumbHeight = $height -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- /* Static directory fallback. */ -}}
+    {{- if hasPrefix $src "/" -}}
+      {{- $full = relURL (strings.TrimPrefix "/" $src) -}}
+    {{- else -}}
+      {{- $full = relURL $src -}}
+    {{- end -}}
+    {{- $thumbURL = $full -}}
+    {{- /* Best-effort dimension probe for static files via images.Config. */ -}}
+    {{- $staticPath := printf "static/%s" (strings.TrimPrefix "/" $src) -}}
+    {{- with try (images.Config $staticPath) -}}
+      {{- with .Err -}}
+        {{- /* swallow; dimensions remain 0 */ -}}
+      {{- else with .Value -}}
+        {{- $width = .Width -}}
+        {{- $height = .Height -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Allow explicit overrides. */ -}}
+{{- with $widthParam }}{{ $width = int . }}{{ end -}}
+{{- with $heightParam }}{{ $height = int . }}{{ end -}}
+{{- if not $thumbURL }}{{ $thumbURL = $full }}{{ end -}}
+
+{{- $spanClass := "" -}}
+{{- with $span -}}
+  {{- $spanAllowed := slice "wide" "tall" "large" -}}
+  {{- if in $spanAllowed . -}}
+    {{- $spanClass = printf " hextra-gallery__item--%s" . -}}
+  {{- end -}}
+{{- end -}}
+
+
+<figure class="hextra-gallery__item{{ $spanClass }}">
+  {{- if $link -}}
+    {{- $external := strings.HasPrefix $link "http" -}}
+    {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
+    <a
+      class="hextra-gallery__link"
+      href="{{ $href }}"
+      {{- if $external }}target="_blank" rel="noreferrer noopener"{{ end -}}
+      {{- with $alt }}aria-label="{{ . }}"{{ end -}}
+    >
+      <img
+        src="{{ $thumbURL | safeURL }}"
+        alt="{{ $alt }}"
+        loading="lazy"
+        decoding="async"
+        data-zoomable="false"
+        {{- with $thumbWidth }}width="{{ . }}"{{ end }}
+        {{- with $thumbHeight }}height="{{ . }}"{{ end -}}
+      />
+    </a>
+  {{- else -}}
+    <a
+      class="hextra-gallery__link"
+      href="{{ $full | safeURL }}"
+      {{- if and (gt $width 0) (gt $height 0) }}data-pswp-width="{{ $width }}" data-pswp-height="{{ $height }}"{{ end -}}
+      {{- with $alt }}aria-label="{{ . }}"{{ end -}}
+      {{- with $caption }}data-pswp-caption="{{ . }}"{{ end -}}
+    >
+      <img
+        src="{{ $thumbURL | safeURL }}"
+        alt="{{ $alt }}"
+        loading="lazy"
+        decoding="async"
+        data-zoomable="false"
+        {{- with $thumbWidth }}width="{{ . }}"{{ end }}
+        {{- with $thumbHeight }}height="{{ . }}"{{ end -}}
+      />
+    </a>
+  {{- end -}}
+  {{- with $caption }}<figcaption class="hextra-gallery__caption">{{ . | markdownify }}</figcaption>{{ end -}}
+</figure>

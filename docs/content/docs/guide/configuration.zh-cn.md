@@ -66,18 +66,18 @@ menu:
    ```
 5. 主题切换
    ```yaml
-    - name: Theme Toggle
-      params:
-        type: theme-toggle
-        label: true # optional, default is false
+   - name: Theme Toggle
+     params:
+       type: theme-toggle
+       label: true # optional, default is false
    ```
 6. 语言切换器
    ```yaml
-    - name: 语言切换器
-      params:
-        type: language-switch
-        label: true # optional, default is false
-        icon: "globe-alt" # optional, default is "translate"
+   - name: 语言切换器
+     params:
+       type: language-switch
+       label: true # optional, default is false
+       icon: "globe-alt" # optional, default is "translate"
    ```
 
 通过设置 `weight` 参数可以调整菜单项的排序。
@@ -128,10 +128,10 @@ params:
 ```yaml {filename="hugo.yaml"}
 params:
   page:
-    displayPagination: false  # 文档页面
+    displayPagination: false # 文档页面
   blog:
     article:
-      displayPagination: false  # 博客文章
+      displayPagination: false # 博客文章
 ```
 
 ## 侧边栏
@@ -224,17 +224,17 @@ copyright: "© 2024 你的文本内容"
 要自定义网站的 [favicon](https://en.wikipedia.org/wiki/Favicon)，将图标文件放在 `static` 文件夹下以覆盖[主题默认的网站图标](https://github.com/imfing/hextra/tree/main/static)：
 
 {{< filetree/container >}}
-  {{< filetree/folder name="static" >}}
-    {{< filetree/file name="android-chrome-192x192.png" >}}
-    {{< filetree/file name="android-chrome-512x512.png" >}}
-    {{< filetree/file name="apple-touch-icon.png" >}}
-    {{< filetree/file name="favicon-16x16.png" >}}
-    {{< filetree/file name="favicon-32x32.png" >}}
-    {{< filetree/file name="favicon-dark.svg" >}}
-    {{< filetree/file name="favicon.ico" >}}
-    {{< filetree/file name="favicon.svg" >}}
-    {{< filetree/file name="site.webmanifest" >}}
-  {{< /filetree/folder >}}
+{{< filetree/folder name="static" >}}
+{{< filetree/file name="android-chrome-192x192.png" >}}
+{{< filetree/file name="android-chrome-512x512.png" >}}
+{{< filetree/file name="apple-touch-icon.png" >}}
+{{< filetree/file name="favicon-16x16.png" >}}
+{{< filetree/file name="favicon-32x32.png" >}}
+{{< filetree/file name="favicon-dark.svg" >}}
+{{< filetree/file name="favicon.ico" >}}
+{{< filetree/file name="favicon.svg" >}}
+{{< filetree/file name="site.webmanifest" >}}
+{{< /filetree/folder >}}
 {{< /filetree/container >}}
 
 #### 基本设置
@@ -373,6 +373,11 @@ params:
     js: "js/vendor/asciinema-player.min.js"
     css: "css/vendor/asciinema-player.css"
 
+  gallery:
+    js: "js/vendor/photoswipe-lightbox.esm.min.js"
+    coreJs: "js/vendor/photoswipe.esm.min.js"
+    css: "css/vendor/photoswipe.css"
+
   math:
     engine: katex
     katex:
@@ -402,6 +407,9 @@ params:
 
   asciinema:
     base: "https://mirror.example.com/asciinema-player/dist/bundle"
+
+  gallery:
+    base: "https://mirror.example.com/photoswipe/dist"
 
   math:
     engine: katex
@@ -496,6 +504,7 @@ params:
 ```
 
 每个链接可以包含：
+
 - `name` - 链接的显示文本
 - `icon` - 可选的图标名称（参见[图标]({{% relref "docs/guide/shortcodes/icon" %}})）
 - `url` - 包含可选占位符的 URL

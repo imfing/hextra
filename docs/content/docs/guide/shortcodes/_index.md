@@ -10,14 +10,14 @@ next: /docs/guide/shortcodes/callout
 Hextra provides a collection of beautiful shortcodes to enhance your content.
 
 {{< cards >}}
-  {{< card link="callout" title="Callout" icon="warning" >}}
-  {{< card link="cards" title="Cards" icon="card" >}}
-  {{< card link="details" title="Details" icon="chevron-right" >}}
-  {{< card link="filetree" title="FileTree" icon="folder-tree" >}}
-  {{< card link="term" title="Term" icon="question-mark-circle" >}}
-  {{< card link="icon" title="Icon" icon="badge-check" >}}
-  {{< card link="steps" title="Steps" icon="one" >}}
-  {{< card link="tabs" title="Tabs" icon="collection" >}}
+{{< card link="callout" title="Callout" icon="warning" >}}
+{{< card link="cards" title="Cards" icon="card" >}}
+{{< card link="details" title="Details" icon="chevron-right" >}}
+{{< card link="filetree" title="FileTree" icon="folder-tree" >}}
+{{< card link="term" title="Term" icon="question-mark-circle" >}}
+{{< card link="icon" title="Icon" icon="badge-check" >}}
+{{< card link="steps" title="Steps" icon="one" >}}
+{{< card link="tabs" title="Tabs" icon="collection" >}}
 {{< /cards >}}
 
 <div style="padding-top:4rem"></div>
@@ -25,8 +25,9 @@ Hextra provides a collection of beautiful shortcodes to enhance your content.
 Additional shortcodes provided by Hugo and Hextra:
 
 {{< cards >}}
-  {{< card link="jupyter" title="Jupyter Notebook" icon="jupyter" tag="alpha" >}}
-  {{< card link="others" title="Others" icon="view-grid" >}}
-  {{< card link="hextra" title="Hextra" icon="view-grid" >}}
-  {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
+{{< card link="jupyter" title="Jupyter Notebook" icon="jupyter" tag="alpha" >}}
+{{< card link="others" title="Others" icon="view-grid" >}}
+{{< card link="hextra" title="Hextra" icon="view-grid" >}}
+{{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
+{{< card link="gallery" title="Gallery" icon="photograph" >}}
 {{< /cards >}}
