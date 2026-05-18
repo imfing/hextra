@@ -245,17 +245,17 @@ For your reference, an example [`i18n/en.yaml`](https://github.com/imfing/hextra
 To customize the [favicon](https://en.wikipedia.org/wiki/Favicon) for your site, place icon files under the `static` folder to override the [default favicons from the theme](https://github.com/imfing/hextra/tree/main/static):
 
 {{< filetree/container >}}
-{{< filetree/folder name="static" >}}
-{{< filetree/file name="android-chrome-192x192.png" >}}
-{{< filetree/file name="android-chrome-512x512.png" >}}
-{{< filetree/file name="apple-touch-icon.png" >}}
-{{< filetree/file name="favicon-16x16.png" >}}
-{{< filetree/file name="favicon-32x32.png" >}}
-{{< filetree/file name="favicon-dark.svg" >}}
-{{< filetree/file name="favicon.ico" >}}
-{{< filetree/file name="favicon.svg" >}}
-{{< filetree/file name="site.webmanifest" >}}
-{{< /filetree/folder >}}
+  {{< filetree/folder name="static" >}}
+    {{< filetree/file name="android-chrome-192x192.png" >}}
+    {{< filetree/file name="android-chrome-512x512.png" >}}
+    {{< filetree/file name="apple-touch-icon.png" >}}
+    {{< filetree/file name="favicon-16x16.png" >}}
+    {{< filetree/file name="favicon-32x32.png" >}}
+    {{< filetree/file name="favicon-dark.svg" >}}
+    {{< filetree/file name="favicon.ico" >}}
+    {{< filetree/file name="favicon.svg" >}}
+    {{< filetree/file name="site.webmanifest" >}}
+  {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
 #### Basic Setup
