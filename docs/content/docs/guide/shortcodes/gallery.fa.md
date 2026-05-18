@@ -1,6 +1,6 @@
 ---
-title: "Gallery"
-linktitle: "Gallery"
+title: "گالری تصاویر"
+linktitle: "گالری تصاویر"
 sidebar:
   exclude: true
 ---

@@ -1,6 +1,6 @@
 ---
-title: "Gallery"
-linktitle: "Gallery"
+title: "图片库"
+linktitle: "图片库"
 sidebar:
   exclude: true
 ---

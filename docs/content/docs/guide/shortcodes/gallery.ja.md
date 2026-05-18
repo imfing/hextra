@@ -1,6 +1,6 @@
 ---
-title: "Gallery"
-linktitle: "Gallery"
+title: "画像ギャラリー"
+linktitle: "画像ギャラリー"
 sidebar:
   exclude: true
 ---
