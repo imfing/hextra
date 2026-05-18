@@ -5,183 +5,183 @@ sidebar:
   exclude: true
 ---
 
-## Overview
+## 概要
 
-The `gallery` shortcode displays a collection of images with an interactive [PhotoSwipe v5](https://photoswipe.com/) lightbox. Click any image to open a full-screen viewer with previous/next navigation, captions, and keyboard support.
+`gallery` ショートコードは、インタラクティブな [PhotoSwipe v5](https://photoswipe.com/) ライトボックスを伴って画像コレクションを表示します。任意の画像をクリックすると、前/次のナビゲーション、キャプション、キーボード操作に対応したフルスクリーンビューアーが開きます。
 
-## Basic Usage
+## 基本的な使い方
 
-Wrap one or more `{{</* gallery-item */>}}` shortcodes inside `{{</* gallery */>}}`. Local and remote images can be mixed in the same gallery:
+1 つ以上の `{{</* gallery-item */>}}` ショートコードを `{{</* gallery */>}}` で囲みます。同じギャラリー内でローカル画像とリモート画像を混在させることができます。
 
 ```markdown
 {{</* gallery */>}}
-  {{</* gallery-item src="images/space.jpg" caption="Space" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1015/1600/1200" thumb="https://picsum.photos/id/1015/800/600" width="1600" height="1200" caption="River valley" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1018/1600/1200" thumb="https://picsum.photos/id/1018/800/600" width="1600" height="1200" caption="Mountain lake" */>}}
+  {{</* gallery-item src="images/space.jpg" caption="宇宙" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1015/1600/1200" thumb="https://picsum.photos/id/1015/800/600" width="1600" height="1200" caption="渓谷" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1018/1600/1200" thumb="https://picsum.photos/id/1018/800/600" width="1600" height="1200" caption="山の湖" */>}}
 {{</* /gallery */>}}
 ```
 
 {{< gallery >}}
-  {{< gallery-item src="images/space.jpg" caption="Space" >}}
-  {{< gallery-item src="https://picsum.photos/id/1015/1600/1200" thumb="https://picsum.photos/id/1015/800/600" width="1600" height="1200" caption="River valley" >}}
-  {{< gallery-item src="https://picsum.photos/id/1018/1600/1200" thumb="https://picsum.photos/id/1018/800/600" width="1600" height="1200" caption="Mountain lake" >}}
+  {{< gallery-item src="images/space.jpg" caption="宇宙" >}}
+  {{< gallery-item src="https://picsum.photos/id/1015/1600/1200" thumb="https://picsum.photos/id/1015/800/600" width="1600" height="1200" caption="渓谷" >}}
+  {{< gallery-item src="https://picsum.photos/id/1018/1600/1200" thumb="https://picsum.photos/id/1018/800/600" width="1600" height="1200" caption="山の湖" >}}
 {{< /gallery >}}
 
-## Image Sources
+## 画像のソース
 
-Images can come from several locations. The shortcode resolves `src` in the following order:
+画像は複数の場所から取得できます。ショートコードは以下の順序で `src` を解決します。
 
-1. **Page bundle resources** — files placed alongside `index.md` in a [leaf bundle](https://gohugo.io/content-management/page-bundles/).
-2. **Global assets** — files inside your site's `assets/` directory.
-3. **Static files** — files inside your site's `static/` directory (referenced with a leading `/`).
-4. **Remote URLs** — any `src` that begins with `http://` or `https://`.
+1. **ページバンドルリソース** — [リーフバンドル](https://gohugo.io/content-management/page-bundles/) 内で `index.md` と並べて配置されたファイル。
+2. **グローバルアセット** — サイトの `assets/` ディレクトリ内のファイル。
+3. **静的ファイル** — サイトの `static/` ディレクトリ内のファイル（先頭に `/` を付けて参照します）。
+4. **リモート URL** — `http://` または `https://` で始まる任意の `src`。
 
-For local images, dimensions are detected automatically. For remote images, supply `width` and `height` so the lightbox can reserve space before the image loads:
+ローカル画像の場合、サイズは自動的に検出されます。リモート画像の場合は、画像の読み込み前にライトボックスが領域を確保できるよう、`width` と `height` を指定してください。
 
 ```markdown
 {{</* gallery-item
   src="https://picsum.photos/id/1043/1920/1280"
   width="1920"
   height="1280"
-  caption="Photo from picsum.photos"
+  caption="picsum.photos の写真"
 */>}}
 ```
 
-The optional `thumb` parameter points at a smaller image used in the in-page grid; PhotoSwipe still opens the full-resolution `src` when the user clicks.
+オプションの `thumb` パラメータは、ページ内のグリッドで使用される小さな画像を指定します。ユーザーがクリックすると、PhotoSwipe は引き続きフル解像度の `src` を開きます。
 
-## Layout Types
+## レイアウトタイプ
 
-The `type` parameter selects the layout algorithm. The default is `grid`.
+`type` パラメータでレイアウトアルゴリズムを選択します。デフォルトは `grid` です。
 
-### Grid (default)
+### Grid（デフォルト）
 
-A uniform grid where every cell has the same size. Use `cols` to control how many columns appear:
+すべてのセルが同じサイズの均一なグリッドです。`cols` で表示する列数を制御します。
 
 ```markdown
 {{</* gallery type="grid" cols="3" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1015/1200/1200" thumb="https://picsum.photos/id/1015/600/600" width="1200" height="1200" caption="River" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1018/1200/1200" thumb="https://picsum.photos/id/1018/600/600" width="1200" height="1200" caption="Lake" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1019/1200/1200" thumb="https://picsum.photos/id/1019/600/600" width="1200" height="1200" caption="Trail" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1039/1200/1200" thumb="https://picsum.photos/id/1039/600/600" width="1200" height="1200" caption="Canyon" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1043/1200/1200" thumb="https://picsum.photos/id/1043/600/600" width="1200" height="1200" caption="Waterfall" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1059/1200/1200" thumb="https://picsum.photos/id/1059/600/600" width="1200" height="1200" caption="Forest" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1015/1200/1200" thumb="https://picsum.photos/id/1015/600/600" width="1200" height="1200" caption="川" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1018/1200/1200" thumb="https://picsum.photos/id/1018/600/600" width="1200" height="1200" caption="湖" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1019/1200/1200" thumb="https://picsum.photos/id/1019/600/600" width="1200" height="1200" caption="小道" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1039/1200/1200" thumb="https://picsum.photos/id/1039/600/600" width="1200" height="1200" caption="峡谷" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1043/1200/1200" thumb="https://picsum.photos/id/1043/600/600" width="1200" height="1200" caption="滝" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1059/1200/1200" thumb="https://picsum.photos/id/1059/600/600" width="1200" height="1200" caption="森" */>}}
 {{</* /gallery */>}}
 ```
 
 {{< gallery type="grid" cols="3" >}}
-  {{< gallery-item src="https://picsum.photos/id/1015/1200/1200" thumb="https://picsum.photos/id/1015/600/600" width="1200" height="1200" caption="River" >}}
-  {{< gallery-item src="https://picsum.photos/id/1018/1200/1200" thumb="https://picsum.photos/id/1018/600/600" width="1200" height="1200" caption="Lake" >}}
-  {{< gallery-item src="https://picsum.photos/id/1019/1200/1200" thumb="https://picsum.photos/id/1019/600/600" width="1200" height="1200" caption="Trail" >}}
-  {{< gallery-item src="https://picsum.photos/id/1039/1200/1200" thumb="https://picsum.photos/id/1039/600/600" width="1200" height="1200" caption="Canyon" >}}
-  {{< gallery-item src="https://picsum.photos/id/1043/1200/1200" thumb="https://picsum.photos/id/1043/600/600" width="1200" height="1200" caption="Waterfall" >}}
-  {{< gallery-item src="https://picsum.photos/id/1059/1200/1200" thumb="https://picsum.photos/id/1059/600/600" width="1200" height="1200" caption="Forest" >}}
+  {{< gallery-item src="https://picsum.photos/id/1015/1200/1200" thumb="https://picsum.photos/id/1015/600/600" width="1200" height="1200" caption="川" >}}
+  {{< gallery-item src="https://picsum.photos/id/1018/1200/1200" thumb="https://picsum.photos/id/1018/600/600" width="1200" height="1200" caption="湖" >}}
+  {{< gallery-item src="https://picsum.photos/id/1019/1200/1200" thumb="https://picsum.photos/id/1019/600/600" width="1200" height="1200" caption="小道" >}}
+  {{< gallery-item src="https://picsum.photos/id/1039/1200/1200" thumb="https://picsum.photos/id/1039/600/600" width="1200" height="1200" caption="峡谷" >}}
+  {{< gallery-item src="https://picsum.photos/id/1043/1200/1200" thumb="https://picsum.photos/id/1043/600/600" width="1200" height="1200" caption="滝" >}}
+  {{< gallery-item src="https://picsum.photos/id/1059/1200/1200" thumb="https://picsum.photos/id/1059/600/600" width="1200" height="1200" caption="森" >}}
 {{< /gallery >}}
 
 ### Carousel
 
-A horizontally scrollable strip of images with previous/next controls and arrow-key navigation:
+前/次のコントロールと矢印キーナビゲーションを備えた、横方向にスクロール可能な画像の列です。
 
 ```markdown
 {{</* gallery type="carousel" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1015/1600/1200" thumb="https://picsum.photos/id/1015/800/600" width="1600" height="1200" caption="River" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1018/1600/1200" thumb="https://picsum.photos/id/1018/800/600" width="1600" height="1200" caption="Lake" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1019/1600/1200" thumb="https://picsum.photos/id/1019/800/600" width="1600" height="1200" caption="Trail" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1039/1600/1200" thumb="https://picsum.photos/id/1039/800/600" width="1600" height="1200" caption="Canyon" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1043/1600/1200" thumb="https://picsum.photos/id/1043/800/600" width="1600" height="1200" caption="Waterfall" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1059/1600/1200" thumb="https://picsum.photos/id/1059/800/600" width="1600" height="1200" caption="Forest" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1015/1600/1200" thumb="https://picsum.photos/id/1015/800/600" width="1600" height="1200" caption="川" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1018/1600/1200" thumb="https://picsum.photos/id/1018/800/600" width="1600" height="1200" caption="湖" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1019/1600/1200" thumb="https://picsum.photos/id/1019/800/600" width="1600" height="1200" caption="小道" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1039/1600/1200" thumb="https://picsum.photos/id/1039/800/600" width="1600" height="1200" caption="峡谷" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1043/1600/1200" thumb="https://picsum.photos/id/1043/800/600" width="1600" height="1200" caption="滝" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1059/1600/1200" thumb="https://picsum.photos/id/1059/800/600" width="1600" height="1200" caption="森" */>}}
 {{</* /gallery */>}}
 ```
 
 {{< gallery type="carousel" >}}
-  {{< gallery-item src="https://picsum.photos/id/1015/1600/1200" thumb="https://picsum.photos/id/1015/800/600" width="1600" height="1200" caption="River" >}}
-  {{< gallery-item src="https://picsum.photos/id/1018/1600/1200" thumb="https://picsum.photos/id/1018/800/600" width="1600" height="1200" caption="Lake" >}}
-  {{< gallery-item src="https://picsum.photos/id/1019/1600/1200" thumb="https://picsum.photos/id/1019/800/600" width="1600" height="1200" caption="Trail" >}}
-  {{< gallery-item src="https://picsum.photos/id/1039/1600/1200" thumb="https://picsum.photos/id/1039/800/600" width="1600" height="1200" caption="Canyon" >}}
-  {{< gallery-item src="https://picsum.photos/id/1043/1600/1200" thumb="https://picsum.photos/id/1043/800/600" width="1600" height="1200" caption="Waterfall" >}}
-  {{< gallery-item src="https://picsum.photos/id/1059/1600/1200" thumb="https://picsum.photos/id/1059/800/600" width="1600" height="1200" caption="Forest" >}}
+  {{< gallery-item src="https://picsum.photos/id/1015/1600/1200" thumb="https://picsum.photos/id/1015/800/600" width="1600" height="1200" caption="川" >}}
+  {{< gallery-item src="https://picsum.photos/id/1018/1600/1200" thumb="https://picsum.photos/id/1018/800/600" width="1600" height="1200" caption="湖" >}}
+  {{< gallery-item src="https://picsum.photos/id/1019/1600/1200" thumb="https://picsum.photos/id/1019/800/600" width="1600" height="1200" caption="小道" >}}
+  {{< gallery-item src="https://picsum.photos/id/1039/1600/1200" thumb="https://picsum.photos/id/1039/800/600" width="1600" height="1200" caption="峡谷" >}}
+  {{< gallery-item src="https://picsum.photos/id/1043/1600/1200" thumb="https://picsum.photos/id/1043/800/600" width="1600" height="1200" caption="滝" >}}
+  {{< gallery-item src="https://picsum.photos/id/1059/1600/1200" thumb="https://picsum.photos/id/1059/800/600" width="1600" height="1200" caption="森" >}}
 {{< /gallery >}}
 
 ### Mosaic
 
-A CSS grid layout where individual items can span multiple columns or rows using the `span` parameter on `gallery-item`. Valid `span` values are `wide` (2 columns), `tall` (2 rows), and `large` (2 columns and 2 rows):
+`gallery-item` の `span` パラメータを使用して、個々のアイテムが複数の列や行にまたがることができる CSS グリッドレイアウトです。`span` の有効な値は `wide`（2 列）、`tall`（2 行）、`large`（2 列 2 行）です。
 
 ```markdown
 {{</* gallery type="mosaic" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1015/1600/900" thumb="https://picsum.photos/id/1015/1200/600" width="1600" height="900" caption="River" span="wide" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1018/800/1200" thumb="https://picsum.photos/id/1018/400/600" width="800" height="1200" caption="Lake" span="tall" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1019/800/600" thumb="https://picsum.photos/id/1019/400/300" width="800" height="600" caption="Trail" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1039/800/600" thumb="https://picsum.photos/id/1039/400/300" width="800" height="600" caption="Canyon" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1043/1600/900" thumb="https://picsum.photos/id/1043/1200/600" width="1600" height="900" caption="Waterfall" span="wide" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1015/1600/900" thumb="https://picsum.photos/id/1015/1200/600" width="1600" height="900" caption="川" span="wide" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1018/800/1200" thumb="https://picsum.photos/id/1018/400/600" width="800" height="1200" caption="湖" span="tall" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1019/800/600" thumb="https://picsum.photos/id/1019/400/300" width="800" height="600" caption="小道" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1039/800/600" thumb="https://picsum.photos/id/1039/400/300" width="800" height="600" caption="峡谷" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1043/1600/900" thumb="https://picsum.photos/id/1043/1200/600" width="1600" height="900" caption="滝" span="wide" */>}}
 {{</* /gallery */>}}
 ```
 
 {{< gallery type="mosaic" >}}
-  {{< gallery-item src="https://picsum.photos/id/1015/1600/900" thumb="https://picsum.photos/id/1015/1200/600" width="1600" height="900" caption="River" span="wide" >}}
-  {{< gallery-item src="https://picsum.photos/id/1018/800/1200" thumb="https://picsum.photos/id/1018/400/600" width="800" height="1200" caption="Lake" span="tall" >}}
-  {{< gallery-item src="https://picsum.photos/id/1019/800/600" thumb="https://picsum.photos/id/1019/400/300" width="800" height="600" caption="Trail" >}}
-  {{< gallery-item src="https://picsum.photos/id/1039/800/600" thumb="https://picsum.photos/id/1039/400/300" width="800" height="600" caption="Canyon" >}}
-  {{< gallery-item src="https://picsum.photos/id/1043/1600/900" thumb="https://picsum.photos/id/1043/1200/600" width="1600" height="900" caption="Waterfall" span="wide" >}}
+  {{< gallery-item src="https://picsum.photos/id/1015/1600/900" thumb="https://picsum.photos/id/1015/1200/600" width="1600" height="900" caption="川" span="wide" >}}
+  {{< gallery-item src="https://picsum.photos/id/1018/800/1200" thumb="https://picsum.photos/id/1018/400/600" width="800" height="1200" caption="湖" span="tall" >}}
+  {{< gallery-item src="https://picsum.photos/id/1019/800/600" thumb="https://picsum.photos/id/1019/400/300" width="800" height="600" caption="小道" >}}
+  {{< gallery-item src="https://picsum.photos/id/1039/800/600" thumb="https://picsum.photos/id/1039/400/300" width="800" height="600" caption="峡谷" >}}
+  {{< gallery-item src="https://picsum.photos/id/1043/1600/900" thumb="https://picsum.photos/id/1043/1200/600" width="1600" height="900" caption="滝" span="wide" >}}
 {{< /gallery >}}
 
 ### Masonry
 
-A responsive masonry layout. Columns are determined automatically based on the viewport width, so the `cols` parameter is ignored for this type. Items keep their natural aspect ratio:
+レスポンシブなメイソンリーレイアウトです。列数はビューポートの幅に応じて自動的に決まるため、このタイプでは `cols` パラメータは無視されます。各アイテムは自然なアスペクト比を保ちます。
 
 ```markdown
 {{</* gallery type="masonry" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1015/1200/800"  thumb="https://picsum.photos/id/1015/600/400"  width="1200" height="800"  caption="River" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1018/800/1200"  thumb="https://picsum.photos/id/1018/400/600"  width="800"  height="1200" caption="Lake" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1019/1200/900"  thumb="https://picsum.photos/id/1019/600/450"  width="1200" height="900"  caption="Trail" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1039/1000/1000" thumb="https://picsum.photos/id/1039/500/500"  width="1000" height="1000" caption="Canyon" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1043/1200/800"  thumb="https://picsum.photos/id/1043/600/400"  width="1200" height="800"  caption="Waterfall" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1059/800/1200"  thumb="https://picsum.photos/id/1059/400/600"  width="800"  height="1200" caption="Forest" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1015/1200/800"  thumb="https://picsum.photos/id/1015/600/400"  width="1200" height="800"  caption="川" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1018/800/1200"  thumb="https://picsum.photos/id/1018/400/600"  width="800"  height="1200" caption="湖" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1019/1200/900"  thumb="https://picsum.photos/id/1019/600/450"  width="1200" height="900"  caption="小道" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1039/1000/1000" thumb="https://picsum.photos/id/1039/500/500"  width="1000" height="1000" caption="峡谷" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1043/1200/800"  thumb="https://picsum.photos/id/1043/600/400"  width="1200" height="800"  caption="滝" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1059/800/1200"  thumb="https://picsum.photos/id/1059/400/600"  width="800"  height="1200" caption="森" */>}}
 {{</* /gallery */>}}
 ```
 
 {{< gallery type="masonry" >}}
-  {{< gallery-item src="https://picsum.photos/id/1015/1200/800" thumb="https://picsum.photos/id/1015/600/400" width="1200" height="800" caption="River" >}}
-  {{< gallery-item src="https://picsum.photos/id/1018/800/1200" thumb="https://picsum.photos/id/1018/400/600" width="800" height="1200" caption="Lake" >}}
-  {{< gallery-item src="https://picsum.photos/id/1019/1200/900" thumb="https://picsum.photos/id/1019/600/450" width="1200" height="900" caption="Trail" >}}
-  {{< gallery-item src="https://picsum.photos/id/1039/1000/1000" thumb="https://picsum.photos/id/1039/500/500" width="1000" height="1000" caption="Canyon" >}}
-  {{< gallery-item src="https://picsum.photos/id/1043/1200/800" thumb="https://picsum.photos/id/1043/600/400" width="1200" height="800" caption="Waterfall" >}}
-  {{< gallery-item src="https://picsum.photos/id/1059/800/1200" thumb="https://picsum.photos/id/1059/400/600" width="800" height="1200" caption="Forest" >}}
+  {{< gallery-item src="https://picsum.photos/id/1015/1200/800" thumb="https://picsum.photos/id/1015/600/400" width="1200" height="800" caption="川" >}}
+  {{< gallery-item src="https://picsum.photos/id/1018/800/1200" thumb="https://picsum.photos/id/1018/400/600" width="800" height="1200" caption="湖" >}}
+  {{< gallery-item src="https://picsum.photos/id/1019/1200/900" thumb="https://picsum.photos/id/1019/600/450" width="1200" height="900" caption="小道" >}}
+  {{< gallery-item src="https://picsum.photos/id/1039/1000/1000" thumb="https://picsum.photos/id/1039/500/500" width="1000" height="1000" caption="峡谷" >}}
+  {{< gallery-item src="https://picsum.photos/id/1043/1200/800" thumb="https://picsum.photos/id/1043/600/400" width="1200" height="800" caption="滝" >}}
+  {{< gallery-item src="https://picsum.photos/id/1059/800/1200" thumb="https://picsum.photos/id/1059/400/600" width="800" height="1200" caption="森" >}}
 {{< /gallery >}}
 
-## Linking Instead of Lightbox
+## ライトボックスの代わりにリンクを使う
 
-Set `link` on a `gallery-item` to navigate to a URL on click instead of opening the lightbox:
+`gallery-item` に `link` を設定すると、クリック時にライトボックスを開く代わりにその URL に遷移します。
 
 ```markdown
 {{</* gallery */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1015/800/600" width="800" height="600" caption="Picsum on the web" link="https://picsum.photos/" */>}}
-  {{</* gallery-item src="https://picsum.photos/id/1018/800/600" width="800" height="600" caption="Lightbox" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1015/800/600" width="800" height="600" caption="Picsum を見る" link="https://picsum.photos/" */>}}
+  {{</* gallery-item src="https://picsum.photos/id/1018/800/600" width="800" height="600" caption="ライトボックス" */>}}
 {{</* /gallery */>}}
 ```
 
-## Configuration
+## 設定
 
-By default, PhotoSwipe is loaded from the jsDelivr CDN. To use a self-hosted or mirrored copy, add a `gallery` block to `params` in your site configuration. See the [Configuration]({{< ref "/docs/guide/configuration" >}}#local-and-mirrored-script-assets) page for details.
+デフォルトでは、PhotoSwipe は jsDelivr CDN から読み込まれます。セルフホスト版やミラー版を使うには、サイト設定の `params` に `gallery` ブロックを追加してください。詳細は [設定]({{< ref "/docs/guide/configuration" >}}#local-and-mirrored-script-assets) ページを参照してください。
 
-## Parameters
+## パラメータ
 
 ### `gallery`
 
-| Parameter | Type   | Default  | Description                                             |
-| --------- | ------ | -------- | ------------------------------------------------------- |
-| `type`    | string | `grid`   | Layout type: `grid`, `mosaic`, `masonry`, or `carousel` |
-| `cols`    | number | `3`      | Number of columns (not used by `masonry`)               |
-| `gap`     | string | `0.5rem` | CSS gap between items                                   |
-| `id`      | string | auto     | Explicit DOM id; defaults to an ordinal-based value     |
+| パラメータ | 型     | デフォルト | 説明                                                             |
+| ---------- | ------ | ---------- | ---------------------------------------------------------------- |
+| `type`     | string | `grid`     | レイアウトタイプ: `grid`、`mosaic`、`masonry`、または `carousel` |
+| `cols`     | number | `3`        | 列数（`masonry` では使用されません）                             |
+| `gap`      | string | `0.5rem`   | アイテム間の CSS gap                                             |
+| `id`       | string | 自動       | 明示的な DOM id。デフォルトは連番ベースの値                      |
 
 ### `gallery-item`
 
-| Parameter | Type   | Default | Description                                                                                                     |
-| --------- | ------ | ------- | --------------------------------------------------------------------------------------------------------------- |
-| `src`     | string | —       | Image source (required). Accepts a page resource path, a global asset path, a static-file path, or a remote URL |
-| `alt`     | string | caption | Alt text for the image                                                                                          |
-| `caption` | string | —       | Caption shown beneath the image and inside the lightbox                                                         |
-| `link`    | string | —       | If set, clicking navigates to this URL instead of opening the lightbox                                          |
-| `width`   | number | auto    | Image width in pixels. Required for remote URLs where dimensions cannot be auto-detected                        |
-| `height`  | number | auto    | Image height in pixels. Required for remote URLs where dimensions cannot be auto-detected                       |
-| `thumb`   | string | derived | Smaller preview image shown in the grid. Defaults to a resized version of `src` for local images                |
-| `span`    | string | —       | Mosaic span hint: `wide` (2 columns), `tall` (2 rows), or `large` (2x2). Only applies when `type="mosaic"`      |
+| パラメータ | 型     | デフォルト | 説明                                                                                                          |
+| ---------- | ------ | ---------- | ------------------------------------------------------------------------------------------------------------- |
+| `src`      | string | —          | 画像ソース（必須）。ページリソースパス、グローバルアセットパス、静的ファイルパス、リモート URL を受け付けます |
+| `alt`      | string | caption    | 画像の代替テキスト                                                                                            |
+| `caption`  | string | —          | 画像の下とライトボックス内に表示されるキャプション                                                            |
+| `link`     | string | —          | 設定すると、クリック時にライトボックスを開く代わりにその URL へ遷移します                                     |
+| `width`    | number | 自動       | 画像の幅（ピクセル）。サイズが自動検出できないリモート URL では必須                                           |
+| `height`   | number | 自動       | 画像の高さ（ピクセル）。サイズが自動検出できないリモート URL では必須                                         |
+| `thumb`    | string | 自動派生   | グリッドに表示される小さなプレビュー画像。ローカル画像ではデフォルトで `src` のリサイズ版が使用されます       |
+| `span`     | string | —          | Mosaic 用の span 指定: `wide`（2 列）、`tall`（2 行）、または `large`（2x2）。`type="mosaic"` のときのみ適用  |

@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "بستن بنر"
+imageGallery: "گالری تصاویر"
 menu: "منو"
 mermaidDiagram: "نمودار"
+nextImage: "تصویر بعدی"
 pdfViewer: "نمایشگر PDF"
 permalinkLabel: "پیوند ثابت به این بخش"
 playbackTime: "زمان پخش"
+previousImage: "تصویر قبلی"
 searchResults: "نتایج جستجو"
 skipToContent: "رفتن به محتوا"
 tableOfContents: "فهرست مطالب"

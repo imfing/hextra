@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Lukk banner"
+imageGallery: "Biletgalleri"
 menu: "Meny"
 mermaidDiagram: "Diagram"
+nextImage: "Neste bilete"
 pdfViewer: "PDF-vising"
 permalinkLabel: "Permanent lenkje til denne seksjonen"
 playbackTime: "Avspelingstid"
+previousImage: "Førre bilete"
 searchResults: "Søkjeresultat"
 skipToContent: "Hopp til innhald"
 tableOfContents: "Innhaldsliste"

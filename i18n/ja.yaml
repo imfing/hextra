@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "バナーを閉じる"
+imageGallery: "画像ギャラリー"
 menu: "メニュー"
 mermaidDiagram: "図"
+nextImage: "次の画像"
 pdfViewer: "PDFビューアー"
 permalinkLabel: "このセクションへのパーマリンク"
 playbackTime: "再生時間"
+previousImage: "前の画像"
 searchResults: "検索結果"
 skipToContent: "コンテンツにスキップ"
 tableOfContents: "目次"
