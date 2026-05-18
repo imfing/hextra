@@ -10,13 +10,13 @@ next: /docs/guide/shortcodes/callout
 Hextra は、コンテンツを強化するための美しいショートコードのコレクションを提供します。
 
 {{< cards >}}
-{{< card link="callout" title="Callout" icon="warning" >}}
-{{< card link="cards" title="Cards" icon="card" >}}
-{{< card link="details" title="Details" icon="chevron-right" >}}
-{{< card link="filetree" title="FileTree" icon="folder-tree" >}}
-{{< card link="icon" title="Icon" icon="badge-check" >}}
-{{< card link="steps" title="Steps" icon="one" >}}
-{{< card link="tabs" title="Tabs" icon="collection" >}}
+  {{< card link="callout" title="Callout" icon="warning" >}}
+  {{< card link="cards" title="Cards" icon="card" >}}
+  {{< card link="details" title="Details" icon="chevron-right" >}}
+  {{< card link="filetree" title="FileTree" icon="folder-tree" >}}
+  {{< card link="icon" title="Icon" icon="badge-check" >}}
+  {{< card link="steps" title="Steps" icon="one" >}}
+  {{< card link="tabs" title="Tabs" icon="collection" >}}
 {{< /cards >}}
 
 <div style="padding-top:4rem"></div>
@@ -24,8 +24,8 @@ Hextra は、コンテンツを強化するための美しいショートコー�
 Hugo と Hextra が提供する追加のショートコード:
 
 {{< cards >}}
-{{< card link="jupyter" title="Jupyter Notebook" icon="jupyter" tag="alpha" >}}
-{{< card link="others" title="Others" icon="view-grid" >}}
-{{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
-{{< card link="gallery" title="Gallery" icon="photograph" >}}
+  {{< card link="jupyter" title="Jupyter Notebook" icon="jupyter" tag="alpha" >}}
+  {{< card link="others" title="Others" icon="view-grid" >}}
+  {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
+  {{< card link="gallery" title="Gallery" icon="photograph" >}}
 {{< /cards >}}

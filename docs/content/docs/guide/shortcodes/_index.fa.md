@@ -10,13 +10,13 @@ next: /docs/guide/shortcodes/callout
 Hextra مجموعه‌ای از شورت‌کدهای زیبا را برای بهبود محتوای شما ارائه می‌دهد.
 
 {{< cards >}}
-{{< card link="callout" title="کالاوت" icon="warning" >}}
-{{< card link="cards" title="کارت‌ها" icon="card" >}}
-{{< card link="details" title="جزئیات" icon="chevron-right" >}}
-{{< card link="filetree" title="درخت فایل" icon="folder-tree" >}}
-{{< card link="icon" title="آیکون" icon="badge-check" >}}
-{{< card link="steps" title="مراحل" icon="one" >}}
-{{< card link="tabs" title="تب‌ها" icon="collection" >}}
+  {{< card link="callout" title="کالاوت" icon="warning" >}}
+  {{< card link="cards" title="کارت‌ها" icon="card" >}}
+  {{< card link="details" title="جزئیات" icon="chevron-right" >}}
+  {{< card link="filetree" title="درخت فایل" icon="folder-tree" >}}
+  {{< card link="icon" title="آیکون" icon="badge-check" >}}
+  {{< card link="steps" title="مراحل" icon="one" >}}
+  {{< card link="tabs" title="تب‌ها" icon="collection" >}}
 {{< /cards >}}
 
 <div style="padding-top:4rem"></div>
@@ -24,8 +24,8 @@ Hextra مجموعه‌ای از شورت‌کدهای زیبا را برای ب�
 شورت‌کدهای اضافی ارائه شده توسط Hugo و Hextra:
 
 {{< cards >}}
-{{< card link="jupyter" title="نوت‌بوک Jupyter" icon="jupyter" tag="alpha" >}}
-{{< card link="others" title="سایر" icon="view-grid" >}}
-{{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
-{{< card link="gallery" title="Gallery" icon="photograph" >}}
+  {{< card link="jupyter" title="نوت‌بوک Jupyter" icon="jupyter" tag="alpha" >}}
+  {{< card link="others" title="سایر" icon="view-grid" >}}
+  {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
+  {{< card link="gallery" title="Gallery" icon="photograph" >}}
 {{< /cards >}}
