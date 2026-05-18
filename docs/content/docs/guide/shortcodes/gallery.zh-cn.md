@@ -31,10 +31,10 @@ sidebar:
 
 图片可以来自多个位置。短代码按以下顺序解析 `src`：
 
-1. **页面捆绑（Page bundle）资源** —— 位于 [叶子捆绑](https://gohugo.io/content-management/page-bundles/) 中 `index.md` 旁边的文件。
-2. **全局资源** —— 站点 `assets/` 目录下的文件。
-3. **静态文件** —— 站点 `static/` 目录下的文件（使用以 `/` 开头的路径引用）。
-4. **远程 URL** —— 任何以 `http://` 或 `https://` 开头的 `src`。
+1. **页面捆绑（Page bundle）资源**：位于 [叶子捆绑](https://gohugo.io/content-management/page-bundles/) 中 `index.md` 旁边的文件。
+2. **全局资源**：站点 `assets/` 目录下的文件。
+3. **静态文件**：站点 `static/` 目录下的文件（使用以 `/` 开头的路径引用）。
+4. **远程 URL**：任何以 `http://` 或 `https://` 开头的 `src`。
 
 对于本地图片，会自动检测图片尺寸。对于远程图片，请提供 `width` 与 `height`，以便灯箱在图片加载前预留空间：
 
@@ -177,11 +177,11 @@ sidebar:
 
 | 参数      | 类型   | 默认值  | 说明                                                                                          |
 | --------- | ------ | ------- | --------------------------------------------------------------------------------------------- |
-| `src`     | string | —       | 图片源（必填）。支持页面资源路径、全局资源路径、静态文件路径或远程 URL                        |
+| `src`     | string | -       | 图片源（必填）。支持页面资源路径、全局资源路径、静态文件路径或远程 URL                        |
 | `alt`     | string | caption | 图片的替代文本                                                                                |
-| `caption` | string | —       | 显示在图片下方以及灯箱中的标题                                                                |
-| `link`    | string | —       | 设置后，点击时跳转到该 URL，而不会打开灯箱                                                    |
+| `caption` | string | -       | 显示在图片下方以及灯箱中的标题                                                                |
+| `link`    | string | -       | 设置后，点击时跳转到该 URL，而不会打开灯箱                                                    |
 | `width`   | number | 自动    | 图片宽度（像素）。对于无法自动检测尺寸的远程 URL 是必填项                                     |
 | `height`  | number | 自动    | 图片高度（像素）。对于无法自动检测尺寸的远程 URL 是必填项                                     |
 | `thumb`   | string | 派生    | 在网格中显示的较小预览图。对于本地图片，默认使用 `src` 缩放后的版本                           |
-| `span`    | string | —       | Mosaic 跨度提示：`wide`（2 列）、`tall`（2 行）或 `large`（2x2）。仅在 `type="mosaic"` 时生效 |
+| `span`    | string | -       | Mosaic 跨度提示：`wide`（2 列）、`tall`（2 行）或 `large`（2x2）。仅在 `type="mosaic"` 时生效 |

@@ -31,10 +31,10 @@ Wrap one or more `{{</* gallery-item */>}}` shortcodes inside `{{</* gallery */>
 
 Images can come from several locations. The shortcode resolves `src` in the following order:
 
-1. **Page bundle resources** — files placed alongside `index.md` in a [leaf bundle](https://gohugo.io/content-management/page-bundles/).
-2. **Global assets** — files inside your site's `assets/` directory.
-3. **Static files** — files inside your site's `static/` directory (referenced with a leading `/`).
-4. **Remote URLs** — any `src` that begins with `http://` or `https://`.
+1. **Page bundle resources**: files placed alongside `index.md` in a [leaf bundle](https://gohugo.io/content-management/page-bundles/).
+2. **Global assets**: files inside your site's `assets/` directory.
+3. **Static files**: files inside your site's `static/` directory (referenced with a leading `/`).
+4. **Remote URLs**: any `src` that begins with `http://` or `https://`.
 
 For local images, dimensions are detected automatically. For remote images, supply `width` and `height` so the lightbox can reserve space before the image loads:
 
@@ -177,11 +177,11 @@ By default, PhotoSwipe is loaded from the jsDelivr CDN. To use a self-hosted or 
 
 | Parameter | Type   | Default | Description                                                                                                     |
 | --------- | ------ | ------- | --------------------------------------------------------------------------------------------------------------- |
-| `src`     | string | —       | Image source (required). Accepts a page resource path, a global asset path, a static-file path, or a remote URL |
+| `src`     | string | -       | Image source (required). Accepts a page resource path, a global asset path, a static-file path, or a remote URL |
 | `alt`     | string | caption | Alt text for the image                                                                                          |
-| `caption` | string | —       | Caption shown beneath the image and inside the lightbox                                                         |
-| `link`    | string | —       | If set, clicking navigates to this URL instead of opening the lightbox                                          |
+| `caption` | string | -       | Caption shown beneath the image and inside the lightbox                                                         |
+| `link`    | string | -       | If set, clicking navigates to this URL instead of opening the lightbox                                          |
 | `width`   | number | auto    | Image width in pixels. Required for remote URLs where dimensions cannot be auto-detected                        |
 | `height`  | number | auto    | Image height in pixels. Required for remote URLs where dimensions cannot be auto-detected                       |
 | `thumb`   | string | derived | Smaller preview image shown in the grid. Defaults to a resized version of `src` for local images                |
-| `span`    | string | —       | Mosaic span hint: `wide` (2 columns), `tall` (2 rows), or `large` (2x2). Only applies when `type="mosaic"`      |
+| `span`    | string | -       | Mosaic span hint: `wide` (2 columns), `tall` (2 rows), or `large` (2x2). Only applies when `type="mosaic"`      |
