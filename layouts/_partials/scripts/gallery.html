@@ -7,14 +7,14 @@
   {{- $useDefaultCdn = false -}}
 {{- end -}}
 
-{{- $galleryJsAsset := "" -}}
+{{- $galleryCoreJsAsset := "" -}}
 {{- with site.Params.gallery.js -}}
-  {{- $galleryJsAsset = . -}}
+  {{- $galleryCoreJsAsset = . -}}
 {{- end -}}
 
-{{- $galleryCoreJsAsset := "" -}}
-{{- with site.Params.gallery.coreJs -}}
-  {{- $galleryCoreJsAsset = . -}}
+{{- $galleryLightboxJsAsset := "" -}}
+{{- with site.Params.gallery.lightboxJs -}}
+  {{- $galleryLightboxJsAsset = . -}}
 {{- end -}}
 
 {{- $galleryCssAsset := "" -}}
@@ -23,7 +23,7 @@
 {{- end -}}
 
 {{- /* If only js/css is set without base, use local asset loading. */ -}}
-{{- if and $useDefaultCdn (or (or (ne $galleryJsAsset "") (ne $galleryCoreJsAsset "")) (ne $galleryCssAsset "")) -}}
+{{- if and $useDefaultCdn (or (or (ne $galleryCoreJsAsset "") (ne $galleryLightboxJsAsset "")) (ne $galleryCssAsset "")) -}}
   {{- $useDefaultCdn = false -}}
 {{- end -}}
 
@@ -64,7 +64,7 @@
 {{- $coreUrl := "" -}}
 
 {{- if $isRemoteBase -}}
-  {{- $lightboxPath := cond (ne $galleryJsAsset "") $galleryJsAsset (printf "photoswipe-lightbox.esm%s.js" $minSuffix) -}}
+  {{- $lightboxPath := cond (ne $galleryLightboxJsAsset "") $galleryLightboxJsAsset (printf "photoswipe-lightbox.esm%s.js" $minSuffix) -}}
   {{- $corePath := cond (ne $galleryCoreJsAsset "") $galleryCoreJsAsset (printf "photoswipe.esm%s.js" $minSuffix) -}}
 
   {{- $lightboxRemote := urls.JoinPath $galleryBase $lightboxPath -}}
@@ -89,11 +89,11 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{- if $galleryJsAsset -}}
-    {{- with resources.Get $galleryJsAsset -}}
+  {{- if $galleryLightboxJsAsset -}}
+    {{- with resources.Get $galleryLightboxJsAsset -}}
       {{- $lightboxUrl = (. | fingerprint).RelPermalink -}}
     {{- else -}}
-      {{- errorf "PhotoSwipe lightbox js asset not found at %q" $galleryJsAsset -}}
+      {{- errorf "PhotoSwipe lightbox js asset not found at %q" $galleryLightboxJsAsset -}}
     {{- end -}}
   {{- end -}}
   {{- if $galleryCoreJsAsset -}}

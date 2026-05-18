@@ -395,8 +395,8 @@ params:
     css: "css/vendor/asciinema-player.css"
 
   gallery:
-    js: "js/vendor/photoswipe-lightbox.esm.min.js"
-    coreJs: "js/vendor/photoswipe.esm.min.js"
+    js: "js/vendor/photoswipe.esm.min.js"
+    lightboxJs: "js/vendor/photoswipe-lightbox.esm.min.js"
     css: "css/vendor/photoswipe.css"
 
   math:
