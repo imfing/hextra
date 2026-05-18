@@ -106,6 +106,13 @@
 {{- with $heightParam }}{{ $height = int . }}{{ end -}}
 {{- if not $thumbURL }}{{ $thumbURL = $full }}{{ end -}}
 
+{{- /* Warn when a lightbox item lacks dimensions: PhotoSwipe needs both
+       data-pswp-width and data-pswp-height to bind, otherwise the click
+       falls through to a plain image link. */ -}}
+{{- if and (not $link) (or (le $width 0) (le $height 0)) -}}
+  {{- warnf "gallery-item: %q is missing width/height for %q; the lightbox will be skipped. Pass width= and height= explicitly for remote images." .Position $src -}}
+{{- end -}}
+
 {{- $spanClass := "" -}}
 {{- with $span -}}
   {{- $spanAllowed := slice "wide" "tall" "large" -}}
