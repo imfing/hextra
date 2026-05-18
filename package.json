@@ -9,12 +9,12 @@
     "test:mobile-menu": "npx playwright test tests/mobile-menu.spec.ts"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.10.1",
-    "@playwright/test": "^1.49.1",
-    "@tailwindcss/postcss": "^4.1.18",
+    "@axe-core/playwright": "^4.11.3",
+    "@playwright/test": "^1.60.0",
+    "@tailwindcss/postcss": "^4.3.0",
     "postcss-cli": "^11.0.1",
-    "prettier": "^3.8.0",
+    "prettier": "^3.8.3",
     "prettier-plugin-go-template": "^0.0.15",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.3.0"
   }
 }
