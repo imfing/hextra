@@ -23,7 +23,7 @@
 {{- end -}}
 
 {{- /* If only js/css is set without base, use local asset loading. */ -}}
-{{- if and $useDefaultCdn (or (or (ne $galleryCoreJsAsset "") (ne $galleryLightboxJsAsset "")) (ne $galleryCssAsset "")) -}}
+{{- if and $useDefaultCdn (or (ne $galleryCoreJsAsset "") (ne $galleryLightboxJsAsset "") (ne $galleryCssAsset "")) -}}
   {{- $useDefaultCdn = false -}}
 {{- end -}}
 
@@ -34,7 +34,6 @@
 {{- $isRemoteBase := or (strings.HasPrefix $galleryBase "http://") (strings.HasPrefix $galleryBase "https://") -}}
 {{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
 
-{{- /* CSS: retrieve, fingerprint, emit. */ -}}
 {{- $galleryCssLink := "" -}}
 {{- if $isRemoteBase -}}
   {{- $cssPath := cond (ne $galleryCssAsset "") $galleryCssAsset "photoswipe.css" -}}
@@ -126,12 +125,8 @@
           html: "",
           onInit: (captionEl, pswp) => {
             pswp.on("change", () => {
-              const currSlide = pswp.currSlide;
-              let text = "";
-              if (currSlide && currSlide.data && currSlide.data.element) {
-                const a = currSlide.data.element;
-                text = a.getAttribute("data-pswp-caption") || a.getAttribute("aria-label") || "";
-              }
+              const a = pswp.currSlide?.data?.element;
+              const text = a ? (a.getAttribute("data-pswp-caption") || a.getAttribute("aria-label") || "") : "";
               captionEl.textContent = text;
               captionEl.style.display = text ? "" : "none";
             });

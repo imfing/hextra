@@ -19,7 +19,6 @@
 {{- $gap := .Get "gap" | default "0.5rem" -}}
 {{- $id := .Get "id" | default (printf "hextra-gallery-%d" .Ordinal) -}}
 
-{{- /* Mark page so scripts/gallery.html is loaded. */ -}}
 {{- .Page.Store.Set "hasGallery" true -}}
 
 {{- $regionLabel := (T "imageGallery") | default "Image gallery" -}}
@@ -29,7 +28,6 @@
   id="{{ $id }}"
   class="hextra-gallery hextra-gallery--{{ $type }} not-prose"
   data-pswp-gallery="#{{ $id }}"
-  data-gallery-type="{{ $type }}"
   style="--hextra-gallery-cols: {{ $cols }}; --hextra-gallery-gap: {{ $gap }};"
   {{- if eq $type "carousel" }}
     role="region" aria-roledescription="carousel" aria-label="{{ $regionLabel }}"

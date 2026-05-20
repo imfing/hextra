@@ -193,7 +193,6 @@
   inset-inline-end: -0.5rem;
 }
 
-.hextra-gallery__nav[dir="rtl"] svg,
 [dir="rtl"] .hextra-gallery__nav svg {
   transform: scaleX(-1);
 }

@@ -31,22 +31,16 @@
 {{- $thumbWidth := 0 -}}
 {{- $thumbHeight := 0 -}}
 
-{{- $isRemote := (urls.Parse $src).Scheme -}}
+{{- $isRemote := strings.Contains $src "://" -}}
 
 {{- if $isRemote -}}
-  {{- /* Remote URL: rely on author-provided dimensions. */ -}}
-  {{- $full = $src -}}
-  {{- if $widthParam }}{{ $width = int $widthParam }}{{ end -}}
-  {{- if $heightParam }}{{ $height = int $heightParam }}{{ end -}}
   {{- with $thumb }}{{ $thumbURL = . }}{{ end -}}
 {{- else -}}
-  {{- /* Local image lookup: page resources -> global resources -> static. */ -}}
   {{- $resource := or (.Page.Resources.Get $src) (resources.Get $src) -}}
   {{- with $resource -}}
     {{- $isSVG := eq .MediaType.SubType "svg" -}}
     {{- $isGIF := eq .MediaType.SubType "gif" -}}
     {{- if or $isSVG $isGIF -}}
-      {{- /* Don't process SVG / animated GIF; use original. */ -}}
       {{- $full = .RelPermalink -}}
       {{- if not $isSVG -}}
         {{- $width = .Width -}}
@@ -57,7 +51,6 @@
       {{- $width = .Width -}}
       {{- $height = .Height -}}
       {{- $full = .RelPermalink -}}
-      {{- /* Derive a smaller in-page thumbnail. */ -}}
       {{- with $thumb -}}
         {{- with or ($.Page.Resources.Get .) (resources.Get .) -}}
           {{- $thumbURL = .RelPermalink -}}
@@ -81,83 +74,61 @@
       {{- end -}}
     {{- end -}}
   {{- else -}}
-    {{- /* Static directory fallback. */ -}}
     {{- if hasPrefix $src "/" -}}
       {{- $full = relURL (strings.TrimPrefix "/" $src) -}}
     {{- else -}}
       {{- $full = relURL $src -}}
     {{- end -}}
     {{- $thumbURL = $full -}}
-    {{- /* Best-effort dimension probe for static files via images.Config. */ -}}
     {{- $staticPath := printf "static/%s" (strings.TrimPrefix "/" $src) -}}
-    {{- with try (images.Config $staticPath) -}}
-      {{- with .Err -}}
-        {{- /* swallow; dimensions remain 0 */ -}}
-      {{- else with .Value -}}
-        {{- $width = .Width -}}
-        {{- $height = .Height -}}
-      {{- end -}}
+    {{- with (try (images.Config $staticPath)).Value -}}
+      {{- $width = .Width -}}
+      {{- $height = .Height -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
 
-{{- /* Allow explicit overrides. */ -}}
 {{- with $widthParam }}{{ $width = int . }}{{ end -}}
 {{- with $heightParam }}{{ $height = int . }}{{ end -}}
 {{- if not $thumbURL }}{{ $thumbURL = $full }}{{ end -}}
 
-{{- /* Warn when a lightbox item lacks dimensions: PhotoSwipe needs both
-       data-pswp-width and data-pswp-height to bind, otherwise the click
-       falls through to a plain image link. */ -}}
+{{- /* PhotoSwipe needs both data-pswp-width and data-pswp-height to bind;
+       without them the click falls through to a plain image link. */ -}}
 {{- if and (not $link) (or (le $width 0) (le $height 0)) -}}
   {{- warnf "gallery-item: %q is missing width/height for %q; the lightbox will be skipped. Pass width= and height= explicitly for remote images." .Position $src -}}
 {{- end -}}
 
 {{- $spanClass := "" -}}
 {{- with $span -}}
-  {{- $spanAllowed := slice "wide" "tall" "large" -}}
-  {{- if in $spanAllowed . -}}
+  {{- if in (slice "wide" "tall" "large") . -}}
     {{- $spanClass = printf " hextra-gallery__item--%s" . -}}
   {{- end -}}
 {{- end -}}
 
+{{- $external := false -}}
+{{- $href := $full -}}
+{{- if $link -}}
+  {{- $external = (urls.Parse $link).Scheme -}}
+  {{- $href = cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
+{{- end -}}
 
 <figure class="hextra-gallery__item{{ $spanClass }}">
-  {{- if $link -}}
-    {{- $external := strings.HasPrefix $link "http" -}}
-    {{- $href := cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
-    <a
-      class="hextra-gallery__link"
-      href="{{ $href }}"
-      {{- if $external }}target="_blank" rel="noreferrer noopener"{{ end -}}
-      {{- with $alt }}aria-label="{{ . }}"{{ end -}}
-    >
-      <img
-        src="{{ $thumbURL | safeURL }}"
-        alt="{{ $alt }}"
-        loading="lazy"
-        decoding="async"
-        {{- with $thumbWidth }}width="{{ . }}"{{ end }}
-        {{- with $thumbHeight }}height="{{ . }}"{{ end -}}
-      />
-    </a>
-  {{- else -}}
-    <a
-      class="hextra-gallery__link"
-      href="{{ $full | safeURL }}"
-      {{- if and (gt $width 0) (gt $height 0) }}data-pswp-width="{{ $width }}" data-pswp-height="{{ $height }}"{{ end -}}
-      {{- with $alt }}aria-label="{{ . }}"{{ end -}}
-      {{- with $caption }}data-pswp-caption="{{ . }}"{{ end -}}
-    >
-      <img
-        src="{{ $thumbURL | safeURL }}"
-        alt="{{ $alt }}"
-        loading="lazy"
-        decoding="async"
-        {{- with $thumbWidth }}width="{{ . }}"{{ end }}
-        {{- with $thumbHeight }}height="{{ . }}"{{ end -}}
-      />
-    </a>
-  {{- end -}}
+  <a
+    class="hextra-gallery__link"
+    href="{{ $href | safeURL }}"
+    {{- if $external }} target="_blank" rel="noreferrer noopener"{{ end -}}
+    {{- if and (not $link) (gt $width 0) (gt $height 0) }} data-pswp-width="{{ $width }}" data-pswp-height="{{ $height }}"{{ end -}}
+    {{- with $alt }} aria-label="{{ . }}"{{ end -}}
+    {{- if not $link }}{{ with $caption }} data-pswp-caption="{{ . }}"{{ end }}{{ end -}}
+  >
+    <img
+      src="{{ $thumbURL | safeURL }}"
+      alt="{{ $alt }}"
+      loading="lazy"
+      decoding="async"
+      {{- with $thumbWidth }} width="{{ . }}"{{ end -}}
+      {{- with $thumbHeight }} height="{{ . }}"{{ end -}}
+    />
+  </a>
   {{- with $caption }}<figcaption class="hextra-gallery__caption">{{ . | markdownify }}</figcaption>{{ end -}}
 </figure>
