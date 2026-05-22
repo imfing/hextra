@@ -3,7 +3,7 @@ Render Jupyter Notebook
 
 @param {string} 0 The path of the Jupyter Notebook.
 
-@example {{% jupyter "notebook.ipynb" %}}
+@example {{< jupyter "notebook.ipynb" >}}
 */ -}}
 
 {{- $path := .Get 0 -}}
@@ -42,7 +42,12 @@ Render Jupyter Notebook
       {{- $source := index $cell "source" -}}
       {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}
 {{- with ($sourceContent | strings.Chomp) -}}
-{{ (printf "\n\n```%s\n%s\n```\n" $language .) | safeHTML -}}
+<div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
+  {{- partial "components/codeblock" (dict "lang" $language "content" .) -}}
+  {{- if or (eq site.Params.highlight.copy.enable nil) (site.Params.highlight.copy.enable) -}}
+    {{- partialCached "components/codeblock-copy-button" (dict "filename" "") "" -}}
+  {{- end -}}
+</div>
 {{- end -}}
 
       <div class="hextra-jupyter-code-cell hextra-scrollbar">
@@ -51,28 +56,55 @@ Render Jupyter Notebook
           <div class="hextra-jupyter-code-cell-outputs-container">
             <div class="hextra-jupyter-code-cell-outputs" tabindex="0">
               {{- range $output := . -}}
-                {{- if eq (index $output "output_type") "display_data" -}}
-                  {{- $data := index $output "data" -}}
-                  {{- $image := index $data "image/png" -}}
-                  {{- if $image -}}
-                    <img src="data:image/png;base64,{{- $image -}}" alt="image" />
+                {{- $outputType := index $output "output_type" -}}
+
+                {{- if or (eq $outputType "display_data") (eq $outputType "execute_result") -}}
+                  {{- $mimeData := index $output "data" -}}
+                  {{- $mimeOrder := slice "text/html" "image/svg+xml" "image/png" "image/jpeg" "text/markdown" "text/latex" "application/json" "text/plain" -}}
+                  {{- $s := newScratch -}}
+                  {{- $s.Set "done" false -}}
+                  {{- range $mime := $mimeOrder -}}
+                    {{- if not ($s.Get "done") -}}
+                      {{- $val := index $mimeData $mime -}}
+                      {{- with $val -}}
+                        {{- $content := cond (reflect.IsSlice .) (delimit . "") . -}}
+                        {{- with $content -}}
+                        {{- if eq $mime "text/html" -}}
+                          {{- $htmlContent := replaceRE `(?s)<style[^>]*>.*?</style>` "" $content -}}
+                          <div class="hextra-jupyter-html not-prose">{{- $htmlContent | safeHTML -}}</div>
+                        {{- else if eq $mime "image/svg+xml" -}}
+                          <div class="hextra-jupyter-svg" role="img" aria-label="SVG output">{{- $content | safeHTML -}}</div>
+                        {{- else if eq $mime "image/png" -}}
+                          <img src="data:image/png;base64,{{- $content -}}" alt="Output image" />
+                        {{- else if eq $mime "image/jpeg" -}}
+                          <img src="data:image/jpeg;base64,{{- $content -}}" alt="Output image" />
+                        {{- else if eq $mime "text/markdown" -}}
+                          {{- $page.RenderString (dict "display" "block") $content -}}
+                        {{- else if eq $mime "text/latex" -}}
+                          <div class="hextra-jupyter-latex">{{- transform.ToMath $content (dict "displayMode" true) -}}</div>
+                        {{- else if eq $mime "text/plain" -}}
+                          <pre class="not-prose">{{- $content -}}</pre>
+                        {{- else if eq $mime "application/json" -}}
+                          <pre class="not-prose"><code>{{- jsonify (dict "indent" "  ") $val -}}</code></pre>
+                        {{- end -}}
+                        {{- $s.Set "done" true -}}
+                        {{- end -}}
+                      {{- end -}}
+                    {{- end -}}
                   {{- end -}}
-                {{- else if eq (index $output "output_type") "stream" -}}
+
+                {{- else if eq $outputType "stream" -}}
+                  {{- $streamName := index $output "name" | default "stdout" -}}
                   {{- $text := index $output "text" -}}
                   {{- $textContent := (cond (reflect.IsSlice $text) (delimit $text "") $text) -}}
-                  <pre class="not-prose">{{- $textContent -}}</pre>
-                {{- else if eq (index $output "output_type") "execute_result" -}}
-                  {{- $data := index $output "data" -}}
-                  {{- $text := index $data "text/plain" -}}
-                  {{- $textContent := (cond (reflect.IsSlice $text) (delimit $text "") $text) -}}
-                  <pre class="not-prose">{{- $textContent -}}</pre>
-                  {{- $html := index $data "text/html" -}}
-                  {{- if $html -}}
-                    {{- $htmlText := delimit $html "" -}}
-                    <div>
-                      {{- $htmlText | safeHTML -}}
-                    </div>
-                  {{- end -}}
+                  <pre class="not-prose{{ if eq $streamName "stderr" }} hextra-jupyter-stream-stderr{{ end }}">{{- $textContent -}}</pre>
+
+                {{- else if eq $outputType "error" -}}
+                  {{- $traceback := index $output "traceback" -}}
+                  {{- $tbContent := cond (reflect.IsSlice $traceback) (delimit $traceback "") $traceback -}}
+                  {{- $tbClean := replaceRE `\x1b\[[0-9;]*[A-Za-z]` "" $tbContent -}}
+                  <pre class="not-prose hextra-jupyter-error" role="alert">{{- $tbClean -}}</pre>
+
                 {{- end -}}
               {{- end -}}
             </div>
@@ -80,9 +112,21 @@ Render Jupyter Notebook
         {{- end -}}
       </div>
     {{- else if eq (index $cell "cell_type") "markdown" -}}
-        {{- $source := index $cell "source" }}
-        {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) }}
-{{ (printf "\n%s\n" $sourceContent) | safeHTML }}
+        {{- $source := index $cell "source" -}}
+        {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}
+        {{- $page.RenderString (dict "display" "block") $sourceContent -}}
+    {{- else if eq (index $cell "cell_type") "raw" -}}
+        {{- $source := index $cell "source" -}}
+        {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}
+        {{- with ($sourceContent | strings.Chomp) -}}
+          <div class="hextra-jupyter-code-cell hextra-scrollbar">
+            <div class="hextra-jupyter-code-cell-outputs-container">
+              <div class="hextra-jupyter-code-cell-outputs" tabindex="0">
+                <pre class="hextra-jupyter-raw-cell not-prose">{{- . -}}</pre>
+              </div>
+            </div>
+          </div>
+        {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

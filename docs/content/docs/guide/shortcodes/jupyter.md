@@ -37,7 +37,7 @@ title: My Page
 math: true
 ---
 
-{{%/* jupyter "notebook.ipynb" */%}}
+{{</* jupyter "notebook.ipynb" */>}}
 ```
 
 Alternatively, you can utilize the [page bundles][page-bundles] feature of Hugo to organize the Jupyter Notebooks together with the Markdown file.
@@ -59,7 +59,7 @@ title: My Page
 math: true
 ---
 
-{{%/* jupyter "notebook.ipynb" */%}}
+{{</* jupyter "notebook.ipynb" */>}}
 ```
 
 ### Using a remote notebook
@@ -67,13 +67,13 @@ math: true
 You can also use a remote notebook by providing the URL to the notebook file. For example, to include [What is the Jupyter Notebook](https://github.com/jupyter/notebook/blob/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb) notebook in the page, you can use the following shortcode:
 
 ```
-{{%/* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */%}}
+{{</* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */>}}
 ```
 
 ## Example Notebook
 
 {{< callout type="info" >}}The following is an example of a notebook file that is included in the project assets folder.{{< /callout >}}
 
-{{% jupyter "example.ipynb" %}}
+{{< jupyter "example.ipynb" >}}
 
 [page-bundles]: https://gohugo.io/content-management/page-bundles/#leaf-bundles

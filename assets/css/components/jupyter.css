@@ -15,3 +15,52 @@
     }
   }
 }
+
+.hextra-jupyter-stream-stderr {
+  @apply hx:border-l-2 hx:border-amber-500 hx:pl-3 hx:bg-amber-50/50 hx:dark:bg-amber-950/20;
+}
+
+.hextra-jupyter-error {
+  @apply hx:border-l-2 hx:border-red-500 hx:pl-3 hx:bg-red-50/50 hx:dark:bg-red-950/20;
+}
+
+.hextra-jupyter-html {
+  @apply hx:overflow-x-auto hx:max-w-full;
+
+  table {
+    @apply hx:border-collapse hx:text-xs hx:my-0;
+
+    th,
+    td {
+      @apply hx:px-3 hx:py-1.5 hx:border hx:border-gray-200 hx:dark:border-neutral-700 hx:text-left;
+    }
+
+    thead th {
+      @apply hx:bg-gray-50 hx:dark:bg-neutral-800 hx:font-semibold;
+    }
+
+    tbody tr:nth-child(even) {
+      @apply hx:bg-gray-50/50 hx:dark:bg-neutral-800/50;
+    }
+
+    tbody tr:hover {
+      @apply hx:bg-primary-50 hx:dark:bg-primary-900/20;
+    }
+  }
+}
+
+.hextra-jupyter-svg {
+  @apply hx:overflow-x-auto hx:max-w-full;
+
+  svg {
+    @apply hx:max-w-full hx:h-auto;
+  }
+}
+
+.hextra-jupyter-latex {
+  @apply hx:overflow-x-auto hx:my-2;
+}
+
+.hextra-jupyter-raw-cell {
+  @apply hx:text-xs hx:overflow-auto hx:max-w-full hx:bg-gray-100 hx:dark:bg-neutral-800 hx:rounded-md hx:px-3 hx:py-2 hx:my-4;
+}
