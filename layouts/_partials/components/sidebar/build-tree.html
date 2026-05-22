@@ -14,13 +14,17 @@
 
 {{- if $matched -}}
   {{- if gt (len $dataNodes) 0 -}}
-    {{- /* Keep only data roots that live under $context */ -}}
+    {{- /* Keep data roots that live under $context, plus groups (no page). */ -}}
     {{- $scopedData := slice -}}
     {{- range $dataNodes -}}
       {{- $node := . -}}
-      {{- with $node.page -}}
-        {{- if or (eq .RelPermalink $context.RelPermalink) (.IsDescendant $context) -}}
-          {{- $scopedData = $scopedData | append $node -}}
+      {{- if not $node.page -}}
+        {{- $scopedData = $scopedData | append $node -}}
+      {{- else -}}
+        {{- with $node.page -}}
+          {{- if or (eq .RelPermalink $context.RelPermalink) (.IsDescendant $context) -}}
+            {{- $scopedData = $scopedData | append $node -}}
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
@@ -46,7 +50,9 @@
       {{- end -}}
 
       {{- range $scopedData -}}
-        {{- if and .link (not (index $autoClaimed .link)) -}}
+        {{- if not .link -}}
+          {{- $nodes = $nodes | append . -}}
+        {{- else if not (index $autoClaimed .link) -}}
           {{- $nodes = $nodes | append . -}}
         {{- end -}}
       {{- end -}}

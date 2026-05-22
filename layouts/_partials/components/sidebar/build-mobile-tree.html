@@ -53,7 +53,6 @@
           "title" $childTitle
           "items" (slice)
           "merge" "none"
-          "group" false
           "separator" false
           "external" (hasPrefix $childLink "http")
           "page" $childPage
@@ -69,7 +68,6 @@
         "items" $childNodes
         "merge" "none"
         "open" true
-        "group" true
         "separator" false
         "external" false
         "page" false
@@ -88,7 +86,7 @@
   {{- with $menuPage -}}
     {{- if ne .Params.sidebar.exclude true -}}
       {{- if .Params.sidebar.separator -}}
-        {{- $nodes = $nodes | append (dict "title" $menuTitle "separator" true "link" "" "items" (slice) "group" false "external" false "page" .) -}}
+        {{- $nodes = $nodes | append (dict "title" $menuTitle "separator" true "link" "" "items" (slice) "external" false "page" .) -}}
       {{- else -}}
         {{- $children := partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "pageURL" $pageURL "matched" $matched) .RelPermalink $page.Language.Lang $matched -}}
         {{- $nodes = $nodes | append (dict
@@ -98,7 +96,6 @@
           "merge" "none"
           "open" (.Params.sidebar.open)
           "separator" false
-          "group" false
           "external" false
           "page" .
           "icon" (.Params.sidebar.icon | default "")
@@ -121,7 +118,6 @@
       "items" (slice)
       "merge" "none"
       "separator" false
-      "group" false
       "external" (hasPrefix $link "http")
       "page" false
     ) -}}

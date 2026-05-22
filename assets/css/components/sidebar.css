@@ -78,7 +78,11 @@
   }
 
   .hextra-sidebar-group-title {
-    @apply hx:flex hx:grow hx:cursor-default hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:dark:text-gray-100;
+    @apply hx:flex hx:items-center hx:gap-2 hx:grow hx:cursor-default hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors hx:text-gray-500 hx:dark:text-neutral-400;
+  }
+
+  .hextra-sidebar-group-title-has-children {
+    @apply hx:ltr:pr-8 hx:rtl:pl-8;
   }
 
   /* Collapsible button */

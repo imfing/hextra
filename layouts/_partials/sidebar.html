@@ -4,18 +4,8 @@
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
 {{- $pageURL := $context.RelPermalink -}}
 
-{{- /* The data sidebar is only active when the current page sits under one of
-       its declared root entries. Elsewhere the auto-generated tree is used. */ -}}
-{{- $matchFound := false -}}
-{{- range partial "components/sidebar/source-data.html" $context -}}
-  {{- with .link -}}
-    {{- with site.GetPage . -}}
-      {{- if or (eq .RelPermalink $pageURL) (.IsAncestor $context) -}}
-        {{- $matchFound = true -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
+{{- /* When a data sidebar file exists, use it for all pages. */ -}}
+{{- $matchFound := gt (len (partial "components/sidebar/source-data.html" $context)) 0 -}}
 
 {{- if .context.Params.sidebar.hide -}}
   {{- $disableSidebar = true -}}

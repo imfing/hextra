@@ -3,9 +3,9 @@
 {{- $open := .open | default true -}}
 {{- $hasChildren := .hasChildren | default false -}}
 
-{{- if $node.group -}}
+{{- if not $node.link -}}
   <div class="hextra-sidebar-item">
-    <span class="hextra-sidebar-group-title">
+    <span class="hextra-sidebar-group-title {{ if $hasChildren }}hextra-sidebar-group-title-has-children{{ end }}">
       {{- with $node.icon -}}
         <span class="hextra-sidebar-link-icon hx:shrink-0 hx:inline-flex hx:items-center">
           {{- partial "utils/icon.html" (dict "name" . "attributes" `height="1em" class="hx:inline-block"`) -}}
@@ -13,6 +13,18 @@
       {{- end -}}
       {{- $node.title -}}
     </span>
+    {{- if $hasChildren -}}
+      <button
+        type="button"
+        class="hextra-sidebar-collapsible-button"
+        aria-label="{{ (T "toggleSection") | default "Toggle section" }}"
+        aria-expanded="{{ if $open }}true{{ else }}false{{ end }}"
+      >
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hextra-sidebar-collapsible-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hextra-sidebar-collapsible-icon-path"></path>
+        </svg>
+      </button>
+    {{- end -}}
   </div>
 {{- else -}}
   <div class="hextra-sidebar-item hextra-sidebar-node" data-active="{{ if $active }}true{{ else }}false{{ end }}">

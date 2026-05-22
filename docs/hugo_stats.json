@@ -155,6 +155,7 @@
       "hextra-sidebar-container",
       "hextra-sidebar-desktop-list",
       "hextra-sidebar-group-title",
+      "hextra-sidebar-group-title-has-children",
       "hextra-sidebar-guide-list",
       "hextra-sidebar-item",
       "hextra-sidebar-link",

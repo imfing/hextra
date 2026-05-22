@@ -12,3 +12,7 @@
       merge: deep
       items:
         - link: /docs/sidebar-lab/deep-parent/deep-manual-node/
+    - title: Group Placeholder
+      icon: collection
+      items:
+        - link: /docs/sidebar-lab/group-child/
