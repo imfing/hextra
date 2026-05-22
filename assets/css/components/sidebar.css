@@ -12,6 +12,10 @@
       contain: layout style;
       backface-visibility: hidden;
     }
+
+    .hextra-sidebar-container[data-open] {
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   .hextra-sidebar-search {

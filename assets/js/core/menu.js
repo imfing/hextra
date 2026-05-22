@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const mobileQuery = window.matchMedia('(max-width: 767px)');
 
   function isMenuOpen() {
-    return menu.querySelector('svg').classList.contains('open');
+    return sidebarContainer.hasAttribute('data-open');
   }
 
   // On mobile, the sidebar is off-screen so hide it from assistive tech
@@ -25,16 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
   function toggleMenu(options = {}) {
     const { focusOnOpen = true } = options;
 
-    // Toggle the hamburger menu
+    // Toggle the hamburger menu icon
     menu.querySelector('svg').classList.toggle('open');
 
-    // When the menu is open, we want to show the navigation sidebar
-    sidebarContainer.classList.toggle('hx:max-md:[transform:translate3d(0,-100%,0)]');
-    sidebarContainer.classList.toggle('hx:max-md:[transform:translate3d(0,0,0)]');
-
-    // When the menu is open, we want to prevent the body from scrolling
-    document.body.classList.toggle('hx:overflow-hidden');
-    document.body.classList.toggle('hx:md:overflow-auto');
+    // Toggle sidebar visibility via data attribute
+    if (isMenuOpen()) {
+      sidebarContainer.removeAttribute('data-open');
+      document.body.style.overflow = '';
+    } else {
+      sidebarContainer.setAttribute('data-open', '');
+      document.body.style.overflow = 'hidden';
+    }
 
     // Sync aria-expanded and aria-hidden
     const isOpen = isMenuOpen();
