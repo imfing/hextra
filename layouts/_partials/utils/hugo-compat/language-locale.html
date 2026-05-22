@@ -1,0 +1,15 @@
+{{/*
+Returns the language locale using the supported Hugo API for the running version.
+
+Hugo v0.158.0 deprecated Language.LanguageCode in favor of Language.Locale.
+Keep the fallback so Hextra can continue supporting Hugo >= 0.146.0.
+*/}}
+{{- $language := . -}}
+{{- $locale := "" -}}
+{{- if ge (hugo.Version) "0.158.0" -}}
+  {{- $locale = $language.Locale -}}
+{{- else -}}
+  {{- $locale = $language.LanguageCode -}}
+{{- end -}}
+
+{{- return $locale -}}

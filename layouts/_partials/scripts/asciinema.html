@@ -33,7 +33,7 @@
 {{- /* CSS retrieval: get raw CSS from either local asset or remote, then process */ -}}
 {{- if $isRemoteBase -}}
   {{- $cssPath := cond (ne $asciinemaCssAsset "") $asciinemaCssAsset "asciinema-player.css" -}}
-  {{- $asciinemaCssUrl := printf "%s/%s" $asciinemaBase $cssPath -}}
+  {{- $asciinemaCssUrl := urls.JoinPath $asciinemaBase $cssPath -}}
   {{- with try (resources.GetRemote $asciinemaCssUrl) -}}
     {{- with .Err -}}
       {{- errorf "Could not retrieve Asciinema css file from %s. Reason: %s." $asciinemaCssUrl . -}}
@@ -56,7 +56,7 @@
 {{- /* JS retrieval: get raw JS from either local asset or remote, then process */ -}}
 {{- if $isRemoteBase -}}
   {{- $jsPath := cond (ne $asciinemaJsAsset "") $asciinemaJsAsset (printf "asciinema-player%s.js" $minSuffix) -}}
-  {{- $asciinemaJsUrl := printf "%s/%s" $asciinemaBase $jsPath -}}
+  {{- $asciinemaJsUrl := urls.JoinPath $asciinemaBase $jsPath -}}
   {{- with try (resources.GetRemote $asciinemaJsUrl) -}}
     {{- with .Err -}}
       {{- errorf "Could not retrieve Asciinema js file from %s. Reason: %s." $asciinemaJsUrl . -}}

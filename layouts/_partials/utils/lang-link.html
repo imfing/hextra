@@ -13,7 +13,7 @@
 {{ end }}
 
 {{ if not $link }}
-  {{ range where $page.Sites ".Language.Lang" $lang }}
+  {{ range where (partial "utils/hugo-compat/sites.html" .) ".Language.Lang" $lang }}
     {{ $link = .Home.RelPermalink }}
   {{ end }}
 {{ end }}

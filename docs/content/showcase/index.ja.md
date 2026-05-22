@@ -13,6 +13,13 @@ Hextra で構築されたオープンソースプロジェクト
 
 {{< cards >}}
   {{< card
+        link="https://docs.sortie-ai.com"
+        title="Sortie"
+        image="https://raw.githubusercontent.com/sortie-ai/docs/refs/heads/main/static/img/screenshot.png"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
         link="https://printn.dev"
         title="PrintN"
         image="https://raw.githubusercontent.com/printn/printn.github.io/refs/heads/main/static/images/screenshot.png"

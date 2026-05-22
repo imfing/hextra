@@ -1,0 +1,14 @@
+{{/*
+Returns site data using the supported Hugo API for the running version.
+
+Hugo v0.156.0 deprecated site.Data / .Site.Data in favor of hugo.Data.
+Keep the fallback so Hextra can continue supporting Hugo >= 0.146.0.
+*/}}
+{{- $siteData := dict -}}
+{{- if ge (hugo.Version) "0.156.0" -}}
+  {{- $siteData = hugo.Data -}}
+{{- else -}}
+  {{- $siteData = site.Data -}}
+{{- end -}}
+
+{{- return $siteData -}}

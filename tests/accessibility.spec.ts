@@ -4,6 +4,12 @@ import AxeBuilder from "@axe-core/playwright";
 const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag22aa"];
 // TODO: Re-enable once known baseline issues are resolved and tracked.
 const DISABLED_RULES = ["color-contrast", "target-size"];
+const EXCLUDED_SELECTORS = [
+  // Third-party player internals are outside the theme's control and can change
+  // independently, while the iframe element itself remains covered by page HTML.
+  "iframe[src*=\"youtube.com/embed\"]",
+  "iframe[src*=\"youtube-nocookie.com/embed\"]",
+];
 
 type Violation = Awaited<
   ReturnType<InstanceType<typeof AxeBuilder>["analyze"]>
@@ -68,10 +74,15 @@ test("all English pages pass axe-core WCAG AA", async ({ page, baseURL }) => {
     await test.step(path, async () => {
       await page.goto(path, { waitUntil: "load" });
 
-      const results = await new AxeBuilder({ page })
+      const axe = new AxeBuilder({ page })
         .withTags(WCAG_TAGS)
-        .disableRules(DISABLED_RULES)
-        .analyze();
+        .disableRules(DISABLED_RULES);
+
+      for (const selector of EXCLUDED_SELECTORS) {
+        axe.exclude(selector);
+      }
+
+      const results = await axe.analyze();
 
       if (results.violations.length === 0) {
         return;

@@ -28,7 +28,7 @@
 {{- /* JS retrieval: get raw JS from either local asset or remote, then process */ -}}
 {{- if $isRemoteBase -}}
   {{- $jsPath := cond (ne $mermaidJsAsset "") $mermaidJsAsset (printf "mermaid%s.js" $minSuffix) -}}
-  {{- $mermaidJsUrl := printf "%s/%s" $mermaidBase $jsPath -}}
+  {{- $mermaidJsUrl := urls.JoinPath $mermaidBase $jsPath -}}
   {{- with try (resources.GetRemote $mermaidJsUrl) -}}
     {{- with .Err -}}
       {{- errorf "Could not retrieve Mermaid js file from %s. Reason: %s." $mermaidJsUrl . -}}

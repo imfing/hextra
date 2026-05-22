@@ -25,3 +25,11 @@
     source = "hugo_stats.json"
     target = "assets/notwatching/hugo_stats.json"
     disableWatch = true
+
+# Theme dev mode runs PostCSS from docs/, while Tailwind v4 loads native
+# dependencies from the theme root. Disable Hugo's Node permission sandbox
+# for this dev-only pipeline so the CSS is compiled instead of served raw.
+[security]
+  [security.node]
+    [security.node.permissions]
+      disable = true

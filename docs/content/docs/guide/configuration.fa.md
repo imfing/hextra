@@ -312,6 +312,16 @@ params:
     displayTags: true
 ```
 
+Hugo به‌صورت پیش‌فرض برای `tags` و `categories` صفحه‌های taxonomy می‌سازد. اگر سایت شما از صفحه‌های taxonomy استفاده نمی‌کند و می‌خواهید پوشه‌های تولیدشده `public/tags/` و `public/categories/` حذف شوند، نوع صفحه‌های `taxonomy` و `term` را غیرفعال کنید:
+
+```yaml {filename="hugo.yaml"}
+disableKinds:
+  - taxonomy
+  - term
+```
+
+فقط زمانی این نوع‌ها را غیرفعال کنید که به صفحه‌های آرشیو برچسب یا دسته‌بندی وابسته نیستید.
+
 ### بزرگنمایی تصویر
 
 بزرگنمایی تصویر به طور پیش‌فرض غیرفعال است. وقتی فعال شود، کلیک روی تصویر Markdown یک نمای بزرگنمایی شده باز می‌کند.
@@ -339,6 +349,73 @@ params:
     base: "https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist"
     # js: "js/medium-zoom.min.js" # اختیاری، نسبت به base یا asset‌های محلی
 ```
+
+### اسکریپت‌های محلی و آینه‌شده
+
+Hextra می‌تواند وابستگی‌های اختیاری فرانت‌اند را از منابع مختلف بارگیری کند:
+
+- تنظیمات پیش‌فرض قالب (CDN)
+- URLهای آینه داخلی از طریق `base`
+- assetهای محلی Hugo از طریق `js` / `css`
+
+برای assetهای محلی، فایل‌های vendor را در پوشه `assets/` سایت خود قرار دهید و مقادیر پیکربندی را به همان مسیرهای asset اشاره دهید:
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    enable: true
+    js: "js/vendor/medium-zoom.min.js"
+
+  mermaid:
+    js: "js/vendor/mermaid.min.js"
+
+  asciinema:
+    js: "js/vendor/asciinema-player.min.js"
+    css: "css/vendor/asciinema-player.css"
+
+  math:
+    engine: katex
+    katex:
+      css: "css/vendor/katex.min.css"
+      assets:
+        - "fonts/KaTeX_Main-Regular.woff2"
+        - "fonts/KaTeX_Math-Italic.woff2"
+
+  search:
+    type: flexsearch
+    flexsearch:
+      js: "js/vendor/flexsearch.bundle.min.js"
+```
+
+`imageZoom.enable: true` فقط به این دلیل لازم است که بزرگ‌نمایی تصویر به‌صورت پیش‌فرض غیرفعال است.
+برای KaTeX، مطمئن شوید همه فایل‌های فونتی که فایل CSS انتخابی شما به آن‌ها ارجاع می‌دهد منتشر می‌شوند، نه فقط دو موردی که در این مثال آمده‌اند.
+
+برای استفاده از یک آینه داخلی، `base` را تنظیم کنید (و در صورت تفاوت نام فایل، در صورت نیاز `js` / `css` را نیز مشخص کنید):
+
+```yaml {filename="hugo.yaml"}
+params:
+  imageZoom:
+    base: "https://mirror.example.com/medium-zoom/dist"
+
+  mermaid:
+    base: "https://mirror.example.com/mermaid/dist"
+
+  asciinema:
+    base: "https://mirror.example.com/asciinema-player/dist/bundle"
+
+  math:
+    engine: katex
+    katex:
+      base: "https://mirror.example.com/katex/dist"
+
+  search:
+    flexsearch:
+      base: "https://mirror.example.com/flexsearch/dist"
+      # js: "flexsearch.bundle.min.js"
+```
+
+> [!NOTE]
+> برای سفارشی‌سازی منبع بارگذاری MathJax، قالب `layouts/_partials/scripts/mathjax.html` را در پروژه خود بازنویسی کنید.
 
 ### عرض صفحه
 
@@ -438,6 +515,17 @@ params:
     flexsearch:
       # نمایه صفحه بر اساس: content | summary | heading | title
       index: content
+```
+
+همچنین می‌توانید محل بارگیری runtime مربوط به FlexSearch را کنترل کنید:
+
+```yaml {filename="hugo.yaml"}
+params:
+  search:
+    flexsearch:
+      version: "0.8.143" # نسخه پیش‌فرض CDN
+      # base: "https://mirror.example.com/flexsearch/dist" # آدرس پایهٔ remote اختیاری
+      # js: "js/vendor/flexsearch.bundle.min.js" # مسیر asset محلی یا فایل سفارشی زیر base راه دور
 ```
 
 گزینه‌های `flexsearch.index`:

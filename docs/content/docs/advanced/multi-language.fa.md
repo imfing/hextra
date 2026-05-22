@@ -16,15 +16,20 @@ Hextra از ایجاد سایت با چندین زبان با استفاده ا�
 defaultContentLanguage: en
 languages:
   en:
-    languageName: English
+    label: English
     weight: 1
   fr:
-    languageName: Français
+    label: Français
     weight: 2
   ja:
-    languageName: 日本語
+    label: 日本語
     weight: 3
 ```
+
+> [!NOTE]
+> پیکربندی‌های قدیمی Hugo ممکن است از `languageName`، `languageCode` و `languageDirection` استفاده کنند.
+> از Hugo v0.158.0 به بعد، به‌ترتیب از `label`، `locale` و `direction` استفاده کنید.
+> مستندات [تنظیمات زبان‌های Hugo](https://gohugo.io/configuration/languages/#language-settings) را ببینید.
 
 ## مدیریت ترجمه‌ها بر اساس نام فایل
 

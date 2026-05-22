@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const crumbData = data[searchUrl];
         if (!crumbData) {
-          console.warn('Excluded page', searchUrl, '- will not be included for search result breadcrumb for', route);
+          console.debug('Excluded page', searchUrl, '- will not be included for search result breadcrumb for', route);
           continue;
         }
 

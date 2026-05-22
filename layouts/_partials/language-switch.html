@@ -9,6 +9,8 @@
 {{- $hideLabel := .hideLabel | default false -}}
 
 {{- $changeLanguage := (T "changeLanguage") | default "Change language" -}}
+{{- $currentLanguageLang := site.Language.Lang -}}
+{{- $currentLanguageLabel := partial "utils/hugo-compat/language-label.html" site.Language -}}
 
 {{- if hugo.IsMultilingual -}}
   <div class="hx:flex hx:justify-items-start {{ if $grow }}hx:grow{{ end }}">
@@ -24,7 +26,7 @@
     >
       <div class="hx:flex hx:items-center hx:gap-2 hx:capitalize">
         {{- partial "utils/icon" (dict "name" $iconName "attributes" (printf "height=%d" $iconHeight)) -}}
-        {{- if not $hideLabel }}<span>{{ site.Language.LanguageName }}</span>{{ end -}}
+        {{- if not $hideLabel }}<span>{{ $currentLanguageLabel }}</span>{{ end -}}
       </div>
     </button>
     <ul
@@ -32,16 +34,18 @@
       style="position: fixed; inset: auto auto 0px 0px; margin: 0px; min-width: 100px;"
       role="menu"
     >
-      {{ range site.Languages }}
-        {{ $link := partial "utils/lang-link" (dict "lang" .Lang "context" $page) }}
+      {{ range partial "utils/hugo-compat/sites.html" . }}
+        {{- $language := .Language -}}
+        {{ $link := partial "utils/lang-link" (dict "lang" $language.Lang "context" $page) }}
+        {{- $languageLabel := partial "utils/hugo-compat/language-label.html" $language -}}
         <li role="none" class="hx:flex hx:flex-col">
           <a
             href="{{ $link }}"
             role="menuitem"
             class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9"
           >
-            {{- .LanguageName -}}
-            {{- if eq .LanguageName site.Language.LanguageName -}}
+            {{- $languageLabel -}}
+            {{- if eq $language.Lang $currentLanguageLang -}}
               <span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3">
                 {{- partial "utils/icon" (dict "name" "check" "attributes" "height=1em width=1em") -}}
               </span>

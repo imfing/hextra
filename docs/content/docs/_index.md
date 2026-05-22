@@ -20,6 +20,7 @@ Designed for building beautiful websites for documentation, blogs, and websites,
 - **Full-text Search** - Built-in offline full-text search powered by FlexSearch, no additional configuration required.
 - **Battery-included** - Markdown, syntax highlighting, LaTeX math formulae, diagrams and Shortcodes elements to enhance your content. Table of contents, breadcrumbs, pagination, sidebar navigation and more are all automatically generated.
 - **Multi-language and SEO Ready** - Multi-language sites made easy with Hugo's multilingual mode. Out-of-the-box support is included for SEO tags, Open Graph, and Twitter Cards.
+- **Accessibility Support** - Interactive components use semantic markup, keyboard-friendly behavior, and automated accessibility checks to keep the UI usable across common assistive workflows.
 
 ## Questions or Feedback?
 

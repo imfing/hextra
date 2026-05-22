@@ -20,7 +20,8 @@
 
 {{/* Extract glossary data entries */}}
 {{- $glossaryEntries := dict -}}
-{{- with (index .Site.Data .Site.Language.Lang "termbase") -}}
+{{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
+{{- with (index $siteData .Site.Language.Lang "termbase") -}}
   {{- range . -}}
     {{- $entry := cond (.abbr) (printf "%s %s %s" .abbr .term .definition) (printf "%s %s" .term .definition) -}}
     {{- $glossaryEntries = $glossaryEntries | merge (dict .term $entry) -}}
