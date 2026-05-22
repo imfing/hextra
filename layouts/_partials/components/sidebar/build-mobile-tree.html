@@ -88,7 +88,10 @@
       {{- if .Params.sidebar.separator -}}
         {{- $nodes = $nodes | append (dict "title" $menuTitle "separator" true "link" "" "items" (slice) "external" false "page" .) -}}
       {{- else -}}
-        {{- $children := partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "pageURL" $pageURL "matched" $matched) .RelPermalink $page.Language.Lang $matched -}}
+        {{- $children := slice -}}
+        {{- if eq .Type "docs" -}}
+          {{- $children = partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "pageURL" $pageURL "matched" $matched) .RelPermalink $page.Language.Lang $matched -}}
+        {{- end -}}
         {{- $nodes = $nodes | append (dict
           "link" .RelPermalink
           "title" $menuTitle
