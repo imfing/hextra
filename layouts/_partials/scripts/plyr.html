@@ -1,0 +1,85 @@
+{{- /* Plyr */ -}}
+
+{{- $plyrBase := "" -}}
+{{- $useDefaultCdn := true -}}
+{{- with site.Params.plyr.base -}}
+  {{- $plyrBase = . -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- $plyrJsAsset := "" -}}
+{{- with site.Params.plyr.js -}}
+  {{- $plyrJsAsset = . -}}
+{{- end -}}
+
+{{- $plyrCssAsset := "" -}}
+{{- with site.Params.plyr.css -}}
+  {{- $plyrCssAsset = . -}}
+{{- end -}}
+
+{{- /* If only js/css is set without base, use local asset loading */ -}}
+{{- if and $useDefaultCdn (or (ne $plyrJsAsset "") (ne $plyrCssAsset "")) -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- /* Set default CDN base if needed */ -}}
+{{- if $useDefaultCdn -}}
+  {{- $plyrBase = "https://cdn.jsdelivr.net/npm/plyr@latest/dist" -}}
+{{- end -}}
+
+{{- $isRemoteBase := or (strings.HasPrefix $plyrBase "http://") (strings.HasPrefix $plyrBase "https://") -}}
+{{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
+
+{{- /* CSS retrieval */ -}}
+{{- if $isRemoteBase -}}
+  {{- $cssPath := cond (ne $plyrCssAsset "") $plyrCssAsset "plyr.css" -}}
+  {{- $plyrCssUrl := printf "%s/%s" $plyrBase $cssPath -}}
+  {{- with try (resources.GetRemote $plyrCssUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Plyr css file from %s. Reason: %s." $plyrCssUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy "css/plyr.css" . -}}
+        {{- $plyrCss := . | fingerprint -}}
+        <link rel="stylesheet" href="{{ $plyrCss.RelPermalink }}" integrity="{{ $plyrCss.Data.Integrity }}" crossorigin="anonymous" />
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $plyrCssAsset -}}
+  {{- with resources.Get $plyrCssAsset -}}
+    {{- $plyrCss := . | fingerprint -}}
+    <link rel="stylesheet" href="{{ $plyrCss.RelPermalink }}" integrity="{{ $plyrCss.Data.Integrity }}" crossorigin="anonymous" />
+  {{- else -}}
+    {{- errorf "Plyr css asset not found at %q" $plyrCssAsset -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* JS retrieval */ -}}
+{{- if $isRemoteBase -}}
+  {{- $jsPath := cond (ne $plyrJsAsset "") $plyrJsAsset (printf "plyr.polyfilled%s.js" $minSuffix) -}}
+  {{- $plyrJsUrl := printf "%s/%s" $plyrBase $jsPath -}}
+  {{- with try (resources.GetRemote $plyrJsUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Plyr js file from %s. Reason: %s." $plyrJsUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy (printf "js/plyr.polyfilled%s.js" $minSuffix) . -}}
+        {{- $plyrJs := . | fingerprint -}}
+        <script defer src="{{ $plyrJs.RelPermalink }}" integrity="{{ $plyrJs.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $plyrJsAsset -}}
+  {{- with resources.Get $plyrJsAsset -}}
+    {{- $plyrJs := . | fingerprint -}}
+    <script defer src="{{ $plyrJs.RelPermalink }}" integrity="{{ $plyrJs.Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- else -}}
+    {{- errorf "Plyr js asset not found at %q" $plyrJsAsset -}}
+  {{- end -}}
+{{- end -}}
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".content video, .content audio, .content [data-plyr-provider]").forEach((el) => {
+      new Plyr(el);
+    });
+  });
+</script>
