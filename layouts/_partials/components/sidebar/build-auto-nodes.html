@@ -4,7 +4,12 @@
 
 {{- if lt $level 4 -}}
   {{- $items := where (union $context.RegularPages $context.Sections) "Params.sidebar.exclude" "!=" true -}}
-  {{- range $items.ByWeight -}}
+  {{- $sortBy := $context.Params.sidebar.sort | default (site.Params.sidebar.sort | default "weight") -}}
+  {{- $sorted := $items.ByWeight -}}
+  {{- if eq $sortBy "title" -}}
+    {{- $sorted = $items.ByTitle -}}
+  {{- end -}}
+  {{- range $sorted -}}
     {{- $children := slice -}}
     {{- if or .RegularPages .Sections -}}
       {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}

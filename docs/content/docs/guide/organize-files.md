@@ -103,6 +103,44 @@ Explicit `items` are rendered first, then any auto-generated children not alread
 
 Pages with `sidebar.exclude: true` in front matter are excluded from both merge modes.
 
+### Sort Order
+
+By default, sidebar pages are sorted by `weight` (which falls back to date when no weight is set). For sections with many pages that should be listed alphabetically, you can switch to sorting by title.
+
+**Global configuration** in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  sidebar:
+    sort: title
+```
+
+**Per-section override** in the section's `_index.md` front matter:
+
+```yaml {filename="content/docs/api/_index.md"}
+---
+title: API Reference
+sidebar:
+  sort: title
+---
+```
+
+The per-section setting takes precedence over the global configuration. Supported values are `weight` (default) and `title`.
+
+### Group Headings
+
+Sidebar entries without a `link` are rendered as non-clickable group headings. This is useful for organizing pages into logical groups without creating a dedicated section page:
+
+```yaml {filename="data/<lang>/sidebar.yaml"}
+- title: Reference
+  icon: book-open
+  items:
+    - link: /docs/api/
+    - link: /docs/cli/
+```
+
+"Reference" will appear as a label in the sidebar with its children listed below. Group headings with children include a collapsible toggle.
+
 ## Section Navigation
 
 

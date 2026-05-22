@@ -20,7 +20,12 @@
       {{- end -}}
 
       {{- $autoItems := where (union $node.page.RegularPages $node.page.Sections) "Params.sidebar.exclude" "!=" true -}}
-      {{- range $autoItems.ByWeight -}}
+      {{- $sortBy := $node.page.Params.sidebar.sort | default (site.Params.sidebar.sort | default "weight") -}}
+      {{- $sorted := $autoItems.ByWeight -}}
+      {{- if eq $sortBy "title" -}}
+        {{- $sorted = $autoItems.ByTitle -}}
+      {{- end -}}
+      {{- range $sorted -}}
         {{- if not (index $existing .RelPermalink) -}}
           {{- $autoChildren := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}
           {{- $children = $children | append (dict
