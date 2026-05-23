@@ -1,12 +1,15 @@
 {{- /*
 Render Jupyter Notebook
 
-@param {string} 0 The path of the Jupyter Notebook.
+@param {string} 0|src The path of the Jupyter Notebook.
+@param {bool} prompts Show In/Out execution count prompts. Use named params: {{< jupyter src="notebook.ipynb" prompts=true >}}
 
 @example {{< jupyter "notebook.ipynb" >}}
+@example {{< jupyter src="notebook.ipynb" prompts=true >}}
 */ -}}
 
-{{- $path := .Get 0 -}}
+{{- $path := or (.Get "src") (.Get 0) -}}
+{{- $showPrompts := eq (printf "%v" (.Get "prompts")) "true" -}}
 {{- $data := "" -}}
 {{- $page := .Page -}}
 
@@ -36,23 +39,91 @@ Render Jupyter Notebook
 
 {{- $language := index $data "metadata" "language_info" "name" | default "python" -}}
 
+{{- define "jupyter.renderMarkdown" -}}
+  {{- $page := .page -}}
+  {{- $sourceContent := .sourceContent -}}
+  {{- $sourceContentTrimmed := strings.TrimSpace $sourceContent -}}
+  {{- if findRE `(?s)^<([A-Za-z][A-Za-z0-9:-]*)(\s|>|/)` $sourceContentTrimmed -}}
+    {{- $sourceContent | safeHTML -}}
+  {{- else -}}
+    {{- $ms := newScratch -}}
+    {{- $ms.Set "content" "" -}}
+    {{- range $line := split $sourceContent "\n" -}}
+      {{- if findRE `^#{1,6}\s+` $line -}}
+        {{- $headingText := replaceRE `^#{1,6}\s+` "" $line -}}
+        {{- $headingText = replaceRE `\s+#+\s*$` "" $headingText -}}
+        {{- $headingText = replaceRE `<[^>]+>` "" $headingText -}}
+        {{- $headingText = strings.TrimSpace $headingText -}}
+        {{- with $headingText -}}
+          {{- $jupyterID := replaceRE `\s+` "-" . -}}
+          {{- $jupyterID = replaceRE `["'<>]` "" $jupyterID -}}
+          {{- $ms.Add "content" (printf "<div id=\"%s\" class=\"hextra-jupyter-anchor-alias\" aria-hidden=\"true\"></div>\n\n" $jupyterID) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $ms.Add "content" (printf "%s\n" $line) -}}
+    {{- end -}}
+    {{- $page.RenderString (dict "display" "block") ($ms.Get "content") -}}
+  {{- end -}}
+{{- end -}}
+
 {{- with index $data "cells" -}}
+  <div class="hextra-jupyter-notebook">
   {{- range $cell := . -}}
+    {{- $meta := index $cell "metadata" | default (dict) -}}
+    {{- $tags := index $meta "tags" | default slice -}}
+    {{- $jupyter := index $meta "jupyter" | default (dict) -}}
+    {{- $hideCell := in $tags "hide-cell" -}}
+    {{- $hideSource := or (index $jupyter "source_hidden") (in $tags "hide-input") -}}
+    {{- $hideOutputs := or (index $jupyter "outputs_hidden") (index $meta "collapsed") (in $tags "hide-output") -}}
+
+    {{- if not $hideCell -}}
     {{- if eq (index $cell "cell_type") "code" -}}
+      {{- $execCount := index $cell "execution_count" -}}
+      {{- $promptNum := " " -}}
+      {{- with $execCount -}}{{- $promptNum = printf "%v" . -}}{{- end -}}
+
+      {{- if not $hideSource -}}
       {{- $source := index $cell "source" -}}
       {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}
 {{- with ($sourceContent | strings.Chomp) -}}
+{{- if $showPrompts -}}
+<div class="hextra-jupyter-prompt-row">
+  <div class="hextra-jupyter-prompt hextra-jupyter-prompt-in">In [{{- $promptNum -}}]:</div>
+  <div class="hextra-jupyter-prompt-content">
+{{- end -}}
 <div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
   {{- partial "components/codeblock" (dict "lang" $language "content" .) -}}
   {{- if or (eq site.Params.highlight.copy.enable nil) (site.Params.highlight.copy.enable) -}}
     {{- partialCached "components/codeblock-copy-button" (dict "filename" "") "" -}}
   {{- end -}}
 </div>
+{{- if $showPrompts -}}
+  </div>
+</div>
 {{- end -}}
+{{- end -}}
+      {{- end -}}
 
+      {{- if not $hideOutputs -}}
+      {{- $outputs := index $cell "outputs" -}}
+      {{- with $outputs -}}
+        {{- $ps := newScratch -}}
+        {{- $ps.Set "hasExecResult" false -}}
+        {{- range . -}}
+          {{- if eq (index . "output_type") "execute_result" -}}
+            {{- $ps.Set "hasExecResult" true -}}
+          {{- end -}}
+        {{- end -}}
+{{- if $showPrompts -}}
+<div class="hextra-jupyter-prompt-row">
+  {{- if ($ps.Get "hasExecResult") -}}
+  <div class="hextra-jupyter-prompt hextra-jupyter-prompt-out">Out[{{- $promptNum -}}]:</div>
+  {{- else -}}
+  <div class="hextra-jupyter-prompt"></div>
+  {{- end -}}
+  <div class="hextra-jupyter-prompt-content">
+{{- end -}}
       <div class="hextra-jupyter-code-cell hextra-scrollbar">
-        {{- $outputs := index $cell "outputs" -}}
-        {{- with $outputs -}}
           <div class="hextra-jupyter-code-cell-outputs-container">
             <div class="hextra-jupyter-code-cell-outputs" tabindex="0">
               {{- range $output := . -}}
@@ -79,7 +150,7 @@ Render Jupyter Notebook
                         {{- else if eq $mime "image/jpeg" -}}
                           <img src="data:image/jpeg;base64,{{- $content -}}" alt="Output image" />
                         {{- else if eq $mime "text/markdown" -}}
-                          {{- $page.RenderString (dict "display" "block") $content -}}
+                          {{- template "jupyter.renderMarkdown" (dict "page" $page "sourceContent" $content) -}}
                         {{- else if eq $mime "text/latex" -}}
                           <div class="hextra-jupyter-latex">{{- transform.ToMath $content (dict "displayMode" true) -}}</div>
                         {{- else if eq $mime "text/plain" -}}
@@ -109,12 +180,17 @@ Render Jupyter Notebook
               {{- end -}}
             </div>
           </div>
-        {{- end -}}
       </div>
+{{- if $showPrompts -}}
+  </div>
+</div>
+{{- end -}}
+      {{- end -}}
+      {{- end -}}
     {{- else if eq (index $cell "cell_type") "markdown" -}}
         {{- $source := index $cell "source" -}}
         {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}
-        {{- $page.RenderString (dict "display" "block") $sourceContent -}}
+        {{- template "jupyter.renderMarkdown" (dict "page" $page "sourceContent" $sourceContent) -}}
     {{- else if eq (index $cell "cell_type") "raw" -}}
         {{- $source := index $cell "source" -}}
         {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}
@@ -128,5 +204,7 @@ Render Jupyter Notebook
           </div>
         {{- end -}}
     {{- end -}}
+    {{- end -}}
   {{- end -}}
+  </div>
 {{- end -}}

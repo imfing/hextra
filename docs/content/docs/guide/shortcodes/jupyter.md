@@ -70,10 +70,26 @@ You can also use a remote notebook by providing the URL to the notebook file. Fo
 {{</* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */>}}
 ```
 
+### Showing In/Out prompts
+
+You can display Jupyter-style `In [N]:`/`Out[N]:` execution count prompts by using named parameters with `prompts=true`:
+
+```
+{{</* jupyter src="notebook.ipynb" prompts=true */>}}
+```
+
+> Note: when using `prompts` or other named parameters, the notebook path must use the `src` parameter instead of a positional argument.
+
 ## Example Notebook
 
 {{< callout type="info" >}}The following is an example of a notebook file that is included in the project assets folder.{{< /callout >}}
 
-{{< jupyter "example.ipynb" >}}
+{{< jupyter src="example.ipynb" prompts=true >}}
+
+## Supported Output Types
+
+{{< callout type="info" >}}The following notebook demonstrates all supported output types including error tracebacks, stderr streams, SVG, Markdown, LaTeX, JSON, raw cells, and cell visibility metadata.{{< /callout >}}
+
+{{< jupyter "example-outputs.ipynb" >}}
 
 [page-bundles]: https://gohugo.io/content-management/page-bundles/#leaf-bundles
