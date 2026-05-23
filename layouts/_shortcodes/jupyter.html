@@ -41,10 +41,6 @@ Render Jupyter Notebook
 {{- end -}}
 
 {{- $language := index $data "metadata" "language_info" "name" | default "python" -}}
-{{- $mainCss := resources.Get "css/compiled/main.css" -}}
-{{- $variablesCss := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" $page -}}
-{{- $customCss := resources.Get "css/custom.css" -}}
-{{- $isolatedOutputHead := printf `<meta charset="utf-8"><link rel="stylesheet" href="%s"><link rel="stylesheet" href="%s"><link rel="stylesheet" href="%s">` $mainCss.RelPermalink $variablesCss.RelPermalink $customCss.RelPermalink -}}
 
 {{- define "jupyter.renderMarkdown" -}}
   {{- $page := .page -}}
@@ -216,16 +212,20 @@ Render Jupyter Notebook
                         {{- with index $mimeMeta "height" -}}
                           {{- $imageAttrs = printf `%s height="%s"` $imageAttrs (printf "%v" . | transform.HTMLEscape) -}}
                         {{- end -}}
+                        {{- $isolated := index $outputMeta "isolated" -}}
                         {{- if eq $mime "text/html" -}}
-                          {{- $isolatedContent := printf `<!doctype html><html><head>%s</head><body><div class="hextra-jupyter-html not-prose">%s</div></body></html>` $isolatedOutputHead $content -}}
-                          {{- $isolatedContentDark := printf `<!doctype html><html class="dark"><head>%s</head><body><div class="hextra-jupyter-html not-prose">%s</div></body></html>` $isolatedOutputHead $content -}}
-                          <iframe class="hextra-jupyter-isolated-output hextra-jupyter-isolated-output-light" sandbox srcdoc="{{ $isolatedContent }}" title="HTML output"></iframe>
-                          <iframe class="hextra-jupyter-isolated-output hextra-jupyter-isolated-output-dark" sandbox srcdoc="{{ $isolatedContentDark }}" title="HTML output"></iframe>
+                          {{- $htmlContent := replaceRE `(?s)<style[^>]*>.*?</style>` "" $content -}}
+                          {{- if $isolated -}}
+                            <iframe class="hextra-jupyter-isolated-output" sandbox srcdoc="{{ $htmlContent | transform.HTMLEscape | safeHTMLAttr }}" title="HTML output"></iframe>
+                          {{- else -}}
+                            <div class="hextra-jupyter-html not-prose">{{- $htmlContent | safeHTML -}}</div>
+                          {{- end -}}
                         {{- else if eq $mime "image/svg+xml" -}}
-                          {{- $isolatedContent := printf `<!doctype html><html><head>%s</head><body><div class="hextra-jupyter-svg" role="img" aria-label="SVG output">%s</div></body></html>` $isolatedOutputHead $content -}}
-                          {{- $isolatedContentDark := printf `<!doctype html><html class="dark"><head>%s</head><body><div class="hextra-jupyter-svg" role="img" aria-label="SVG output">%s</div></body></html>` $isolatedOutputHead $content -}}
-                          <iframe class="hextra-jupyter-isolated-output hextra-jupyter-isolated-output-light" sandbox srcdoc="{{ $isolatedContent }}" title="SVG output"></iframe>
-                          <iframe class="hextra-jupyter-isolated-output hextra-jupyter-isolated-output-dark" sandbox srcdoc="{{ $isolatedContentDark }}" title="SVG output"></iframe>
+                          {{- if $isolated -}}
+                            <iframe class="hextra-jupyter-isolated-output" sandbox srcdoc="{{ $content | transform.HTMLEscape | safeHTMLAttr }}" title="SVG output"></iframe>
+                          {{- else -}}
+                            <div class="hextra-jupyter-svg" role="img" aria-label="SVG output">{{- $content | safeHTML -}}</div>
+                          {{- end -}}
                         {{- else if eq $mime "image/png" -}}
                           <img src="data:image/png;base64,{{- $content -}}" alt="Output image" {{ $imageAttrs | safeHTMLAttr }} />
                         {{- else if eq $mime "image/jpeg" -}}
