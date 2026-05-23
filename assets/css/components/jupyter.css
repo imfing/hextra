@@ -25,7 +25,19 @@
 }
 
 .hextra-jupyter-isolated-output {
-  @apply hx:h-64 hx:w-full hx:rounded-md hx:border hx:border-gray-200 hx:bg-white hx:dark:border-neutral-800;
+  @apply hx:h-40 hx:w-full hx:bg-white;
+}
+
+.hextra-jupyter-isolated-output-dark {
+  display: none;
+}
+
+.dark .hextra-jupyter-isolated-output-light {
+  display: none;
+}
+
+.dark .hextra-jupyter-isolated-output-dark {
+  display: block;
 }
 
 .hextra-jupyter-notebook {
