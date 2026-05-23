@@ -42,6 +42,28 @@ Render Jupyter Notebook
 {{- define "jupyter.renderMarkdown" -}}
   {{- $page := .page -}}
   {{- $sourceContent := .sourceContent -}}
+  {{- with .attachments -}}
+    {{- $attachmentMimeOrder := slice "image/png" "image/jpeg" "image/gif" "image/webp" "image/svg+xml" -}}
+    {{- range $attachmentName, $bundle := . -}}
+      {{- $as := newScratch -}}
+      {{- $as.Set "done" false -}}
+      {{- range $mime := $attachmentMimeOrder -}}
+        {{- if not ($as.Get "done") -}}
+          {{- with index $bundle $mime -}}
+            {{- $payload := cond (reflect.IsSlice .) (delimit . "") . -}}
+            {{- with $payload -}}
+              {{- $as.Set "uri" (printf "data:%s;base64,%s" $mime .) -}}
+              {{- $as.Set "done" true -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- with $as.Get "uri" -}}
+        {{- $sourceContent = replace $sourceContent (printf "attachment:%s" $attachmentName) . -}}
+        {{- $sourceContent = replace $sourceContent (printf "attachment:%s" (replace $attachmentName " " "%20")) . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
   {{- $sourceContentTrimmed := strings.TrimSpace $sourceContent -}}
   {{- if findRE `(?s)^<([A-Za-z][A-Za-z0-9:-]*)(\s|>|/)` $sourceContentTrimmed -}}
     {{- $sourceContent | safeHTML -}}
@@ -62,7 +84,8 @@ Render Jupyter Notebook
       {{- end -}}
       {{- $ms.Add "content" (printf "%s\n" $line) -}}
     {{- end -}}
-    {{- $page.RenderString (dict "display" "block") ($ms.Get "content") -}}
+    {{- $rendered := $page.RenderString (dict "display" "block") ($ms.Get "content") -}}
+    {{- $rendered | safeHTML -}}
   {{- end -}}
 {{- end -}}
 
@@ -74,7 +97,9 @@ Render Jupyter Notebook
     {{- $jupyter := index $meta "jupyter" | default (dict) -}}
     {{- $hideCell := in $tags "hide-cell" -}}
     {{- $hideSource := or (index $jupyter "source_hidden") (in $tags "hide-input") -}}
-    {{- $hideOutputs := or (index $jupyter "outputs_hidden") (index $meta "collapsed") (in $tags "hide-output") -}}
+    {{- $hideOutputs := or (index $jupyter "outputs_hidden") (in $tags "hide-output") -}}
+    {{- $collapsed := index $meta "collapsed" -}}
+    {{- $scrolled := index $meta "scrolled" -}}
 
     {{- if not $hideCell -}}
     {{- if eq (index $cell "cell_type") "code" -}}
@@ -124,10 +149,21 @@ Render Jupyter Notebook
   <div class="hextra-jupyter-prompt-content">
 {{- end -}}
       <div class="hextra-jupyter-code-cell hextra-scrollbar">
+        {{- if $collapsed -}}
+        <details>
+          <summary aria-label="Toggle output"></summary>
+        {{- end -}}
           <div class="hextra-jupyter-code-cell-outputs-container">
-            <div class="hextra-jupyter-code-cell-outputs" tabindex="0">
+            {{- $outputsClass := "hextra-jupyter-code-cell-outputs" -}}
+            {{- if eq (printf "%v" $scrolled) "true" -}}
+              {{- $outputsClass = printf "%s hextra-jupyter-code-cell-outputs-scrolled" $outputsClass -}}
+            {{- else if eq (printf "%v" $scrolled) "false" -}}
+              {{- $outputsClass = printf "%s hextra-jupyter-code-cell-outputs-unscrolled" $outputsClass -}}
+            {{- end -}}
+            <div class="{{ $outputsClass }}" tabindex="0">
               {{- range $output := . -}}
                 {{- $outputType := index $output "output_type" -}}
+                {{- $outputMeta := index $output "metadata" | default (dict) -}}
 
                 {{- if or (eq $outputType "display_data") (eq $outputType "execute_result") -}}
                   {{- $mimeData := index $output "data" -}}
@@ -140,15 +176,32 @@ Render Jupyter Notebook
                       {{- with $val -}}
                         {{- $content := cond (reflect.IsSlice .) (delimit . "") . -}}
                         {{- with $content -}}
+                        {{- $mimeMeta := index $outputMeta $mime | default (dict) -}}
+                        {{- $imageAttrs := "" -}}
+                        {{- with index $mimeMeta "width" -}}
+                          {{- $imageAttrs = printf `%s width="%s"` $imageAttrs (printf "%v" . | transform.HTMLEscape) -}}
+                        {{- end -}}
+                        {{- with index $mimeMeta "height" -}}
+                          {{- $imageAttrs = printf `%s height="%s"` $imageAttrs (printf "%v" . | transform.HTMLEscape) -}}
+                        {{- end -}}
+                        {{- $isolated := index $outputMeta "isolated" -}}
                         {{- if eq $mime "text/html" -}}
                           {{- $htmlContent := replaceRE `(?s)<style[^>]*>.*?</style>` "" $content -}}
-                          <div class="hextra-jupyter-html not-prose">{{- $htmlContent | safeHTML -}}</div>
+                          {{- if $isolated -}}
+                            <iframe class="hextra-jupyter-isolated-output" sandbox srcdoc="{{ $htmlContent | transform.HTMLEscape | safeHTMLAttr }}" title="HTML output"></iframe>
+                          {{- else -}}
+                            <div class="hextra-jupyter-html not-prose">{{- $htmlContent | safeHTML -}}</div>
+                          {{- end -}}
                         {{- else if eq $mime "image/svg+xml" -}}
-                          <div class="hextra-jupyter-svg" role="img" aria-label="SVG output">{{- $content | safeHTML -}}</div>
+                          {{- if $isolated -}}
+                            <iframe class="hextra-jupyter-isolated-output" sandbox srcdoc="{{ $content | transform.HTMLEscape | safeHTMLAttr }}" title="SVG output"></iframe>
+                          {{- else -}}
+                            <div class="hextra-jupyter-svg" role="img" aria-label="SVG output">{{- $content | safeHTML -}}</div>
+                          {{- end -}}
                         {{- else if eq $mime "image/png" -}}
-                          <img src="data:image/png;base64,{{- $content -}}" alt="Output image" />
+                          <img src="data:image/png;base64,{{- $content -}}" alt="Output image" {{ $imageAttrs | safeHTMLAttr }} />
                         {{- else if eq $mime "image/jpeg" -}}
-                          <img src="data:image/jpeg;base64,{{- $content -}}" alt="Output image" />
+                          <img src="data:image/jpeg;base64,{{- $content -}}" alt="Output image" {{ $imageAttrs | safeHTMLAttr }} />
                         {{- else if eq $mime "text/markdown" -}}
                           {{- template "jupyter.renderMarkdown" (dict "page" $page "sourceContent" $content) -}}
                         {{- else if eq $mime "text/latex" -}}
@@ -180,6 +233,9 @@ Render Jupyter Notebook
               {{- end -}}
             </div>
           </div>
+        {{- if $collapsed -}}
+        </details>
+        {{- end -}}
       </div>
 {{- if $showPrompts -}}
   </div>
@@ -190,7 +246,8 @@ Render Jupyter Notebook
     {{- else if eq (index $cell "cell_type") "markdown" -}}
         {{- $source := index $cell "source" -}}
         {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}
-        {{- template "jupyter.renderMarkdown" (dict "page" $page "sourceContent" $sourceContent) -}}
+        {{- $attachments := index $cell "attachments" | default (dict) -}}
+        {{- template "jupyter.renderMarkdown" (dict "page" $page "sourceContent" $sourceContent "attachments" $attachments) -}}
     {{- else if eq (index $cell "cell_type") "raw" -}}
         {{- $source := index $cell "source" -}}
         {{- $sourceContent := (cond (reflect.IsSlice $source) (delimit $source "") $source) -}}

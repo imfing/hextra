@@ -88,7 +88,7 @@ You can display Jupyter-style `In [N]:`/`Out[N]:` execution count prompts by usi
 
 ## Supported Output Types
 
-{{< callout type="info" >}}The following notebook demonstrates all supported output types including error tracebacks, stderr streams, SVG, Markdown, LaTeX, JSON, raw cells, and cell visibility metadata.{{< /callout >}}
+{{< callout type="info" >}}The following notebook demonstrates all supported output types including error tracebacks, stderr streams, SVG, Markdown, LaTeX, JSON, raw cells, attachments, output metadata, and cell visibility metadata.{{< /callout >}}
 
 {{< jupyter "example-outputs.ipynb" >}}
 

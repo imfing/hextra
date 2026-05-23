@@ -13,10 +13,26 @@
         @apply hx:text-xs hx:overflow-auto hx:max-w-full;
       }
     }
+
+    .hextra-jupyter-code-cell-outputs-scrolled {
+      @apply hx:max-h-64;
+    }
+
+    .hextra-jupyter-code-cell-outputs-unscrolled {
+      @apply hx:max-h-none;
+    }
   }
 }
 
+.hextra-jupyter-isolated-output {
+  @apply hx:h-64 hx:w-full hx:rounded-md hx:border hx:border-gray-200 hx:bg-white hx:dark:border-neutral-800;
+}
+
 .hextra-jupyter-notebook {
+  :where(p > img[src^="data:image/"]):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    @apply hx:inline-block hx:align-middle;
+  }
+
   :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
     @apply hx:border-b hx:pb-1 hx:border-neutral-200/70 hx:contrast-more:border-neutral-400 hx:dark:border-primary-100/10 hx:contrast-more:dark:border-neutral-400;
   }
