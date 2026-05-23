@@ -233,7 +233,7 @@ Render Jupyter Notebook
                         {{- else if eq $mime "text/markdown" -}}
                           {{- template "jupyter.renderMarkdown" (dict "page" $page "sourceContent" $content) -}}
                         {{- else if eq $mime "text/latex" -}}
-                          <div class="hextra-jupyter-latex">{{- transform.ToMath $content (dict "displayMode" true) -}}</div>
+                          <div class="hextra-jupyter-latex" tabindex="0">{{- transform.ToMath $content (dict "displayMode" true) -}}</div>
                         {{- else if eq $mime "text/plain" -}}
                           <pre class="not-prose">{{- $content -}}</pre>
                         {{- else if eq $mime "application/json" -}}
