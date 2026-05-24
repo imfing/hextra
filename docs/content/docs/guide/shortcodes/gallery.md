@@ -171,7 +171,6 @@ By default, PhotoSwipe is loaded from the jsDelivr CDN. To use a self-hosted or 
 | `type`    | string | `grid`   | Layout type: `grid`, `mosaic`, `masonry`, or `carousel` |
 | `cols`    | number | `3`      | Number of columns (not used by `masonry`)               |
 | `gap`     | string | `0.5rem` | CSS gap between items                                   |
-| `id`      | string | auto     | Explicit DOM id; defaults to an ordinal-based value     |
 
 ### `gallery-item`
 

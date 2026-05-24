@@ -4,7 +4,6 @@
   @param {string} type   Layout type: grid (default) | mosaic | masonry | carousel
   @param {number} cols   Number of columns (default 3, ignored for masonry which is responsive)
   @param {string} gap    Gap between items (CSS length, default "0.5rem")
-  @param {string} id     Optional explicit id (defaults to the shortcode ordinal)
   */
 -}}
 
@@ -29,7 +28,7 @@
   {{- $gap = "0.5rem" -}}
 {{- end -}}
 
-{{- $id := .Get "id" | default (printf "hextra-gallery-%d" .Ordinal) -}}
+{{- $id := printf "hextra-gallery-%d" .Ordinal -}}
 {{- $trackId := printf "%s-track" $id -}}
 {{- $statusId := printf "%s-status" $id -}}
 

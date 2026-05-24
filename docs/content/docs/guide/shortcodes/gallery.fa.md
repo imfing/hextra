@@ -171,7 +171,6 @@ sidebar:
 | `type`  | string | `grid`   | نوع چیدمان: `grid`، `mosaic`، `masonry` یا `carousel`    |
 | `cols`  | number | `3`      | تعداد ستون‌ها (در `masonry` استفاده نمی‌شود)             |
 | `gap`   | string | `0.5rem` | فاصله CSS بین آیتم‌ها                                    |
-| `id`    | string | خودکار   | شناسه (id) صریح در DOM؛ پیش‌فرض بر اساس شماره ترتیبی است |
 
 ### `gallery-item`
 

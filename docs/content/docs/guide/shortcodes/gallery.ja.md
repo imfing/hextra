@@ -171,7 +171,6 @@ sidebar:
 | `type`     | string | `grid`     | レイアウトタイプ: `grid`、`mosaic`、`masonry`、または `carousel` |
 | `cols`     | number | `3`        | 列数（`masonry` では使用されません）                             |
 | `gap`      | string | `0.5rem`   | アイテム間の CSS gap                                             |
-| `id`       | string | 自動       | 明示的な DOM id。デフォルトは連番ベースの値                      |
 
 ### `gallery-item`
 

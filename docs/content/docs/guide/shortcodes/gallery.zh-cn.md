@@ -171,7 +171,6 @@ sidebar:
 | `type` | string | `grid`   | 布局类型：`grid`、`mosaic`、`masonry` 或 `carousel` |
 | `cols` | number | `3`      | 列数（`masonry` 不使用此参数）                      |
 | `gap`  | string | `0.5rem` | 图片之间的 CSS 间距                                 |
-| `id`   | string | 自动     | 显式指定的 DOM id，默认基于序号生成                 |
 
 ### `gallery-item`
 
