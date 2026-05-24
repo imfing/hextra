@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Închide bannerul"
+imageGallery: "Galerie de imagini"
 menu: "Meniu"
 mermaidDiagram: "Diagramă"
+nextImage: "Imaginea următoare"
 pdfViewer: "Vizualizator PDF"
 permalinkLabel: "Link permanent către această secțiune"
 playbackTime: "Timp de redare"
+previousImage: "Imaginea anterioară"
 searchResults: "Rezultatele căutării"
 skipToContent: "Salt la conținut"
 tableOfContents: "Cuprins"

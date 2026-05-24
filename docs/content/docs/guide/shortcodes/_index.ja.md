@@ -27,4 +27,5 @@ Hugo と Hextra が提供する追加のショートコード:
   {{< card link="jupyter" title="Jupyter Notebook" icon="jupyter" >}}
   {{< card link="others" title="Others" icon="view-grid" >}}
   {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
+  {{< card link="gallery" title="画像ギャラリー" icon="photograph" >}}
 {{< /cards >}}

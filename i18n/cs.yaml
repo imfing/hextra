@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Zavřít banner"
+imageGallery: "Galerie obrázků"
 menu: "Menu"
 mermaidDiagram: "Diagram"
+nextImage: "Další obrázek"
 pdfViewer: "Prohlížeč PDF"
 permalinkLabel: "Trvalý odkaz na tuto sekci"
 playbackTime: "Doba přehrávání"
+previousImage: "Předchozí obrázek"
 searchResults: "Výsledky vyhledávání"
 skipToContent: "Přejít na obsah"
 tableOfContents: "Obsah"

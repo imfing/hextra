@@ -1,0 +1,244 @@
+{{- /* Gallery (PhotoSwipe v5) */ -}}
+
+{{- $galleryBase := "" -}}
+{{- $useDefaultCdn := true -}}
+{{- $hasGalleryBase := false -}}
+{{- with site.Params.gallery.base -}}
+  {{- $galleryBase = . -}}
+  {{- $useDefaultCdn = false -}}
+  {{- $hasGalleryBase = true -}}
+{{- end -}}
+
+{{- $galleryCoreJsAsset := "" -}}
+{{- with site.Params.gallery.js -}}
+  {{- $galleryCoreJsAsset = . -}}
+{{- end -}}
+
+{{- $galleryLightboxJsAsset := "" -}}
+{{- with site.Params.gallery.lightboxJs -}}
+  {{- $galleryLightboxJsAsset = . -}}
+{{- end -}}
+
+{{- $galleryCssAsset := "" -}}
+{{- with site.Params.gallery.css -}}
+  {{- $galleryCssAsset = . -}}
+{{- end -}}
+
+{{- /* If JS is set without base, use local asset loading for the configured modules. */ -}}
+{{- if and $useDefaultCdn (or (ne $galleryCoreJsAsset "") (ne $galleryLightboxJsAsset "")) -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- if $useDefaultCdn -}}
+  {{- $galleryBase = "https://cdn.jsdelivr.net/npm/photoswipe@5/dist" -}}
+{{- end -}}
+
+{{- $isRemoteBase := or (strings.HasPrefix $galleryBase "http://") (strings.HasPrefix $galleryBase "https://") -}}
+{{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
+
+{{- $galleryCssLink := "" -}}
+{{- if and $galleryCssAsset (or (not $hasGalleryBase) (not $isRemoteBase)) -}}
+  {{- with resources.Get $galleryCssAsset -}}
+    {{- $css := . | fingerprint -}}
+    {{- $galleryCssLink = printf "<link rel=\"stylesheet\" href=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\" />" $css.RelPermalink $css.Data.Integrity -}}
+  {{- else -}}
+    {{- errorf "PhotoSwipe css asset not found at %q" $galleryCssAsset -}}
+  {{- end -}}
+{{- else if $isRemoteBase -}}
+  {{- $cssPath := cond (ne $galleryCssAsset "") $galleryCssAsset "photoswipe.css" -}}
+  {{- $galleryCssUrl := urls.JoinPath $galleryBase $cssPath -}}
+  {{- with try (resources.GetRemote $galleryCssUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve PhotoSwipe css file from %s. Reason: %s." $galleryCssUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy "css/photoswipe.css" . -}}
+        {{- $css := . | fingerprint -}}
+        {{- $galleryCssLink = printf "<link rel=\"stylesheet\" href=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\" />" $css.RelPermalink $css.Data.Integrity -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $galleryCssAsset -}}
+  {{- with resources.Get $galleryCssAsset -}}
+    {{- $css := . | fingerprint -}}
+    {{- $galleryCssLink = printf "<link rel=\"stylesheet\" href=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\" />" $css.RelPermalink $css.Data.Integrity -}}
+  {{- else -}}
+    {{- errorf "PhotoSwipe css asset not found at %q" $galleryCssAsset -}}
+  {{- end -}}
+{{- end -}}
+{{- $galleryCssLink | safeHTML -}}
+
+{{- /* JS: PhotoSwipe v5 is ESM-only. We need two files: lightbox and core. */ -}}
+{{- $lightboxUrl := "" -}}
+{{- $coreUrl := "" -}}
+
+{{- if $isRemoteBase -}}
+  {{- $lightboxPath := cond (ne $galleryLightboxJsAsset "") $galleryLightboxJsAsset (printf "photoswipe-lightbox.esm%s.js" $minSuffix) -}}
+  {{- $corePath := cond (ne $galleryCoreJsAsset "") $galleryCoreJsAsset (printf "photoswipe.esm%s.js" $minSuffix) -}}
+
+  {{- $lightboxRemote := urls.JoinPath $galleryBase $lightboxPath -}}
+  {{- with try (resources.GetRemote $lightboxRemote) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve PhotoSwipe lightbox js from %s. Reason: %s." $lightboxRemote . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy (printf "js/photoswipe-lightbox.esm%s.js" $minSuffix) . -}}
+        {{- $lightboxUrl = (. | fingerprint).RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $coreRemote := urls.JoinPath $galleryBase $corePath -}}
+  {{- with try (resources.GetRemote $coreRemote) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve PhotoSwipe core js from %s. Reason: %s." $coreRemote . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy (printf "js/photoswipe.esm%s.js" $minSuffix) . -}}
+        {{- $coreUrl = (. | fingerprint).RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- if $galleryLightboxJsAsset -}}
+    {{- with resources.Get $galleryLightboxJsAsset -}}
+      {{- $lightboxUrl = (. | fingerprint).RelPermalink -}}
+    {{- else -}}
+      {{- errorf "PhotoSwipe lightbox js asset not found at %q" $galleryLightboxJsAsset -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $galleryCoreJsAsset -}}
+    {{- with resources.Get $galleryCoreJsAsset -}}
+      {{- $coreUrl = (. | fingerprint).RelPermalink -}}
+    {{- else -}}
+      {{- errorf "PhotoSwipe core js asset not found at %q" $galleryCoreJsAsset -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if or (not $lightboxUrl) (not $coreUrl) -}}
+  {{- errorf "PhotoSwipe JS configuration is incomplete. Set both params.gallery.js and params.gallery.lightboxJs, set params.gallery.base to an absolute URL, or omit JS overrides to use the default CDN." -}}
+{{- end -}}
+
+{{- if and $lightboxUrl $coreUrl -}}
+<script type="module">
+  import PhotoSwipeLightbox from {{ $lightboxUrl | jsonify | safeJS }};
+
+  const initLightboxes = () => {
+    document.querySelectorAll("[data-pswp-gallery]").forEach((el) => {
+      if (el.dataset.pswpInited === "1") return;
+      const lightbox = new PhotoSwipeLightbox({
+        gallery: "#" + el.id,
+        children: "a[data-pswp-width][data-pswp-height]",
+        pswpModule: () => import({{ $coreUrl | jsonify | safeJS }}),
+      });
+      lightbox.on("uiRegister", () => {
+        lightbox.pswp.ui.registerElement({
+          name: "caption",
+          order: 9,
+          isButton: false,
+          appendTo: "root",
+          html: "",
+          onInit: (captionEl, pswp) => {
+            pswp.on("change", () => {
+              const a = pswp.currSlide?.data?.element;
+              const source = a?.closest("figure")?.querySelector(".hextra-gallery__caption");
+              if (source && source.textContent.trim()) {
+                captionEl.innerHTML = source.innerHTML;
+                captionEl.style.display = "";
+                return;
+              }
+              const text = a?.querySelector("img")?.getAttribute("alt") || "";
+              captionEl.textContent = text;
+              captionEl.style.display = text ? "" : "none";
+            });
+          },
+        });
+      });
+      lightbox.init();
+      el.dataset.pswpInited = "1";
+    });
+  };
+
+  const initCarousels = () => {
+    document.querySelectorAll(".hextra-gallery--carousel").forEach((el) => {
+      if (el.dataset.carouselInited === "1") return;
+      const track = el.querySelector(".hextra-gallery__track");
+      const prev = el.querySelector("[data-gallery-prev]");
+      const next = el.querySelector("[data-gallery-next]");
+      const status = el.querySelector("[data-gallery-status]");
+      if (!track) return;
+      const items = Array.from(track.querySelectorAll(".hextra-gallery__item"));
+
+      const slideWidth = () => {
+        const first = track.querySelector(".hextra-gallery__item");
+        if (!first) return track.clientWidth;
+        const style = window.getComputedStyle(track);
+        const gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+        return first.getBoundingClientRect().width + gap;
+      };
+
+      const scrollByOne = (dir) => {
+        track.scrollBy({ left: dir * slideWidth(), behavior: "smooth" });
+      };
+
+      let statusTimer;
+      const updateStatus = () => {
+        if (!status || !items.length) return;
+        const trackRect = track.getBoundingClientRect();
+        const isRTL = document.documentElement.dir === "rtl";
+        const refEdge = isRTL ? trackRect.right : trackRect.left;
+        const active = items.reduce(
+          (best, item, index) => {
+            const itemRect = item.getBoundingClientRect();
+            const itemEdge = isRTL ? itemRect.right : itemRect.left;
+            const distance = Math.abs(itemEdge - refEdge);
+            return distance < best.distance ? { index, distance } : best;
+          },
+          { index: 0, distance: Infinity }
+        );
+        status.textContent = `Image ${active.index + 1} of ${items.length}`;
+      };
+
+      const scheduleStatusUpdate = () => {
+        window.clearTimeout(statusTimer);
+        statusTimer = window.setTimeout(updateStatus, 120);
+      };
+
+      if (prev) prev.addEventListener("click", () => {
+        scrollByOne(-1);
+        scheduleStatusUpdate();
+      });
+      if (next) next.addEventListener("click", () => {
+        scrollByOne(1);
+        scheduleStatusUpdate();
+      });
+
+      track.addEventListener("keydown", (e) => {
+        const isRTL = document.documentElement.dir === "rtl";
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          scrollByOne(isRTL ? -1 : 1);
+          scheduleStatusUpdate();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          scrollByOne(isRTL ? 1 : -1);
+          scheduleStatusUpdate();
+        }
+      });
+
+      track.addEventListener("scroll", scheduleStatusUpdate, { passive: true });
+      updateStatus();
+
+      el.dataset.carouselInited = "1";
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initLightboxes();
+      initCarousels();
+    });
+  } else {
+    initLightboxes();
+    initCarousels();
+  }
+</script>
+{{- end -}}

@@ -66,18 +66,18 @@ menu:
    ```
 5. تبديل السمة
    ```yaml
-    - name: Theme Toggle
-      params:
-        type: theme-toggle
-        label: true # optional, default is false
+   - name: Theme Toggle
+     params:
+       type: theme-toggle
+       label: true # optional, default is false
    ```
 6. مُبدِّل اللغة
    ```yaml
-    - name: مُبدِّل اللغة
-      params:
-        type: language-switch
-        label: true # optional, default is false
-        icon: "globe-alt" # optional, default is "translate"
+   - name: مُبدِّل اللغة
+     params:
+       type: language-switch
+       label: true # optional, default is false
+       icon: "globe-alt" # optional, default is "translate"
    ```
 
 این آیتم‌های منو را می‌توان با تنظیم پارامتر `weight` مرتب کرد.
@@ -128,10 +128,10 @@ params:
 ```yaml {filename="hugo.yaml"}
 params:
   page:
-    displayPagination: false  # برای صفحات مستندات
+    displayPagination: false # برای صفحات مستندات
   blog:
     article:
-      displayPagination: false  # برای مقالات وبلاگ
+      displayPagination: false # برای مقالات وبلاگ
 ```
 
 ## نوار کناری
@@ -373,6 +373,11 @@ params:
     js: "js/vendor/asciinema-player.min.js"
     css: "css/vendor/asciinema-player.css"
 
+  gallery:
+    js: "js/vendor/photoswipe.esm.min.js"
+    lightboxJs: "js/vendor/photoswipe-lightbox.esm.min.js"
+    css: "css/vendor/photoswipe.css"
+
   math:
     engine: katex
     katex:
@@ -402,6 +407,9 @@ params:
 
   asciinema:
     base: "https://mirror.example.com/asciinema-player/dist/bundle"
+
+  gallery:
+    base: "https://mirror.example.com/photoswipe/dist"
 
   math:
     engine: katex
@@ -496,6 +504,7 @@ params:
 ```
 
 هر لینک می‌تواند شامل موارد زیر باشد:
+
 - `name` - متن نمایشی لینک
 - `icon` - نام آیکون اختیاری (به [آیکون‌ها]({{% relref "docs/guide/shortcodes/icon" %}}) مراجعه کنید)
 - `url` - آدرس با جایگزین‌های اختیاری
@@ -626,4 +635,10 @@ llms: false
 سایر ویژگی‌های Open Graph می‌توانند فقط یک مقدار داشته باشند.
 به عنوان مثال، این صفحه یک تگ `og:image` (که تصویری برای پیش‌نمایش در اشتراک‌گذاری‌های اجتماعی پیکربندی می‌کند) و یک تگ `og:audio` دارد.
 
-```yaml {filename
+```yaml {filename="content/docs/guide/configuration.md"}
+title: "پیکربندی"
+params:
+  images:
+    - "img/config-image.jpg"
+  audio: "config-talk.mp3"
+```
