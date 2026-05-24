@@ -34,8 +34,10 @@
   {{- end }}
 
   <div class="hextra-alert-content">
-    <div class="hextra-alert-content-inner">
-      {{- $content -}}
-    </div>
+    {{- with $alertSign -}}
+      <div class="hextra-alert-content-inner">{{ $content }}</div>
+    {{- else -}}
+      {{ $content }}
+    {{- end -}}
   </div>
 </div>

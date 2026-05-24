@@ -52,10 +52,6 @@
   @apply hx:w-full hx:min-w-0 hx:leading-7;
 }
 
-.hextra-alert-content-inner {
-  @apply hx:mt-6 hx:leading-7 hx:first:mt-0;
-}
-
 .hextra-alert[data-alert-fold] {
   & > .hextra-alert-content {
     @apply hx:overflow-hidden;
