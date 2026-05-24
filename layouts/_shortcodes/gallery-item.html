@@ -31,7 +31,7 @@
 {{- $thumbWidth := 0 -}}
 {{- $thumbHeight := 0 -}}
 
-{{- $isRemote := strings.Contains $src "://" -}}
+{{- $isRemote := or (strings.Contains $src "://") (strings.HasPrefix $src "//") (strings.HasPrefix $src "data:") -}}
 
 {{- if $isRemote -}}
   {{- with $thumb }}{{ $thumbURL = . }}{{ end -}}
@@ -46,7 +46,23 @@
         {{- $width = .Width -}}
         {{- $height = .Height -}}
       {{- end -}}
-      {{- $thumbURL = .RelPermalink -}}
+      {{- with $thumb -}}
+        {{- with or ($.Page.Resources.Get .) (resources.Get .) -}}
+          {{- $thumbURL = .RelPermalink -}}
+          {{- if ne .MediaType.SubType "svg" -}}
+            {{- $thumbWidth = .Width -}}
+            {{- $thumbHeight = .Height -}}
+          {{- end -}}
+        {{- else -}}
+          {{- $thumbURL = . -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $thumbURL = .RelPermalink -}}
+        {{- if not $isSVG -}}
+          {{- $thumbWidth = $width -}}
+          {{- $thumbHeight = $height -}}
+        {{- end -}}
+      {{- end -}}
     {{- else -}}
       {{- $width = .Width -}}
       {{- $height = .Height -}}
@@ -108,18 +124,22 @@
 {{- $external := false -}}
 {{- $href := $full -}}
 {{- if $link -}}
-  {{- $external = (urls.Parse $link).Scheme -}}
+  {{- $scheme := (urls.Parse $link).Scheme -}}
+  {{- $external = or (eq $scheme "http") (eq $scheme "https") -}}
   {{- $href = cond (strings.HasPrefix $link "/") ($link | relURL) $link -}}
+{{- end -}}
+
+{{- $linkClass := "hextra-gallery__link" -}}
+{{- if $link -}}
+  {{- $linkClass = printf "%s hextra-gallery__link--linked" $linkClass -}}
 {{- end -}}
 
 <figure class="hextra-gallery__item{{ $spanClass }}">
   <a
-    class="hextra-gallery__link"
+    class="{{ $linkClass }}"
     href="{{ $href | safeURL }}"
     {{- if $external }} target="_blank" rel="noreferrer noopener"{{ end -}}
     {{- if and (not $link) (gt $width 0) (gt $height 0) }} data-pswp-width="{{ $width }}" data-pswp-height="{{ $height }}"{{ end -}}
-    {{- with $alt }} aria-label="{{ . }}"{{ end -}}
-    {{- if not $link }}{{ with $caption }} data-pswp-caption="{{ . }}"{{ end }}{{ end -}}
   >
     <img
       src="{{ $thumbURL | safeURL }}"

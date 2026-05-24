@@ -2,9 +2,11 @@
 
 {{- $galleryBase := "" -}}
 {{- $useDefaultCdn := true -}}
+{{- $hasGalleryBase := false -}}
 {{- with site.Params.gallery.base -}}
   {{- $galleryBase = . -}}
   {{- $useDefaultCdn = false -}}
+  {{- $hasGalleryBase = true -}}
 {{- end -}}
 
 {{- $galleryCoreJsAsset := "" -}}
@@ -22,8 +24,8 @@
   {{- $galleryCssAsset = . -}}
 {{- end -}}
 
-{{- /* If only js/css is set without base, use local asset loading. */ -}}
-{{- if and $useDefaultCdn (or (ne $galleryCoreJsAsset "") (ne $galleryLightboxJsAsset "") (ne $galleryCssAsset "")) -}}
+{{- /* If JS is set without base, use local asset loading for the configured modules. */ -}}
+{{- if and $useDefaultCdn (or (ne $galleryCoreJsAsset "") (ne $galleryLightboxJsAsset "")) -}}
   {{- $useDefaultCdn = false -}}
 {{- end -}}
 
@@ -35,7 +37,14 @@
 {{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
 
 {{- $galleryCssLink := "" -}}
-{{- if $isRemoteBase -}}
+{{- if and $galleryCssAsset (or (not $hasGalleryBase) (not $isRemoteBase)) -}}
+  {{- with resources.Get $galleryCssAsset -}}
+    {{- $css := . | fingerprint -}}
+    {{- $galleryCssLink = printf "<link rel=\"stylesheet\" href=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\" />" $css.RelPermalink $css.Data.Integrity -}}
+  {{- else -}}
+    {{- errorf "PhotoSwipe css asset not found at %q" $galleryCssAsset -}}
+  {{- end -}}
+{{- else if $isRemoteBase -}}
   {{- $cssPath := cond (ne $galleryCssAsset "") $galleryCssAsset "photoswipe.css" -}}
   {{- $galleryCssUrl := urls.JoinPath $galleryBase $cssPath -}}
   {{- with try (resources.GetRemote $galleryCssUrl) -}}
@@ -104,6 +113,10 @@
   {{- end -}}
 {{- end -}}
 
+{{- if or (not $lightboxUrl) (not $coreUrl) -}}
+  {{- errorf "PhotoSwipe JS configuration is incomplete. Set both params.gallery.js and params.gallery.lightboxJs, set params.gallery.base to an absolute URL, or omit JS overrides to use the default CDN." -}}
+{{- end -}}
+
 {{- if and $lightboxUrl $coreUrl -}}
 <script type="module">
   import PhotoSwipeLightbox from {{ $lightboxUrl | jsonify | safeJS }};
@@ -126,7 +139,13 @@
           onInit: (captionEl, pswp) => {
             pswp.on("change", () => {
               const a = pswp.currSlide?.data?.element;
-              const text = a ? (a.getAttribute("data-pswp-caption") || a.getAttribute("aria-label") || "") : "";
+              const source = a?.closest("figure")?.querySelector(".hextra-gallery__caption");
+              if (source && source.textContent.trim()) {
+                captionEl.innerHTML = source.innerHTML;
+                captionEl.style.display = "";
+                return;
+              }
+              const text = a?.querySelector("img")?.getAttribute("alt") || "";
               captionEl.textContent = text;
               captionEl.style.display = text ? "" : "none";
             });
@@ -144,7 +163,9 @@
       const track = el.querySelector(".hextra-gallery__track");
       const prev = el.querySelector("[data-gallery-prev]");
       const next = el.querySelector("[data-gallery-next]");
+      const status = el.querySelector("[data-gallery-status]");
       if (!track) return;
+      const items = Array.from(track.querySelectorAll(".hextra-gallery__item"));
 
       const slideWidth = () => {
         const first = track.querySelector(".hextra-gallery__item");
@@ -158,19 +179,53 @@
         track.scrollBy({ left: dir * slideWidth(), behavior: "smooth" });
       };
 
-      if (prev) prev.addEventListener("click", () => scrollByOne(-1));
-      if (next) next.addEventListener("click", () => scrollByOne(1));
+      let statusTimer;
+      const updateStatus = () => {
+        if (!status || !items.length) return;
+        const trackRect = track.getBoundingClientRect();
+        const isRTL = document.documentElement.dir === "rtl";
+        const refEdge = isRTL ? trackRect.right : trackRect.left;
+        const active = items.reduce(
+          (best, item, index) => {
+            const itemRect = item.getBoundingClientRect();
+            const itemEdge = isRTL ? itemRect.right : itemRect.left;
+            const distance = Math.abs(itemEdge - refEdge);
+            return distance < best.distance ? { index, distance } : best;
+          },
+          { index: 0, distance: Infinity }
+        );
+        status.textContent = `Image ${active.index + 1} of ${items.length}`;
+      };
+
+      const scheduleStatusUpdate = () => {
+        window.clearTimeout(statusTimer);
+        statusTimer = window.setTimeout(updateStatus, 120);
+      };
+
+      if (prev) prev.addEventListener("click", () => {
+        scrollByOne(-1);
+        scheduleStatusUpdate();
+      });
+      if (next) next.addEventListener("click", () => {
+        scrollByOne(1);
+        scheduleStatusUpdate();
+      });
 
       track.addEventListener("keydown", (e) => {
         const isRTL = document.documentElement.dir === "rtl";
         if (e.key === "ArrowRight") {
           e.preventDefault();
           scrollByOne(isRTL ? -1 : 1);
+          scheduleStatusUpdate();
         } else if (e.key === "ArrowLeft") {
           e.preventDefault();
           scrollByOne(isRTL ? 1 : -1);
+          scheduleStatusUpdate();
         }
       });
+
+      track.addEventListener("scroll", scheduleStatusUpdate, { passive: true });
+      updateStatus();
 
       el.dataset.carouselInited = "1";
     });

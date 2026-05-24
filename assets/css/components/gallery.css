@@ -12,6 +12,10 @@
   @apply hx:block hx:h-full hx:w-full hx:cursor-zoom-in hx:outline-none;
 }
 
+.hextra-gallery__link--linked {
+  @apply hx:cursor-pointer;
+}
+
 .hextra-gallery__link:focus-visible {
   @apply hx:outline-2 hx:outline-offset-2 hx:outline-primary-500;
 }
@@ -69,15 +73,15 @@
   height: 100%;
 }
 
-.hextra-gallery__item--wide {
+.hextra-gallery--mosaic .hextra-gallery__item--wide {
   grid-column: span 2;
 }
 
-.hextra-gallery__item--tall {
+.hextra-gallery--mosaic .hextra-gallery__item--tall {
   grid-row: span 2;
 }
 
-.hextra-gallery__item--large {
+.hextra-gallery--mosaic .hextra-gallery__item--large {
   grid-column: span 2;
   grid-row: span 2;
 }
@@ -86,8 +90,8 @@
   .hextra-gallery--mosaic {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .hextra-gallery__item--wide,
-  .hextra-gallery__item--large {
+  .hextra-gallery--mosaic .hextra-gallery__item--wide,
+  .hextra-gallery--mosaic .hextra-gallery__item--large {
     grid-column: span 2;
   }
 }
@@ -96,12 +100,12 @@
   .hextra-gallery--mosaic {
     grid-template-columns: 1fr;
   }
-  .hextra-gallery__item--wide,
-  .hextra-gallery__item--large {
+  .hextra-gallery--mosaic .hextra-gallery__item--wide,
+  .hextra-gallery--mosaic .hextra-gallery__item--large {
     grid-column: span 1;
   }
-  .hextra-gallery__item--tall,
-  .hextra-gallery__item--large {
+  .hextra-gallery--mosaic .hextra-gallery__item--tall,
+  .hextra-gallery--mosaic .hextra-gallery__item--large {
     grid-row: span 1;
   }
 }
@@ -144,7 +148,6 @@
   gap: var(--hextra-gallery-gap);
   @apply hx:overflow-x-auto hx:scroll-smooth hx:snap-x hx:snap-mandatory hx:pb-1;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
 }
 
 .hextra-gallery__track:focus-visible {
@@ -171,7 +174,7 @@
 
 .hextra-gallery__nav {
   @apply hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:inline-flex hx:items-center hx:justify-center;
-  @apply hx:w-9 hx:h-9 hx:rounded-full hx:cursor-pointer hx:shadow;
+  @apply hx:z-10 hx:w-9 hx:h-9 hx:rounded-full hx:cursor-pointer hx:shadow;
   @apply hx:border hx:border-black/10 hx:bg-white/90 hx:text-gray-800;
   @apply hx:transition-colors hx:duration-200 hx:hover:bg-white;
   @apply hx:dark:border-white/10 hx:dark:bg-neutral-800/90 hx:dark:text-gray-200 hx:dark:hover:bg-neutral-800;

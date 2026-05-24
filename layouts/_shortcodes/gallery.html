@@ -15,9 +15,23 @@
   {{- $type = "grid" -}}
 {{- end -}}
 
-{{- $cols := .Get "cols" | default 3 -}}
+{{- $cols := .Get "cols" | default "3" -}}
+{{- $cols = printf "%v" $cols -}}
+{{- if not (findRE `^[1-9][0-9]*$` $cols) -}}
+  {{- warnf "gallery: invalid cols value %q, falling back to 3" $cols -}}
+  {{- $cols = "3" -}}
+{{- end -}}
+
 {{- $gap := .Get "gap" | default "0.5rem" -}}
+{{- $gap = printf "%v" $gap -}}
+{{- if not (findRE `^(0|([0-9]+|[0-9]*\.[0-9]+)(px|rem|em|ch|ex|vw|vh|vmin|vmax|%))$` $gap) -}}
+  {{- warnf "gallery: invalid gap value %q, falling back to 0.5rem" $gap -}}
+  {{- $gap = "0.5rem" -}}
+{{- end -}}
+
 {{- $id := .Get "id" | default (printf "hextra-gallery-%d" .Ordinal) -}}
+{{- $trackId := printf "%s-track" $id -}}
+{{- $statusId := printf "%s-status" $id -}}
 
 {{- .Page.Store.Set "hasGallery" true -}}
 
@@ -34,19 +48,20 @@
   {{- end }}
 >
   {{- if eq $type "carousel" -}}
-    <div class="hextra-gallery__track" tabindex="0" aria-live="polite">
-      {{- .Inner -}}
-    </div>
-    <button type="button" class="hextra-gallery__nav hextra-gallery__nav--prev" data-gallery-prev aria-label="{{ (T "previousImage") | default "Previous image" }}" aria-controls="{{ $id }}">
+    <button type="button" class="hextra-gallery__nav hextra-gallery__nav--prev" data-gallery-prev aria-label="{{ (T "previousImage") | default "Previous image" }}" aria-controls="{{ $trackId }}">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="20" height="20">
         <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6" />
       </svg>
     </button>
-    <button type="button" class="hextra-gallery__nav hextra-gallery__nav--next" data-gallery-next aria-label="{{ (T "nextImage") | default "Next image" }}" aria-controls="{{ $id }}">
+    <button type="button" class="hextra-gallery__nav hextra-gallery__nav--next" data-gallery-next aria-label="{{ (T "nextImage") | default "Next image" }}" aria-controls="{{ $trackId }}">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="20" height="20">
         <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6" />
       </svg>
     </button>
+    <div id="{{ $trackId }}" class="hextra-gallery__track hextra-scrollbar" tabindex="0" aria-describedby="{{ $statusId }}">
+      {{- .Inner -}}
+    </div>
+    <div id="{{ $statusId }}" class="hx:sr-only" aria-live="polite" role="status" data-gallery-status></div>
   {{- else -}}
     {{- .Inner -}}
   {{- end -}}
