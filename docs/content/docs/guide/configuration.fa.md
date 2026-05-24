@@ -635,6 +635,10 @@ llms: false
 سایر ویژگی‌های Open Graph می‌توانند فقط یک مقدار داشته باشند.
 به عنوان مثال، این صفحه یک تگ `og:image` (که تصویری برای پیش‌نمایش در اشتراک‌گذاری‌های اجتماعی پیکربندی می‌کند) و یک تگ `og:audio` دارد.
 
-```yaml {filename
-
+```yaml {filename="content/docs/guide/configuration.md"}
+title: "پیکربندی"
+params:
+  images:
+    - "img/config-image.jpg"
+  audio: "config-talk.mp3"
 ```
