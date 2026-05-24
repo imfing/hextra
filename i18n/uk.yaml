@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Закрити банер"
+imageGallery: "Галерея зображень"
 menu: "Меню"
 mermaidDiagram: "Діаграма"
+nextImage: "Наступне зображення"
 pdfViewer: "Перегляд PDF"
 permalinkLabel: "Постійне посилання на цей розділ"
 playbackTime: "Час відтворення"
+previousImage: "Попереднє зображення"
 searchResults: "Результати пошуку"
 skipToContent: "Перейти до вмісту"
 tableOfContents: "Зміст"

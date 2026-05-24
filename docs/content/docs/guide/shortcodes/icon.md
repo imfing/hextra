@@ -9,7 +9,7 @@ To use this shortcode inline, inline shortcode needs to be enabled in the config
 enableInlineShortcodes: true
 ```
 
-List of available icons can be found in [`data/icons.yaml`](https://github.com/imfing/hextra/blob/main/data/icons.yaml).
+Built-in icons are listed in [`data/icons.yaml`](https://github.com/imfing/hextra/blob/main/data/icons.yaml).
 
 <!--more-->
 
@@ -46,9 +46,29 @@ It then can be used in the shortcode like this:
 
 Tip: [Iconify Design](https://iconify.design/) is a great place to find SVG icons for your site.
 
+### Remote icon packs
+
+Remote icons can be loaded on demand by using a provider prefix. Hextra supports these providers:
+
+| Provider                                 | Example                           | Icon                        |
+| ---------------------------------------- | --------------------------------- | --------------------------- |
+| [Lucide](https://lucide.dev/icons/)      | `{{</* icon "lucide:house" */>}}` | {{< icon "lucide:house" >}} |
+| [Tabler Icons](https://tabler.io/icons)  | `{{</* icon "tabler:user" */>}}`  | {{< icon "tabler:user" >}}  |
+| [Simple Icons](https://simpleicons.org/) | `{{</* icon "simple:hugo" */>}}`  | {{< icon "simple:hugo" >}}  |
+
+Remote icons are fetched at build time. The default providers are pinned to major package versions and loaded from these CDN URLs:
+
+```yaml
+lucide: "https://unpkg.com/lucide-static@1/icons/%s.svg"
+tabler: "https://unpkg.com/@tabler/icons@3/icons/outline/%s.svg"
+simple: "https://cdn.jsdelivr.net/npm/simple-icons@16/icons/%s.svg"
+```
+
+Remote icon names work anywhere Hextra accepts an icon name, including cards, tabs, badges, callouts, and navbar menu items.
+
 ## Options
 
 | Name         | Description                 |
-|--------------|-----------------------------|
+| ------------ | --------------------------- |
 | `name`       | Icon name                   |
 | `attributes` | The attributes of the icon. |

@@ -80,7 +80,7 @@
   {{- $useMainMenu := and (eq $level 0) $toc -}}
   {{- $mainMenuEntries := slice -}}
 
-  {{- $items := slice -}}
+  {{- $items := where (union .context.RegularPages .context.Sections) "Params.sidebar.exclude" "!=" true -}}
   {{- if $useMainMenu -}}
     {{- range $menuItem := site.Menus.main -}}
       {{- $menuType := $menuItem.Params.type | default "" -}}
@@ -156,18 +156,14 @@
         {{- $mainMenuEntries = $mainMenuEntries | append (dict "type" "url" "link" $link "title" $menuTitle) -}}
       {{- end -}}
     {{- end -}}
-  {{- else -}}
-    {{- $items = where (union .context.RegularPages .context.Sections) "Params.sidebar.exclude" "!=" true -}}
   {{- end -}}
 
-  {{- $hasItems := gt (len $items) 0 -}}
-  {{- if $useMainMenu -}}
-    {{- $hasItems = gt (len $mainMenuEntries) 0 -}}
-  {{- end -}}
+  {{- $useMainMenuEntries := and $useMainMenu (gt (len $mainMenuEntries) 0) -}}
+  {{- $hasItems := or (gt (len $items) 0) $useMainMenuEntries -}}
 
   {{- if $hasItems -}}
     {{- if eq $level 0 -}}
-      {{- if $useMainMenu -}}
+      {{- if $useMainMenuEntries -}}
         {{- /* Mixed list: page entries render trees; url entries render leaf links. */ -}}
         {{- range $entry := $mainMenuEntries -}}
           {{- if eq (index $entry "type") "page" -}}

@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Fechar banner"
+imageGallery: "Galeria de imagens"
 menu: "Menu"
 mermaidDiagram: "Diagrama"
+nextImage: "Próxima imagem"
 pdfViewer: "Visualizador de PDF"
 permalinkLabel: "Link permanente para esta secção"
 playbackTime: "Tempo de reprodução"
+previousImage: "Imagem anterior"
 searchResults: "Resultados da pesquisa"
 skipToContent: "Saltar para o conteúdo"
 tableOfContents: "Índice"

@@ -37,7 +37,7 @@ title: صفحه من
 math: true
 ---
 
-{{%/* jupyter "notebook.ipynb" */%}}
+{{</* jupyter "notebook.ipynb" */>}}
 ```
 
 به‌عنوان جایگزین، می‌توانید از ویژگی [بسته‌های صفحه][page-bundles] هوگو استفاده کنید تا Jupyter Notebookها را همراه با فایل Markdown سازماندهی کنید.
@@ -59,7 +59,7 @@ title: صفحه من
 math: true
 ---
 
-{{%/* jupyter "notebook.ipynb" */%}}
+{{</* jupyter "notebook.ipynb" */>}}
 ```
 
 ### استفاده از یک نوت‌بوک راه‌دور
@@ -67,13 +67,13 @@ math: true
 همچنین می‌توانید از یک نوت‌بوک راه‌دور با ارائه URL به فایل نوت‌بوک استفاده کنید. به‌عنوان مثال، برای گنجاندن نوت‌بوک [Jupyter Notebook چیست](https://github.com/jupyter/notebook/blob/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb) در صفحه، می‌توانید از شورتکد زیر استفاده کنید:
 
 ```
-{{%/* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */%}}
+{{</* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */>}}
 ```
 
 ## نمونه نوت‌بوک
 
 {{< callout type="info" >}}مثال زیر یک نمونه از فایل نوت‌بوک است که در پوشه assets پروژه گنجانده شده است.{{< /callout >}}
 
-{{% jupyter "example.ipynb" %}}
+{{< jupyter "example.ipynb" >}}
 
 [page-bundles]: https://gohugo.io/content-management/page-bundles/#leaf-bundles

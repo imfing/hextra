@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Banner sluiten"
+imageGallery: "Afbeeldingengalerij"
 menu: "Menu"
 mermaidDiagram: "Diagram"
+nextImage: "Volgende afbeelding"
 pdfViewer: "PDF-weergave"
 permalinkLabel: "Permanente link naar deze sectie"
 playbackTime: "Afspeeltijd"
+previousImage: "Vorige afbeelding"
 searchResults: "Zoekresultaten"
 skipToContent: "Ga naar inhoud"
 tableOfContents: "Inhoudsopgave"

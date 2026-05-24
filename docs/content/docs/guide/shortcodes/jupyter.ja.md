@@ -37,7 +37,7 @@ title: マイページ
 math: true
 ---
 
-{{%/* jupyter "notebook.ipynb" */%}}
+{{</* jupyter "notebook.ipynb" */>}}
 ```
 
 あるいは、Hugo の [ページバンドル][page-bundles] 機能を利用して、Jupyter Notebook を Markdown ファイルと一緒に整理することもできます。
@@ -59,7 +59,7 @@ title: マイページ
 math: true
 ---
 
-{{%/* jupyter "notebook.ipynb" */%}}
+{{</* jupyter "notebook.ipynb" */>}}
 ```
 
 ### リモートノートブックの使用
@@ -67,13 +67,13 @@ math: true
 ノートブックファイルの URL を指定することで、リモートノートブックも使用できます。例えば、[What is the Jupyter Notebook](https://github.com/jupyter/notebook/blob/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb) ノートブックをページに組み込むには、以下のショートコードを使用します:
 
 ```
-{{%/* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */%}}
+{{</* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */>}}
 ```
 
 ## ノートブックの例
 
 {{< callout type="info" >}}以下は、プロジェクトの assets フォルダに含まれるノートブックファイルの例です。{{< /callout >}}
 
-{{% jupyter "example.ipynb" %}}
+{{< jupyter "example.ipynb" >}}
 
 [page-bundles]: https://gohugo.io/content-management/page-bundles/#leaf-bundles
