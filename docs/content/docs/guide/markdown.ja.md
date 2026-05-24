@@ -39,9 +39,12 @@ Hugo はテキストの書式設定やリスト作成などに [Markdown](https:
 
 {{< new-feature version="v0.9.0" >}}
 
-アラートは、重要な情報を強調するために使用できるブロッククォート構文を基にしたMarkdown拡張機能です。
-[GitHubスタイルのアラート](https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts)がサポートされています。
+コールアウトや admonition とも呼ばれるアラートは、重要な情報を強調するためのブロッククォートです。
 最新バージョンのHextraと[Hugo v0.146.0](https://github.com/gohugoio/hugo/releases/tag/v0.146.0)以降を使用していることを確認してください。
+
+#### 基本構文
+
+ブロッククォートの最初の行に `[!TYPE]` を使用します。
 
 > [!NOTE]
 > コンテンツをざっと見る際にもユーザーが知っておくべき有用な情報。
@@ -73,6 +76,20 @@ Hugo はテキストの書式設定やリスト作成などに [Markdown](https:
 
 > [!CAUTION]
 > 特定のアクションによるリスクやネガティブな結果についての警告。
+```
+
+基本構文は GitHub、Obsidian、Typora と互換性があります。
+
+#### 拡張構文
+
+種類の後に `+` または `-` を追加すると折りたたみ可能になり、マーカーの後にテキストを追加するとカスタムタイトルになります。この構文は [Obsidian callouts](https://help.obsidian.md/Editing+and+formatting/Callouts) のみと互換性があります。
+
+> [!TIP]- アラートは折りたためますか？
+> はい。折りたたみ式アラートは、閉じると内容が非表示になります。
+
+```markdown {filename=Markdown}
+> [!TIP]- アラートは折りたためますか？
+> はい。折りたたみ式アラートは、閉じると内容が非表示になります。
 ```
 
 ### テーブル

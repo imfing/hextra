@@ -1,6 +1,11 @@
 {{- $content := .content -}}
 {{- $alertType := .alertType -}}
 {{- $alertTitle := .alertTitle -}}
+{{- $alertSign := .alertSign -}}
+
+{{- $isFoldable := false -}}
+{{- if $alertSign }}{{ $isFoldable = true }}{{ end -}}
+{{- $isOpen := eq $alertSign "+" -}}
 
 {{- $styles := newScratch -}}
 {{- $styles.Set "default" (dict
@@ -36,36 +41,36 @@
 
 {{- $style := or ($styles.Get $alertType) ($styles.Get "default") -}}
 {{- $title := or $alertTitle (or (i18n $alertType) (title $alertType)) -}}
+{{- $contentID := printf "hextra-alert-%s" (md5 (printf "%s-%s-%s" $alertType $title $content)) -}}
 
-{{- /* Check if .alertSign exists to determine if it's foldable */}}
-{{- if .alertSign }}
-<details class="hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:border-gray-200 hx:contrast-more:border-current hx:contrast-more:dark:border-current hx:group {{ $style.style }}" {{ if eq .alertSign "+" }}open{{ end }}>
-  <summary class="hx:flex hx:cursor-pointer hx:items-center hx:font-medium hx:before:mr-1 hx:before:inline-block hx:before:transition-transform hx:before:content-[''] hx:dark:before:invert hx:rtl:before:rotate-180 hx:group-open:before:rotate-90">
-    {{- with $style.icon -}}
-      {{- partial "utils/icon.html" (dict "name" . "attributes" `height=16px class="hx:inline-block hx:align-middle hx:mr-2"`) -}}
-    {{- end -}}
-    {{- $title -}}
-  </summary>
-
-  <div class="hx:w-full hx:min-w-0 hx:leading-7">
-    <div class="hx:mt-6 hx:leading-7 hx:first:mt-0">
-      {{- $content -}}
-    </div>
-  </div>
-</details>
-{{- else }}
-<div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:border-gray-200 hx:contrast-more:border-current hx:contrast-more:dark:border-current {{ $style.style }}">
+<div data-alert="{{ $alertType }}" {{ if $isFoldable }}data-alert-fold="{{ $alertSign }}" {{ end }}class="hextra-alert hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:border-gray-200 hx:contrast-more:border-current hx:contrast-more:dark:border-current {{ $style.style }}">
+  {{- if $isFoldable }}
+  <button type="button" class="hextra-alert-toggle hx:flex hx:w-full hx:cursor-pointer hx:items-center hx:gap-3 hx:text-left hx:font-medium hx:hextra-focus-visible-inset" aria-expanded="{{ if $isOpen }}true{{ else }}false{{ end }}" aria-controls="{{ $contentID }}">
+    <span class="hx:flex hx:min-w-0 hx:items-center">
+      {{- with $style.icon -}}
+        {{- partial "utils/icon.html" (dict "name" . "attributes" `height=16px class="hx:inline-block hx:align-middle hx:mr-2 hx:shrink-0"`) -}}
+      {{- end -}}
+      <span class="hx:min-w-0 [word-break:break-word]">{{- $title -}}</span>
+    </span>
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hextra-alert-chevron hx:ltr:ml-auto hx:rtl:mr-auto hx:h-[18px] hx:min-w-[18px] hx:shrink-0 hx:rounded-xs hx:p-0.5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg>
+  </button>
+  {{- else }}
   <p class="hx:flex hx:items-center hx:font-medium">
     {{- with $style.icon -}}
       {{- partial "utils/icon.html" (dict "name" . "attributes" `height=16px class="hx:inline-block hx:align-middle hx:mr-2"`) -}}
     {{- end -}}
     {{- $title -}}
   </p>
+  {{- end }}
 
-  <div class="hx:w-full hx:min-w-0 hx:leading-7">
-    <div class="hx:mt-6 hx:leading-7 hx:first:mt-0">
+  <div
+    {{ if $isFoldable }}id="{{ $contentID }}" {{ end }}
+    class="hextra-alert-content hx:w-full hx:min-w-0 hx:leading-7"
+    {{ if $isFoldable }}aria-hidden="{{ if $isOpen }}false{{ else }}true{{ end }}"{{ end }}
+    {{ if and $isFoldable (not $isOpen) }}inert{{ end }}
+  >
+    <div class="hextra-alert-content-inner hx:mt-6 hx:leading-7 hx:first:mt-0">
       {{- $content -}}
     </div>
   </div>
 </div>
-{{- end }}

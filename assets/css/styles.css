@@ -76,6 +76,7 @@ body {
 
 @import "./typography.css";
 @import "./highlight.css";
+@import "./components/alert.css";
 @import "./components/cards.css";
 @import "./components/steps.css";
 @import "./components/search.css";

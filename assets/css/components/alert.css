@@ -1,0 +1,31 @@
+.hextra-alert[data-alert-fold] {
+  & > .hextra-alert-content {
+    @apply hx:overflow-hidden;
+    display: grid;
+    grid-template-rows: 0fr;
+  }
+
+  & > .hextra-alert-content > .hextra-alert-content-inner {
+    min-height: 0;
+  }
+
+  &[data-alert-fold="+"] > .hextra-alert-toggle > .hextra-alert-chevron > path {
+    @apply hx:rotate-90;
+  }
+
+  &[data-alert-fold="+"] > .hextra-alert-content {
+    grid-template-rows: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hextra-alert[data-alert-fold] > .hextra-alert-content {
+    transition: grid-template-rows 0.2s cubic-bezier(0.52, 0.16, 0.04, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hextra-alert-chevron > path {
+    transition: none;
+  }
+}
