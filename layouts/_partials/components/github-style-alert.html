@@ -3,10 +3,6 @@
 {{- $alertTitle := .alertTitle -}}
 {{- $alertSign := .alertSign -}}
 
-{{- $isFoldable := false -}}
-{{- if $alertSign }}{{ $isFoldable = true }}{{ end -}}
-{{- $isOpen := eq $alertSign "+" -}}
-
 {{- $icons := dict
   "note" "information-circle"
   "tip" "light-bulb"
@@ -15,12 +11,15 @@
   "caution" "exclamation-circle"
 -}}
 {{- $icon := or (index $icons $alertType) "light-bulb" -}}
-{{- $title := or $alertTitle (or (i18n $alertType) (title $alertType)) -}}
-{{- $contentID := printf "hextra-alert-%s" (md5 (printf "%s-%s-%s" $alertType $title $content)) -}}
+{{- $title := or $alertTitle (i18n $alertType) (title $alertType) -}}
 
-<div data-alert="{{ $alertType }}" {{ if $isFoldable }}data-alert-fold="{{ $alertSign }}" {{ end }}class="hextra-alert">
-  {{- if $isFoldable }}
-  <button type="button" class="hextra-alert-toggle" aria-expanded="{{ if $isOpen }}true{{ else }}false{{ end }}" aria-controls="{{ $contentID }}">
+<div
+  {{ with $alertType }}data-alert="{{ . }}" {{ end -}}
+  {{ with $alertSign }}data-alert-fold="{{ . }}" {{ end -}}
+  class="hextra-alert"
+>
+  {{- with $alertSign }}
+  <button type="button" class="hextra-alert-toggle" aria-expanded="{{ if eq . "+" }}true{{ else }}false{{ end }}">
     <span class="hextra-alert-title">
       {{- partial "utils/icon.html" (dict "name" $icon "attributes" `height=16px class="hextra-alert-icon"`) -}}
       <span class="hextra-alert-title-text">{{- $title -}}</span>
@@ -34,12 +33,7 @@
   </p>
   {{- end }}
 
-  <div
-    {{ if $isFoldable }}id="{{ $contentID }}" {{ end }}
-    class="hextra-alert-content"
-    {{ if $isFoldable }}aria-hidden="{{ if $isOpen }}false{{ else }}true{{ end }}"{{ end }}
-    {{ if and $isFoldable (not $isOpen) }}inert{{ end }}
-  >
+  <div class="hextra-alert-content">
     <div class="hextra-alert-content-inner">
       {{- $content -}}
     </div>

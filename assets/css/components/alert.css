@@ -87,3 +87,9 @@
     transition: none;
   }
 }
+
+@media print {
+  .hextra-alert[data-alert-fold] > .hextra-alert-content {
+    grid-template-rows: 1fr;
+  }
+}

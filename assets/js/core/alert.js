@@ -1,23 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll(".hextra-alert-toggle");
-  buttons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      const alert = button.closest(".hextra-alert");
-      const contentID = button.getAttribute("aria-controls");
-      const content = contentID ? document.getElementById(contentID) : null;
-      if (!alert || !content) {
-        return;
-      }
+  document.querySelectorAll(".hextra-alert[data-alert-fold]").forEach(function (alert) {
+    const button = alert.querySelector(".hextra-alert-toggle");
+    const content = alert.querySelector(".hextra-alert-content");
+    if (!button || !content) {
+      return;
+    }
 
-      const open = alert.dataset.alertFold !== "+";
+    const sync = function (open) {
       alert.dataset.alertFold = open ? "+" : "-";
       button.setAttribute("aria-expanded", open ? "true" : "false");
       content.setAttribute("aria-hidden", open ? "false" : "true");
-      if (open) {
-        content.removeAttribute("inert");
-      } else {
-        content.setAttribute("inert", "");
-      }
+      content.toggleAttribute("inert", !open);
+    };
+
+    sync(alert.dataset.alertFold === "+");
+
+    button.addEventListener("click", function () {
+      sync(alert.dataset.alertFold !== "+");
     });
   });
 });
