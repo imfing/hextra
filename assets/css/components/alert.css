@@ -1,3 +1,61 @@
+.hextra-alert {
+  @apply hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:contrast-more:border-current hx:contrast-more:dark:border-current;
+  @apply hx:border-green-200 hx:bg-green-100 hx:text-green-900 hx:dark:border-green-200/30 hx:dark:bg-green-900/30 hx:dark:text-green-200;
+}
+
+.hextra-alert[data-alert="note"] {
+  @apply hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200;
+}
+
+.hextra-alert[data-alert="tip"] {
+  @apply hx:border-green-200 hx:bg-green-100 hx:text-green-900 hx:dark:border-green-200/30 hx:dark:bg-green-900/30 hx:dark:text-green-200;
+}
+
+.hextra-alert[data-alert="important"] {
+  @apply hx:border-purple-200 hx:bg-purple-100 hx:text-purple-900 hx:dark:border-purple-200/30 hx:dark:bg-purple-900/30 hx:dark:text-purple-200;
+}
+
+.hextra-alert[data-alert="warning"] {
+  @apply hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200;
+}
+
+.hextra-alert[data-alert="caution"] {
+  @apply hx:border-red-200 hx:bg-red-100 hx:text-red-900 hx:dark:border-red-200/30 hx:dark:bg-red-900/30 hx:dark:text-red-200;
+}
+
+.hextra-alert-title {
+  @apply hx:flex hx:min-w-0 hx:items-center hx:font-medium;
+}
+
+.hextra-alert-title-text {
+  @apply hx:min-w-0;
+  word-break: break-word;
+}
+
+.hextra-alert-icon {
+  @apply hx:inline-block hx:shrink-0 hx:align-middle hx:mr-2;
+}
+
+.hextra-alert-toggle {
+  @apply hx:flex hx:w-full hx:cursor-pointer hx:items-center hx:gap-3 hx:text-left hx:font-medium hx:hextra-focus-visible-inset;
+}
+
+.hextra-alert-chevron {
+  @apply hx:ltr:ml-auto hx:rtl:mr-auto hx:h-[18px] hx:min-w-[18px] hx:shrink-0 hx:rounded-xs hx:p-0.5;
+}
+
+.hextra-alert-chevron > path {
+  @apply hx:origin-center hx:transition-transform hx:rtl:-rotate-180;
+}
+
+.hextra-alert-content {
+  @apply hx:w-full hx:min-w-0 hx:leading-7;
+}
+
+.hextra-alert-content-inner {
+  @apply hx:mt-6 hx:leading-7 hx:first:mt-0;
+}
+
 .hextra-alert[data-alert-fold] {
   & > .hextra-alert-content {
     @apply hx:overflow-hidden;
