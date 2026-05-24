@@ -6,6 +6,7 @@
 {{- $pageURL := .pageURL -}}
 {{- $toc := .toc | default false -}}
 {{- $level := .level | default 0 -}}
+{{- $static := .static | default false -}}
 
 {{- range (.nodes | default slice) -}}
   {{- if .separator -}}
@@ -15,20 +16,30 @@
   {{- else -}}
     {{- $children := .items | default slice -}}
     {{- $hasChildren := gt (len $children) 0 -}}
-    {{- $active := and .link (eq $pageURL .link) -}}
-    {{- $isAncestor := false -}}
-    {{- with .page -}}
-      {{- $isAncestor = and (not $active) (.IsAncestor $page) -}}
+
+    {{- if $static -}}
+      <li{{ with .open }} class="open"{{ end }}>
+        {{- partial "components/sidebar/render-item.html" (dict "node" . "active" false "open" (.open | default false) "hasChildren" $hasChildren) -}}
+        {{- if $hasChildren -}}
+          {{- partial "components/sidebar/render-children.html" (dict "nodes" $children "static" true "level" (add $level 1)) -}}
+        {{- end -}}
+      </li>
+    {{- else -}}
+      {{- $active := and .link (eq $pageURL .link) -}}
+      {{- $isAncestor := false -}}
+      {{- with .page -}}
+        {{- $isAncestor = and (not $active) (.IsAncestor $page) -}}
+      {{- end -}}
+      {{- $shouldOpen := or .open $isAncestor $active | default true -}}
+      <li class="{{ if $shouldOpen }}open{{ end }}">
+        {{- partial "components/sidebar/render-item.html" (dict "node" . "active" $active "open" $shouldOpen "hasChildren" $hasChildren) -}}
+        {{- if and $toc $active (ne $page.Params.toc false) -}}
+          {{- partial "components/sidebar/render-toc.html" (dict "page" $page) -}}
+        {{- end -}}
+        {{- if $hasChildren -}}
+          {{- partial "components/sidebar/render-children.html" (dict "nodes" $children "page" $page "pageURL" $pageURL "toc" $toc "level" (add $level 1)) -}}
+        {{- end -}}
+      </li>
     {{- end -}}
-    {{- $shouldOpen := or .open $isAncestor $active | default true -}}
-    <li class="{{ if $shouldOpen }}open{{ end }}">
-      {{- partial "components/sidebar/render-item.html" (dict "node" . "active" $active "open" $shouldOpen "hasChildren" $hasChildren) -}}
-      {{- if and $toc $active (ne $page.Params.toc false) -}}
-        {{- partial "components/sidebar/render-toc.html" (dict "page" $page) -}}
-      {{- end -}}
-      {{- if $hasChildren -}}
-        {{- partial "components/sidebar/render-children.html" (dict "nodes" $children "page" $page "pageURL" $pageURL "toc" $toc "level" (add $level 1)) -}}
-      {{- end -}}
-    </li>
   {{- end -}}
 {{- end -}}

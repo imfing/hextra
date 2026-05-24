@@ -1,7 +1,7 @@
 @layer components {
   /* Container & layout */
   .hextra-sidebar-container {
-    @apply hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)];
+    @apply hx:flex hx:flex-col hx:print:hidden hx:md:top-[calc(var(--navbar-height)+var(--hextra-banner-height))] hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)];
   }
 
   @media (max-width: 48rem) {
@@ -23,7 +23,7 @@
   }
 
   .hextra-sidebar-scroll {
-    @apply hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))];
+    @apply hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--hextra-banner-height)-var(--menu-height))];
   }
 
   .hextra-sidebar-placeholder {
@@ -153,6 +153,12 @@
 
   .hextra-sidebar-theme-toggle {
     @apply hx:flex hx:grow hx:flex-col;
+  }
+
+  /* Cache mode: suppress transitions until JS has initialised the active state */
+  .hextra-sidebar-container[data-sidebar-cache]:not([data-sidebar-ready]) .hextra-sidebar-children,
+  .hextra-sidebar-container[data-sidebar-cache]:not([data-sidebar-ready]) .hextra-sidebar-collapsible-icon-path {
+    transition: none;
   }
 
   /* Collapse/expand states */

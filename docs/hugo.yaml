@@ -182,6 +182,9 @@ params:
     message: |
       Hextra **v0.12** is here! 🎉 Discover [what's new]({{% relref "blog/v0.12" %}})
 
+  sidebar:
+    cache: true
+
   navbar:
     displayTitle: true
     displayLogo: true
