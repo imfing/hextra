@@ -41,7 +41,7 @@
 }
 
 .hextra-alert-chevron {
-  @apply hx:ltr:ml-auto hx:rtl:mr-auto hx:h-[18px] hx:min-w-[18px] hx:shrink-0 hx:rounded-xs hx:p-0.5;
+  @apply hx:ltr:ml-auto hx:rtl:mr-auto hx:h-4.5 hx:min-w-4.5 hx:shrink-0 hx:rounded-xs hx:p-0.5;
 }
 
 .hextra-alert-chevron > path {
