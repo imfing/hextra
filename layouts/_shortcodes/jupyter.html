@@ -16,6 +16,10 @@ Render Jupyter Notebook
 {{- $data := "" -}}
 {{- $page := .Page -}}
 
+{{- if not $path -}}
+  {{- errorf "jupyter shortcode requires a notebook path. Pass it as {{< jupyter \"notebook.ipynb\" >}} or {{< jupyter src=\"notebook.ipynb\" >}}." -}}
+{{- end -}}
+
 {{- $isLocal := not (urls.Parse $path).Scheme -}}
 {{- $isPage := and (eq .Page.Kind "page") (not .Page.BundleType) -}}
 
@@ -45,76 +49,64 @@ Render Jupyter Notebook
 {{- define "jupyter.renderMarkdown" -}}
   {{- $page := .page -}}
   {{- $sourceContent := .sourceContent -}}
-  {{- with .attachments -}}
-    {{- $attachmentMimeOrder := slice "image/png" "image/jpeg" "image/gif" "image/webp" "image/svg+xml" -}}
-    {{- range $attachmentName, $bundle := . -}}
-      {{- $as := newScratch -}}
-      {{- $as.Set "done" false -}}
-      {{- range $mime := $attachmentMimeOrder -}}
-        {{- if not ($as.Get "done") -}}
-          {{- with index $bundle $mime -}}
-            {{- $payload := cond (reflect.IsSlice .) (delimit . "") . -}}
-            {{- with $payload -}}
-              {{- $as.Set "uri" (printf "data:%s;base64,%s" $mime .) -}}
-              {{- $as.Set "done" true -}}
-            {{- end -}}
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
-      {{- with $as.Get "uri" -}}
-        {{- $sourceContent = replace $sourceContent (printf "attachment:%s" $attachmentName) . -}}
-        {{- $sourceContent = replace $sourceContent (printf "attachment:%s" (replace $attachmentName " " "%20")) . -}}
-        {{- $sourceContent = replace $sourceContent (printf "attachment:%s" (urlquery $attachmentName)) . -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
+  {{- $attachments := .attachments | default (dict) -}}
+  {{- $attachmentMimeOrder := slice "image/png" "image/jpeg" "image/gif" "image/webp" "image/svg+xml" -}}
   {{- $ms := newScratch -}}
   {{- $ms.Set "content" "" -}}
   {{- $ms.Set "inFence" false -}}
-  {{- $ms.Set "fence" "" -}}
+  {{- $ms.Set "fenceChar" "" -}}
+  {{- $ms.Set "fenceLen" 0 -}}
   {{- $lines := split $sourceContent "\n" -}}
-  {{- range $i, $line := $lines -}}
-    {{- $trimmedLine := strings.TrimSpace $line -}}
-    {{- $startsBacktickFence := strings.HasPrefix $trimmedLine "```" -}}
-    {{- $startsTildeFence := strings.HasPrefix $trimmedLine "~~~" -}}
+  {{- range $line := $lines -}}
     {{- $inFence := $ms.Get "inFence" -}}
     {{- if $inFence -}}
-      {{- $fence := $ms.Get "fence" -}}
-      {{- if or (and (eq $fence "```") $startsBacktickFence) (and (eq $fence "~~~") $startsTildeFence) -}}
+      {{- $fenceChar := $ms.Get "fenceChar" -}}
+      {{- $fenceLen := $ms.Get "fenceLen" -}}
+      {{- $closePattern := cond (eq $fenceChar "`") (printf "^ {0,3}`{%d,}[ \t]*$" $fenceLen) (printf "^ {0,3}~{%d,}[ \t]*$" $fenceLen) -}}
+      {{- if findRE $closePattern $line -}}
         {{- $ms.Set "inFence" false -}}
-        {{- $ms.Set "fence" "" -}}
+        {{- $ms.Set "fenceChar" "" -}}
+        {{- $ms.Set "fenceLen" 0 -}}
       {{- end -}}
-    {{- else if or $startsBacktickFence $startsTildeFence -}}
-      {{- $ms.Set "inFence" true -}}
-      {{- $ms.Set "fence" (cond $startsBacktickFence "```" "~~~") -}}
     {{- else -}}
-      {{- $isHeading := false -}}
-      {{- $headingText := "" -}}
-      {{- if findRE `^#{1,6}\s+` $line -}}
-        {{- $isHeading = true -}}
-        {{- $headingText = replaceRE `^#{1,6}\s+` "" $line -}}
-        {{- $headingText = replaceRE `\s+#+\s*$` "" $headingText -}}
-      {{- else if and (lt (add $i 1) (len $lines)) (findRE `\S` $line) -}}
-        {{- $nextLine := strings.TrimSpace (index $lines (add $i 1)) -}}
-        {{- if findRE `^(=+|-+)$` $nextLine -}}
-          {{- $isHeading = true -}}
-          {{- $headingText = $line -}}
-        {{- end -}}
+      {{- $fenceOpen := findRE "^ {0,3}(`{3,}|~{3,})" $line -}}
+      {{- with $fenceOpen -}}
+        {{- $fenceMarker := strings.TrimSpace (index . 0) -}}
+        {{- $ms.Set "inFence" true -}}
+        {{- $ms.Set "fenceChar" (substr $fenceMarker 0 1) -}}
+        {{- $ms.Set "fenceLen" (len $fenceMarker) -}}
       {{- end -}}
-      {{- if $isHeading -}}
-        {{- $headingText = replaceRE `<[^>]+>` "" $headingText -}}
-        {{- $headingText = strings.TrimSpace $headingText -}}
-        {{- with $headingText -}}
-          {{- $jupyterID := replaceRE `\s+` "-" . -}}
-          {{- $jupyterID = replaceRE `[&"'<>]` "" $jupyterID -}}
-          {{- $ms.Add "content" (printf "<div id=\"%s\" class=\"hextra-jupyter-anchor-alias\" aria-hidden=\"true\"></div>\n\n" $jupyterID) -}}
+    {{- end -}}
+    {{- $lineContent := $line -}}
+    {{- if not ($ms.Get "inFence") -}}
+      {{- range $attachmentName, $bundle := $attachments -}}
+        {{- $as := newScratch -}}
+        {{- $as.Set "done" false -}}
+        {{- range $mime := $attachmentMimeOrder -}}
+          {{- if not ($as.Get "done") -}}
+            {{- with index $bundle $mime -}}
+              {{- $payload := cond (reflect.IsSlice .) (delimit . "") . -}}
+              {{- with $payload -}}
+                {{- $as.Set "uri" (printf "data:%s;base64,%s" $mime .) -}}
+                {{- $as.Set "done" true -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- with $as.Get "uri" -}}
+          {{- $attachmentURI := . -}}
+          {{- $attachmentRefs := slice $attachmentName (replace $attachmentName " " "%20") (urls.PathEscape $attachmentName) (urlquery $attachmentName) -}}
+          {{- range $attachmentRef := $attachmentRefs -}}
+            {{- $lineContent = replace $lineContent (printf "attachment:%s" $attachmentRef) $attachmentURI -}}
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
-    {{- $ms.Add "content" (printf "%s\n" $line) -}}
+    {{- $ms.Add "content" (printf "%s\n" $lineContent) -}}
   {{- end -}}
-  {{- $rendered := $page.RenderString (dict "display" "block") ($ms.Get "content") -}}
-  {{- $rendered | safeHTML -}}
+  {{- with $ms.Get "content" -}}
+    {{- $page.RenderString (dict "display" "block") . | safeHTML -}}
+  {{- end -}}
 {{- end -}}
 
 {{- with index $data "cells" -}}
@@ -179,7 +171,7 @@ Render Jupyter Notebook
       <div class="hextra-jupyter-code-cell hextra-scrollbar">
         {{- if eq (printf "%v" $collapsed) "true" -}}
         <details>
-          <summary aria-label="Toggle output"></summary>
+          <summary class="hextra-jupyter-output-summary" aria-label="Toggle output">Output</summary>
         {{- end -}}
           <div class="hextra-jupyter-code-cell-outputs-container">
             {{- $outputsClass := "hextra-jupyter-code-cell-outputs" -}}
@@ -195,7 +187,17 @@ Render Jupyter Notebook
 
                 {{- if or (eq $outputType "display_data") (eq $outputType "execute_result") -}}
                   {{- $mimeData := index $output "data" -}}
-                  {{- $mimeOrder := slice "text/html" "image/svg+xml" "image/png" "image/jpeg" "text/markdown" "text/latex" "application/json" "text/plain" -}}
+                  {{- if eq $outputType "execute_result" -}}
+                    {{- with index $mimeData "text/plain" -}}
+                      {{- $plainContent := cond (reflect.IsSlice .) (delimit . "") . -}}
+                      {{- $plainClean := replaceRE `\x1b\[[0-9;]*[A-Za-z]` "" $plainContent -}}
+                      <pre class="not-prose">{{- $plainClean -}}</pre>
+                    {{- end -}}
+                  {{- end -}}
+                  {{- $mimeOrder := slice "text/html" "image/svg+xml" "image/png" "image/jpeg" "image/gif" "image/webp" "text/markdown" "text/latex" "application/json" "text/plain" -}}
+                  {{- if eq $outputType "execute_result" -}}
+                    {{- $mimeOrder = slice "text/html" "image/svg+xml" "image/png" "image/jpeg" "image/gif" "image/webp" "text/markdown" "text/latex" "application/json" -}}
+                  {{- end -}}
                   {{- $s := newScratch -}}
                   {{- $s.Set "done" false -}}
                   {{- range $mime := $mimeOrder -}}
@@ -230,12 +232,24 @@ Render Jupyter Notebook
                           <img src="data:image/png;base64,{{- $content -}}" alt="Output image" {{ $imageAttrs | safeHTMLAttr }} />
                         {{- else if eq $mime "image/jpeg" -}}
                           <img src="data:image/jpeg;base64,{{- $content -}}" alt="Output image" {{ $imageAttrs | safeHTMLAttr }} />
+                        {{- else if eq $mime "image/gif" -}}
+                          <img src="data:image/gif;base64,{{- $content -}}" alt="Output image" {{ $imageAttrs | safeHTMLAttr }} />
+                        {{- else if eq $mime "image/webp" -}}
+                          <img src="data:image/webp;base64,{{- $content -}}" alt="Output image" {{ $imageAttrs | safeHTMLAttr }} />
                         {{- else if eq $mime "text/markdown" -}}
                           {{- template "jupyter.renderMarkdown" (dict "page" $page "sourceContent" $content) -}}
                         {{- else if eq $mime "text/latex" -}}
-                          <div class="hextra-jupyter-latex" tabindex="0">{{- transform.ToMath $content (dict "displayMode" true) -}}</div>
+                          {{- with try (transform.ToMath $content (dict "output" "htmlAndMathml" "displayMode" true)) -}}
+                            {{- with .Err -}}
+                              <pre class="not-prose">{{- $content -}}</pre>
+                            {{- else -}}
+                              {{- $page.Store.Set "hasMath" true -}}
+                              <div class="hextra-jupyter-latex" tabindex="0">{{- .Value -}}</div>
+                            {{- end -}}
+                          {{- end -}}
                         {{- else if eq $mime "text/plain" -}}
-                          <pre class="not-prose">{{- $content -}}</pre>
+                          {{- $textPlainClean := replaceRE `\x1b\[[0-9;]*[A-Za-z]` "" $content -}}
+                          <pre class="not-prose">{{- $textPlainClean -}}</pre>
                         {{- else if eq $mime "application/json" -}}
                           <pre class="not-prose"><code>{{- jsonify (dict "indent" "  ") $val -}}</code></pre>
                         {{- end -}}

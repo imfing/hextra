@@ -87,6 +87,10 @@
   @apply hx:overflow-x-auto hx:my-2;
 }
 
+.hextra-jupyter-output-summary {
+  @apply hx:cursor-pointer hx:text-xs hx:font-medium hx:text-gray-500 hx:dark:text-neutral-400 hx:mb-2;
+}
+
 .hextra-jupyter-raw-cell {
   @apply hx:text-xs hx:overflow-auto hx:max-w-full hx:bg-gray-100 hx:dark:bg-neutral-800 hx:rounded-md hx:px-3 hx:py-2 hx:my-4;
 }

@@ -1,7 +1,15 @@
 {{- $dest := .Destination -}}
-{{- $url := urls.Parse $dest -}}
+{{- $url := urls.Parse "" -}}
+{{- $parsedURL := false -}}
+{{- with try (urls.Parse $dest) -}}
+  {{- with .Err -}}
+  {{- else -}}
+    {{- $url = .Value -}}
+    {{- $parsedURL = true -}}
+  {{- end -}}
+{{- end -}}
 
-{{- if and $dest (hasPrefix $dest "/") -}}
+{{- if and $parsedURL $dest (hasPrefix $dest "/") -}}
   {{- with or (.PageInner.GetPage $url.Path) (.PageInner.Resources.Get $url.Path) (resources.Get $url.Path) -}}
     {{- $query := cond $url.RawQuery (printf "?%s" $url.RawQuery) "" -}}
     {{- $fragment := cond $url.Fragment (printf "#%s" $url.Fragment) "" -}}
