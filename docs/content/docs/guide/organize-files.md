@@ -152,6 +152,28 @@ Sidebar entries without a `link` are rendered as non-clickable group headings. T
 
 This is also a way to expose a folder that has no `_index.md`: declare a group with the desired title and list its child pages explicitly.
 
+### Scoping by Section
+
+For sites with multiple top-level sections that need different sidebars, define data files under `data/<lang>/sidebar/` mirroring the content tree. The lookup walks from the deepest matching section upward, so a more specific file wins:
+
+{{< filetree/container >}}
+  {{< filetree/folder name="data" >}}
+    {{< filetree/folder name="en" >}}
+      {{< filetree/folder name="sidebar" state="open" >}}
+        {{< filetree/file name="docs.yaml" >}}
+        {{< filetree/folder name="docs" state="open" >}}
+          {{< filetree/file name="sidebar-lab.yaml" >}}
+        {{< /filetree/folder >}}
+        {{< filetree/file name="api.yaml" >}}
+      {{< /filetree/folder >}}
+    {{< /filetree/folder >}}
+  {{< /filetree/folder >}}
+{{< /filetree/container >}}
+
+With the layout above, pages under `/docs/sidebar-lab/` use `sidebar/docs/sidebar-lab.yaml`; other `/docs/*` pages fall back to `sidebar/docs.yaml`; pages under `/api/*` use `sidebar/api.yaml`. Sections without a matching file fall back to auto-discovery.
+
+The single-file form (`data/<lang>/sidebar.yaml` as a slice) remains supported for sites that want one shared sidebar. Use either the single-file form or the nested-directory form per language, not both.
+
 ## Section Navigation
 
 

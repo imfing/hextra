@@ -4,6 +4,8 @@
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
 {{- $pageURL := $context.RelPermalink -}}
 {{- $cacheMode := site.Params.sidebar.cache | default false -}}
+{{- $sectionKey := "" -}}
+{{- with $context.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
 
 {{- /* When a data sidebar file exists, use it for all pages. */ -}}
 {{- $matchFound := gt (len (partial "components/sidebar/source-data.html" $context)) 0 -}}
@@ -31,9 +33,9 @@
   <div class="hextra-scrollbar hextra-sidebar-scroll">
     {{- /* Mobile sidebar: uses menu.main at top level, shows inline TOC */ -}}
     <ul class="hextra-sidebar-mobile-list">
-      {{- $mobileNodes := partialCached "components/sidebar/build-mobile-tree.html" (dict "page" $context "pageURL" $pageURL "matched" $matchFound) $context.Language.Lang $matchFound -}}
+      {{- $mobileNodes := partialCached "components/sidebar/build-mobile-tree.html" (dict "page" $context "pageURL" $pageURL "matched" $matchFound) $context.Language.Lang $matchFound $sectionKey -}}
       {{- if $cacheMode -}}
-        {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "static" true "level" 0) "mobile" $context.Language.Lang $matchFound -}}
+        {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "static" true "level" 0) "mobile" $context.Language.Lang $matchFound $sectionKey -}}
       {{- else -}}
         {{- partial "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "page" $context "pageURL" $pageURL "toc" true "level" 0) -}}
       {{- end -}}
@@ -46,9 +48,9 @@
       {{ $context.Store.Set "enableFooterSwitches" true }}
     {{- else -}}
       <ul class="hextra-sidebar-desktop-list">
-        {{- $desktopNodes := partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "pageURL" $pageURL "matched" $matchFound) $navRoot.RelPermalink $context.Language.Lang $matchFound -}}
+        {{- $desktopNodes := partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "pageURL" $pageURL "matched" $matchFound) $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
         {{- if $cacheMode -}}
-          {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "static" true "level" 0) "desktop" $navRoot.RelPermalink $context.Language.Lang $matchFound -}}
+          {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "static" true "level" 0) "desktop" $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
         {{- else -}}
           {{- partial "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "page" $context "pageURL" $pageURL "toc" false "level" 0) -}}
         {{- end -}}

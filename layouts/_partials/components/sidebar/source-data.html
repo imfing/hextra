@@ -1,16 +1,56 @@
 {{- $lang := .Language.Lang -}}
 {{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
 
-{{- $localized := slice -}}
-{{- with index $siteData $lang -}}
-  {{- if reflect.IsSlice .sidebar -}}
-    {{- $localized = .sidebar -}}
+{{- /* Build the section path for the current page (e.g. ["foo", "docs"]).
+       Used to look up the most-specific entry in the nested-directory form
+       (data/<lang>/sidebar/foo/docs.yaml). The legacy single-file form
+       (data/<lang>/sidebar.yaml as a slice) ignores this path. */ -}}
+{{- $sectionPath := slice -}}
+{{- with .CurrentSection -}}
+  {{- $prefix := strings.TrimSuffix "/" (relLangURL "/") -}}
+  {{- $rel := strings.Trim (strings.TrimPrefix $prefix .RelPermalink) "/" -}}
+  {{- if $rel -}}
+    {{- $sectionPath = split $rel "/" -}}
   {{- end -}}
 {{- end -}}
 
-{{- $base := slice -}}
-{{- if reflect.IsSlice $siteData.sidebar -}}
-  {{- $base = $siteData.sidebar -}}
+{{- /* Search localized first, then the global root. Within each, a top-level
+       slice wins (legacy form); otherwise walk the section path from deepest
+       to shallowest and return the first slice found. */ -}}
+{{- $roots := slice -}}
+{{- with index $siteData $lang -}}
+  {{- $roots = $roots | append . -}}
+{{- end -}}
+{{- $roots = $roots | append $siteData -}}
+
+{{- $result := slice -}}
+{{- range $root := $roots -}}
+  {{- if eq (len $result) 0 -}}
+    {{- $sidebar := index $root "sidebar" -}}
+    {{- if reflect.IsSlice $sidebar -}}
+      {{- $result = $sidebar -}}
+    {{- else if reflect.IsMap $sidebar -}}
+      {{- $depth := len $sectionPath -}}
+      {{- if gt $depth 0 -}}
+        {{- range $d := seq $depth -1 1 -}}
+          {{- if eq (len $result) 0 -}}
+            {{- $cur := $sidebar -}}
+            {{- $ok := true -}}
+            {{- range $k := first $d $sectionPath -}}
+              {{- if reflect.IsMap $cur -}}
+                {{- $cur = index $cur $k -}}
+              {{- else -}}
+                {{- $ok = false -}}
+              {{- end -}}
+            {{- end -}}
+            {{- if and $ok (reflect.IsSlice $cur) -}}
+              {{- $result = $cur -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}
 
-{{- return (or $localized $base (slice)) -}}
+{{- return $result -}}

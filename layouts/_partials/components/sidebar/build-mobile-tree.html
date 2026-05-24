@@ -2,6 +2,8 @@
 {{- $pageURL := .pageURL -}}
 {{- $matched := .matched | default false -}}
 {{- $nodes := slice -}}
+{{- $sectionKey := "" -}}
+{{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
 
 {{- range $menuItem := site.Menus.main -}}
   {{- $menuType := $menuItem.Params.type | default "" -}}
@@ -97,7 +99,7 @@
       {{- else -}}
         {{- $children := slice -}}
         {{- if eq .Type "docs" -}}
-          {{- $children = partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "pageURL" $pageURL "matched" $matched) .RelPermalink $page.Language.Lang $matched -}}
+          {{- $children = partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "pageURL" $pageURL "matched" $matched) .RelPermalink $page.Language.Lang $matched $sectionKey -}}
         {{- end -}}
         {{- $nodes = $nodes | append (dict
           "link" .RelPermalink
@@ -137,7 +139,7 @@
 {{- /* Fall back to the content tree when menu.main has no usable entries */ -}}
 {{- if eq (len $nodes) 0 -}}
   {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $page.FirstSection -}}
-  {{- $nodes = partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $page "pageURL" $pageURL "matched" $matched) $navRoot.RelPermalink $page.Language.Lang $matched -}}
+  {{- $nodes = partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $page "pageURL" $pageURL "matched" $matched) $navRoot.RelPermalink $page.Language.Lang $matched $sectionKey -}}
 {{- end -}}
 
 {{- return $nodes -}}

@@ -9,7 +9,9 @@
 {{- $sidebarData := partial "components/sidebar/source-data.html" $page -}}
 {{- $dataNodes := slice -}}
 {{- if gt (len $sidebarData) 0 -}}
-  {{- $dataNodes = partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) $page.Language.Lang -}}
+  {{- $sectionKey := "" -}}
+  {{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
+  {{- $dataNodes = partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) $page.Language.Lang $sectionKey -}}
 {{- end -}}
 
 {{- if $matched -}}
