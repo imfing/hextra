@@ -1,3 +1,12 @@
+- link: /docs/getting-started/
+- link: /docs/guide/
+  merge: deep
+
+- separator: true
+  title: Deep Dive
+
+- link: /docs/advanced/
+  merge: deep
 - link: /docs/sidebar-lab/
   title: Sidebar Lab
   icon: folder-tree
@@ -16,3 +25,9 @@
       icon: collection
       items:
         - link: /docs/sidebar-lab/group-child/
+
+- separator: true
+  title: More
+- link: /about/
+- link: https://gohugo.io/documentation/
+  title: Hugo Docs ↗

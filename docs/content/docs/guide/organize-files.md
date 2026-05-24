@@ -78,6 +78,15 @@ weight: 2
 ---
 ```
 
+To use a different label in the sidebar than the page's `title`, set `linkTitle` in the front matter. This also affects breadcrumbs (see [below](#customizing-breadcrumb-link-titles)).
+
+```yaml {filename="content/docs/guide/organize-files.md"}
+---
+title: Organize Files
+linkTitle: Files
+---
+```
+
 {{< callout type="info" >}}
   It is recommended to keep the sidebar not too deep. If you have a lot of content, consider **splitting them into multiple sections**.
 {{< /callout >}}
@@ -140,6 +149,8 @@ Sidebar entries without a `link` are rendered as non-clickable group headings. T
 ```
 
 "Reference" will appear as a label in the sidebar with its children listed below. Group headings with children include a collapsible toggle.
+
+This is also a way to expose a folder that has no `_index.md`: declare a group with the desired title and list its child pages explicitly.
 
 ## Section Navigation
 

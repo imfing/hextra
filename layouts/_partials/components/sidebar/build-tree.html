@@ -14,49 +14,9 @@
 
 {{- if $matched -}}
   {{- if gt (len $dataNodes) 0 -}}
-    {{- /* Keep data roots that live under $context, plus groups (no page). */ -}}
-    {{- $scopedData := slice -}}
-    {{- range $dataNodes -}}
-      {{- $node := . -}}
-      {{- if not $node.page -}}
-        {{- $scopedData = $scopedData | append $node -}}
-      {{- else -}}
-        {{- with $node.page -}}
-          {{- if or (eq .RelPermalink $context.RelPermalink) (.IsDescendant $context) -}}
-            {{- $scopedData = $scopedData | append $node -}}
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-
-    {{- if gt (len $scopedData) 0 -}}
-      {{- $dataByLink := dict -}}
-      {{- $autoClaimed := dict -}}
-      {{- range $scopedData -}}
-        {{- if .link -}}
-          {{- $dataByLink = merge $dataByLink (dict .link .) -}}
-        {{- end -}}
-      {{- end -}}
-
-      {{- $nodes = slice -}}
-      {{- range $autoNodes -}}
-        {{- $autoNode := . -}}
-        {{- with index $dataByLink $autoNode.link -}}
-          {{- $nodes = $nodes | append . -}}
-        {{- else -}}
-          {{- $nodes = $nodes | append $autoNode -}}
-        {{- end -}}
-        {{- $autoClaimed = merge $autoClaimed (dict $autoNode.link true) -}}
-      {{- end -}}
-
-      {{- range $scopedData -}}
-        {{- if not .link -}}
-          {{- $nodes = $nodes | append . -}}
-        {{- else if not (index $autoClaimed .link) -}}
-          {{- $nodes = $nodes | append . -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
+    {{- /* Data file is authoritative: respect declared order as-is. Children   */ -}}
+    {{- /* still auto-discover per-node via `merge: deep`.                      */ -}}
+    {{- $nodes = $dataNodes -}}
   {{- end -}}
 {{- else if gt (len $dataNodes) 0 -}}
   {{- /* Overlay cosmetic-only fields (icon) onto matching auto nodes so the */ -}}

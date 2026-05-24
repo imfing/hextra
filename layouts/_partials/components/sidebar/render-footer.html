@@ -1,3 +1,6 @@
+{{- with site.Menus.sidebar -}}
+  {{- warnf "menu.sidebar is deprecated and will be removed in a future release; define sidebar entries in a data file instead for greater flexibility." -}}
+{{- end -}}
 {{- range site.Menus.sidebar -}}
   {{- $name := or (T .Identifier) .Name -}}
   {{- if eq .Params.type "separator" -}}

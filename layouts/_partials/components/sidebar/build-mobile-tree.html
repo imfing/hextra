@@ -62,12 +62,19 @@
     {{- end -}}
 
     {{- if gt (len $childNodes) 0 -}}
+      {{- /* Default closed; sidebar JS opens ancestors of the active link. */ -}}
+      {{- $groupOpen := false -}}
+      {{- range $childNodes -}}
+        {{- if and .link (eq $pageURL .link) -}}
+          {{- $groupOpen = true -}}
+        {{- end -}}
+      {{- end -}}
       {{- $nodes = $nodes | append (dict
         "link" ""
         "title" $menuTitle
         "items" $childNodes
         "merge" "none"
-        "open" true
+        "open" $groupOpen
         "separator" false
         "external" false
         "page" false

@@ -27,6 +27,10 @@
       {{- end -}}
       {{- range $sorted -}}
         {{- if not (index $existing .RelPermalink) -}}
+          {{- $sep := .Params.sidebar.separator -}}
+          {{- if and $sep (ne $sep true) -}}
+            {{- warnf "sidebar.separator on %q is only respected at the top level; ignored under nested data node" .RelPermalink -}}
+          {{- end -}}
           {{- $autoChildren := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}
           {{- $children = $children | append (dict
             "link" .RelPermalink
@@ -35,7 +39,7 @@
             "merge" "none"
             "open" .Params.sidebar.open
             "weight" .Weight
-            "separator" (.Params.sidebar.separator | default false)
+            "separator" (eq $sep true)
 
             "external" false
             "page" .
