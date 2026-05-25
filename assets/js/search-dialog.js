@@ -20,6 +20,7 @@
   let innerEl;
   let closeAnimationListener = null;
   let closeTimer = null;
+  let collapseTimer = null;
 
   document.addEventListener('DOMContentLoaded', init);
 
@@ -194,6 +195,13 @@
     viewportEl.dataset.expanded = expanded ? 'true' : 'false';
   }
 
+  function cancelCollapse() {
+    if (collapseTimer !== null) {
+      clearTimeout(collapseTimer);
+      collapseTimer = null;
+    }
+  }
+
   function clearResults() {
     while (resultsEl.firstChild) resultsEl.removeChild(resultsEl.firstChild);
   }
@@ -296,11 +304,18 @@
   async function runSearch() {
     const query = input.value.trim();
     if (!query) {
-      clearResults();
-      if (emptyEl) emptyEl.hidden = true;
       input.setAttribute('aria-activedescendant', '');
       if (statusEl) statusEl.textContent = '';
       setViewportExpanded(false);
+      // Defer DOM clear until the viewport finishes collapsing — otherwise the
+      // results vanish first and the viewport snaps to the inner padding before
+      // animating the last few pixels to 0.
+      cancelCollapse();
+      collapseTimer = setTimeout(() => {
+        collapseTimer = null;
+        clearResults();
+        if (emptyEl) emptyEl.hidden = true;
+      }, 250);
       return;
     }
     if (!window.hextraSearch) return;
@@ -350,6 +365,7 @@
   }
 
   function renderResults(results, query) {
+    cancelCollapse();
     clearResults();
     if (innerEl) innerEl.scrollTop = 0;
 

@@ -32,6 +32,7 @@
 
 /* Dialog */
 .hextra-search-dialog {
+  --hextra-search-results-max-height: min(28rem, calc(100vh - 7rem));
   @apply hx:p-0 hx:rounded-xl hx:overflow-hidden
     hx:bg-white hx:dark:bg-neutral-900
     hx:border hx:border-gray-200 hx:dark:border-neutral-800
@@ -161,11 +162,12 @@
 }
 
 .hextra-search-results-viewport[data-expanded="true"] {
-  max-height: calc(100vh - 7rem);
+  max-height: var(--hextra-search-results-max-height);
 }
 
 .hextra-search-results-inner {
-  @apply hx:max-h-112 hx:overflow-y-auto hx:overscroll-contain hx:p-1;
+  @apply hx:overflow-y-auto hx:overscroll-contain hx:p-1;
+  max-height: var(--hextra-search-results-max-height);
 }
 
 /* Results list */

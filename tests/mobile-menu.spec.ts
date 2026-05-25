@@ -11,20 +11,28 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-test("clicking mobile hamburger does not focus the sidebar search input", async ({ page }) => {
+test("clicking mobile hamburger does not focus command palette search", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/", { waitUntil: "load" });
 
   const menuButton = page.locator(".hextra-hamburger-menu");
   await expect(menuButton).toBeVisible();
 
-  const sidebarSearchInput = page.locator(".hextra-sidebar-container .hextra-search-input").first();
-  await expect(sidebarSearchInput).toBeVisible();
+  const searchTrigger = page.locator("[data-search-open]").first();
+  await expect(searchTrigger).toBeVisible();
+  await expect(
+    page.locator(".hextra-sidebar-container .hextra-search-input"),
+  ).toHaveCount(0);
+
+  const searchDialog = page.locator("#hextra-search-dialog");
+  const searchInput = searchDialog.locator(".hextra-search-input");
+  await expect(searchDialog).toHaveJSProperty("open", false);
 
   await menuButton.click();
 
   await expect(menuButton).toHaveAttribute("aria-expanded", "true");
-  await expect(sidebarSearchInput).not.toBeFocused();
+  await expect(searchDialog).toHaveJSProperty("open", false);
+  await expect(searchInput).not.toBeFocused();
 });
 
 test("mobile sidebar exposes main menu dropdown children", async ({ page }) => {
