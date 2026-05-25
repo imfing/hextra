@@ -2,5 +2,6 @@
 
 if (localStorage.getItem('{{ site.Params.banner.key | default `banner-closed` }}')) {
   document.documentElement.style.setProperty("--hextra-banner-height", "0px");
+  document.documentElement.style.setProperty("--hextra-sidebar-banner-offset", "0px");
   document.documentElement.classList.add("hextra-banner-hidden");
 }

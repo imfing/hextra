@@ -1,3 +1,4 @@
+- type: search
 - link: /docs/getting-started/
 - link: /docs/guide/
   merge: deep

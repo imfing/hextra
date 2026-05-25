@@ -3,7 +3,34 @@
   if (!document.querySelector('.hextra-banner')) {
     var s = document.querySelector('.hextra-sidebar-container');
     if (s) s.style.setProperty('--hextra-banner-height', '0px');
+    document.documentElement.style.setProperty('--hextra-sidebar-banner-offset', '0px');
   }
+})();
+
+(function () {
+  var banner = document.querySelector('.hextra-banner');
+  if (!banner) return;
+
+  var scheduled = false;
+
+  function setSidebarBannerOffset() {
+    scheduled = false;
+    var offset = 0;
+    if (!document.documentElement.classList.contains('hextra-banner-hidden')) {
+      offset = Math.max(0, Math.round(banner.getBoundingClientRect().bottom));
+    }
+    document.documentElement.style.setProperty('--hextra-sidebar-banner-offset', offset + 'px');
+  }
+
+  function scheduleSidebarBannerOffset() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(setSidebarBannerOffset);
+  }
+
+  setSidebarBannerOffset();
+  window.addEventListener('scroll', scheduleSidebarBannerOffset, { passive: true });
+  window.addEventListener('resize', scheduleSidebarBannerOffset);
 })();
 
 document.addEventListener("DOMContentLoaded", function () {

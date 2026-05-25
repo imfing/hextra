@@ -1,7 +1,13 @@
 @layer components {
   /* Container & layout */
   .hextra-sidebar-container {
-    @apply hx:flex hx:flex-col hx:print:hidden hx:md:top-[calc(var(--navbar-height)+var(--hextra-banner-height))] hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)];
+    @apply hx:flex hx:flex-col hx:print:hidden hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)];
+  }
+
+  @media (min-width: 48rem) {
+    .hextra-sidebar-container {
+      top: calc(var(--navbar-height) + var(--hextra-sidebar-banner-offset, var(--hextra-banner-height)));
+    }
   }
 
   @media (max-width: 48rem) {
@@ -27,7 +33,13 @@
   }
 
   .hextra-sidebar-scroll {
-    @apply hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--hextra-banner-height)-var(--menu-height))];
+    @apply hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow;
+  }
+
+  @media (min-width: 48rem) {
+    .hextra-sidebar-scroll {
+      height: calc(100vh - var(--navbar-height) - var(--hextra-sidebar-banner-offset, var(--hextra-banner-height)) - var(--menu-height));
+    }
   }
 
   .hextra-sidebar-placeholder {

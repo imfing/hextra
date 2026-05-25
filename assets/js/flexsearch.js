@@ -44,17 +44,35 @@ document.addEventListener("DOMContentLoaded", function () {
     setShortcutElementsOpacity(opacity);
   }
 
+  function getSearchElement(wrapper) {
+    return {
+      wrapper,
+      inputElement: wrapper.querySelector('.hextra-search-input'),
+      resultsElement: wrapper.querySelector('.hextra-search-results')
+    };
+  }
+
+  function isVisibleSearchWrapper(wrapper) {
+    return wrapper && wrapper.clientHeight > 0;
+  }
+
   // Get the search wrapper, input, and results elements.
-  function getActiveSearchElement() {
-    const inputs = Array.from(document.querySelectorAll('.hextra-search-wrapper')).filter(el => el.clientHeight > 0);
-    if (inputs.length === 1) {
-      return {
-        wrapper: inputs[0],
-        inputElement: inputs[0].querySelector('.hextra-search-input'),
-        resultsElement: inputs[0].querySelector('.hextra-search-results')
-      };
+  function getActiveSearchElement(target) {
+    const targetWrapper = target?.closest?.('.hextra-search-wrapper');
+    if (isVisibleSearchWrapper(targetWrapper)) {
+      return getSearchElement(targetWrapper);
     }
-    return undefined;
+
+    const focusedWrapper = document.activeElement?.closest?.('.hextra-search-wrapper');
+    if (isVisibleSearchWrapper(focusedWrapper)) {
+      return getSearchElement(focusedWrapper);
+    }
+
+    const inputs = Array.from(document.querySelectorAll('.hextra-search-wrapper')).filter(isVisibleSearchWrapper);
+    if (inputs.length > 0) {
+      return getSearchElement(inputs[0]);
+    }
+    return {};
   }
 
   const INPUTS = ['input', 'select', 'button', 'textarea']
@@ -100,8 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Get the currently active result and its index.
-  function getActiveResult() {
-    const { resultsElement } = getActiveSearchElement();
+  function getActiveResult(target) {
+    const { resultsElement } = getActiveSearchElement(target);
     if (!resultsElement) return { result: undefined, index: -1 };
 
     const result = resultsElement.querySelector('.hextra-search-active');
@@ -112,11 +130,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Set the active result by index.
-  function setActiveResult(index) {
-    const { resultsElement } = getActiveSearchElement();
+  function setActiveResult(index, target) {
+    const { resultsElement } = getActiveSearchElement(target);
     if (!resultsElement) return;
 
-    const { result: activeResult } = getActiveResult();
+    const { result: activeResult } = getActiveResult(target);
     activeResult && activeResult.classList.remove('hextra-search-active');
     const result = resultsElement.querySelector(`[data-index="${index}"]`);
     if (result) {
@@ -126,53 +144,53 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Get the number of search results from the DOM.
-  function getResultsLength() {
-    const { resultsElement } = getActiveSearchElement();
+  function getResultsLength(target) {
+    const { resultsElement } = getActiveSearchElement(target);
     if (!resultsElement) return 0;
     return resultsElement.dataset.count;
   }
 
   // Finish the search by hiding the results and clearing the input.
-  function finishSearch() {
-    const { inputElement } = getActiveSearchElement();
+  function finishSearch(target) {
+    const { inputElement } = getActiveSearchElement(target);
     if (!inputElement) return;
-    hideSearchResults();
+    hideSearchResults(target);
     inputElement.value = '';
     inputElement.blur();
   }
 
-  function hideSearchResults() {
-    const { resultsElement } = getActiveSearchElement();
+  function hideSearchResults(target) {
+    const { resultsElement } = getActiveSearchElement(target);
     if (!resultsElement) return;
     resultsElement.classList.add('hx:hidden');
   }
 
   // Handle keyboard events.
   function handleKeyDown(e) {
-    const { inputElement } = getActiveSearchElement();
+    const { inputElement } = getActiveSearchElement(e.target);
     if (!inputElement) return;
 
-    const resultsLength = getResultsLength();
-    const { result: activeResult, index: activeIndex } = getActiveResult();
+    const resultsLength = getResultsLength(e.target);
+    const { result: activeResult, index: activeIndex } = getActiveResult(e.target);
 
     switch (e.key) {
       case 'ArrowUp':
         e.preventDefault();
-        if (activeIndex > 0) setActiveResult(activeIndex - 1);
+        if (activeIndex > 0) setActiveResult(activeIndex - 1, e.target);
         break;
       case 'ArrowDown':
         e.preventDefault();
-        if (activeIndex + 1 < resultsLength) setActiveResult(activeIndex + 1);
+        if (activeIndex + 1 < resultsLength) setActiveResult(activeIndex + 1, e.target);
         break;
       case 'Enter':
         e.preventDefault();
         if (activeResult) {
           activeResult.click();
         }
-        finishSearch();
+        finishSearch(e.target);
       case 'Escape':
         e.preventDefault();
-        hideSearchResults();
+        hideSearchResults(e.target);
         // Clear the input when pressing escape
         inputElement.value = '';
         inputElement.dispatchEvent(new Event('input'));
@@ -309,11 +327,12 @@ document.addEventListener("DOMContentLoaded", function () {
   function search(e) {
     const query = e.target.value;
     if (!e.target.value) {
-      hideSearchResults();
+      hideSearchResults(e.target);
       return;
     }
 
-    const { resultsElement } = getActiveSearchElement();
+    const { resultsElement } = getActiveSearchElement(e.target);
+    if (!resultsElement) return;
     while (resultsElement.firstChild) {
       resultsElement.removeChild(resultsElement.firstChild);
     }
@@ -375,7 +394,7 @@ document.addEventListener("DOMContentLoaded", function () {
         prefix: res.prefix,
         children: res.children
       }));
-    displayResults(sortedResults, query);
+    displayResults(sortedResults, query, resultsElement);
   }
 
   /**
@@ -384,10 +403,7 @@ document.addEventListener("DOMContentLoaded", function () {
    * @param {Array} results - The array of search results.
    * @param {string} query - The search query.
    */
-  function displayResults(results, query) {
-    const { resultsElement } = getActiveSearchElement();
-    if (!resultsElement) return;
-
+  function displayResults(results, query, resultsElement) {
     if (!results.length) {
       resultsElement.innerHTML = `<span class="hextra-search-no-result">{{ $noResultsFound | safeHTML }}</span>`;
       // Announce no results to screen readers
@@ -474,7 +490,7 @@ document.addEventListener("DOMContentLoaded", function () {
       li.appendChild(link);
       li.addEventListener('mousemove', handleMouseMove);
       li.addEventListener('keydown', handleKeyDown);
-      link.addEventListener('click', finishSearch);
+      link.addEventListener('click', e => finishSearch(e.target));
       fragment.appendChild(li);
     }
     resultsElement.appendChild(fragment);

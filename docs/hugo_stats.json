@@ -492,6 +492,7 @@
       "hx:max-w-[50%]",
       "hx:max-w-[90rem]",
       "hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))]",
+      "hx:max-w-full",
       "hx:max-w-none",
       "hx:max-xl:hidden",
       "hx:mb-0",

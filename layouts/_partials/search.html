@@ -1,7 +1,10 @@
 {{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
+{{- $location := .location | default "navbar" -}}
+{{- $isSidebar := eq $location "sidebar" -}}
+{{- $wrapperWidth := cond $isSidebar "hx:w-full" "hx:md:w-64" -}}
+{{- $resultsWidth := cond $isSidebar "hx:w-full hx:max-w-full" "hx:w-screen hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))] hx:ltr:md:left-auto hx:rtl:md:right-auto" -}}
 
-
-<div class="hextra-search-wrapper hx:relative hx:md:w-64">
+<div class="hextra-search-wrapper hx:relative {{ $wrapperWidth }}">
   <div class="hx:relative hx:flex hx:items-center hx:text-gray-900 hx:contrast-more:text-gray-800 hx:dark:text-gray-300 hx:contrast-more:dark:text-gray-300">
     <input
       placeholder="{{ $placeholder }}"
@@ -21,7 +24,7 @@
 
   <div>
     <ul
-      class="hextra-search-results hextra-scrollbar hx:hidden hx:border hx:border-gray-200 hx:bg-white hx:text-gray-100 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:absolute hx:top-full hx:z-20 hx:mt-2 hx:overflow-auto hx:overscroll-contain hx:rounded-xl hx:py-2.5 hx:shadow-xl hx:max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx:inset-x-0 hx:ltr:md:left-auto hx:rtl:md:right-auto hx:contrast-more:border hx:contrast-more:border-gray-900 hx:contrast-more:dark:border-gray-50 hx:w-screen hx:min-h-[100px] hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))]"
+      class="hextra-search-results hextra-scrollbar hx:hidden hx:border hx:border-gray-200 hx:bg-white hx:text-gray-100 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:absolute hx:top-full hx:z-20 hx:mt-2 hx:overflow-auto hx:overscroll-contain hx:rounded-xl hx:py-2.5 hx:shadow-xl hx:max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx:inset-x-0 hx:contrast-more:border hx:contrast-more:border-gray-900 hx:contrast-more:dark:border-gray-50 hx:min-h-[100px] {{ $resultsWidth }}"
       aria-label="{{ (T "searchResults") | default "Search results" }}"
       style="transition: max-height 0.2s ease 0s;"
     ></ul>
