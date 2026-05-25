@@ -364,6 +364,13 @@
     }
   }
 
+  function getParentCrumb(result) {
+    if (!result.prefix || !result.title) return result.prefix;
+    if (result.prefix === result.title) return '';
+    const suffix = ` > ${result.title}`;
+    return result.prefix.endsWith(suffix) ? result.prefix.slice(0, -suffix.length) : result.prefix;
+  }
+
   function renderResults(results, query) {
     cancelCollapse();
     clearResults();
@@ -382,7 +389,8 @@
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < results.length; i++) {
       const result = results[i];
-      const isParent = !!result.prefix;
+      const isParent = result.prefix !== undefined;
+      const hasExcerpt = result.children.content && result.children.content !== result.children.title;
 
       const li = document.createElement('li');
       li.setAttribute('role', 'presentation');
@@ -394,19 +402,20 @@
       link.setAttribute('role', 'option');
       link.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
 
-      if (isParent) {
+      const crumbText = isParent ? getParentCrumb(result) : result.prefix;
+      if (crumbText) {
         const crumb = document.createElement('div');
         crumb.className = 'hextra-search-crumb';
-        crumb.textContent = result.prefix;
+        crumb.textContent = crumbText;
         link.appendChild(crumb);
       }
 
       const title = document.createElement('div');
       title.className = 'hextra-search-title';
-      appendHighlightedText(title, result.children.title, query);
+      appendHighlightedText(title, isParent ? result.title : result.children.title, query);
       link.appendChild(title);
 
-      if (result.children.content && result.children.content !== result.children.title) {
+      if (!isParent && hasExcerpt) {
         const excerpt = document.createElement('div');
         excerpt.className = 'hextra-search-excerpt';
         appendHighlightedText(excerpt, result.children.content, query);
@@ -415,6 +424,34 @@
 
       li.appendChild(link);
       fragment.appendChild(li);
+
+      if (isParent && hasExcerpt) {
+        const excerptLi = document.createElement('li');
+        excerptLi.setAttribute('role', 'presentation');
+        excerptLi.classList.add('hextra-search-child');
+
+        const excerptLink = document.createElement('a');
+        excerptLink.id = `${result.id}-excerpt`;
+        excerptLink.href = result.route;
+        excerptLink.setAttribute('role', 'option');
+        excerptLink.setAttribute('aria-selected', 'false');
+        excerptLink.setAttribute('aria-label', `${result.children.title} - ${result.children.content}`);
+
+        if (result.children.title && result.children.title !== result.title) {
+          const title = document.createElement('div');
+          title.className = 'hextra-search-title';
+          appendHighlightedText(title, result.children.title, query);
+          excerptLink.appendChild(title);
+        }
+
+        const excerpt = document.createElement('div');
+        excerpt.className = 'hextra-search-excerpt';
+        appendHighlightedText(excerpt, result.children.content, query);
+        excerptLink.appendChild(excerpt);
+
+        excerptLi.appendChild(excerptLink);
+        fragment.appendChild(excerptLi);
+      }
     }
     resultsEl.appendChild(fragment);
 

@@ -143,7 +143,7 @@
   /**
    * Run the actual FlexSearch query and return a sorted, deduped result list.
    * @param {string} query
-   * @returns {Array<{id: string, route: string, prefix?: string, children: {title: string, content: string}}>}
+   * @returns {Array<{id: string, route: string, title: string, prefix?: string, children: {title: string, content: string}}>}
    */
   function performSearch(query) {
     const maxPageResults = parseInt('{{- site.Params.search.flexsearch.maxPageResults | default 20 -}}', 10);
@@ -178,6 +178,7 @@
           _page_rk: i,
           _section_rk: j,
           route: url,
+          title: result.doc.title,
           prefix: isFirstItemOfPage ? result.doc.crumb : undefined,
           children: { title, content }
         });
@@ -198,6 +199,7 @@
       .map((res, idx) => ({
         id: `hextra-search-opt-${idx}`,
         route: res.route,
+        title: res.title,
         prefix: res.prefix,
         children: res.children
       }));
