@@ -219,13 +219,13 @@
 /* Child result: indented under a 1px vertical rule that visually groups it
    with the preceding parent. */
 .hextra-search-results > li.hextra-search-child > a > * {
-  padding-left: 1rem;
+  padding-inline-start: 1rem;
 }
 
 .hextra-search-results > li.hextra-search-child::before {
   content: "";
   position: absolute;
-  left: 0.75rem;
+  inset-inline-start: 0.75rem;
   top: 0;
   bottom: 0;
   width: 1px;

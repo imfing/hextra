@@ -5,8 +5,8 @@
 // {{ $noResultsFound := (T "noResultsFound") | default "No results found." }}
 
 (function () {
-  const resultsFoundTemplate = '{{ (T "resultsFound") | default "%d results found" | safeJS }}';
-  const noResultsText = '{{ $noResultsFound | safeJS }}';
+  const resultsFoundTemplate = '{{ (T "resultsFound") | default "%d results found" }}';
+  const noResultsText = '{{ $noResultsFound }}';
 
   const EDITABLE_TAGS = ['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'];
   const isMac = /iPad|iPhone|Macintosh/.test(navigator.userAgent);
@@ -97,8 +97,21 @@
     // Enter on focused result anchors falls through to native anchor activation.
   }
 
+  function isEditableElement(element) {
+    const tag = element && element.tagName;
+    return !!element && (EDITABLE_TAGS.includes(tag) || element.isContentEditable);
+  }
+
+  function setActiveDescendant(id) {
+    if (id) input.setAttribute('aria-activedescendant', id);
+    else input.removeAttribute('aria-activedescendant');
+  }
+
   function handleGlobalKeyDown(e) {
+    const inEditable = isEditableElement(document.activeElement);
+
     if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+      if (inEditable) return;
       e.preventDefault();
       // A dialog mid-dismiss is logically "closed" for toggle purposes — without
       // this, a rapid second Cmd+K is eaten by closeDialog's early-return.
@@ -111,9 +124,6 @@
     if (dialog.open) return;
 
     if (e.key === '/') {
-      const active = document.activeElement;
-      const tag = active && active.tagName;
-      const inEditable = active && (EDITABLE_TAGS.includes(tag) || active.isContentEditable);
       if (inEditable) return;
       e.preventDefault();
       openDialog();
@@ -155,6 +165,7 @@
 
   function closeDialog() {
     if (!dialog.open || dialog.dataset.state === 'closing') return;
+    cancelCollapse();
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion) {
@@ -270,10 +281,10 @@
       o.setAttribute('aria-selected', o === el ? 'true' : 'false');
     });
     if (el) {
-      input.setAttribute('aria-activedescendant', el.id || '');
+      setActiveDescendant(el.id);
       if (scroll) el.scrollIntoView({ block: 'nearest' });
     } else {
-      input.setAttribute('aria-activedescendant', '');
+      setActiveDescendant();
     }
   }
 
@@ -301,10 +312,12 @@
     selectOption(options[i], opts);
   }
 
-  async function runSearch() {
+  async function runSearch(e) {
+    if (e && e.isComposing) return;
+
     const query = input.value.trim();
     if (!query) {
-      input.setAttribute('aria-activedescendant', '');
+      setActiveDescendant();
       if (statusEl) statusEl.textContent = '';
       setViewportExpanded(false);
       // Defer DOM clear until the viewport finishes collapsing — otherwise the
@@ -400,7 +413,7 @@
     if (!results.length) {
       if (emptyEl) emptyEl.hidden = false;
       if (statusEl) statusEl.textContent = noResultsText;
-      input.setAttribute('aria-activedescendant', '');
+      setActiveDescendant();
       setViewportExpanded(true);
       return;
     }
@@ -481,7 +494,7 @@
     resultsEl.appendChild(fragment);
 
     const firstOption = resultsEl.querySelector('a[role="option"]');
-    if (firstOption) input.setAttribute('aria-activedescendant', firstOption.id || '');
+    setActiveDescendant(firstOption && firstOption.id);
 
     if (statusEl) {
       statusEl.textContent = resultsFoundTemplate.replace('%d', optionCount.toString());

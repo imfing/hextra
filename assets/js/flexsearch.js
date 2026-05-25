@@ -91,8 +91,10 @@
         }
 
         for (const heading in data[route].data) {
-          const [hash, text] = heading.split('#');
-          const url = route.replace(/\/+$/, '') + (hash ? '#' + hash : '');
+          const separator = heading.indexOf('#');
+          const hash = separator === -1 ? heading : heading.slice(0, separator);
+          const text = separator === -1 ? '' : heading.slice(separator + 1);
+          const url = route + (hash ? `${route.endsWith('/') ? '' : '/'}#${hash}` : '');
           const title = text || data[route].title;
 
           const content = data[route].data[heading] || '';
