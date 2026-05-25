@@ -1,9 +1,10 @@
 /* Command palette: shadcn-style search dialog */
 
-/* Trigger button (rendered in the navbar, styled to look like an input) */
+/* Trigger button (rendered in the navbar, styled to look like an input).
+   Icon-only variant is rendered as a plain navbar icon (see search-trigger.html). */
 .hextra-search-trigger {
   @apply hx:inline-flex hx:items-center hx:gap-2 hx:rounded-lg hx:bg-black/[.05] hx:dark:bg-gray-50/10
-    hx:px-3 hx:py-2 hx:text-sm hx:leading-tight hx:md:text-sm hx:md:w-64
+    hx:px-3 hx:py-2 hx:text-sm hx:leading-tight hx:md:text-sm hx:md:w-48
     hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-50
     hx:transition-colors hx:cursor-pointer hx:hextra-focus-visible;
 }
@@ -24,7 +25,7 @@
 
 /* Dialog */
 .hextra-search-dialog {
-  @apply hx:p-0 hx:rounded-xl hx:shadow-2xl
+  @apply hx:p-0 hx:rounded-xl hx:overflow-hidden
     hx:bg-white hx:dark:bg-neutral-900
     hx:border hx:border-gray-200 hx:dark:border-neutral-800
     hx:text-gray-900 hx:dark:text-gray-100;
@@ -36,6 +37,8 @@
   width: calc(100% - 1rem);
   max-width: 640px;
   max-height: min(500px, calc(100vh - 4rem));
+  /* Stronger, darker shadow than shadow-2xl to better lift off backdrop. */
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
 }
 
 .hextra-search-dialog::backdrop {
@@ -108,7 +111,7 @@
 }
 
 .hextra-search-input-icon {
-  @apply hx:h-4 hx:w-4 hx:shrink-0 hx:text-gray-400 hx:dark:text-gray-500;
+  @apply hx:h-5 hx:w-5 hx:shrink-0 hx:text-gray-400 hx:dark:text-gray-500;
 }
 
 .hextra-search-input {
@@ -133,7 +136,12 @@
 .hextra-search-input-kbd {
   @apply hx:hidden hx:sm:inline-flex hx:items-center hx:select-none
     hx:rounded-sm hx:border hx:border-gray-200 hx:dark:border-gray-100/20
-    hx:bg-white hx:dark:bg-dark/50 hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500;
+    hx:bg-white hx:dark:bg-dark/50 hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium
+    hx:text-gray-500 hx:dark:text-gray-400
+    hx:cursor-pointer hx:transition-colors
+    hx:hover:text-gray-900 hx:dark:hover:text-gray-100
+    hx:hover:border-gray-300 hx:dark:hover:border-gray-100/30
+    hx:hextra-focus-visible;
 }
 
 /* Results viewport: animates height smoothly as results change (fumadocs-style). */
@@ -144,7 +152,7 @@
 }
 
 .hextra-search-results-inner {
-  @apply hx:max-h-[24rem] hx:overflow-y-auto hx:overscroll-contain hx:p-1;
+  @apply hx:max-h-[28rem] hx:overflow-y-auto hx:overscroll-contain hx:p-1;
 }
 
 /* Results list */

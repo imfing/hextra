@@ -43,6 +43,9 @@
       btn.addEventListener('click', () => openDialog());
     });
 
+    const closeBtn = dialog.querySelector('[data-search-close]');
+    if (closeBtn) closeBtn.addEventListener('click', () => closeDialog());
+
     document.addEventListener('keydown', handleGlobalKeyDown);
 
     input.addEventListener('input', runSearch);

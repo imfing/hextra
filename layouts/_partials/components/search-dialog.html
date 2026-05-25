@@ -26,7 +26,13 @@
           aria-expanded="false"
           aria-activedescendant=""
         />
-        <kbd class="hextra-search-input-kbd">ESC</kbd>
+        {{- $closeLabel := (T "close") | default "Close" -}}
+        <button
+          type="button"
+          class="hextra-search-input-kbd"
+          data-search-close
+          aria-label="{{ $closeLabel }}"
+        >ESC</button>
       </div>
       <div class="hextra-search-results-viewport" data-search-viewport>
         <div class="hextra-search-results-inner hextra-scrollbar" data-search-inner>

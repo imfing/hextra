@@ -1,15 +1,40 @@
 {{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
-<button
-  type="button"
-  class="hextra-search-trigger"
-  data-search-open
-  aria-haspopup="dialog"
-  aria-controls="hextra-search-dialog"
-  aria-label="{{ $placeholder }}"
->
-  <svg class="hextra-search-trigger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z" />
-  </svg>
-  <span class="hextra-search-trigger-label">{{ $placeholder }}</span>
-  <kbd class="hextra-search-trigger-kbd">CTRL K</kbd>
-</button>
+{{- $iconHeight := 24 -}}
+{{- /* When the navbar search menu item has `icon` set, render an icon-only
+       trigger — mirrors the icon-menu pattern in _partials/navbar.html. */ -}}
+{{- $icon := "" -}}
+{{- if reflect.IsMap . -}}
+  {{- with .params -}}
+    {{- $icon = .icon -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $icon -}}
+  <button
+    type="button"
+    class="hx:p-2 hx:text-current hx:cursor-pointer hx:hextra-focus-visible"
+    data-search-open
+    aria-haspopup="dialog"
+    aria-controls="hextra-search-dialog"
+    aria-label="{{ $placeholder }}"
+    title="{{ $placeholder }}"
+  >
+    {{- partial "utils/icon.html" (dict "name" $icon "attributes" (printf "height=%d" $iconHeight)) -}}
+    <span class="hx:sr-only">{{ $placeholder }}</span>
+  </button>
+{{- else -}}
+  <button
+    type="button"
+    class="hextra-search-trigger"
+    data-search-open
+    aria-haspopup="dialog"
+    aria-controls="hextra-search-dialog"
+    aria-label="{{ $placeholder }}"
+  >
+    <svg class="hextra-search-trigger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    <span class="hextra-search-trigger-label">{{ $placeholder }}</span>
+    <kbd class="hextra-search-trigger-kbd">CTRL K</kbd>
+  </button>
+{{- end -}}
