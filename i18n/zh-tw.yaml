@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "關閉橫幅"
+imageGallery: "圖片庫"
 menu: "選單"
 mermaidDiagram: "圖表"
+nextImage: "下一張圖片"
 pdfViewer: "PDF 檢視器"
 permalinkLabel: "此章節的永久連結"
 playbackTime: "播放時間"
+previousImage: "上一張圖片"
 searchResults: "搜尋結果"
 skipToContent: "跳至內容"
 tableOfContents: "目錄"

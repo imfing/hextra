@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "배너 닫기"
+imageGallery: "이미지 갤러리"
 menu: "메뉴"
 mermaidDiagram: "다이어그램"
+nextImage: "다음 이미지"
 pdfViewer: "PDF 뷰어"
 permalinkLabel: "이 섹션에 대한 고유 링크"
 playbackTime: "재생 시간"
+previousImage: "이전 이미지"
 searchResults: "검색 결과"
 skipToContent: "본문으로 건너뛰기"
 tableOfContents: "목차"

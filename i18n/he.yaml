@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "סגור באנר"
+imageGallery: "גלריית תמונות"
 menu: "תפריט"
 mermaidDiagram: "תרשים"
+nextImage: "התמונה הבאה"
 pdfViewer: "מציג PDF"
 permalinkLabel: "קישור קבוע לפסקה זו"
 playbackTime: "זמן ניגון"
+previousImage: "התמונה הקודמת"
 searchResults: "תוצאות חיפוש"
 skipToContent: "דלג לתוכן"
 tableOfContents: "תוכן עניינים"

@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Close banner"
+imageGallery: "Image gallery"
 menu: "Menu"
 mermaidDiagram: "Diagram"
+nextImage: "Next image"
 pdfViewer: "PDF viewer"
 permalinkLabel: "Permalink for this section"
 playbackTime: "Playback time"
+previousImage: "Previous image"
 searchResults: "Search results"
 skipToContent: "Skip to content"
 tableOfContents: "Table of contents"

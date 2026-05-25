@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Đóng biểu ngữ"
+imageGallery: "Thư viện ảnh"
 menu: "Menu"
 mermaidDiagram: "Sơ đồ"
+nextImage: "Ảnh kế tiếp"
 pdfViewer: "Trình xem PDF"
 permalinkLabel: "Liên kết cố định đến phần này"
 playbackTime: "Thời gian phát"
+previousImage: "Ảnh trước"
 searchResults: "Kết quả tìm kiếm"
 skipToContent: "Chuyển đến nội dung"
 tableOfContents: "Mục lục"

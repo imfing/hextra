@@ -37,7 +37,7 @@ title: 我的页面
 math: true
 ---
 
-{{%/* jupyter "notebook.ipynb" */%}}
+{{</* jupyter "notebook.ipynb" */>}}
 ```
 
 或者，你可以利用 Hugo 的[页面包][page-bundles]功能，将 Jupyter Notebook 与 Markdown 文件组织在一起。
@@ -59,7 +59,7 @@ title: 我的页面
 math: true
 ---
 
-{{%/* jupyter "notebook.ipynb" */%}}
+{{</* jupyter "notebook.ipynb" */>}}
 ```
 
 ### 使用远程笔记本
@@ -67,13 +67,13 @@ math: true
 你也可以通过提供笔记本文件的 URL 来使用远程笔记本。例如，要在页面中嵌入 [什么是 Jupyter Notebook](https://github.com/jupyter/notebook/blob/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb) 笔记本，可以使用以下短代码：
 
 ```
-{{%/* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */%}}
+{{</* jupyter "https://raw.githubusercontent.com/jupyter/notebook/main/docs/source/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.ipynb" */>}}
 ```
 
 ## 示例笔记本
 
 {{< callout type="info" >}}以下示例展示的是项目 assets 文件夹中包含的笔记本文件。{{< /callout >}}
 
-{{% jupyter "example.ipynb" %}}
+{{< jupyter "example.ipynb" >}}
 
 [page-bundles]: https://gohugo.io/content-management/page-bundles/#leaf-bundles

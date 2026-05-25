@@ -13,6 +13,27 @@ Open source projects powered by Hextra
 
 {{< cards >}}
   {{< card
+        link="https://goreleaser.com"
+        title="GoReleaser"
+        image="https://github.com/user-attachments/assets/6f02b5f5-4a84-4c18-983f-149d9568a8d1"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
+        link="https://golangci-lint.run"
+        title="golangci-lint"
+        image="https://github.com/user-attachments/assets/a4ff6b5e-f7e7-4646-b0c4-3e42473d5128"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
+        link="https://rustdesk.com/docs/en/"
+        title="RustDesk Docs"
+        image="https://github.com/user-attachments/assets/7d48512f-e51d-447d-b693-bf4c9f4e5bc2"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
         link="https://docs.sortie-ai.com"
         title="Sortie"
         image="https://raw.githubusercontent.com/sortie-ai/docs/refs/heads/main/static/img/screenshot.png"
@@ -34,8 +55,8 @@ Open source projects powered by Hextra
   >}}
 
   {{< card
-        link="https://github.com/claceio/clace"
-        title="Clace"
+        link="https://github.com/openrundev/openrun"
+        title="OpenRun"
         image="https://github.com/user-attachments/assets/af4dbd21-a492-48dd-96fd-8542c548bd03"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
@@ -44,13 +65,6 @@ Open source projects powered by Hextra
         link="https://github.com/regolith-linux/regolith-desktop.com"
         title="Regolith Desktop"
         image="https://github.com/user-attachments/assets/4bbedd7d-67ef-4363-91f1-acb4a0c5f8d0"
-        imageStyle="object-fit:cover; aspect-ratio:16/9;"
-  >}}
-
-  {{< card
-        link="https://github.com/modelcontextprotocol/specification"
-        title="Model Context Protocol Specification"
-        image="https://github.com/user-attachments/assets/1bb4f952-b8fc-43b5-9cbd-cd7213c2ba90"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 
@@ -103,13 +117,6 @@ Open source projects powered by Hextra
   >}}
 
   {{< card
-        link="https://owaspai.org/"
-        title="OWASP AI Security and Privacy Guide"
-        image="https://github.com/imfing/hextra/assets/5097752/fbb1d3a5-a0e8-4cfc-88cf-3523b0176c89"
-        imageStyle="object-fit:cover; aspect-ratio:16/9;"
-  >}}
-
-  {{< card
         link="https://developers.osuny.org"
         title="Osuny"
         image="https://raw.githubusercontent.com/noesya/osuny-developers/main/static/images/showcase-hextra/screenshot.png"
@@ -123,7 +130,7 @@ Open source projects powered by Hextra
   >}}
 
   {{< card
-        link="https://hoa.moe/"
+        link="https://github.com/HITSZ-OpenAuto/hoa-moe"
         title="HITSZ OpenAuto"
         image="https://raw.githubusercontent.com/HITSZ-OpenAuto/hoa.moe/main/static/images/showcase-new.png"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"

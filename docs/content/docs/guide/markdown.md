@@ -39,9 +39,12 @@ Blockquote with attribution
 
 {{< new-feature version="v0.9.0" >}}
 
-Alerts are a Markdown extension based on the blockquote syntax that you can use to emphasize critical information.
-[GitHub-style alerts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) are supported.
+Also known as callouts or admonitions, alerts are blockquotes used to emphasize critical information.
 Please make sure you are using the latest version of Hextra and [Hugo v0.146.0](https://github.com/gohugoio/hugo/releases/tag/v0.146.0) or later.
+
+#### Basic syntax
+
+Use `[!TYPE]` as the first line of the blockquote.
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
@@ -73,6 +76,20 @@ Please make sure you are using the latest version of Hextra and [Hugo v0.146.0](
 
 > [!CAUTION]
 > Advises about risks or negative outcomes of certain actions.
+```
+
+The basic syntax is compatible with GitHub, Obsidian, and Typora.
+
+#### Extended syntax
+
+Add `+` or `-` after the type to make the alert foldable, and add text after the marker to set a custom title. This syntax is compatible with [Obsidian callouts](https://help.obsidian.md/Editing+and+formatting/Callouts) only.
+
+> [!TIP]- Are alerts foldable?
+> Yes. Foldable alerts hide their content when collapsed.
+
+```markdown {filename=Markdown}
+> [!TIP]- Are alerts foldable?
+> Yes. Foldable alerts hide their content when collapsed.
 ```
 
 ### Tables

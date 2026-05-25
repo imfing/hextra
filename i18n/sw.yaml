@@ -1,10 +1,13 @@
 # Accessibility labels (screen reader only)
 closeBanner: "Funga bango"
+imageGallery: "Maktaba ya picha"
 menu: "Menyu"
 mermaidDiagram: "Mchoro"
+nextImage: "Picha inayofuata"
 pdfViewer: "Kitazamaji cha PDF"
 permalinkLabel: "Kiungo cha kudumu kwa sehemu hii"
 playbackTime: "Muda wa kucheza"
+previousImage: "Picha iliyotangulia"
 searchResults: "Matokeo ya utafutaji"
 skipToContent: "Ruka hadi maudhui"
 tableOfContents: "Jedwali la yaliyomo"
