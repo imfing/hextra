@@ -10,6 +10,7 @@ test("render hook resolves Markdown page links to Hugo clean URLs", () => {
   const publishDir = join(siteDir, "public");
   const themesDir = join(siteDir, "themes");
 
+  mkdirSync(join(contentDir, "docs", "guide", "bundle"), { recursive: true });
   mkdirSync(join(contentDir, "docs", "guide", "sub"), { recursive: true });
   mkdirSync(themesDir);
   symlinkSync(process.cwd(), join(themesDir, "hextra"), "dir");
@@ -77,6 +78,15 @@ title: Current
 [Remote](https://example.com/readme.md)
 `
   );
+  writeFileSync(
+    join(contentDir, "docs", "guide", "bundle", "index.md"),
+    `---
+title: Bundle
+---
+
+[Bundle sibling](../sibling.md)
+`
+  );
 
   try {
     execFileSync("hugo", ["--source", siteDir, "--themesDir", themesDir, "--destination", publishDir], { cwd: process.cwd(), stdio: "pipe" });
@@ -94,6 +104,9 @@ title: Current
     expect(contentHtml).toContain('href="/base/docs/overview/#top">Absolute');
     expect(contentHtml).toContain('href="missing.md?x=1#frag">Missing');
     expect(contentHtml).toContain('href="https://example.com/readme.md"target="_blank" rel="noopener">Remote');
+
+    const bundleHtml = readFileSync(join(publishDir, "docs", "guide", "bundle", "index.html"), "utf8");
+    expect(bundleHtml).toContain('href="/base/docs/guide/sibling/">Bundle sibling');
   } finally {
     rmSync(siteDir, { recursive: true, force: true });
   }

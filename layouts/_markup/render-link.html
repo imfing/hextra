@@ -14,7 +14,12 @@
 
 {{/* Resolve local Markdown page links to Hugo clean URLs before falling back to static/resource handling. */}}
 {{- if and $parsedURL $dest (not $url.IsAbs) $url.Path (strings.HasSuffix $url.Path ".md") -}}
-  {{- $pagePath := strings.TrimSuffix ".md" (strings.TrimPrefix "./" $url.Path) -}}
+  {{- $pagePath := strings.TrimSuffix ".md" $url.Path -}}
+  {{- if hasPrefix $pagePath "/" -}}
+    {{- $pagePath = strings.TrimPrefix "/" $pagePath -}}
+  {{- else -}}
+    {{- $pagePath = path.Join .PageInner.File.Dir $pagePath -}}
+  {{- end -}}
   {{- with .PageInner.GetPage $pagePath -}}
     {{- $dest = printf "%s%s%s" .RelPermalink $query $fragment -}}
     {{- $resolvedPage = true -}}
