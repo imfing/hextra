@@ -5,7 +5,7 @@
 // {{ $noResultsFound := (T "noResultsFound") | default "No results found." }}
 
 (function () {
-  const resultsFoundTemplate = '{{ (T "resultsFound") | default "%d results found" }}';
+  const resultsFoundTemplate = '{{ (T "resultsFound") | default "%d results found" | safeJS }}';
   const noResultsText = '{{ $noResultsFound | safeJS }}';
 
   const EDITABLE_TAGS = ['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'];
@@ -19,6 +19,7 @@
   let viewportEl;
   let innerEl;
   let closeAnimationListener = null;
+  let closeTimer = null;
 
   document.addEventListener('DOMContentLoaded', init);
 
@@ -35,7 +36,12 @@
 
     if (isMac) {
       document.querySelectorAll('.hextra-search-trigger-kbd').forEach(el => {
-        el.innerHTML = '<span class="hx:text-xs">⌘</span>K';
+        while (el.firstChild) el.removeChild(el.firstChild);
+        const cmd = document.createElement('span');
+        cmd.style.fontSize = '0.75rem';
+        cmd.textContent = '⌘';
+        el.appendChild(cmd);
+        el.appendChild(document.createTextNode('K'));
       });
     }
 
@@ -129,6 +135,10 @@
       dialog.removeEventListener('animationend', closeAnimationListener);
       closeAnimationListener = null;
     }
+    if (closeTimer !== null) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
     delete dialog.dataset.state;
   }
 
@@ -142,16 +152,31 @@
     }
 
     dialog.dataset.state = 'closing';
+    const finalize = () => {
+      if (closeTimer !== null) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      if (closeAnimationListener) {
+        dialog.removeEventListener('animationend', closeAnimationListener);
+        closeAnimationListener = null;
+      }
+      if (dialog.dataset.state === 'closing') {
+        delete dialog.dataset.state;
+        dialog.close();
+      }
+    };
     // The backdrop animation is the longest — wait for it so neither layer
     // gets cut off when the dialog is removed from the top layer.
     closeAnimationListener = (e) => {
       if (e.animationName !== 'hextra-search-backdrop-out') return;
-      dialog.removeEventListener('animationend', closeAnimationListener);
-      closeAnimationListener = null;
-      delete dialog.dataset.state;
-      dialog.close();
+      finalize();
     };
     dialog.addEventListener('animationend', closeAnimationListener);
+    // animationend on ::backdrop doesn't bubble reliably across browsers
+    // (Firefox in particular); force-close shortly after the 300ms animation
+    // so the dialog can't get stranded.
+    closeTimer = setTimeout(finalize, 400);
   }
 
   function collapseViewport() {
@@ -169,6 +194,9 @@
   }
 
   function handleInputKeyDown(e) {
+    // During IME composition the user is still selecting a candidate; Enter
+    // commits the candidate (not the result), arrow keys cycle candidates.
+    if (e.isComposing || e.keyCode === 229) return;
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
@@ -251,7 +279,19 @@
       return;
     }
     if (!window.hextraSearch) return;
-    const results = await window.hextraSearch.search(query);
+    let results;
+    try {
+      results = await window.hextraSearch.search(query);
+    } catch (err) {
+      // Stale failure for an old query — ignore. Otherwise log and fall
+      // through to an empty render so the user sees feedback instead of stale
+      // results.
+      if (input.value.trim() !== query) return;
+      console.warn('[hextra-search]', err);
+      results = [];
+    }
+    // Drop stale results if the input changed during the await.
+    if (input.value.trim() !== query) return;
     renderResults(results, query);
   }
 
@@ -286,6 +326,7 @@
 
   function renderResults(results, query) {
     clearResults();
+    if (innerEl) innerEl.scrollTop = 0;
 
     if (!results.length) {
       if (emptyEl) emptyEl.hidden = false;
@@ -309,6 +350,9 @@
       const link = document.createElement('a');
       link.id = result.id;
       link.href = result.route;
+      // aria-activedescendant pattern: focus stays on the input; result
+      // anchors must not be in the Tab sequence.
+      link.tabIndex = -1;
       link.setAttribute('role', 'option');
       link.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
 
@@ -317,15 +361,17 @@
         crumb.className = 'hextra-search-crumb';
         crumb.textContent = result.prefix;
         link.appendChild(crumb);
+      }
 
-        const title = document.createElement('div');
-        title.className = 'hextra-search-title';
-        appendHighlightedText(title, result.children.title, query);
-        link.appendChild(title);
-      } else {
+      const title = document.createElement('div');
+      title.className = 'hextra-search-title';
+      appendHighlightedText(title, result.children.title, query);
+      link.appendChild(title);
+
+      if (result.children.content && result.children.content !== result.children.title) {
         const excerpt = document.createElement('div');
         excerpt.className = 'hextra-search-excerpt';
-        appendHighlightedText(excerpt, result.children.content || result.children.title, query);
+        appendHighlightedText(excerpt, result.children.content, query);
         link.appendChild(excerpt);
       }
 

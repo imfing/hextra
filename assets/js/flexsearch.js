@@ -22,7 +22,7 @@
    */
   function preloadIndex() {
     if (indexPromise) return indexPromise;
-    indexPromise = (async () => {
+    const attempt = (async () => {
       const tokenize = '{{- site.Params.search.flexsearch.tokenize | default  "forward" -}}';
 
       // https://github.com/TryGhost/Ghost/pull/21148
@@ -128,6 +128,15 @@
         });
       }
     })();
+    // Clear the cached promise on failure so the next call retries instead of
+    // returning the rejection forever.
+    const wrapped = attempt.catch((err) => {
+      if (indexPromise === wrapped) indexPromise = null;
+      pageIndex = undefined;
+      sectionIndex = undefined;
+      throw err;
+    });
+    indexPromise = wrapped;
     return indexPromise;
   }
 

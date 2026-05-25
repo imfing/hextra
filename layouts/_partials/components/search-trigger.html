@@ -1,3 +1,9 @@
+{{/* Render a search trigger button.
+
+  Expects a dict with:
+  - params: an optional menu-item .Params map, optionally including `icon`
+  - location: where the trigger is rendered, currently "navbar"
+*/}}
 {{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
 {{- $iconHeight := 24 -}}
 {{- /* When the navbar search menu item has `icon` set, render an icon-only
