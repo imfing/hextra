@@ -140,17 +140,24 @@
     return indexPromise;
   }
 
+  function getParentCrumb(crumb, title) {
+    if (!crumb || !title) return crumb || '';
+    if (crumb === title) return '';
+    const suffix = ` > ${title}`;
+    return crumb.endsWith(suffix) ? crumb.slice(0, -suffix.length) : crumb;
+  }
+
   /**
-   * Run the actual FlexSearch query and return a sorted, deduped result list.
+   * Run the actual FlexSearch query and return sorted, deduped page groups.
    * @param {string} query
-   * @returns {Array<{id: string, route: string, title: string, prefix?: string, children: {title: string, content: string}}>}
+   * @returns {Array<{id: string, route: string, title: string, prefix: string, matches: Array<{id: string, route: string, title: string, content: string}>}>}
    */
   function performSearch(query) {
     const maxPageResults = parseInt('{{- site.Params.search.flexsearch.maxPageResults | default 20 -}}', 10);
     const maxSectionResults = parseInt('{{- site.Params.search.flexsearch.maxSectionResults | default 10 -}}', 10);
     const pageResults = pageIndex.search(query, maxPageResults, { enrich: true, suggest: true })[0]?.result || [];
 
-    const results = [];
+    const groups = [];
     const pageTitleMatches = {};
 
     for (let i = 0; i < pageResults.length; i++) {
@@ -159,8 +166,14 @@
 
       const sectionResults = sectionIndex.search(query,
         { enrich: true, suggest: true, tag: { 'pageId': `page_${result.id}` } })[0]?.result || [];
-      let isFirstItemOfPage = true;
       const occurred = {};
+      const group = {
+        _page_rk: i,
+        route: '',
+        title: result.doc.title,
+        prefix: getParentCrumb(result.doc.crumb, result.doc.title),
+        matches: []
+      };
 
       const nResults = Math.min(sectionResults.length, maxSectionResults);
       for (let j = 0; j < nResults; j++) {
@@ -174,34 +187,36 @@
 
         if (occurred[url + '@' + content]) continue;
         occurred[url + '@' + content] = true;
-        results.push({
-          _page_rk: i,
-          _section_rk: j,
+        if (!group.route) group.route = url.split('#')[0];
+        group.matches.push({
           route: url,
-          title: result.doc.title,
-          prefix: isFirstItemOfPage ? result.doc.crumb : undefined,
-          children: { title, content }
+          title,
+          content
         });
-        isFirstItemOfPage = false;
       }
+
+      if (group.matches.length) groups.push(group);
     }
 
-    return results
+    let optionId = 0;
+    return groups
       .sort((a, b) => {
-        if (a._page_rk === b._page_rk) {
-          return a._section_rk - b._section_rk;
-        }
         if (pageTitleMatches[a._page_rk] !== pageTitleMatches[b._page_rk]) {
           return pageTitleMatches[b._page_rk] - pageTitleMatches[a._page_rk];
         }
         return a._page_rk - b._page_rk;
       })
-      .map((res, idx) => ({
-        id: `hextra-search-opt-${idx}`,
+      .map((res) => ({
+        id: `hextra-search-opt-${optionId++}`,
         route: res.route,
         title: res.title,
         prefix: res.prefix,
-        children: res.children
+        matches: res.matches.map((match) => ({
+          id: `hextra-search-opt-${optionId++}`,
+          route: match.route,
+          title: match.title,
+          content: match.content
+        }))
       }));
   }
 
