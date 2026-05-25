@@ -21,7 +21,7 @@
     {{- $currentPage := . -}}
     {{- range .Site.Menus.main -}}
       {{- if eq .Params.type "search" -}}
-        {{- partial "search.html" (dict "params" .Params "location" "navbar") -}}
+        {{- partial "search.html" (dict "icon" .Params.icon) -}}
       {{- else -}}
         {{- $link := .URL -}}
         {{- $external := strings.HasPrefix $link "http" -}}
