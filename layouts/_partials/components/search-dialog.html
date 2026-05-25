@@ -9,9 +9,7 @@
   >
     <div class="hextra-search">
       <div class="hextra-search-input-wrapper">
-        <svg class="hextra-search-input-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
+        {{- partial "utils/icon.html" (dict "name" "search" "attributes" `class="hextra-search-input-icon" focusable="false"`) -}}
         <input
           class="hextra-search-input"
           type="search"

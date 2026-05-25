@@ -10,7 +10,7 @@
     hx:transition-colors hx:cursor-pointer hx:hextra-focus-visible
     hx:md:justify-start hx:md:gap-2 hx:md:p-0 hx:md:px-3 hx:md:py-2
     hx:md:w-48 hx:md:text-sm hx:md:leading-tight
-    hx:md:bg-black/[.05] hx:md:dark:bg-gray-50/10
+    hx:md:bg-black/5 hx:md:dark:bg-gray-50/10
     hx:md:text-gray-500 hx:md:hover:text-gray-900
     hx:md:dark:text-gray-400 hx:md:dark:hover:text-gray-50;
 }
@@ -159,7 +159,7 @@
 }
 
 .hextra-search-results-inner {
-  @apply hx:max-h-[28rem] hx:overflow-y-auto hx:overscroll-contain hx:p-1;
+  @apply hx:max-h-112 hx:overflow-y-auto hx:overscroll-contain hx:p-1;
 }
 
 /* Results list */

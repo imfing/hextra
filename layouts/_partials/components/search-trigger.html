@@ -31,9 +31,7 @@
     aria-controls="hextra-search-dialog"
     aria-label="{{ $placeholder }}"
   >
-    <svg class="hextra-search-trigger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z" />
-    </svg>
+    {{- partial "utils/icon.html" (dict "name" "search" "attributes" `class="hextra-search-trigger-icon" focusable="false"`) -}}
     <span class="hextra-search-trigger-label">{{ $placeholder }}</span>
     <kbd class="hextra-search-trigger-kbd">CTRL K</kbd>
   </button>
