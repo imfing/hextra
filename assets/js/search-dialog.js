@@ -364,6 +364,34 @@
     }
   }
 
+  function createBreadcrumbSeparator() {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.classList.add('hextra-search-crumb-separator');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '2');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'm9 18 6-6-6-6');
+    svg.appendChild(path);
+    return svg;
+  }
+
+  function appendBreadcrumb(container, parts) {
+    for (let i = 0; i < parts.length; i++) {
+      if (i > 0) container.appendChild(createBreadcrumbSeparator());
+
+      const part = document.createElement('span');
+      part.textContent = parts[i];
+      container.appendChild(part);
+    }
+  }
+
   function renderResults(results, query) {
     cancelCollapse();
     clearResults();
@@ -396,10 +424,11 @@
       isFirstOption = false;
       optionCount++;
 
-      if (result.prefix) {
+      if (result.breadcrumbs && result.breadcrumbs.length) {
         const crumb = document.createElement('div');
         crumb.className = 'hextra-search-crumb';
-        crumb.textContent = result.prefix;
+        crumb.setAttribute('aria-label', result.breadcrumbs.join(' > '));
+        appendBreadcrumb(crumb, result.breadcrumbs);
         link.appendChild(crumb);
       }
 

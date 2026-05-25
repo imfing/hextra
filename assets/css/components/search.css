@@ -193,7 +193,15 @@
 
 /* Inline breadcrumb shown above the title on the parent (first) result per page. */
 .hextra-search-crumb {
-  @apply hx:text-xs hx:text-gray-600 hx:dark:text-gray-400 hx:leading-4;
+  @apply hx:flex hx:items-center hx:gap-0.5 hx:text-xs hx:text-gray-600 hx:dark:text-gray-400 hx:leading-4;
+}
+
+.hextra-search-crumb-separator {
+  @apply hx:h-3.5 hx:w-3.5 hx:shrink-0 hx:text-gray-400 hx:dark:text-gray-500;
+}
+
+[dir="rtl"] .hextra-search-crumb-separator {
+  transform: rotate(180deg);
 }
 
 .hextra-search-title {

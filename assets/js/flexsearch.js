@@ -38,7 +38,7 @@
         cache: 100,
         document: {
           id: 'id',
-          store: ['title', 'crumb'],
+          store: ['title', 'breadcrumbs'],
           index: "content"
         }
       });
@@ -66,6 +66,7 @@
         const urlParts = route.split('/').filter(x => x !== "" && !x.startsWith('#'));
 
         let crumb = '';
+        const crumbParts = [];
         let searchUrl = '/';
         for (let i = 0; i < urlParts.length; i++) {
           const urlPart = urlParts[i];
@@ -81,6 +82,7 @@
           if (title === "_index") {
             title = urlPart.split("-").map(x => x).join(" ");
           }
+          crumbParts.push(title);
           crumb += title;
 
           if (i < urlParts.length - 1) {
@@ -123,7 +125,7 @@
         pageIndex.add({
           id: pageId,
           title: data[route].title,
-          crumb,
+          breadcrumbs: crumbParts.slice(0, -1),
           content: pageContent
         });
       }
@@ -140,17 +142,10 @@
     return indexPromise;
   }
 
-  function getParentCrumb(crumb, title) {
-    if (!crumb || !title) return crumb || '';
-    if (crumb === title) return '';
-    const suffix = ` > ${title}`;
-    return crumb.endsWith(suffix) ? crumb.slice(0, -suffix.length) : crumb;
-  }
-
   /**
    * Run the actual FlexSearch query and return sorted, deduped page groups.
    * @param {string} query
-   * @returns {Array<{id: string, route: string, title: string, prefix: string, matches: Array<{id: string, route: string, title: string, content: string}>}>}
+   * @returns {Array<{id: string, route: string, title: string, breadcrumbs: string[], matches: Array<{id: string, route: string, title: string, content: string}>}>}
    */
   function performSearch(query) {
     const maxPageResults = parseInt('{{- site.Params.search.flexsearch.maxPageResults | default 20 -}}', 10);
@@ -171,7 +166,7 @@
         _page_rk: i,
         route: '',
         title: result.doc.title,
-        prefix: getParentCrumb(result.doc.crumb, result.doc.title),
+        breadcrumbs: result.doc.breadcrumbs || [],
         matches: []
       };
 
@@ -210,7 +205,7 @@
         id: `hextra-search-opt-${optionId++}`,
         route: res.route,
         title: res.title,
-        prefix: res.prefix,
+        breadcrumbs: res.breadcrumbs,
         matches: res.matches.map((match) => ({
           id: `hextra-search-opt-${optionId++}`,
           route: match.route,
