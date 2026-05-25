@@ -22,6 +22,10 @@
     @apply hx:px-4 hx:pt-4 hx:md:hidden;
   }
 
+  .hextra-sidebar-search-item {
+    @apply hx:py-1.5;
+  }
+
   .hextra-sidebar-scroll {
     @apply hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--hextra-banner-height)-var(--menu-height))];
   }

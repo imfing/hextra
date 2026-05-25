@@ -9,7 +9,11 @@
 {{- $static := .static | default false -}}
 
 {{- range (.nodes | default slice) -}}
-  {{- if .separator -}}
+  {{- if eq .type "search" -}}
+    <li class="hextra-sidebar-search-item">
+      {{- partial "search.html" (dict "location" "sidebar") -}}
+    </li>
+  {{- else if .separator -}}
     <li class="hextra-sidebar-separator">
       <span>{{ .title }}</span>
     </li>

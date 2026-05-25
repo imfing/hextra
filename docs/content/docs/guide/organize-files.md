@@ -152,6 +152,19 @@ Sidebar entries without a `link` are rendered as non-clickable group headings. T
 
 This is also a way to expose a folder that has no `_index.md`: declare a group with the desired title and list its child pages explicitly.
 
+### Search Input
+
+Place the search input inline in the sidebar by adding a node with `type: search`:
+
+```yaml {filename="data/<lang>/sidebar/docs.yaml"}
+- type: search
+- link: /docs/getting-started/
+- link: /docs/guide/
+  merge: deep
+```
+
+This is useful when the navbar search is disabled or when you want a sticky search at the top of the docs sidebar on desktop.
+
 ### Scoping by Section
 
 Data-driven sidebars are scoped per section. Place files under `data/<lang>/sidebar/` mirroring the content tree; the lookup walks from the deepest matching section upward, so a more specific file wins:
