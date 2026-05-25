@@ -6,6 +6,17 @@
   }
 }
 
+@media (max-width: 48rem) {
+  .hextra-nav-container-blur {
+    background-color: var(--hx-color-white) !important;
+    height: max(100%, var(--hextra-banner-height));
+  }
+
+  .dark .hextra-nav-container-blur {
+    background-color: var(--hx-color-dark) !important;
+  }
+}
+
 /* Hamburger Menu - Flattened Structure */
 .hextra-hamburger-menu svg g {
   @apply hx:origin-center hx:transition-all hx:duration-100 hx:ease-out;
