@@ -1,9 +1,3 @@
-nav {
-  .hextra-search-wrapper {
-    @apply hx:hidden hx:md:inline-block;
-  }
-}
-
 @supports (
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {

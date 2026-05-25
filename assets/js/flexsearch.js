@@ -63,7 +63,7 @@
       for (const route in data) {
         let pageContent = '';
         ++pageId;
-        const urlParts = route.split('/').filter(x => x != "" && !x.startsWith('#'));
+        const urlParts = route.split('/').filter(x => x !== "" && !x.startsWith('#'));
 
         let crumb = '';
         let searchUrl = '/';
@@ -78,7 +78,7 @@
           }
 
           let title = data[searchUrl].title;
-          if (title == "_index") {
+          if (title === "_index") {
             title = urlPart.split("-").map(x => x).join(" ");
           }
           crumb += title;
@@ -90,7 +90,7 @@
 
         for (const heading in data[route].data) {
           const [hash, text] = heading.split('#');
-          const url = route.trimEnd('/') + (hash ? '#' + hash : '');
+          const url = route.replace(/\/+$/, '') + (hash ? '#' + hash : '');
           const title = text || data[route].title;
 
           const content = data[route].data[heading] || '';

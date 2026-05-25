@@ -98,7 +98,7 @@
   }
 
   function handleGlobalKeyDown(e) {
-    if ((e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)) {
+    if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
       // A dialog mid-dismiss is logically "closed" for toggle purposes — without
       // this, a rapid second Cmd+K is eaten by closeDialog's early-return.
@@ -138,7 +138,7 @@
       input.focus();
       input.select();
     });
-    if (window.hextraSearch) window.hextraSearch.preload();
+    if (window.hextraSearch) window.hextraSearch.preload().catch(() => {});
   }
 
   function cancelClose() {

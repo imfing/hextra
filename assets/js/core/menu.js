@@ -61,7 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Close menu on Escape key (mobile only)
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileQuery.matches && isMenuOpen()) {
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('hextra-search-dialog')?.open) return;
+    if (mobileQuery.matches && isMenuOpen()) {
       toggleMenu();
     }
   });
