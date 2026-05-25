@@ -238,6 +238,29 @@ You can use [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) and [Hugo 
 
 Hugo variables available in the footer section are: `.switchesVisible` and `.displayCopyright`.
 
+## Custom Page Sections
+
+You can add custom sections around each page's content by creating any of these files in your site:
+
+```
+layouts/_partials/custom/page-begin.html
+layouts/_partials/custom/content-begin.html
+layouts/_partials/custom/content-end.html
+layouts/_partials/custom/page-end.html
+```
+
+The page hooks are rendered inside the page's `<main>` element. The content hooks are rendered immediately before and after the page content.
+
+Each partial receives the current Hugo page as context, so you can use page parameters, site parameters, and other Hugo template features.
+
+For example, add a page-specific maintainer banner by creating `layouts/_partials/custom/content-begin.html`:
+
+```html {filename="layouts/_partials/custom/content-begin.html"}
+{{ with .Params.maintainers }}
+<aside class="not-prose hx:mb-6 hx:rounded-lg hx:border hx:border-gray-200 hx:p-4 hx:text-sm hx:dark:border-neutral-800">Maintained by {{ delimit . ", " }}</aside>
+{{ end }}
+```
+
 ## Custom Layouts
 
 The layouts of the theme can be overridden by creating a file with the same name in the `layouts` directory of your site.

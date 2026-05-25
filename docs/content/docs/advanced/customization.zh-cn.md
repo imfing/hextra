@@ -238,6 +238,29 @@ layouts/_partials/custom/head-end.html
 
 页脚部分可用的 Hugo 变量有：`.switchesVisible` 和 `.displayCopyright`。
 
+## 自定义页面部分
+
+您可以在站点中创建以下任一文件，在每个页面内容周围添加自定义部分：
+
+```
+layouts/_partials/custom/page-begin.html
+layouts/_partials/custom/content-begin.html
+layouts/_partials/custom/content-end.html
+layouts/_partials/custom/page-end.html
+```
+
+页面钩子会渲染在页面的 `<main>` 元素内。内容钩子会渲染在页面内容的前后。
+
+每个 partial 都会接收当前 Hugo 页面作为上下文，因此可以使用页面参数、站点参数以及其他 Hugo 模板功能。
+
+例如，创建 `layouts/_partials/custom/content-begin.html` 来添加特定页面的维护者横幅：
+
+```html {filename="layouts/_partials/custom/content-begin.html"}
+{{ with .Params.maintainers }}
+<aside class="not-prose hx:mb-6 hx:rounded-lg hx:border hx:border-gray-200 hx:p-4 hx:text-sm hx:dark:border-neutral-800">Maintained by {{ delimit . ", " }}</aside>
+{{ end }}
+```
+
 ## 自定义布局
 
 可以通过在站点的 `layouts` 目录中创建同名文件来覆盖主题的布局。
