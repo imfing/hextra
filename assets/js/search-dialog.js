@@ -84,6 +84,17 @@
       const anchor = e.target.closest('a[role="option"]');
       if (anchor) setActiveOption(anchor, { scroll: false });
     });
+
+    // Result anchors are in the Tab sequence; keep aria-selected in sync with
+    // the focused option so the highlighted row matches keyboard focus.
+    resultsEl.addEventListener('focusin', (e) => {
+      const anchor = e.target.closest('a[role="option"]');
+      if (anchor) setActiveOption(anchor, { scroll: false });
+    });
+
+    // Arrow keys cycle focus among results once focus has left the input.
+    // Enter falls through to native anchor activation.
+    resultsEl.addEventListener('keydown', handleResultsKeyDown);
   }
 
   function handleGlobalKeyDown(e) {
@@ -234,6 +245,49 @@
     }
   }
 
+  function handleResultsKeyDown(e) {
+    const anchor = e.target.closest('a[role="option"]');
+    if (!anchor) return;
+    const focusOption = (el) => {
+      el.focus({ preventScroll: true });
+      el.scrollIntoView({ block: 'nearest' });
+    };
+    const focusSibling = (delta) => {
+      const options = getOptions();
+      const i = options.indexOf(anchor);
+      if (i === -1) return;
+      focusOption(options[(i + delta + options.length) % options.length]);
+    };
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        focusSibling(1);
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        focusSibling(-1);
+        break;
+      case 'Home': {
+        const all = getOptions();
+        if (!all.length) return;
+        e.preventDefault();
+        focusOption(all[0]);
+        break;
+      }
+      case 'End': {
+        const all = getOptions();
+        if (!all.length) return;
+        e.preventDefault();
+        focusOption(all[all.length - 1]);
+        break;
+      }
+      case 'Escape':
+        e.preventDefault();
+        closeDialog();
+        break;
+    }
+  }
+
   function getOptions() {
     return Array.from(resultsEl.querySelectorAll('a[role="option"]'));
   }
@@ -350,9 +404,6 @@
       const link = document.createElement('a');
       link.id = result.id;
       link.href = result.route;
-      // aria-activedescendant pattern: focus stays on the input; result
-      // anchors must not be in the Tab sequence.
-      link.tabIndex = -1;
       link.setAttribute('role', 'option');
       link.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
 

@@ -169,12 +169,14 @@
 
 .hextra-search-results > li {
   @apply hx:list-none;
+  position: relative;
 }
 
 .hextra-search-results > li > a {
   @apply hx:relative hx:flex hx:flex-col hx:gap-0.5 hx:rounded-lg hx:px-2.5 hx:py-2
     hx:text-sm hx:cursor-pointer hx:no-underline
     hx:text-gray-800 hx:dark:text-gray-200;
+  z-index: 1;
 }
 
 .hextra-search-results > li > a[aria-selected="true"] {
@@ -204,7 +206,7 @@
   padding-left: 1rem;
 }
 
-.hextra-search-results > li.hextra-search-child > a::before {
+.hextra-search-results > li.hextra-search-child::before {
   content: "";
   position: absolute;
   left: 0.75rem;
@@ -216,7 +218,7 @@
 
 /* `dark:` inside @apply collapses to an empty :where() on ::before
    pseudo-elements, so the dark variant is written out long-hand. */
-.dark .hextra-search-results > li.hextra-search-child > a::before {
+.dark .hextra-search-results > li.hextra-search-child::before {
   @apply hx:bg-neutral-700;
 }
 
