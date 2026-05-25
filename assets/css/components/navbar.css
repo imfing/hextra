@@ -7,12 +7,12 @@
 }
 
 @media (max-width: 48rem) {
-  .hextra-nav-container-blur {
+  [data-hextra-banner="visible"] .hextra-nav-container-blur {
     background-color: var(--hx-color-white) !important;
     height: max(100%, var(--hextra-banner-height));
   }
 
-  .dark .hextra-nav-container-blur {
+  .dark[data-hextra-banner="visible"] .hextra-nav-container-blur {
     background-color: var(--hx-color-dark) !important;
   }
 }
