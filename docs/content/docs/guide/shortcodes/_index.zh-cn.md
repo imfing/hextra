@@ -24,7 +24,8 @@ Hextra 提供了一系列精美的短代码来增强您的内容。
 Hugo 和 Hextra 提供的其他短代码：
 
 {{< cards >}}
-  {{< card link="jupyter" title="Jupyter 笔记本" icon="jupyter" tag="alpha" >}}
+  {{< card link="jupyter" title="Jupyter 笔记本" icon="jupyter" >}}
   {{< card link="others" title="其他" icon="view-grid" >}}
   {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
+  {{< card link="gallery" title="图片库" icon="photograph" >}}
 {{< /cards >}}

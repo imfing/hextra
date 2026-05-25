@@ -1,14 +1,19 @@
-nav {
-  .hextra-search-wrapper {
-    @apply hx:hidden hx:md:inline-block;
-  }
-}
-
 @supports (
   (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))
 ) {
   .hextra-nav-container-blur {
     @apply hx:backdrop-blur-md hx:bg-white/[.85] hx:dark:bg-dark/80!;
+  }
+}
+
+@media (max-width: 48rem) {
+  [data-hextra-banner="visible"] .hextra-nav-container-blur {
+    background-color: var(--hx-color-white) !important;
+    height: max(100%, var(--hextra-banner-height));
+  }
+
+  .dark[data-hextra-banner="visible"] .hextra-nav-container-blur {
+    background-color: var(--hx-color-dark) !important;
   }
 }
 

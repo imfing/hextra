@@ -1,53 +1,43 @@
 {{- $content := .content -}}
 {{- $alertType := .alertType -}}
 {{- $alertTitle := .alertTitle -}}
+{{- $alertSign := .alertSign -}}
 
-{{- $styles := newScratch -}}
-{{- $styles.Set "default" (dict
-  "icon" "light-bulb"
-  "style" "hx:border-green-200 hx:bg-green-100 hx:text-green-900 hx:dark:border-green-200/30 hx:dark:bg-green-900/30 hx:dark:text-green-200"
-  )
+{{- $icons := dict
+  "note" "information-circle"
+  "tip" "light-bulb"
+  "important" "information-circle"
+  "warning" "exclamation"
+  "caution" "exclamation-circle"
 -}}
-{{- $styles.Set "note" (dict
-  "icon" "information-circle"
-  "style" "hx:border-blue-200 hx:bg-blue-100 hx:text-blue-900 hx:dark:border-blue-200/30 hx:dark:bg-blue-900/30 hx:dark:text-blue-200"
-  )
--}}
-{{- $styles.Set "tip" (dict
-  "icon" "light-bulb"
-  "style" "hx:border-green-200 hx:bg-green-100 hx:text-green-900 hx:dark:border-green-200/30 hx:dark:bg-green-900/30 hx:dark:text-green-200"
-  )
--}}
-{{- $styles.Set "important" (dict
-  "icon" "information-circle"
-  "style" "hx:border-purple-200 hx:bg-purple-100 hx:text-purple-900 hx:dark:border-purple-200/30 hx:dark:bg-purple-900/30 hx:dark:text-purple-200"
-  )
--}}
-{{- $styles.Set "warning" (dict
-  "icon" "exclamation"
-  "style" "hx:border-amber-200 hx:bg-amber-100 hx:text-amber-900 hx:dark:border-amber-200/30 hx:dark:bg-amber-900/30 hx:dark:text-amber-200"
-  )
--}}
-{{- $styles.Set "caution" (dict
-  "icon" "exclamation-circle"
-  "style" "hx:border-red-200 hx:bg-red-100 hx:text-red-900 hx:dark:border-red-200/30 hx:dark:bg-red-900/30 hx:dark:text-red-200"
-  )
--}}
+{{- $icon := or (index $icons $alertType) "light-bulb" -}}
+{{- $title := or $alertTitle (i18n $alertType) (title $alertType) -}}
 
-{{- $style := or ($styles.Get $alertType) ($styles.Get "default") -}}
-{{- $title := or $alertTitle (or (i18n $alertType) (title $alertType)) -}}
-
-<div class="hx:overflow-x-auto hx:mt-6 hx:flex hx:flex-col hx:rounded-lg hx:border hx:py-4 hx:px-4 hx:border-gray-200 hx:contrast-more:border-current hx:contrast-more:dark:border-current {{ $style.style }}">
-  <p class="hx:flex hx:items-center hx:font-medium">
-    {{- with $style.icon -}}
-      {{- partial "utils/icon.html" (dict "name" . "attributes" `height=16px class="hx:inline-block hx:align-middle hx:mr-2"`) -}}
-    {{- end -}}
-    {{- $title -}}
+<div
+  {{ with $alertType }}data-alert="{{ . }}" {{ end -}}
+  {{ with $alertSign }}data-alert-fold="{{ . }}" {{ end -}}
+  class="hextra-alert"
+>
+  {{- with $alertSign }}
+  <button type="button" class="hextra-alert-toggle" aria-expanded="{{ if eq . "+" }}true{{ else }}false{{ end }}">
+    <span class="hextra-alert-title">
+      {{- partial "utils/icon.html" (dict "name" $icon "attributes" `height=16px class="hextra-alert-icon"`) -}}
+      <span class="hextra-alert-title-text">{{- $title -}}</span>
+    </span>
+    {{- partial "utils/icon.html" (dict "name" "chevron-right" "attributes" `class="hextra-alert-chevron" focusable="false"`) -}}
+  </button>
+  {{- else }}
+  <p class="hextra-alert-title">
+    {{- partial "utils/icon.html" (dict "name" $icon "attributes" `height=16px class="hextra-alert-icon"`) -}}
+    <span class="hextra-alert-title-text">{{- $title -}}</span>
   </p>
+  {{- end }}
 
-  <div class="hx:w-full hx:min-w-0 hx:leading-7">
-    <div class="hx:mt-6 hx:leading-7 hx:first:mt-0">
-      {{- $content -}}
-    </div>
+  <div class="hextra-alert-content">
+    {{- with $alertSign -}}
+      <div class="hextra-alert-content-inner">{{ $content }}</div>
+    {{- else -}}
+      {{ $content }}
+    {{- end -}}
   </div>
 </div>

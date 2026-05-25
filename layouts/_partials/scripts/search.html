@@ -8,6 +8,12 @@
       {{- $jsSearch = $jsSearch | minify | fingerprint -}}
     {{- end -}}
 
+    {{- $jsDialogScript := printf "%s.search-dialog.js" .Language.Lang -}}
+    {{- $jsDialog := resources.Get "js/search-dialog.js" | resources.ExecuteAsTemplate $jsDialogScript . -}}
+    {{- if hugo.IsProduction -}}
+      {{- $jsDialog = $jsDialog | minify | fingerprint -}}
+    {{- end -}}
+
     {{- $flexSearchBase := "" -}}
     {{- $useDefaultCdn := true -}}
     {{- with site.Params.search.flexsearch.base -}}
@@ -57,6 +63,7 @@
     {{- end -}}
 
     <script defer src="{{ $jsSearch.RelPermalink }}" integrity="{{ $jsSearch.Data.Integrity }}"></script>
+    <script defer src="{{ $jsDialog.RelPermalink }}" integrity="{{ $jsDialog.Data.Integrity }}"></script>
   {{- else -}}
     {{- warnf `search type "%s" is not supported` $searchType -}}
   {{- end -}}

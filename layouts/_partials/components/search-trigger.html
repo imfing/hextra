@@ -1,0 +1,38 @@
+{{/* Render a search trigger button.
+
+  Expects a dict with:
+  - icon: optional icon name for icon-only rendering
+*/}}
+{{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
+{{- $iconHeight := 24 -}}
+{{- /* When the navbar search menu item has `icon` set, render an icon-only
+       trigger — mirrors the icon-menu pattern in _partials/navbar.html. */ -}}
+{{- $icon := .icon | default "" -}}
+
+{{- if $icon -}}
+  <button
+    type="button"
+    class="hx:p-1 hx:md:p-2 hx:text-current hx:cursor-pointer hx:hextra-focus-visible"
+    data-search-open
+    aria-haspopup="dialog"
+    aria-controls="hextra-search-dialog"
+    aria-label="{{ $placeholder }}"
+    title="{{ $placeholder }}"
+  >
+    {{- partial "utils/icon.html" (dict "name" $icon "attributes" (printf "height=%d" $iconHeight)) -}}
+    <span class="hx:sr-only">{{ $placeholder }}</span>
+  </button>
+{{- else -}}
+  <button
+    type="button"
+    class="hextra-search-trigger"
+    data-search-open
+    aria-haspopup="dialog"
+    aria-controls="hextra-search-dialog"
+    aria-label="{{ $placeholder }}"
+  >
+    {{- partial "utils/icon.html" (dict "name" "search" "attributes" `class="hextra-search-trigger-icon" focusable="false"`) -}}
+    <span class="hextra-search-trigger-label">{{ $placeholder }}</span>
+    <kbd class="hextra-search-trigger-kbd">CTRL K</kbd>
+  </button>
+{{- end -}}

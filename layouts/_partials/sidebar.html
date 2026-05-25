@@ -25,11 +25,6 @@
 {{- end -}}
 
 <aside class="hextra-sidebar-container {{ $sidebarClass }}"{{ if $cacheMode }} data-sidebar-cache{{ end }}>
-  {{- if (site.Params.search.enable | default true) -}}
-    <div class="hextra-sidebar-search">
-      {{ partial "search.html" (dict "location" "sidebar") }}
-    </div>
-  {{- end -}}
   <div class="hextra-scrollbar hextra-sidebar-scroll">
     {{- /* Mobile sidebar: uses menu.main at top level, shows inline TOC */ -}}
     <ul class="hextra-sidebar-mobile-list">

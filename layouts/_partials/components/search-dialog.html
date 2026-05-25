@@ -1,0 +1,48 @@
+{{- if (site.Params.search.enable | default true) -}}
+  {{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
+  {{- $searchResults := (T "searchResults") | default "Search results" -}}
+  {{- $noResults := (T "noResultsFound") | default "No results found." -}}
+  <dialog
+    id="hextra-search-dialog"
+    class="hextra-search-dialog"
+    aria-label="{{ $placeholder }}"
+  >
+    <div class="hextra-search">
+      <div class="hextra-search-input-wrapper">
+        {{- partial "utils/icon.html" (dict "name" "search" "attributes" `class="hextra-search-input-icon" focusable="false"`) -}}
+        <input
+          class="hextra-search-input"
+          type="search"
+          role="combobox"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="{{ $placeholder }}"
+          aria-label="{{ $placeholder }}"
+          aria-controls="hextra-search-results"
+          aria-expanded="false"
+        />
+        {{- $closeLabel := (T "close") | default "Close" -}}
+        <button
+          type="button"
+          class="hextra-search-input-kbd"
+          data-search-close
+          aria-label="{{ $closeLabel }}"
+        >ESC</button>
+      </div>
+      <div class="hextra-search-results-viewport" data-search-viewport>
+        <div class="hextra-search-results-inner hextra-scrollbar" data-search-inner>
+          <ul
+            id="hextra-search-results"
+            class="hextra-search-results"
+            role="listbox"
+            aria-label="{{ $searchResults }}"
+          ></ul>
+          <div class="hextra-search-empty" data-search-empty hidden>{{ $noResults }}</div>
+        </div>
+      </div>
+      <div class="hextra-search-status hx:sr-only" aria-live="polite" role="status"></div>
+    </div>
+  </dialog>
+{{- end -}}

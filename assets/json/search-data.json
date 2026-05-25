@@ -28,11 +28,9 @@
   {{- end -}}
 {{- end -}}
 
-{{- $glossary := dict
-  "title" "Glossary"
-  "data" $glossaryEntries
--}}
-
-{{- $output = $output | merge (dict (relLangURL "glossary") $glossary )}}
+{{- with site.GetPage "/glossary" -}}
+  {{- $pageTitle := .LinkTitle | default .Title | default "Glossary" -}}
+  {{- $output = $output | merge (dict .RelPermalink (dict "title" $pageTitle "data" $glossaryEntries)) -}}
+{{- end -}}
 
 {{- $output | jsonify -}}

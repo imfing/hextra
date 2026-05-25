@@ -28,7 +28,7 @@ body {
   --primary-hue: 212deg;
   --primary-saturation: 100%;
   --primary-lightness: 50%;
-  --navbar-height: 4rem;
+  --hextra-navbar-height: 3.5rem;
   --hextra-banner-height: 2rem;
   --menu-height: 3.75rem; /* 60px */
 }
@@ -58,7 +58,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -67,15 +69,14 @@ body {
 }
 
 @layer base {
-  :where(a, button, [role="tab"], [role="menuitem"], [role="menuitemradio"], input, select, textarea, [tabindex="0"]):not(
-      [class*="hextra-focus-visible"]
-    ):focus-visible {
+  :where(a, button, [role="tab"], [role="menuitem"], [role="menuitemradio"], input, select, textarea, [tabindex="0"]):not([class*="hextra-focus-visible"]):focus-visible {
     @apply hx:hextra-focus;
   }
 }
 
 @import "./typography.css";
 @import "./highlight.css";
+@import "./components/alert.css";
 @import "./components/cards.css";
 @import "./components/steps.css";
 @import "./components/search.css";
@@ -89,3 +90,4 @@ body {
 @import "./components/badge.css";
 @import "./components/toc.css";
 @import "./components/archives.css";
+@import "./components/gallery.css";

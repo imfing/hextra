@@ -155,18 +155,19 @@ The following classes can be used to customize various parts of the theme.
 
 #### Search
 
-- `hextra-search-wrapper` - The search wrapper container
+- `hextra-search-trigger` - The search trigger button
+- `hextra-search-dialog` - The search dialog element
 - `hextra-search-input` - The search input element
 - `hextra-search-results` - The search results list container
 
-Optional nested classes used within the search UI:
+Optional nested classes and selectors used within the search UI:
 
+- `hextra-search-crumb` - The breadcrumb label for the first result from a page
 - `hextra-search-title` - The result title element
-- `hextra-search-active` - The active result anchor
-- `hextra-search-no-result` - The empty state element
-- `hextra-search-prefix` - The breadcrumb/prefix label for grouped results
 - `hextra-search-excerpt` - The result snippet text
 - `hextra-search-match` - The highlighted query span
+- `hextra-search-empty` - The empty state element
+- `a[role="option"][aria-selected="true"]` - The selected result anchor
 
 #### Table of Contents
 

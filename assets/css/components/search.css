@@ -1,38 +1,255 @@
-.hextra-search-wrapper {
-  li {
-    @apply hx:mx-2.5 hx:wrap-break-word hx:rounded-md hx:contrast-more:border hx:text-gray-800 hx:contrast-more:border-transparent hx:dark:text-gray-300;
-    a {
-      @apply hx:focus-visible:outline-none hx:block hx:scroll-m-12 hx:px-2.5 hx:py-2;
-    }
+/* Trigger button (rendered in the navbar). Mobile-first: renders as an
+   icon-only square button to keep the navbar compact and to mirror the
+   other navbar icon items. From md+ it expands into a pill-input look
+   with a "Search..." label and a Ctrl/Cmd+K hint.
+   The opt-in icon-only variant (params.icon) is rendered as a separate
+   <button> branch in search-trigger.html. */
+.hextra-search-trigger {
+  @apply hx:inline-flex hx:items-center hx:justify-center hx:rounded-lg
+    hx:p-1 hx:text-current
+    hx:transition-colors hx:cursor-pointer hx:hextra-focus-visible
+    hx:md:justify-start hx:md:gap-2 hx:md:p-0 hx:md:px-3 hx:md:py-2
+    hx:md:w-48 hx:md:text-sm hx:md:leading-tight
+    hx:md:bg-black/5 hx:md:dark:bg-gray-50/10
+    hx:md:text-gray-500 hx:md:hover:text-gray-900
+    hx:md:dark:text-gray-400 hx:md:dark:hover:text-gray-50;
+}
 
-    .hextra-search-title {
-      @apply hx:text-base hx:font-semibold hx:leading-5;
-    }
+.hextra-search-trigger-icon {
+  @apply hx:h-6 hx:w-6 hx:shrink-0
+    hx:md:h-4 hx:md:w-4 hx:md:opacity-60;
+}
 
-    .hextra-search-active {
-      @apply hx:rounded-md hx:bg-primary-500/10 hx:contrast-more:border-primary-500;
-    }
+.hextra-search-trigger-label {
+  @apply hx:hidden hx:md:inline hx:grow hx:text-start;
+}
+
+.hextra-search-trigger-kbd {
+  @apply hx:hidden hx:md:inline-flex hx:items-center hx:gap-0.5 hx:select-none
+    hx:rounded-sm hx:border hx:border-gray-200 hx:dark:border-gray-100/20
+    hx:bg-white hx:dark:bg-dark/50 hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500;
+}
+
+/* Dialog */
+.hextra-search-dialog {
+  --hextra-search-results-max-height: min(28rem, calc(100vh - 7rem));
+  @apply hx:p-0 hx:rounded-xl hx:overflow-hidden
+    hx:bg-white hx:dark:bg-neutral-900
+    hx:border hx:border-gray-200 hx:dark:border-neutral-800
+    hx:text-gray-900 hx:dark:text-gray-100;
+  position: fixed;
+  top: max(1rem, calc(50% - 250px));
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  width: calc(100% - 1rem);
+  max-width: 640px;
+  max-height: min(500px, calc(100vh - 4rem));
+  /* Stronger, darker shadow than shadow-2xl to better lift off backdrop. */
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+}
+
+.hextra-search-dialog::backdrop {
+  @apply hx:bg-black/20 hx:backdrop-blur-xs;
+}
+
+.hextra-search-dialog[open] {
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hextra-search-dialog[open]:not([data-state="closing"]) {
+    animation: hextra-search-dialog-in 300ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .hextra-search-no-result {
-    @apply hx:block hx:select-none hx:p-8 hx:text-center hx:text-sm hx:text-gray-400;
+  .hextra-search-dialog[open]:not([data-state="closing"])::backdrop {
+    animation: hextra-search-backdrop-in 300ms ease;
+    will-change: opacity;
   }
+}
 
-  .hextra-search-prefix {
-    @apply hx:mx-2.5 hx:mb-2 hx:mt-6 hx:select-none hx:border-b hx:border-black/10 hx:px-2.5 hx:pb-1.5 hx:text-xs hx:font-semibold
-    hx:uppercase hx:text-gray-500 hx:first:mt-0 hx:dark:border-white/20 hx:dark:text-gray-300 hx:contrast-more:border-gray-600
-    hx:contrast-more:text-gray-900 hx:contrast-more:dark:border-gray-50 hx:contrast-more:dark:text-gray-50;
+.hextra-search-dialog[data-state="closing"] {
+  animation: hextra-search-dialog-out 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hextra-search-dialog[data-state="closing"]::backdrop {
+  animation: hextra-search-backdrop-out 300ms ease forwards;
+  will-change: opacity;
+}
+
+@keyframes hextra-search-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(1.06);
   }
-
-  .hextra-search-excerpt {
-    @apply hx:overflow-hidden hx:text-ellipsis hx:mt-1 hx:text-sm hx:leading-[1.35rem] hx:text-gray-600 hx:dark:text-gray-400 hx:contrast-more:dark:text-gray-50;
-    display: -webkit-box;
-    line-clamp: 1;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
   }
+}
 
-  .hextra-search-match {
-    @apply hx:text-primary-600;
+@keyframes hextra-search-dialog-out {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) scale(1.04);
+  }
+}
+
+@keyframes hextra-search-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hextra-search-backdrop-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Inner wrapper inside dialog */
+.hextra-search {
+  @apply hx:flex hx:flex-col hx:overflow-hidden;
+}
+
+/* Input row */
+.hextra-search-input-wrapper {
+  @apply hx:flex hx:items-center hx:gap-3 hx:px-4
+    hx:border-b hx:border-gray-100 hx:dark:border-neutral-800;
+}
+
+.hextra-search-input-icon {
+  @apply hx:h-5 hx:w-5 hx:shrink-0 hx:text-gray-400 hx:dark:text-gray-500;
+}
+
+.hextra-search-input {
+  @apply hx:grow hx:h-12 hx:bg-transparent hx:py-3 hx:text-base
+    hx:text-gray-900 hx:dark:text-gray-100
+    hx:placeholder:text-gray-400 hx:dark:placeholder:text-gray-500
+    hx:focus:outline-none;
+}
+
+.hextra-search-input:focus,
+.hextra-search-input:focus-visible {
+  outline: none;
+  box-shadow: none;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+}
+
+.hextra-search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.hextra-search-input-kbd {
+  @apply hx:hidden hx:sm:inline-flex hx:items-center hx:select-none
+    hx:rounded-sm hx:border hx:border-gray-200 hx:dark:border-gray-100/20
+    hx:bg-white hx:dark:bg-dark/50 hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium
+    hx:text-gray-500 hx:dark:text-gray-400
+    hx:cursor-pointer hx:transition-colors
+    hx:hover:text-gray-900 hx:dark:hover:text-gray-100
+    hx:hover:border-gray-300 hx:dark:hover:border-gray-100/30
+    hx:hextra-focus-visible;
+}
+
+/* Results viewport: animates height smoothly as results change. */
+.hextra-search-results-viewport {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hextra-search-results-viewport[data-expanded="true"] {
+  max-height: var(--hextra-search-results-max-height);
+}
+
+.hextra-search-results-inner {
+  @apply hx:overflow-y-auto hx:overscroll-contain hx:p-1;
+  max-height: var(--hextra-search-results-max-height);
+}
+
+/* Results list */
+.hextra-search-results {
+  @apply hx:m-0 hx:list-none hx:p-0;
+}
+
+.hextra-search-results > li {
+  @apply hx:list-none;
+  position: relative;
+}
+
+.hextra-search-results > li > a {
+  @apply hx:relative hx:flex hx:flex-col hx:gap-0.5 hx:rounded-lg hx:px-2.5 hx:py-2
+    hx:text-sm hx:cursor-pointer hx:no-underline
+    hx:text-gray-800 hx:dark:text-gray-200;
+  z-index: 1;
+}
+
+.hextra-search-results > li > a[aria-selected="true"] {
+  @apply hx:bg-primary-100/80 hx:text-gray-900 hx:dark:bg-primary-400/15 hx:dark:text-gray-50;
+}
+
+/* Inline breadcrumb shown above the title on the parent (first) result per page. */
+.hextra-search-crumb {
+  @apply hx:flex hx:items-center hx:gap-0.5 hx:text-xs hx:text-gray-600 hx:dark:text-gray-400 hx:leading-4;
+}
+
+.hextra-search-crumb-separator {
+  @apply hx:h-3.5 hx:w-3.5 hx:shrink-0 hx:text-gray-400 hx:dark:text-gray-500;
+}
+
+[dir="rtl"] .hextra-search-crumb-separator {
+  transform: rotate(180deg);
+}
+
+.hextra-search-title {
+  @apply hx:text-sm hx:font-medium hx:leading-5;
+}
+
+.hextra-search-excerpt {
+  @apply hx:text-sm hx:leading-5 hx:text-gray-700 hx:dark:text-gray-300 hx:overflow-hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+/* Child result: indented under a 1px vertical rule that visually groups it
+   with the preceding parent. */
+.hextra-search-results > li.hextra-search-child > a > * {
+  padding-inline-start: 1rem;
+}
+
+.hextra-search-results > li.hextra-search-child::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0.75rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  @apply hx:bg-gray-200;
+}
+
+/* `dark:` inside @apply collapses to an empty :where() on ::before
+   pseudo-elements, so the dark variant is written out long-hand. */
+.dark .hextra-search-results > li.hextra-search-child::before {
+  @apply hx:bg-neutral-700;
+}
+
+.hextra-search-match {
+  @apply hx:text-primary-600 hx:font-semibold;
+}
+
+.hextra-search-empty {
+  @apply hx:px-3 hx:py-10 hx:text-center hx:text-sm hx:text-gray-500 hx:dark:text-gray-400;
+}
+
+/* Mobile: top-anchored, narrow gutters. */
+@media (max-width: 640px) {
+  .hextra-search-dialog {
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
   }
 }

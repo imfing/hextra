@@ -2,8 +2,4 @@
   {{- warnf "Alert type %s is not supported" .AlertType -}}
 {{- end -}}
 
-{{- $content := .Text -}}
-{{- $alertType := .AlertType -}}
-{{- $alertTitle := .AlertTitle -}}
-
-{{- partial "components/github-style-alert.html" (dict "content" $content "alertType" $alertType "alertTitle" $alertTitle) -}}
+{{- partial "components/github-style-alert.html" (dict "content" .Text "alertType" .AlertType "alertTitle" .AlertTitle "alertSign" .AlertSign) -}}
