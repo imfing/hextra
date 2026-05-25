@@ -28,7 +28,7 @@ body {
   --primary-hue: 212deg;
   --primary-saturation: 100%;
   --primary-lightness: 50%;
-  --navbar-height: 4rem;
+  --hextra-navbar-height: 3.5rem;
   --hextra-banner-height: 2rem;
   --menu-height: 3.75rem; /* 60px */
 }
@@ -79,7 +79,7 @@ body {
 @import "./components/alert.css";
 @import "./components/cards.css";
 @import "./components/steps.css";
-@import "./components/command.css";
+@import "./components/search.css";
 @import "./components/sidebar.css";
 @import "./components/banner.css";
 @import "./components/navbar.css";
