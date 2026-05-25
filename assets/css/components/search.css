@@ -156,8 +156,12 @@
 /* Results viewport: animates height smoothly as results change. */
 .hextra-search-results-viewport {
   overflow: hidden;
-  height: var(--hextra-search-height, 0);
-  transition: height 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 0;
+  transition: max-height 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hextra-search-results-viewport[data-expanded="true"] {
+  max-height: calc(100vh - 7rem);
 }
 
 .hextra-search-results-inner {

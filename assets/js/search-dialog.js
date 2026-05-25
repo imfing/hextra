@@ -55,7 +55,7 @@
     document.addEventListener('keydown', handleGlobalKeyDown);
 
     input.addEventListener('input', runSearch);
-    input.addEventListener('keydown', handleInputKeyDown);
+    dialog.addEventListener('keydown', handleDialogKeyDown);
 
     // Click on backdrop closes the dialog.
     dialog.addEventListener('click', (e) => {
@@ -92,9 +92,8 @@
       if (anchor) setActiveOption(anchor, { scroll: false });
     });
 
-    // Arrow keys cycle focus among results once focus has left the input.
-    // Enter falls through to native anchor activation.
-    resultsEl.addEventListener('keydown', handleResultsKeyDown);
+    // Dialog-level keyboard handling keeps input and result navigation in sync.
+    // Enter on focused result anchors falls through to native anchor activation.
   }
 
   function handleGlobalKeyDown(e) {
@@ -190,46 +189,50 @@
     closeTimer = setTimeout(finalize, 400);
   }
 
-  function collapseViewport() {
+  function setViewportExpanded(expanded) {
     if (!viewportEl) return;
-    viewportEl.style.setProperty('--hextra-search-height', '0px');
-  }
-
-  function syncViewport() {
-    if (!viewportEl || !innerEl) return;
-    viewportEl.style.setProperty('--hextra-search-height', innerEl.offsetHeight + 'px');
+    viewportEl.dataset.expanded = expanded ? 'true' : 'false';
   }
 
   function clearResults() {
     while (resultsEl.firstChild) resultsEl.removeChild(resultsEl.firstChild);
   }
 
-  function handleInputKeyDown(e) {
+  function handleDialogKeyDown(e) {
+    const anchor = e.target.closest('a[role="option"]');
+    const fromInput = e.target === input;
+    if (!fromInput && !anchor) return;
+
     // During IME composition the user is still selecting a candidate; Enter
     // commits the candidate (not the result), arrow keys cycle candidates.
-    if (e.isComposing || e.keyCode === 229) return;
+    if (fromInput && (e.isComposing || e.keyCode === 229)) return;
+
+    const focusResults = !!anchor;
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        moveSelection(1);
+        moveSelection(1, { current: anchor, focus: focusResults });
         break;
       case 'ArrowUp':
         e.preventDefault();
-        moveSelection(-1);
+        moveSelection(-1, { current: anchor, focus: focusResults });
         break;
-      case 'Home':
-        if (!getOptions().length) return;
+      case 'Home': {
+        const all = getOptions();
+        if (!all.length) return;
         e.preventDefault();
-        setActiveOption(getOptions()[0]);
+        selectOption(all[0], { focus: focusResults });
         break;
+      }
       case 'End': {
         const all = getOptions();
         if (!all.length) return;
         e.preventDefault();
-        setActiveOption(all[all.length - 1]);
+        selectOption(all[all.length - 1], { focus: focusResults });
         break;
       }
       case 'Enter': {
+        if (!fromInput) return;
         const opt = getActiveOption();
         if (!opt) return;
         e.preventDefault();
@@ -239,49 +242,6 @@
       case 'Escape':
         // input[type=search] clears its value on Escape and swallows the event,
         // so close the dialog explicitly here.
-        e.preventDefault();
-        closeDialog();
-        break;
-    }
-  }
-
-  function handleResultsKeyDown(e) {
-    const anchor = e.target.closest('a[role="option"]');
-    if (!anchor) return;
-    const focusOption = (el) => {
-      el.focus({ preventScroll: true });
-      el.scrollIntoView({ block: 'nearest' });
-    };
-    const focusSibling = (delta) => {
-      const options = getOptions();
-      const i = options.indexOf(anchor);
-      if (i === -1) return;
-      focusOption(options[(i + delta + options.length) % options.length]);
-    };
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        focusSibling(1);
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        focusSibling(-1);
-        break;
-      case 'Home': {
-        const all = getOptions();
-        if (!all.length) return;
-        e.preventDefault();
-        focusOption(all[0]);
-        break;
-      }
-      case 'End': {
-        const all = getOptions();
-        if (!all.length) return;
-        e.preventDefault();
-        focusOption(all[all.length - 1]);
-        break;
-      }
-      case 'Escape':
         e.preventDefault();
         closeDialog();
         break;
@@ -309,17 +269,28 @@
     }
   }
 
-  function moveSelection(delta) {
+  function focusOption(el) {
+    setActiveOption(el, { scroll: false });
+    el.focus({ preventScroll: true });
+    el.scrollIntoView({ block: 'nearest' });
+  }
+
+  function selectOption(el, opts) {
+    if (opts && opts.focus) focusOption(el);
+    else setActiveOption(el);
+  }
+
+  function moveSelection(delta, opts) {
     const options = getOptions();
     if (!options.length) return;
-    const current = getActiveOption();
+    const current = (opts && opts.current) || getActiveOption();
     let i = options.indexOf(current);
     if (i === -1) {
       i = delta > 0 ? 0 : options.length - 1;
     } else {
       i = (i + delta + options.length) % options.length;
     }
-    setActiveOption(options[i]);
+    selectOption(options[i], opts);
   }
 
   async function runSearch() {
@@ -329,7 +300,7 @@
       if (emptyEl) emptyEl.hidden = true;
       input.setAttribute('aria-activedescendant', '');
       if (statusEl) statusEl.textContent = '';
-      collapseViewport();
+      setViewportExpanded(false);
       return;
     }
     if (!window.hextraSearch) return;
@@ -386,7 +357,7 @@
       if (emptyEl) emptyEl.hidden = false;
       if (statusEl) statusEl.textContent = noResultsText;
       input.setAttribute('aria-activedescendant', '');
-      syncViewport();
+      setViewportExpanded(true);
       return;
     }
 
@@ -438,6 +409,6 @@
       statusEl.textContent = resultsFoundTemplate.replace('%d', results.length.toString());
     }
 
-    syncViewport();
+    setViewportExpanded(true);
   }
 })();
