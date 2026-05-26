@@ -15,7 +15,14 @@
     </li>
   {{- else if .separator -}}
     <li class="hextra-sidebar-separator">
-      <span>{{ .title }}</span>
+      <span class="hx:inline-flex hx:items-center hx:gap-2">
+        {{- with .icon -}}
+          <span class="hextra-sidebar-link-icon hx:shrink-0 hx:inline-flex hx:items-center">
+            {{- partial "utils/icon.html" (dict "name" . "attributes" `height="1em" class="hx:inline-block"`) -}}
+          </span>
+        {{- end -}}
+        {{- .title -}}
+      </span>
     </li>
   {{- else -}}
     {{- $children := .items | default slice -}}

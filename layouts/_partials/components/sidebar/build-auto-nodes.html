@@ -11,6 +11,9 @@
   {{- end -}}
   {{- range $sorted -}}
     {{- $sep := .Params.sidebar.separator -}}
+    {{- $sepLift := and (eq $sep true) (eq $level 0) -}}
+
+    {{- /* String value injects a divider label before this item (top-level only). */ -}}
     {{- if and $sep (ne $sep true) -}}
       {{- if eq $level 0 -}}
         {{- $nodes = $nodes | append (dict
@@ -27,24 +30,46 @@
       {{- else -}}
         {{- warnf "sidebar.separator on %q is only respected at the top level (depth %d); ignored" .RelPermalink $level -}}
       {{- end -}}
+    {{- else if and (eq $sep true) (ne $level 0) -}}
+      {{- warnf "sidebar.separator: true on %q is only respected at the top level (depth %d); ignored" .RelPermalink $level -}}
     {{- end -}}
-    {{- $children := slice -}}
-    {{- if or .RegularPages .Sections -}}
-      {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}
-    {{- end -}}
-    {{- $nodes = $nodes | append (dict
-      "link" .RelPermalink
-      "title" (partial "utils/title" .)
-      "items" $children
-      "merge" "none"
-      "open" .Params.sidebar.open
-      "weight" .Weight
-      "separator" (eq $sep true)
 
-      "external" false
-      "page" .
-      "icon" (.Params.sidebar.icon | default "")
-    ) -}}
+    {{- if $sepLift -}}
+      {{- /* Section itself renders as a separator; its children are lifted. */ -}}
+      {{- $nodes = $nodes | append (dict
+        "link" ""
+        "title" (partial "utils/title" .)
+        "items" slice
+        "merge" "none"
+        "weight" .Weight
+        "separator" true
+        "external" false
+        "page" false
+        "icon" (.Params.sidebar.icon | default "")
+      ) -}}
+      {{- if or .RegularPages .Sections -}}
+        {{- $lifted := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" $level) .RelPermalink -}}
+        {{- $nodes = $nodes | append $lifted -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $children := slice -}}
+      {{- if or .RegularPages .Sections -}}
+        {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}
+      {{- end -}}
+      {{- $nodes = $nodes | append (dict
+        "link" .RelPermalink
+        "title" (partial "utils/title" .)
+        "items" $children
+        "merge" "none"
+        "open" .Params.sidebar.open
+        "weight" .Weight
+        "separator" false
+
+        "external" false
+        "page" .
+        "icon" (.Params.sidebar.icon | default "")
+      ) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

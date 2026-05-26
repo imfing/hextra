@@ -32,24 +32,50 @@
             {{- warnf "sidebar.separator on %q is only respected at the top level; ignored under nested data node" .RelPermalink -}}
           {{- end -}}
           {{- $autoChildren := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}
-          {{- $children = $children | append (dict
-            "link" .RelPermalink
-            "title" (partial "utils/title" .)
-            "items" $autoChildren
-            "merge" "none"
-            "open" .Params.sidebar.open
-            "weight" .Weight
-            "separator" (eq $sep true)
+          {{- if eq $sep true -}}
+            {{- /* Section becomes a separator; its children are lifted alongside. */ -}}
+            {{- $children = $children | append (dict
+              "link" ""
+              "title" (partial "utils/title" .)
+              "items" slice
+              "merge" "none"
+              "weight" .Weight
+              "separator" true
+              "external" false
+              "page" false
+              "icon" (.Params.sidebar.icon | default "")
+            ) -}}
+            {{- if gt (len $autoChildren) 0 -}}
+              {{- $children = $children | append $autoChildren -}}
+            {{- end -}}
+          {{- else -}}
+            {{- $children = $children | append (dict
+              "link" .RelPermalink
+              "title" (partial "utils/title" .)
+              "items" $autoChildren
+              "merge" "none"
+              "open" .Params.sidebar.open
+              "weight" .Weight
+              "separator" false
 
-            "external" false
-            "page" .
-            "icon" (.Params.sidebar.icon | default "")
-          ) -}}
+              "external" false
+              "page" .
+              "icon" (.Params.sidebar.icon | default "")
+            ) -}}
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
 
-    {{- $result = $result | append (merge $node (dict "items" $children)) -}}
+    {{- if $node.separator -}}
+      {{- /* Node renders as a separator label; lift any children alongside. */ -}}
+      {{- $result = $result | append (merge $node (dict "link" "" "items" slice)) -}}
+      {{- if gt (len $children) 0 -}}
+        {{- $result = $result | append $children -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $result = $result | append (merge $node (dict "items" $children)) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

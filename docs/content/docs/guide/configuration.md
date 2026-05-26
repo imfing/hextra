@@ -191,6 +191,29 @@ sidebar:
 
 This will hide the main sidebar from the page, freeing up space for the main content of the page.
 
+### Section Separator
+
+Top-level sections can be promoted to a separator label, lifting their children to the top level of the sidebar. Set `sidebar.separator: true` in the section's `_index.md`:
+
+```yaml {filename="content/docs/advanced/_index.md"}
+---
+title: Advanced
+sidebar:
+  separator: true
+---
+```
+
+The section's title is shown as a non-clickable group label, and its child pages appear as top-level entries beneath it. URLs and breadcrumbs still reflect the actual content hierarchy. The section's `sidebar.icon` (if set) renders alongside the label.
+
+To inject a separator label *before* a page or section without changing its position in the tree, set the value to a string instead:
+
+```yaml
+sidebar:
+  separator: "Reference"
+```
+
+Both forms are only respected on top-level entries.
+
 ### Per-Page Icon
 
 Attach an icon to a page's sidebar entry via front matter. The icon name must exist in Hextra's icon set:
@@ -238,7 +261,7 @@ Create a file at `data/<lang>/sidebar.yaml` (e.g., `data/en/sidebar.yaml`) for a
 | `merge` | string | `"none"` | `"none"`: only explicit items shown. `"deep"`: auto-generated children appended for unmatched pages. |
 | `open` | bool | `true` | Whether the section starts expanded. |
 | `weight` | int | `0` | Sort weight for ordering. |
-| `separator` | bool | `false` | Render as a section separator label. |
+| `separator` | bool | `false` | Render the node as a separator label. Any children (explicit or auto-discovered via `merge: deep`) are lifted to the parent level. |
 
 When a page is under a section covered by the data file, the data-driven tree is used. For pages in other sections, the auto-generated tree is used as a fallback.
 
