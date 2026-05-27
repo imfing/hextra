@@ -253,14 +253,6 @@ layouts/_partials/custom/page-end.html
 
 هر partial صفحه فعلی Hugo را به عنوان context دریافت می‌کند، بنابراین می‌توانید از پارامترهای صفحه، پارامترهای سایت و دیگر قابلیت‌های قالب Hugo استفاده کنید.
 
-برای مثال، برای افزودن بنر نگهدارندگان مخصوص هر صفحه، `layouts/_partials/custom/content-begin.html` را ایجاد کنید:
-
-```html {filename="layouts/_partials/custom/content-begin.html"}
-{{ with .Params.maintainers }}
-<aside class="not-prose hx:mb-6 hx:rounded-lg hx:border hx:border-gray-200 hx:p-4 hx:text-sm hx:dark:border-neutral-800">Maintained by {{ delimit . ", " }}</aside>
-{{ end }}
-```
-
 ## چیدمان‌های سفارشی
 
 چیدمان‌های تم را می‌توان با ایجاد یک فایل با همان نام در دایرکتوری `layouts` سایت خود بازنویسی کرد.

@@ -253,14 +253,6 @@ layouts/_partials/custom/page-end.html
 
 各パーシャルには現在のHugoページがコンテキストとして渡されるため、ページパラメータ、サイトパラメータ、その他のHugoテンプレート機能を使用できます。
 
-例えば、ページごとのメンテナーバナーを追加するには、`layouts/_partials/custom/content-begin.html`を作成します:
-
-```html {filename="layouts/_partials/custom/content-begin.html"}
-{{ with .Params.maintainers }}
-<aside class="not-prose hx:mb-6 hx:rounded-lg hx:border hx:border-gray-200 hx:p-4 hx:text-sm hx:dark:border-neutral-800">Maintained by {{ delimit . ", " }}</aside>
-{{ end }}
-```
-
 ## カスタムレイアウト
 
 テーマのレイアウトは、サイトの`layouts`ディレクトリに同じ名前のファイルを作成することでオーバーライドできます。

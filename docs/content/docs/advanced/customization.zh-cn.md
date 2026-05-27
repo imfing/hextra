@@ -253,14 +253,6 @@ layouts/_partials/custom/page-end.html
 
 每个 partial 都会接收当前 Hugo 页面作为上下文，因此可以使用页面参数、站点参数以及其他 Hugo 模板功能。
 
-例如，创建 `layouts/_partials/custom/content-begin.html` 来添加特定页面的维护者横幅：
-
-```html {filename="layouts/_partials/custom/content-begin.html"}
-{{ with .Params.maintainers }}
-<aside class="not-prose hx:mb-6 hx:rounded-lg hx:border hx:border-gray-200 hx:p-4 hx:text-sm hx:dark:border-neutral-800">Maintained by {{ delimit . ", " }}</aside>
-{{ end }}
-```
-
 ## 自定义布局
 
 可以通过在站点的 `layouts` 目录中创建同名文件来覆盖主题的布局。
