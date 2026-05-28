@@ -35,25 +35,21 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   var container = document.querySelector('.hextra-sidebar-container');
-  var isCacheMode = container && container.hasAttribute('data-sidebar-cache');
+  if (!container) return;
 
-  if (isCacheMode) {
-    // Inline script in sidebar.html handles init before paint;
-    // fallback if it didn't run (e.g. CSP blocking inline scripts)
-    if (!container.hasAttribute('data-sidebar-ready')) {
-      initActiveItem(container);
-      restoreSessionState(container);
-      container.offsetHeight;
-      container.setAttribute('data-sidebar-ready', '');
-    }
-    if (!restoreSidebarScroll()) scrollToActiveItem();
-    injectMobileTOC(container);
-    window.addEventListener('beforeunload', saveSidebarScroll);
-  } else {
-    scrollToActiveItem();
+  // Inline script in sidebar.html handles init before paint;
+  // fallback if it didn't run (e.g. CSP blocking inline scripts)
+  if (!container.hasAttribute('data-sidebar-ready')) {
+    initActiveItem(container);
+    restoreSessionState(container);
+    container.offsetHeight;
+    container.setAttribute('data-sidebar-ready', '');
   }
+  if (!restoreSidebarScroll()) scrollToActiveItem();
+  injectMobileTOC(container);
+  window.addEventListener('beforeunload', saveSidebarScroll);
 
-  enableCollapsibles(isCacheMode);
+  enableCollapsibles();
 });
 
 function getSidebarKey(li) {
@@ -132,7 +128,7 @@ function injectMobileTOC(container) {
   }
 }
 
-function enableCollapsibles(isCacheMode) {
+function enableCollapsibles() {
   document.querySelectorAll(".hextra-sidebar-collapsible-button").forEach(function (button) {
     button.addEventListener("click", function (e) {
       e.preventDefault();
@@ -143,13 +139,11 @@ function enableCollapsibles(isCacheMode) {
       var isOpen = list.classList.contains('open');
       button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
-      if (isCacheMode) {
-        var key = getSidebarKey(list);
-        if (key) {
-          var state = loadSidebarState();
-          state[key] = isOpen;
-          saveSidebarState(state);
-        }
+      var key = getSidebarKey(list);
+      if (key) {
+        var state = loadSidebarState();
+        state[key] = isOpen;
+        saveSidebarState(state);
       }
     });
   });

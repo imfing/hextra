@@ -3,7 +3,6 @@
 {{- $displayPlaceholder := .displayPlaceholder | default false -}}
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
 {{- $pageURL := $context.RelPermalink -}}
-{{- $cacheMode := site.Params.sidebar.cache | default false -}}
 {{- $sectionKey := "" -}}
 {{- with $context.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
 
@@ -24,16 +23,12 @@
   {{- end -}}
 {{- end -}}
 
-<aside class="hextra-sidebar-container {{ $sidebarClass }}"{{ if $cacheMode }} data-sidebar-cache{{ end }}>
+<aside class="hextra-sidebar-container {{ $sidebarClass }}" data-sidebar-cache>
   <div class="hextra-scrollbar hextra-sidebar-scroll">
     {{- /* Mobile sidebar: uses menu.main at top level, shows inline TOC */ -}}
     <ul class="hextra-sidebar-mobile-list">
       {{- $mobileNodes := partialCached "components/sidebar/build-mobile-tree.html" (dict "page" $context "pageURL" $pageURL "matched" $matchFound) $context.Language.Lang $matchFound $sectionKey -}}
-      {{- if $cacheMode -}}
-        {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "static" true "level" 0) "mobile" $context.Language.Lang $matchFound $sectionKey -}}
-      {{- else -}}
-        {{- partial "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "page" $context "pageURL" $pageURL "toc" true "level" 0) -}}
-      {{- end -}}
+      {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "level" 0) "mobile" $context.Language.Lang $matchFound $sectionKey -}}
       {{- partial "components/sidebar/render-footer.html" -}}
     </ul>
 
@@ -44,21 +39,15 @@
     {{- else -}}
       <ul class="hextra-sidebar-desktop-list">
         {{- $desktopNodes := partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "pageURL" $pageURL "matched" $matchFound) $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
-        {{- if $cacheMode -}}
-          {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "static" true "level" 0) "desktop" $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
-        {{- else -}}
-          {{- partial "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "page" $context "pageURL" $pageURL "toc" false "level" 0) -}}
-        {{- end -}}
+        {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "level" 0) "desktop" $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
         {{- partial "components/sidebar/render-footer.html" -}}
       </ul>
     {{- end -}}
   </div>
-  {{- if $cacheMode -}}
-    {{- if ne $context.Params.toc false -}}
-      <template data-mobile-toc>
-        {{- partial "components/sidebar/render-toc.html" (dict "page" $context) -}}
-      </template>
-    {{- end -}}
+  {{- if ne $context.Params.toc false -}}
+    <template data-mobile-toc>
+      {{- partial "components/sidebar/render-toc.html" (dict "page" $context) -}}
+    </template>
   {{- end -}}
   {{- $switchesClass := cond $disableSidebar "hx:md:hidden" "" -}}
   {{- $displayThemeToggle := (site.Params.theme.displayToggle | default true) -}}
@@ -75,7 +64,6 @@
     </div>
   {{- end -}}
 </aside>
-{{- if $cacheMode -}}
 <script>
 (function () {
   var c = document.querySelector('.hextra-sidebar-container[data-sidebar-cache]');
@@ -112,4 +100,3 @@
   if (sv) { var sb = c.querySelector('.hextra-scrollbar'); if (sb) sb.scrollTop = parseInt(sv, 10); }
 })();
 </script>
-{{- end -}}
