@@ -4,10 +4,15 @@
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
     <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+        {{ partial "custom/page-begin.html" . }}
         {{ partial "breadcrumb.html" (dict "page" . "enable" false) }}
         <br class="hx:mt-1.5 hx:text-sm" />
         {{ if .Title }}<h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">{{ .Title }}</h1>{{ end }}
-        <div class="content">{{ .Content }}</div>
+        <div class="content">
+          {{ partial "custom/content-begin.html" . }}
+          {{ .Content }}
+          {{ partial "custom/content-end.html" . }}
+        </div>
         {{- $pages := partial "utils/sort-pages" (dict "page" . "by" site.Params.blog.list.sortBy "order" site.Params.blog.list.sortOrder) -}}
         {{- $pagerSize := site.Params.blog.list.pagerSize | default 10 -}}
         {{- $paginator := .Paginate $pages $pagerSize -}}
@@ -21,7 +26,11 @@
             {{ end }}
             <p class="hx:opacity-80 hx:mt-4 hx:leading-7">{{- partial "utils/page-description" . -}}</p>
             <p class="hx:opacity-80 hx:mt-1 hx:leading-7">
-              <a class="hx:text-[color:hsl(var(--primary-hue),100%,50%)] hx:underline hx:underline-offset-2 hx:decoration-from-font" href="{{ .RelPermalink }}" aria-label="{{ printf "%s %s" $readMore .Title }}">
+              <a
+                class="hx:text-[color:hsl(var(--primary-hue),100%,50%)] hx:underline hx:underline-offset-2 hx:decoration-from-font"
+                href="{{ .RelPermalink }}"
+                aria-label="{{ printf "%s %s" $readMore .Title }}"
+              >
                 {{- $readMore -}}
               </a>
             </p>
@@ -32,6 +41,7 @@
         {{- if gt $paginator.TotalPages 1 -}}
           {{ partial "components/blog-pager.html" $paginator }}
         {{- end -}}
+        {{ partial "custom/page-end.html" . }}
       </main>
     </article>
     <div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div>

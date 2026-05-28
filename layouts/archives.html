@@ -8,9 +8,11 @@
     {{ partial "toc.html" (dict "Params" (dict "toc" false)) }}
     <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+        {{ partial "custom/page-begin.html" . }}
         <br class="hx:mt-1.5 hx:text-sm" />
         {{ if .Title }}<h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">{{ .Title }}</h1>{{ end }}
         <div class="hx:mb-16"></div>
+        {{ partial "custom/content-begin.html" . }}
         {{- if $groups }}
           {{- range $groups }}
             <h2 class="hx:mt-4 hx:mb-4 hx:text-2xl hx:font-bold hx:text-slate-900 hx:dark:text-slate-100">{{ .Key }}</h2>
@@ -20,7 +22,12 @@
                 <div class="hx:flex hx:items-baseline hx:gap-4 hx:py-2">
                   <time class="hx:shrink-0 hx:text-sm hx:tabular-nums hx:text-gray-500 hx:dark:text-gray-400" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format $dateFormat }}</time>
                   <div>
-                    <a href="{{ .RelPermalink }}" class="hx:font-medium hx:text-gray-700 hx:dark:text-gray-300 hx:transition-colors hx:duration-150 hx:hover:text-primary-600 hx:dark:hover:text-primary-400">{{ .Title }}</a>
+                    <a
+                      href="{{ .RelPermalink }}"
+                      class="hx:font-medium hx:text-gray-700 hx:dark:text-gray-300 hx:transition-colors hx:duration-150 hx:hover:text-primary-600 hx:dark:hover:text-primary-400"
+                    >
+                      {{ .Title }}
+                    </a>
                     {{- with .Params.tags }}
                       <span class="hx:text-xs hx:leading-7">{{ partial "tags.html" (dict "context" $page) }}</span>
                     {{- end }}
@@ -32,6 +39,8 @@
         {{- else }}
           <p class="hx:text-center hx:text-gray-500 hx:dark:text-gray-400">{{ (T "noResultsFound") | default "No posts found." }}</p>
         {{- end }}
+        {{ partial "custom/content-end.html" . }}
+        {{ partial "custom/page-end.html" . }}
       </main>
     </article>
   </div>

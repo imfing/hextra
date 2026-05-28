@@ -238,6 +238,21 @@ layouts/_partials/custom/head-end.html
 
 フッターセクションで利用可能なHugo変数: `.switchesVisible`と`.displayCopyright`。
 
+## カスタムページセクション
+
+サイト内に以下のファイルを作成すると、各ページのコンテンツ周辺にカスタムセクションを追加できます:
+
+```
+layouts/_partials/custom/page-begin.html
+layouts/_partials/custom/content-begin.html
+layouts/_partials/custom/content-end.html
+layouts/_partials/custom/page-end.html
+```
+
+ページフックはページの`<main>`要素内にレンダリングされます。コンテンツフックはページコンテンツの直前と直後にレンダリングされます。
+
+各パーシャルには現在のHugoページがコンテキストとして渡されるため、ページパラメータ、サイトパラメータ、その他のHugoテンプレート機能を使用できます。
+
 ## カスタムレイアウト
 
 テーマのレイアウトは、サイトの`layouts`ディレクトリに同じ名前のファイルを作成することでオーバーライドできます。
