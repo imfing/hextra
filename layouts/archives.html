@@ -25,8 +25,9 @@
                     <a
                       href="{{ .RelPermalink }}"
                       class="hx:font-medium hx:text-gray-700 hx:dark:text-gray-300 hx:transition-colors hx:duration-150 hx:hover:text-primary-600 hx:dark:hover:text-primary-400"
-                      >{{ .Title }}</a
                     >
+                      {{ .Title }}
+                    </a>
                     {{- with .Params.tags }}
                       <span class="hx:text-xs hx:leading-7">{{ partial "tags.html" (dict "context" $page) }}</span>
                     {{- end }}
