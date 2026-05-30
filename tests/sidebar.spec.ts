@@ -76,6 +76,15 @@ test.describe("mobile sidebar", () => {
     await expect(mobile.locator('a[href="/docs/sidebar-lab/manual-only/"]').first()).toBeVisible();
   });
 
+  test("marks external links from their href", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 900 });
+    await page.goto("/docs/sidebar-lab/");
+    const external = page.locator('ul.hextra-sidebar-mobile-list a[href="https://imfing.github.io/hextra/versions/latest/"]');
+
+    await expect(external).toHaveAttribute("target", "_blank");
+    await expect(external).toHaveAttribute("rel", /noreferrer/);
+  });
+
   test("injects mobile TOC when only desktop active item is available", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 900 });
     await page.goto("/docs/guide/configuration/");

@@ -46,12 +46,8 @@
   "items" ($node.items | default slice)
   "merge" ($node.merge | default "none")
   "open" $open
-  "external" $external
   "page" $page
   "icon" $icon
 -}}
-{{- if eq $type "separator" -}}
-  {{- $result = merge $result (dict "separator" true) -}}
-{{- end -}}
 
 {{- return $result -}}

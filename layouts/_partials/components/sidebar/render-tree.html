@@ -9,7 +9,7 @@
     <li class="hextra-sidebar-search-item">
       {{- partial "search.html" (dict "location" "sidebar") -}}
     </li>
-  {{- else if .separator -}}
+  {{- else if eq .type "separator" -}}
     <li class="hextra-sidebar-separator">
       <span class="hx:inline-flex hx:items-center hx:gap-2">
         {{- partial "components/sidebar/sidebar-icon.html" .icon -}}

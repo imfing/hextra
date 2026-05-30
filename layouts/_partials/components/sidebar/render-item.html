@@ -1,6 +1,7 @@
 {{- $node := .node -}}
 {{- $open := .open | default false -}}
 {{- $hasChildren := .hasChildren | default false -}}
+{{- $external := hasPrefix ($node.link | default "") "http" -}}
 
 {{- /* Build the link class up front so the template conditionals don't leak  */ -}}
 {{- /* literal newlines into the rendered class attribute (see prettier wrap). */ -}}
@@ -21,7 +22,7 @@
     <a
       class="{{ $linkClass }}"
       href="{{ $node.link }}"
-      {{ if $node.external }}target="_blank" rel="noreferrer"{{ end }}
+      {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
     >
       <span class="hextra-sidebar-link-content hx:flex hx:items-center hx:gap-2 hx:min-w-0">
         {{- partial "components/sidebar/sidebar-icon.html" $node.icon -}}

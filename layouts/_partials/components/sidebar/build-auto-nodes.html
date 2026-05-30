@@ -17,7 +17,6 @@
           "title" (string $sep)
           "type" "separator"
           "items" slice
-          "separator" true
           "icon" ""
           )
         -}}
@@ -35,7 +34,6 @@
         "title" (partial "utils/title" .)
         "type" "separator"
         "items" slice
-        "separator" true
         "icon" (.Params.sidebar.icon | default "")
         )
       -}}
@@ -53,7 +51,6 @@
         "title" (partial "utils/title" .)
         "items" $children
         "open" .Params.sidebar.open
-        "external" false
         "icon" (.Params.sidebar.icon | default "")
         )
       -}}

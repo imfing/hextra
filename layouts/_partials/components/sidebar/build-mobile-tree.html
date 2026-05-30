@@ -54,7 +54,6 @@
           "link" $childLink
           "title" $childTitle
           "items" (slice)
-          "external" (hasPrefix $childLink "http")
           "icon" $childIcon
           )
         -}}
@@ -84,7 +83,7 @@
   {{- with $menuPage -}}
     {{- if not (partial "components/sidebar/is-excluded.html" (dict "page" . "scope" $scope)) -}}
       {{- if .Params.sidebar.separator -}}
-        {{- $nodes = $nodes | append (dict "type" "separator" "title" $menuTitle "link" "" "items" (slice) "separator" true) -}}
+        {{- $nodes = $nodes | append (dict "type" "separator" "title" $menuTitle "link" "" "items" (slice)) -}}
       {{- else -}}
         {{- $children := slice -}}
         {{- if eq .Type "docs" -}}
@@ -95,7 +94,6 @@
           "title" $menuTitle
           "items" $children
           "open" (.Params.sidebar.open)
-          "external" false
           "icon" (.Params.sidebar.icon | default "")
           )
         -}}
@@ -115,7 +113,6 @@
       "link" $link
       "title" $menuTitle
       "items" (slice)
-      "external" (hasPrefix $link "http")
       )
     -}}
   {{- end -}}
