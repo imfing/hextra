@@ -33,6 +33,7 @@
             {{- $children = $children | append (dict
               "link" ""
               "title" (partial "utils/title" .)
+              "type" "separator"
               "items" slice
               "merge" "none"
               "weight" .Weight
@@ -53,7 +54,6 @@
               "merge" "none"
               "open" .Params.sidebar.open
               "weight" .Weight
-              "separator" false
 
               "external" false
               "page" .
@@ -65,7 +65,7 @@
       {{- end -}}
     {{- end -}}
 
-    {{- if $node.separator -}}
+    {{- if eq $node.type "separator" -}}
       {{- /* Node renders as a separator label; lift any children alongside. */ -}}
       {{- $result = $result | append (merge $node (dict "link" "" "items" slice)) -}}
       {{- if gt (len $children) 0 -}}

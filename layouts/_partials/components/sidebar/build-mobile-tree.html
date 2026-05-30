@@ -54,7 +54,6 @@
           "title" $childTitle
           "items" (slice)
           "merge" "none"
-          "separator" false
           "external" (hasPrefix $childLink "http")
           "page" $childPage
           "icon" $childIcon
@@ -71,7 +70,6 @@
         "items" $childNodes
         "merge" "none"
         "open" false
-        "separator" false
         "external" false
         "page" false
         )
@@ -90,7 +88,7 @@
   {{- with $menuPage -}}
     {{- if ne .Params.sidebar.exclude true -}}
       {{- if .Params.sidebar.separator -}}
-        {{- $nodes = $nodes | append (dict "title" $menuTitle "separator" true "link" "" "items" (slice) "external" false "page" .) -}}
+        {{- $nodes = $nodes | append (dict "type" "separator" "title" $menuTitle "link" "" "items" (slice) "separator" true "external" false "page" .) -}}
       {{- else -}}
         {{- $children := slice -}}
         {{- if eq .Type "docs" -}}
@@ -102,7 +100,6 @@
           "items" $children
           "merge" "none"
           "open" (.Params.sidebar.open)
-          "separator" false
           "external" false
           "page" .
           "icon" (.Params.sidebar.icon | default "")
@@ -125,7 +122,6 @@
       "title" $menuTitle
       "items" (slice)
       "merge" "none"
-      "separator" false
       "external" (hasPrefix $link "http")
       "page" false
       )

@@ -14,6 +14,7 @@
         {{- $nodes = $nodes | append (dict
           "link" ""
           "title" (string $sep)
+          "type" "separator"
           "items" slice
           "merge" "none"
           "weight" 0
@@ -35,6 +36,7 @@
       {{- $nodes = $nodes | append (dict
         "link" ""
         "title" (partial "utils/title" .)
+        "type" "separator"
         "items" slice
         "merge" "none"
         "weight" .Weight
@@ -60,7 +62,6 @@
         "merge" "none"
         "open" .Params.sidebar.open
         "weight" .Weight
-        "separator" false
 
         "external" false
         "page" .

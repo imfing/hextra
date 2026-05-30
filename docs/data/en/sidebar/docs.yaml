@@ -3,7 +3,7 @@
 - link: /docs/guide/
   merge: deep
 
-- separator: true
+- type: separator
   title: Deep Dive
 
 - link: /docs/advanced/
@@ -27,7 +27,7 @@
       items:
         - link: /docs/sidebar-lab/group-child/
 
-- separator: true
+- type: separator
   title: More
 - link: /about/
 - link: https://gohugo.io/documentation/

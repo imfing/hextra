@@ -16,7 +16,13 @@
   {{- $title = partial "utils/title" $page -}}
 {{- end -}}
 
-{{- $knownKeys := slice "link" "title" "items" "merge" "open" "weight" "separator" "exclude" "icon" "type" -}}
+{{- $type := $node.type | default "" -}}
+{{- if and $type (not (in (slice "search" "separator") $type)) -}}
+  {{- warnf "sidebar data: unknown type %q on node with link %q" $type ($node.link | default "<no link>") -}}
+  {{- $type = "" -}}
+{{- end -}}
+
+{{- $knownKeys := slice "link" "title" "items" "merge" "open" "weight" "exclude" "icon" "type" -}}
 {{- range $key, $_ := $node -}}
   {{- if not (in $knownKeys $key) -}}
     {{- warnf "sidebar data: unknown key %q on node with link %q" $key ($node.link | default "<no link>") -}}
@@ -28,17 +34,20 @@
   {{- $icon = $page.Params.sidebar.icon | default "" -}}
 {{- end -}}
 
-{{- return (dict
-  "type" ($node.type | default "")
+{{- $result := dict
+  "type" $type
   "link" $normalizedLink
   "title" ($title | default "Untitled")
   "items" ($node.items | default slice)
   "merge" ($node.merge | default "none")
   "open" $node.open
   "weight" ($node.weight | default 0)
-  "separator" ($node.separator | default false)
   "external" $external
   "page" $page
   "icon" $icon
-  )
 -}}
+{{- if eq $type "separator" -}}
+  {{- $result = merge $result (dict "separator" true) -}}
+{{- end -}}
+
+{{- return $result -}}
