@@ -11,11 +11,7 @@
 {{- if not $node.link -}}
   <div class="hextra-sidebar-item">
     <span class="hextra-sidebar-group-title {{ if $hasChildren }}hextra-sidebar-group-title-has-children{{ end }}">
-      {{- with $node.icon -}}
-        <span class="hextra-sidebar-link-icon hx:shrink-0 hx:inline-flex hx:items-center">
-          {{- partial "utils/icon.html" (dict "name" . "attributes" `height="1em" class="hx:inline-block"`) -}}
-        </span>
-      {{- end -}}
+      {{- partial "components/sidebar/sidebar-icon.html" $node.icon -}}
       {{- $node.title -}}
     </span>
     {{- partial "components/sidebar/collapsible-button.html" (dict "hasChildren" $hasChildren "open" $open) -}}
@@ -28,11 +24,7 @@
       {{ if $node.external }}target="_blank" rel="noreferrer"{{ end }}
     >
       <span class="hextra-sidebar-link-content hx:flex hx:items-center hx:gap-2 hx:min-w-0">
-        {{- with $node.icon -}}
-          <span class="hextra-sidebar-link-icon hx:shrink-0 hx:inline-flex hx:items-center">
-            {{- partial "utils/icon.html" (dict "name" . "attributes" `height="1em" class="hx:inline-block"`) -}}
-          </span>
-        {{- end -}}
+        {{- partial "components/sidebar/sidebar-icon.html" $node.icon -}}
         <span class="hextra-sidebar-link-text">{{- $node.title -}}</span>
       </span>
     </a>

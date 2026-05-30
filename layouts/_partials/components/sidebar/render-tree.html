@@ -12,11 +12,7 @@
   {{- else if .separator -}}
     <li class="hextra-sidebar-separator">
       <span class="hx:inline-flex hx:items-center hx:gap-2">
-        {{- with .icon -}}
-          <span class="hextra-sidebar-link-icon hx:shrink-0 hx:inline-flex hx:items-center">
-            {{- partial "utils/icon.html" (dict "name" . "attributes" `height="1em" class="hx:inline-block"`) -}}
-          </span>
-        {{- end -}}
+        {{- partial "components/sidebar/sidebar-icon.html" .icon -}}
         {{- .title -}}
       </span>
     </li>

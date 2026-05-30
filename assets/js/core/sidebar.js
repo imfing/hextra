@@ -127,9 +127,18 @@ function injectMobileTOC(container) {
   if (!mobileList) return;
 
   var activeLink = mobileList.querySelector(".hextra-sidebar-active-item");
-  if (!activeLink) return;
+  if (!activeLink) {
+    var desktopActiveLink = container.querySelector(".hextra-sidebar-desktop-list .hextra-sidebar-active-item");
+    var activePath = desktopActiveLink && normalizeSidebarPath(desktopActiveLink.getAttribute("href"));
+    if (activePath) {
+      activeLink = Array.from(mobileList.querySelectorAll(".hextra-sidebar-link")).find(function (link) {
+        return normalizeSidebarPath(link.getAttribute("href")) === activePath;
+      });
+    }
+  }
 
-  var li = activeLink.closest("li");
+  var li = activeLink ? activeLink.closest("li") : null;
+  if (!li) li = mobileList.querySelector("li.open") || mobileList.querySelector("li");
   if (!li) return;
 
   var item = li.querySelector(":scope > .hextra-sidebar-item");

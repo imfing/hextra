@@ -75,6 +75,32 @@ test.describe("mobile sidebar", () => {
     const mobile = page.locator("ul.hextra-sidebar-mobile-list");
     await expect(mobile.locator('a[href="/docs/sidebar-lab/manual-only/"]').first()).toBeVisible();
   });
+
+  test("injects mobile TOC when only desktop active item is available", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 900 });
+    await page.goto("/docs/guide/configuration/");
+
+    const mobile = page.locator("ul.hextra-sidebar-mobile-list");
+    await expect(mobile.locator(".hextra-sidebar-toc-link").first()).toBeVisible();
+
+    await page.evaluate(() => {
+      const container = document.querySelector(".hextra-sidebar-container");
+      if (!container) throw new Error("Missing sidebar container");
+
+      container.querySelectorAll(".hextra-sidebar-mobile-list .hextra-sidebar-toc-link").forEach((link) => {
+        link.closest("ul")?.remove();
+      });
+      container.querySelectorAll(".hextra-sidebar-mobile-list .hextra-sidebar-active-item").forEach((link) => {
+        link.classList.remove("hextra-sidebar-active-item", "hextra-sidebar-link-active");
+        link.classList.add("hextra-sidebar-link-inactive");
+      });
+
+      const sidebar = window as unknown as { injectMobileTOC: (container: Element) => void };
+      sidebar.injectMobileTOC(container);
+    });
+
+    await expect(mobile.locator(".hextra-sidebar-toc-link").first()).toBeVisible();
+  });
 });
 
 test.describe("semantic classes and legacy hooks", () => {
