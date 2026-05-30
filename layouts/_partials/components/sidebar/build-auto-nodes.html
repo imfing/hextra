@@ -2,13 +2,8 @@
 {{- $level := .level | default 0 -}}
 {{- $nodes := slice -}}
 
-{{- if lt $level 4 -}}
-  {{- $items := where (union $context.RegularPages $context.Sections) "Params.sidebar.exclude" "!=" true -}}
-  {{- $sortBy := $context.Params.sidebar.sort | default (site.Params.sidebar.sort | default "weight") -}}
-  {{- $sorted := $items.ByWeight -}}
-  {{- if eq $sortBy "title" -}}
-    {{- $sorted = $items.ByTitle -}}
-  {{- end -}}
+{{- if lt $level (site.Params.sidebar.maxDepth | default 4) -}}
+  {{- $sorted := partial "components/sidebar/sorted-items.html" (dict "context" $context) -}}
   {{- range $sorted -}}
     {{- $sep := .Params.sidebar.separator -}}
     {{- $sepLift := and (eq $sep true) (eq $level 0) -}}
@@ -26,7 +21,8 @@
           "external" false
           "page" false
           "icon" ""
-        ) -}}
+          )
+        -}}
       {{- else -}}
         {{- warnf "sidebar.separator on %q is only respected at the top level (depth %d); ignored" .RelPermalink $level -}}
       {{- end -}}
@@ -46,15 +42,16 @@
         "external" false
         "page" false
         "icon" (.Params.sidebar.icon | default "")
-      ) -}}
+        )
+      -}}
       {{- if or .RegularPages .Sections -}}
-        {{- $lifted := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" $level) .RelPermalink -}}
+        {{- $lifted := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" $level) .RelPermalink $level -}}
         {{- $nodes = $nodes | append $lifted -}}
       {{- end -}}
     {{- else -}}
       {{- $children := slice -}}
       {{- if or .RegularPages .Sections -}}
-        {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink -}}
+        {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink (add $level 1) -}}
       {{- end -}}
       {{- $nodes = $nodes | append (dict
         "link" .RelPermalink
@@ -68,7 +65,8 @@
         "external" false
         "page" .
         "icon" (.Params.sidebar.icon | default "")
-      ) -}}
+        )
+      -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

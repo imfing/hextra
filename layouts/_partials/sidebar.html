@@ -7,7 +7,7 @@
 {{- with $context.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
 
 {{- /* When a data sidebar file exists, use it for all pages. */ -}}
-{{- $matchFound := gt (len (partial "components/sidebar/source-data.html" $context)) 0 -}}
+{{- $matchFound := gt (len (partialCached "components/sidebar/source-data.html" $context $context.Language.Lang $sectionKey)) 0 -}}
 
 {{- if .context.Params.sidebar.hide -}}
   {{- $disableSidebar = true -}}
@@ -23,6 +23,20 @@
   {{- end -}}
 {{- end -}}
 
+{{- /* Active state and section expansion are applied by JS (see inline script
+  below and assets/js/core/sidebar.js). Without JS the tree would collapse,
+  so expand every section and hide the inert toggles for no-JS users. */
+-}}
+<noscript>
+  <style>
+    .hextra-sidebar-children {
+      grid-template-rows: 1fr !important;
+    }
+    .hextra-sidebar-collapsible-button {
+      display: none !important;
+    }
+  </style>
+</noscript>
 <aside class="hextra-sidebar-container {{ $sidebarClass }}" data-sidebar-cache>
   <div class="hextra-scrollbar hextra-sidebar-scroll">
     {{- /* Mobile sidebar: uses menu.main at top level, shows inline TOC */ -}}
@@ -65,38 +79,44 @@
   {{- end -}}
 </aside>
 <script>
-(function () {
-  var c = document.querySelector('.hextra-sidebar-container[data-sidebar-cache]');
-  if (!c) return;
-  var p = location.pathname;
-  c.querySelectorAll('.hextra-sidebar-link').forEach(function (a) {
-    if (a.getAttribute('href') !== p) return;
-    a.classList.remove('hextra-sidebar-link-inactive');
-    a.classList.add('hextra-sidebar-link-active', 'hextra-sidebar-active-item');
-    var i = a.closest('.hextra-sidebar-item');
-    if (i) i.setAttribute('data-active', 'true');
-    var l = a.closest('li');
-    while (l) {
-      l.classList.add('open');
-      var b = l.querySelector(':scope > .hextra-sidebar-item > .hextra-sidebar-collapsible-button');
-      if (b) b.setAttribute('aria-expanded', 'true');
-      l = l.parentElement && l.parentElement.closest('li');
-    }
-  });
-  try {
-    var s = JSON.parse(sessionStorage.getItem('hextra-sidebar-state')) || {};
-    c.querySelectorAll('li').forEach(function (li) {
-      var a = li.querySelector(':scope > .hextra-sidebar-item > .hextra-sidebar-link');
-      var k = a ? a.getAttribute('href') : null;
-      if (!k) { var g = li.querySelector(':scope > .hextra-sidebar-item > .hextra-sidebar-group-title'); if (g) k = 'group:' + g.textContent.trim(); }
-      if (!k || !(k in s) || li.querySelector('.hextra-sidebar-link-active')) return;
-      li.classList.toggle('open', s[k]);
-      var b = li.querySelector(':scope > .hextra-sidebar-item > .hextra-sidebar-collapsible-button');
-      if (b) b.setAttribute('aria-expanded', s[k] ? 'true' : 'false');
+  (function () {
+    var c = document.querySelector(".hextra-sidebar-container[data-sidebar-cache]");
+    if (!c) return;
+    var p = location.pathname;
+    c.querySelectorAll(".hextra-sidebar-link").forEach(function (a) {
+      if (a.getAttribute("href") !== p) return;
+      a.classList.remove("hextra-sidebar-link-inactive");
+      a.classList.add("hextra-sidebar-link-active", "hextra-sidebar-active-item");
+      var i = a.closest(".hextra-sidebar-item");
+      if (i) i.setAttribute("data-active", "true");
+      var l = a.closest("li");
+      while (l) {
+        l.classList.add("open");
+        var b = l.querySelector(":scope > .hextra-sidebar-item > .hextra-sidebar-collapsible-button");
+        if (b) b.setAttribute("aria-expanded", "true");
+        l = l.parentElement && l.parentElement.closest("li");
+      }
     });
-  } catch (e) {}
-  c.setAttribute('data-sidebar-ready', '');
-  var sv = sessionStorage.getItem('hextra-sidebar-scroll');
-  if (sv) { var sb = c.querySelector('.hextra-scrollbar'); if (sb) sb.scrollTop = parseInt(sv, 10); }
-})();
+    try {
+      var s = JSON.parse(sessionStorage.getItem("hextra-sidebar-state")) || {};
+      c.querySelectorAll("li").forEach(function (li) {
+        var a = li.querySelector(":scope > .hextra-sidebar-item > .hextra-sidebar-link");
+        var k = a ? a.getAttribute("href") : null;
+        if (!k) {
+          var g = li.querySelector(":scope > .hextra-sidebar-item > .hextra-sidebar-group-title");
+          if (g) k = "group:" + g.textContent.trim();
+        }
+        if (!k || !(k in s) || li.querySelector(".hextra-sidebar-link-active")) return;
+        li.classList.toggle("open", s[k]);
+        var b = li.querySelector(":scope > .hextra-sidebar-item > .hextra-sidebar-collapsible-button");
+        if (b) b.setAttribute("aria-expanded", s[k] ? "true" : "false");
+      });
+    } catch (e) {}
+    c.setAttribute("data-sidebar-ready", "");
+    var sv = sessionStorage.getItem("hextra-sidebar-scroll");
+    if (sv) {
+      var sb = c.querySelector(".hextra-scrollbar");
+      if (sb) sb.scrollTop = parseInt(sv, 10);
+    }
+  })();
 </script>

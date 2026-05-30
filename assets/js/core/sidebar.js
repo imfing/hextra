@@ -45,7 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
     container.offsetHeight;
     container.setAttribute('data-sidebar-ready', '');
   }
-  if (!restoreSidebarScroll()) scrollToActiveItem();
+  // Restore the saved scroll position for stability across navigation, then
+  // ensure the active item is visible. scrollToActiveItem() is a no-op when the
+  // item already sits within the viewport, so a restored position is preserved
+  // unless the active item would otherwise be off-screen.
+  restoreSidebarScroll();
+  scrollToActiveItem();
   injectMobileTOC(container);
   window.addEventListener('beforeunload', saveSidebarScroll);
 
@@ -151,11 +156,9 @@ function enableCollapsibles() {
 
 function restoreSidebarScroll() {
   var saved = sessionStorage.getItem('hextra-sidebar-scroll');
-  if (saved === null) return false;
+  if (saved === null) return;
   var scrollbar = document.querySelector("aside.hextra-sidebar-container > .hextra-scrollbar");
-  if (!scrollbar) return false;
-  scrollbar.scrollTop = parseInt(saved, 10);
-  return true;
+  if (scrollbar) scrollbar.scrollTop = parseInt(saved, 10);
 }
 
 function saveSidebarScroll() {

@@ -5,7 +5,7 @@
 {{- $page := false -}}
 
 {{- if and $link (not $external) -}}
-  {{- $normalizedLink = relLangURL (strings.TrimPrefix "/" $link) -}}
+  {{- $normalizedLink = partial "utils/sidebar-link.html" $link -}}
   {{- with site.GetPage $link -}}
     {{- $page = . -}}
   {{- end -}}
@@ -40,4 +40,5 @@
   "external" $external
   "page" $page
   "icon" $icon
-) -}}
+  )
+-}}

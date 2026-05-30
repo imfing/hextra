@@ -1,0 +1,7 @@
+{{- /* Normalize a root-relative sidebar/menu link to a language-aware URL.   */ -}}
+{{- /* External and already-resolved links are returned unchanged.            */ -}}
+{{- $link := . -}}
+{{- if hasPrefix $link "/" -}}
+  {{- $link = relLangURL (strings.TrimPrefix "/" $link) -}}
+{{- end -}}
+{{- return $link -}}

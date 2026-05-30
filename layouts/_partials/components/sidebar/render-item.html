@@ -13,23 +13,16 @@
       {{- end -}}
       {{- $node.title -}}
     </span>
-    {{- if $hasChildren -}}
-      <button
-        type="button"
-        class="hextra-sidebar-collapsible-button"
-        aria-label="{{ (T "toggleSection") | default "Toggle section" }}"
-        aria-expanded="{{ if $open }}true{{ else }}false{{ end }}"
-      >
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hextra-sidebar-collapsible-icon">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hextra-sidebar-collapsible-icon-path"></path>
-        </svg>
-      </button>
-    {{- end -}}
+    {{- partial "components/sidebar/collapsible-button.html" (dict "hasChildren" $hasChildren "open" $open) -}}
   </div>
 {{- else -}}
   <div class="hextra-sidebar-item hextra-sidebar-node" data-active="{{ if $active }}true{{ else }}false{{ end }}">
     <a
-      class="hextra-sidebar-link {{ if $hasChildren }}hextra-sidebar-link-has-children{{ end }} {{ if $active }}hextra-sidebar-link-active hextra-sidebar-active-item{{ else }}hextra-sidebar-link-inactive{{ end }}"
+      class="hextra-sidebar-link {{ if $hasChildren }}hextra-sidebar-link-has-children{{ end }} {{ if $active }}
+        hextra-sidebar-link-active hextra-sidebar-active-item
+      {{ else }}
+        hextra-sidebar-link-inactive
+      {{ end }}"
       href="{{ $node.link }}"
       {{ if $node.external }}target="_blank" rel="noreferrer"{{ end }}
     >
@@ -42,17 +35,6 @@
         <span class="hextra-sidebar-link-text">{{- $node.title -}}</span>
       </span>
     </a>
-    {{- if $hasChildren -}}
-      <button
-        type="button"
-        class="hextra-sidebar-collapsible-button"
-        aria-label="{{ (T "toggleSection") | default "Toggle section" }}"
-        aria-expanded="{{ if $open }}true{{ else }}false{{ end }}"
-      >
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hextra-sidebar-collapsible-icon">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hextra-sidebar-collapsible-icon-path"></path>
-        </svg>
-      </button>
-    {{- end -}}
+    {{- partial "components/sidebar/collapsible-button.html" (dict "hasChildren" $hasChildren "open" $open) -}}
   </div>
 {{- end -}}

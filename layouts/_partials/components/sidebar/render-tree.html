@@ -1,4 +1,4 @@
-{{- if ge (.level | default 0) 4 -}}
+{{- if ge (.level | default 0) (site.Params.sidebar.maxDepth | default 4) -}}
   {{- return -}}
 {{- end -}}
 

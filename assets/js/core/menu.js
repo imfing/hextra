@@ -69,19 +69,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Select all anchor tags in the sidebar container
-  const sidebarLinks = sidebarContainer.querySelectorAll('a');
-
-  // Add click event listener to each anchor tag
-  sidebarLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      // Check if the href attribute contains a hash symbol (links to a heading)
-      if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
-        // Only dismiss overlay on mobile view
-        if (window.innerWidth < 768) {
-          toggleMenu();
-        }
-      }
-    });
+  // Dismiss the overlay when an in-page (hash) link is tapped on mobile.
+  // Delegated to the container so links injected after load (e.g. the mobile
+  // TOC inserted by sidebar.js) are covered without re-binding.
+  sidebarContainer.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link || !sidebarContainer.contains(link)) return;
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#') && window.innerWidth < 768) {
+      toggleMenu();
+    }
   });
 });

@@ -1,0 +1,10 @@
+{{- /* Returns the section's child pages (regular pages + sub-sections),     */ -}}
+{{- /* filtered by sidebar.exclude and sorted per sidebar.sort (weight|title). */ -}}
+{{- $page := .context -}}
+{{- $items := where (union $page.RegularPages $page.Sections) "Params.sidebar.exclude" "!=" true -}}
+{{- $sortBy := $page.Params.sidebar.sort | default (site.Params.sidebar.sort | default "weight") -}}
+{{- $sorted := $items.ByWeight -}}
+{{- if eq $sortBy "title" -}}
+  {{- $sorted = $items.ByTitle -}}
+{{- end -}}
+{{- return $sorted -}}

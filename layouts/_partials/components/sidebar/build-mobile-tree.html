@@ -40,7 +40,7 @@
         {{- $childLink = $childItem.URL -}}
         {{- with $childItem.PageRef -}}
           {{- if hasPrefix . "/" -}}
-            {{- $childLink = relLangURL (strings.TrimPrefix "/" .) -}}
+            {{- $childLink = partial "utils/sidebar-link.html" . -}}
           {{- end -}}
         {{- end -}}
       {{- end -}}
@@ -59,7 +59,8 @@
           "external" (hasPrefix $childLink "http")
           "page" $childPage
           "icon" $childIcon
-        ) -}}
+          )
+        -}}
       {{- end -}}
     {{- end -}}
 
@@ -80,7 +81,8 @@
         "separator" false
         "external" false
         "page" false
-      ) -}}
+        )
+      -}}
     {{- end -}}
     {{- continue -}}
   {{- end -}}
@@ -111,7 +113,8 @@
           "external" false
           "page" .
           "icon" (.Params.sidebar.icon | default "")
-        ) -}}
+          )
+        -}}
       {{- end -}}
     {{- end -}}
     {{- continue -}}
@@ -120,7 +123,7 @@
   {{- $link := $menuItem.URL -}}
   {{- with $menuItem.PageRef -}}
     {{- if hasPrefix . "/" -}}
-      {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+      {{- $link = partial "utils/sidebar-link.html" . -}}
     {{- end -}}
   {{- end -}}
   {{- if $link -}}
@@ -132,7 +135,8 @@
       "separator" false
       "external" (hasPrefix $link "http")
       "page" false
-    ) -}}
+      )
+    -}}
   {{- end -}}
 {{- end -}}
 

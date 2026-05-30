@@ -2,15 +2,15 @@
 {{- $page := .page -}}
 {{- $pageURL := .pageURL -}}
 {{- $matched := .matched | default false -}}
+{{- $sectionKey := "" -}}
+{{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
 
-{{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context) $context.RelPermalink -}}
+{{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context) $context.RelPermalink 0 -}}
 {{- $nodes := $autoNodes -}}
 
-{{- $sidebarData := partial "components/sidebar/source-data.html" $page -}}
+{{- $sidebarData := partialCached "components/sidebar/source-data.html" $page $page.Language.Lang $sectionKey -}}
 {{- $dataNodes := slice -}}
 {{- if gt (len $sidebarData) 0 -}}
-  {{- $sectionKey := "" -}}
-  {{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
   {{- $dataNodes = partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData) $page.Language.Lang $sectionKey -}}
 {{- end -}}
 
