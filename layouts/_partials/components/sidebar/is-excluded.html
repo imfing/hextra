@@ -1,0 +1,23 @@
+{{- $input := . -}}
+{{- $value := false -}}
+{{- $scope := "" -}}
+
+{{- if reflect.IsMap $input -}}
+  {{- $scope = $input.scope | default "" -}}
+  {{- if isset $input "value" -}}{{- $value = index $input "value" -}}{{- end -}}
+  {{- with $input.page -}}{{- $value = .Params.sidebar.exclude -}}{{- end -}}
+  {{- with $input.node -}}{{- $value = .exclude -}}{{- end -}}
+{{- else -}}
+  {{- $value = $input -}}
+{{- end -}}
+
+{{- $excluded := eq $value true -}}
+{{- if and (not $excluded) $scope -}}
+  {{- if eq (printf "%v" $value) $scope -}}
+    {{- $excluded = true -}}
+  {{- else if and (reflect.IsSlice $value) (in $value $scope) -}}
+    {{- $excluded = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $excluded -}}

@@ -1,5 +1,6 @@
 {{- $page := .page -}}
 {{- $matched := .matched | default false -}}
+{{- $scope := "mobile" -}}
 {{- $nodes := slice -}}
 {{- $sectionKey := "" -}}
 {{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
@@ -32,7 +33,7 @@
 
       {{- $childLink := "" -}}
       {{- with $childPage -}}
-        {{- if ne .Params.sidebar.exclude true -}}
+        {{- if not (partial "components/sidebar/is-excluded.html" (dict "page" . "scope" $scope)) -}}
           {{- $childLink = .RelPermalink -}}
         {{- end -}}
       {{- else -}}
@@ -53,9 +54,7 @@
           "link" $childLink
           "title" $childTitle
           "items" (slice)
-          "merge" "none"
           "external" (hasPrefix $childLink "http")
-          "page" $childPage
           "icon" $childIcon
           )
         -}}
@@ -68,10 +67,7 @@
         "link" ""
         "title" $menuTitle
         "items" $childNodes
-        "merge" "none"
         "open" false
-        "external" false
-        "page" false
         )
       -}}
     {{- end -}}
@@ -86,22 +82,20 @@
   {{- end -}}
 
   {{- with $menuPage -}}
-    {{- if ne .Params.sidebar.exclude true -}}
+    {{- if not (partial "components/sidebar/is-excluded.html" (dict "page" . "scope" $scope)) -}}
       {{- if .Params.sidebar.separator -}}
-        {{- $nodes = $nodes | append (dict "type" "separator" "title" $menuTitle "link" "" "items" (slice) "separator" true "external" false "page" .) -}}
+        {{- $nodes = $nodes | append (dict "type" "separator" "title" $menuTitle "link" "" "items" (slice) "separator" true) -}}
       {{- else -}}
         {{- $children := slice -}}
         {{- if eq .Type "docs" -}}
-          {{- $children = partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "matched" $matched) .RelPermalink $page.Language.Lang $matched $sectionKey -}}
+          {{- $children = partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "matched" $matched "scope" $scope) .RelPermalink $page.Language.Lang $matched $sectionKey $scope -}}
         {{- end -}}
         {{- $nodes = $nodes | append (dict
           "link" .RelPermalink
           "title" $menuTitle
           "items" $children
-          "merge" "none"
           "open" (.Params.sidebar.open)
           "external" false
-          "page" .
           "icon" (.Params.sidebar.icon | default "")
           )
         -}}
@@ -121,9 +115,7 @@
       "link" $link
       "title" $menuTitle
       "items" (slice)
-      "merge" "none"
       "external" (hasPrefix $link "http")
-      "page" false
       )
     -}}
   {{- end -}}
@@ -132,7 +124,7 @@
 {{- /* Fall back to the content tree when menu.main has no usable entries */ -}}
 {{- if eq (len $nodes) 0 -}}
   {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $page.FirstSection -}}
-  {{- $nodes = partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $page "matched" $matched) $navRoot.RelPermalink $page.Language.Lang $matched $sectionKey -}}
+  {{- $nodes = partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $page "matched" $matched "scope" $scope) $navRoot.RelPermalink $page.Language.Lang $matched $sectionKey $scope -}}
 {{- end -}}
 
 {{- return $nodes -}}

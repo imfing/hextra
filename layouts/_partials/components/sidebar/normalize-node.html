@@ -22,7 +22,7 @@
   {{- $type = "" -}}
 {{- end -}}
 
-{{- $knownKeys := slice "link" "title" "items" "merge" "open" "weight" "exclude" "icon" "type" -}}
+{{- $knownKeys := slice "link" "title" "items" "merge" "open" "exclude" "icon" "type" -}}
 {{- range $key, $_ := $node -}}
   {{- if not (in $knownKeys $key) -}}
     {{- warnf "sidebar data: unknown key %q on node with link %q" $key ($node.link | default "<no link>") -}}
@@ -41,7 +41,6 @@
   "items" ($node.items | default slice)
   "merge" ($node.merge | default "none")
   "open" $node.open
-  "weight" ($node.weight | default 0)
   "external" $external
   "page" $page
   "icon" $icon

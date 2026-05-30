@@ -1,5 +1,4 @@
 {{- $node := .node -}}
-{{- $active := .active | default false -}}
 {{- $open := .open | default false -}}
 {{- $hasChildren := .hasChildren | default false -}}
 
@@ -7,11 +6,7 @@
 {{- /* literal newlines into the rendered class attribute (see prettier wrap). */ -}}
 {{- $linkClass := "hextra-sidebar-link" -}}
 {{- if $hasChildren -}}{{- $linkClass = printf "%s hextra-sidebar-link-has-children" $linkClass -}}{{- end -}}
-{{- if $active -}}
-  {{- $linkClass = printf "%s hextra-sidebar-link-active hextra-sidebar-active-item" $linkClass -}}
-{{- else -}}
-  {{- $linkClass = printf "%s hextra-sidebar-link-inactive" $linkClass -}}
-{{- end -}}
+{{- $linkClass = printf "%s hextra-sidebar-link-inactive" $linkClass -}}
 
 {{- if not $node.link -}}
   <div class="hextra-sidebar-item">
@@ -26,7 +21,7 @@
     {{- partial "components/sidebar/collapsible-button.html" (dict "hasChildren" $hasChildren "open" $open) -}}
   </div>
 {{- else -}}
-  <div class="hextra-sidebar-item hextra-sidebar-node" data-active="{{ if $active }}true{{ else }}false{{ end }}">
+  <div class="hextra-sidebar-item hextra-sidebar-node">
     <a
       class="{{ $linkClass }}"
       href="{{ $node.link }}"

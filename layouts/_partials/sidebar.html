@@ -51,7 +51,7 @@
       {{ $context.Store.Set "enableFooterSwitches" true }}
     {{- else -}}
       <ul class="hextra-sidebar-desktop-list">
-        {{- $desktopNodes := partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "matched" $matchFound) $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
+        {{- $desktopNodes := partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "matched" $matchFound "scope" "desktop") $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey "desktop" -}}
         {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "level" 0) "desktop" $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
         {{- partial "components/sidebar/render-footer.html" -}}
       </ul>

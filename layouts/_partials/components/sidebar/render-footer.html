@@ -17,7 +17,6 @@
     <li>
       {{- partial "components/sidebar/render-item.html" (dict
         "node" (dict "title" $name "link" $link "external" (hasPrefix $link "http"))
-        "active" false
         "open" false
         "hasChildren" false
         )

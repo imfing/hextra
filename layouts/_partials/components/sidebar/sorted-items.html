@@ -1,10 +1,17 @@
 {{- /* Returns the section's child pages (regular pages + sub-sections),     */ -}}
 {{- /* filtered by sidebar.exclude and sorted per sidebar.sort (weight|title). */ -}}
 {{- $page := .context -}}
-{{- $items := where (union $page.RegularPages $page.Sections) "Params.sidebar.exclude" "!=" true -}}
+{{- $scope := .scope | default "sidebar" -}}
+{{- $items := union $page.RegularPages $page.Sections -}}
 {{- $sortBy := $page.Params.sidebar.sort | default (site.Params.sidebar.sort | default "weight") -}}
 {{- $sorted := $items.ByWeight -}}
 {{- if eq $sortBy "title" -}}
   {{- $sorted = $items.ByTitle -}}
 {{- end -}}
-{{- return $sorted -}}
+{{- $result := slice -}}
+{{- range $sorted -}}
+  {{- if not (partial "components/sidebar/is-excluded.html" (dict "page" . "scope" $scope)) -}}
+    {{- $result = $result | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $result -}}

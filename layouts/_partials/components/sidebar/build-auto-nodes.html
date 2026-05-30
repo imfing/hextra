@@ -1,9 +1,10 @@
 {{- $context := .context -}}
 {{- $level := .level | default 0 -}}
+{{- $scope := .scope | default "sidebar" -}}
 {{- $nodes := slice -}}
 
 {{- if lt $level (site.Params.sidebar.maxDepth | default 4) -}}
-  {{- $sorted := partial "components/sidebar/sorted-items.html" (dict "context" $context) -}}
+  {{- $sorted := partial "components/sidebar/sorted-items.html" (dict "context" $context "scope" $scope) -}}
   {{- range $sorted -}}
     {{- $sep := .Params.sidebar.separator -}}
     {{- $sepLift := and (eq $sep true) (eq $level 0) -}}
@@ -16,11 +17,7 @@
           "title" (string $sep)
           "type" "separator"
           "items" slice
-          "merge" "none"
-          "weight" 0
           "separator" true
-          "external" false
-          "page" false
           "icon" ""
           )
         -}}
@@ -38,33 +35,25 @@
         "title" (partial "utils/title" .)
         "type" "separator"
         "items" slice
-        "merge" "none"
-        "weight" .Weight
         "separator" true
-        "external" false
-        "page" false
         "icon" (.Params.sidebar.icon | default "")
         )
       -}}
       {{- if or .RegularPages .Sections -}}
-        {{- $lifted := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" $level) .RelPermalink $level -}}
+        {{- $lifted := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" $level "scope" $scope) .RelPermalink $level $scope -}}
         {{- $nodes = $nodes | append $lifted -}}
       {{- end -}}
     {{- else -}}
       {{- $children := slice -}}
       {{- if or .RegularPages .Sections -}}
-        {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink (add $level 1) -}}
+        {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1) "scope" $scope) .RelPermalink (add $level 1) $scope -}}
       {{- end -}}
       {{- $nodes = $nodes | append (dict
         "link" .RelPermalink
         "title" (partial "utils/title" .)
         "items" $children
-        "merge" "none"
         "open" .Params.sidebar.open
-        "weight" .Weight
-
         "external" false
-        "page" .
         "icon" (.Params.sidebar.icon | default "")
         )
       -}}

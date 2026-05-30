@@ -254,16 +254,16 @@ Create a file at `data/<lang>/sidebar.yaml` (e.g., `data/en/sidebar.yaml`) for a
 
 #### Node Properties
 
-| Property | Type   | Default             | Description                                                                                                                                                               |
-| -------- | ------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `link`   | string | —                   | Page path (e.g., `/docs/guide/`). Required except for virtual nodes such as search and separators.                                                                        |
-| `title`  | string | page title          | Display title. Falls back to the Hugo page title if omitted.                                                                                                              |
-| `type`   | string | —                   | Virtual node type. Use `"search"` for a sidebar search entry or `"separator"` for a separator label. Separator children are lifted to the parent level.                   |
-| `icon`   | string | page `sidebar.icon` | Icon name from Hextra's icon set (e.g., `book-open`, `folder-tree`). Rendered before the title; falls back to the linked page's front-matter `sidebar.icon` when omitted. |
-| `items`  | list   | `[]`                | Child nodes.                                                                                                                                                              |
-| `merge`  | string | `"none"`            | `"none"`: only explicit items shown. `"deep"`: auto-generated children appended for unmatched pages.                                                                      |
-| `open`   | bool   | `true`              | Whether the section starts expanded.                                                                                                                                      |
-| `weight` | int    | `0`                 | Sort weight for ordering.                                                                                                                                                 |
+| Property  | Type   | Default             | Description                                                                                                                                                               |
+| --------- | ------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `link`    | string | —                   | Page path (e.g., `/docs/guide/`). Required except for virtual nodes such as search and separators.                                                                        |
+| `title`   | string | page title          | Display title. Falls back to the Hugo page title if omitted.                                                                                                              |
+| `type`    | string | —                   | Virtual node type. Use `"search"` for a sidebar search entry or `"separator"` for a separator label. Separator children are lifted to the parent level.                   |
+| `exclude` | bool   | `false`             | Hide this data node and its children from the sidebar.                                                                                                                    |
+| `icon`    | string | page `sidebar.icon` | Icon name from Hextra's icon set (e.g., `book-open`, `folder-tree`). Rendered before the title; falls back to the linked page's front-matter `sidebar.icon` when omitted. |
+| `items`   | list   | `[]`                | Child nodes.                                                                                                                                                              |
+| `merge`   | string | `"none"`            | `"none"`: only explicit items shown. `"deep"`: auto-generated children appended for unmatched pages.                                                                      |
+| `open`    | bool   | `true`              | Whether the section starts expanded.                                                                                                                                      |
 
 When a page is under a section covered by the data file, the data-driven tree is used. For pages in other sections, the auto-generated tree is used as a fallback.
 

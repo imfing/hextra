@@ -1,15 +1,16 @@
 {{- $rawNodes := .nodes | default slice -}}
 {{- $level := .level | default 0 -}}
+{{- $scope := .scope | default "sidebar" -}}
 {{- $result := slice -}}
 
 {{- if lt $level (site.Params.sidebar.maxDepth | default 4) -}}
   {{- range $rawNodes -}}
-    {{- if eq .exclude true -}}{{- continue -}}{{- end -}}
+    {{- if partial "components/sidebar/is-excluded.html" (dict "node" . "scope" $scope) -}}{{- continue -}}{{- end -}}
     {{- $node := partial "components/sidebar/normalize-node.html" . -}}
 
     {{- $children := slice -}}
     {{- with $node.items -}}
-      {{- $children = partial "components/sidebar/build-data-tree.html" (dict "nodes" . "level" (add $level 1)) -}}
+      {{- $children = partial "components/sidebar/build-data-tree.html" (dict "nodes" . "level" (add $level 1) "scope" $scope) -}}
     {{- end -}}
 
     {{- if and (eq $node.merge "deep") $node.page -}}
@@ -20,14 +21,14 @@
         {{- end -}}
       {{- end -}}
 
-      {{- $sorted := partial "components/sidebar/sorted-items.html" (dict "context" $node.page) -}}
+      {{- $sorted := partial "components/sidebar/sorted-items.html" (dict "context" $node.page "scope" $scope) -}}
       {{- range $sorted -}}
         {{- if not (index $existing .RelPermalink) -}}
           {{- $sep := .Params.sidebar.separator -}}
           {{- if and $sep (ne $sep true) -}}
             {{- warnf "sidebar.separator on %q is only respected at the top level; ignored under nested data node" .RelPermalink -}}
           {{- end -}}
-          {{- $autoChildren := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1)) .RelPermalink (add $level 1) -}}
+          {{- $autoChildren := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1) "scope" $scope) .RelPermalink (add $level 1) $scope -}}
           {{- if eq $sep true -}}
             {{- /* Section becomes a separator; its children are lifted alongside. */ -}}
             {{- $children = $children | append (dict
@@ -35,11 +36,7 @@
               "title" (partial "utils/title" .)
               "type" "separator"
               "items" slice
-              "merge" "none"
-              "weight" .Weight
               "separator" true
-              "external" false
-              "page" false
               "icon" (.Params.sidebar.icon | default "")
               )
             -}}
@@ -51,12 +48,8 @@
               "link" .RelPermalink
               "title" (partial "utils/title" .)
               "items" $autoChildren
-              "merge" "none"
               "open" .Params.sidebar.open
-              "weight" .Weight
-
               "external" false
-              "page" .
               "icon" (.Params.sidebar.icon | default "")
               )
             -}}
@@ -67,12 +60,12 @@
 
     {{- if eq $node.type "separator" -}}
       {{- /* Node renders as a separator label; lift any children alongside. */ -}}
-      {{- $result = $result | append (merge $node (dict "link" "" "items" slice)) -}}
+      {{- $result = $result | append (partial "components/sidebar/compact-node.html" (merge $node (dict "link" "" "items" slice))) -}}
       {{- if gt (len $children) 0 -}}
         {{- $result = $result | append $children -}}
       {{- end -}}
     {{- else -}}
-      {{- $result = $result | append (merge $node (dict "items" $children)) -}}
+      {{- $result = $result | append (partial "components/sidebar/compact-node.html" (merge $node (dict "items" $children))) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
