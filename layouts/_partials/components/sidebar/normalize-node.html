@@ -34,13 +34,18 @@
   {{- $icon = $page.Params.sidebar.icon | default "" -}}
 {{- end -}}
 
+{{- $open := $node.open -}}
+{{- if and (not (isset $node "open")) $page -}}
+  {{- $open = $page.Params.sidebar.open -}}
+{{- end -}}
+
 {{- $result := dict
   "type" $type
   "link" $normalizedLink
   "title" ($title | default "Untitled")
   "items" ($node.items | default slice)
   "merge" ($node.merge | default "none")
-  "open" $node.open
+  "open" $open
   "external" $external
   "page" $page
   "icon" $icon

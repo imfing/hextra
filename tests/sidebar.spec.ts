@@ -49,6 +49,16 @@ test.describe("data-first sidebar", () => {
     const desktop = page.locator("ul.hextra-sidebar-desktop-list");
     await expect(desktop.locator('a[href="/docs/getting-started/"]')).toBeVisible();
   });
+
+  test("data nodes inherit sidebar.open from linked pages", async ({ page }) => {
+    await page.goto("/docs/getting-started/");
+    const guide = page.locator('ul.hextra-sidebar-desktop-list a[href="/docs/guide/"]');
+    const guideItem = guide.locator("xpath=ancestor::li[1]");
+
+    await expect(guide).toBeVisible();
+    await expect(guideItem).toHaveClass(/open/);
+    await expect(guideItem.locator(":scope > .hextra-sidebar-item > button")).toHaveAttribute("aria-expanded", "true");
+  });
 });
 
 test.describe("mobile sidebar", () => {
