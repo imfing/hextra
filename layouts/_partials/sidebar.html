@@ -2,7 +2,6 @@
 {{- $disableSidebar := .disableSidebar | default false -}}
 {{- $displayPlaceholder := .displayPlaceholder | default false -}}
 {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $context.FirstSection -}}
-{{- $pageURL := $context.RelPermalink -}}
 {{- $sectionKey := "" -}}
 {{- with $context.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
 
@@ -41,7 +40,7 @@
   <div class="hextra-scrollbar hextra-sidebar-scroll">
     {{- /* Mobile sidebar: uses menu.main at top level, shows inline TOC */ -}}
     <ul class="hextra-sidebar-mobile-list">
-      {{- $mobileNodes := partialCached "components/sidebar/build-mobile-tree.html" (dict "page" $context "pageURL" $pageURL "matched" $matchFound) $context.Language.Lang $matchFound $sectionKey -}}
+      {{- $mobileNodes := partialCached "components/sidebar/build-mobile-tree.html" (dict "page" $context "matched" $matchFound) $context.Language.Lang $matchFound $sectionKey -}}
       {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $mobileNodes "level" 0) "mobile" $context.Language.Lang $matchFound $sectionKey -}}
       {{- partial "components/sidebar/render-footer.html" -}}
     </ul>
@@ -52,7 +51,7 @@
       {{ $context.Store.Set "enableFooterSwitches" true }}
     {{- else -}}
       <ul class="hextra-sidebar-desktop-list">
-        {{- $desktopNodes := partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "pageURL" $pageURL "matched" $matchFound) $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
+        {{- $desktopNodes := partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $context "matched" $matchFound) $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
         {{- partialCached "components/sidebar/render-tree.html" (dict "nodes" $desktopNodes "level" 0) "desktop" $navRoot.RelPermalink $context.Language.Lang $matchFound $sectionKey -}}
         {{- partial "components/sidebar/render-footer.html" -}}
       </ul>
@@ -82,11 +81,15 @@
   (function () {
     var c = document.querySelector(".hextra-sidebar-container[data-sidebar-cache]");
     if (!c) return;
-    var p = location.pathname;
+    var norm = function (s) {
+      return s && s.length > 1 ? s.replace(/\/$/, "") : s;
+    };
+    var p = norm(location.pathname);
     c.querySelectorAll(".hextra-sidebar-link").forEach(function (a) {
-      if (a.getAttribute("href") !== p) return;
+      if (norm(a.getAttribute("href")) !== p) return;
       a.classList.remove("hextra-sidebar-link-inactive");
       a.classList.add("hextra-sidebar-link-active", "hextra-sidebar-active-item");
+      a.setAttribute("aria-current", "page");
       var i = a.closest(".hextra-sidebar-item");
       if (i) i.setAttribute("data-active", "true");
       var l = a.closest("li");
@@ -113,10 +116,12 @@
       });
     } catch (e) {}
     c.setAttribute("data-sidebar-ready", "");
-    var sv = sessionStorage.getItem("hextra-sidebar-scroll");
-    if (sv) {
-      var sb = c.querySelector(".hextra-scrollbar");
-      if (sb) sb.scrollTop = parseInt(sv, 10);
-    }
+    try {
+      var sv = sessionStorage.getItem("hextra-sidebar-scroll");
+      if (sv) {
+        var sb = c.querySelector(".hextra-scrollbar");
+        if (sb) sb.scrollTop = parseInt(sv, 10);
+      }
+    } catch (e) {}
   })();
 </script>

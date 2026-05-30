@@ -4,6 +4,7 @@
 
 {{- if lt $level (site.Params.sidebar.maxDepth | default 4) -}}
   {{- range $rawNodes -}}
+    {{- if eq .exclude true -}}{{- continue -}}{{- end -}}
     {{- $node := partial "components/sidebar/normalize-node.html" . -}}
 
     {{- $children := slice -}}

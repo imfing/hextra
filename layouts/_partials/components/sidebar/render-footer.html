@@ -11,7 +11,7 @@
     {{- $link := .URL -}}
     {{- with .PageRef -}}
       {{- if hasPrefix . "/" -}}
-        {{- $link = relLangURL (strings.TrimPrefix "/" .) -}}
+        {{- $link = partial "utils/sidebar-link.html" . -}}
       {{- end -}}
     {{- end -}}
     <li>
@@ -20,7 +20,8 @@
         "active" false
         "open" false
         "hasChildren" false
-      ) -}}
+        )
+      -}}
     </li>
   {{- end -}}
 {{- end -}}

@@ -1,7 +1,17 @@
 {{- $node := .node -}}
 {{- $active := .active | default false -}}
-{{- $open := .open | default true -}}
+{{- $open := .open | default false -}}
 {{- $hasChildren := .hasChildren | default false -}}
+
+{{- /* Build the link class up front so the template conditionals don't leak  */ -}}
+{{- /* literal newlines into the rendered class attribute (see prettier wrap). */ -}}
+{{- $linkClass := "hextra-sidebar-link" -}}
+{{- if $hasChildren -}}{{- $linkClass = printf "%s hextra-sidebar-link-has-children" $linkClass -}}{{- end -}}
+{{- if $active -}}
+  {{- $linkClass = printf "%s hextra-sidebar-link-active hextra-sidebar-active-item" $linkClass -}}
+{{- else -}}
+  {{- $linkClass = printf "%s hextra-sidebar-link-inactive" $linkClass -}}
+{{- end -}}
 
 {{- if not $node.link -}}
   <div class="hextra-sidebar-item">
@@ -18,11 +28,7 @@
 {{- else -}}
   <div class="hextra-sidebar-item hextra-sidebar-node" data-active="{{ if $active }}true{{ else }}false{{ end }}">
     <a
-      class="hextra-sidebar-link {{ if $hasChildren }}hextra-sidebar-link-has-children{{ end }} {{ if $active }}
-        hextra-sidebar-link-active hextra-sidebar-active-item
-      {{ else }}
-        hextra-sidebar-link-inactive
-      {{ end }}"
+      class="{{ $linkClass }}"
       href="{{ $node.link }}"
       {{ if $node.external }}target="_blank" rel="noreferrer"{{ end }}
     >

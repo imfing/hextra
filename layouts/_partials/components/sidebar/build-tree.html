@@ -1,6 +1,5 @@
 {{- $context := .context -}}
 {{- $page := .page -}}
-{{- $pageURL := .pageURL -}}
 {{- $matched := .matched | default false -}}
 {{- $sectionKey := "" -}}
 {{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
