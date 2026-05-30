@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hextra Sidebar Tree Explainer</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7f9;
+        --panel: #ffffff;
+        --panel-soft: #f0f4f8;
+        --text: #1d2733;
+        --muted: #64748b;
+        --line: #d8e0ea;
+        --line-strong: #b8c4d2;
+        --code-bg: #fbfcfe;
+        --code-text: #111827;
+        --blue: #2563eb;
+        --green: #0f766e;
+        --amber: #b45309;
+        --red: #b91c1c;
+        --purple: #7c3aed;
+        --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.55 Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      .shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 20px 48px;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1.4fr 0.9fr;
+        gap: 20px;
+        align-items: end;
+        margin-bottom: 22px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        font-size: 32px;
+        max-width: 720px;
+      }
+
+      h2 {
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+
+      h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      .lede {
+        max-width: 740px;
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      .meta {
+        display: grid;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .pill {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 10px;
+        background: #ffffff;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 18px;
+      }
+
+      .card {
+        grid-column: span 6;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .wide {
+        grid-column: 1 / -1;
+      }
+
+      .third {
+        grid-column: span 4;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .flow-step {
+        min-height: 116px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        background: var(--panel-soft);
+        position: relative;
+      }
+
+      .flow-step strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .flow-step p {
+        color: var(--muted);
+        font-size: 13px;
+        margin: 0;
+      }
+
+      .num {
+        display: inline-flex;
+        width: 22px;
+        height: 22px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: var(--blue);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      pre {
+        margin: 12px 0 0;
+        overflow: auto;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: var(--code-bg);
+        color: var(--code-text);
+        padding: 14px;
+        font:
+          13px/1.5 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          Monaco,
+          Consolas,
+          "Liberation Mono",
+          monospace;
+        tab-size: 2;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      :not(pre) > code {
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: #ffffff;
+        padding: 1px 5px;
+        color: #0f172a;
+      }
+
+      .tree {
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tree li {
+        position: relative;
+        padding: 7px 0 7px 22px;
+        border-left: 1px solid var(--line);
+      }
+
+      .tree li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 18px;
+        width: 14px;
+        border-top: 1px solid var(--line);
+      }
+
+      .node {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 6px 9px;
+        background: #fff;
+        font-weight: 600;
+      }
+
+      .node small {
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .node.active {
+        border-color: #93c5fd;
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+
+      .node.separator {
+        border-color: #fde68a;
+        background: #fffbeb;
+        color: #92400e;
+      }
+
+      .node.group {
+        border-color: #99f6e4;
+        background: #ecfdf5;
+        color: #0f766e;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .legend span {
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fff;
+        padding: 4px 9px;
+        font-size: 12px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        font-size: 13px;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 8px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: #334155;
+        background: #f8fafc;
+        font-weight: 700;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .badge.blue {
+        background: #dbeafe;
+        color: var(--blue);
+      }
+
+      .badge.green {
+        background: #ccfbf1;
+        color: var(--green);
+      }
+
+      .badge.amber {
+        background: #fef3c7;
+        color: var(--amber);
+      }
+
+      .badge.red {
+        background: #fee2e2;
+        color: var(--red);
+      }
+
+      .callout {
+        border-left: 4px solid var(--blue);
+        background: #eff6ff;
+        padding: 12px 14px;
+        border-radius: 8px;
+        margin-top: 12px;
+      }
+
+      .checklist {
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+
+      .checklist li {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+
+      .mark {
+        display: inline-flex;
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
+        align-items: center;
+        justify-content: center;
+        background: #dcfce7;
+        color: #166534;
+        font-weight: 800;
+        font-size: 12px;
+      }
+
+      footer {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 900px) {
+        header {
+          grid-template-columns: 1fr;
+        }
+
+        .card,
+        .third {
+          grid-column: 1 / -1;
+        }
+
+        .flow {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header>
+        <div>
+          <h1>Hextra Sidebar Tree: How This Branch Builds and Renders Navigation</h1>
+          <p class="lede">
+            A simplified walkthrough of the sidebar rewrite in this branch. The important idea is that Hugo templates first build a typed node tree, then render a small stable contract that browser
+            JavaScript enhances for active state, section expansion, and mobile table of contents.
+          </p>
+          <div class="pill-row">
+            <span class="pill">data-first sidebar</span>
+            <span class="pill">auto fallback</span>
+            <span class="pill">type: separator</span>
+            <span class="pill">JS active state</span>
+            <span class="pill">mobile TOC injection</span>
+          </div>
+        </div>
+        <div class="meta">
+          <div><strong>Current branch state:</strong> includes open inheritance and fallback cleanup.</div>
+          <div><strong>Main files:</strong> <code>layouts/_partials/sidebar.html</code>, <code>components/sidebar/*</code>, <code>assets/js/core/sidebar.js</code></div>
+          <div><strong>Tests:</strong> <code>tests/sidebar.spec.ts</code></div>
+        </div>
+      </header>
+
+      <section class="card wide">
+        <h2>Pipeline</h2>
+        <p class="muted">The sidebar is built in five phases. The desktop and mobile sidebars share the same render tree, but they use different roots and scopes.</p>
+        <div class="flow">
+          <div class="flow-step">
+            <span class="num">1</span>
+            <strong>Detect source</strong>
+            <p><code>source-data.html</code> looks for the best matching data file for the current section.</p>
+          </div>
+          <div class="flow-step">
+            <span class="num">2</span>
+            <strong>Build tree</strong>
+            <p><code>build-tree.html</code> chooses data nodes when matched, otherwise auto nodes.</p>
+          </div>
+          <div class="flow-step">
+            <span class="num">3</span>
+            <strong>Normalize</strong>
+            <p><code>normalize-node.html</code> resolves links, titles, icons, open state, and node type.</p>
+          </div>
+          <div class="flow-step">
+            <span class="num">4</span>
+            <strong>Render</strong>
+            <p><code>render-tree.html</code> and <code>render-item.html</code> consume the normalized tree.</p>
+          </div>
+          <div class="flow-step">
+            <span class="num">5</span>
+            <strong>Enhance</strong>
+            <p>Inline JS and <code>sidebar.js</code> mark active links, open ancestors, restore state, and inject TOC.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Source Detection</h2>
+        <p>
+          For a page under <code>/docs/guide/configuration/</code>, the branch looks up a localized data file first. If a matching data file exists, that data file is authoritative for the covered
+          section. Sections not covered by data fall back to the content tree.
+        </p>
+        <pre><code>// sidebar.html
+matchFound = len(sourceData(currentPage, lang, sectionKey)) > 0
+
+desktopNodes = buildTree({
+  context: navRoot,
+  page: currentPage,
+  matched: matchFound,
+  scope: "desktop"
+})
+
+mobileNodes = buildMobileTree({
+  page: currentPage,
+  matched: matchFound
+})</code></pre>
+      </section>
+
+      <section class="card">
+        <h2>Data Model</h2>
+        <p>
+          Data nodes now use <code>type</code> for virtual nodes. A separator is just <code>type: separator</code>; the older data-file shape <code>separator: true</code>
+          is no longer accepted.
+        </p>
+        <pre><code>- type: search
+
+- link: /docs/guide/
+  merge: deep
+
+- type: separator
+  title: Deep Dive
+
+- link: /docs/sidebar-lab/
+  title: Sidebar Lab
+  icon: folder-tree
+  merge: deep
+  items:
+    - link: /docs/sidebar-lab/manual-only/
+    - link: /docs/sidebar-lab/manual-parent/
+      merge: none</code></pre>
+      </section>
+
+      <section class="card wide">
+        <h2>What Normalization Adds</h2>
+        <p class="muted">The raw data file is intentionally compact. Normalization resolves missing values from Hugo pages.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Resolved by</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>link: /docs/guide/</code></td>
+              <td><code>utils/sidebar-link.html</code></td>
+              <td>Language-aware URL such as <code>/docs/guide/</code>.</td>
+            </tr>
+            <tr>
+              <td>Missing <code>title</code></td>
+              <td>Linked page title</td>
+              <td><code>Guide</code></td>
+            </tr>
+            <tr>
+              <td>Missing <code>icon</code></td>
+              <td>Linked page <code>Params.sidebar.icon</code></td>
+              <td><code>book-open</code>, <code>folder-tree</code>, etc.</td>
+            </tr>
+            <tr>
+              <td>Missing <code>open</code></td>
+              <td>Linked page <code>Params.sidebar.open</code></td>
+              <td><code>sidebar.open: true</code> on <code>docs/guide/_index.md</code> keeps Guide expanded.</td>
+            </tr>
+            <tr>
+              <td><code>type: separator</code></td>
+              <td>Node type validation</td>
+              <td>Rendered as a label; its children, if any, are lifted beside it.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Merge Modes</h2>
+        <p>Data order is authoritative. <code>merge</code> decides whether the node shows only explicit children or also appends unmatched auto-discovered children.</p>
+        <pre><code>// merge: none
+Manual Parent
+  Manual Node
+  // Auto children under this page are not appended.
+
+// merge: deep
+Deep Parent
+  Deep Manual Node
+  Deep Auto Child
+  // Missing pages from content tree are appended.</code></pre>
+        <div class="callout">
+          <strong>Data node weight was removed.</strong>
+          Explicit data order is the ordering mechanism. Page weight still matters for auto-discovered children via <code>sorted-items.html</code>.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Exclude Handling</h2>
+        <p>
+          Exclusion now goes through one predicate, <code>is-excluded.html</code>. The tree builders pass a scope, so future values such as <code>exclude: mobile</code> or a scope list have one place
+          to evolve.
+        </p>
+        <pre><code>isExcluded({ page, scope: "desktop" })
+isExcluded({ page, scope: "mobile" })
+isExcluded({ node, scope })
+
+// Current semantics:
+exclude: true       // hidden everywhere
+exclude: mobile     // supported by the predicate
+exclude: [mobile]   // supported by the predicate</code></pre>
+      </section>
+
+      <section class="card wide">
+        <h2>Rendered Tree Example</h2>
+        <p class="muted">
+          This is a simplified version of the desktop sidebar on <code>/docs/getting-started/</code>. Guide is open because the data node inherits <code>sidebar.open: true</code> from its linked page.
+        </p>
+        <ul class="tree">
+          <li>
+            <span class="node active">Getting Started <small>/docs/getting-started/</small></span>
+          </li>
+          <li>
+            <span class="node group">Guide <small>open inherited from page</small></span>
+            <ul class="tree">
+              <li><span class="node">Organize Files</span></li>
+              <li><span class="node">Configuration</span></li>
+              <li><span class="node">Markdown</span></li>
+              <li>
+                <span class="node group">Shortcodes</span>
+                <ul class="tree">
+                  <li><span class="node">Callout</span></li>
+                  <li><span class="node">Cards</span></li>
+                  <li><span class="node">FileTree</span></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><span class="node separator">Deep Dive</span></li>
+          <li><span class="node group">Advanced</span></li>
+          <li><span class="node group">Sidebar Lab</span></li>
+          <li><span class="node separator">More</span></li>
+          <li><span class="node">About</span></li>
+        </ul>
+        <div class="legend">
+          <span>active: JS-selected current page</span>
+          <span>group: node with children</span>
+          <span>separator: <code>type: separator</code></span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Render Contract</h2>
+        <p>Render templates only depend on a small set of fields. Builders may carry extra helper fields while assembling the tree, but rendering reads the stable fields below.</p>
+        <pre><code>{
+  type: "separator" | "search" | "",
+  link: "/docs/guide/",
+  title: "Guide",
+  items: [...],
+  open: true,
+  external: false,
+  icon: "book-open",
+  separator: true // internal render flag for separators
+}</code></pre>
+      </section>
+
+      <section class="card">
+        <h2>Active State and Expansion</h2>
+        <p>Server rendering starts with default open state. JavaScript then finds the current URL, marks the active link, and opens every ancestor <code>li</code>.</p>
+        <pre><code>if (normalize(link.href) == normalize(location.pathname)) {
+  link.classList.add("hextra-sidebar-link-active")
+  link.setAttribute("aria-current", "page")
+
+  li = link.closest("li")
+  while (li) {
+    li.classList.add("open")
+    setButtonExpanded(li, true)
+    li = parentSidebarLi(li)
+  }
+}</code></pre>
+      </section>
+
+      <section class="card third">
+        <h2>No JS</h2>
+        <p>The <code>noscript</code> fallback now forces children visible with layout-agnostic CSS instead of depending only on <code>grid-template-rows</code>.</p>
+        <pre><code>.hextra-sidebar-children {
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  grid-template-rows: none !important;
+}</code></pre>
+      </section>
+
+      <section class="card third">
+        <h2>Mobile TOC</h2>
+        <p>
+          Mobile TOC is stored in a <code>&lt;template&gt;</code>. JavaScript injects it under the active mobile item. If mobile active is absent, it uses the desktop active href to find the mobile
+          match, then falls back to an open or first mobile item.
+        </p>
+        <pre><code>active = mobile.querySelector(".active")
+if (!active) {
+  href = desktopActive.href
+  active = findMobileLinkByHref(href)
+}
+target = activeLi || openLi || firstLi</code></pre>
+      </section>
+
+      <section class="card third">
+        <h2>Icon Markup</h2>
+        <p>Repeated icon wrapper markup is centralized in <code>sidebar-icon.html</code>. Link rows, group titles, and separators all use the same partial.</p>
+        <pre><code>{{ partial "components/sidebar/sidebar-icon.html" $node.icon }}</code></pre>
+      </section>
+
+      <section class="card wide">
+        <h2>What This Branch Fixed</h2>
+        <ul class="checklist">
+          <li>
+            <span class="mark">1</span><span>Strict data separator model: <code>type: separator</code>.</span>
+          </li>
+          <li>
+            <span class="mark">2</span><span>Data-file <code>exclude</code> is honored and centralized with page exclude handling.</span>
+          </li>
+          <li>
+            <span class="mark">3</span><span>Active links receive <code>aria-current="page"</code>.</span>
+          </li>
+          <li><span class="mark">4</span><span>Mobile groups do not bake page-specific open state into cached results.</span></li>
+          <li><span class="mark">5</span><span>Active URL matching normalizes trailing slashes.</span></li>
+          <li>
+            <span class="mark">6</span><span>Data nodes inherit <code>sidebar.open</code> from linked pages unless data explicitly sets <code>open</code>.</span>
+          </li>
+          <li><span class="mark">7</span><span>No-JS fallback, mobile TOC fallback, and sidebar icon markup were cleaned up.</span></li>
+        </ul>
+      </section>
+
+      <footer>This file is a standalone explainer. Open it directly in a browser; it does not need the Hugo dev server.</footer>
+    </main>
+  </body>
+</html>

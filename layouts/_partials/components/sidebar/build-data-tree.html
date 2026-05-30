@@ -60,12 +60,12 @@
 
     {{- if eq $node.type "separator" -}}
       {{- /* Node renders as a separator label; lift any children alongside. */ -}}
-      {{- $result = $result | append (partial "components/sidebar/compact-node.html" (merge $node (dict "link" "" "items" slice))) -}}
+      {{- $result = $result | append (merge $node (dict "link" "" "items" slice)) -}}
       {{- if gt (len $children) 0 -}}
         {{- $result = $result | append $children -}}
       {{- end -}}
     {{- else -}}
-      {{- $result = $result | append (partial "components/sidebar/compact-node.html" (merge $node (dict "items" $children))) -}}
+      {{- $result = $result | append (merge $node (dict "items" $children)) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
