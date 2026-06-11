@@ -204,7 +204,7 @@ toc: false
 ---
 ```
 
-For AsciiDoc content, install the `asciidoctor` executable and allow Hugo to run it in your site configuration. Hextra reads the rendered AsciiDoc headings for the table of contents and search index.
+For AsciiDoc content, install the `asciidoctor` executable and allow Hugo to run it in your site configuration. Hextra reads the rendered AsciiDoc headings for the table of contents and search index. This support is experimental and is not considered stable.
 
 ```yaml {filename="hugo.yaml"}
 security:
