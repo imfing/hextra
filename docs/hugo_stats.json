@@ -623,7 +623,6 @@
       "hx:pr-2",
       "hx:pr-4",
       "hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]",
-      "hx:pr-[max(env(safe-area-inset-left),1.5rem)]",
       "hx:pr-[max(env(safe-area-inset-right),1.5rem)]",
       "hx:print:[display:none]",
       "hx:print:bg-transparent",
