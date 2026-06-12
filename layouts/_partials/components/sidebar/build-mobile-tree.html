@@ -82,8 +82,13 @@
 
   {{- with $menuPage -}}
     {{- if not (partial "components/sidebar/is-excluded.html" (dict "page" . "scope" $scope)) -}}
-      {{- if .Params.sidebar.separator -}}
+      {{- $sep := .Params.sidebar.separator -}}
+      {{- if eq $sep true -}}
         {{- $nodes = $nodes | append (dict "type" "separator" "title" $menuTitle "link" "" "items" (slice)) -}}
+        {{- if eq .Type "docs" -}}
+          {{- $children := partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "matched" $matched "scope" $scope "allowSeparator" false) .RelPermalink $page.Language.Lang $matched $sectionKey $scope false -}}
+          {{- $nodes = $nodes | append $children -}}
+        {{- end -}}
       {{- else -}}
         {{- $children := slice -}}
         {{- if eq .Type "docs" -}}

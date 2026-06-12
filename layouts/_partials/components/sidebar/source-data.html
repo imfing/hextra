@@ -1,9 +1,10 @@
 {{- $lang := .Language.Lang -}}
 {{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
 
-{{- /* Build the section path for the current page (e.g. ["foo", "docs"]).
-       Used to look up the matching entry under
-       data/<lang>/sidebar/<section>/<sub>.yaml. */ -}}
+{{- /* Build the section path for the current page (e.g. ["docs", "guide"]).
+  Used to look up the matching entry under
+  data/<lang>/sidebar/<section>/<sub>.yaml. */
+-}}
 {{- $sectionPath := slice -}}
 {{- with .CurrentSection -}}
   {{- $prefix := strings.TrimSuffix "/" (relLangURL "/") -}}
@@ -13,10 +14,10 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Search localized first, then the global root. Walk the section path
-       from deepest to shallowest and return the first slice found.
-       No fallback to a top-level `sidebar.yaml`: section files are
-       authoritative, unmatched sections fall back to auto-discovery. */ -}}
+{{- /* Search localized first, then the global root. A top-level `sidebar.yaml`
+  list covers the root docs tree; section maps walk the section path from
+  deepest to shallowest and return the first slice found. */
+-}}
 {{- $roots := slice -}}
 {{- with index $siteData $lang -}}
   {{- $roots = $roots | append . -}}
@@ -25,10 +26,12 @@
 
 {{- $result := slice -}}
 {{- $depth := len $sectionPath -}}
-{{- if gt $depth 0 -}}
-  {{- range $root := $roots -}}
-    {{- if eq (len $result) 0 -}}
-      {{- $sidebar := index $root "sidebar" -}}
+{{- range $root := $roots -}}
+  {{- if eq (len $result) 0 -}}
+    {{- $sidebar := index $root "sidebar" -}}
+    {{- if reflect.IsSlice $sidebar -}}
+      {{- $result = $sidebar -}}
+    {{- else if gt $depth 0 -}}
       {{- if reflect.IsMap $sidebar -}}
         {{- range $d := seq $depth -1 1 -}}
           {{- if eq (len $result) 0 -}}

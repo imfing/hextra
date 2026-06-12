@@ -19,8 +19,9 @@
   {{- else -}}
     {{- $children := .items | default slice -}}
     {{- $hasChildren := gt (len $children) 0 -}}
-    <li{{ with .open }} class="open"{{ end }}>
-      {{- partial "components/sidebar/render-item.html" (dict "node" . "open" (.open | default false) "hasChildren" $hasChildren) -}}
+    {{- $open := and $hasChildren .open -}}
+    <li{{ with $open }} class="open"{{ end }}>
+      {{- partial "components/sidebar/render-item.html" (dict "node" . "open" $open "hasChildren" $hasChildren) -}}
       {{- if $hasChildren -}}
         <div class="hextra-sidebar-children">
           <ul class="hextra-sidebar-guide-list">

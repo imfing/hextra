@@ -2,10 +2,14 @@
 {{- $page := .page -}}
 {{- $matched := .matched | default false -}}
 {{- $scope := .scope | default "sidebar" -}}
+{{- $allowSeparator := true -}}
+{{- if isset . "allowSeparator" -}}
+  {{- $allowSeparator = .allowSeparator -}}
+{{- end -}}
 {{- $sectionKey := "" -}}
 {{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
 
-{{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context "scope" $scope) $context.RelPermalink 0 $scope -}}
+{{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context "scope" $scope "allowSeparator" $allowSeparator) $context.RelPermalink 0 $scope $allowSeparator -}}
 {{- $nodes := $autoNodes -}}
 
 {{- $sidebarData := partialCached "components/sidebar/source-data.html" $page $page.Language.Lang $sectionKey -}}

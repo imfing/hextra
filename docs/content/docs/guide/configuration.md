@@ -203,16 +203,7 @@ sidebar:
 ---
 ```
 
-The section's title is shown as a non-clickable group label, and its child pages appear as top-level entries beneath it. URLs and breadcrumbs still reflect the actual content hierarchy. The section's `sidebar.icon` (if set) renders alongside the label.
-
-To inject a separator label _before_ a page or section without changing its position in the tree, set the value to a string instead:
-
-```yaml
-sidebar:
-  separator: "Reference"
-```
-
-Both forms are only respected on top-level entries.
+The section's title is shown as a non-clickable group label, and its child pages appear as top-level entries beneath it. URLs and breadcrumbs still reflect the actual content hierarchy. The section's `sidebar.icon` (if set) renders alongside the label. This option is only respected on top-level entries.
 
 ### Per-Page Icon
 

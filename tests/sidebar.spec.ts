@@ -1,4 +1,113 @@
+import { execFileSync } from "node:child_process";
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { test, expect } from "@playwright/test";
+
+test.describe("root data sidebar", () => {
+  test("uses top-level sidebar data for doc-like root content", () => {
+    const siteDir = mkdtempSync(join(tmpdir(), "hextra-root-sidebar-"));
+
+    try {
+      mkdirSync(join(siteDir, "content"), { recursive: true });
+      mkdirSync(join(siteDir, "content", "reference"), { recursive: true });
+      mkdirSync(join(siteDir, "data"), { recursive: true });
+      mkdirSync(join(siteDir, "themes"), { recursive: true });
+      symlinkSync(process.cwd(), join(siteDir, "themes", "hextra"), "dir");
+
+      writeFileSync(
+        join(siteDir, "hugo.yaml"),
+        `baseURL: "https://example.org/"
+title: "Root Docs"
+theme: "hextra"
+disableKinds: ["taxonomy", "term"]
+`
+      );
+      writeFileSync(
+        join(siteDir, "content", "_index.md"),
+        `---
+title: Root Docs
+type: docs
+cascade:
+  type: docs
+---
+`
+      );
+      writeFileSync(
+        join(siteDir, "content", "intro.md"),
+        `---
+title: Intro
+---
+
+Intro page.
+`
+      );
+      writeFileSync(
+        join(siteDir, "content", "manual.md"),
+        `---
+title: Manual
+---
+
+Manual page.
+`
+      );
+      writeFileSync(
+        join(siteDir, "content", "reference", "_index.md"),
+        `---
+title: Reference
+---
+
+Reference section.
+`
+      );
+      writeFileSync(
+        join(siteDir, "content", "reference", "concepts.md"),
+        `---
+title: Concepts
+---
+
+Concepts page.
+`
+      );
+      writeFileSync(
+        join(siteDir, "content", "reference", "api.md"),
+        `---
+title: API
+---
+
+API page.
+`
+      );
+      writeFileSync(
+        join(siteDir, "data", "sidebar.yaml"),
+        `- link: /intro/
+  title: Intro from root data
+- link: /manual/
+  title: Manual from root data
+- link: /reference/
+  title: Reference section from root data
+  merge: deep
+  items:
+    - link: /reference/concepts/
+      title: Concepts pinned from root data
+`
+      );
+
+      execFileSync("hugo", ["--source", siteDir, "--destination", join(siteDir, "public")], { cwd: process.cwd() });
+
+      const html = readFileSync(join(siteDir, "public", "intro", "index.html"), "utf8");
+      expect(html).toContain("Intro from root data");
+      expect(html).toContain("Manual from root data");
+
+      const sectionHtml = readFileSync(join(siteDir, "public", "reference", "index.html"), "utf8");
+      expect(sectionHtml).toContain("Reference section from root data");
+      expect(sectionHtml).toContain("Concepts pinned from root data");
+      expect(sectionHtml).toContain("API");
+    } finally {
+      rmSync(siteDir, { recursive: true, force: true });
+    }
+  });
+});
 
 test.describe("data-first sidebar", () => {
   test("renders data nodes and auto-fallback nodes via merge: deep", async ({ page }) => {

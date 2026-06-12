@@ -1,29 +1,21 @@
 {{- $context := .context -}}
 {{- $level := .level | default 0 -}}
 {{- $scope := .scope | default "sidebar" -}}
+{{- $allowSeparator := false -}}
+{{- if isset . "allowSeparator" -}}
+  {{- $allowSeparator = .allowSeparator -}}
+{{- else if eq $level 0 -}}
+  {{- $allowSeparator = true -}}
+{{- end -}}
 {{- $nodes := slice -}}
 
 {{- if lt $level (site.Params.sidebar.maxDepth | default 4) -}}
   {{- $sorted := partial "components/sidebar/sorted-items.html" (dict "context" $context "scope" $scope) -}}
   {{- range $sorted -}}
     {{- $sep := .Params.sidebar.separator -}}
-    {{- $sepLift := and (eq $sep true) (eq $level 0) -}}
+    {{- $sepLift := and (eq $sep true) $allowSeparator -}}
 
-    {{- /* String value injects a divider label before this item (top-level only). */ -}}
-    {{- if and $sep (ne $sep true) -}}
-      {{- if eq $level 0 -}}
-        {{- $nodes = $nodes | append (dict
-          "link" ""
-          "title" (string $sep)
-          "type" "separator"
-          "items" slice
-          "icon" ""
-          )
-        -}}
-      {{- else -}}
-        {{- warnf "sidebar.separator on %q is only respected at the top level (depth %d); ignored" .RelPermalink $level -}}
-      {{- end -}}
-    {{- else if and (eq $sep true) (ne $level 0) -}}
+    {{- if and (eq $sep true) (not $allowSeparator) -}}
       {{- warnf "sidebar.separator: true on %q is only respected at the top level (depth %d); ignored" .RelPermalink $level -}}
     {{- end -}}
 
@@ -38,13 +30,13 @@
         )
       -}}
       {{- if or .RegularPages .Sections -}}
-        {{- $lifted := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" $level "scope" $scope) .RelPermalink $level $scope -}}
+        {{- $lifted := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" $level "scope" $scope "allowSeparator" false) .RelPermalink $level $scope false -}}
         {{- $nodes = $nodes | append $lifted -}}
       {{- end -}}
     {{- else -}}
       {{- $children := slice -}}
       {{- if or .RegularPages .Sections -}}
-        {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1) "scope" $scope) .RelPermalink (add $level 1) $scope -}}
+        {{- $children = partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1) "scope" $scope "allowSeparator" false) .RelPermalink (add $level 1) $scope false -}}
       {{- end -}}
       {{- $nodes = $nodes | append (dict
         "link" .RelPermalink
