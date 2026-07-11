@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
       sidebarContainer.setAttribute('aria-hidden', isMenuOpen() ? 'false' : 'true');
     } else {
       sidebarContainer.removeAttribute('aria-hidden');
+      if (isMenuOpen()) {
+        sidebarContainer.removeAttribute('data-open');
+        menu.querySelector('svg').classList.remove('open');
+        menu.setAttribute('aria-expanded', 'false');
+      }
+      document.body.style.overflow = '';
     }
   }
 

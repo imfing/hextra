@@ -6,25 +6,23 @@
 {{- if isset . "allowSeparator" -}}
   {{- $allowSeparator = .allowSeparator -}}
 {{- end -}}
-{{- $sectionKey := "" -}}
-{{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
 
 {{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context "scope" $scope "allowSeparator" $allowSeparator) $context.RelPermalink 0 $scope $allowSeparator -}}
 {{- $nodes := $autoNodes -}}
 
-{{- $sidebarData := partialCached "components/sidebar/source-data.html" $page $page.Language.Lang $sectionKey -}}
+{{- $sidebarData := partialCached "components/sidebar/source-data.html" $context $context.Language.Lang $context.RelPermalink -}}
 {{- $dataNodes := slice -}}
 {{- if gt (len $sidebarData) 0 -}}
-  {{- $dataNodes = partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData "scope" $scope) $page.Language.Lang $sectionKey $scope -}}
+  {{- $dataNodes = partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData "scope" $scope) $context.Language.Lang $context.RelPermalink $scope -}}
 {{- end -}}
 
 {{- if $matched -}}
-  {{- if gt (len $dataNodes) 0 -}}
+  {{- if gt (len $sidebarData) 0 -}}
     {{- /* Data file is authoritative: respect declared order as-is. Children   */ -}}
     {{- /* still auto-discover per-node via `merge: deep`.                      */ -}}
     {{- $nodes = $dataNodes -}}
   {{- end -}}
-{{- else if gt (len $dataNodes) 0 -}}
+{{- else if gt (len $sidebarData) 0 -}}
   {{- /* Overlay cosmetic-only fields (icon) onto matching auto nodes so the */ -}}
   {{- /* data file's icons remain visible from outside the covered section.  */ -}}
   {{- $iconByLink := dict -}}
