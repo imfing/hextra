@@ -43,12 +43,14 @@
 {{- /* Process all headings */ -}}
 {{- $s := newScratch -}}
 {{- $s.Set "keys" slice -}}
-{{- $s.Set "titles" slice -}}
+{{- $s.Set "markers" slice -}}
+{{- $s.Set "endTags" slice -}}
 
 {{- partial "utils/extract-headings.html" (dict "target" $page.Fragments "scratch" $s) -}}
 
 {{- $headingKeys := $s.Get "keys" -}}
-{{- $headingTitles := $s.Get "titles" -}}
+{{- $headingMarkers := $s.Get "markers" -}}
+{{- $headingEndTags := $s.Get "endTags" -}}
 
 {{- $content := $page.Content | htmlUnescape -}}
 {{- $len := len $headingKeys -}}
@@ -59,22 +61,39 @@
   {{ if eq $len 0 }}
     {{ $data = $data | merge (dict "" ($page.Plain | htmlUnescape | strings.TrimSpace)) }}
   {{ else }}
-    {{/* Split the raw content from bottom to top */}}
+    {{/* Split the rendered content from bottom to top using stable heading identifiers. */}}
     {{ range seq $len }}
       {{ $i := sub $len . }}
       {{ $headingKey := index $headingKeys $i }}
-      {{ $headingTitle := index $headingTitles $i }}
+      {{ $headingMarker := index $headingMarkers $i }}
+      {{ $headingEndTag := index $headingEndTags $i }}
 
-      {{ if eq $i 0 }}
-        {{ $data = $data | merge (dict $headingKey ($content | plainify | htmlUnescape | strings.TrimSpace)) }}
-      {{ else }}
-        {{ $parts := split $content (printf "%s" $headingTitle) }}
-        {{ $lastPart := index $parts (sub (len $parts) 1) }}
+      {{ with $headingMarker }}
+        {{ $headingParts := split $content . }}
 
-        {{ $data = $data | merge (dict $headingKey ($lastPart | plainify | htmlUnescape | strings.TrimSpace)) }}
-        {{ $content = strings.TrimSuffix $lastPart $content }}
-        {{ $content = strings.TrimSuffix (printf "%s" $headingTitle) $content }}
+        {{ if gt (len $headingParts) 1 }}
+          {{ $beforeHeading := index $headingParts 0 }}
+          {{ $headingAndContent := delimit (after 1 $headingParts) . }}
+          {{ $parts := split $headingAndContent $headingEndTag }}
+
+          {{ if gt (len $parts) 1 }}
+            {{ $fragment := delimit (after 1 $parts) $headingEndTag }}
+            {{ $data = $data | merge (dict $headingKey ($fragment | plainify | htmlUnescape | strings.TrimSpace)) }}
+            {{ $content = $beforeHeading }}
+          {{ else }}
+            {{/* Preserve the remaining content when a custom render hook has malformed output. */}}
+            {{ $data = $data | merge (dict $headingKey "") }}
+          {{ end }}
+        {{ else }}
+          {{/* Fail open so one unmatched heading cannot swallow fragments above it. */}}
+          {{ $data = $data | merge (dict $headingKey "") }}
+        {{ end }}
       {{ end }}
+    {{ end }}
+
+    {{ $preamble := $content | plainify | htmlUnescape | strings.TrimSpace }}
+    {{ with $preamble }}
+      {{ $data = $data | merge (dict "" .) }}
     {{ end }}
   {{ end }}
 {{ else if (eq $type "heading" ) }}
