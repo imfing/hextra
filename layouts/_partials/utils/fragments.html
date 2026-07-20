@@ -1,26 +1,26 @@
 {{- /*
   fragments.html - Split page content into searchable fragments
-  
+
   This partial processes a Hugo page and splits its content into fragments based on headings,
   creating a data structure suitable for search indexing. It supports different fragment types
   and handles hierarchical heading structures (h1, h2).
-  
+
   Parameters:
   - .context (Page): The Hugo page to process
   - .type (string): Fragment type - "content" (default), "heading", "title", or "summary"
-  
+
   Returns:
   - dict: Map of heading keys to content fragments
-  
+
   Example:
   Input page with content:
     # Introduction
     This is the intro text.
     ## Setup
     Setup instructions here.
-    # Configuration  
+    # Configuration
     Config details here.
-  
+
   Output (type "content"):
   {
     "": "This is the intro text.",
@@ -28,7 +28,7 @@
     "setup#Setup": "Setup instructions here.", 
     "config#Configuration": "Config details here."
   }
-  
+
   Fragment types:
   - "content": Splits page content by headings (default)
   - "heading": Returns heading keys with empty content
@@ -44,11 +44,17 @@
 {{- $s := newScratch -}}
 {{- $s.Set "keys" slice -}}
 {{- $s.Set "titles" slice -}}
+{{- $s.Set "ids" slice -}}
 
-{{- partial "utils/extract-headings.html" (dict "target" $page.Fragments "scratch" $s) -}}
+{{- $headingData := partial "utils/headings.html" $page -}}
+{{- $headings := index $headingData "headings" -}}
+{{- with $headings -}}
+  {{- partial "utils/extract-headings.html" (dict "target" (dict "Headings" .) "scratch" $s) -}}
+{{- end -}}
 
 {{- $headingKeys := $s.Get "keys" -}}
 {{- $headingTitles := $s.Get "titles" -}}
+{{- $headingIDs := $s.Get "ids" -}}
 
 {{- $content := $page.Content | htmlUnescape -}}
 {{- $len := len $headingKeys -}}
@@ -64,16 +70,33 @@
       {{ $i := sub $len . }}
       {{ $headingKey := index $headingKeys $i }}
       {{ $headingTitle := index $headingTitles $i }}
+      {{ $headingID := index $headingIDs $i }}
 
       {{ if eq $i 0 }}
         {{ $data = $data | merge (dict $headingKey ($content | plainify | htmlUnescape | strings.TrimSpace)) }}
       {{ else }}
+        {{ $splitMarker := $headingTitle }}
+        {{ $usedIDMarker := false }}
         {{ $parts := split $content (printf "%s" $headingTitle) }}
-        {{ $lastPart := index $parts (sub (len $parts) 1) }}
 
-        {{ $data = $data | merge (dict $headingKey ($lastPart | plainify | htmlUnescape | strings.TrimSpace)) }}
-        {{ $content = strings.TrimSuffix $lastPart $content }}
-        {{ $content = strings.TrimSuffix (printf "%s" $headingTitle) $content }}
+        {{ if and (eq (len $parts) 1) $headingID }}
+          {{ $splitMarker = printf "id=\"%s\"" $headingID }}
+          {{ $usedIDMarker = true }}
+          {{ $parts = split $content $splitMarker }}
+        {{ end }}
+
+        {{ if gt (len $parts) 1 }}
+          {{ $lastPart := index $parts (sub (len $parts) 1) }}
+          {{ if $usedIDMarker }}
+            {{ $lastPart = replaceRE `^[^>]*>` "" $lastPart }}
+          {{ end }}
+
+          {{ $data = $data | merge (dict $headingKey ($lastPart | plainify | htmlUnescape | strings.TrimSpace)) }}
+          {{ $content = strings.TrimSuffix $lastPart $content }}
+          {{ $content = strings.TrimSuffix (printf "%s" $splitMarker) $content }}
+        {{ else }}
+          {{ $data = $data | merge (dict $headingKey ($content | plainify | htmlUnescape | strings.TrimSpace)) }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}

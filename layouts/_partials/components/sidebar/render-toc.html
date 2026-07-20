@@ -1,14 +1,13 @@
 {{- $page := .page -}}
-{{- with $page.Fragments.Headings -}}
+{{- $headingData := partial "utils/headings.html" $page -}}
+{{- $headings := index $headingData "headings" -}}
+{{- with $headings -}}
   <ul class="hextra-sidebar-guide-list">
     {{- range . -}}
       {{- with .Headings -}}
         {{- range . -}}
           <li>
-            <a
-              href="#{{ anchorize .ID }}"
-              class="hextra-sidebar-toc-link"
-            >
+            <a href="#{{ anchorize .ID }}" class="hextra-sidebar-toc-link">
               {{- .Title | safeHTML | plainify | htmlUnescape -}}
             </a>
           </li>

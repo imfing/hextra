@@ -3,8 +3,9 @@ Extracts all headings from a page and adds them to the scratchpad.
 
 The keys can be obtained from the scratchpad by using the "keys" key.
 The titles can be obtained from the scratchpad by using the "titles" key.
+The IDs can be obtained from the scratchpad by using the "ids" key.
 
-The scratchpad must be initialized with empty slices before calling this function for the keys "keys" and "titles"
+The scratchpad must be initialized with empty slices before calling this function for the keys "keys", "titles", and "ids".
 
 @param {any} target The element to extract headings from.
 @param {any} scratch The scratchpad to add the keys and titles to.
@@ -22,6 +23,7 @@ The scratchpad must be initialized with empty slices before calling this functio
 
   {{- $title := (printf "<h%d>%s" $heading.Level $heading.Title) | htmlUnescape -}}
   {{- $.scratch.Add "titles" (slice $title) -}}
+  {{- $.scratch.Add "ids" (slice $heading.ID) -}}
 
   {{- partial "utils/extract-headings.html" (dict
     "target" $heading
