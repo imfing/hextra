@@ -245,8 +245,12 @@
 
 {{- define "sidebar-toc" -}}
   {{ $page := .page }}
-  {{ with $page.Fragments.Headings }}
-    <ul class='hx:flex hx:flex-col hx:gap-1 hx:relative hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:dark:before:bg-neutral-800 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:pr-3 hx:rtl:before:right-0 hx:ltr:ml-3 hx:rtl:mr-3'>
+  {{ $headingData := partial "utils/headings.html" $page }}
+  {{ $headings := index $headingData "headings" }}
+  {{ with $headings }}
+    <ul
+      class='hx:flex hx:flex-col hx:gap-1 hx:relative hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:dark:before:bg-neutral-800 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:pr-3 hx:rtl:before:right-0 hx:ltr:ml-3 hx:rtl:mr-3'
+    >
       {{- range . }}
         {{- with .Headings }}
           {{- range . -}}
