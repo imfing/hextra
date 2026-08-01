@@ -43,13 +43,9 @@
 {{- /* Process all headings */ -}}
 {{- $s := newScratch -}}
 {{- $s.Set "keys" slice -}}
-<<<<<<< HEAD
 {{- $s.Set "markers" slice -}}
 {{- $s.Set "endTags" slice -}}
-=======
-{{- $s.Set "titles" slice -}}
 {{- $s.Set "ids" slice -}}
->>>>>>> origin/main
 
 {{- $headingData := partial "utils/headings.html" $page -}}
 {{- $headings := index $headingData "headings" -}}
@@ -58,13 +54,9 @@
 {{- end -}}
 
 {{- $headingKeys := $s.Get "keys" -}}
-<<<<<<< HEAD
 {{- $headingMarkers := $s.Get "markers" -}}
 {{- $headingEndTags := $s.Get "endTags" -}}
-=======
-{{- $headingTitles := $s.Get "titles" -}}
 {{- $headingIDs := $s.Get "ids" -}}
->>>>>>> origin/main
 
 {{- $content := $page.Content | htmlUnescape -}}
 {{- $len := len $headingKeys -}}
@@ -79,9 +71,9 @@
     {{ range seq $len }}
       {{ $i := sub $len . }}
       {{ $headingKey := index $headingKeys $i }}
-<<<<<<< HEAD
       {{ $headingMarker := index $headingMarkers $i }}
       {{ $headingEndTag := index $headingEndTags $i }}
+      {{ $headingID := index $headingIDs $i }}
 
       {{ with $headingMarker }}
         {{ $headingParts := split $content . }}
@@ -99,38 +91,27 @@
             {{/* Preserve the remaining content when a custom render hook has malformed output. */}}
             {{ $data = $data | merge (dict $headingKey "") }}
           {{ end }}
+        {{ else if $headingID }}
+          {{/* Fallback for external renderers (e.g. AsciiDoc) where id is on the heading element itself */}}
+          {{ $idMarker := printf "id=\"%s\"" $headingID }}
+          {{ $idParts := split $content $idMarker }}
+
+          {{ if gt (len $idParts) 1 }}
+            {{ $lastPart := index $idParts (sub (len $idParts) 1) }}
+            {{ $lastPart = replaceRE `^[^>]*>` "" $lastPart }}
+
+            {{ $data = $data | merge (dict $headingKey ($lastPart | plainify | htmlUnescape | strings.TrimSpace)) }}
+            {{ $content = strings.TrimSuffix $lastPart $content }}
+            {{ $content = strings.TrimSuffix $idMarker $content }}
+            {{/* Strip the partial opening heading tag from the tail of the remaining content */}}
+            {{ $content = replaceRE `<[^>]*$` "" $content }}
+          {{ else }}
+            {{/* Fail open so one unmatched heading cannot swallow fragments above it. */}}
+            {{ $data = $data | merge (dict $headingKey "") }}
+          {{ end }}
         {{ else }}
           {{/* Fail open so one unmatched heading cannot swallow fragments above it. */}}
           {{ $data = $data | merge (dict $headingKey "") }}
-=======
-      {{ $headingTitle := index $headingTitles $i }}
-      {{ $headingID := index $headingIDs $i }}
-
-      {{ if eq $i 0 }}
-        {{ $data = $data | merge (dict $headingKey ($content | plainify | htmlUnescape | strings.TrimSpace)) }}
-      {{ else }}
-        {{ $splitMarker := $headingTitle }}
-        {{ $usedIDMarker := false }}
-        {{ $parts := split $content (printf "%s" $headingTitle) }}
-
-        {{ if and (eq (len $parts) 1) $headingID }}
-          {{ $splitMarker = printf "id=\"%s\"" $headingID }}
-          {{ $usedIDMarker = true }}
-          {{ $parts = split $content $splitMarker }}
-        {{ end }}
-
-        {{ if gt (len $parts) 1 }}
-          {{ $lastPart := index $parts (sub (len $parts) 1) }}
-          {{ if $usedIDMarker }}
-            {{ $lastPart = replaceRE `^[^>]*>` "" $lastPart }}
-          {{ end }}
-
-          {{ $data = $data | merge (dict $headingKey ($lastPart | plainify | htmlUnescape | strings.TrimSpace)) }}
-          {{ $content = strings.TrimSuffix $lastPart $content }}
-          {{ $content = strings.TrimSuffix (printf "%s" $splitMarker) $content }}
-        {{ else }}
-          {{ $data = $data | merge (dict $headingKey ($content | plainify | htmlUnescape | strings.TrimSpace)) }}
->>>>>>> origin/main
         {{ end }}
       {{ end }}
     {{ end }}
