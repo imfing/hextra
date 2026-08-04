@@ -50,7 +50,7 @@ SECOND_DUPLICATE_BODY_TOKEN
   );
 
   try {
-    execFileSync("hugo", ["--source", siteDir, "--themesDir", themesDir, "--destination", publishDir], {
+    execFileSync("hugo", ["--source", siteDir, "--themesDir", themesDir, "--destination", publishDir, "--environment", "development"], {
       cwd: process.cwd(),
       stdio: "pipe",
     });
