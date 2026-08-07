@@ -21,7 +21,8 @@ The scratchpad must be initialized with empty slices before calling this functio
     {{- $.scratch.Add "endTags" (slice "") -}}
     {{- $.scratch.Add "ids" (slice "") -}}
   {{- else -}}
-    {{- $key := (printf "%s#%s" $heading.ID $heading.Title) -}}
+    {{- $headingTitle := $heading.Title | plainify | htmlUnescape | strings.TrimSpace -}}
+    {{- $key := (printf "%s#%s" $heading.ID $headingTitle) -}}
     {{- $.scratch.Add "keys" (slice $key) -}}
     {{- $marker := printf "<h%d data-hextra-search-id=\"%s\"" $heading.Level ($heading.ID | safeURL) -}}
     {{- $.scratch.Add "markers" (slice $marker) -}}

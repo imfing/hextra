@@ -4,7 +4,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSyn
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-test("search fragments support inline markup in headings", () => {
+test("search fragments extract correctly for headings with inline markup", () => {
   const siteDir = mkdtempSync(join(tmpdir(), "hextra-search-fragments-"));
   const contentDir = join(siteDir, "content");
   const publishDir = join(siteDir, "public");
@@ -61,7 +61,7 @@ SECOND_DUPLICATE_BODY_TOKEN
     expect(fragments[""]).toBe("PREAMBLE_TOKEN");
     expect(fragments["plain-heading#Plain Heading"]).toBe("PLAIN_BODY_TOKEN");
     expect(fragments["link-heading#Link Heading"]).toBe("LINK_BODY_TOKEN");
-    expect(fragments["emphasized-code-1#<em>Emphasized</em> <code>Code</code> #1"]).toBe("FORMATTED_BODY_TOKEN");
+    expect(fragments["emphasized-code-1#Emphasized Code #1"]).toBe("FORMATTED_BODY_TOKEN");
     expect(fragments["duplicate#Duplicate"]).toBe("FIRST_DUPLICATE_BODY_TOKEN");
     expect(fragments["duplicate-1#Duplicate"]).toBe("SECOND_DUPLICATE_BODY_TOKEN");
   } finally {
