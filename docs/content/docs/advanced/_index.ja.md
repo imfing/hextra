@@ -3,6 +3,8 @@ linkTitle: 高度な設定
 title: 高度なトピック
 prev: /docs/guide/shortcodes/tabs
 next: /docs/advanced/multi-language
+sidebar:
+  icon: cog
 ---
 
 このセクションでは、テーマの高度なトピックについて説明します。

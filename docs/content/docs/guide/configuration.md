@@ -191,6 +191,73 @@ sidebar:
 
 This will hide the main sidebar from the page, freeing up space for the main content of the page.
 
+### Section Separator
+
+Top-level sections can be promoted to a separator label, lifting their children to the top level of the sidebar. Set `sidebar.separator: true` in the section's `_index.md`:
+
+```yaml {filename="content/docs/advanced/_index.md"}
+---
+title: Advanced
+sidebar:
+  separator: true
+---
+```
+
+The section's title is shown as a non-clickable group label, and its child pages appear as top-level entries beneath it. URLs and breadcrumbs still reflect the actual content hierarchy. The section's `sidebar.icon` (if set) renders alongside the label. This option is only respected on top-level entries.
+
+### Per-Page Icon
+
+Attach an icon to a page's sidebar entry via front matter. The icon name must exist in Hextra's icon set:
+
+```yaml {filename="content/docs/guide/configuration.md"}
+---
+title: Configuration
+sidebar:
+  icon: cog
+---
+```
+
+If the page is also listed in the [data-driven sidebar](#data-driven-sidebar) with its own `icon`, the data file's value wins.
+
+### Data-Driven Sidebar
+
+You can define your sidebar structure explicitly using a YAML data file instead of relying on the auto-generated content tree.
+
+Create a file at `data/<lang>/sidebar.yaml` (e.g., `data/en/sidebar.yaml`) for a localized definition, or `data/sidebar.yaml` for a language-independent one:
+
+```yaml {filename="data/en/sidebar.yaml"}
+- link: /docs/guide/
+  title: Guide
+  icon: book-open
+  merge: deep
+  items:
+    - link: /docs/guide/installation/
+    - link: /docs/guide/configuration/
+      title: Custom Title
+    - type: separator
+      title: Advanced
+    - link: /docs/guide/advanced/
+      merge: none
+      items:
+        - link: /docs/guide/advanced/topic-a/
+        - link: /docs/guide/advanced/topic-b/
+```
+
+#### Node Properties
+
+| Property  | Type   | Default             | Description                                                                                                                                                               |
+| --------- | ------ | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `link`    | string | —                   | Page path (e.g., `/docs/guide/`). Required except for virtual nodes such as search and separators.                                                                        |
+| `title`   | string | page title          | Display title. Falls back to the Hugo page title if omitted.                                                                                                              |
+| `type`    | string | —                   | Virtual node type. Use `"search"` for a sidebar search entry or `"separator"` for a separator label. Separator children are lifted to the parent level.                   |
+| `exclude` | bool   | `false`             | Hide this data node and its children from the sidebar.                                                                                                                    |
+| `icon`    | string | page `sidebar.icon` | Icon name from Hextra's icon set (e.g., `book-open`, `folder-tree`). Rendered before the title; falls back to the linked page's front-matter `sidebar.icon` when omitted. |
+| `items`   | list   | `[]`                | Child nodes.                                                                                                                                                              |
+| `merge`   | string | `"none"`            | `"none"`: only explicit items shown. `"deep"`: auto-generated children appended for unmatched pages.                                                                      |
+| `open`    | bool   | `true`              | Whether the section starts expanded.                                                                                                                                      |
+
+When a page is under a section covered by the data file, the data-driven tree is used. For pages in other sections, the auto-generated tree is used as a fallback.
+
 ## Right Sidebar
 
 ### Table of Contents
@@ -260,17 +327,17 @@ For your reference, an example [`i18n/en.yaml`](https://github.com/imfing/hextra
 To customize the [favicon](https://en.wikipedia.org/wiki/Favicon) for your site, place icon files under the `static` folder to override the [default favicons from the theme](https://github.com/imfing/hextra/tree/main/static):
 
 {{< filetree/container >}}
-  {{< filetree/folder name="static" >}}
-    {{< filetree/file name="android-chrome-192x192.png" >}}
-    {{< filetree/file name="android-chrome-512x512.png" >}}
-    {{< filetree/file name="apple-touch-icon.png" >}}
-    {{< filetree/file name="favicon-16x16.png" >}}
-    {{< filetree/file name="favicon-32x32.png" >}}
-    {{< filetree/file name="favicon-dark.svg" >}}
-    {{< filetree/file name="favicon.ico" >}}
-    {{< filetree/file name="favicon.svg" >}}
-    {{< filetree/file name="site.webmanifest" >}}
-  {{< /filetree/folder >}}
+{{< filetree/folder name="static" >}}
+{{< filetree/file name="android-chrome-192x192.png" >}}
+{{< filetree/file name="android-chrome-512x512.png" >}}
+{{< filetree/file name="apple-touch-icon.png" >}}
+{{< filetree/file name="favicon-16x16.png" >}}
+{{< filetree/file name="favicon-32x32.png" >}}
+{{< filetree/file name="favicon-dark.svg" >}}
+{{< filetree/file name="favicon.ico" >}}
+{{< filetree/file name="favicon.svg" >}}
+{{< filetree/file name="site.webmanifest" >}}
+{{< /filetree/folder >}}
 {{< /filetree/container >}}
 
 #### Basic Setup

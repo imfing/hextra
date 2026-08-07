@@ -1,0 +1,34 @@
+- type: search
+- link: /docs/getting-started/
+- link: /docs/guide/
+  merge: deep
+
+- type: separator
+  title: Deep Dive
+
+- link: /docs/advanced/
+  merge: deep
+- link: /docs/sidebar-lab/
+  title: Sidebar Lab
+  icon: folder-tree
+  merge: deep
+  items:
+    - link: /docs/sidebar-lab/manual-only/
+    - link: /docs/sidebar-lab/manual-parent/
+      merge: none
+      items:
+        - link: /docs/sidebar-lab/manual-parent/manual-node/
+    - link: /docs/sidebar-lab/deep-parent/
+      merge: deep
+      items:
+        - link: /docs/sidebar-lab/deep-parent/deep-manual-node/
+    - title: Group Placeholder
+      icon: collection
+      items:
+        - link: /docs/sidebar-lab/group-child/
+
+- type: separator
+  title: More
+- link: /about/
+- link: https://gohugo.io/documentation/
+  title: Hugo Docs ↗

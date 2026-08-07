@@ -5,6 +5,7 @@ prev: /docs/getting-started
 next: /docs/guide/organize-files
 sidebar:
   open: true
+  icon: book-open
 ---
 
 Hextra の使い方を学ぶには、以下のセクションを参照してください:

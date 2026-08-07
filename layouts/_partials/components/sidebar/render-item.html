@@ -1,0 +1,34 @@
+{{- $node := .node -}}
+{{- $open := .open | default false -}}
+{{- $hasChildren := .hasChildren | default false -}}
+{{- $external := hasPrefix ($node.link | default "") "http" -}}
+
+{{- /* Build the link class up front so the template conditionals don't leak  */ -}}
+{{- /* literal newlines into the rendered class attribute (see prettier wrap). */ -}}
+{{- $linkClass := "hextra-sidebar-link" -}}
+{{- if $hasChildren -}}{{- $linkClass = printf "%s hextra-sidebar-link-has-children" $linkClass -}}{{- end -}}
+{{- $linkClass = printf "%s hextra-sidebar-link-inactive" $linkClass -}}
+
+{{- if not $node.link -}}
+  <div class="hextra-sidebar-item">
+    <span class="hextra-sidebar-group-title {{ if $hasChildren }}hextra-sidebar-group-title-has-children{{ end }}">
+      {{- partial "components/sidebar/icon.html" $node.icon -}}
+      {{- $node.title -}}
+    </span>
+    {{- partial "components/sidebar/collapsible-button.html" (dict "hasChildren" $hasChildren "open" $open) -}}
+  </div>
+{{- else -}}
+  <div class="hextra-sidebar-item hextra-sidebar-node">
+    <a
+      class="{{ $linkClass }}"
+      href="{{ $node.link }}"
+      {{ if $external }}target="_blank" rel="noreferrer"{{ end }}
+    >
+      <span class="hextra-sidebar-link-content hx:flex hx:items-center hx:gap-2 hx:min-w-0">
+        {{- partial "components/sidebar/icon.html" $node.icon -}}
+        <span class="hextra-sidebar-link-text">{{- $node.title -}}</span>
+      </span>
+    </a>
+    {{- partial "components/sidebar/collapsible-button.html" (dict "hasChildren" $hasChildren "open" $open) -}}
+  </div>
+{{- end -}}

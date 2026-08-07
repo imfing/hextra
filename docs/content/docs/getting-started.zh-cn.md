@@ -6,6 +6,8 @@ tags:
   - 指南
 next: /docs/guide
 prev: /docs
+sidebar:
+  icon: lightning-bolt
 ---
 
 ## 从模板快速启动

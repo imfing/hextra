@@ -6,6 +6,8 @@ tags:
   - راهنما
 next: /docs/guide
 prev: /docs
+sidebar:
+  icon: lightning-bolt
 ---
 
 ## شروع سریع با قالب
