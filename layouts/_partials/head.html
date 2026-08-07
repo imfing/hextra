@@ -40,6 +40,7 @@
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
     {{- with $customCss }}
       {{- $custom := . | fingerprint }}
+      <link rel="preload" href="{{ $custom.RelPermalink }}" as="style" integrity="{{ $custom.Data.Integrity }}" />
       <link href="{{ $custom.RelPermalink }}" rel="stylesheet" integrity="{{ $custom.Data.Integrity }}" />
     {{- end }}
 
