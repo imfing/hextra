@@ -127,6 +127,23 @@ params:
 
 It will load the KaTeX CSS file from `assets/css/katex.min.css` instead of downloading from CDN.
 
+##### Supply Options to `tomath` function
+
+Control the behaviour of the `transform.ToMath` function which handles the rendering.
+
+```yaml {filename="hugo.yaml"}
+params:
+  math:
+    katex:
+      options:
+        strict: "warn"
+        # Options from https://gohugo.io/functions/transform/tomath/
+
+```
+
+All options which are given to the `transform.ToMath` function can be used.
+See [https://gohugo.io/functions/transform/tomath/].
+
 #### MathJax
 
 Alternatively, you can use [MathJax][mathjax] to render math expressions:
