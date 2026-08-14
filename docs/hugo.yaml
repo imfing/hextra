@@ -17,6 +17,11 @@ outputs:
   page: [html, markdown]
   section: [html, rss, markdown]
 
+taxonomies:
+  tag: tags
+  category: categories
+  series: series
+
 defaultContentLanguage: en
 languages:
   en:
@@ -110,6 +115,11 @@ menu:
     - identifier: more
       name: More
       weight: 4
+    - identifier: series
+      name: Series
+      weight: 4.5
+      params:
+        type: series
     - identifier: showcase
       name: Showcase
       pageRef: /showcase
@@ -156,6 +166,11 @@ menu:
       pageRef: /glossary
       parent: more
       weight: 3
+    - identifier: talks
+      name: Talks
+      pageRef: /talks
+      parent: more
+      weight: 4
 
   sidebar:
     - identifier: more
@@ -241,8 +256,6 @@ params:
       displayPagination: true
 
   archives:
-    # Source section used for the archives page.
-    section: blog
     # Date format for archive list items.
     dateFormat: "Jan 02"
 

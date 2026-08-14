@@ -37,6 +37,8 @@
           {{- partial "theme-toggle.html" (dict "iconHeight" $iconHeight "hideLabel" (not .Params.label) "iconHeight" $iconHeight "location" "top" "class" "hx:p-1 hx:md:p-2") -}}
         {{- else if eq .Params.type "language-switch" -}}
           {{- partial "language-switch" (dict "context" $page "grow" false "hideLabel" (not .Params.label) "iconName" (.Params.icon | default "translate") "iconHeight" $iconHeight "location" "top" "class" "hx:p-1 hx:md:p-2") -}}
+        {{- else if eq .Params.type "series" -}}
+          {{- partial "navbar-series.html" (dict "item" . "currentPage" $currentPage) -}}
         {{- else if .Params.icon -}}
           {{- /* Display icon menu item */ -}}
           {{- if not $link -}}{{ warnf "Icon menu item '%s' has no URL" .Name }}{{- end -}}
