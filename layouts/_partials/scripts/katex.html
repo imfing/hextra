@@ -73,19 +73,30 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Optionally publish files (fonts, css, js, etc.) from assets and emit tags for css/js with integrity and crossorigin */ -}}
+{{- /* Optionally publish files (fonts, css, js, etc.) or directories (ends with /) from assets and emit tags for css/js with integrity and crossorigin */ -}}
 {{- with site.Params.math.katex.assets -}}
   {{- range . -}}
-    {{- with resources.Get . -}}
-      {{- $name := .Name | lower -}}
-      {{- if strings.HasSuffix $name ".css" -}}
-        {{- $built := . | fingerprint "sha512" -}}
-        <link rel="stylesheet" href="{{ $built.RelPermalink }}" integrity="{{ $built.Data.Integrity }}" crossorigin="anonymous" />
-      {{- else if or (strings.HasSuffix $name ".js") (strings.HasSuffix $name ".mjs") -}}
-        {{- $built := . | fingerprint "sha512" -}}
-        <script src="{{ $built.RelPermalink }}" async integrity="{{ $built.Data.Integrity }}" crossorigin="anonymous"></script>
-      {{- else -}}
-        {{- .Publish -}}
+    {{- $files := "" -}}
+    {{- if strings.HasSuffix . "/" -}}
+      {{- $files = resources.Match (printf "%s**" .) -}}
+    {{- else if strings.Contains . "*" -}}
+      {{- $files = resources.Match . -}}
+    {{- else -}}
+      {{- $files = slice (resources.Get .) -}}
+    {{- end -}}
+
+    {{- range $files -}}
+      {{- if . -}}
+        {{- $name := .Name | lower -}}
+        {{- if strings.HasSuffix $name ".css" -}}
+          {{- $built := . | fingerprint "sha512" -}}
+          <link rel="stylesheet" href="{{ $built.RelPermalink }}" integrity="{{ $built.Data.Integrity }}" crossorigin="anonymous" />
+        {{- else if or (strings.HasSuffix $name ".js") (strings.HasSuffix $name ".mjs") -}}
+          {{- $built := . | fingerprint "sha512" -}}
+          <script src="{{ $built.RelPermalink }}" async integrity="{{ $built.Data.Integrity }}" crossorigin="anonymous"></script>
+        {{- else -}}
+          {{- .Publish -}}
+        {{- end -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
