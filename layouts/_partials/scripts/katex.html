@@ -11,7 +11,7 @@
   - base (local path) only (no css):
     - Link directly to "{{ base }}/katex[.min].css" (no processing).
   - Nothing set:
-    - Default to CDN latest base; same as remote path above.
+    - Default to a KaTeX release line compatible with Hugo; same as remote path above.
 
   Additional:
   - assets: optional list to publish extra assets. CSS/JS get tags with integrity (JS loads async).
@@ -23,7 +23,16 @@
   {{- $katexBase = . -}}
 {{- else -}}
   {{- if not site.Params.math.katex.css -}}
-    {{- $katexBase = "https://cdn.jsdelivr.net/npm/katex@latest/dist" -}}
+    {{- /* KaTeX 0.18 introduces breaking CSS class changes, so the stylesheet
+      must match Hugo's embedded KaTeX renderer: 0.16 before Hugo 0.166.0,
+      and 0.18.4 starting with Hugo 0.166.0.
+      See https://github.com/gohugoio/hugo/pull/15259.
+    */ -}}
+    {{- $katexVersion := "0.16" -}}
+    {{- if ge hugo.Version "0.166.0" -}}
+      {{- $katexVersion = "0.18.4" -}}
+    {{- end -}}
+    {{- $katexBase = printf "https://cdn.jsdelivr.net/npm/katex@%s/dist" $katexVersion -}}
   {{- end -}}
 {{- end -}}
 
