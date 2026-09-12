@@ -34,6 +34,13 @@ Hextra で構築されたオープンソースプロジェクト
   >}}
 
   {{< card
+        link="https://docs.roled.io/"
+        title="Roled Documentation"
+        image="https://github.com/user-attachments/assets/4f6ab282-c00c-4a45-8502-5b6aa7b11f52"
+        imageStyle="object-fit:cover; aspect-ratio:16/9;"
+  >}}
+
+  {{< card
         link="https://docs.sortie-ai.com"
         title="Sortie"
         image="https://raw.githubusercontent.com/sortie-ai/docs/refs/heads/main/static/img/screenshot.png"
