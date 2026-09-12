@@ -36,7 +36,7 @@ Open source projects powered by Hextra
   {{< card
         link="https://docs.roled.io/"
         title="Roled Documentation"
-        image="https://github.com/user-attachments/assets/4f6ab282-c00c-4a45-8502-5b6aa7b11f52"
+        image="https://github.com/user-attachments/assets/e4880b0d-7932-4efc-930b-851e22b9ddb6"
         imageStyle="object-fit:cover; aspect-ratio:16/9;"
   >}}
 
