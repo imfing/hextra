@@ -24,13 +24,15 @@
 {{- else -}}
   {{- if not site.Params.math.katex.css -}}
     {{- /* KaTeX 0.18 introduces breaking CSS class changes, so the stylesheet
-      must match Hugo's embedded KaTeX renderer: 0.16 before Hugo 0.166.0,
-      and 0.18.4 starting with Hugo 0.166.0.
+      release line must match Hugo's embedded KaTeX renderer: 0.16 before Hugo
+      0.166.0, and 0.18 starting with Hugo 0.166.0 (which embeds 0.18.4).
+      The "-DEV" threshold also matches source-built 0.166.0 snapshots, which
+      Hugo's version comparison sorts below the 0.166.0 release.
       See https://github.com/gohugoio/hugo/pull/15259.
     */ -}}
     {{- $katexVersion := "0.16" -}}
-    {{- if ge hugo.Version "0.166.0" -}}
-      {{- $katexVersion = "0.18.4" -}}
+    {{- if ge hugo.Version "0.166.0-DEV" -}}
+      {{- $katexVersion = "0.18" -}}
     {{- end -}}
     {{- $katexBase = printf "https://cdn.jsdelivr.net/npm/katex@%s/dist" $katexVersion -}}
   {{- end -}}

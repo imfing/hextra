@@ -15,8 +15,15 @@ defaults:
 jobs:
   build-tests:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 0.161.1 embeds KaTeX 0.16.x; 0.166.0 embeds KaTeX 0.18.x. Testing
+        # both covers each branch of the KaTeX CSS version selection in
+        # layouts/_partials/scripts/katex.html.
+        hugo-version: ["0.161.1", "0.166.0"]
     env:
-      HUGO_VERSION: 0.161.1
+      HUGO_VERSION: ${{ matrix.hugo-version }}
       # These specs build temporary Hugo sites and inspect the output files
       # directly, so no browser or web server is needed. Setting BASE_URL
       # keeps Playwright from starting the docs webServer.
@@ -49,6 +56,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-tests-report
+          name: build-tests-report-hugo-${{ matrix.hugo-version }}
           path: playwright-report/
           retention-days: 14

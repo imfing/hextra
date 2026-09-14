@@ -107,8 +107,11 @@ params:
   math:
     engine: katex
     katex:
-      base: "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist"
+      base: "https://cdn.jsdelivr.net/npm/katex@0.18/dist"
 ```
+
+> [!NOTE]
+> The pinned KaTeX version must match the KaTeX renderer embedded in Hugo, otherwise math may render incorrectly: use the `0.18` release line for Hugo 0.166.0 and above, and the `0.16` line (e.g. `katex@0.16.22`) for older Hugo versions.
 
 ##### Use local assets
 

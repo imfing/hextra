@@ -107,8 +107,11 @@ params:
   math:
     engine: katex
     katex:
-      base: "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist"
+      base: "https://cdn.jsdelivr.net/npm/katex@0.18/dist"
 ```
+
+> [!NOTE]
+> 固定する KaTeX のバージョンは、Hugo に組み込まれている KaTeX レンダラーと一致させる必要があります。一致しない場合、数式が正しく表示されないことがあります。Hugo 0.166.0 以降では `0.18` 系を、それより古い Hugo では `0.16` 系（例: `katex@0.16.22`）を使用してください。
 
 ##### ローカルアセットの使用
 
