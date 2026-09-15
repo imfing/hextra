@@ -1,0 +1,57 @@
+{{- $lang := .Language.Lang -}}
+{{- $siteData := partial "utils/hugo-compat/site-data.html" . -}}
+
+{{- /* Build the section path for the current page (e.g. ["docs", "guide"]).
+  Used to look up the matching entry under
+  data/<lang>/sidebar/<section>/<sub>.yaml. */
+-}}
+{{- $sectionPath := slice -}}
+{{- with .CurrentSection -}}
+  {{- $prefix := strings.TrimSuffix "/" (relLangURL "/") -}}
+  {{- $rel := strings.Trim (strings.TrimPrefix $prefix .RelPermalink) "/" -}}
+  {{- if $rel -}}
+    {{- $sectionPath = split $rel "/" -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Search localized first, then the global root. A top-level `sidebar.yaml`
+  list covers the root docs tree; section maps walk the section path from
+  deepest to shallowest and return the first slice found. */
+-}}
+{{- $roots := slice -}}
+{{- with index $siteData $lang -}}
+  {{- $roots = $roots | append . -}}
+{{- end -}}
+{{- $roots = $roots | append $siteData -}}
+
+{{- $result := slice -}}
+{{- $depth := len $sectionPath -}}
+{{- range $root := $roots -}}
+  {{- if eq (len $result) 0 -}}
+    {{- $sidebar := index $root "sidebar" -}}
+    {{- if reflect.IsSlice $sidebar -}}
+      {{- $result = $sidebar -}}
+    {{- else if gt $depth 0 -}}
+      {{- if reflect.IsMap $sidebar -}}
+        {{- range $d := seq $depth -1 1 -}}
+          {{- if eq (len $result) 0 -}}
+            {{- $cur := $sidebar -}}
+            {{- $ok := true -}}
+            {{- range $k := first $d $sectionPath -}}
+              {{- if reflect.IsMap $cur -}}
+                {{- $cur = index $cur $k -}}
+              {{- else -}}
+                {{- $ok = false -}}
+              {{- end -}}
+            {{- end -}}
+            {{- if and $ok (reflect.IsSlice $cur) -}}
+              {{- $result = $cur -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

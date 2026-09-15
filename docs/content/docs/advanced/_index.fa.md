@@ -3,6 +3,8 @@ linkTitle: پیشرفته
 title: مباحث پیشرفته
 prev: /docs/guide/shortcodes/tabs
 next: /docs/advanced/multi-language
+sidebar:
+  icon: cog
 ---
 
 این بخش برخی از مباحث پیشرفته این پوسته را پوشش می‌دهد.

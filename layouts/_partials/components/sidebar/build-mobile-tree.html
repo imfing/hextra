@@ -1,0 +1,132 @@
+{{- $page := .page -}}
+{{- $matched := .matched | default false -}}
+{{- $scope := "mobile" -}}
+{{- $nodes := slice -}}
+{{- $sectionKey := "" -}}
+{{- with $page.CurrentSection -}}{{- $sectionKey = .RelPermalink -}}{{- end -}}
+
+{{- range $menuItem := site.Menus.main -}}
+  {{- $menuType := $menuItem.Params.type | default "" -}}
+  {{- $isIconOnly := and $menuItem.Params.icon (ne $menuType "link") -}}
+  {{- if or (eq $menuType "search") (eq $menuType "theme-toggle") (eq $menuType "language-switch") $isIconOnly -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $menuTitle := or (T $menuItem.Identifier) $menuItem.Name -}}
+
+  {{- if $menuItem.HasChildren -}}
+    {{- $childNodes := slice -}}
+    {{- range $childItem := $menuItem.Children -}}
+      {{- $childType := $childItem.Params.type | default "" -}}
+      {{- $childIsIconOnly := and $childItem.Params.icon (ne $childType "link") -}}
+      {{- if or (eq $childType "search") (eq $childType "theme-toggle") (eq $childType "language-switch") $childIsIconOnly -}}
+        {{- continue -}}
+      {{- end -}}
+
+      {{- $childTitle := or (T $childItem.Identifier) $childItem.Name -}}
+      {{- $childPage := $childItem.Page -}}
+      {{- with $childItem.PageRef -}}
+        {{- with $page.Site.GetPage . -}}
+          {{- $childPage = . -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- $childLink := "" -}}
+      {{- with $childPage -}}
+        {{- if not (partial "components/sidebar/is-excluded.html" (dict "page" . "scope" $scope)) -}}
+          {{- $childLink = .RelPermalink -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $childLink = $childItem.URL -}}
+        {{- with $childItem.PageRef -}}
+          {{- if hasPrefix . "/" -}}
+            {{- $childLink = partial "utils/sidebar-link.html" . -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- if $childLink -}}
+        {{- $childIcon := "" -}}
+        {{- with $childPage -}}
+          {{- $childIcon = .Params.sidebar.icon | default "" -}}
+        {{- end -}}
+        {{- $childNodes = $childNodes | append (dict
+          "link" $childLink
+          "title" $childTitle
+          "items" (slice)
+          "icon" $childIcon
+          )
+        -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if gt (len $childNodes) 0 -}}
+      {{- /* Default closed; sidebar JS opens ancestors of the active link. */ -}}
+      {{- $nodes = $nodes | append (dict
+        "link" ""
+        "title" $menuTitle
+        "items" $childNodes
+        "open" false
+        )
+      -}}
+    {{- end -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $menuPage := $menuItem.Page -}}
+  {{- with $menuItem.PageRef -}}
+    {{- with $page.Site.GetPage . -}}
+      {{- $menuPage = . -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- with $menuPage -}}
+    {{- if not (partial "components/sidebar/is-excluded.html" (dict "page" . "scope" $scope)) -}}
+      {{- $sep := .Params.sidebar.separator -}}
+      {{- if eq $sep true -}}
+        {{- $nodes = $nodes | append (dict "type" "separator" "title" $menuTitle "link" "" "items" (slice)) -}}
+        {{- if eq .Type "docs" -}}
+          {{- $children := partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "matched" $matched "scope" $scope "allowSeparator" false) .RelPermalink $page.Language.Lang $matched $sectionKey $scope false -}}
+          {{- $nodes = $nodes | append $children -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $children := slice -}}
+        {{- if eq .Type "docs" -}}
+          {{- $children = partialCached "components/sidebar/build-tree.html" (dict "context" . "page" $page "matched" $matched "scope" $scope) .RelPermalink $page.Language.Lang $matched $sectionKey $scope -}}
+        {{- end -}}
+        {{- $nodes = $nodes | append (dict
+          "link" .RelPermalink
+          "title" $menuTitle
+          "items" $children
+          "open" (.Params.sidebar.open)
+          "icon" (.Params.sidebar.icon | default "")
+          )
+        -}}
+      {{- end -}}
+    {{- end -}}
+    {{- continue -}}
+  {{- end -}}
+
+  {{- $link := $menuItem.URL -}}
+  {{- with $menuItem.PageRef -}}
+    {{- if hasPrefix . "/" -}}
+      {{- $link = partial "utils/sidebar-link.html" . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $link -}}
+    {{- $nodes = $nodes | append (dict
+      "link" $link
+      "title" $menuTitle
+      "items" (slice)
+      )
+    -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Fall back to the content tree when menu.main has no usable entries */ -}}
+{{- if eq (len $nodes) 0 -}}
+  {{- $navRoot := cond (eq site.Home.Type "docs") site.Home $page.FirstSection -}}
+  {{- $nodes = partialCached "components/sidebar/build-tree.html" (dict "context" $navRoot "page" $page "matched" $matched "scope" $scope) $navRoot.RelPermalink $page.Language.Lang $matched $sectionKey $scope -}}
+{{- end -}}
+
+{{- return $nodes -}}

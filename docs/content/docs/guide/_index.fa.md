@@ -5,6 +5,7 @@ prev: /docs/getting-started
 next: /docs/guide/organize-files
 sidebar:
   open: true
+  icon: book-open
 ---
 
 برای یادگیری نحوه استفاده از Hextra، بخش‌های زیر را بررسی کنید:

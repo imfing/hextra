@@ -6,6 +6,8 @@ tags:
   - Guide
 next: /docs/guide
 prev: /docs
+sidebar:
+  icon: lightning-bolt
 ---
 
 ## テンプレートから始める

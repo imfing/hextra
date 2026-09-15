@@ -15,6 +15,34 @@
     hx:md:dark:text-gray-400 hx:md:dark:hover:text-gray-50;
 }
 
+/* In the sidebar context, always render the full pill (label + kbd hint)
+   and fill the available width, regardless of breakpoint — the navbar's
+   mobile-icon-only treatment would leave a near-empty button inside the
+   wider sidebar drawer. Lives here (unlayered) so it competes by
+   specificity against the base rule above — sidebar.css is in
+   @layer components and would otherwise lose the cascade regardless of
+   specificity.
+   TODO: relocate to sidebar.css once component CSS layering is unified. */
+.hextra-sidebar-search-item .hextra-search-trigger {
+  @apply hx:w-full hx:justify-start hx:gap-2 hx:p-0 hx:px-3 hx:py-2
+    hx:text-sm hx:leading-tight
+    hx:bg-black/5 hx:dark:bg-gray-50/10
+    hx:text-gray-500 hx:hover:text-gray-900
+    hx:dark:text-gray-400 hx:dark:hover:text-gray-50;
+}
+
+.hextra-sidebar-search-item .hextra-search-trigger-icon {
+  @apply hx:h-4 hx:w-4 hx:opacity-60;
+}
+
+.hextra-sidebar-search-item .hextra-search-trigger-label {
+  @apply hx:inline;
+}
+
+.hextra-sidebar-search-item .hextra-search-trigger-kbd {
+  @apply hx:inline-flex;
+}
+
 .hextra-search-trigger-icon {
   @apply hx:h-6 hx:w-6 hx:shrink-0
     hx:md:h-4 hx:md:w-4 hx:md:opacity-60;

@@ -1,0 +1,56 @@
+{{- $rawNodes := .nodes | default slice -}}
+{{- $level := .level | default 0 -}}
+{{- $scope := .scope | default "sidebar" -}}
+{{- $result := slice -}}
+
+{{- if lt $level (site.Params.sidebar.maxDepth | default 4) -}}
+  {{- range $rawNodes -}}
+    {{- if partial "components/sidebar/is-excluded.html" (dict "node" . "scope" $scope) -}}{{- continue -}}{{- end -}}
+    {{- $node := partial "components/sidebar/normalize-node.html" . -}}
+
+    {{- $children := slice -}}
+    {{- with $node.items -}}
+      {{- $children = partial "components/sidebar/build-data-tree.html" (dict "nodes" . "level" (add $level 1) "scope" $scope) -}}
+    {{- end -}}
+
+    {{- if and (eq $node.merge "deep") $node.page -}}
+      {{- $existing := dict -}}
+      {{- range $children -}}
+        {{- if .link -}}
+          {{- $existing = merge $existing (dict .link true) -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- $sorted := partial "components/sidebar/sorted-items.html" (dict "context" $node.page "scope" $scope) -}}
+      {{- range $sorted -}}
+        {{- if not (index $existing .RelPermalink) -}}
+          {{- $sep := .Params.sidebar.separator -}}
+          {{- if eq $sep true -}}
+            {{- warnf "sidebar.separator on %q is only respected at the top level; ignored under data merge node" .RelPermalink -}}
+          {{- end -}}
+          {{- $autoChildren := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" . "level" (add $level 1) "scope" $scope "allowSeparator" false) .RelPermalink (add $level 1) $scope false -}}
+          {{- $children = $children | append (dict
+            "link" .RelPermalink
+            "title" (partial "utils/title" .)
+            "items" $autoChildren
+            "open" .Params.sidebar.open
+            "icon" (.Params.sidebar.icon | default "")
+            )
+          -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if eq $node.type "separator" -}}
+      {{- /* Node renders as a separator label; lift any children alongside. */ -}}
+      {{- $result = $result | append (merge $node (dict "link" "" "items" slice)) -}}
+      {{- if gt (len $children) 0 -}}
+        {{- $result = $result | append $children -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $result = $result | append (merge $node (dict "items" $children)) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

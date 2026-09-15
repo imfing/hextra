@@ -78,9 +78,112 @@ weight: 2
 ---
 ```
 
+To use a different label in the sidebar than the page's `title`, set `linkTitle` in the front matter. This also affects breadcrumbs (see [below](#customizing-breadcrumb-link-titles)).
+
+```yaml {filename="content/docs/guide/organize-files.md"}
+---
+title: Organize Files
+linkTitle: Files
+---
+```
+
 {{< callout type="info" >}}
   It is recommended to keep the sidebar not too deep. If you have a lot of content, consider **splitting them into multiple sections**.
 {{< /callout >}}
+
+### Merge Modes
+
+When using a data-driven sidebar, the `merge` property controls how children are resolved:
+
+**`merge: none`** (default)
+Only the nodes explicitly listed in `items` appear. Auto-generated children from the content tree are ignored.
+
+**`merge: deep`**
+Explicit `items` are rendered first, then any auto-generated children not already listed are appended. This lets you pin important pages at the top while keeping the rest auto-generated.
+
+```yaml
+- link: /docs/guide/
+  merge: deep        # auto children are appended
+  items:
+    - link: /docs/guide/quickstart/   # pinned at top
+    - link: /docs/guide/installation/ # pinned second
+    # remaining pages under /docs/guide/ are appended automatically
+```
+
+Pages with `sidebar.exclude: true` in front matter are excluded from both merge modes.
+
+### Sort Order
+
+By default, sidebar pages are sorted by `weight` (which falls back to date when no weight is set). For sections with many pages that should be listed alphabetically, you can switch to sorting by title.
+
+**Global configuration** in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  sidebar:
+    sort: title
+```
+
+**Per-section override** in the section's `_index.md` front matter:
+
+```yaml {filename="content/docs/api/_index.md"}
+---
+title: API Reference
+sidebar:
+  sort: title
+---
+```
+
+The per-section setting takes precedence over the global configuration. Supported values are `weight` (default) and `title`.
+
+### Group Headings
+
+Sidebar entries without a `link` are rendered as non-clickable group headings. This is useful for organizing pages into logical groups without creating a dedicated section page:
+
+```yaml {filename="data/<lang>/sidebar/docs.yaml"}
+- title: Reference
+  icon: book-open
+  items:
+    - link: /docs/api/
+    - link: /docs/cli/
+```
+
+"Reference" will appear as a label in the sidebar with its children listed below. Group headings with children include a collapsible toggle.
+
+This is also a way to expose a folder that has no `_index.md`: declare a group with the desired title and list its child pages explicitly.
+
+### Search Input
+
+Place the search input inline in the sidebar by adding a node with `type: search`:
+
+```yaml {filename="data/<lang>/sidebar/docs.yaml"}
+- type: search
+- link: /docs/getting-started/
+- link: /docs/guide/
+  merge: deep
+```
+
+This is useful when the navbar search is disabled or when you want a sticky search at the top of the docs sidebar on desktop.
+
+### Scoping by Section
+
+Data-driven sidebars are scoped per section. Place files under `data/<lang>/sidebar/` mirroring the content tree; the lookup walks from the deepest matching section upward, so a more specific file wins:
+
+{{< filetree/container >}}
+  {{< filetree/folder name="data" >}}
+    {{< filetree/folder name="en" >}}
+      {{< filetree/folder name="sidebar" state="open" >}}
+        {{< filetree/file name="docs.yaml" >}}
+        {{< filetree/folder name="docs" state="open" >}}
+          {{< filetree/file name="sidebar-lab.yaml" >}}
+        {{< /filetree/folder >}}
+        {{< filetree/file name="api.yaml" >}}
+      {{< /filetree/folder >}}
+    {{< /filetree/folder >}}
+  {{< /filetree/folder >}}
+{{< /filetree/container >}}
+
+With the layout above, pages under `/docs/sidebar-lab/` use `sidebar/docs/sidebar-lab.yaml`; other `/docs/*` pages fall back to `sidebar/docs.yaml`; pages under `/api/*` use `sidebar/api.yaml`. Sections without a matching file fall back to auto-discovery.
 
 ## Section Navigation
 

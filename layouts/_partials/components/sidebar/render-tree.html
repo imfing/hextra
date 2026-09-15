@@ -1,0 +1,34 @@
+{{- if ge (.level | default 0) (site.Params.sidebar.maxDepth | default 4) -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $level := .level | default 0 -}}
+
+{{- range (.nodes | default slice) -}}
+  {{- if eq .type "search" -}}
+    <li class="hextra-sidebar-search-item">
+      {{- partial "search.html" (dict "location" "sidebar") -}}
+    </li>
+  {{- else if eq .type "separator" -}}
+    <li class="hextra-sidebar-separator">
+      <span class="hx:inline-flex hx:items-center hx:gap-2">
+        {{- partial "components/sidebar/icon.html" .icon -}}
+        {{- .title -}}
+      </span>
+    </li>
+  {{- else -}}
+    {{- $children := .items | default slice -}}
+    {{- $hasChildren := gt (len $children) 0 -}}
+    {{- $open := and $hasChildren .open -}}
+    <li{{ with $open }} class="open"{{ end }}>
+      {{- partial "components/sidebar/render-item.html" (dict "node" . "open" $open "hasChildren" $hasChildren) -}}
+      {{- if $hasChildren -}}
+        <div class="hextra-sidebar-children">
+          <ul class="hextra-sidebar-guide-list">
+            {{- partial "components/sidebar/render-tree.html" (dict "nodes" $children "level" (add $level 1)) -}}
+          </ul>
+        </div>
+      {{- end -}}
+    </li>
+  {{- end -}}
+{{- end -}}

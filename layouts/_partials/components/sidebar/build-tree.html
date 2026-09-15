@@ -1,0 +1,48 @@
+{{- $context := .context -}}
+{{- $page := .page -}}
+{{- $matched := .matched | default false -}}
+{{- $scope := .scope | default "sidebar" -}}
+{{- $allowSeparator := true -}}
+{{- if isset . "allowSeparator" -}}
+  {{- $allowSeparator = .allowSeparator -}}
+{{- end -}}
+
+{{- $autoNodes := partialCached "components/sidebar/build-auto-nodes.html" (dict "context" $context "scope" $scope "allowSeparator" $allowSeparator) $context.RelPermalink 0 $scope $allowSeparator -}}
+{{- $nodes := $autoNodes -}}
+
+{{- $sidebarData := partialCached "components/sidebar/source-data.html" $context $context.Language.Lang $context.RelPermalink -}}
+{{- $dataNodes := slice -}}
+{{- if gt (len $sidebarData) 0 -}}
+  {{- $dataNodes = partialCached "components/sidebar/build-data-tree.html" (dict "nodes" $sidebarData "scope" $scope) $context.Language.Lang $context.RelPermalink $scope -}}
+{{- end -}}
+
+{{- if $matched -}}
+  {{- if gt (len $sidebarData) 0 -}}
+    {{- /* Data file is authoritative: respect declared order as-is. Children   */ -}}
+    {{- /* still auto-discover per-node via `merge: deep`.                      */ -}}
+    {{- $nodes = $dataNodes -}}
+  {{- end -}}
+{{- else if gt (len $sidebarData) 0 -}}
+  {{- /* Overlay cosmetic-only fields (icon) onto matching auto nodes so the */ -}}
+  {{- /* data file's icons remain visible from outside the covered section.  */ -}}
+  {{- $iconByLink := dict -}}
+  {{- range $dataNodes -}}
+    {{- if and .link .icon -}}
+      {{- $iconByLink = merge $iconByLink (dict .link .icon) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt (len $iconByLink) 0 -}}
+    {{- $patched := slice -}}
+    {{- range $autoNodes -}}
+      {{- $autoNode := . -}}
+      {{- with index $iconByLink $autoNode.link -}}
+        {{- $patched = $patched | append (merge $autoNode (dict "icon" .)) -}}
+      {{- else -}}
+        {{- $patched = $patched | append $autoNode -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $nodes = $patched -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $nodes -}}
