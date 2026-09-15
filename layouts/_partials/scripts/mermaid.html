@@ -48,6 +48,7 @@
   {{- end -}}
 {{- end -}}
 
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     // Store original mermaid code for each diagram
@@ -55,21 +56,40 @@
       el.dataset.original = el.innerHTML;
     });
 
-    const theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
-    mermaid.initialize({ startOnLoad: true, theme: theme });
+    // Disable auto-start before mermaid's own load handler runs
+    mermaid.initialize({ startOnLoad: false });
 
+    // Render only visible diagrams; hidden ones render truncated
+    let queue = Promise.resolve();
+    const renderVisible = () => {
+      queue = queue.then(() => {
+        const theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
+        mermaid.initialize({ startOnLoad: false, theme: theme });
+        const nodes = Array.from(document.querySelectorAll(".mermaid:not([data-processed])")).filter((el) => el.offsetParent !== null);
+        if (nodes.length) return mermaid.run({ nodes }).catch(console.error);
+      });
+    };
+
+    renderVisible();
+
+    // Render diagrams when revealed (e.g. tab switch, details toggle)
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting && !e.target.dataset.processed)) {
+        renderVisible();
+      }
+    });
+    document.querySelectorAll(".mermaid").forEach((el) => observer.observe(el));
+
+    // Re-render diagrams on theme change
     let timeout;
     new MutationObserver(() => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        const theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
-        document.querySelectorAll(".mermaid").forEach((el) => {
-          // Reset to original content, preserving HTML
+        document.querySelectorAll(".mermaid[data-processed]").forEach((el) => {
           el.innerHTML = el.dataset.original;
           el.removeAttribute("data-processed");
         });
-        mermaid.initialize({ startOnLoad: true, theme: theme });
-        mermaid.init();
+        renderVisible();
       }, 150);
     }).observe(document.documentElement, {
       attributes: true,
