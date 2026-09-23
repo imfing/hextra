@@ -10,7 +10,16 @@
 
       {{- $base_url = strings.TrimSuffix "/" $base_url -}}
       {{- $filename = strings.TrimPrefix "/" $filename -}}
-      {{- $file_url := urls.JoinPath $base_url $filename -}}
+
+      {{- /* Default to just filename */ -}}
+      {{- $file_url := $filename -}}
+
+      {{- if .full_url -}}
+        {{- $file_url = .full_url -}}
+      {{- else if $base_url -}}
+        {{- $file_url = urls.JoinPath $base_url $filename -}}
+      {{- end -}}
+
 
       <a class="hx:no-underline hx:inline-flex hx:items-center hx:gap-1" href="{{ $file_url }}" target="_blank" rel="noopener noreferrer">
           <span>{{- $filename -}}</span>
