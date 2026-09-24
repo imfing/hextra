@@ -23,10 +23,7 @@
 
 <a
   class="hextra-card hx:group hx:flex hx:flex-col hx:justify-start hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:text-current hx:no-underline hx:dark:shadow-none hx:hover:shadow-gray-100 hx:dark:hover:shadow-none hx:shadow-gray-100 hx:active:shadow-sm hx:active:shadow-gray-200 hx:transition-all hx:duration-200 {{ $linkClass }}"
-  {{- if $link -}}
-    href="{{ $href }}"
-    {{ with $external }}target="_blank" rel="noreferrer"{{ end -}}
-  {{- end -}}
+  {{ if $link }}href="{{ $href }}"{{ with $external }} target="_blank" rel="noreferrer"{{ end }}{{ end }}
 >
   {{- with $image -}}
     <img
