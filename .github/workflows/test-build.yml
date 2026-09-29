@@ -14,16 +14,17 @@ defaults:
 
 jobs:
   build-tests:
-    runs-on: ubuntu-latest
+    name: build-tests (${{ matrix.os }}, hugo ${{ matrix.hugo-version }})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
         # 0.161.1 embeds KaTeX 0.16.x; 0.166.0 embeds KaTeX 0.18.x. Testing
         # both covers each branch of the KaTeX CSS version selection in
         # layouts/_partials/scripts/katex.html.
         hugo-version: ["0.161.1", "0.166.0"]
     env:
-      HUGO_VERSION: ${{ matrix.hugo-version }}
       # These specs build temporary Hugo sites and inspect the output files
       # directly, so no browser or web server is needed. Setting BASE_URL
       # keeps Playwright from starting the docs webServer.
@@ -35,6 +36,11 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.26"
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -42,12 +48,16 @@ jobs:
           cache: npm
 
       - name: Setup Hugo
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ matrix.hugo-version }}
+          extended: true
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Build docs site
+        run: npm run build
 
       - name: Run build tests
         run: npm run test:build
@@ -56,6 +66,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-tests-report-hugo-${{ matrix.hugo-version }}
+          name: build-tests-report-${{ matrix.os }}-hugo-${{ matrix.hugo-version }}
           path: playwright-report/
           retention-days: 14
