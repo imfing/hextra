@@ -32,7 +32,7 @@ languages:
     params:
       banner:
         message: |
-          هگزترا **v0.12** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% relref "blog/v0.12" %}})
+          هگزترا **v0.13** منتشر شد! 🎉 [تازه‌ها را ببینید]({{% relref "blog/v0.13" %}})
       page:
         contextMenu:
           links:
@@ -47,7 +47,7 @@ languages:
     params:
       banner:
         message: |
-          Hextra **v0.12** がリリースされました！🎉 [新着情報はこちら]({{% relref "blog/v0.12" %}})
+          Hextra **v0.13** がリリースされました！🎉 [新着情報はこちら]({{% relref "blog/v0.13" %}})
       page:
         contextMenu:
           links:
@@ -62,7 +62,7 @@ languages:
     params:
       banner:
         message: |
-          Hextra **v0.12** 发布啦！🎉 查看[更新内容]({{% relref "blog/v0.12" %}})
+          Hextra **v0.13** 发布啦！🎉 查看[更新内容]({{% relref "blog/v0.13" %}})
       page:
         contextMenu:
           links:
@@ -141,6 +141,10 @@ menu:
       name: v0.11 ↗
       url: https://imfing.github.io/hextra/versions/v0.11/
       parent: versions
+    - identifier: v0.12
+      name: v0.12 ↗
+      url: https://imfing.github.io/hextra/versions/v0.12/
+      parent: versions
     - identifier: about
       name: About
       pageRef: /about
@@ -178,9 +182,9 @@ params:
   externalLinkDecoration: true
 
   banner:
-    key: 'announcement-v0.12'
+    key: 'announcement-v0.13'
     message: |
-      Hextra **v0.12** is here! 🎉 Discover [what's new]({{% relref "blog/v0.12" %}})
+      Hextra **v0.13** is here! 🎉 Discover [what's new]({{% relref "blog/v0.13" %}})
 
   navbar:
     displayTitle: true
