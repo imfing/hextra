@@ -103,7 +103,7 @@ title: Bundle
     expect(contentHtml).toContain('href="/base/docs/guide/sub/topic/?view=full#part">Nested');
     expect(contentHtml).toContain('href="/base/docs/overview/#top">Absolute');
     expect(contentHtml).toContain('href="missing.md?x=1#frag">Missing');
-    expect(contentHtml).toContain('href="https://example.com/readme.md"target="_blank" rel="noopener">Remote');
+    expect(contentHtml).toContain('href="https://example.com/readme.md" target="_blank" rel="noopener">Remote');
 
     const bundleHtml = readFileSync(join(publishDir, "docs", "guide", "bundle", "index.html"), "utf8");
     expect(bundleHtml).toContain('href="/base/docs/guide/sibling/">Bundle sibling');
