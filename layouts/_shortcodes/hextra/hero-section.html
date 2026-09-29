@@ -12,9 +12,7 @@ A simple hero section with a heading and optional style.
 {{- $heading := int (strings.TrimPrefix "h" (.Get "heading" | default "h2")) -}}
 {{- $size := cond (ge $heading 4) "xl" (cond (eq $heading 3) "2xl" "4xl") -}}
 
-<h{{ $heading }}
-  class="not-prose hx:text-{{ $size }} hx:font-bold hx:leading-none hx:tracking-tighter hx:md:text-3xl hx:py-2 hx:bg-clip-text hx:text-transparent hx:bg-gradient-to-r hx:from-gray-900 hx:to-gray-600 hx:dark:from-gray-100 hx:dark:to-gray-400"
-  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
->
+{{- /* Keep the opening tag on one line: when nested, a lone ">" is parsed as a blockquote marker. */ -}}
+<h{{ $heading }} class="not-prose hx:text-{{ $size }} hx:font-bold hx:leading-none hx:tracking-tighter hx:md:text-3xl hx:py-2 hx:bg-clip-text hx:text-transparent hx:bg-gradient-to-r hx:from-gray-900 hx:to-gray-600 hx:dark:from-gray-100 hx:dark:to-gray-400"{{ with $style }} style="{{ . | safeCSS }}"{{ end }}>
   {{ .Inner | markdownify }}
 </h{{ $heading }}>

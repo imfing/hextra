@@ -1,0 +1,10 @@
+# prettier-plugin-go-template reflows optional attributes in these opening tags,
+# which drops the separating space ("a"b=) or leaves a lone ">" line that
+# markdownify parses as a blockquote when the shortcode is nested.
+layouts/_markup/render-link.html
+layouts/_partials/shortcodes/card.html
+layouts/_shortcodes/hextra/hero-badge.html
+layouts/_shortcodes/hextra/hero-button.html
+layouts/_shortcodes/hextra/hero-headline.html
+layouts/_shortcodes/hextra/hero-section.html
+layouts/_shortcodes/hextra/hero-subtitle.html
