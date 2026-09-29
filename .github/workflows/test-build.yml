@@ -19,8 +19,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Some issues only reproduce on a specific platform (e.g. path
-        # separators or CRLF line endings on Windows), so build on all three.
         os: [ubuntu-latest, macos-latest, windows-latest]
         # 0.161.1 embeds KaTeX 0.16.x; 0.166.0 embeds KaTeX 0.18.x. Testing
         # both covers each branch of the KaTeX CSS version selection in

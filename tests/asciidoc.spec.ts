@@ -16,8 +16,7 @@ test("AsciiDoc pages provide TOC and search fragments", () => {
   mkdirSync(binDir);
   symlinkSync(process.cwd(), join(themesDir, "hextra"), "dir");
 
-  // Fake asciidoctor as a Node script so it runs on every platform; Windows
-  // needs a .cmd launcher since it can't execute a shebang script.
+  // Windows can't run shebang scripts, so use a .cmd launcher there.
   writeFileSync(
     join(binDir, "asciidoctor.js"),
     `process.stdin.resume();
