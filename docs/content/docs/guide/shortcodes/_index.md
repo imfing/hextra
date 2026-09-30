@@ -30,4 +30,5 @@ Additional shortcodes provided by Hugo and Hextra:
   {{< card link="hextra" title="Hextra" icon="view-grid" >}}
   {{< card link="asciinema" title="Asciinema Player" icon="terminal" >}}
   {{< card link="gallery" title="Gallery" icon="photograph" >}}
+  {{< card link="openapi" title="OpenAPI" icon="code" >}}
 {{< /cards >}}
