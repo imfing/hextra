@@ -1,0 +1,50 @@
+/* Swagger UI rendered by the openapi shortcode. Its stylesheet loads after
+   this one, so overrides add .hextra-openapi to win over the same selector. */
+
+.hextra-openapi {
+  @apply hx:my-6;
+}
+
+.hextra-openapi .swagger-ui .wrapper {
+  @apply hx:px-0;
+}
+
+/* Swagger UI paints its dark theme on a blue-gray background, including the
+   root element: keep the Hextra page background */
+:root.dark-mode,
+html.dark-mode .hextra-openapi .swagger-ui {
+  background: transparent;
+}
+
+/* Keyboard focus: Swagger UI removes the outline of selects, and its dark
+   theme also removes it from operation and schema toggles, with rules up to
+   six classes deep, hence !important */
+.hextra-openapi .swagger-ui select:focus-visible,
+.hextra-openapi .swagger-ui .opblock-summary-control:focus-visible,
+.hextra-openapi .swagger-ui .model-box-control:focus-visible,
+.hextra-openapi .swagger-ui .models-control:focus-visible {
+  outline: 2px solid var(--hx-color-primary-500) !important;
+  outline-offset: 2px;
+}
+
+/* Deprecated operations: Swagger UI dims them to 60% opacity, which takes
+   their text and badge below 3:1 in both themes. The struck-through path and
+   the gray badge already mark them, so keep them opaque and darken or lighten
+   the badge enough for its label. */
+.hextra-openapi .swagger-ui .opblock.opblock-deprecated {
+  opacity: 1;
+}
+
+.hextra-openapi .swagger-ui .opblock.opblock-deprecated .opblock-summary-method {
+  background: rgb(115 115 115);
+}
+
+html.dark-mode .hextra-openapi .swagger-ui .opblock.opblock-deprecated .opblock-summary-method {
+  background: rgb(212 212 212);
+}
+
+/* In the Swagger UI dark theme, the PUT section header is far lighter than
+   those of the other methods and its text stays below 4.5:1 */
+html.dark-mode .hextra-openapi .swagger-ui .opblock.opblock-put .opblock-section-header {
+  background: #3b2a1d;
+}

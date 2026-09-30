@@ -1,0 +1,115 @@
+{{- /* OpenAPI (Swagger UI) */ -}}
+
+{{- $openapiBase := "" -}}
+{{- $useDefaultCdn := true -}}
+{{- with site.Params.openapi.base -}}
+  {{- $openapiBase = . -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- $openapiJsAsset := "" -}}
+{{- with site.Params.openapi.js -}}
+  {{- $openapiJsAsset = . -}}
+{{- end -}}
+
+{{- $openapiCssAsset := "" -}}
+{{- with site.Params.openapi.css -}}
+  {{- $openapiCssAsset = . -}}
+{{- end -}}
+
+{{- /* If only js/css is set without base, use local asset loading */ -}}
+{{- if and $useDefaultCdn (or (ne $openapiJsAsset "") (ne $openapiCssAsset "")) -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- /* Set default CDN base if needed */ -}}
+{{- if $useDefaultCdn -}}
+  {{- $openapiBase = "https://cdn.jsdelivr.net/npm/swagger-ui-dist@5" -}}
+{{- end -}}
+
+{{- $isRemoteBase := or (strings.HasPrefix $openapiBase "http://") (strings.HasPrefix $openapiBase "https://") -}}
+
+{{- /* CSS retrieval: get raw CSS from either local asset or remote, then process */ -}}
+{{- if $isRemoteBase -}}
+  {{- $cssPath := cond (ne $openapiCssAsset "") $openapiCssAsset "swagger-ui.css" -}}
+  {{- $openapiCssUrl := urls.JoinPath $openapiBase $cssPath -}}
+  {{- with try (resources.GetRemote $openapiCssUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Swagger UI css file from %s. Reason: %s." $openapiCssUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy "css/swagger-ui.css" . -}}
+        {{- $openapiCss := . | fingerprint -}}
+        <link rel="stylesheet" href="{{ $openapiCss.RelPermalink }}" integrity="{{ $openapiCss.Data.Integrity }}" crossorigin="anonymous" />
+      {{- end -}}
+    {{- else -}}
+      {{- errorf "Could not retrieve Swagger UI css file from %s." $openapiCssUrl -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $openapiCssAsset -}}
+  {{- with resources.Get $openapiCssAsset -}}
+    {{- $openapiCss := . | fingerprint -}}
+    <link rel="stylesheet" href="{{ $openapiCss.RelPermalink }}" integrity="{{ $openapiCss.Data.Integrity }}" crossorigin="anonymous" />
+  {{- else -}}
+    {{- errorf "Swagger UI css asset not found at %q" $openapiCssAsset -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* JS retrieval: get raw JS from either local asset or remote, then process */ -}}
+{{- if $isRemoteBase -}}
+  {{- $jsPath := cond (ne $openapiJsAsset "") $openapiJsAsset "swagger-ui-bundle.js" -}}
+  {{- $openapiJsUrl := urls.JoinPath $openapiBase $jsPath -}}
+  {{- with try (resources.GetRemote $openapiJsUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Swagger UI js file from %s. Reason: %s." $openapiJsUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy "js/swagger-ui-bundle.js" . -}}
+        {{- $openapiJs := . | fingerprint -}}
+        <script defer src="{{ $openapiJs.RelPermalink }}" integrity="{{ $openapiJs.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end -}}
+    {{- else -}}
+      {{- errorf "Could not retrieve Swagger UI js file from %s." $openapiJsUrl -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $openapiJsAsset -}}
+  {{- with resources.Get $openapiJsAsset -}}
+    {{- $openapiJs := . | fingerprint -}}
+    <script defer src="{{ $openapiJs.RelPermalink }}" integrity="{{ $openapiJs.Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- else -}}
+    {{- errorf "Swagger UI js asset not found at %q" $openapiJsAsset -}}
+  {{- end -}}
+{{- end -}}
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!window.SwaggerUIBundle) return;
+
+    // Swagger UI ships a dark theme enabled by the dark-mode class on the root
+    // element: keep it in step with the Hextra theme, including later toggles.
+    const root = document.documentElement;
+    const syncTheme = () => root.classList.toggle("dark-mode", root.classList.contains("dark"));
+    syncTheme();
+    new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ["class"] });
+
+    document.querySelectorAll(".hextra-openapi").forEach((el) => {
+      window.SwaggerUIBundle({ ...JSON.parse(el.dataset.config || "{}"), domNode: el, url: el.dataset.url });
+
+      // Swagger UI wraps its servers selects, global and per operation, in empty
+      // labels: name them after the title of their section as they appear.
+      let pending = false;
+      const labelServers = () => {
+        pending = false;
+        el.querySelectorAll(".servers select:not([aria-label])").forEach((select) => {
+          const title = select.closest(".schemes-server-container, .operation-servers")?.querySelector(".servers-title, .opblock-title");
+          select.setAttribute("aria-label", title?.textContent.trim() || "Servers");
+        });
+      };
+      new MutationObserver(() => {
+        if (!pending) {
+          pending = true;
+          requestAnimationFrame(labelServers);
+        }
+      }).observe(el, { childList: true, subtree: true });
+    });
+  });
+</script>

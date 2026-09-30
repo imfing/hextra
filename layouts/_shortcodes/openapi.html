@@ -1,0 +1,78 @@
+{{- /*
+Render an OpenAPI description with Swagger UI.
+
+@param {string} src The OpenAPI description (JSON or YAML): a page resource, a global asset, a file under the static directory, or a URL.
+@param {string} 0 Same as src.
+@param {string} docExpansion How operations are expanded: list (default), full or none.
+@param {int} defaultModelsExpandDepth Expansion depth of the schemas section, -1 to hide it (default 1).
+@param {bool} filter Show a field to filter operations by tag (default false).
+@param {bool} tryItOutEnabled Open the "Try it out" section of operations by default (default false).
+@param {string} tagsSorter Sort tags alphabetically with alpha (default: document order).
+@param {string} operationsSorter Sort operations with alpha or method (default: document order).
+
+@example {{< openapi "openapi.yaml" >}}
+@example {{< openapi src="https://petstore3.swagger.io/api/v3/openapi.json" docExpansion="none" >}}
+*/ -}}
+
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- if not $src -}}
+  {{- errorf "The %q shortcode requires the path or URL of an OpenAPI description. See %s" .Name .Position -}}
+{{- end -}}
+
+{{- /* Local descriptions are published with the site, remote ones are fetched by the browser. */ -}}
+{{- $url := "" -}}
+{{- if or (urls.Parse $src).Scheme (hasPrefix $src "//") -}}
+  {{- $url = $src -}}
+{{- else -}}
+  {{- with or (.Page.Resources.Get $src) (resources.Get $src) -}}
+    {{- $url = .RelPermalink -}}
+  {{- else -}}
+    {{- $url = partial "utils/file-path" (dict "page" .Page "path" $src) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $config := dict -}}
+
+{{- with .Get "docExpansion" -}}
+  {{- if in (slice "list" "full" "none") . -}}
+    {{- $config = merge $config (dict "docExpansion" .) -}}
+  {{- else -}}
+    {{- warnf "openapi: unknown docExpansion value %q, falling back to list. See %s" . $.Position -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Test the presence of the parameter, as 0 is a valid depth. */ -}}
+{{- if and .IsNamedParams (isset .Params "defaultModelsExpandDepth") -}}
+  {{- $depth := printf "%v" (.Get "defaultModelsExpandDepth") -}}
+  {{- if findRE `^(-1|0|[1-9][0-9]?)$` $depth -}}
+    {{- $config = merge $config (dict "defaultModelsExpandDepth" (int $depth)) -}}
+  {{- else -}}
+    {{- warnf "openapi: invalid defaultModelsExpandDepth value %q, falling back to 1. See %s" $depth $.Position -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $key := slice "filter" "tryItOutEnabled" -}}
+  {{- with $.Get $key -}}
+    {{- $config = merge $config (dict $key (eq (printf "%v" .) "true")) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Get "tagsSorter" -}}
+  {{- if eq . "alpha" -}}
+    {{- $config = merge $config (dict "tagsSorter" .) -}}
+  {{- else -}}
+    {{- warnf "openapi: unknown tagsSorter value %q, keeping the document order. See %s" . $.Position -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Get "operationsSorter" -}}
+  {{- if in (slice "alpha" "method") . -}}
+    {{- $config = merge $config (dict "operationsSorter" .) -}}
+  {{- else -}}
+    {{- warnf "openapi: unknown operationsSorter value %q, keeping the document order. See %s" . $.Position -}}
+  {{- end -}}
+{{- end -}}
+
+{{- .Page.Store.Set "hasOpenAPI" true -}}
+
+<div class="hextra-openapi not-prose" data-url="{{ $url }}" data-config="{{ $config | jsonify }}"></div>

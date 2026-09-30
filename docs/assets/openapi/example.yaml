@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  title: Bookshelf API
+  version: 1.0.0
+  description: A small example API to showcase the `openapi` shortcode.
+servers:
+  - url: https://api.example.com/v1
+tags:
+  - name: Books
+    description: Manage the books of the shelf
+paths:
+  /books:
+    get:
+      tags: [Books]
+      summary: List books
+      parameters:
+        - name: author
+          in: query
+          description: Only return books written by this author
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of books to return
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: The books of the shelf
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+    post:
+      tags: [Books]
+      summary: Add a book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewBook"
+      responses:
+        "201":
+          description: The book was added
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+  /books/{bookId}:
+    parameters:
+      - name: bookId
+        in: path
+        required: true
+        description: Identifier of the book
+        schema:
+          type: string
+    get:
+      tags: [Books]
+      summary: Get a book
+      responses:
+        "200":
+          description: The book
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        "404":
+          description: No book has this identifier
+    put:
+      tags: [Books]
+      summary: Replace a book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewBook"
+      responses:
+        "200":
+          description: The updated book
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+    delete:
+      tags: [Books]
+      summary: Remove a book
+      responses:
+        "204":
+          description: The book was removed
+  /books/{bookId}/cover:
+    get:
+      tags: [Books]
+      summary: Get the cover of a book
+      deprecated: true
+      description: Use the `coverUrl` property of the book instead.
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The cover image
+          content:
+            image/png: {}
+components:
+  schemas:
+    NewBook:
+      type: object
+      required: [title, author]
+      properties:
+        title:
+          type: string
+          example: The Hobbit
+        author:
+          type: string
+          example: J. R. R. Tolkien
+        year:
+          type: integer
+          example: 1937
+    Book:
+      allOf:
+        - $ref: "#/components/schemas/NewBook"
+        - type: object
+          required: [id]
+          properties:
+            id:
+              type: string
+              example: hobbit
+            coverUrl:
+              type: string
+              format: uri
