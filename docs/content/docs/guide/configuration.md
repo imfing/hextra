@@ -488,7 +488,7 @@ Similarly, the width of the navbar and footer can be customized by the `params.n
 
 ### Page Context Menu
 
-The page context menu provides a dropdown button that allows users to copy the page content as Markdown or view the raw Markdown source. This feature is useful for documentation sites where readers may want to share or reference the content in Markdown format.
+The page context menu provides a dropdown button that allows users to copy the page content as Markdown or view it as a Markdown file. This feature is useful for documentation sites where readers may want to share or reference the content in Markdown format.
 
 #### Enabling the Context Menu
 
@@ -509,6 +509,8 @@ outputs:
   section: [html, rss, markdown]
 ```
 
+The Markdown version is generated from the rendered page, so shortcodes, included content and links resolve as they do in HTML, and links use absolute URLs. It requires Hugo v0.151.0 or later.
+
 #### Per-Page Control
 
 To enable or disable the context menu for a specific page, use the `contextMenu` parameter in the front matter:
@@ -526,7 +528,7 @@ You can add custom links to the context menu dropdown. This is useful for integr
 
 - `{url}` - The page URL (URL-encoded)
 - `{title}` - The page title (URL-encoded)
-- `{markdown_url}` - The URL to the raw Markdown content (URL-encoded)
+- `{markdown_url}` - The URL to the Markdown version of the page (URL-encoded)
 
 ```yaml {filename="hugo.yaml"}
 params:
