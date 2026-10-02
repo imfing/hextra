@@ -8,3 +8,7 @@ layouts/_shortcodes/hextra/hero-button.html
 layouts/_shortcodes/hextra/hero-headline.html
 layouts/_shortcodes/hextra/hero-section.html
 layouts/_shortcodes/hextra/hero-subtitle.html
+
+# Markdown output templates are Go templates, not Markdown: the Markdown parser
+# escapes template comments and inserts blank lines that end up in the output.
+layouts/**/*.md

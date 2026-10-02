@@ -1,2 +1,2 @@
 {{- .Title | replaceRE "\n" " " | printf "# %s" }}
-{{ .RawContent }}
+{{ partial "utils/markdown-content.md" . }}
