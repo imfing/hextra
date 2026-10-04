@@ -1,0 +1,13 @@
+{{- $page := .page -}}
+{{- $dateFormat := .dateFormat | default "Jan 02" -}}
+<div class="hx:flex hx:items-baseline hx:gap-4 hx:py-2">
+  <time class="hx:shrink-0 hx:text-sm hx:tabular-nums hx:text-gray-500 hx:dark:text-gray-400" datetime="{{ $page.Date.Format "2006-01-02" }}">{{ $page.Date.Format $dateFormat }}</time>
+  <div>
+    <a href="{{ $page.RelPermalink }}" class="hx:font-medium hx:text-gray-700 hx:dark:text-gray-300 hx:transition-colors hx:duration-150 hx:hover:text-primary-600 hx:dark:hover:text-primary-400">
+      {{ $page.Title }}
+    </a>
+    {{- with $page.Params.tags }}
+      <span class="hx:text-xs hx:leading-7">{{ partial "tags.html" (dict "context" $page) }}</span>
+    {{- end }}
+  </div>
+</div>

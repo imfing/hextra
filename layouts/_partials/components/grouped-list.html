@@ -1,0 +1,29 @@
+{{- $pages := .pages | default slice -}}
+{{- $groupBy := .groupBy | default "year" -}}
+{{- $dateFormat := .dateFormat | default "Jan 02" -}}
+
+{{- if eq $groupBy "year" }}
+  {{- range $pages.GroupByDate "2006" "desc" }}
+    <h2 class="hx:mt-4 hx:mb-4 hx:text-2xl hx:font-bold hx:text-slate-900 hx:dark:text-slate-100">{{ .Key }}</h2>
+    <div class="hextra-archive-timeline hx:ml-2 hx:pl-6 hx:mb-6">
+      {{- range .Pages }}
+        {{ partial "components/archive-item.html" (dict "page" . "dateFormat" $dateFormat) }}
+      {{- end }}
+    </div>
+  {{- end }}
+{{- else if eq $groupBy "month" }}
+  {{- range $pages.GroupByDate "2006-01" "desc" }}
+    <h2 class="hx:mt-4 hx:mb-4 hx:text-2xl hx:font-bold hx:text-slate-900 hx:dark:text-slate-100">{{ .Key }}</h2>
+    <div class="hextra-archive-timeline hx:ml-2 hx:pl-6 hx:mb-6">
+      {{- range .Pages }}
+        {{ partial "components/archive-item.html" (dict "page" . "dateFormat" $dateFormat) }}
+      {{- end }}
+    </div>
+  {{- end }}
+{{- else }}
+  <div>
+    {{- range $pages }}
+      {{ partial "components/archive-item.html" (dict "page" . "dateFormat" $dateFormat) }}
+    {{- end }}
+  </div>
+{{- end -}}
