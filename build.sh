@@ -12,6 +12,7 @@ echo "Using base URL: $BASE_URL"
 MAIN_VERSION="$(git tag --list "v[0-9]*" --sort=-v:refname | head -n 1):latest:docs"
 VERSIONS=(
   "main:latest:docs" # latest version always builds from main
+  "v0.12.3:v0.12:docs"
   "v0.11.3:v0.11:docs"
   "v0.10.3:v0.10:exampleSite"
 )

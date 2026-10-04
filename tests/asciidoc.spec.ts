@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { execFileSync } from "node:child_process";
 import { chmodSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { delimiter, join } from "node:path";
 
 test("AsciiDoc pages provide TOC and search fragments", () => {
   const siteDir = mkdtempSync(join(tmpdir(), "hextra-asciidoc-"));
@@ -16,13 +16,12 @@ test("AsciiDoc pages provide TOC and search fragments", () => {
   mkdirSync(binDir);
   symlinkSync(process.cwd(), join(themesDir, "hextra"), "dir");
 
-  const asciidoctorPath = join(binDir, "asciidoctor");
+  // Windows can't run shebang scripts, so use a .cmd launcher there.
   writeFileSync(
-    asciidoctorPath,
-    `#!/bin/sh
-cat >/dev/null
-cat <<'HTML'
-<div class="sect1">
+    join(binDir, "asciidoctor.js"),
+    `process.stdin.resume();
+process.stdin.on("end", () => {
+  process.stdout.write(\`<div class="sect1">
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>AsciiDoc paragraph content.</p></div>
@@ -32,10 +31,17 @@ cat <<'HTML'
 </div>
 </div>
 </div>
-HTML
+\`);
+});
 `
   );
-  chmodSync(asciidoctorPath, 0o755);
+  if (process.platform === "win32") {
+    writeFileSync(join(binDir, "asciidoctor.cmd"), `@node "%~dp0asciidoctor.js" %*\r\n`);
+  } else {
+    const asciidoctorPath = join(binDir, "asciidoctor");
+    writeFileSync(asciidoctorPath, `#!/bin/sh\nexec node "$(dirname "$0")/asciidoctor.js" "$@"\n`);
+    chmodSync(asciidoctorPath, 0o755);
+  }
 
   writeFileSync(
     join(siteDir, "hugo.yaml"),
@@ -83,7 +89,7 @@ Nested detail content.
   try {
     execFileSync("hugo", ["--source", siteDir, "--themesDir", themesDir, "--destination", publishDir], {
       cwd: process.cwd(),
-      env: { ...process.env, PATH: `${binDir}:${process.env.PATH}` },
+      env: { ...process.env, PATH: `${binDir}${delimiter}${process.env.PATH}` },
       stdio: "pipe",
     });
 

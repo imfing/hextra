@@ -9,8 +9,7 @@
   @param {number} height  Explicit height (required for remote URLs that can't be auto-detected).
   @param {string} thumb   Optional smaller image used in-page (defaults to a derived resize for local images).
   @param {string} span    Mosaic span hint - "wide" (2 cols), "tall" (2 rows), or "large" (2x2).
-  */
--}}
+  */ -}}
 {{- $src := .Get "src" | default (.Get 0) -}}
 {{- if not $src -}}
   {{- errorf "gallery-item: %q is missing required 'src' parameter" .Position -}}

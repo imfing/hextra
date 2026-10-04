@@ -153,6 +153,10 @@
   {{- end -}}
 
   {{- $useMainMenuEntries := and $useMainMenu (gt (len $mainMenuEntries) 0) -}}
+  {{- $hasPageEntry := false -}}
+  {{- range $mainMenuEntries -}}
+    {{- if eq (index . "type") "page" -}}{{- $hasPageEntry = true -}}{{- end -}}
+  {{- end -}}
   {{- $hasItems := or (gt (len $items) 0) $useMainMenuEntries -}}
 
   {{- if $hasItems -}}
@@ -202,7 +206,10 @@
             <li>{{ template "sidebar-item-link" dict "active" $active "open" false "title" (index $entry "title") "link" $link }}</li>
           {{- end -}}
         {{- end -}}
-      {{- else -}}
+      {{- end -}}
+      {{- /* Fall back to the page tree when no menu entry is page-backed,
+        so mobile navigation isn't limited to external menu links (#1024). */ -}}
+      {{- if not $hasPageEntry -}}
         {{- range $items.ByWeight }}
           {{- if .Params.sidebar.separator -}}
             <li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100">

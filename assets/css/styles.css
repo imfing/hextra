@@ -66,6 +66,17 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  /*
+   * Exempt SVG subtrees from the near-zero transition duration above.
+   *
+   * Zero preserves the reduced-motion intent, no animation, while letting
+   * geometry changes apply immediately so measurements stay correct.
+   */
+  svg,
+  svg * {
+    transition-duration: 0s !important;
+  }
 }
 
 @layer base {

@@ -106,8 +106,11 @@ params:
   math:
     engine: katex
     katex:
-      base: "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist"
+      base: "https://cdn.jsdelivr.net/npm/katex@0.18/dist"
 ```
+
+> [!NOTE]
+> 固定的 KaTeX 版本必须与 Hugo 内置的 KaTeX 渲染器相匹配，否则数学公式可能无法正确渲染：Hugo 0.166.0 及以上版本请使用 `0.18` 系列，更早的 Hugo 版本请使用 `0.16` 系列（如 `katex@0.16.22`）。
 
 ##### 使用本地资源
 
