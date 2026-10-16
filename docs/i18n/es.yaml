@@ -1,0 +1,17 @@
+documentation: "Documentación"
+showcase: "Escaparate"
+blog: "Blog"
+glossary: "Glosario"
+about: "Acerca de..."
+hugoDocs: "Hugo Docs ↖"
+versions: "Versiones"
+development: "Desarrollo"
+caution: "Precaución"
+important: "Importante"
+note: "Nota"
+tip: "Consejo"
+warning: "Advertencia"
+
+# New-Feature Shortcode
+newFeatureBranch: "Nuevo en la rama principal"
+newFeatureVersion: "Nuevo en %s"
