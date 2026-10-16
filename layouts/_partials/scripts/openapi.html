@@ -17,16 +17,12 @@
   document.addEventListener("DOMContentLoaded", () => {
     if (!window.SwaggerUIBundle) return;
 
-    const observers = [];
-
     // Swagger UI ships a dark theme enabled by the dark-mode class on the root
     // element: keep it in step with the Hextra theme, including later toggles.
     const root = document.documentElement;
     const syncTheme = () => root.classList.toggle("dark-mode", root.classList.contains("dark"));
     syncTheme();
-    const themeObserver = new MutationObserver(syncTheme);
-    themeObserver.observe(root, { attributes: true, attributeFilter: ["class"] });
-    observers.push(themeObserver);
+    new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ["class"] });
 
     document.querySelectorAll(".hextra-openapi").forEach((el) => {
       window.SwaggerUIBundle({ ...JSON.parse(el.dataset.config || "{}"), domNode: el, url: el.dataset.url });
@@ -46,23 +42,12 @@
           select.setAttribute("aria-label", title?.textContent.trim() || serversLabel);
         });
       };
-      const observer = new MutationObserver(() => {
+      new MutationObserver(() => {
         if (!pending) {
           pending = true;
           requestAnimationFrame(applyA11y);
         }
-      });
-      observer.observe(el, { childList: true, subtree: true });
-      observers.push(observer);
+      }).observe(el, { childList: true, subtree: true });
     });
-
-    // Prevent lingering observers when navigating away.
-    window.addEventListener(
-      "pagehide",
-      () => {
-        observers.forEach((observer) => observer.disconnect());
-      },
-      { once: true }
-    );
   });
 </script>
