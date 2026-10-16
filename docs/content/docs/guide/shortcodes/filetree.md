@@ -43,7 +43,7 @@ linkTitle: FileTree
 
 ### `filetree/folder`
 
-| Parameter | Description                                                          |
-|-----------|----------------------------------------------------------------------|
-| `name`    | The name of the file.                                                |
-| `state`   | The state of the file. Can be `open` or `closed`. Default is `open`. |
+| Parameter | Description                                                            |
+|-----------|------------------------------------------------------------------------|
+| `name`    | The name of the folder.                                                |
+| `state`   | The state of the folder. Can be `open` or `closed`. Default is `open`. |
