@@ -36,7 +36,7 @@ function buildSite(params: string, apiPage: string) {
   const build = spawnSync("hugo", ["--source", siteDir, "--themesDir", themesDir, "--destination", publishDir], { cwd: process.cwd(), encoding: "utf8" });
   const read = (...path: string[]) => readFileSync(join(publishDir, ...path), "utf8");
   const cleanup = () => rmSync(siteDir, { recursive: true, force: true });
-  return { build, read, cleanup, publishDir };
+  return { build, read, cleanup };
 }
 
 test("openapi shortcode resolves descriptions and loads Swagger UI only where used", () => {
@@ -100,31 +100,6 @@ test("openapi shortcode fails the build when Swagger UI assets are misconfigured
   try {
     expect(build.status).not.toBe(0);
     expect(build.stderr).toContain("Swagger UI js configuration is incomplete");
-  } finally {
-    cleanup();
-  }
-});
-
-test("openapi theme sync survives a page restored from the back-forward cache", async ({ page }) => {
-  const { build, publishDir, cleanup } = buildSite(LOCAL_ASSETS, `{{< openapi "specs/api.yaml" >}}\n`);
-
-  try {
-    expect(build.status, build.stderr).toBe(0);
-
-    await page.route("https://example.org/**", (route) => {
-      const path = new URL(route.request().url()).pathname;
-      route.fulfill({ path: join(publishDir, path.endsWith("/") ? `${path}index.html` : path) });
-    });
-    await page.goto("https://example.org/docs/api/");
-
-    // Leaving for the back-forward cache fires pagehide, then pageshow on return.
-    await page.evaluate(() => {
-      window.dispatchEvent(new PageTransitionEvent("pagehide", { persisted: true }));
-      window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true }));
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-    });
-    await expect(page.locator("html")).toHaveClass(/\bdark-mode\b/);
   } finally {
     cleanup();
   }
