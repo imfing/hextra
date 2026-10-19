@@ -16,9 +16,8 @@ html.dark-mode .hextra-openapi .swagger-ui {
   background: transparent;
 }
 
-/* Keyboard focus: Swagger UI removes the outline of selects, and its dark
-   theme also removes it from operation and schema toggles, with rules up to
-   six classes deep, hence !important */
+/* Swagger UI removes the focus outline of selects and, in dark mode, of the
+   operation and schema toggles, with selectors too specific to beat without !important */
 .hextra-openapi .swagger-ui select:focus-visible,
 .hextra-openapi .swagger-ui .opblock-summary-control:focus-visible,
 .hextra-openapi .swagger-ui .model-box-control:focus-visible,
@@ -27,10 +26,9 @@ html.dark-mode .hextra-openapi .swagger-ui {
   outline-offset: 2px;
 }
 
-/* Deprecated operations: Swagger UI dims them to 60% opacity, which takes
-   their text and badge below 3:1 in both themes. The struck-through path and
-   the gray badge already mark them, so keep them opaque and darken or lighten
-   the badge enough for its label. */
+/* Swagger UI dims deprecated operations to 60%, which drops their text and badge
+   below 3:1. The struck-through path and gray badge already mark them, so keep
+   them opaque and only retune the badge color for its label. */
 .hextra-openapi .swagger-ui .opblock.opblock-deprecated {
   opacity: 1;
 }

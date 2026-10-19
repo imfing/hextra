@@ -11,8 +11,7 @@
   @param {string} js Default JS filename under the base URL, also used as the published filename.
   @param {string} css Default CSS filename under the base URL, also used as the published filename. Omit when the dependency has no stylesheet.
 
-  @example {{ partial "utils/vendor-assets.html" (dict "name" "Swagger UI" "key" "openapi" "params" site.Params.openapi "cdn" "https://cdn.jsdelivr.net/npm/swagger-ui-dist@5" "js" "swagger-ui-bundle.js" "css" "swagger-ui.css")
-}}
+  @example {{ partial "utils/vendor-assets.html" (dict "name" "Swagger UI" "key" "openapi" "params" site.Params.openapi "cdn" "https://cdn.jsdelivr.net/npm/swagger-ui-dist@5" "js" "swagger-ui-bundle.js" "css" "swagger-ui.css") }}
 */ -}}
 {{- $name := .name -}}
 {{- $key := .key -}}

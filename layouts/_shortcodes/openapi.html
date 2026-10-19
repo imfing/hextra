@@ -10,10 +10,8 @@
   @param {string} tagsSorter Sort tags alphabetically with alpha (default: document order).
   @param {string} operationsSorter Sort operations with alpha or method (default: document order).
 
-  @example {{< openapi "openapi.yaml"
->}}
-@example
-{{< openapi src="https://petstore3.swagger.io/api/v3/openapi.json" docExpansion="none" >}}
+  @example {{< openapi "openapi.yaml" >}}
+  @example {{< openapi src="https://petstore3.swagger.io/api/v3/openapi.json" docExpansion="none" >}}
 */ -}}
 {{- $src := .Get "src" | default (.Get 0) -}}
 {{- if not $src -}}
@@ -47,7 +45,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Test the presence of the parameter, as 0 is a valid depth. */ -}}
+{{- /* 0 is a valid depth, so test that the parameter is set rather than truthy. */ -}}
 {{- if and .IsNamedParams (isset .Params "defaultModelsExpandDepth") -}}
   {{- $depth := printf "%v" (.Get "defaultModelsExpandDepth") -}}
   {{- if findRE `^(-1|0|[1-9][0-9]?)$` $depth -}}
