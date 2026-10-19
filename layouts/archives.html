@@ -20,7 +20,7 @@
               {{- range .Pages }}
                 {{- $page := . -}}
                 <div class="hx:flex hx:items-baseline hx:gap-4 hx:py-2">
-                  <time class="hx:shrink-0 hx:text-sm hx:tabular-nums hx:text-gray-500 hx:dark:text-gray-400" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format $dateFormat }}</time>
+                  <time class="hx:shrink-0 hx:text-sm hx:tabular-nums hx:text-gray-500 hx:dark:text-gray-400" datetime="{{ .Date.Format "2006-01-02" }}">{{ time.Format $dateFormat .Date }}</time>
                   <div>
                     <a
                       href="{{ .RelPermalink }}"
