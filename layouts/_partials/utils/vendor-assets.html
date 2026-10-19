@@ -1,0 +1,84 @@
+{{- /*
+  Emit the stylesheet and script tags of a vendored frontend dependency, loaded from the
+  default CDN, from a mirror (params.base) or from local assets (params.js and params.css).
+
+  Remote files are fetched at build time and published with the site.
+
+  @param {string} name Display name of the dependency, used in messages.
+  @param {string} key Name of the site params section, used in messages.
+  @param {map} params Site params of the dependency: base, js and css.
+  @param {string} cdn Base URL of the default CDN.
+  @param {string} js Default JS filename under the base URL, also used as the published filename.
+  @param {string} css Default CSS filename under the base URL, also used as the published filename. Omit when the dependency has no stylesheet.
+
+  @example {{ partial "utils/vendor-assets.html" (dict "name" "Swagger UI" "key" "openapi" "params" site.Params.openapi "cdn" "https://cdn.jsdelivr.net/npm/swagger-ui-dist@5" "js" "swagger-ui-bundle.js" "css" "swagger-ui.css") }}
+*/ -}}
+{{- $name := .name -}}
+{{- $key := .key -}}
+{{- $params := .params | default dict -}}
+{{- $base := $params.base | default "" -}}
+{{- $jsAsset := $params.js | default "" -}}
+{{- $cssAsset := $params.css | default "" -}}
+{{- $jsName := .js -}}
+{{- $cssName := .css | default "" -}}
+
+{{- /* Without a base nor local assets, use the default CDN. */ -}}
+{{- if not (or $base $jsAsset $cssAsset) -}}
+  {{- $base = .cdn -}}
+{{- end -}}
+{{- $isRemoteBase := or (hasPrefix $base "http://") (hasPrefix $base "https://") -}}
+
+{{- /* CSS: from the remote base or from a local asset. */ -}}
+{{- $css := "" -}}
+{{- if $cssName -}}
+  {{- if $isRemoteBase -}}
+    {{- $url := urls.JoinPath $base ($cssAsset | default $cssName) -}}
+    {{- with try (resources.GetRemote $url) -}}
+      {{- with .Err -}}
+        {{- errorf "Could not retrieve %s css file from %s. Reason: %s." $name $url . -}}
+      {{- else with .Value -}}
+        {{- $css = resources.Copy (printf "css/%s" $cssName) . | fingerprint -}}
+      {{- else -}}
+        {{- errorf "Could not retrieve %s css file from %s." $name $url -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else if $cssAsset -}}
+    {{- with resources.Get $cssAsset -}}
+      {{- $css = . | fingerprint -}}
+    {{- else -}}
+      {{- errorf "%s css asset not found at %q" $name $cssAsset -}}
+    {{- end -}}
+  {{- else -}}
+    {{- warnf "%s css configuration is incomplete: no stylesheet is loaded. Set params.%s.css to a local asset, set params.%s.base to an absolute URL, or omit both to use the default CDN." $name $key $key -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* JS: from the remote base or from a local asset. */ -}}
+{{- $js := "" -}}
+{{- if $isRemoteBase -}}
+  {{- $url := urls.JoinPath $base ($jsAsset | default $jsName) -}}
+  {{- with try (resources.GetRemote $url) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve %s js file from %s. Reason: %s." $name $url . -}}
+    {{- else with .Value -}}
+      {{- $js = resources.Copy (printf "js/%s" $jsName) . | fingerprint -}}
+    {{- else -}}
+      {{- errorf "Could not retrieve %s js file from %s." $name $url -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $jsAsset -}}
+  {{- with resources.Get $jsAsset -}}
+    {{- $js = . | fingerprint -}}
+  {{- else -}}
+    {{- errorf "%s js asset not found at %q" $name $jsAsset -}}
+  {{- end -}}
+{{- else -}}
+  {{- errorf "%s js configuration is incomplete. Set params.%s.js to a local asset, set params.%s.base to an absolute URL, or omit both to use the default CDN." $name $key $key -}}
+{{- end -}}
+
+{{- with $css -}}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" />
+{{- end -}}
+{{- with $js -}}
+  <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end -}}

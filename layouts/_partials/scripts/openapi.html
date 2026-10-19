@@ -1,0 +1,53 @@
+{{- /* OpenAPI (Swagger UI) */ -}}
+
+{{- partial "utils/vendor-assets.html" (dict
+  "name" "Swagger UI"
+  "key" "openapi"
+  "params" site.Params.openapi
+  "cdn" "https://cdn.jsdelivr.net/npm/swagger-ui-dist@5"
+  "js" "swagger-ui-bundle.js"
+  "css" "swagger-ui.css"
+  )
+-}}
+
+
+<script data-servers="Servers">
+  const serversLabel = document.currentScript?.getAttribute("data-servers") || "Servers";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!window.SwaggerUIBundle) return;
+
+    // Swagger UI ships a dark theme enabled by the dark-mode class on the root
+    // element: keep it in step with the Hextra theme, including later toggles.
+    const root = document.documentElement;
+    const syncTheme = () => root.classList.toggle("dark-mode", root.classList.contains("dark"));
+    syncTheme();
+    new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ["class"] });
+
+    document.querySelectorAll(".hextra-openapi").forEach((el) => {
+      window.SwaggerUIBundle({ ...JSON.parse(el.dataset.config || "{}"), domNode: el, url: el.dataset.url });
+
+      let pending = false;
+      const applyA11y = () => {
+        pending = false;
+
+        // Swagger UI renders its operations in a <main> element, nested in the
+        // <main> of the page: demote it so that the page keeps a single main landmark.
+        el.querySelectorAll("main").forEach((main) => main.setAttribute("role", "region"));
+
+        // Swagger UI wraps its servers selects, global and per operation, in empty
+        // labels: name them after the title of their section as they appear.
+        el.querySelectorAll(".servers select:not([aria-label])").forEach((select) => {
+          const title = select.closest(".schemes-server-container, .operation-servers")?.querySelector(".servers-title, .opblock-title");
+          select.setAttribute("aria-label", title?.textContent.trim() || serversLabel);
+        });
+      };
+      new MutationObserver(() => {
+        if (!pending) {
+          pending = true;
+          requestAnimationFrame(applyA11y);
+        }
+      }).observe(el, { childList: true, subtree: true });
+    });
+  });
+</script>

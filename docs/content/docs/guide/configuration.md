@@ -414,6 +414,10 @@ params:
     lightboxJs: "js/vendor/photoswipe-lightbox.esm.min.js"
     css: "css/vendor/photoswipe.css"
 
+  openapi:
+    js: "js/vendor/swagger-ui-bundle.js"
+    css: "css/vendor/swagger-ui.css"
+
   math:
     engine: katex
     katex:
@@ -446,6 +450,9 @@ params:
 
   gallery:
     base: "https://mirror.example.com/photoswipe/dist"
+
+  openapi:
+    base: "https://mirror.example.com/swagger-ui-dist"
 
   math:
     engine: katex

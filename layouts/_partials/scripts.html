@@ -19,6 +19,11 @@
   {{- partial "scripts/gallery.html" . -}}
 {{- end -}}
 
+{{/* OpenAPI */}}
+{{- if (.Store.Get "hasOpenAPI") -}}
+  {{- partial "scripts/openapi.html" . -}}
+{{- end -}}
+
 {{/* Medium Zoom */}}
 {{- if (.Store.Get "hasImageZoom") -}}
   {{- partial "scripts/medium-zoom.html" . -}}
