@@ -2,7 +2,14 @@
 {{- $icon := .Get "icon" | default "" -}}
 {{- $defaultLink := cond (eq $version "") "https://github.com/imfing/hextra/tree/main" (printf "https://github.com/imfing/hextra/releases/tag/%s" $version) -}}
 {{- $link := .Get "link" | default $defaultLink -}}
-{{- $content := cond (eq $version "") "New in main branch" (printf "New in %s" $version) -}}
+
+{{- $content := "" -}}
+{{- if eq $version "" -}}
+  {{- $content = T "newFeatureBranch" | default "New in main branch" -}}
+{{- else -}}
+  {{- $translationString := T "newFeatureVersion" | default "New in %s" -}}
+  {{- $content = printf $translationString $version -}}
+{{- end -}}
 
 <div style="margin-top: 1rem; display: inline-flex;">
   <a href="{{ $link }}" title="{{ $link | plainify }}" target="_blank">
