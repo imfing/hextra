@@ -86,11 +86,19 @@ A shortcode for rendering a button with a link.
 
 ### Options
 
-| Parameter | Description              |
-|-----------|--------------------------|
-| `link`    | The link of the button.  |
-| `text`    | The text of the button.  |
-| `style`   | The style of the button. |
+| Parameter | Description                                           |
+| --------- | ----------------------------------------------------- |
+| `link`    | The link of the button.                               |
+| `text`    | The text of the button.                               |
+| `style`   | Raw inline CSS applied to the button's `<a>` element. |
+
+The button's default styling is applied automatically. You can use `style` to override it with inline CSS:
+
+```markdown
+{{</* hextra/hero-button text="Get Started" link="/docs" style="background-color: #ff6b6b;" */>}}
+```
+
+Links beginning with `http` open in a new tab with `rel="noreferrer"`. Paths beginning with `/` are processed with Hugo's `relURL`.
 
 ## `hextra/hero-container`
 
