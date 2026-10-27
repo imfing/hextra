@@ -3,22 +3,22 @@
 <meta property="og:title" content="{{ .Title }}">
 <meta
   property="og:description"
-  content="{{ with .Description }}
-    {{ . }}
-  {{ else }}
-    {{ if .IsPage }}
-      {{ .Summary }}
-    {{ else }}
+  content="{{- with .Description -}}
+    {{ strings.TrimSpace . }}
+  {{- else -}}
+    {{- if .IsPage -}}
+      {{ .Summary | plainify | htmlUnescape | replaceRE `\s+` ` ` | strings.TrimSpace }}
+    {{- else -}}
       {{ with .Site.Params.description }}{{ . }}{{ end }}
-    {{ end }}
-  {{ end }}">
+    {{- end -}}
+  {{- end -}}">
 <meta
   property="og:type"
-  content="{{ if .IsPage }}
+  content="{{- if .IsPage -}}
     article
-  {{ else }}
+  {{- else -}}
     website
-  {{ end }}">
+  {{- end -}}">
 <meta property="og:url" content="{{ .Permalink }}">
 
 {{- with $.Params.images -}}
