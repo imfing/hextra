@@ -158,6 +158,18 @@ sidebar:
 ---
 ```
 
+### Sections Without a Link
+
+To make a section in the left sidebar only expand and collapse its children instead of linking to its own page, set the `sidebar.link` parameter to `false` in the front matter of the section's `_index.md`:
+
+```yaml {filename="content/docs/guide/_index.md"}
+---
+title: Guide
+sidebar:
+  link: false
+---
+```
+
 ### Extra Links
 
 Sidebar extra links are defined under the `menu.sidebar` section in the config file:
