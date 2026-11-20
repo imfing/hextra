@@ -67,6 +67,18 @@ cascade:
 
 The above example configuration ensures that the content files inside `content/my-docs/` will be treated as documentation (`docs` type) by default.
 
+To use the `docs` layout for the whole site with a flat content layout (no `content/docs/` directory), set the cascade in the root `content/_index.md`. Limit it to the `home`, `section` and `page` kinds, so that taxonomy pages such as `/tags/` keep their own layout:
+
+```yaml {filename="content/_index.md"}
+---
+title: My Site
+cascade:
+  - target:
+      kind: "{home,section,page}"
+    type: docs
+---
+```
+
 ## Sidebar Navigation
 
 The sidebar navigation is generated automatically based on the content organization alphabetically. To manually configure the sidebar order, we can use the `weight` parameter in the front matter of the Markdown files.
