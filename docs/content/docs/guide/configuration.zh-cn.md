@@ -322,6 +322,21 @@ disableKinds:
 
 只有在不依赖标签或分类归档页面时，才禁用这些类型。
 
+### 博客文章摘要
+
+博客列表会显示每篇文章的简短预览。Hextra 使用文章 front matter 中的 `description`，没有时回退到文章的 [Hugo 摘要](https://gohugo.io/content-management/summaries/)。自动摘要是文章开头的纯文本，因此文章顶部的图片说明等文字也会出现在预览中。
+
+要控制预览，在 front matter 中设置 `description` 或 `summary`：
+
+```yaml {filename="content/blog/my-post.md"}
+---
+title: My Post
+description: A short preview shown in the blog list.
+---
+```
+
+`description` 也会用作页面的 meta description。另外，也可以在内容中放置 `<!--more-->` 分隔符：只有分隔符之前的内容会成为摘要，因此要作为预览的文字必须位于分隔符之上，图片说明位于分隔符之下。
+
 ### 图片缩放
 
 图片缩放默认禁用。启用后，点击 Markdown 图片会打开放大视图。
