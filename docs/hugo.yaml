@@ -206,6 +206,8 @@ params:
     enable: true
     displayCopyright: true
     displayPoweredBy: true
+    # Put the switches, theme credit and copyright on one row
+    compact: false
     width: normal
 
   # Display the last modification date
