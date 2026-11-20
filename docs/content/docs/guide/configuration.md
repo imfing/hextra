@@ -358,6 +358,21 @@ disableKinds:
 
 Only disable these kinds when you are not relying on tag or category archive pages.
 
+### Blog Post Summaries
+
+The blog list shows a short preview of each post. Hextra uses the `description` from the post's front matter and falls back to the post's [Hugo summary](https://gohugo.io/content-management/summaries/). The automatic summary is the plain text of the start of the post, so text such as an image caption at the top of the post also appears in the preview.
+
+To control the preview, set `description` or `summary` in the front matter:
+
+```yaml {filename="content/blog/my-post.md"}
+---
+title: My Post
+description: A short preview shown in the blog list.
+---
+```
+
+The `description` is also used as the page's meta description. Alternatively, place a `<!--more-->` divider in the content: only the content before the divider becomes the summary, so the text you want as the preview must sit above the divider and the caption below it.
+
 ### Image Zoom
 
 Image zoom is disabled by default. When enabled, clicking a Markdown image opens a zoomed view.
