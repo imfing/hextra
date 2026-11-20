@@ -86,7 +86,6 @@
     "classes": [
       "[-webkit-tap-highlight-color:transparent]",
       "[-webkit-touch-callout:none]",
-      "[counter-reset:step]",
       "[hyphens:auto]",
       "[word-break:break-word]",
       "asciinema-player",
@@ -220,6 +219,7 @@
       "hx:-mr-2",
       "hx:-mt-20",
       "hx:-translate-y-1/2",
+      "hx:[counter-reset:step]",
       "hx:absolute",
       "hx:active:bg-gray-400/20",
       "hx:active:opacity-50",
