@@ -85,6 +85,21 @@ body {
   }
 }
 
+/* Match GitHub's Markdown image theme fragments, including captions and linked images. */
+@layer base {
+  html:not(.dark) img[src$="#gh-dark-mode-only"],
+  html:not(.dark) figure:has(> img[src$="#gh-dark-mode-only"]),
+  html:not(.dark) a:has(> img[src$="#gh-dark-mode-only"]) {
+    display: none;
+  }
+
+  html.dark img[src$="#gh-light-mode-only"],
+  html.dark figure:has(> img[src$="#gh-light-mode-only"]),
+  html.dark a:has(> img[src$="#gh-light-mode-only"]) {
+    display: none;
+  }
+}
+
 @import "./typography.css";
 @import "./highlight.css";
 @import "./components/alert.css";

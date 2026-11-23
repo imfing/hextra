@@ -200,6 +200,17 @@ With caption:
 ![landscape](https://picsum.photos/800/600 "Lorem Picsum")
 ```
 
+### Light and dark images
+
+Add GitHub's theme fragments to Markdown image URLs to show different images in light and dark mode. The same Markdown works in GitHub's preview:
+
+```markdown {filename=Markdown}
+![Diagram in light mode](diagram-light.png#gh-light-mode-only)
+![Diagram in dark mode](diagram-dark.png#gh-dark-mode-only)
+```
+
+This also works for captioned images (images with a title) and images wrapped in links. The fragment syntax applies to Markdown images, not Hugo's `figure` shortcode.
+
 For more advanced functionality, use Hugo's built-in [Figure shortcode](https://gohugo.io/shortcodes/figure/).
 
 ## Configuration
