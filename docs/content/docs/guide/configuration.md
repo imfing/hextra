@@ -253,6 +253,19 @@ copyright: "© 2024 YOUR TEXT HERE"
 
 For your reference, an example [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) file can be found in the GitHub repository. Additionally, you could use Markdown format in the copyright text.
 
+### Compact Footer
+
+By default, the footer stacks the language and theme switches, the "Powered by Hextra" credit and the copyright text in separate blocks.
+Set `params.footer.compact` to put them on a single row instead, which takes much less vertical space:
+
+```yaml {filename="hugo.yaml"}
+params:
+  footer:
+    compact: true
+```
+
+The [custom footer]({{% relref "docs/advanced/customization#custom-extra-section-in-footer" %}}) content is still rendered below the row.
+
 ## Others
 
 ### Favicon
