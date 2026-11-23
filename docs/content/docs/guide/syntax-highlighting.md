@@ -58,6 +58,26 @@ go 1.20
 go 1.20
 ```
 
+### Overriding Link Text
+
+For links that do not contain the desired filename of the code snippet, you can use `name_override` to provide an overridden name for your link.
+
+````markdown {filename="name_override"}
+```c++ {base_url="https://godbolt.org/z/6Y7v7e19f", name_override="default godbolt"}
+// Type your code here, or load an example.
+int square(int num) {
+    return num * num;
+}
+```
+````
+
+```c++ {base_url="https://godbolt.org/z/6Y7v7e19f", name_override="default godbolt"}
+// Type your code here, or load an example.
+int square(int num) {
+    return num * num;
+}
+```
+
 ### Line Numbers
 
 To set line numbers, set attribute `linenos` to `table` and optionally set `linenostart` to the starting line number:
