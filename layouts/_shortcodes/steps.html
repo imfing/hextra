@@ -4,6 +4,14 @@ A shortcode for creating a step list.
 @example {{% steps %}}{{% /steps %}}
 */ -}}
 
-<div class="hextra-steps hx:ml-4 hx:mb-12 hx:ltr:border-l hx:rtl:border-r hx:border-gray-200 hx:ltr:pl-6 hx:rtl:pr-6 hx:dark:border-neutral-800 [counter-reset:step]">
-  {{- .Inner -}}
+{{- /*
+The counter is reset on an inner wrapper, not on the container. A counter-reset
+also applies to the element's following siblings, so resetting on the container
+would make an outer step that follows a nested steps block continue the nested
+count. The wrapper has no siblings, so each block, nested or not, keeps its own.
+*/ -}}
+<div class="hextra-steps hx:ml-4 hx:mb-12 hx:ltr:border-l hx:rtl:border-r hx:border-gray-200 hx:ltr:pl-6 hx:rtl:pr-6 hx:dark:border-neutral-800">
+  <div class="hx:[counter-reset:step]">
+    {{- .Inner -}}
+  </div>
 </div>
