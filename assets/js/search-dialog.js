@@ -21,6 +21,8 @@
   let closeAnimationListener = null;
   let closeTimer = null;
   let collapseTimer = null;
+  let composing = false;
+  let lastQuery = null;
 
   document.addEventListener('DOMContentLoaded', init);
 
@@ -55,7 +57,17 @@
 
     document.addEventListener('keydown', handleGlobalKeyDown);
 
-    input.addEventListener('input', runSearch);
+    // Track IME composition ourselves instead of relying on `isComposing`.
+    // On commit, Chromium fires `input` (isComposing: true) before
+    // `compositionend`, while Firefox fires it after (isComposing: false).
+    input.addEventListener('compositionstart', () => { composing = true; });
+    input.addEventListener('compositionend', () => {
+      composing = false;
+      runSearch();
+    });
+    input.addEventListener('input', () => {
+      if (!composing) runSearch();
+    });
     dialog.addEventListener('keydown', handleDialogKeyDown);
 
     // Click on backdrop closes the dialog.
@@ -312,10 +324,13 @@
     selectOption(options[i], opts);
   }
 
-  async function runSearch(e) {
-    if (e && e.isComposing) return;
-
+  async function runSearch() {
     const query = input.value.trim();
+    // Firefox fires `input` after `compositionend` too; both carry the same
+    // query, so skip the second call.
+    if (query === lastQuery) return;
+    lastQuery = query;
+
     if (!query) {
       setActiveDescendant();
       if (statusEl) statusEl.textContent = '';
